@@ -1,0 +1,148 @@
+# exports
+export DIRSTACKSIZE=20
+export FCEDIT=/usr/bin/vim
+export EDITOR=/usr/bin/vim
+export BROWSER=/usr/bin/w3m
+export IMG=/usr/bin/gliv
+export VID=/usr/bin/mplayer
+export CC=/usr/bin/gcc
+export SHELL=/bin/zsh
+export MPD_HOST=lenovo
+export MPD_PORT=6600
+export PAGER=/bin/less
+export LANG="en_US.utf8"
+export LC_ALL="en_US.utf8"
+export LC="en_US.utf8"
+export LESSCHARSET="utf-8"
+export LESS_TERMCAP_mb=$'\E[01;31m'
+export LESS_TERMCAP_md=$'\E[01;31m'
+export LESS_TERMCAP_me=$'\E[0m'
+export LESS_TERMCAP_se=$'\E[0m'
+export LESS_TERMCAP_so=$'\E[01;45;30m'
+export LESS_TERMCAP_ue=$'\E[0m'
+export LESS_TERMCAP_us=$'\E[01;34m'
+
+# aliases
+alias ls='ls -h --color=auto -F --group-directories-first'
+alias la='ls -AX'
+alias lb='la -Ssr'
+alias lf='la -d *(-/DN)'
+alias lls='ls -l'
+alias lla='lls -AX'
+alias llb='lla -Sr'
+alias llt='lla -tr'
+alias llm='llt -rl -- **/*(D.om[1,10])'
+alias llf='lla -d *(-/DN)'
+alias back='cd $OLDPWD'
+alias e='bye'
+alias rd='rm -rd'
+alias rds='srm -vr $@'
+alias rms='srm -v $*'
+alias cl='clear'
+
+alias ff='find |grep -i'
+alias nocm='egrep -v "^\s*(#|$)"'
+alias fsync='sudo rsync -vrhpavzu'
+alias las="3view $HOME/othe/archive/$(llt $HOME/othe/archive |tail -1|awk '{print $9}')"
+alias lasp="3view $HOME/othe/archive/$(llt $HOME/othe/archive |tail -2|head -1|awk '{print $9}')"
+alias wika='/usr/share/doc/arch-wiki/html/index.html'
+alias todo='vim $HOME/othe/TODO_now'
+alias sod='vim $HOME/othe/TODO_scripts'
+alias xedit='vim $HOME/.Xdefaults'
+alias zedit='vim $HOME/.zshrc'
+alias zedia='vim $HOME/.zsh_alis'
+alias zload='source ~/.zshrc'
+alias startx='rmouv ; startx'
+alias unrarall='for file in `ls *.rar`; do unrar -x clr $file; done'
+alias unzipall='for file in `ls *.zip`; do unzip -L $file; done'
+
+alias irb='irb --simple-prompt'
+alias diff='colordiff'
+alias grep='grep --color=auto'
+alias psu='ps fxo etime,user,pid,pmem,pcpu,comm'
+alias psr='ps -u root fo etime,user,pid,pmem,pcpu,command |less'
+alias daemons='ls /var/run/daemons'
+alias dfu='df -hTP'
+alias ping='ping -c 5'
+alias sd='sdcv'
+alias ncmp='ncmpcpp'
+alias rot='rtorrent'
+alias hb='HandBrakeCLI -e x264 -E ac3 -6 dp12 -R 48 -b 1800 -B 160 -D 3.0 -2 -T -p --decomb -x qp=0:aq-strength=1.5:direct=auto:bframes=6:mixed-refs:no-fast-pskip:8x8dct -i /dev/dvd'
+alias bdvd='growisofs -dvd-compat -speed=16 -iso-level 3 -relaxed-filenames -max-iso9660-filenames -input-charset UTF-8 -Z /dev/dvdrw -R -J -joliet-long -v -l'
+alias mpq='$VID -really-quiet'
+alias mpn='$VID -nosound -really-quiet'
+alias mix2='ossmix codec1.jack.int-speaker.mode mix2 && echo "Mixer set to PC Speaker"'
+alias mix3='ossmix codec1.jack.int-speaker.mode mix3 && echo "Mixer set to Headphones"'
+alias mute='ossvol -t'
+alias vu='ossvol -i 1'
+alias vd='ossvol -d 1'
+
+alias svim='sudo vim'
+alias upf='sudo fc-cache -vf'
+alias upd='sudo updatedb'
+alias abs='sudo abs'
+alias reboot='sudo reboot'
+alias poweroff='sudo poweroff'
+alias killn='pkill -f'
+alias pacman='pacman-color'
+alias ay='yaourt'
+alias aive='ay -Q --date | tee $HOME/othe/archive/$(date +%m_%d_%y) &>/dev/null &'
+alias downgrade='ay -Su --downgrade'
+alias clean='ay -Scc'
+
+# functions
+## to unpack files
+extr() {
+		if [ -f $1 ] ; then 
+			case $1 in
+             *.tar.bz2)   tar xjf $1    ;;
+             *.tar.gz)    tar xzf $1    ;;
+             *.bz2)       bunzip2 $1    ;;
+             *.rar)       unrar e $1    ;;
+             *.gz)        gunzip $1     ;;
+             *.tar)       tar xf $1     ;;
+             *.tbz2)      tar xjf $1    ;;
+             *.tgz)       tar xzf $1    ;;
+             *.zip)       unzip $1      ;;
+             *.Z)         uncompress $1 ;;
+             *.7z)        7z x $1    	;;
+	     *.xz)	  unxz -vk $1	;;
+             *)           echo "'$1' cannot be extracted via extr()" ;;
+         esac
+     else
+         echo "'$1' is not a valid file"
+     fi
+}
+
+## to start, stop or restart daemons
+function rcstart() { 
+	sudo /etc/rc.d/$1 start; 
+}
+
+function rcstop() { 
+	sudo /etc/rc.d/$1 stop; 
+}
+
+function rcrestart() { 
+	sudo /etc/rc.d/$1 restart; 
+}
+
+function reprobe() {
+	sudo modprobe -r $1
+	sudo modprobe $1
+}
+
+## to make a directory and cd into immediately
+function mkcd() {
+    mkdir "$@"
+    cd "$@"
+}
+
+## to go up a specified amount of levels
+function up(){
+  local arg=${1:-1};
+  while [ $arg -gt 0 ]; do
+    cd .. >&/dev/null;
+    arg=$(($arg - 1));
+  done
+}

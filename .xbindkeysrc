@@ -1,0 +1,38 @@
+"moodlight -b"
+XF86MonBrightnessUp
+
+"moodlight -d"
+XF86MonBrightnessDown
+
+"mpc prev"
+XF86AudioPrev
+
+"mpc toggle"
+XF86AudioPlay
+
+"mpc next"
+XF86AudioNext
+
+"mpc stop"
+XF86AudioStop
+
+"ossvol -t"
+XF86AudioMute
+
+"ossvol -d 1"
+XF86AudioLowerVolume
+
+"ossvol -i 1"
+XF86AudioRaiseVolume
+
+"mpc volume -10"
+Shift+XF86AudioLowerVolume
+
+"mpc volume +10"
+Shift+XF86AudioRaiseVolume
+
+"songrem -p"
+Shift+End
+
+"songrem"
+Shift+Home

@@ -16,7 +16,7 @@
 --
 
 defbindings("WMPlex", {
-    kpress("Shift+F3", "run_here(_)")
+    kpress("F3", "run_here(_)")
 })
 
 local pid_prop_atom = ioncore.x_intern_atom("_NET_WM_PID", false)

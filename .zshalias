@@ -3,8 +3,9 @@ export DIRSTACKSIZE=20
 export FCEDIT=/usr/bin/vim
 export EDITOR=/usr/bin/vim
 export BROWSER=/usr/bin/w3m
-export IMG=/usr/bin/gliv
-export VID=/usr/bin/mplayer
+export IMGVIEW=/usr/bin/gliv
+export VIDVIEW=/usr/bin/mplayer
+export PDFVIEW=/usr/bin/zathura
 export CC=/usr/bin/gcc
 export SHELL=/bin/zsh
 export MPD_HOST=127.0.0.1
@@ -21,6 +22,27 @@ export LESS_TERMCAP_se=$'\E[0m'
 export LESS_TERMCAP_so=$'\E[01;45;30m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;34m'
+
+# open with
+alias -s mov=$VIDVIEW
+alias -s avi=$VIDVIEW
+alias -s wmv=$VIDVIEW
+alias -s mkv=$VIDVIEW
+alias -s mp4=$VIDVIEW
+alias -s mpg=$VIDVIEW
+alias -s mpeg=$VIDVIEW
+alias -s html=$BROWSER
+alias -s htm=$BROWSER
+alias -s org=$BROWSER
+alias -s com=$BROWSER
+alias -s net=$BROWSER
+alias -s php=$BROWSER
+alias -s gif=$IMGVIEW
+alias -s jpg=$IMGVIEW
+alias -s jpeg=$IMGVIEW
+alias -s svg=$IMGVIEW
+alias -s png=$IMGVIEW
+alias -s pdf=$PDFVIEW
 
 # aliases
 alias ls='ls -h --color=auto -F --group-directories-first'
@@ -67,8 +89,8 @@ alias ncmp='ncmpcpp'
 alias rot='rtorrent'
 alias hb='HandBrakeCLI -e x264 -E ac3 -6 dp12 -R 48 -b 1800 -B 160 -D 3.0 -2 -T -p --decomb -x qp=0:aq-strength=1.5:direct=auto:bframes=6:mixed-refs:no-fast-pskip:8x8dct -i /dev/dvd'
 alias bdvd='growisofs -dvd-compat -speed=16 -iso-level 3 -relaxed-filenames -max-iso9660-filenames -input-charset UTF-8 -Z /dev/dvdrw -R -J -joliet-long -v -l'
-alias mpq='$VID -really-quiet'
-alias mpn='$VID -nosound -really-quiet'
+alias mpq='$VIDVIEW -really-quiet'
+alias mpn='$VIDVIEW -nosound -really-quiet'
 alias mix2='ossmix codec1.jack.int-speaker.mode mix2 && echo "Mixer set to PC Speaker"'
 alias mix3='ossmix codec1.jack.int-speaker.mode mix3 && echo "Mixer set to Headphones"'
 alias mute='ossvol -t'
@@ -79,8 +101,8 @@ alias svim='sudo vim'
 alias upf='sudo fc-cache -vf'
 alias upd='sudo updatedb'
 alias abs='sudo abs'
-alias reboot='sudo reboot'
-alias poweroff='sudo poweroff'
+alias reboot='killall ssh-agent ; rm ~/.ssh/environment ; sudo reboot'
+alias poweroff='killall ssh-agent ; rm ~/.ssh/environment ; sudo poweroff'
 alias killn='pkill -f'
 alias pacman='pacman-color'
 alias ay='yaourt'
@@ -91,49 +113,54 @@ alias clean='ay -Scc'
 # functions
 ## to unpack files
 extr() {
-		if [ -f $1 ] ; then 
-			case $1 in
-             *.tar.bz2)   tar xjf $1    ;;
-             *.tar.gz)    tar xzf $1    ;;
-             *.bz2)       bunzip2 $1    ;;
-             *.rar)       unrar e $1    ;;
-             *.gz)        gunzip $1     ;;
-             *.tar)       tar xf $1     ;;
-             *.tbz2)      tar xjf $1    ;;
-             *.tgz)       tar xzf $1    ;;
-             *.zip)       unzip $1      ;;
-             *.Z)         uncompress $1 ;;
-             *.7z)        7z x $1    	;;
-	     *.xz)	  unxz -vk $1	;;
-             *)           echo "'$1' cannot be extracted via extr()" ;;
-         esac
-     else
-         echo "'$1' is not a valid file"
-     fi
+  if [ -f $1 ] ; then 
+    case $1 in
+      *.tar.bz2)   tar xjf $1    ;;
+      *.tar.gz)    tar xzf $1    ;;
+      *.bz2)       bunzip2 $1    ;;
+      *.rar)       unrar e $1    ;;
+      *.gz)        gunzip $1     ;;
+      *.tar)       tar xf $1     ;;
+      *.tbz2)      tar xjf $1    ;;
+      *.tgz)       tar xzf $1    ;;
+      *.zip)       unzip $1      ;;
+      *.Z)         uncompress $1 ;;
+      *.7z)        7z x $1    	;;
+      *.xz)        unxz -vk $1	;;
+      *)           echo "'$1' cannot be extracted via extr()" ;;
+    esac
+  else
+    echo "'$1' is not a valid file"
+fi
 }
 
 ## to start, stop or restart daemons
 function rcstart() { 
-	sudo /etc/rc.d/$1 start; 
+  sudo /etc/rc.d/$1 start; 
 }
-
 function rcstop() { 
-	sudo /etc/rc.d/$1 stop; 
+  sudo /etc/rc.d/$1 stop; 
 }
-
 function rcrestart() { 
-	sudo /etc/rc.d/$1 restart; 
+  sudo /etc/rc.d/$1 restart; 
+}
+function reprobe() {
+  sudo modprobe -r $1
+  sudo modprobe $1
 }
 
-function reprobe() {
-	sudo modprobe -r $1
-	sudo modprobe $1
+## to quickly create/edit todo files
+function todo() {
+  TENV=$HOME/othe
+  case $1 in
+    *) vim $TENV/.TODO_$@ ;;
+  esac
 }
 
 ## to make a directory and cd into immediately
 function mkcd() {
-    mkdir "$@"
-    cd "$@"
+  mkdir "$@"
+  cd "$@"
 }
 
 ## to go up a specified amount of levels

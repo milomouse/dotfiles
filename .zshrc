@@ -73,35 +73,14 @@ bindkey "^?" backward-delete-char
 
 PATH=$PATH:/usr/sbin:/usr/local:/usr/local/sbin:/usr/local/bin
 
-## open with
-alias -s mov=$VIDPLAYER
-alias -s avi=$VIDPLAYER
-alias -s wmv=$VIDPLAYER
-alias -s mkv=$VIDPLAYER
-alias -s mp4=$VIDPLAYER
-alias -s mpg=$VIDPLAYER
-alias -s mpeg=$VIDPLAYER
-alias -s html=$BROWSER
-alias -s htm=$BROWSER
-alias -s org=$BROWSER
-alias -s com=$BROWSER
-alias -s net=$BROWSER
-alias -s php=$BROWSER
-alias -s gif=$IMGVIEWER
-alias -s jpg=$IMGVIEWER
-alias -s jpeg=$IMGVIEWER
-alias -s svg=$IMGVIEWER
-alias -s png=$IMGVIEWER
-alias -s pdf="zathura"
-
-## source aliases
+# source aliases
 if [ -f ~/.zshalias ]; then
-	. ~/.zshalias
+  . ~/.zshalias
 fi
 
-## source ssh
+# source ssh
 SSH_ENV="$HOME/.ssh/environment"
-
+ 
 function agent-s {
   echo "Initializing new SSH agent..."
   /usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"

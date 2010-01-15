@@ -65,9 +65,9 @@ alias cl='clear'
 alias ff='find |grep -i'
 alias nocm='egrep -v "^\s*(#|$)"'
 alias fsync='sudo rsync -vrhpavzu'
-alias las="3view $HOME/othe/archive/$(llt $HOME/othe/archive |tail -1|awk '{print $9}')"
-alias lasp="3view $HOME/othe/archive/$(llt $HOME/othe/archive |tail -2|head -1|awk '{print $9}')"
 alias wika='/usr/share/doc/arch-wiki/html/index.html'
+alias lasi="3view $HOME/othe/archive/$(llt $HOME/othe/archive |tail -1|awk '{print $9}')"
+alias lasid="3view $HOME/othe/archive/$(llt $HOME/othe/archive |tail -2|head -1|awk '{print $9}')"
 alias xedit='vim $HOME/.Xdefaults'
 alias zedit='vim $HOME/.zshrc'
 alias zedia='vim $HOME/.zshalias'
@@ -151,9 +151,9 @@ function reprobe() {
 
 ## to quickly create/edit todo files
 function todo() {
-  TENV=$HOME/othe
+  local ENV=$HOME/othe
   case $1 in
-    *) vim $TENV/.TODO_$@ ;;
+    *) vim $ENV/.TODO_$@ ;;
   esac
 }
 

@@ -1,0 +1,21 @@
+[general]
+ui = TTY.TTYUI
+accounts = FastMail
+
+[Account FastMail]
+localrepository = FastMail-Local
+remoterepository = FastMail-Remote
+maxsyncaccounts = 3
+maxconnections = 3
+
+[Repository FastMail-Local]
+type = Maildir
+localfolders = ~/mail/FastMail
+
+[Repository FastMail-Remote]
+type = IMAP
+remotehost = mail.messagingengine.com
+remoteuser = ..@..
+remoteport = 142
+
+# vim: ft=cfg tw=0

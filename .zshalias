@@ -151,11 +151,28 @@ function reprobe() {
 
 ## to quickly create/edit todo files
 function todo() {
-  local ENV=$HOME/othe
+  local arg=$HOME/othe
   case $1 in
-    *) vim $ENV/.TODO_$@ ;;
+    *) vim $arg/.TODO_$@ ;;
   esac
 }
+
+## to find latest mirrors, rank and use them
+function mrr() {
+  local env=/tmp/newmirrors
+  local fifo1=/tmp/fifo1
+  local fifo2=/tmp/fifo2
+  mkfifo /tmp/fifo{1,2}
+  links -dump 'https://www.archlinux.de/?page=MirrorStatus;orderby=lastsync;sort=1'|\
+  grep "tp:/"|head -n 10|awk '{print $1}'|sed "s/$/\$repo\/os\/`arch`/" >! $fifo1 &
+  links -dump 'https://www.archlinux.de/?page=MirrorStatus;orderby=avgtime;sort=1'|\
+  grep "tp:/"|head -n 10|awk '{print $1}'|sed "s/$/\$repo\/os\/`arch`/" >! $fifo2 &
+  grep -xvf $fifo2 <$fifo1|grep -vi i686|head -n 5|sed 's/^/Server = /;s/$//' >! $env
+  rm /tmp/fifo{1,2} &>/dev/null
+  rankmirrors -n 5 $env >! /tmp/good
+  rm $env ; sudo mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist-old
+  sudo mv /tmp/good /etc/pacman.d/mirrorlist
+  }
 
 ## to make a directory and cd into immediately
 function mkcd() {

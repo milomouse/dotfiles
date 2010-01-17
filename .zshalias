@@ -84,7 +84,6 @@ alias psr='ps -u root fo etime,user,pid,pmem,pcpu,command |less'
 alias daemons='ls /var/run/daemons'
 alias dfu='df -hTP'
 alias ping='ping -c 5'
-alias sd='sdcv'
 alias ncmp='ncmpcpp'
 alias rot='rtorrent'
 alias hb='HandBrakeCLI -e x264 -E ac3 -6 dp12 -R 48 -b 1800 -B 160 -D 3.0 -2 -T -p --decomb -x qp=0:aq-strength=1.5:direct=auto:bframes=6:mixed-refs:no-fast-pskip:8x8dct -i /dev/dvd'
@@ -173,6 +172,22 @@ function mrr() {
   rm $env ; sudo mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist-old
   sudo mv /tmp/good /etc/pacman.d/mirrorlist
   }
+
+## to quickly find definitions
+function sd() {
+  case $1 in
+    -w | -wordnet ) shift
+    sdcv -u "WordNet" $@ | grep -i $@
+    ;;
+    -t | -thesaurus ) shift
+    sdcv -u "English Thesaurus" $@ | grep -i $@
+    ;;
+    -a | -all ) shift
+    sdcv $@ | less
+    ;;
+    *) sdcv -u "WordNet" $@ | grep -i $@
+  esac
+}
 
 ## to make a directory and cd into immediately
 function mkcd() {

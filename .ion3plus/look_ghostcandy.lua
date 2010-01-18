@@ -2,7 +2,7 @@
 -- milomouse
 
 local vivid   = "#ddb4c4"
-local basic = "#b188a9"
+local basic   = "#b188a9"
 local faded   = "#ae969f"
 local night   = "#766169"
 local blank   = "#393033"
@@ -76,7 +76,7 @@ de.defstyle("tab", {
     font = "-*-fixed-*-*-*-*-7-*-*-*-*-*-*-*",
     de.substyle("active-selected", {
 	foreground_colour = faded_ghost,
-        background_colour = basic,
+        background_colour = "#D5A1B5",
     }),
     de.substyle("active-unselected", {
 	foreground_colour = "#202020",

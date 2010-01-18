@@ -87,7 +87,7 @@
 ------------------------------------------------------------------------------------
 
 local defaults = {
-	files = { ".ion3plus", "/var/log/auth.log", "/var/log/everything.log", "/var/log/messages.log", "/var/log/pacman.log", "/var/log/crond", "/var/log/user.log", "/var/log/daemon.log", "/var/log/kernel.log", "/var/log/dmesg.log", "/var/log/syslog.log", "/var/log/errors.log" }, 
+	files = { ".ion3plus", "/var/log/auth.log", "/var/log/pacman.log", "/var/log/crond", "/var/log/user.log", "/var/log/errors.log" }, 
 				     --  If you change this setting, the log will be auto-updated!
 	log = ".config/ion3-flash.log",  --> Where do you like to log? Paths not in $HOME [...]
 				     --  are invalid. If you change this file, please, remove

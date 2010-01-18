@@ -45,7 +45,7 @@ local function get_mpd_status()
     if settings.password ~= nil then
         cmd_string = "password " .. settings.password .. "\n" .. cmd_string
     end
-    cmd_string = string.format('echo -n "%s" | nc %s %d',
+    cmd_string = string.format('echo -n "%s" | ncat %s %d',
                                cmd_string, settings.address, settings.port)
     
     last_success = success

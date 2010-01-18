@@ -1,38 +1,31 @@
- ##
- ##  ~/.rtorrent.rc
- ##  milomouse
- ##
+## ~/.rtorrent.rc
+## milomouse
 
- # one . nect
+# connection
+port_range = 49164-49164
+encryption = allow_incoming
+peer_exchange = yes
+enable_trackers = yes
+use_udp_trackers = yes
+dht = auto
+dht_port = 6881
 
- port_range = 49164-49164
- encryption = allow_incoming
- peer_exchange = yes
- enable_trackers = yes
- use_udp_trackers = yes
- dht = auto
- dht_port = 6881
+# downloads
+download_rate = 0
+directory = /home/milo/tors/
+session = /home/milo/tors/.sess
 
- # two . dwlo
+# uploads
+upload_rate = 65
+max_uploads = 20
 
- download_rate = 0
- directory = /home/milo/tors/
- session = /home/milo/tors/.sess
+# watch dirs
+schedule = watch_directory1,5,5,"load_start=/home/milo/tors/foto/.down/*.torrent,d.set_directory=/home/milo/tors/foto/"
+schedule = watch_directory2,5,5,"load_start=/home/milo/tors/muzk/.down/*.torrent,d.set_directory=/home/milo/tors/muzk/"
+schedule = watch_directory3,5,5,"load_start=/home/milo/tors/othe/.down/*.torrent,d.set_directory=/home/milo/tors/othe/"
+schedule = watch_directory4,5,5,"load_start=/home/milo/tors/vide/.down/*.torrent,d.set_directory=/home/milo/tors/vide/"
 
- # three . uplo
-
- upload_rate = 65
- max_uploads = 20
-
- # four . wach
-
- schedule = watch_directory1,5,5,"load_start=/home/milo/tors/foto/.down/*.torrent,d.set_directory=/home/milo/tors/foto/"
- schedule = watch_directory2,5,5,"load_start=/home/milo/tors/muzk/.down/*.torrent,d.set_directory=/home/milo/tors/muzk/"
- schedule = watch_directory3,5,5,"load_start=/home/milo/tors/othe/.down/*.torrent,d.set_directory=/home/milo/tors/othe/"
- schedule = watch_directory4,5,5,"load_start=/home/milo/tors/vide/.down/*.torrent,d.set_directory=/home/milo/tors/vide/"
-
- # five . ackt
-
- schedule = tied_directory,5,60,start_tied=
- schedule = untied_directory,5,60,close_untied=
- check_hash = yes
+# actions
+schedule = tied_directory,5,60,start_tied=
+schedule = untied_directory,5,60,close_untied=
+check_hash = yes

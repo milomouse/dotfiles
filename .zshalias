@@ -49,18 +49,20 @@ alias ls='ls -h --color=auto -F --group-directories-first'
 alias la='ls -AX'
 alias lb='la -Ssr'
 alias lf='la -d *(-/DN)'
+alias lt='la -tr'
 alias lls='ls -l'
 alias lla='lls -AX'
 alias llb='lla -Sr'
 alias llt='lla -tr'
 alias llm='llt -rl -- **/*(D.om[1,10])'
 alias llf='lla -d *(-/DN)'
+alias badcheck='sudo find / -perm -002 \( -type f -o -type d \) -ls'
 alias back='cd $OLDPWD'
 alias e='bye'
+alias cl='clear'
 alias rd='rm -rd'
 alias rds='srm -vr $@'
 alias rms='srm -v $*'
-alias cl='clear'
 
 alias ff='find |grep -i'
 alias nocm='egrep -v "^\s*(#|$)"'
@@ -100,8 +102,6 @@ alias svim='sudo vim'
 alias upf='sudo fc-cache -vf'
 alias upd='sudo updatedb'
 alias abs='sudo abs'
-alias reboot='killall ssh-agent ; rm ~/.ssh/environment ; sudo reboot'
-alias poweroff='killall ssh-agent ; rm ~/.ssh/environment ; sudo poweroff'
 alias killn='pkill -f'
 alias pacman='pacman-color'
 alias ay='yaourt'
@@ -110,6 +110,18 @@ alias downgrade='ay -Su --downgrade'
 alias clean='ay -Scc'
 
 # functions
+## to reboot and poweroff
+function reboot() {
+killall ssh-agent &>/dev/null
+rm $HOME/.ssh/environment &>/dev/null
+sudo reboot
+}
+function poweroff() {
+killall ssh-agent &>/dev/null
+rm $HOME/.ssh/environment &>/dev/null
+sudo poweroff
+}
+
 ## to unpack files
 extr() {
   if [ -f $1 ] ; then 
@@ -152,40 +164,27 @@ function reprobe() {
 function todo() {
   local arg=$HOME/othe
   case $1 in
-    *) vim $arg/.TODO_$@ ;;
+    -l ) shift
+    ls -1 $arg/.TODO*
+    ;;
+    * ) vim $arg/.TODO_$@
+    ;;
   esac
 }
-
-## to find latest mirrors, rank and use them
-function mrr() {
-  local env=/tmp/newmirrors
-  local fifo1=/tmp/fifo1
-  local fifo2=/tmp/fifo2
-  mkfifo /tmp/fifo{1,2}
-  links -dump 'https://www.archlinux.de/?page=MirrorStatus;orderby=lastsync;sort=1'|\
-  grep "tp:/"|head -n 10|awk '{print $1}'|sed "s/$/\$repo\/os\/`arch`/" >! $fifo1 &
-  links -dump 'https://www.archlinux.de/?page=MirrorStatus;orderby=avgtime;sort=1'|\
-  grep "tp:/"|head -n 10|awk '{print $1}'|sed "s/$/\$repo\/os\/`arch`/" >! $fifo2 &
-  grep -xvf $fifo2 <$fifo1|grep -vi i686|head -n 5|sed 's/^/Server = /;s/$//' >! $env
-  rm /tmp/fifo{1,2} &>/dev/null
-  rankmirrors -n 5 $env >! /tmp/good
-  rm $env ; sudo mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist-old
-  sudo mv /tmp/good /etc/pacman.d/mirrorlist
-  }
 
 ## to quickly find definitions
 function sd() {
   case $1 in
     -w | -wordnet ) shift
-    sdcv -u "WordNet" $@ | grep -i $@
+    sdcv -u "WordNet" $@
     ;;
     -t | -thesaurus ) shift
-    sdcv -u "English Thesaurus" $@ | grep -i $@
+    sdcv -u "English Thesaurus" $@
     ;;
     -a | -all ) shift
     sdcv $@ | less
     ;;
-    *) sdcv -u "WordNet" $@ | grep -i $@
+    *) sdcv -u "WordNet" $@
   esac
 }
 

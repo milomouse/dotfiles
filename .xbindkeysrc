@@ -11,10 +11,10 @@ Alt+Prior
 Alt+Next
 
 "songrem"
-Shift+Delete
+Control+Delete
 
 "songrem -p"
-Shift+Home
+Control+Next
 
 "ossvol -t"
 XF86AudioMute
@@ -36,3 +36,6 @@ XF86MonBrightnessUp
 
 "moodlight -d"
 XF86MonBrightnessDown
+
+"synap"
+Mod4+Escape

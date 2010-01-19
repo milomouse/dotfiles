@@ -59,9 +59,9 @@ defbindings("WScreen", {
         kpress("Delete", "ioncore.exec_on(_, 'alock -bg shade:shade=30 -cursor glyph -auth pam')"),
 
         bdoc("Take a screenshot of current workspace."),
-        kpress("End", "ioncore.exec_on(_, 'import -window root ~/foto/shot/$(date +%Y_%m_%d-%H%M).png')"),
+        kpress("End", "ioncore.exec_on(_, 'scrot ~/foto/shot/$(date +%Y_%m_%d-%H%M).png')"),
 
-        bdoc("Exile the mouse or grant amnesty if already exiled."),
+        bdoc("Banish the mouse (and then return it to it's previous state)."),
         kpress("E", "ioncore.exec_on(_, 'mouv')"),
     }),
 

@@ -57,7 +57,7 @@ function update_linuxbatt()
         then statusd.inform("linuxbatt_hint", "critical")
         elseif perc < settings.important_threshold
         then statusd.inform("linuxbatt_hint", "important")
-        else statusd.inform("linuxbatt_hint", "normal")
+        else statusd.inform("linuxbatt_hint", "cyan")
         end
 	linuxbatt_timer:set(settings.update_interval, update_linuxbatt)
 end

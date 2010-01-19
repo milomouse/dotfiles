@@ -1,1 +1,1 @@
-dopath("look_ghostcandy")
+dopath("look_candymouse")

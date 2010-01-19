@@ -65,8 +65,8 @@ mod_statusbar.launch_statusd{
     -- Load meter
     load={
         --update_interval=10*1000,
-        important_threshold=1.8,
-        critical_threshold=4.0,
+        important_threshold=0.00,
+        critical_threshold=2.00,
     },
     exec={
 	 oval={

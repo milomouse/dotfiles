@@ -1,11 +1,10 @@
--- look_ghostcandy.lua drawing engine configuration file for Ion.
--- milomouse
+-- look_candymouse.lua drawing engine configuration file for Ion.
+-- milomouse < vincent [at] fea . st >
 
 local vivid   = "#ddb4c4"
 local basic   = "#b188a9"
 local faded   = "#ae969f"
 local night   = "#766169"
-local blank   = "#393033"
 
 local regular_ghost = "#494949"
 local faded_ghost   = "#222"
@@ -20,13 +19,22 @@ de.defstyle("*", {
     spacing = 0,
     foreground_colour = night,
     background_colour = "#0c0c0c",
-    highlight_pixels = 2,
+    highlight_pixels = 3,
     highlight_colour = "black",
-    shadow_pixels = 2,
+    shadow_pixels = 3,
     shadow_colour = "black",
     border_style = "elevated",
-    text_align = "center",
+    text_align = "right",
     font = "-*-fixed-*-*-*-*-9-*-*-*-*-*-*-*",
+    de.substyle("important", { foreground_colour = "#b092a4", }),
+    de.substyle("critical", { foreground_colour = "#b67caa", }),
+    de.substyle("gray", { foreground_colour = "#c6c7c5", }),
+    de.substyle("red", { foreground_colour = "#ffadcc", }),
+    de.substyle("magenta", { foreground_colour = "#baabb7", }),
+    de.substyle("blue", { foreground_colour = "#3f4f60", }),
+    de.substyle("cyan", { foreground_colour = "#809cb9", }),
+    de.substyle("green", { foreground_colour = "#619489", }),
+    de.substyle("yellow", { foreground_colour = "#b7b872", }),
 })
 
 de.defstyle("frame", {
@@ -49,19 +57,20 @@ de.defstyle("frame-floating", {
 
 de.defstyle("frame-tiled", {
     based_on = "frame",
-    spacing = 1,
-    padding_pixels = 1,
-    highlight_pixels = 2,
+    spacing = 0,
+    padding_pixels = 0,
+    highlight_pixels = 1,
     highlight_colour = baleful_ghost,
     shadow_pixels = 2,
     shadow_colour = baleful_ghost,
     de.substyle("active", {
-    	highlight_colour = baleful_ghost,
-        shadow_colour = baleful_ghost,
+    	highlight_colour = "#a488d9",
+        shadow_colour = "#9ed3d7",
     }),
     de.substyle("inactive", {
-	highlight_colour = "#060606",
-	shadow_colour = "#060606",
+	--highlight_colour = "#464051",
+	highlight_colour = "#131117",
+	shadow_colour = "#000",
 })
 })
 
@@ -72,15 +81,15 @@ de.defstyle("tab", {
     highlight_pixels = 0,
     shadow_pixels = 1,
     shadow_colour = baleful_ghost,
-    text_align = "center",
+    text_align = "right",
     font = "-*-fixed-*-*-*-*-7-*-*-*-*-*-*-*",
     de.substyle("active-selected", {
-	foreground_colour = "#202020",
-        background_colour = "#54464e",
+	foreground_colour = faded_ghost,
+        background_colour = "#625873",
     }),
     de.substyle("active-unselected", {
-	foreground_colour = "#333",
-        background_colour = "#030303",
+	foreground_colour = "#202020",
+        background_colour = "#54464e",
     }),
     de.substyle("inactive-selected", {
 	foreground_colour = "#333",
@@ -120,15 +129,6 @@ de.defstyle("stdisp", {
     background_colour = "black",
     foreground_colour = night,
     font ="-*-fixed-*-*-*-*-9-*-*-*-*-*-*-*",
-    de.substyle("important", { foreground_colour = "#b092a4", }),
-    de.substyle("critical", { foreground_colour = "#b67caa", }),
-    de.substyle("gray", { foreground_colour = "#c6c7c5", }),
-    de.substyle("red", { foreground_colour = "#ffadcc", }),
-    de.substyle("magenta", { foreground_colour = "#baabb7", }),
-    de.substyle("blue", { foreground_colour = "#3f4f60", }),
-    de.substyle("cyan", { foreground_colour = "#809cb9", }),
-    de.substyle("green", { foreground_colour = "#619489", }),
-    de.substyle("yellow", { foreground_colour = "#b7b872", }),
 })
 
 de.defstyle("tab-menuentry", {

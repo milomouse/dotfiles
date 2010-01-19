@@ -10,8 +10,8 @@ return {
         },
     },
     ["load"] = {
-        ["critical_threshold"] = 4,
-        ["important_threshold"] = 1.8,
+        ["critical_threshold"] = 2,
+        ["important_threshold"] = 0,
     },
     ["mail"] = {
     },

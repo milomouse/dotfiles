@@ -7,18 +7,18 @@ return {
             [1] = {
                 ["type"] = "WGroupWS",
                 ["name"] = "1.WORK",
-                ["hidden"] = true,
                 ["geom"] = {
                     ["y"] = 0,
                     ["x"] = 0,
                     ["w"] = 1366,
                     ["h"] = 768,
                 },
+                ["switchto"] = true,
                 ["sizepolicy"] = "full",
                 ["managed"] = {
                     [1] = {
                         ["type"] = "WTiling",
-                        ["name"] = "WTiling<2>",
+                        ["name"] = "WTiling",
                         ["bottom"] = true,
                         ["level"] = 0,
                         ["sizepolicy"] = "full",
@@ -36,55 +36,303 @@ return {
                             ["dir"] = "vertical",
                             ["brs"] = 758,
                             ["br"] = {
-                                ["tls"] = 216,
+                                ["tls"] = 819,
                                 ["tl"] = {
-                                    ["regparams"] = {
-                                        ["mode"] = 1,
-                                        ["type"] = "WFrame",
-                                        ["name"] = "WFrame",
-                                        ["managed"] = {
-                                        },
-                                    },
-                                    ["type"] = "WSplitRegion",
-                                },
-                                ["dir"] = "vertical",
-                                ["brs"] = 542,
-                                ["br"] = {
-                                    ["tls"] = 774,
+                                    ["tls"] = 283,
                                     ["tl"] = {
-                                        ["tls"] = 258,
+                                        ["regparams"] = {
+                                            ["mode"] = 2,
+                                            ["type"] = "WFrame",
+                                            ["name"] = "WFrame<1>",
+                                            ["managed"] = {
+                                                [1] = {
+                                                    ["type"] = "WGroupCW",
+                                                    ["name"] = "WGroupCW<6>",
+                                                    ["geom"] = {
+                                                        ["y"] = 1,
+                                                        ["x"] = 1,
+                                                        ["w"] = 816,
+                                                        ["h"] = 280,
+                                                    },
+                                                    ["switchto"] = true,
+                                                    ["sizepolicy"] = "full",
+                                                    ["managed"] = {
+                                                        [1] = {
+                                                            ["type"] = "WClientWin",
+                                                            ["bottom"] = true,
+                                                            ["windowid"] = 16777225,
+                                                            ["checkcode"] = 1,
+                                                            ["sizepolicy"] = "full",
+                                                            ["geom"] = {
+                                                                ["y"] = 3,
+                                                                ["x"] = 1,
+                                                                ["w"] = 814,
+                                                                ["h"] = 274,
+                                                            },
+                                                            ["level"] = 1,
+                                                        },
+                                                    },
+                                                    ["level"] = 0,
+                                                },
+                                            },
+                                        },
+                                        ["type"] = "WSplitRegion",
+                                    },
+                                    ["dir"] = "vertical",
+                                    ["brs"] = 475,
+                                    ["br"] = {
+                                        ["regparams"] = {
+                                            ["mode"] = 2,
+                                            ["type"] = "WFrame",
+                                            ["name"] = "WFrame<8>",
+                                            ["managed"] = {
+                                                [1] = {
+                                                    ["type"] = "WGroupCW",
+                                                    ["name"] = "WGroupCW<3>",
+                                                    ["geom"] = {
+                                                        ["y"] = 1,
+                                                        ["x"] = 1,
+                                                        ["w"] = 816,
+                                                        ["h"] = 472,
+                                                    },
+                                                    ["switchto"] = true,
+                                                    ["sizepolicy"] = "full",
+                                                    ["managed"] = {
+                                                        [1] = {
+                                                            ["type"] = "WClientWin",
+                                                            ["bottom"] = true,
+                                                            ["windowid"] = 12582921,
+                                                            ["checkcode"] = 2,
+                                                            ["sizepolicy"] = "full",
+                                                            ["geom"] = {
+                                                                ["y"] = 0,
+                                                                ["x"] = 1,
+                                                                ["w"] = 814,
+                                                                ["h"] = 472,
+                                                            },
+                                                            ["level"] = 1,
+                                                        },
+                                                    },
+                                                    ["level"] = 0,
+                                                },
+                                                [2] = {
+                                                    ["type"] = "WGroupCW",
+                                                    ["name"] = "WGroupCW<8>",
+                                                    ["hidden"] = true,
+                                                    ["geom"] = {
+                                                        ["y"] = 1,
+                                                        ["x"] = 1,
+                                                        ["w"] = 816,
+                                                        ["h"] = 472,
+                                                    },
+                                                    ["sizepolicy"] = "full",
+                                                    ["managed"] = {
+                                                        [1] = {
+                                                            ["type"] = "WClientWin",
+                                                            ["bottom"] = true,
+                                                            ["windowid"] = 25165833,
+                                                            ["checkcode"] = 3,
+                                                            ["sizepolicy"] = "full",
+                                                            ["geom"] = {
+                                                                ["y"] = 0,
+                                                                ["x"] = 1,
+                                                                ["w"] = 814,
+                                                                ["h"] = 472,
+                                                            },
+                                                            ["level"] = 1,
+                                                        },
+                                                    },
+                                                    ["level"] = 0,
+                                                },
+                                            },
+                                        },
+                                        ["type"] = "WSplitRegion",
+                                    },
+                                    ["type"] = "WSplitSplit",
+                                },
+                                ["dir"] = "horizontal",
+                                ["brs"] = 547,
+                                ["br"] = {
+                                    ["tls"] = 530,
+                                    ["tl"] = {
+                                        ["tls"] = 154,
                                         ["tl"] = {
                                             ["regparams"] = {
-                                                ["mode"] = 1,
+                                                ["mode"] = 2,
                                                 ["type"] = "WFrame",
                                                 ["name"] = "WFrame<2>",
                                                 ["managed"] = {
+                                                    [1] = {
+                                                        ["type"] = "WGroupCW",
+                                                        ["name"] = "WGroupCW<5>",
+                                                        ["hidden"] = true,
+                                                        ["geom"] = {
+                                                            ["y"] = 1,
+                                                            ["x"] = 1,
+                                                            ["w"] = 544,
+                                                            ["h"] = 151,
+                                                        },
+                                                        ["sizepolicy"] = "full",
+                                                        ["managed"] = {
+                                                            [1] = {
+                                                                ["type"] = "WClientWin",
+                                                                ["bottom"] = true,
+                                                                ["windowid"] = 20971529,
+                                                                ["checkcode"] = 4,
+                                                                ["sizepolicy"] = "full",
+                                                                ["geom"] = {
+                                                                    ["y"] = 1,
+                                                                    ["x"] = 0,
+                                                                    ["w"] = 544,
+                                                                    ["h"] = 148,
+                                                                },
+                                                                ["level"] = 1,
+                                                            },
+                                                        },
+                                                        ["level"] = 0,
+                                                    },
+                                                    [2] = {
+                                                        ["type"] = "WGroupCW",
+                                                        ["name"] = "WGroupCW<2>",
+                                                        ["geom"] = {
+                                                            ["y"] = 1,
+                                                            ["x"] = 1,
+                                                            ["w"] = 544,
+                                                            ["h"] = 151,
+                                                        },
+                                                        ["switchto"] = true,
+                                                        ["sizepolicy"] = "full",
+                                                        ["managed"] = {
+                                                            [1] = {
+                                                                ["type"] = "WClientWin",
+                                                                ["bottom"] = true,
+                                                                ["windowid"] = 10485769,
+                                                                ["checkcode"] = 5,
+                                                                ["sizepolicy"] = "full",
+                                                                ["geom"] = {
+                                                                    ["y"] = 1,
+                                                                    ["x"] = 0,
+                                                                    ["w"] = 544,
+                                                                    ["h"] = 148,
+                                                                },
+                                                                ["level"] = 1,
+                                                            },
+                                                        },
+                                                        ["level"] = 0,
+                                                    },
                                                 },
                                             },
                                             ["type"] = "WSplitRegion",
                                         },
                                         ["dir"] = "vertical",
-                                        ["brs"] = 284,
+                                        ["brs"] = 376,
                                         ["br"] = {
                                             ["regparams"] = {
-                                                ["mode"] = 1,
+                                                ["mode"] = 2,
                                                 ["type"] = "WFrame",
-                                                ["name"] = "WFrame<4>",
+                                                ["name"] = "WFrame",
                                                 ["managed"] = {
+                                                    [1] = {
+                                                        ["type"] = "WGroupCW",
+                                                        ["name"] = "WGroupCW<1>",
+                                                        ["geom"] = {
+                                                            ["y"] = 1,
+                                                            ["x"] = 1,
+                                                            ["w"] = 544,
+                                                            ["h"] = 373,
+                                                        },
+                                                        ["switchto"] = true,
+                                                        ["sizepolicy"] = "full",
+                                                        ["managed"] = {
+                                                            [1] = {
+                                                                ["type"] = "WClientWin",
+                                                                ["bottom"] = true,
+                                                                ["windowid"] = 6291465,
+                                                                ["checkcode"] = 6,
+                                                                ["sizepolicy"] = "full",
+                                                                ["geom"] = {
+                                                                    ["y"] = 0,
+                                                                    ["x"] = 0,
+                                                                    ["w"] = 544,
+                                                                    ["h"] = 373,
+                                                                },
+                                                                ["level"] = 1,
+                                                            },
+                                                        },
+                                                        ["level"] = 0,
+                                                    },
                                                 },
                                             },
                                             ["type"] = "WSplitRegion",
                                         },
                                         ["type"] = "WSplitSplit",
                                     },
-                                    ["dir"] = "horizontal",
-                                    ["brs"] = 592,
+                                    ["dir"] = "vertical",
+                                    ["brs"] = 228,
                                     ["br"] = {
                                         ["regparams"] = {
-                                            ["mode"] = 1,
+                                            ["mode"] = 2,
                                             ["type"] = "WFrame",
                                             ["name"] = "WFrame<3>",
                                             ["managed"] = {
+                                                [1] = {
+                                                    ["type"] = "WGroupCW",
+                                                    ["name"] = "WGroupCW",
+                                                    ["hidden"] = true,
+                                                    ["geom"] = {
+                                                        ["y"] = 1,
+                                                        ["x"] = 1,
+                                                        ["w"] = 544,
+                                                        ["h"] = 225,
+                                                    },
+                                                    ["sizepolicy"] = "full",
+                                                    ["managed"] = {
+                                                        [1] = {
+                                                            ["type"] = "WClientWin",
+                                                            ["bottom"] = true,
+                                                            ["windowid"] = 4194313,
+                                                            ["checkcode"] = 7,
+                                                            ["sizepolicy"] = "full",
+                                                            ["geom"] = {
+                                                                ["y"] = 2,
+                                                                ["x"] = 0,
+                                                                ["w"] = 544,
+                                                                ["h"] = 220,
+                                                            },
+                                                            ["level"] = 1,
+                                                        },
+                                                    },
+                                                    ["level"] = 0,
+                                                },
+                                                [2] = {
+                                                    ["type"] = "WGroupCW",
+                                                    ["name"] = "WGroupCW<7>",
+                                                    ["geom"] = {
+                                                        ["y"] = 1,
+                                                        ["x"] = 1,
+                                                        ["w"] = 544,
+                                                        ["h"] = 225,
+                                                    },
+                                                    ["switchto"] = true,
+                                                    ["sizepolicy"] = "full",
+                                                    ["managed"] = {
+                                                        [1] = {
+                                                            ["type"] = "WClientWin",
+                                                            ["bottom"] = true,
+                                                            ["windowid"] = 27262979,
+                                                            ["checkcode"] = 8,
+                                                            ["sizepolicy"] = "full",
+                                                            ["geom"] = {
+                                                                ["y"] = 0,
+                                                                ["x"] = 92,
+                                                                ["w"] = 360,
+                                                                ["h"] = 225,
+                                                            },
+                                                            ["level"] = 1,
+                                                        },
+                                                    },
+                                                    ["level"] = 0,
+                                                },
                                             },
                                         },
                                         ["type"] = "WSplitRegion",
@@ -113,53 +361,6 @@ return {
                 ["managed"] = {
                     [1] = {
                         ["type"] = "WTiling",
-                        ["name"] = "WTiling",
-                        ["bottom"] = true,
-                        ["level"] = 0,
-                        ["sizepolicy"] = "full",
-                        ["geom"] = {
-                            ["y"] = 0,
-                            ["x"] = 0,
-                            ["w"] = 1366,
-                            ["h"] = 768,
-                        },
-                        ["split_tree"] = {
-                            ["tls"] = 10,
-                            ["tl"] = {
-                                ["type"] = "WSplitST",
-                            },
-                            ["dir"] = "vertical",
-                            ["brs"] = 758,
-                            ["br"] = {
-                                ["regparams"] = {
-                                    ["mode"] = 1,
-                                    ["type"] = "WFrame",
-                                    ["name"] = "WFrame<9>",
-                                    ["managed"] = {
-                                    },
-                                },
-                                ["type"] = "WSplitRegion",
-                            },
-                            ["type"] = "WSplitSplit",
-                        },
-                    },
-                },
-                ["level"] = 0,
-            },
-            [3] = {
-                ["type"] = "WGroupWS",
-                ["name"] = "3.BROWSE",
-                ["geom"] = {
-                    ["y"] = 0,
-                    ["x"] = 0,
-                    ["w"] = 1366,
-                    ["h"] = 768,
-                },
-                ["switchto"] = true,
-                ["sizepolicy"] = "full",
-                ["managed"] = {
-                    [1] = {
-                        ["type"] = "WTiling",
                         ["name"] = "WTiling<1>",
                         ["bottom"] = true,
                         ["level"] = 0,
@@ -171,31 +372,104 @@ return {
                             ["h"] = 768,
                         },
                         ["split_tree"] = {
-                            ["tls"] = 10,
+                            ["regparams"] = {
+                                ["mode"] = 2,
+                                ["type"] = "WFrame",
+                                ["name"] = "WFrame<4>",
+                                ["managed"] = {
+                                    [1] = {
+                                        ["type"] = "WClientWin",
+                                        ["level"] = 0,
+                                        ["windowid"] = 14680206,
+                                        ["switchto"] = true,
+                                        ["sizepolicy"] = "full",
+                                        ["geom"] = {
+                                            ["y"] = 1,
+                                            ["x"] = 1,
+                                            ["w"] = 1363,
+                                            ["h"] = 765,
+                                        },
+                                        ["checkcode"] = 9,
+                                    },
+                                    [2] = {
+                                        ["type"] = "WClientWin",
+                                        ["hidden"] = true,
+                                        ["windowid"] = 14689570,
+                                        ["checkcode"] = 10,
+                                        ["sizepolicy"] = "full",
+                                        ["geom"] = {
+                                            ["y"] = 1,
+                                            ["x"] = 1,
+                                            ["w"] = 1363,
+                                            ["h"] = 765,
+                                        },
+                                        ["level"] = 0,
+                                    },
+                                },
+                            },
+                            ["type"] = "WSplitRegion",
+                        },
+                    },
+                },
+                ["level"] = 0,
+            },
+            [3] = {
+                ["type"] = "WGroupWS",
+                ["name"] = "3.BROWSE",
+                ["hidden"] = true,
+                ["geom"] = {
+                    ["y"] = 0,
+                    ["x"] = 0,
+                    ["w"] = 1366,
+                    ["h"] = 768,
+                },
+                ["sizepolicy"] = "full",
+                ["managed"] = {
+                    [1] = {
+                        ["type"] = "WTiling",
+                        ["name"] = "WTiling<2>",
+                        ["bottom"] = true,
+                        ["level"] = 0,
+                        ["sizepolicy"] = "full",
+                        ["geom"] = {
+                            ["y"] = 0,
+                            ["x"] = 0,
+                            ["w"] = 1366,
+                            ["h"] = 768,
+                        },
+                        ["split_tree"] = {
+                            ["tls"] = 544,
                             ["tl"] = {
-                                ["type"] = "WSplitST",
+                                ["regparams"] = {
+                                    ["mode"] = 2,
+                                    ["type"] = "WFrame",
+                                    ["name"] = "WFrame<6>",
+                                    ["managed"] = {
+                                    },
+                                },
+                                ["type"] = "WSplitRegion",
                             },
                             ["dir"] = "vertical",
-                            ["brs"] = 758,
+                            ["brs"] = 224,
                             ["br"] = {
-                                ["tls"] = 428,
+                                ["tls"] = 683,
                                 ["tl"] = {
                                     ["regparams"] = {
-                                        ["mode"] = 1,
+                                        ["mode"] = 2,
                                         ["type"] = "WFrame",
-                                        ["name"] = "WFrame<7>",
+                                        ["name"] = "WFrame<5>",
                                         ["managed"] = {
                                         },
                                     },
                                     ["type"] = "WSplitRegion",
                                 },
-                                ["dir"] = "vertical",
-                                ["brs"] = 330,
+                                ["dir"] = "horizontal",
+                                ["brs"] = 683,
                                 ["br"] = {
                                     ["regparams"] = {
-                                        ["mode"] = 1,
+                                        ["mode"] = 2,
                                         ["type"] = "WFrame",
-                                        ["name"] = "WFrame<1>",
+                                        ["name"] = "WFrame<7>",
                                         ["managed"] = {
                                         },
                                     },
@@ -215,17 +489,46 @@ return {
                 ["managed"] = {
                     [1] = {
                         ["geom"] = {
-                            ["y"] = 181,
-                            ["x"] = 291,
-                            ["w"] = 798,
-                            ["h"] = 265,
+                            ["y"] = 225,
+                            ["x"] = 261,
+                            ["w"] = 889,
+                            ["h"] = 268,
                         },
                         ["type"] = "WFrame",
                         ["name"] = "*scratchpad*",
                         ["bottom"] = true,
                         ["level"] = 1025,
-                        ["mode"] = 0,
+                        ["mode"] = 2,
                         ["managed"] = {
+                            [1] = {
+                                ["type"] = "WGroupCW",
+                                ["name"] = "WGroupCW<4>",
+                                ["geom"] = {
+                                    ["y"] = 1,
+                                    ["x"] = 1,
+                                    ["w"] = 886,
+                                    ["h"] = 265,
+                                },
+                                ["switchto"] = true,
+                                ["sizepolicy"] = "full",
+                                ["managed"] = {
+                                    [1] = {
+                                        ["type"] = "WClientWin",
+                                        ["bottom"] = true,
+                                        ["windowid"] = 23068681,
+                                        ["checkcode"] = 11,
+                                        ["sizepolicy"] = "full",
+                                        ["geom"] = {
+                                            ["y"] = 0,
+                                            ["x"] = 0,
+                                            ["w"] = 886,
+                                            ["h"] = 265,
+                                        },
+                                        ["level"] = 1,
+                                    },
+                                },
+                                ["level"] = 0,
+                            },
                         },
                         ["sizepolicy"] = "free_glue",
                     },

@@ -1,6 +1,5 @@
 # prompt line
 PROMPT='%F{red}%M%~%# %f'
-RPROMPT='%F{red}%T%f'
 
 # history specification
 export HISTSIZE=1400

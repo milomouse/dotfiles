@@ -98,8 +98,6 @@ de.defstyle("tab", {
     de.substyle("inactive-selected", {
 	foreground_colour = "#222",
         background_colour = "#030303",
-	--foreground_colour = "#222",
-        --background_colour = "#030303",
     }),
     de.substyle("inactive-unselected", {
 	foreground_colour = "#111",

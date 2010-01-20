@@ -16,7 +16,7 @@
  urxvt*cutchars: "()*,<>[]{}|'
  urxvt*saveLines: 8192
  urxvt*borderLess: false
- urxvt*fading: 40
+ urxvt*fading: 70
  urxvt*cursorColor: #b092a4
  urxvt*transparent: true
  urxvt*shading: 4

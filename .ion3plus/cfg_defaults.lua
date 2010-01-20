@@ -18,7 +18,7 @@ dopath("exec_show")
 dopath("move_current")
 dopath("send_to_ws")
 dopath("tabmenu")
-dopath("no_tabs")
+--dopath("no_tabs")
 
 -- Deprecated.
 dopath("cfg_user", true)

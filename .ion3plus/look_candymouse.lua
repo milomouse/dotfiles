@@ -60,12 +60,14 @@ de.defstyle("frame-tiled", {
     spacing = 0,
     padding_pixels = 0,
     highlight_pixels = 1,
-    highlight_colour = baleful_ghost,
-    shadow_pixels = 2,
-    shadow_colour = baleful_ghost,
+    highlight_colour = "#a488d9",
+    shadow_pixels = 1,
+    shadow_colour = "#9ed3d7",
     de.substyle("active", {
-    	highlight_colour = "#a488d9",
-        shadow_colour = "#9ed3d7",
+    	highlight_colour = "#111",
+        shadow_colour = "#111",
+    	--highlight_colour = "#a488d9",
+        --shadow_colour = "#9ed3d7",
     }),
     de.substyle("inactive", {
 	--highlight_colour = "#464051",
@@ -86,14 +88,18 @@ de.defstyle("tab", {
     de.substyle("active-selected", {
 	foreground_colour = faded_ghost,
         background_colour = "#625873",
+        ---shadow_colour = "#625873",
     }),
     de.substyle("active-unselected", {
-	foreground_colour = "#202020",
-        background_colour = "#54464e",
+	foreground_colour = "#101010",
+        background_colour = "#363040",
+        ---shadow_colour = "#363040",
     }),
     de.substyle("inactive-selected", {
-	foreground_colour = "#333",
+	foreground_colour = "#222",
         background_colour = "#030303",
+	--foreground_colour = "#222",
+        --background_colour = "#030303",
     }),
     de.substyle("inactive-unselected", {
 	foreground_colour = "#111",

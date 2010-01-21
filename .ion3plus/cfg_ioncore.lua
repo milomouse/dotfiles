@@ -54,9 +54,6 @@ defbindings("WScreen", {
         
         bdoc("Clear all tags."),
         kpress("T", "ioncore.tagged_clear()"),
-        
-	bdoc("Lock the screen."),
-        kpress("Delete", "ioncore.exec_on(_, 'alock -bg shade:shade=30 -cursor glyph -auth pam')"),
 
         bdoc("Take a screenshot of current workspace."),
         kpress("End", "ioncore.exec_on(_, 'scrot ~/foto/shot/$(date +%Y_%m_%d-%H%M).png')"),
@@ -347,7 +344,7 @@ defbindings("WMoveresMode", {
 defmenu("mainmenu", {
     menuentry("Run...",         "mod_query.query_exec(_)"),
     menuentry("Terminal",       "ioncore.exec_on(_, XTERM or 'xterm')"),
-    menuentry("Lock screen",    "ioncore.exec_on(_, 'slock')"),
+    menuentry("Lock screen",    "ioncore.exec_on(_, 'alock -bg shade:shade=30 -cursor glyph -auth pam')"),
     menuentry("Help",           "mod_query.query_man(_)"),
     menuentry("About Ion",      "mod_query.show_about_ion(_)"),
     submenu("Styles",           "stylemenu"),

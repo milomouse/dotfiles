@@ -24,7 +24,7 @@ de.defstyle("*", {
     shadow_pixels = 3,
     shadow_colour = "black",
     border_style = "elevated",
-    text_align = "right",
+    text_align = "center",
     font = "-*-fixed-*-*-*-*-9-*-*-*-*-*-*-*",
     de.substyle("important", { foreground_colour = "#b092a4", }),
     de.substyle("critical", { foreground_colour = "#b67caa", }),
@@ -60,19 +60,18 @@ de.defstyle("frame-tiled", {
     spacing = 0,
     padding_pixels = 0,
     highlight_pixels = 1,
-    highlight_colour = "#a488d9",
+    highlight_colour = baleful_ghost,
     shadow_pixels = 1,
-    shadow_colour = "#9ed3d7",
+    shadow_colour = baleful_ghost,
     de.substyle("active", {
-    	highlight_colour = "#111",
-        shadow_colour = "#111",
+    	highlight_colour = "#0a0a0a",
+        shadow_colour = "black",
     	--highlight_colour = "#a488d9",
         --shadow_colour = "#9ed3d7",
     }),
     de.substyle("inactive", {
-	--highlight_colour = "#464051",
-	highlight_colour = "#131117",
-	shadow_colour = "#000",
+	highlight_colour = "#0a0a0a",
+	shadow_colour = "black",
 })
 })
 
@@ -83,12 +82,12 @@ de.defstyle("tab", {
     highlight_pixels = 0,
     shadow_pixels = 1,
     shadow_colour = baleful_ghost,
-    text_align = "right",
+    text_align = "center",
     font = "-*-fixed-*-*-*-*-7-*-*-*-*-*-*-*",
     de.substyle("active-selected", {
 	foreground_colour = faded_ghost,
         background_colour = "#625873",
-        ---shadow_colour = "#625873",
+        --shadow_colour = "#625873",
     }),
     de.substyle("active-unselected", {
 	foreground_colour = "#101010",

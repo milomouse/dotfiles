@@ -1,55 +1,55 @@
- ## ~/.Xdefaults
- ## milomouse
+## ~/.Xdefaults
+## milomouse
 
- urxvt*termName: rxvt-256color
- urxvt*loginShell: true
- urxvt*font:    -*-fixed-*-*-*-*-9-*-*-*-*-*-*
- urxvt*boldFont:    -*-fixed-medium-*-*-*-9-*-*-*-*-*-*
- urxvt*italicFont: -*-fixed-medium-*-*-*-9-*-*-*-*-*-*
- urxvt*boldItalicFont: -*-fixed-medium-*-*-*-9-*-*-*-*-*-*
- urxvt*colorIT: #707070
- urxvt*scrollBar: false
- urxvt*secondaryScroll: true
- urxvt*scrollTtyKeypress: true
- urxvt*scrollWithBuffer: true
- urxvt*scrollTtyOutput: false
- urxvt*cutchars: "()*,<>[]{}|'
- urxvt*saveLines: 8192
- urxvt*borderLess: false
- urxvt*fading: 70
- urxvt*cursorColor: #b092a4
- urxvt*transparent: true
- urxvt*shading: 4
+urxvt*termName: rxvt-256color
+urxvt*loginShell: true
+urxvt*font:    -*-fixed-*-*-*-*-9-*-*-*-*-*-*
+urxvt*boldFont:    -*-fixed-medium-*-*-*-9-*-*-*-*-*-*
+urxvt*italicFont: -*-fixed-medium-*-*-*-9-*-*-*-*-*-*
+urxvt*boldItalicFont: -*-fixed-medium-*-*-*-9-*-*-*-*-*-*
+urxvt*colorIT: #707070
+urxvt*scrollBar: false
+urxvt*secondaryScroll: true
+urxvt*scrollTtyKeypress: true
+urxvt*scrollWithBuffer: true
+urxvt*scrollTtyOutput: false
+urxvt*cutchars: "()*,<>[]{}|'
+urxvt*saveLines: 8192
+urxvt*borderLess: false
+urxvt*fading: 70
+urxvt*cursorColor: #b092a4
+urxvt*transparent: true
+urxvt*shading: 4
 
- Xcursor.theme: whiteglass
- Xcursor.size: 10
+Xcursor.theme: whiteglass
+Xcursor.size: 10
 
  !milomouse
- *background: #151515
-  *foreground: #c3c2c5
+*background: #151515
+*foreground: #c3c2c5
  !black
-  *color0:  #050505
-  *color8:  #555753
+*color0:  #050505
+*color8:  #555753
  !red
-  *color1:  #9c8093
-  *color9:  #ffadcc
+*color1:  #9c8093
+*color9:  #ffadcc
  !green
-  *color2:  #9ed3d7
-  *color10: #67d797
+*color2:  #9ed3d7
+*color10: #67d797
  !yellow
-  *color3:  #ccc9a5
-  *color11: #c4c497
+*color3:  #ccc9a5
+*color11: #c4c497
  !blue
-  *color4:  #3f4f60
-  *color12: #98a7b6
+*color4:  #3f4f60
+*color12: #98a7b6
  !magenta
-  *color5:  #a488d9
-  *color13: #b7a7bc
+*color5:  #a488d9
+*color13: #b7a7bc
  !cyan
-  *color6:  #8d9fa6
-  *color14: #b8ddea
+*color6:  #8d9fa6
+*color14: #b8ddea
  !white
-  *color7:  #665c64
-  *color15: #787a76
+*color7:  #665c64
+*color15: #787a76
 
- # vim:enc=utf-8:nu:ai:si:et:ts=4:sw=4:ft=xdefaults:
+# vim:enc=utf-8:nu:ai:si:et:ts=4:sw=4:ft=xdefaults:

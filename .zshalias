@@ -75,7 +75,7 @@ alias xedit='vim $HOME/.Xdefaults'
 alias zedit='vim $HOME/.zshrc'
 alias zedia='vim $HOME/.zshalias'
 alias zload='source ~/.zshrc'
-alias startx='rmouv ; startx'
+alias startx='rmouv ; startx -- -dpi 120'
 alias unrarall='for file in `ls *.rar`; do unrar -x clr $file; done'
 alias unzipall='for file in `ls *.zip`; do unzip -L $file; done'
 

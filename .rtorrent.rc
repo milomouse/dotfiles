@@ -24,7 +24,6 @@ schedule = watch_directory1,5,5,"load_start=/home/milo/tors/foto/.down/*.torrent
 schedule = watch_directory2,5,5,"load_start=/home/milo/tors/muzk/.down/*.torrent,d.set_directory=/home/milo/tors/muzk/"
 schedule = watch_directory3,5,5,"load_start=/home/milo/tors/othe/.down/*.torrent,d.set_directory=/home/milo/tors/othe/"
 schedule = watch_directory4,5,5,"load_start=/home/milo/tors/vide/.down/*.torrent,d.set_directory=/home/milo/tors/vide/"
-schedule = watch_directory5,5,5,"load_start=/home/milo/tors/vide/show/.down/*.torrent,d.set_directory=/home/milo/vide/show/"
 
 # actions
 schedule = tied_directory,5,60,start_tied=

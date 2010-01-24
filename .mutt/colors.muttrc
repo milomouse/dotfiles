@@ -1,0 +1,67 @@
+## ~/.mutt/colors.muttrc
+## milomouse
+
+# set default
+  color normal     white         default
+
+# main colors
+  color status     magenta       default
+  color indicator  brightwhite   default
+  color tree       blue          default
+  color error      brightred     default
+  color message    brightmagenta default
+
+# color all ML mails
+#  color index      blue          default "~u"
+
+# uncolor certain messages
+uncolor index "~P"
+uncolor index "~C @.com"
+uncolor index "~N ~u"
+uncolor index "~N !~u"
+uncolor index "~T"
+uncolor index "~D"
+
+# and recolor them appropriately
+  color index      brightblack   default "~P"
+  color index      green         default "~C @.com"
+  color index      brightcyan    default "~N ~u"  # new ML mail
+  color index      brightmagenta default "~N !~u" # new non-ML mail
+  color index      brightgreen   default "~T"
+  color index      brightred     default "~D"
+
+# set up the headers
+  color header     blue          default "^from:"
+  color header     blue          default "^to:"
+  color header     magenta       default "^cc:"
+  color header     brightmagenta default "^date:"
+  color header     brightblue    default "^subject:"
+
+# message bodies
+  color attachment brightblack   default
+  color search     red           brightblack
+  color signature  cyan          default
+  color tilde      blue          default
+
+# urls
+  color body       brightblue    default "(^|<| )mailto:[^ ]+@[^ ]( |>|$)"
+  color body       brightblue    default "(^|<| )(http|https|ftp|file|telnet|news|finger)://[^ ]+( |>|$)"
+
+# emoticons
+  color body       brightmagenta default "(^| )+(|[<>|])[8;:](|[^ ])[)(/|DOPS]( |$)+"
+  color body       brightmagenta default "(^| )+[)(/|DOPS](|[^ ])[8;:](|[<>|])( |$)+"
+
+# *bold*, _underline_, and /italic/
+  color body       brightred     default "(^| )\\*[^ ]+\\*( |$)"
+  color body       brightcyan    default "(^| )_[^ ]+_( |$)"
+  color body       brightcyan    default "(^| )/[^ ]+/( |$)"
+
+# quote blocks
+  color quoted     magenta       default
+  color quoted1    cyan          default
+  color quoted2    green         default
+  color quoted3    magenta       default
+  color quoted4    cyan          default
+  color quoted5    green         default
+  color quoted6    magenta       default
+  color quoted7    cyan          default

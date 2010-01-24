@@ -1,0 +1,47 @@
+#!/bin/bash
+## Change screen brightness on computers where linux
+## fails to detect functions keys for it.
+
+CONFIG=$HOME/.config/.brightness
+OUTPUT='sudo setpci -s 00:02.0 F4.B='
+CURRENT=`cat $CONFIG|awk '{print $5}'|cut -c6,7`
+ARGUMENT="5"
+
+brighter() {
+	if [ $CURRENT = FF ]; then
+		return
+	fi
+		if [ $CURRENT = 95 ]; then
+			NEW=FF
+			echo $OUTPUT$NEW > $CONFIG
+			sh $CONFIG
+		else
+			NEW=`expr $CURRENT + $ARGUMENT`
+			echo $OUTPUT$NEW > $CONFIG
+			sh $CONFIG
+		fi
+}
+
+dimmer() {
+	if [ $CURRENT = 5 ]; then
+		return
+	fi
+		if [ $CURRENT = FF ]; then
+			NEW=95
+			echo $OUTPUT$NEW > $CONFIG
+			sh $CONFIG
+		else
+			NEW=`expr $CURRENT - $ARGUMENT`
+			echo $OUTPUT$NEW > $CONFIG
+			sh $CONFIG
+	fi
+}
+
+case "$1" in
+	'-b'|'--brighter')
+	brighter
+	;;
+	'-d'|'--dimmer')
+	dimmer
+	;;
+esac

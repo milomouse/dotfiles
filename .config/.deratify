@@ -75,7 +75,6 @@ unbind C-Z
 unbind exclam
 unbind apostrophe
 unbind space
-unbind Tab
 unbind M-Tab
 unbind C-exclam
 unbind C-Return

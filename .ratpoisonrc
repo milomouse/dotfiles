@@ -1,5 +1,7 @@
 # ~/.ratpoisonrc
-# milomouse
+# milomouse <vincent@fea.st>
+# complimenting ratpoison scripts found at: github.com/milomouse
+
 exec ratpoison -c "source $HOME/.config/.deratify"
 
 bind F1 exec ratpoison -c "select -" -c "only" -c "next" -c "echo Layout 1"
@@ -18,14 +20,11 @@ set maxsizegravity ne
 set padding 2 0 2 0
 set border 4
 set barborder 0
-set barpadding 2 0
-set barinpadding 0
+set barpadding 2 1
 set bargravity se
 set inputwidth 400
 set fgcolor #876CBE
 set bgcolor #020202
-#set fwcolor #876CBE
-#set bwcolor #020202
 set resizeunit 2
 set waitcursor 3
 set historysize 50
@@ -41,14 +40,15 @@ bind e exec
 bind f fselect
 bind g exec firefox-nightly
 bind h select -
+bind H exec ratpoison - c "select -" -c "only"
 bind i vsplit
 bind j hsplit
 bind k kill
 bind l windows
-bind m redisplay
+bind m exec manurat
 bind n curframe
 bind o exec urxvt -e ncmpcpp
-bind p putsel
+bind p redisplay
 bind q remove
 bind r resize
 bind s swap
@@ -64,14 +64,14 @@ bind equal dedicate 1
 bind Insert exec import -window root ~/foto/shot/$(date +%Y_%m_%d-%k%M).png 
 bind Delete exec alock -bg shade:shade=30 -cursor glyph -auth pam 
 
-definekey top M-comma prev
-definekey top M-period next
+definekey top M-n next
+definekey top M-p prev
 definekey top M-apostrophe focus
-definekey top M-n focuslast
 definekey top M-k focusup
 definekey top M-j focusdown
 definekey top M-h focusleft
 definekey top M-l focusright
+definekey top M-Tab focuslast
 definekey top M-K exchangeup
 definekey top M-J exchangedown
 definekey top M-H exchangeleft
@@ -80,11 +80,12 @@ definekey top M-C-k ratrelwarp 0 -7
 definekey top M-C-j ratrelwarp 0 7
 definekey top M-C-h ratrelwarp -7 0
 definekey top M-C-l ratrelwarp 7 0
+definekey top M-C-Return exec ratpoison -c "rathold down" -c "rathold up"
 
 definekey top M-Home exec ossrat -t
 definekey top M-End exec ossrat -s
-definekey top M-Next exec ossrat -n
 definekey top M-Prior exec ossrat -p
+definekey top M-Next exec ossrat -n
 definekey top C-Next exec songrem -p
 definekey top C-Delete exec songrem
 definekey top XF86AudioRaiseVolume exec ossrat -i 1
@@ -93,5 +94,12 @@ definekey top XF86AudioMute exec ossrat -m
 definekey top XF86MonBrightnessUp exec moodlight -b
 definekey top XF86MonBrightnessDown exec moodlight -d
 
+definekey top M-comma rpwsp
+definekey top M-period rpwsn
+definekey top M-exclam rpwsm1
+definekey top M-at rpwsm2
+definekey top M-numbersign rpwsm3
+definekey top M-dollar rpwsm4
+definekey top M-percent rpwsm5
 exec rpws init 5 -k
 exec xsetroot -cursor_name left_ptr

@@ -64,21 +64,21 @@ alias cl='clear'
 alias rd='rm -rd'
 alias rds='srm -vr $@'
 alias rms='srm -v $*'
-
 alias ff='find |grep -i'
 alias nocm='egrep -v "^\s*(#|$)"'
 alias fsync='sudo rsync -vrhpavzu'
 alias wika='/usr/share/doc/arch-wiki/html/index.html'
-alias lasi="3view $HOME/othe/archive/$(llt $HOME/othe/archive |tail -1|awk '{print $9}')"
-alias lasid="3view $HOME/othe/archive/$(llt $HOME/othe/archive |tail -2|head -1|awk '{print $9}')"
+alias startx='rmouv;startx -- -dpi 120'
 alias xedit='vim $HOME/.Xdefaults'
 alias zedit='vim $HOME/.zshrc'
 alias zedia='vim $HOME/.zshalias'
 alias zload='source ~/.zshrc'
-alias startx='rmouv ; startx -- -dpi 120'
+alias medit='vim $HOME/.musca_start'
+alias redit='vim $HOME/.ratpoisonrc'
+alias lasi="3view $HOME/othe/archive/$(llt $HOME/othe/archive |tail -1|awk '{print $9}')"
+alias lasid="3view $HOME/othe/archive/$(llt $HOME/othe/archive |tail -2|head -1|awk '{print $9}')"
 alias unrarall='for file in `ls *.rar`; do unrar -x clr $file; done'
 alias unzipall='for file in `ls *.zip`; do unzip -L $file; done'
-
 alias irb='irb --simple-prompt'
 alias diff='colordiff'
 alias grep='grep --color=auto'
@@ -90,7 +90,7 @@ alias ping='ping -c 5'
 alias ncmp='ncmpcpp'
 alias rot='rtorrent'
 alias hb='HandBrakeCLI -e x264 -E ac3 -6 dp12 -R 48 -b 1800 -B 160 -D 3.0 -2 -T -p --decomb -x qp=0:aq-strength=1.5:direct=auto:bframes=6:mixed-refs:no-fast-pskip:8x8dct -i /dev/dvd'
-alias bdvd='growisofs -dvd-compat -speed=16 -iso-level 3 -relaxed-filenames -max-iso9660-filenames -input-charset UTF-8 -Z /dev/dvdrw -R -J -joliet-long -v -l'
+alias bdvddata='growisofs -dvd-compat -speed=16 -iso-level 3 -relaxed-filenames -max-iso9660-filenames -input-charset UTF-8 -Z /dev/dvdrw -R -J -joliet-long -v -l'
 alias mpq='$VIDVIEW -really-quiet'
 alias mpn='$VIDVIEW -nosound -really-quiet'
 alias mix2='ossmix codec1.jack.int-speaker.mode mix2 && echo "Mixer set to PC Speaker"'
@@ -98,7 +98,6 @@ alias mix3='ossmix codec1.jack.int-speaker.mode mix3 && echo "Mixer set to Headp
 alias mute='ossvol -t'
 alias vu='ossvol -i 1'
 alias vd='ossvol -d 1'
-
 alias svim='sudo vim'
 alias upf='sudo fc-cache -vf'
 alias upd='sudo updatedb'
@@ -111,16 +110,31 @@ alias downgrade='ay -Su --downgrade'
 alias clean='ay -Scc'
 
 # functions
+## to go up a specified amount of levels
+function up(){
+  local arg=${1:-1};
+  while [ $arg -gt 0 ]; do
+    cd .. >&/dev/null;
+    arg=$(($arg - 1));
+  done
+}
+
+## to make a directory and cd into immediately
+function mkcd() {
+  mkdir "$@"
+  cd "$@"
+}
+
 ## to reboot and poweroff
 function reboot() {
-killall ssh-agent &>/dev/null
-rm $HOME/.ssh/environment &>/dev/null
-sudo reboot
+  killall ssh-agent &>/dev/null
+  rm $HOME/.ssh/environment &>/dev/null
+  sudo reboot
 }
 function poweroff() {
-killall ssh-agent &>/dev/null
-rm $HOME/.ssh/environment &>/dev/null
-sudo poweroff
+  killall ssh-agent &>/dev/null
+  rm $HOME/.ssh/environment &>/dev/null
+  sudo poweroff
 }
 
 ## to unpack files
@@ -187,19 +201,4 @@ function sd() {
     ;;
     *) sdcv -u "WordNet" $@
   esac
-}
-
-## to make a directory and cd into immediately
-function mkcd() {
-  mkdir "$@"
-  cd "$@"
-}
-
-## to go up a specified amount of levels
-function up(){
-  local arg=${1:-1};
-  while [ $arg -gt 0 ]; do
-    cd .. >&/dev/null;
-    arg=$(($arg - 1));
-  done
 }

@@ -1,0 +1,161 @@
+#!/bin/bash
+# A fork of ossvol with minor changes and ratpoison output.
+# Original by: Daniel J Griffiths <ghost1227@archlinux.us>
+# Modified by: milomouse <vincent@fea.st>
+
+VOLSTORE=~/.config/.volume
+CHANNEL="vmix0-outvol"
+ARGUMENT=$2
+
+usage() {
+	echo "usage: ossrat [option] [argument]"
+	echo
+	echo "Options:"
+	echo "     -i, --increase - increase volume by [argument]"
+	echo "     -d, --decrease - decrease volume by [argument]"
+	echo "     -t, --toggle   - toggle play/pause"
+	echo "     -m, --mute     - mute/unmute"
+	echo "     -n, --next     - play [next] song"
+	echo "     -p, --prev     - play previous song"
+	echo "     -s, --stop     - stop playing current song"
+	echo "     -h, --help     - display this"
+	exit
+}
+
+err() {
+	echo "$1"
+	exit 1
+}
+
+toggle() {
+	if [ `mpc|head -2|tail -1|awk '{print $1}'|tr '[]' ' '` = playing ]; then
+	   INFO=$(echo -n ">>> Paused >>> $(mpc|tail -1|awk '{print $2" "$3" "$4" "$5}'|tr 'r' 'R')")
+	   mpc toggle
+	   ratpoison -c "echo $INFO"
+	else
+	   mpc toggle
+           ONE=$(echo -n ">>> $(mpc|head -1)")
+           TWO=$(echo -n ">>> $(mpc|head -2|tail -1|awk '{print $3" "$2}')")
+           INFO=$(echo -n $ONE $TWO)
+           ratpoison -c "echo $INFO"
+	fi
+}
+
+next() {
+	if [ `mpc|cat -n|cut -f 1|tail -1` = 1 ]; then
+	   mpc play
+           ONE=$(echo -n ">>> $(mpc|head -1)")
+           TWO=$(echo -n ">>> $(mpc|head -2|tail -1|awk '{print $3" "$2}')")
+           INFO=$(echo -n $ONE $TWO)
+           ratpoison -c "echo $INFO"
+	else
+	   mpc next
+           ONE=$(echo -n ">>> $(mpc|head -1)")
+           TWO=$(echo -n ">>> $(mpc|head -2|tail -1|awk '{print $3" "$2}')")
+           INFO=$(echo -n $ONE $TWO)
+           ratpoison -c "echo $INFO"
+	fi
+}
+
+previous() {
+	if [ `mpc|cat -n|cut -f 1|tail -1` = 1 ]; then
+	   ratpoison -c "echo"
+	else
+	   mpc prev
+           ONE=$(echo -n ">>> $(mpc|head -1)")
+           TWO=$(echo -n ">>> $(mpc|head -2|tail -1|awk '{print $3" "$2}')")
+           INFO=$(echo -n $ONE $TWO)
+           ratpoison -c "echo $INFO"
+	fi
+}
+
+cancel() {
+	if [ `mpc|cat -n|cut -f 1|tail -1` = 3 ]; then
+	   mpc stop
+           curr=`ossmix|grep outvol|awk '{print $4}'`
+           INFO=$(echo -n ">>> Stopped >>> Volume: $curr dB")
+           ratpoison -c "echo $INFO"
+	else
+	   ratpoison -c "echo"
+	fi
+}
+
+mute() {
+	if [ -f $VOLSTORE ]; then
+	   ossmix $CHANNEL `cat $VOLSTORE`
+	   rm $VOLSTORE
+           curr=`ossmix|grep outvol|awk '{print $4}'`
+	   ratpoison -c "echo >>> Volume: $curr dB"
+	else
+	   VOLUME=$(ossmix $CHANNEL | awk '{print $10}' | awk -F : '{print $1}')
+	   ossmix $CHANNEL 0
+	   `echo $VOLUME >> $VOLSTORE`
+	   ratpoison -c "echo >>> Volume: MUTED"
+	fi
+}
+
+increase() {
+	if [ -f $VOLSTORE ]; then
+	   TMPVOL=`cat $VOLSTORE`
+	   NEWVOL=`expr $TMPVOL + $ARGUMENT`
+	   ossmix $CHANNEL +$NEWVOL
+	   rm $VOLSTORE
+	else
+	   ossmix $CHANNEL +$ARGUMENT
+           curr=`ossmix|grep outvol|awk '{print $4}'`
+	   ratpoison -c "echo >>> Volume: $curr dB"
+	fi
+}
+
+decrease() {
+	if [ -f $VOLSTORE ]; then
+	   TMPVOL=`cat $VOLSTORE`
+	   NEWVOL=`expr $TMPVOL - $ARGUMENT`
+	   ossmix $CHANNEL -- -$NEWVOL
+	   rm $VOLSTORE
+	else
+	   ossmix $CHANNEL -- -$ARGUMENT
+           curr=`ossmix|grep outvol|awk '{print $4}'`
+	   ratpoison -c "echo >>> Volume: $curr dB"
+	fi
+}
+
+announce() {
+           ONE=$(echo -n ">>> $(mpc|head -1)")
+           TWO=$(echo -n ">>> $(mpc|head -2|tail -1|awk '{print $3" "$2}')")
+           INFO=$(echo -n $ONE $TWO)
+           ratpoison -c "echo $INFO"
+}
+
+case "$1" in
+	'-i'|'--increase')
+	increase
+	;;
+	'-d'|'--decrease')
+	decrease
+	;;
+	'-t'|'--toggle')
+	toggle
+	;;
+	'-m'|'---mute')
+	mute
+	;;
+	'-n'|'--next')
+	next
+	;;
+	'-p'|'--prev')
+	previous
+	;;
+	'-s'|'--stop')
+	cancel
+	;;
+	'-a'|'--announce')
+	announce
+	;;
+	''|'-h'|'--help')
+	usage
+	;;
+	*)
+	err "Unrecognized option \`$1', see ossrat --help"
+	;;
+esac

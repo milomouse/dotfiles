@@ -1,0 +1,17 @@
+#!/bin/sh
+MCORD=$HOME/.config/.mouv
+
+if [ -f $MCORD ]; then
+   xdotool mousemove $(cat $MCORD)
+   rm $MCORD
+else
+   CURR=$(xdotool getmouselocation |tr 'xy:screen' ' '|cut -c3,4,5,6,9,10,11,12)
+   echo $CURR >> $MCORD
+    xdotool mousemove $(xdpyinfo|grep dimensions|awk '{print $2}'|tr 'x' ' ')
+fi
+
+if [ `synclient -l|grep TouchpadOff|awk '{print $3}'` = 0 ]; then
+   synclient TouchpadOff=1
+else
+   synclient TouchpadOff=0
+fi

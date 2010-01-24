@@ -1,0 +1,156 @@
+#!/bin/bash
+#
+# PACKAGE: SongREM
+# VERSION: 0.1-3
+# REQUIRE: "mpd" and "mpc"
+#
+# DESCRIPTION:
+# Small script to remember "good songs" and play them back later.
+# This is basically a butchered fork of pbrisbin3's "GoodSong" ;;
+# I [hackishly] added functionality for instant playing of listed
+# songs, matching them against the current running playlist. This
+# is so you don't have to clear and build a new playlist for each
+# song you randomly play. But be warned though: blatant grep, cat
+# and general pipe abuse. Name changed so there isn't clobbering.
+#
+# TODO:
+# 1. Play right song by an artist when >=1 songs have same title.
+#   \ discover a way to do this without using hardcode/filenames.
+# 2. Build new playlist only when a song is not in open playlist.
+#   \ or add that song to current playlist without rebuilding it.
+# 3. Gather and display information about $list. (like mpc stats)
+# 4. Remove current song from $list if found there via -r option.
+#
+###
+
+# Colors for the CLI environment (if desired; for aesthetics).
+c1=$'\E[0;31m'
+c2=$'\E[0;32m'
+c3=$'\E[0;33m'
+c4=$'\E[0;34m'
+c5=$'\E[0;35m'
+c6=$'\E[0;36m'
+c7=$'\E[0;37m'
+c0=$'\E[0m'
+
+# Custom prefixes (if desired; can easily be plugged or pulled from code).
+success_prefix=">>> SongREM:"
+skipped_prefix="<<< SongREM:"
+error_prefix="<!> WARNING:"
+
+# File location for remembered songs (different than GoodSong--no clobbering).
+list="$HOME/.config/.songrem"
+
+# Create remembered list if it doesn't exist.
+[ -f $list ] || touch $list
+
+# Location of /etc/mpd.conf's music_dir (if desired, for added functionality).
+# musicdir="$(grep -i music_dir /etc/mpd.conf|awk '{print $2}'|tr '"' ' '|awk '{print $1}')"
+
+# Get current song from mpc and check if it's already remembered.
+song="$(mpc | head -1)"
+check=$(grep "$song" "$list")
+
+# Help message. Can easily be colored and customized.
+message() {
+  echo ""
+  echo " SongREM keeps a text file of favorite songs pulled from"
+  echo " mpd.  When run with no options, it simply appends the"
+  echo " currently mpd playing song to the list. CLI options are:"
+  echo ""
+  echo "        -s | --show  Displays a random song from the"
+  echo "                     existing list. You can also set"
+  echo "		     the amount of songs you want to"
+  echo "		     see by using: -s \$NUMBER"
+  echo ""
+  echo "        -p | --play  Plays a random song from existing"
+  echo "                     list by matching it against the"
+  echo "		     current running playlist."
+  echo ""
+  echo "        -b | --build Builds a playlist of your full"
+  echo "                     existing list."
+  echo ""
+  echo "	-r | --rid   Rids existing list of current song"
+  echo "		     if present. If current song is not"
+  echo "		     present, this option does nothing."
+  echo "		     (UNDER DEVELOPMENT)"
+  echo ""
+  echo "	-i | --info  Gathers and displays information"
+  echo "		     about files in existing list."
+  echo "		     (UNDER DEVELOPMENT)"
+  echo ""
+  echo "        -h | --help  Displays this message and quits."
+  echo ""
+
+  exit 1
+}
+
+# Get the filename from a line in the list.
+getfilename() {
+  artist="$(echo $1 | sed 's/\ \-\ /+/g' | cut -d "+" -f 1)"
+  title="$(echo $1 | sed 's/\ \-\ /+/g' | cut -d "+" -f 2)"
+  filename="$(mpc search artist "$artist" title "$title" | head -1)"
+}
+
+#mpc listall|cat -n|grep "$(mpc search artist '$artist' title '$title')"|\
+#grep "$(mpc|head -2|tail -1|awk '{print $2}'|tr '#' ' '|cut -d "/" -f 1)"|cut -f2
+# ==> current: => filename.mp3
+#
+#mpc listall|cat -n|grep "$(mpc search artist '$artist' title '$title')"|\
+#grep "$(mpc|head -2|tail -1|awk '{print $2}'|tr '#' ' '|cut -d "/" -f 1)"|cut -f1
+# ==> current: => #XXXX
+
+# Parse the CLI options if they're presented.
+case $1 in
+  -h|--help)
+     message
+  ;;
+  -s|--show)
+  if [ -z "$2" ]; then
+     track="$(cat -n $list | sort -R | head -n1)"
+     echo "$track"
+  else
+     track="$(cat -n $list | sort -R )"
+     echo "$track"|head -n$2
+  fi
+  ;;
+  -i|--info)
+     echo $error_prefix $c5"Still being developed."$c0
+  ;;
+  -r|--remove)
+     $EDITOR $list
+     echo $error_prefix $c5"Still being developed."$c0
+  ;;
+  -p|--play)
+     mpc play $(echo "$(mpc playlist)"|cat -n|grep "$(cat $list|grep -v "$song"|sort -R|head -n1)"|awk '{print $1}')|>& /dev/null
+     ONE=$(echo -n ">>> $(mpc|head -1)")
+     TWO=$(echo -n ">>> $(mpc|head -2|tail -1|awk '{print $3" "$2}')")
+     INFO=$(echo -n $ONE $TWO)
+     ratpoison -c "echo $INFO"
+     ratpoison -c "echo $success_prefix $INFO"
+  ;;
+  -b|--build)
+  temp="/tmp/.songrem.tmp"
+  [ -f $temp ] || touch $temp
+     mpc clear >& /dev/null
+     cat $list | while read track; do
+     getfilename "$track"
+     echo "mpc add \"$filename\"" >> $temp
+     done
+     sh $temp
+     rm $temp
+     mpc play
+  ;;
+  *)
+  if [ -z "$check" ]; then
+     echo "$song" >> "$list"
+     INFO=$(echo -n ">>> \"$(mpc|head -1)"\")
+     ratpoison -c "echo $success_prefix $INFO added to list."
+  else
+     INFO=$(echo -n ">>> \"$(mpc|head -1)"\")
+     ratpoison -c "echo $success_prefix $INFO already in list."
+  fi
+  ;;
+esac
+
+exit 0

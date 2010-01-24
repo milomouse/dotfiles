@@ -1,0 +1,31 @@
+#!/bin/sh
+# Display a file with it's char count,
+# line count, and owner name using Less.
+
+width=150
+C0=$'\E[0m'
+C1=$'\E[0;45m'
+C2=$'\E[1;30m'
+C3=$'\E[1;45m'
+
+for input
+do
+	lines="$(wc -l < $input | sed 's/ //g')"
+	chars="$(wc -c < $input | sed 's/ //g')"
+	owner="$(ls -ld $input | awk '{print $3}')"
+	echo ""
+	echo $C1$C2 "File:"$C0 "$input "$C0$C1$C2"Lines:"$C0 "$lines"$C0 $C1$C2"Chars:"$C0 "$chars"$C0 $C1$C2"Owner:"$C0 "$owner"$C0
+	echo ""
+	while read line
+	do
+		if [ ${#line} -gt $width ] ; then
+			echo $'\E[0;35m'"$line" | fmt | sed -e '1s/^/ /' -e '2,$s/^/+ /'
+		else
+			echo $'\E[0;35m'" $line"
+		fi
+	done < $input
+
+	echo ""
+done | less
+
+exit 0

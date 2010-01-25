@@ -25,7 +25,6 @@ set bargravity se
 set inputwidth 400
 set fgcolor #876CBE
 set bgcolor #020202
-set resizeunit 2
 set waitcursor 3
 set historysize 50
 set maxundos 50

@@ -19,7 +19,7 @@ urxvt*borderLess: false
 urxvt*fading: 50
 urxvt*cursorColor: #b092a4
 urxvt*transparent: true
-urxvt*shading: 4
+urxvt*shading: 3
 
 Xcursor.theme: whiteglass
 Xcursor.size: 10

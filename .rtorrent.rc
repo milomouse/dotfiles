@@ -29,3 +29,8 @@ schedule = watch_directory4,5,5,"load_start=/home/milo/tors/vide/.down/*.torrent
 schedule = tied_directory,5,60,start_tied=
 schedule = untied_directory,5,60,close_untied=
 check_hash = yes
+
+# colors
+done_fg_color = 5
+active_fg_color = 6
+active_bg_color = 7

@@ -16,7 +16,7 @@ set winfmt %n %s %t
 set winliststyle column
 set wingravity c
 set transgravity se
-set maxsizegravity ne
+set maxsizegravity c
 set padding 2 0 2 0
 set border 4
 set barborder 0
@@ -30,7 +30,7 @@ set waitcursor 3
 set historysize 50
 set maxundos 50
 rudeness 12
-escape M-semicolon
+escape s-semicolon
 
 bind a exec ossrat -a
 bind b exec synap
@@ -40,21 +40,22 @@ bind e exec
 bind f fselect
 bind g exec firefox-nightly
 bind h select -
-bind H exec ratpoison - c "select -" -c "only"
+bind H exec ratpoison -c "select -" -c "only"
 bind i vsplit
 bind j hsplit
 bind k kill
 bind l windows
 bind m exec manurat
 bind n curframe
-bind o exec urxvt -e ncmpcpp
-bind p redisplay
+bind o only
+bind p exec urxvt -e ncmpcpp
 bind q remove
 bind r resize
 bind s swap
 bind t title
 bind u undo
 bind v version
+bind w redisplay
 bind x info
 bind y redo
 bind z lastmsg
@@ -64,28 +65,28 @@ bind equal dedicate 1
 bind Insert exec import -window root ~/foto/shot/$(date +%Y_%m_%d-%k%M).png 
 bind Delete exec alock -bg shade:shade=30 -cursor glyph -auth pam 
 
-definekey top M-n next
-definekey top M-p prev
-definekey top M-apostrophe focus
-definekey top M-k focusup
-definekey top M-j focusdown
-definekey top M-h focusleft
-definekey top M-l focusright
-definekey top M-Tab focuslast
-definekey top M-K exchangeup
-definekey top M-J exchangedown
-definekey top M-H exchangeleft
-definekey top M-L exchangeright
-definekey top M-C-k ratrelwarp 0 -7
-definekey top M-C-j ratrelwarp 0 7
-definekey top M-C-h ratrelwarp -7 0
-definekey top M-C-l ratrelwarp 7 0
-definekey top M-C-Return exec ratpoison -c "rathold down" -c "rathold up"
+definekey top s-n next
+definekey top s-p prev
+definekey top s-apostrophe focus
+definekey top s-k focusup
+definekey top s-j focusdown
+definekey top s-h focusleft
+definekey top s-l focusright
+definekey top s-Tab focuslast
+definekey top s-K exchangeup
+definekey top s-J exchangedown
+definekey top s-H exchangeleft
+definekey top s-L exchangeright
+definekey top s-C-k ratrelwarp 0 -7
+definekey top s-C-j ratrelwarp 0 7
+definekey top s-C-h ratrelwarp -7 0
+definekey top s-C-l ratrelwarp 7 0
+definekey top s-C-Return exec ratpoison -c "rathold down" -c "rathold up"
 
-definekey top M-Home exec ossrat -t
-definekey top M-End exec ossrat -s
-definekey top M-Prior exec ossrat -p
-definekey top M-Next exec ossrat -n
+definekey top s-Home exec ossrat -t
+definekey top s-End exec ossrat -s
+definekey top s-Prior exec ossrat -p
+definekey top s-Next exec ossrat -n
 definekey top C-Next exec songrem -p
 definekey top C-Delete exec songrem
 definekey top XF86AudioRaiseVolume exec ossrat -i 1
@@ -94,12 +95,17 @@ definekey top XF86AudioMute exec ossrat -m
 definekey top XF86MonBrightnessUp exec moodlight -b
 definekey top XF86MonBrightnessDown exec moodlight -d
 
-definekey top M-comma rpwsp
-definekey top M-period rpwsn
-definekey top M-exclam rpwsm1
-definekey top M-at rpwsm2
-definekey top M-numbersign rpwsm3
-definekey top M-dollar rpwsm4
-definekey top M-percent rpwsm5
+definekey top s-comma rpwsp
+definekey top s-period rpwsn
+definekey top s-exclam rpwsm1
+definekey top s-at rpwsm2
+definekey top s-numbersign rpwsm3
+definekey top s-dollar rpwsm4
+definekey top s-percent rpwsm5
+definekey top s-F1 rpws1
+definekey top s-F2 rpws2
+definekey top s-F3 rpws3
+definekey top s-F4 rpws4
+definekey top s-F5 rpws5
 exec rpws init 5 -k
 exec xsetroot -cursor_name left_ptr

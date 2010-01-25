@@ -69,6 +69,7 @@ bindkey "^[[8~" end-of-line
 bindkey "^[[1~" beginning-of-line
 bindkey "^[[4~" end-of-line
 bindkey "^?" backward-delete-char
+bindkey '^R' history-incremental-search-backward
 
 PATH=$PATH:/usr/sbin:/usr/local:/usr/local/sbin:/usr/local/bin
 

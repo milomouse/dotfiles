@@ -4,14 +4,14 @@
 
 exec ratpoison -c "source $HOME/.config/.deratify"
 
-bind F1 exec ratpoison -c "select -" -c "only" -c "next" -c "echo Layout 1"
-bind F2 exec ratpoison -c "select -" -c "only" -c "hsplit" -c "next" -c "echo Layout 2"
+bind F1 exec ratpoison -c "select -" -c "only" -c "hsplit" -c "next" -c "focusright" -c "next" -c "vsplit" -c "next" -c "vsplit" -c "focusdown" -c "focusdown" -c "remove" -c "echo Layout 1"
+bind F2 exec ratpoison -c "select -" -c "only" -c "vsplit" -c "next" -c "echo Layout 2"
 bind F3 exec ratpoison -c "select -" -c "only" -c "vsplit" -c "next" -c "focusdown" -c "hsplit" -c "next" -c "echo Layout 3"
 bind F4 exec ratpoison -c "select -" -c "only" -c "vsplit" -c "next" -c "hsplit" -c "next" -c "focusdown" -c "hsplit" -c "next" -c "echo Layout 4"
-bind F5 exec ratpoison -c "select -" -c "only" -c "hsplit" -c "next" -c "focusright" -c "next" -c "vsplit" -c "next" -c "vsplit" -c "focusdown" -c "focusdown" -c "remove" -c "echo Layout 5"
+bind F5 exec ratpoison -c "select -" -c "only" -c "hsplit" -c "next" -c "vsplit" -c "focusdown" -c "next" -c "focusright" -c "vsplit" -c "next" -c "vsplit" -c "resize 0 23" -c "focusdown" -c "next" -c "resize 0 41" -c "focusdown" -c "next" -c "echo Layout 5"
 
 set font fixed-6
-set winname name
+set winname class
 set winfmt %n %s %t
 set winliststyle column
 set wingravity c
@@ -66,12 +66,12 @@ bind Delete exec alock -bg shade:shade=30 -cursor glyph -auth pam
 
 definekey top s-n next
 definekey top s-p prev
-definekey top s-apostrophe focus
+definekey top s-Tab focus
 definekey top s-k focusup
 definekey top s-j focusdown
 definekey top s-h focusleft
 definekey top s-l focusright
-definekey top s-Tab focuslast
+definekey top s-apostrophe focuslast
 definekey top s-K exchangeup
 definekey top s-J exchangedown
 definekey top s-H exchangeleft

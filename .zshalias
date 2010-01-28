@@ -3,11 +3,11 @@ export DIRSTACKSIZE=20
 export FCEDIT=/usr/bin/vim
 export EDITOR=/usr/bin/vim
 export BROWSER=/usr/bin/w3m
-export IMGVIEW=/usr/bin/gliv
-export VIDVIEW=/usr/bin/mplayer
-export PDFVIEW=/usr/bin/zathura
+export IMGV=/usr/bin/gliv
+export VIDV=/usr/bin/mplayer
+export PDFV=/usr/bin/zathura
 export CC=/usr/bin/gcc
-export SHELL=/usr/bin/zsh
+export SHELL=/bin/zsh
 export MPD_HOST=127.0.0.1
 export MPD_PORT=6600
 export PAGER=/bin/less
@@ -24,25 +24,25 @@ export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;34m'
 
 # open with
-alias -s mov=$VIDVIEW
-alias -s avi=$VIDVIEW
-alias -s wmv=$VIDVIEW
-alias -s mkv=$VIDVIEW
-alias -s mp4=$VIDVIEW
-alias -s mpg=$VIDVIEW
-alias -s mpeg=$VIDVIEW
+alias -s mov=$VIDV
+alias -s avi=$VIDV
+alias -s wmv=$VIDV
+alias -s mkv=$VIDV
+alias -s mp4=$VIDV
+alias -s mpg=$VIDV
+alias -s mpeg=$VIDV
 alias -s html=$BROWSER
 alias -s htm=$BROWSER
 alias -s org=$BROWSER
 alias -s com=$BROWSER
 alias -s net=$BROWSER
 alias -s php=$BROWSER
-alias -s gif=$IMGVIEW
-alias -s jpg=$IMGVIEW
-alias -s jpeg=$IMGVIEW
-alias -s svg=$IMGVIEW
-alias -s png=$IMGVIEW
-alias -s pdf=$PDFVIEW
+alias -s gif=$IMGV
+alias -s jpg=$IMGV
+alias -s jpeg=$IMGV
+alias -s svg=$IMGV
+alias -s png=$IMGV
+alias -s pdf=$PDFV
 
 # aliases
 alias ls='ls -h --color=auto -F --group-directories-first'
@@ -66,7 +66,8 @@ alias rds='srm -vr $@'
 alias rms='srm -v $*'
 alias ff='find |grep -i'
 alias nocm='egrep -v "^\s*(#|$)"'
-alias fsync='sudo rsync -vrhpavzu'
+#alias fsync='sudo rsync -vrhpavzu'
+alias fsync='sudo rsync -vahu --no-motd --delete-after'
 alias wika='/usr/share/doc/arch-wiki/html/index.html'
 alias startx='rmouv;startx -- -dpi 120'
 alias xedit='vim $HOME/.Xdefaults'
@@ -91,8 +92,8 @@ alias ncmp='ncmpcpp'
 alias rot='rtorrent'
 alias hb='HandBrakeCLI -e x264 -E ac3 -6 dp12 -R 48 -b 1800 -B 160 -D 3.0 -2 -T -p --decomb -x qp=0:aq-strength=1.5:direct=auto:bframes=6:mixed-refs:no-fast-pskip:8x8dct -i /dev/dvd'
 alias bdvddata='growisofs -dvd-compat -speed=16 -iso-level 3 -relaxed-filenames -max-iso9660-filenames -input-charset UTF-8 -Z /dev/dvdrw -R -J -joliet-long -v -l'
-alias mpq='$VIDVIEW -really-quiet'
-alias mpn='$VIDVIEW -nosound -really-quiet'
+alias mpq='$VIDV -really-quiet'
+alias mpn='$VIDV -nosound -really-quiet'
 alias mix2='ossmix codec1.jack.int-speaker.mode mix2 && echo "Mixer set to PC Speaker"'
 alias mix3='ossmix codec1.jack.int-speaker.mode mix3 && echo "Mixer set to Headphones"'
 alias mute='ossvol -t'
@@ -151,8 +152,9 @@ extr() {
       *.tgz)       tar xzf $1    ;;
       *.zip)       unzip $1      ;;
       *.Z)         uncompress $1 ;;
-      *.7z)        7z x $1    	;;
-      *.xz)        unxz -vk $1	;;
+      *.7z)        7z x $1    	 ;;
+      *.xz)        unxz -vk $1	 ;;
+      *.lzma)      unlzma -vk $1 ;;
       *)           echo "'$1' cannot be extracted via extr()" ;;
     esac
   else

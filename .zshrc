@@ -1,5 +1,5 @@
 # prompt line
-PROMPT='%F{red}%~%# %f'
+PROMPT='%F{red}%/%# %f'
 
 # history specification
 export HISTSIZE=1400

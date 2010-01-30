@@ -44,7 +44,7 @@ bind i vsplit
 bind j hsplit
 bind k kill
 bind l windows
-bind m exec manurat
+bind m exec ratman
 bind n curframe
 bind o only
 bind p exec urxvt -e ncmpcpp
@@ -66,12 +66,12 @@ bind Delete exec alock -bg shade:shade=30 -cursor glyph -auth pam
 
 definekey top s-n next
 definekey top s-p prev
-definekey top s-Tab focus
+definekey top s-apostrophe focus
 definekey top s-k focusup
 definekey top s-j focusdown
 definekey top s-h focusleft
 definekey top s-l focusright
-definekey top s-apostrophe focuslast
+definekey top s-Tab focuslast
 definekey top s-K exchangeup
 definekey top s-J exchangedown
 definekey top s-H exchangeleft

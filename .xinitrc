@@ -1,8 +1,5 @@
 #!/bin/sh
 ## ~/.xinitrc
-
-if [ -f $HOME/.Xdefaults ]; then
-   xrdb -merge $HOME/.Xdefaults
 fi
 if [ -f ~/.Xmodmap ]; then
    xmodmap ~/.Xmodmap

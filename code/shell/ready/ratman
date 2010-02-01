@@ -1,3 +1,3 @@
 #!/bin/sh
-MANUAL=$(ratpoison -c "prompt Manpage: ")
+MANUAL=$(ratpoison -c "prompt Manpage:")
 ratpoison -c "exec urxvt -e man $MANUAL"

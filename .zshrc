@@ -1,5 +1,6 @@
 # prompt line
-PROMPT='%F{red}%/%# %f'
+precmd() {print -Pn "\e]2;%2d\a"}
+PROMPT='%F{red}» %f'
 
 # history specification
 export HISTSIZE=1400
@@ -57,9 +58,11 @@ setopt promptsubst
 setopt nobeep
 unsetopt transient_rprompt
 unset mailcheck
-setterm -blength 0
+autoload -U pick-web-browser
+zstyle ':mime:*' x-browsers firefox-nightly uzbl-browser
+zstyle ':mime:*' tty-browsers w3m links
 
-# make home and end key work + some other goodies
+# make home/end keys work + other stuff
 bindkey "^[[2~" overwrite-mode
 bindkey "^[[3~" delete-char
 bindkey "^[[5~" up-line-or-search 
@@ -90,12 +93,3 @@ function agent-s {
   . "${SSH_ENV}" > /dev/null
   /usr/bin/ssh-add;
 }
-# automatically source
-#if [ -f "${SSH_ENV}" ]; then
-#  . "${SSH_ENV}" > /dev/null
-#  ps -ef | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || {
-#    agent-s;
-#  }
-#else
-#  agent-s;
-#fi

@@ -1,5 +1,4 @@
 set border_focus #a488d9
-set frame_display_hidden 0
 set frame_resize 10
 bind off all
 bind on Mod1+Return exec urxvt

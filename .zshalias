@@ -31,90 +31,89 @@ alias -s mkv=$VIDV
 alias -s mp4=$VIDV
 alias -s mpg=$VIDV
 alias -s mpeg=$VIDV
-alias -s html=$BROWSER
-alias -s htm=$BROWSER
-alias -s org=$BROWSER
-alias -s com=$BROWSER
-alias -s net=$BROWSER
-alias -s php=$BROWSER
 alias -s gif=$IMGV
 alias -s jpg=$IMGV
 alias -s jpeg=$IMGV
 alias -s svg=$IMGV
 alias -s png=$IMGV
 alias -s pdf=$PDFV
+alias -s html=pick-web-browser
+alias -s htm=pick-web-browser
+alias -s org=pick-web-browser
+alias -s com=pick-web-browser
+alias -s net=pick-web-browser
 
 # aliases
-alias ls='ls -h --color=auto -F --group-directories-first'
-alias la='ls -AX'
-alias lb='la -Ssr'
-alias lf='la -d *(-/DN)'
-alias lt='la -tr'
-alias lls='ls -l'
-alias lla='lls -AX'
-alias llb='lla -Sr'
-alias llt='lla -tr'
-alias llm='llt -rl -- **/*(D.om[1,10])'
-alias llms='llt -rl -- $PWD/*(D.om[1,10])'
-alias llf='lla -d *(-/DN)'
-alias badcheck='sudo find / -perm -002 \( -type f -o -type d \) -ls'
-alias back='cd $OLDPWD'
-alias e='bye'
-alias cl='clear'
-alias rd='rm -rd'
-alias rds='srm -vr $@'
-alias rms='srm -v $*'
-alias ff='find |grep -i'
-alias nocm='egrep -v "^\s*(#|$)"'
-#alias fsync='sudo rsync -vrhpavzu'
-alias fsync='sudo rsync -vahu --exclude=/mnt --exclude=/proc --exclude=/sys --exclude=/tmp --exclude=/media --no-motd --delete-after'
-alias wika='/usr/share/doc/arch-wiki/html/index.html'
-alias startx='rmouv;startx -- -dpi 120'
-alias xedit='vim $HOME/.Xdefaults'
-alias zedit='vim $HOME/.zshrc'
-alias zedia='vim $HOME/.zshalias'
-alias zload='source ~/.zshrc'
-alias medit='vim $HOME/.musca_start'
-alias redit='vim $HOME/.ratpoisonrc'
+alias ls="ls -h --color=auto -F --group-directories-first"
+alias la="ls -AX"
+alias lb="la -Ssr"
+alias lf="la -d *(-/DN)"
+alias lt="la -tr"
+alias lls="ls -l"
+alias lla="lls -AX"
+alias llb="lla -Sr"
+alias llt="lla -tr"
+alias llm="llt -rl -- **/*(D.om[1,10])"
+alias llms="llt -rl -- $PWD/*(D.om[1,10])"
+alias llf="lla -d *(-/DN)"
+alias badcheck="sudo find / -perm -002 \( -type f -o -type d \) -ls"
+alias back="cd $OLDPWD"
+alias e="bye"
+alias cl="clear"
+alias rd="rm -rd"
+alias rds="srm -vr"
+alias rms="srm -v"
+alias ff="find |grep -i"
+alias nocm="egrep -v '^\s*(#|$)'"
+#alias fsync="sudo rsync -vrhpavzu"
+alias fsync="sudo rsync -vahu --exclude=/mnt --exclude=/proc --exclude=/sys --exclude=/tmp --exclude=/media --no-motd --delete-after"
+alias wika="/usr/share/doc/arch-wiki/html/index.html"
+alias startx="rmouv;startx -- -dpi 120"
+alias xedit="vim $HOME/.Xdefaults"
+alias zedit="vim $HOME/.zshrc"
+alias zedia="vim $HOME/.zshalias"
+alias zload="source ~/.zshrc"
+alias medit="vim $HOME/.musca_start"
+alias redit="vim $HOME/.ratpoisonrc"
 alias lasi="3view $HOME/othe/archive/$(llt $HOME/othe/archive |tail -1|awk '{print $9}')"
 alias lasid="3view $HOME/othe/archive/$(llt $HOME/othe/archive |tail -2|head -1|awk '{print $9}')"
 alias unrarall='for file in `ls *.rar`; do unrar -x clr $file; done'
 alias unzipall='for file in `ls *.zip`; do unzip -L $file; done'
-alias irb='irb --simple-prompt'
-alias diff='colordiff'
-alias grep='grep --color=auto'
-alias psu='ps fxo etime,user,pid,pmem,pcpu,comm'
-alias psr='ps -u root fo etime,user,pid,pmem,pcpu,command |less'
-alias daemons='ls /var/run/daemons'
-alias dfu='df -hTP'
-alias ping='ping -c 5'
-alias ncmp='ncmpcpp'
-alias rot='rtorrent'
-alias cdrwblank='cdrecord -dev=/dev/sr0 -speed=32 -blank=fast'
-#alias bdatacd='mkisofs -J -R $@ | cdrecord -dev=/dev/sr0 -driveropts=burnfree -speed=32 -'
-#alias bisocd='cdrecord -dev=/dev/sr0 -speed=32 -driveropts=burnfree'
-alias bmuzkcd='cdrecord -dev=/dev/sr0 -driveropts=burnfree -audio -pad' #*.wav
-#alias rmuzkcd='rubyripper OR cdparanoia -B 1- && for i in *.wav; do flac -d "$i"; done'
-alias bdatadvd='growisofs -dvd-compat -speed=16 -iso-level 3 -relaxed-filenames -max-iso9660-filenames -input-charset UTF-8 -Z /dev/dvdrw -R -J -joliet-long -v -l' #-graft-points x=/x \y x=/
-#alias bvidedvd='growisofs -dvd-compat -Z /dev/dvdrw -dvd-video' #. #for AUTIO_TS and VIDEO_TS in current dir
-alias rvidedvd='HandBrakeCLI -e x264 -E ac3 -6 dp12 -R 48 -b 1800 -B 160 -D 3.0 -2 -T -p --decomb -x qp=0:aq-strength=1.5:direct=auto:bframes=6:mixed-refs:no-fast-pskip:8x8dct -i /dev/dvd'
-alias mpq='$VIDV -really-quiet'
-alias mpn='$VIDV -nosound -really-quiet'
-alias mix2='ossmix codec1.jack.int-speaker.mode mix2 && echo "Mixer set to PC Speaker"'
-alias mix3='ossmix codec1.jack.int-speaker.mode mix3 && echo "Mixer set to Headphones"'
-alias mute='ossvol -t'
-alias vu='ossvol -i 1'
-alias vd='ossvol -d 1'
-alias svim='sudo vim'
-alias upf='sudo fc-cache -vf'
-alias upd='sudo updatedb'
-alias abs='sudo abs'
-alias killn='pkill -f'
-alias pacman='pacman-color'
-alias ay='yaourt'
-alias aive='ay -Q --date | tee $HOME/othe/archive/$(date +%m_%d_%y) &>/dev/null &'
-alias downgrade='ay -Su --downgrade'
-alias clean='ay -Scc'
+alias irb="irb --simple-prompt"
+alias diff="colordiff"
+alias grep="grep --color=auto"
+alias psu="ps fxo etime,user,pid,pmem,pcpu,comm"
+alias psr="ps -u root fo etime,user,pid,pmem,pcpu,command |less"
+alias daemons="ls /var/run/daemons"
+alias dfu="df -hTP"
+alias ping="ping -c 5"
+alias ncmp="ncmpcpp"
+alias rot="rtorrent"
+alias cdrwblank="cdrecord -dev=/dev/sr0 -speed=32 -blank=fast"
+#alias bcddata="mkisofs -J -R $@ | cdrecord -dev=/dev/sr0 -driveropts=burnfree -speed=32 -"
+#alias bcdiso="cdrecord -dev=/dev/sr0 -speed=32 -driveropts=burnfree"
+alias bcdmuzk="cdrecord -dev=/dev/sr0 -driveropts=burnfree -audio -pad" #*.wav
+#alias rmuzk="rubyripper OR cdparanoia -B 1- && for i in *.wav; do flac -d "$i"; done"
+alias bdvddata="growisofs -dvd-compat -speed=16 -iso-level 3 -relaxed-filenames -max-iso9660-filenames -input-charset UTF-8 -Z /dev/dvdrw -R -J -joliet-long -v -l" #-graft-points x=/a \b x=/
+#alias bdvdvide="growisofs -dvd-compat -Z /dev/dvdrw -dvd-video" #. #for AUTIO_TS and VIDEO_TS in current dir
+alias hb="HandBrakeCLI -e x264 -E ac3 -6 dp12 -R 48 -b 1800 -B 160 -D 3.0 -2 -T -p --decomb -x qp=0:aq-strength=1.5:direct=auto:bframes=6:mixed-refs:no-fast-pskip:8x8dct -i /dev/dvd" #-t/-L -S xMB -o *.mp4
+alias mpq="$VIDV -really-quiet"
+alias mpn="$VIDV -nosound -really-quiet"
+alias mix2="ossmix codec1.jack.int-speaker.mode mix2 && echo 'Mixer set to PC Speaker'"
+alias mix3="ossmix codec1.jack.int-speaker.mode mix3 && echo 'Mixer set to Headphones'"
+alias mute="ossvol -t"
+alias vu="ossvol -i 1"
+alias vd="ossvol -d 1"
+alias svim="sudo vim"
+alias upf="sudo fc-cache -vf"
+alias upd="sudo updatedb"
+alias abs="sudo abs"
+alias killn="pkill -f"
+alias pacman="pacman-color"
+alias ay="yaourt"
+alias aive="ay -Q --date | tee $HOME/othe/archive/$(date +%m_%d_%y) >>/dev/null"
+alias downgrade="ay -Su --downgrade"
+alias clean="ay -Scc"
 
 # functions
 ## to go up a specified amount of levels

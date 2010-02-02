@@ -67,7 +67,7 @@ hdr_order from: to: cc: date: subject:                            # and in this 
 
 # lists and boxes
 subscribe arch-announce arch-dev-public arch-general
-mailboxes +FastMail/INBOX +FastMail/Forums +FastMail/Arch-Linux +FastMail/Filesystems +FastMail/Uzbl-Dev +FastMail/Storage +FastMail/Junk\ Mail +FastMail/Sent\ Items +FastMail/Drafts +FastMail/Trash
+mailboxes +FastMail/INBOX +FastMail/Forums +FastMail/Filesystems +FastMail/Arch-Dev +FastMail/Uzbl-Dev +FastMail/Storage +FastMail/Junk\ Mail +FastMail/Sent\ Items +FastMail/Drafts +FastMail/Trash
 
 # conditionally source a 256 colors file
 source `FILE=$HOME/.mutt/colors.muttrc; [[ $TERM =~ 256 ]] && FILE=$HOME/.mutt/256colors.muttrc; echo $FILE`

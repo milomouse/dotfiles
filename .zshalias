@@ -113,9 +113,10 @@ alias ay="yaourt"
 alias aive="ay -Q --date | tee $HOME/othe/archive/$(date +%m_%d_%y) >>/dev/null"
 alias downgrade="ay -Su --downgrade"
 alias clean="ay -Scc"
+function ayn () {
+  yaourt -Ss -q $@ | grep $@ | grep -v '^  '
+}
 
-# functions
-## to go up a specified amount of levels
 function up(){
   local arg=${1:-1};
   while [ $arg -gt 0 ]; do
@@ -124,13 +125,11 @@ function up(){
   done
 }
 
-## to make a directory and cd into immediately
 function mkcd() {
   mkdir "$@"
   cd "$@"
 }
 
-## to reboot and poweroff
 function reboot() {
   killall ssh-agent &>/dev/null
   rm $HOME/.ssh/environment &>/dev/null
@@ -142,7 +141,6 @@ function poweroff() {
   sudo poweroff
 }
 
-## to unpack files
 extr() {
   if [ -f $1 ] ; then 
     case $1 in
@@ -166,7 +164,6 @@ extr() {
 fi
 }
 
-## to start, stop or restart daemons
 function rcstart() { 
   sudo /etc/rc.d/$1 start; 
 }
@@ -181,7 +178,6 @@ function reprobe() {
   sudo modprobe $1
 }
 
-## to quickly create/edit todo files
 function todo() {
   local arg=$HOME/othe
   case $1 in
@@ -193,7 +189,6 @@ function todo() {
   esac
 }
 
-## to quickly find definitions
 function sd() {
   case $1 in
     -w | -wordnet ) shift

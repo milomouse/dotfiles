@@ -21,7 +21,7 @@ set padding 2 0 2 0
 set border 4
 set barborder 0
 set barpadding 2 1
-set bargravity se
+set bargravity ne
 set inputwidth 400
 set fgcolor #876CBE
 set bgcolor #020202

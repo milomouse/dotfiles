@@ -3,21 +3,24 @@
 
 # connection
 port_range = 49164-49164
-encryption = allow_incoming
+encryption = allow_incoming,try_outgoing,enable_retry
 peer_exchange = yes
 enable_trackers = yes
+tracker_numwant = 64
 use_udp_trackers = yes
 dht = auto
 dht_port = 6881
 
-# downloads
-download_rate = 0
+# {up,down}loads
 directory = /home/milo/tors/
 session = /home/milo/tors/.sess
-
-# uploads
-upload_rate = 65
-max_uploads = 20
+max_uploads = 24
+max_uploads_global = 24
+upload_rate = 24
+max_downloads_global = 241
+download_rate = 0
+max_peers = 82
+max_peers_seed = 24
 
 # watch dirs
 schedule = watch_directory1,5,5,"load_start=/home/milo/tors/foto/.down/*.torrent,d.set_directory=/home/milo/tors/foto/"
@@ -26,8 +29,10 @@ schedule = watch_directory3,5,5,"load_start=/home/milo/tors/othe/.down/*.torrent
 schedule = watch_directory4,5,5,"load_start=/home/milo/tors/vide/.down/*.torrent,d.set_directory=/home/milo/tors/vide/"
 
 # actions
+on_finished = notify,"execute=torrat,$d.get_base_filename=,finished"
 schedule = tied_directory,5,60,start_tied=
 schedule = untied_directory,5,60,close_untied=
+schedule = low_diskspace,5,60,"close_low_diskspace=200M"
 check_hash = yes
 
 # colors (from patch)

@@ -44,7 +44,7 @@ alias -s com=pick-web-browser
 alias -s net=pick-web-browser
 
 # aliases
-alias ls="ls -h --color=auto -F --group-directories-first"
+alias ls="ls -hF --color=auto --group-directories-first"
 alias la="ls -AX"
 alias lb="la -Ssr"
 alias lf="la -d *(-/DN)"
@@ -72,7 +72,6 @@ alias xedit="vim $HOME/.Xdefaults"
 alias zedit="vim $HOME/.zshrc"
 alias zedia="vim $HOME/.zshalias"
 alias zload="source ~/.zshrc"
-alias medit="vim $HOME/.musca_start"
 alias redit="vim $HOME/.ratpoisonrc"
 alias lasi="3view $HOME/othe/archive/$(llt $HOME/othe/archive |tail -1|awk '{print $9}')"
 alias lasid="3view $HOME/othe/archive/$(llt $HOME/othe/archive |tail -2|head -1|awk '{print $9}')"
@@ -128,6 +127,22 @@ function up(){
 function mkcd() {
   mkdir "$@"
   cd "$@"
+}
+
+function cpf () {             
+if [[ -d $*[-1] ]]; then
+  cp $* && cd $*[-1]
+elif [[ -d ${*[-1]%/*} ]]; then
+  cp $* && cd ${*[-1]%/*}
+fi
+}
+
+function mvf () {             
+if [[ -d $*[-1] ]]; then
+  mv $* && cd $*[-1]
+elif [[ -d ${*[-1]%/*} ]]; then
+  mv $* && cd ${*[-1]%/*}
+fi
 }
 
 function reboot() {

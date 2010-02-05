@@ -1,0 +1,3 @@
+#!/bin/sh
+tor=$(echo $@)
+ratpoison -c "echo >>> rTorrent >> $tor" 

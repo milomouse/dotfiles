@@ -1,3 +1,4 @@
+#!/bin/sh
 ## ~/.xinitrc
 xmodmap ~/.Xmodmap &
 Esetroot -scale ~/foto/wall/200906125407-15574.jpg &

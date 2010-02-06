@@ -126,8 +126,10 @@ case $1 in
      ONE=$(echo -n ">>> $(mpc|head -1)")
      TWO=$(echo -n ">>> $(mpc|head -2|tail -1|awk '{print $3" "$2}')")
      INFO=$(echo -n $ONE $TWO)
-     ratpoison -c "echo $INFO"
-     ratpoison -c "echo $success_prefix $INFO"
+       if [ `ps -a|grep xinit|cat -n|cut -f 1` = 1 ]; then
+          ratpoison -c "echo $INFO"
+          ratpoison -c "echo $success_prefix $INFO"
+       fi
   ;;
   -b|--build)
   temp="/tmp/.songrem.tmp"
@@ -145,10 +147,14 @@ case $1 in
   if [ -z "$check" ]; then
      echo "$song" >> "$list"
      INFO=$(echo -n ">>> \"$(mpc|head -1)"\")
-     ratpoison -c "echo $success_prefix $INFO added to list."
+       if [ `ps -a|grep xinit|cat -n|cut -f 1` = 1 ]; then
+          ratpoison -c "echo $success_prefix $INFO added to list."
+       fi
   else
      INFO=$(echo -n ">>> \"$(mpc|head -1)"\")
-     ratpoison -c "echo $success_prefix $INFO already in list."
+       if [ `ps -a|grep xinit|cat -n|cut -f 1` = 1 ]; then
+          ratpoison -c "echo $success_prefix $INFO already in list."
+       fi
   fi
   ;;
 esac

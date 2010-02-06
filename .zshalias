@@ -112,9 +112,6 @@ alias ay="yaourt"
 alias aive="ay -Q --date | tee $HOME/othe/archive/$(date +%m_%d_%y) >>/dev/null"
 alias downgrade="ay -Su --downgrade"
 alias clean="ay -Scc"
-function ayn () {
-  yaourt -Ss -q $@ | grep $@ | grep -v '^  '
-}
 
 function up(){
   local arg=${1:-1};

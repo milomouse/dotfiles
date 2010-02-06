@@ -29,7 +29,8 @@ schedule = watch_directory3,5,5,"load_start=/home/milo/tors/othe/.down/*.torrent
 schedule = watch_directory4,5,5,"load_start=/home/milo/tors/vide/.down/*.torrent,d.set_directory=/home/milo/tors/vide/"
 
 # actions
-on_finished = notify,"execute=torrat,$d.get_base_filename=,finished"
+system.method.set_key = event.download.finished,notify,"execute=torrat,$d.get_base_filename=,finished"
+#on_finished = notify,"execute=torrat,$d.get_base_filename=,finished"
 schedule = tied_directory,5,60,start_tied=
 schedule = untied_directory,5,60,close_untied=
 schedule = low_diskspace,5,60,"close_low_diskspace=200M"

@@ -2,7 +2,7 @@
 # milomouse <vincent@fea.st>
 # complimenting ratpoison scripts found at: github.com/milomouse
 
-exec ratpoison -c "source $HOME/.config/.deratify"
+source $HOME/.config/.deratify
 
 bind F1 exec ratpoison -c "select -" -c "only" -c "hsplit" -c "next" -c "focusright" -c "next" -c "vsplit" -c "next" -c "vsplit" -c "focusdown" -c "focusdown" -c "remove" -c "echo Layout 1"
 bind F2 exec ratpoison -c "select -" -c "only" -c "vsplit" -c "next" -c "echo Layout 2"
@@ -61,7 +61,7 @@ bind z lastmsg
 bind Escape abort
 bind minus dedicate 0
 bind equal dedicate 1
-bind Insert exec import -window root ~/foto/shot/$(date +%Y_%m_%d-%k%M).png 
+bind Print exec import -window root ~/foto/shot/$(date +%Y_%m_%d-%k%M).png 
 bind Delete exec alock -bg shade:shade=30 -cursor glyph -auth pam 
 
 definekey top s-n next

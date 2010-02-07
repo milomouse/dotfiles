@@ -31,52 +31,70 @@ toggle() {
 	if [ `mpc|head -2|tail -1|awk '{print $1}'|tr '[]' ' '` = playing ]; then
 	   INFO=$(echo -n ">>> Paused >>> $(mpc|tail -1|awk '{print $2" "$3" "$4" "$5}'|tr 'r' 'R')")
 	   mpc toggle
-	   ratpoison -c "echo $INFO"
+       if [ `ps -a|grep xinit` ]; then
+	        ratpoison -c "echo $INFO"
+       fi
 	else
 	   mpc toggle
            ONE=$(echo -n ">>> $(mpc|head -1)")
            TWO=$(echo -n ">>> $(mpc|head -2|tail -1|awk '{print $3" "$2}')")
            INFO=$(echo -n $ONE $TWO)
-           ratpoison -c "echo $INFO"
+             if [ `ps -a|grep xinit` ]; then
+                ratpoison -c "echo $INFO"
+             fi
 	fi
 }
 
 next() {
-	if [ `mpc|cat -n|cut -f 1|tail -1` = 1 ]; then
+	if [ `mpc| |cut -f 1|tail -1` = 1 ]; then
 	   mpc play
            ONE=$(echo -n ">>> $(mpc|head -1)")
            TWO=$(echo -n ">>> $(mpc|head -2|tail -1|awk '{print $3" "$2}')")
            INFO=$(echo -n $ONE $TWO)
-           ratpoison -c "echo $INFO"
+             if [ `ps -a|grep xinit` ]; then
+                ratpoison -c "echo $INFO"
+             fi
 	else
 	   mpc next
            ONE=$(echo -n ">>> $(mpc|head -1)")
            TWO=$(echo -n ">>> $(mpc|head -2|tail -1|awk '{print $3" "$2}')")
            INFO=$(echo -n $ONE $TWO)
-           ratpoison -c "echo $INFO"
+             if [ `ps -a|grep xinit` ]; then
+                ratpoison -c "echo $INFO"
+             fi
 	fi
 }
 
 previous() {
-	if [ `mpc|cat -n|cut -f 1|tail -1` = 1 ]; then
-	   ratpoison -c "echo"
+	if [ `mpc| |cut -f 1|tail -1` = 1 ]; then
+       if [ `ps -a|grep xinit` ]; then
+	        INFO=$(echo -n ">>> Nothing playing >>> $(mpc|tail -1|awk '{print $2" "$3" "$4" "$5}'|tr 'r' 'R')")
+	        ratpoison -c "echo $INFO"
+       fi
 	else
 	   mpc prev
            ONE=$(echo -n ">>> $(mpc|head -1)")
            TWO=$(echo -n ">>> $(mpc|head -2|tail -1|awk '{print $3" "$2}')")
            INFO=$(echo -n $ONE $TWO)
-           ratpoison -c "echo $INFO"
+             if [ `ps -a|grep xinit` ]; then
+                ratpoison -c "echo $INFO"
+             fi
 	fi
 }
 
 cancel() {
-	if [ `mpc|cat -n|cut -f 1|tail -1` = 3 ]; then
+	if [ `mpc| |cut -f 1|tail -1` = 3 ]; then
 	   mpc stop
            curr=`ossmix|grep outvol|awk '{print $4}'`
            INFO=$(echo -n ">>> Stopped >>> Volume: $curr dB")
-           ratpoison -c "echo $INFO"
+             if [ `ps -a|grep xinit` ]; then
+                ratpoison -c "echo $INFO"
+             fi
 	else
-	   ratpoison -c "echo"
+    if [ `ps -a|grep xinit` ]; then
+	     ratpoison -c "echo"
+    fi
+       return
 	fi
 }
 
@@ -85,12 +103,16 @@ mute() {
 	   ossmix $CHANNEL `cat $VOLSTORE`
 	   rm $VOLSTORE
            curr=`ossmix|grep outvol|awk '{print $4}'`
-	   ratpoison -c "echo >>> Volume: $curr dB"
+     if [ `ps -a|grep xinit` ]; then
+	      ratpoison -c "echo >>> Volume: $curr dB"
+     fi
 	else
 	   VOLUME=$(ossmix $CHANNEL | awk '{print $10}' | awk -F : '{print $1}')
 	   ossmix $CHANNEL 0
 	   `echo $VOLUME >> $VOLSTORE`
-	   ratpoison -c "echo >>> Volume: MUTED"
+       if [ `ps -a|grep xinit` ]; then
+	        ratpoison -c "echo >>> Volume: MUTED"
+       fi
 	fi
 }
 
@@ -103,7 +125,9 @@ increase() {
 	else
 	   ossmix $CHANNEL +$ARGUMENT
            curr=`ossmix|grep outvol|awk '{print $4}'`
-	   ratpoison -c "echo >>> Volume: $curr dB"
+     if [ `ps -a|grep xinit` ]; then
+	      ratpoison -c "echo >>> Volume: $curr dB"
+     fi
 	fi
 }
 
@@ -116,15 +140,35 @@ decrease() {
 	else
 	   ossmix $CHANNEL -- -$ARGUMENT
            curr=`ossmix|grep outvol|awk '{print $4}'`
-	   ratpoison -c "echo >>> Volume: $curr dB"
+     if [ `ps -a|grep xinit` ]; then
+	      ratpoison -c "echo >>> Volume: $curr dB"
+     fi
 	fi
 }
 
 announce() {
-           ONE=$(echo -n ">>> $(mpc|head -1)")
-           TWO=$(echo -n ">>> $(mpc|head -2|tail -1|awk '{print $3" "$2}')")
-           INFO=$(echo -n $ONE $TWO)
-           ratpoison -c "echo $INFO"
+	if [ `mpc| |cut -f 1|tail -1` = 1 ]; then
+	   ONE=$(echo -n ">>> Nothing Playing")
+	   TWO=$(echo -n ">>> $(mpc|tail -1|awk '{print $2" "$3" "$4" "$5}'|tr 'r' 'R')")
+	   INFO=$(echo -n $ONE $TWO)
+       if [ `ps -a|grep xinit` ]; then
+	        ratpoison -c "echo $INFO"
+       fi
+	else
+	   if [ `mpc|head -2|tail -1|awk '{print $1}'|tr '[]' ' '` = paused ]; then
+	      INFO=$(echo -n ">>> Paused >>> $(mpc|tail -1|awk '{print $2" "$3" "$4" "$5}'|tr 'r' 'R')")
+          if [ `ps -a|grep xinit` ]; then
+             ratpoison -c "echo $INFO"
+          fi
+	   else
+         ONE=$(echo -n ">>> $(mpc|head -1)")
+         TWO=$(echo -n ">>> $(mpc|head -2|tail -1|awk '{print $3" "$2}')")
+         INFO=$(echo -n $ONE $TWO)
+           if [ `ps -a|grep xinit` ]; then
+              ratpoison -c "echo $INFO"
+           fi
+     fi
+  fi
 }
 
 case "$1" in

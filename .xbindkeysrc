@@ -1,35 +1,29 @@
-"mpc toggle"
+"ossrat -t"
 Alt+Home
 
-"mpc stop"
+"ossrat -s"
 Alt+End
 
-"mpc prev"
+"ossrat -p"
 Alt+Prior
 
-"mpc next"
+"ossrat -n"
 Alt+Next
+
+"ossrat -m"
+XF86AudioMute
+
+"ossrat -d 1"
+XF86AudioLowerVolume
+
+"ossrat -i 1"
+XF86AudioRaiseVolume
 
 "songrem"
 Control+Delete
 
 "songrem -p"
 Control+Next
-
-"ossvol -t"
-XF86AudioMute
-
-"ossvol -d 1"
-XF86AudioLowerVolume
-
-"ossvol -i 1"
-XF86AudioRaiseVolume
-
-"mpc volume -10"
-Shift+XF86AudioLowerVolume
-
-"mpc volume +10"
-Shift+XF86AudioRaiseVolume
 
 "moodlight -b"
 XF86MonBrightnessUp

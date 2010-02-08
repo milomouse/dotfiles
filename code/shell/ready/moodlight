@@ -1,6 +1,7 @@
 #!/bin/bash
 ## Change screen brightness on computers where linux
-## fails to detect functions keys for it.
+## fails to detect function keys for it.
+## More dynamic than /sys/class/backlight/..->
 
 CONFIG=$HOME/.config/.brightness
 OUTPUT='sudo setpci -s 00:02.0 F4.B='

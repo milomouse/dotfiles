@@ -33,7 +33,8 @@ escape s-semicolon
 
 bind a exec ossrat -a
 bind b exec synap
-bind c exec urxvt
+bind c exec urxvt -e tmux
+bind C exec urxvt
 bind d time
 bind e exec
 bind f fselect

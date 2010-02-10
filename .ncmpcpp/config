@@ -45,7 +45,7 @@ playlist_show_remaining_time = "yes"
 
 enable_window_title = "no"
 header_visibility = "yes"
-statusbar_visibility = "no"
+statusbar_visibility = "yes"
 progressbar_look = "--"
 autocenter_mode = "yes"
 incremental_seeking = "yes"

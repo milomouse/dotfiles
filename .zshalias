@@ -1,28 +1,3 @@
-# exports
-export DIRSTACKSIZE=20
-export FCEDIT=/usr/bin/vim
-export EDITOR=/usr/bin/vim
-export BROWSER=/usr/bin/w3m
-export IMGV=/usr/bin/gliv
-export VIDV=/usr/bin/mplayer
-export PDFV=/usr/bin/zathura
-export CC=/usr/bin/gcc
-export SHELL=/bin/zsh
-export MPD_HOST=127.0.0.1
-export MPD_PORT=6600
-export PAGER=/bin/less
-export LANG="en_US.utf8"
-export LC_ALL="en_US.utf8"
-export LC="en_US.utf8"
-export LESSCHARSET="utf-8"
-export LESS_TERMCAP_mb=$'\E[01;31m'
-export LESS_TERMCAP_md=$'\E[01;31m'
-export LESS_TERMCAP_me=$'\E[0m'
-export LESS_TERMCAP_se=$'\E[0m'
-export LESS_TERMCAP_so=$'\E[01;45;30m'
-export LESS_TERMCAP_ue=$'\E[0m'
-export LESS_TERMCAP_us=$'\E[01;34m'
-
 # open with
 alias -s mov=$VIDV
 alias -s avi=$VIDV
@@ -57,7 +32,6 @@ alias llm="llt -rl -- **/*(D.om[1,10])"
 alias llms="llt -rl -- $PWD/*(D.om[1,10])"
 alias llf="lla -d *(-/DN)"
 alias badcheck="sudo find / -perm -002 \( -type f -o -type d \) -ls"
-alias back="cd $OLDPWD"
 alias e="bye"
 alias cl="clear"
 alias rd="rm -rd"
@@ -97,9 +71,9 @@ alias bdvddata="growisofs -dvd-compat -speed=16 -iso-level 3 -relaxed-filenames 
 alias hb="HandBrakeCLI -e x264 -E ac3 -6 dp12 -R 48 -b 1800 -B 160 -D 3.0 -2 -T -p --decomb -x qp=0:aq-strength=1.5:direct=auto:bframes=6:mixed-refs:no-fast-pskip:8x8dct -i /dev/dvd" #-t/-L -S xMB -o *.mp4
 alias mpq="$VIDV -really-quiet"
 alias mpn="$VIDV -nosound -really-quiet"
-alias mix2="ossmix codec1.jack.int-speaker.mode mix2 && echo 'Mixer set to PC Speaker'"
-alias mix3="ossmix codec1.jack.int-speaker.mode mix3 && echo 'Mixer set to Headphones'"
-alias mute="ossvol -t"
+alias mix2="ossmix codec1.jack.int-speaker.mode mix2 >>/dev/null && echo 'Mixer set to PC Speaker'"
+alias mix3="ossmix codec1.jack.int-speaker.mode mix3 >>/dev/null && echo 'Mixer set to Headphones'"
+alias mute="ossrat -m"
 alias vu="ossrat -i 1"
 alias vd="ossrat -d 1"
 alias svim="sudo vim"
@@ -120,6 +94,10 @@ function up(){
     arg=$(($arg - 1));
   done
 }
+
+function back() {
+  pushd -q -$1
+  }
 
 function mkcd() {
   mkdir "$@"

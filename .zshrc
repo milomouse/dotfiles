@@ -1,11 +1,37 @@
 # prompt line
 precmd() {print -Pn "\e]2;%2d\a"}
-PROMPT='%F{red}» %f'
+PS1='%F{red}» %f'
+PS2='%B%F{white}%_ %b%f%F{red}» %f'
+PS3='%B%F{white}?# %b%f%F{red}» %f'
+PS4='%B%F{white}%_ %b%f%F{red}» %f%B%F{white}+%N:%i %b%f%F{red}» %f'
 
-# history specification
+# exports
 export HISTSIZE=1400
 export SAVEHIST=$HISTSIZE
-setopt appendhistory nomatch notify
+export DIRSTACKSIZE=20
+export FCEDIT=/usr/bin/vim
+export EDITOR=/usr/bin/vim
+export BROWSER=/usr/bin/w3m
+export IMGV=/usr/bin/gliv
+export VIDV=/usr/bin/mplayer
+export PDFV=/usr/bin/zathura
+export CC=/usr/bin/gcc
+export SHELL=/bin/zsh
+export MPD_HOST=127.0.0.1
+export MPD_PORT=6600
+export PAGER=/bin/less
+export LANG="en_US.utf8"
+export LC_ALL="en_US.utf8"
+export LC="en_US.utf8"
+export LESSCHARSET="utf-8"
+export LESS_TERMCAP_mb=$'\E[01;31m'
+export LESS_TERMCAP_md=$'\E[01;31m'
+export LESS_TERMCAP_me=$'\E[0m'
+export LESS_TERMCAP_se=$'\E[0m'
+export LESS_TERMCAP_so=$'\E[01;45;30m'
+export LESS_TERMCAP_ue=$'\E[0m'
+export LESS_TERMCAP_us=$'\E[01;34m'
+
 
 # auto-completion
 autoload -U compinit
@@ -30,12 +56,15 @@ zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' force-list always
 
 # optimize
+setopt VI
 setopt AUTO_CD
 setopt CHASE_LINKS
 setopt AUTO_PUSHD
 setopt PUSHD_IGNORE_DUPS
 setopt HASH_LIST_ALL
 setopt LIST_TYPES
+setopt LIST_PACKED
+setopt NO_MATCH
 setopt CORRECT
 setopt COMPLETE_IN_WORD
 setopt HIST_VERIFY
@@ -50,14 +79,17 @@ setopt NO_CLOBBER
 setopt EXTENDED_GLOB
 setopt NUMERIC_GLOB_SORT
 setopt DOT_GLOB
+setopt NO_BEEP
+setopt NOTIFY
 setopt CHECK_JOBS
 setopt LONG_LIST_JOBS
 setopt AUTO_CONTINUE
 setopt INTERACTIVE_COMMENTS
-setopt promptsubst
-setopt nobeep
-unsetopt transient_rprompt
-unset mailcheck
+setopt WARN_CREATE_GLOBAL
+setopt RM_STAR_WAIT
+setopt PROMPT_SUBST
+unsetopt TRANSIENT_RPROMPT
+unset MAILCHECK
 autoload -U pick-web-browser
 zstyle ':mime:*' x-browsers firefox-nightly uzbl-browser
 zstyle ':mime:*' tty-browsers w3m links

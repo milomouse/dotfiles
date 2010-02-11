@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 if [ "$USER" = "root" ]; then
   maybe_mirrors=$(w3m -dump 'https://www.archlinux.de/?page=MirrorStatus;orderby=lastsync;sort=1'|\
     grep "tp:/"|head -n 10|awk '{print $1}'|sed "s/$/\$repo\/os\/`arch`/")

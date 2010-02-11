@@ -1,8 +1,0 @@
-#!/bin/sh
-# Make sure there's no lingering .mouv file.
-MCORD=/home/milo/.config/.mouv
-if [ -f $MCORD ]; then
-	rm $MCORD
-else
-	shift
-fi

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 # A fork of ossvol with minor changes and ratpoison output.
 # Original by: Daniel J Griffiths <ghost1227@archlinux.us>
 # Modified by: milomouse <vincent@fea.st>

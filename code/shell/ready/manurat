@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 # Simple manpage selector with dmenu.
 
 MANDIR=/usr/share/man

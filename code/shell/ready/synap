@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 # milomouse <vincent[at]fea.st>
 # Banish mouse and disable touchpad, also undo this.
 

@@ -26,10 +26,11 @@ alias lf="la -d *(-/DN)"
 alias lt="la -tr"
 alias lls="ls -l"
 alias lla="lls -AX"
-alias llb="lla -Sr"
+alias llb="la -1Ssr"
 alias llt="lla -tr"
-alias llm="llt -rl -- **/*(D.om[1,10])"
-alias llms="llt -rl -- $PWD/*(D.om[1,10])"
+alias llts="llt -- *(D.om[1,10])"
+alias llm="llt --time=use -u -- **/*(D.om[1,40])"
+alias llms="llt --time=use -u -- *(D.om[1,10])"
 alias llf="lla -d *(-/DN)"
 alias badcheck="sudo find / -perm -002 \( -type f -o -type d \) -ls"
 alias e="bye"
@@ -39,10 +40,9 @@ alias rds="srm -vr"
 alias rms="srm -v"
 alias ff="find |grep -i"
 alias nocm="egrep -v '^\s*(#|$)'"
-alias fullsync="sudo rsync -vahu --exclude=/mnt --exclude=/proc --exclude=/sys --exclude=/tmp --exclude=/media --no-motd --delete-after"
-alias somesync="sudo rsync -vahu --no-motd --delete-after"
+alias somesync="sudo rsync -vahu --no-motd --delete-after" # specify..
 alias wika="w3m /usr/share/doc/arch-wiki/html/index.html"
-alias startx="rmouv;startx -- -dpi 120"
+alias startx="startx -- -dpi 120"
 alias xedit="vim $HOME/.Xdefaults"
 alias zedit="vim $HOME/.zshrc"
 alias zedia="vim $HOME/.zshalias"
@@ -102,7 +102,7 @@ function back() {
   }
 
 function mkcd() {
-  mkdir "$@"
+  mkdir -p "$@"
   cd "$@"
 }
 
@@ -122,6 +122,15 @@ elif [[ -d ${*[-1]%/*} ]]; then
 fi
 }
 
+function timer() {
+    local start=`date +%s`
+    $*
+    local stop=`date +%s`
+    
+    duration=$[$stop - $start]
+    echo "Duration: $duration s"
+}
+
 function reboot() {
   killall ssh-agent &>/dev/null
   rm $HOME/.ssh/environment &>/dev/null
@@ -133,7 +142,42 @@ function poweroff() {
   sudo poweroff
 }
 
-extr() {
+function fullsync() {
+  local CORE=/mnt/s1tb
+  local DEST=$CORE/snapshot
+  if [ ! -b /dev/disk/by-uuid/de153146-136c-4c7f-84d2-8254d3593fa1 ]; then
+    echo $'\E[01;31m'"Device not found, check dmesg and try again." $'\E[0m'
+  else
+    if [ -f $CORE/.lock ]; then
+      echo $'\E[01;36m'"fullsync() has started, please wait ..." $'\E[0m'
+      sudo rsync -vahu --no-motd --delete-after \
+      --exclude=/tmp \
+      --exclude=/dev \
+      --exclude=/sys \
+      --exclude=/proc \
+      --exclude=/media \
+      --exclude=/mnt \
+      / $DEST
+
+      sudo mkdir -p $DEST/tmp
+      sudo mkdir -p $DEST/dev
+      sudo mkdir -p $DEST/sys
+      sudo mkdir -p $DEST/proc
+      sudo mkdir -p $DEST/media/cd
+      sudo mkdir -p $DEST/media/dvd
+      sudo mkdir -p $DEST/media/fl
+      sudo mkdir -p $DEST/media/hdd
+      sudo mkdir -p $DEST/mnt/s1tb
+      sudo chmod -R 777 $DEST/tmp
+      sudo cp -ap /lib/udev/devices/* $DEST/dev/
+      echo $'\E[01;36m'"fullsync() has finished, you may now unmount volume: $(echo $CORE)" $'\E[0m'
+    else
+      echo $'\E[01;31m'"Device was found but does not appear to be mounted, check mtab and try again." $'\E0m'
+    fi
+  fi
+}
+
+function extr() {
   if [ -f $1 ] ; then 
     case $1 in
       *.tar.bz2)   tar xjf $1    ;;

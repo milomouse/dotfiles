@@ -17,7 +17,7 @@ export VIDV=/usr/bin/mplayer
 export PDFV=/usr/bin/zathura
 export CC=/usr/bin/gcc
 export SHELL=/bin/zsh
-export MPD_HOST=127.0.0.1
+export MPD_HOST=lenovo
 export MPD_PORT=6600
 export PAGER=/bin/less
 export LANG="en_US.utf8"
@@ -31,7 +31,6 @@ export LESS_TERMCAP_se=$'\E[0m'
 export LESS_TERMCAP_so=$'\E[01;45;30m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;34m'
-
 
 # auto-completion
 autoload -U compinit
@@ -114,14 +113,41 @@ if [ -f ~/.zshalias ]; then
 fi
 
 # source ssh
-SSH_ENV="$HOME/.ssh/environment"
- 
 function agent-s {
-  echo "Initializing new SSH agent..."
-  rm ${SSH_ENV} >&/dev/null
-  /usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
-  echo succeeded
-  chmod 600 "${SSH_ENV}"
-  . "${SSH_ENV}" > /dev/null
-  /usr/bin/ssh-add;
+  local SSH_ENV="$HOME/.ssh/environment"
+  echo "Initializing new SSH agent ..."
+  if [ -f ${SSH_ENV} ]; then
+    rm ${SSH_ENV} >&/dev/null
+  fi
+  if [ ! `ps -a|grep -i ssh-agent` ]; then
+    /usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
+    echo succeeded
+    chmod 600 "${SSH_ENV}"
+    . "${SSH_ENV}" > /dev/null
+    /usr/bin/ssh-add;
+    git pull origin master
+  else
+    killall ssh-agent &>/dev/null
+  fi
 }
+
+# zenburn framebuffer colors
+#if [ "$TERM" = "linux" ]; then
+#    echo -en "\e]P01C1C20"
+#    echo -en "\e]P84d4d4d"
+#    echo -en "\e]P1CE5C00"
+#    echo -en "\e]P9F57900"
+#    echo -en "\e]P2B7CE42"
+#    echo -en "\e]PABDE077"
+#    echo -en "\e]P3B88B10"
+#    echo -en "\e]PBFFC135"
+#    echo -en "\e]P466AABB"
+#    echo -en "\e]PCAACCBB"
+#    echo -en "\e]P5B7416E"
+#    echo -en "\e]PDBB4466"
+#    echo -en "\e]P65E7175"
+#    echo -en "\e]PEA3BABF"
+#    echo -en "\e]P7D6D8D9"
+#    echo -en "\e]PF6C887A"
+#    clear
+#fi

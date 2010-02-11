@@ -40,6 +40,16 @@
  set statusline=[%n]\ %<%f%m%r\ %w\ %y\ \ <%{&fileformat}>%=[%o]\ %l,%c%V\/%L\ \ %P
  set grepprg=grep\ -nH\ $*
  inoremap # X<BS>#
+ autocmd FileType python,sh,bash,zsh,ruby,perl      let StartComment="#"  | let EndComment=""
+ autocmd FileType lisp,scheme                       let StartComment=";"  | let EndComment=""
+ autocmd FileType cpp,php,c,javascript              let StartComment="//" | let EndComment=""
+ autocmd FileType java                              let StartComment="/*" | let EndComment="*/"
+ autocmd FileType html    let StartComment="<!--" | let EndComment="-->"
+ autocmd FileType haskell let StartComment="--"   | let EndComment=""
+ autocmd FileType vim     let StartComment="\""   | let EndComment=""
+ autocmd BufNewFile,BufRead *muttrc*           set ft=muttrc
+ autocmd BufNewFile,BufRead *.xcolors          set ft=xdefaults
+ autocmd BufNewFile,BufRead ~/.mutt/temp/mutt* set ft=mail | set textwidth=72 | set spell
  autocmd BufReadPost *
    \ if line("'\"") > 0 && line("'\"") <= line("$") |
    \   exe "normal! 9`\"" |

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 # Display a file with it's char count,
 # line count, and owner name using Less.
 

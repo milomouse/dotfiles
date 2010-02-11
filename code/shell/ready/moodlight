@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 ## Change screen brightness on computers where linux
 ## fails to detect function keys for it.
 ## More dynamic than /sys/class/backlight/..->
@@ -38,6 +38,12 @@ dimmer() {
 	fi
 }
 
+max() {
+  NEW=FF
+  echo $OUTPUT$NEW > $CONFIG
+  sh $CONFIG
+}
+
 case "$1" in
 	'-b'|'--brighter')
 	brighter
@@ -45,4 +51,7 @@ case "$1" in
 	'-d'|'--dimmer')
 	dimmer
 	;;
+  '-m'|'--max')
+  max
+  ;;
 esac

@@ -1,0 +1,18 @@
+[user]
+  name = milomouse
+  email = vincent@fea.st
+[color]
+  ui = auto
+[sendmail]
+  smtpserver = /usr/bin/msmtp
+  supressfrom = true
+  chainreplyto = false
+  thread = true
+  compose = true
+  confirm = auto
+[apply]
+  whitespace = strip
+[core]
+  editor = /usr/bin/vim
+  pager = less
+

@@ -48,6 +48,7 @@
  autocmd FileType haskell let StartComment="--"   | let EndComment=""
  autocmd FileType vim     let StartComment="\""   | let EndComment=""
  autocmd BufNewFile,BufRead *muttrc*           set ft=muttrc
+ autocmd BufNewFile,BufRead *.xsrc*            set ft=sh
  autocmd BufNewFile,BufRead *.xcolors          set ft=xdefaults
  autocmd BufNewFile,BufRead ~/.mutt/temp/mutt* set ft=mail | set textwidth=72 | set spell
  autocmd BufReadPost *

@@ -123,12 +123,12 @@ fi
 }
 
 function timer() {
-    local start=`date +%s`
-    $*
-    local stop=`date +%s`
-    
-    duration=$[$stop - $start]
-    echo "Duration: $duration s"
+  local start=`date +%s`
+  $*
+  local stop=`date +%s`
+  
+  duration=$[$stop - $start]
+  echo "Duration: $duration s"
 }
 
 function reboot() {

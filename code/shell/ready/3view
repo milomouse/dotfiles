@@ -1,6 +1,5 @@
 #!/bin/zsh
-# Display a file with it's char count,
-# line count, and owner name using Less.
+# Display a file with it's char count, line count, and owner name using Less.
 
 width=150
 C0=$'\E[0m'

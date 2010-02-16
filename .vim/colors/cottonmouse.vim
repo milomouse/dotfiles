@@ -115,7 +115,7 @@ else
   hi Special        term=none cterm=none ctermfg=Blue        ctermbg=none
   hi SpecialKey     term=none cterm=none ctermfg=Blue        ctermbg=none
   hi Statement      term=none cterm=none ctermfg=DarkCyan    ctermbg=none
-  hi StatusLine     term=none cterm=none ctermfg=DarkBlue    ctermbg=DarkCyan
+  hi StatusLine     term=none cterm=none ctermfg=DarkGray    ctermbg=DarkCyan
   hi StatusLineNC   term=none cterm=none ctermfg=DarkBlue    ctermbg=DarkGray
   hi StorageClass   term=none cterm=none ctermfg=Magenta     ctermbg=none
   hi String         term=none cterm=none ctermfg=DarkRed     ctermbg=none

@@ -60,7 +60,7 @@ alias psr="ps -u root fo etime,user,pid,pmem,pcpu,command |less"
 alias daemons="ls /var/run/daemons"
 alias dfu="df -hTP"
 alias ping="ping -c 5"
-alias siteget='wget --recurse --page-requisites --convert-links --html-extension --no-parent --wait=10 --limit-rate=20K -U Mozilla -l' #depth, then url
+alias siteget='wget --recursive --page-requisites --convert-links --html-extension --no-parent --wait=10 --limit-rate=20K -U Mozilla -l' #depth, then url
 alias ncmp="ncmpcpp"
 alias rot="rtorrent"
 alias cdrwblank="cdrecord -dev=/dev/sr0 -speed=32 -blank=fast"

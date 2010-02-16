@@ -6,7 +6,7 @@
  set nocompatible
  set ignorecase
  set smartcase
- set autoindent
+ set noautoindent
  set nosmartindent
  set smarttab
  set nocindent

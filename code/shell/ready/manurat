@@ -1,5 +1,5 @@
 #!/bin/zsh
-# Simple manpage selector with dmenu.
+## Simple manpage selector with dmenu.
 
 MANDIR=/usr/share/man
 DMENU="dmenu -b -fn -*-fixed-medium-r-normal-*-9-*-*-*-*-*-*-* -nb #000 -nf #625873 -sb #a488d9 -sf #000"

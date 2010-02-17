@@ -1,4 +1,4 @@
-# open with
+# open with..
 alias -s mov=$VIDV
 alias -s avi=$VIDV
 alias -s wmv=$VIDV
@@ -46,12 +46,12 @@ alias startx="startx -- -dpi 120"
 alias xedit="vim $HOME/.Xdefaults"
 alias zedit="vim $HOME/.zshrc"
 alias zedia="vim $HOME/.zshalias"
-alias zload="source ~/.zshrc"
+alias zload=". $HOME/.zshrc"
 alias redit="vim $HOME/.ratpoisonrc"
 alias lasi="3view $HOME/othe/archive/$(llt $HOME/othe/archive |tail -1|awk '{print $9}')"
 alias lasid="3view $HOME/othe/archive/$(llt $HOME/othe/archive |tail -2|head -1|awk '{print $9}')"
-alias unrarall='for file in `ls *.rar`; do unrar -x clr $file; done'
-alias unzipall='for file in `ls *.zip`; do unzip -L $file; done'
+alias unrarall='for file in `ls *.rar`; do unrar -x r $file; done'
+alias unzipall='for file in `ls *.zip`; do unzip $file; done'
 alias irb="irb --simple-prompt"
 alias diff="colordiff"
 alias grep="grep --color=auto"
@@ -89,6 +89,7 @@ alias aive="ay -Q --date | tee $HOME/othe/archive/$(date +%m_%d_%y) >>/dev/null"
 alias downgrade="ay -Su --downgrade"
 alias clean="ay -Scc"
 
+# functions
 function up(){
   local arg=${1:-1};
   while [ $arg -gt 0 ]; do
@@ -217,25 +218,16 @@ function reprobe() {
 function todo() {
   local arg=$HOME/othe
   case $1 in
-    -l ) shift
-    ls -1 $arg/.TODO*
-    ;;
-    * ) vim $arg/.TODO_$@
-    ;;
+    -l ) ls -1 $arg/.TODO* ;;
+    * ) vim $arg/.TODO_$1 ;;
   esac
 }
 
 function sd() {
   case $1 in
-    -w | -wordnet ) shift
-    sdcv -u "WordNet" $@
-    ;;
-    -t | -thesaurus ) shift
-    sdcv -u "English Thesaurus" $@
-    ;;
-    -a | -all ) shift
-    sdcv $@ | less
-    ;;
-    *) sdcv -u "WordNet" $@
+    -w | -wordnet ) sdcv -u "WordNet" $2 ;;
+    -t | -thesaurus ) sdcv -u "English Thesaurus" $2 ;;
+    -a | -all ) sdcv $2 | less ;;
+    *) sdcv -u "WordNet" $1
   esac
 }

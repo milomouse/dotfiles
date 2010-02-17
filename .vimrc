@@ -7,9 +7,9 @@
  set ignorecase
  set smartcase
  set noautoindent
- set nosmartindent
- set smarttab
+ set smartindent
  set nocindent
+ set smarttab
  set expandtab
  set ts=2
  set softtabstop=2
@@ -43,12 +43,11 @@
  autocmd FileType python,sh,bash,zsh,ruby,perl      let StartComment="#"  | let EndComment=""
  autocmd FileType lisp,scheme                       let StartComment=";"  | let EndComment=""
  autocmd FileType cpp,php,c,javascript              let StartComment="//" | let EndComment=""
- autocmd FileType java                              let StartComment="/*" | let EndComment="*/"
  autocmd FileType html    let StartComment="<!--" | let EndComment="-->"
  autocmd FileType haskell let StartComment="--"   | let EndComment=""
  autocmd FileType vim     let StartComment="\""   | let EndComment=""
  autocmd BufNewFile,BufRead *muttrc*           set ft=muttrc
- autocmd BufNewFile,BufRead *.xsrc*            set ft=sh
+ autocmd BufNewFile,BufRead *.xs{rc,alias}*    set ft=sh
  autocmd BufNewFile,BufRead *.xcolors          set ft=xdefaults
  autocmd BufNewFile,BufRead ~/.mutt/temp/mutt* set ft=mail | set textwidth=72 | set spell
  autocmd BufReadPost *

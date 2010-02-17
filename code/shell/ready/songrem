@@ -1,9 +1,7 @@
 #!/bin/zsh
-#
 # PACKAGE: SongREM
 # VERSION: 0.1-3
 # REQUIRE: "mpd" and "mpc"
-#
 # DESCRIPTION:
 # Small script to remember "good songs" and play them back later.
 # This is basically a butchered fork of pbrisbin3's "GoodSong" ;;
@@ -20,7 +18,6 @@
 #   \ or add that song to current playlist without rebuilding it.
 # 3. Gather and display information about $list. (like mpc stats)
 # 4. Remove current song from $list if found there via -r option.
-#
 ###
 
 # Colors for the CLI environment (if desired; for aesthetics).

@@ -1,36 +1,15 @@
+# extend run-path
+PATH=$PATH:/usr/sbin:/usr/local:/usr/local/sbin:/usr/local/bin
+
+# source aliases
+[ ! -f ~/.zshalias ] || . ~/.zshalias
+
 # prompt line
 precmd() {print -Pn "\e]2;%2d\a"}
 PS1='%F{red}» %f'
 PS2='%B%F{white}%_ %b%f%F{red}» %f'
 PS3='%B%F{white}?# %b%f%F{red}» %f'
 PS4='%B%F{white}%_ %b%f%F{red}» %f%B%F{white}+%N:%i %b%f%F{red}» %f'
-
-# exports
-export HISTSIZE=1400
-export SAVEHIST=$HISTSIZE
-export DIRSTACKSIZE=20
-export FCEDIT=/usr/bin/vim
-export EDITOR=/usr/bin/vim
-export BROWSER=/usr/bin/w3m
-export IMGV=/usr/bin/gliv
-export VIDV=/usr/bin/mplayer
-export PDFV=/usr/bin/zathura
-export CC=/usr/bin/gcc
-export SHELL=/bin/zsh
-export MPD_HOST=lenovo
-export MPD_PORT=6600
-export PAGER=/bin/less
-export LANG="en_US.utf8"
-export LC_ALL="en_US.utf8"
-export LC="en_US.utf8"
-export LESSCHARSET="utf-8"
-export LESS_TERMCAP_mb=$'\E[01;31m'
-export LESS_TERMCAP_md=$'\E[01;31m'
-export LESS_TERMCAP_me=$'\E[0m'
-export LESS_TERMCAP_se=$'\E[0m'
-export LESS_TERMCAP_so=$'\E[01;45;30m'
-export LESS_TERMCAP_ue=$'\E[0m'
-export LESS_TERMCAP_us=$'\E[01;34m'
 
 # auto-completion
 autoload -U compinit
@@ -105,14 +84,34 @@ bindkey "^[[4~" end-of-line
 bindkey "^?" backward-delete-char
 bindkey '^R' history-incremental-search-backward
 
-PATH=$PATH:/usr/sbin:/usr/local:/usr/local/sbin:/usr/local/bin
+# exports
+export HISTSIZE=1400
+export SAVEHIST=$HISTSIZE
+export DIRSTACKSIZE=20
+export FCEDIT=/usr/bin/vim
+export EDITOR=/usr/bin/vim
+export BROWSER=/usr/bin/w3m
+export IMGV=/usr/bin/gliv
+export VIDV=/usr/bin/mplayer
+export PDFV=/usr/bin/zathura
+export CC=/usr/bin/gcc
+export SHELL=/bin/zsh
+export MPD_HOST=lenovo
+export MPD_PORT=6600
+export PAGER=/bin/less
+export LANG="en_US.utf8"
+export LC_ALL="en_US.utf8"
+export LC="en_US.utf8"
+export LESSCHARSET="utf-8"
+export LESS_TERMCAP_mb=$'\E[01;31m'
+export LESS_TERMCAP_md=$'\E[01;31m'
+export LESS_TERMCAP_me=$'\E[0m'
+export LESS_TERMCAP_se=$'\E[0m'
+export LESS_TERMCAP_so=$'\E[01;45;30m'
+export LESS_TERMCAP_ue=$'\E[0m'
+export LESS_TERMCAP_us=$'\E[01;34m'
 
-# source aliases
-if [ -f ~/.zshalias ]; then
-  . ~/.zshalias
-fi
-
-# source ssh
+# ! -f .zshalias || at least have ssh function
 function agent-s {
   local SSH_ENV="$HOME/.ssh/environment"
   echo "Initializing new SSH agent ..."

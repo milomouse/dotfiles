@@ -4,9 +4,7 @@
 
 # delete leftover 'mouv' file if present
 banished=$HOME/.config/.mouv
-if [ -f $banished ]; then
-  rm $banished
-fi
+[ ! -f $banished ] || rm $banished
 # swap alt_l with super_l
 xmodmap -e "keycode 133 = Alt_L"
 xmodmap -e "keycode 64 = Super_L"

@@ -45,7 +45,7 @@ bind i vsplit
 bind j hsplit
 bind k kill
 bind l windows
-bind m exec ratman
+bind m exec ratpoison -c "exec urxvt -e man $(ratpoison -c "prompt Manpage:")"
 bind n curframe
 bind o only
 bind p exec urxvt -e ncmpcpp

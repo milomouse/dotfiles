@@ -1,3 +1,0 @@
-#!/bin/zsh
-MANUAL=$(ratpoison -c "prompt Manpage:")
-ratpoison -c "exec urxvt -e man $MANUAL"

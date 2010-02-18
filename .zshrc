@@ -5,11 +5,11 @@ PATH=$PATH:/usr/sbin:/usr/local:/usr/local/sbin:/usr/local/bin
 [ ! -f ~/.zshalias ] || . ~/.zshalias
 
 # prompt line
-precmd() {print -Pn "\e]2;%2d\a"}
 PS1='%F{red}» %f'
 PS2='%B%F{white}%_ %b%f%F{red}» %f'
 PS3='%B%F{white}?# %b%f%F{red}» %f'
 PS4='%B%F{white}%_ %b%f%F{red}» %f%B%F{white}+%N:%i %b%f%F{red}» %f'
+[ ! `echo $TERM` = screen ] || precmd() {print -Pn "\e]2;%2d\a"}
 
 # auto-completion
 autoload -U compinit

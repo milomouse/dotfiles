@@ -1,0 +1,88 @@
+## ~/.xsrc
+## milomouse <vincent[at]fea.st>
+## TODO: make better functions.. still learning this stuff.
+prompt = '; ' '> '
+
+# don't export zsh stuff
+noexport = FCEDIT DIRSTACKSIZE HISTCONTROL HISTSIZE SAVEHIST
+
+# global exports
+EDITOR = /usr/bin/vim
+BROWSER = /usr/bin/w3m
+IMGV = /usr/bin/gliv
+VIDV = /usr/bin/mplayer
+PDFV = /usr/bin/zathura
+XAUTHORITY = $home/.config/.Xauthority
+XDG_CACHE_HOME = /dev/shm/cache
+XDG_CONFIG_DIR = $home/.config
+XDG_CONFIG_DIRS = $home/.config:/etc
+XDG_DATA_HOME = $home/.config/share
+XDG_DESKTOP_DIR = /dev/shm
+XDG_DOCUMENTS_DIR = $home/rite
+XDG_DOWNLOAD_DIR = $home/down
+XDG_MUSIC_DIR = $home/muzk
+XDG_PICTURES_DIR = $home/foto
+XDG_PUBLICSHARE_DIR = /dev/shm
+XDG_TEMPLATES_DIR = /dev/shm
+XDG_VIDEOS_DIR = $home/vide
+
+# functions
+fn rcstart args { sudo /etc/rc.d/$args start }
+fn rcstop args { sudo /etc/rc.d/$args stop }
+fn rcrestart args { sudo /etc/rc.d/$args restart }
+fn reprobe args { sudo modprobe -r $args && sudo modprobe $args }
+fn mkcd args { mkdir -p $args && cd $args }
+fn ch args { pushd >/dev/null ; cd $args }
+fn back { popd >/dev/null }
+fn up { cd .. }
+fn grep args { /bin/grep --color=auto $args }
+fn whats args { /usr/bin/whatis $args }
+fn ls args { /bin/ls --color=auto -hF --group-directories-first $args }
+fn la args { /bin/ls --color=auto -hF --group-directories-first -AX $args }
+fn lb args { /bin/ls --color=auto -hF --group-directories-first -AXSsr $args }
+fn lf args { /bin/ls --color=auto -hF --group-directories-first -AX -d $args * }
+fn lt args { /bin/ls --color=auto -hF --group-directories-first -AXtr $args }
+fn lls args { /bin/ls --color=auto -hFl --group-directories-first $args }
+fn lla args { /bin/ls --color=auto -hFl --group-directories-first -AX $args }
+fn llb args { /bin/ls --color=auto -hF --group-directories-first -1AXSsr $args }
+fn llf args { /bin/ls --color=auto -hFl --group-directories-first -AX -d $args * }
+fn llt args { /bin/ls --color=auto -hFl --group-directories-first -AXtr $args }
+fn rd args { /bin/rm -r $args }
+fn rds args { /usr/bin/srm -vr $args }
+fn rms args { /usr/bin/srm -v $args }
+fn siteget args { /usr/bin/wget --recursive --page-requisites --convert-links --html-extension --no-parent --wait=10 --limit-rate=20K -U Mozilla -l $args } #depth, then url
+fn mpq args { $VIDV -really-quiet $args }
+fn mpn args { $VIDV -really-quiet -nosound $args }
+fn mix2 { ossmix codec1.jack.int-speaker.mode mix2 >>/dev/null && echo 'Mixer set to PC Speaker' }
+fn mix3 { ossmix codec1.jack.int-speaker.mode mix3 >>/dev/null && echo 'Mixer set to Headphones' }
+fn killn args { pkill -f $args }
+fn pacman args { pacman-color $args }
+fn ay args { yaourt $args }
+fn todo args { $EDITOR $home/othe/.TODO_$args }
+fn svim args { sudo $EDITOR $args }
+
+# aliases
+alias e exit
+alias cl clear
+alias startx ( /usr/bin/startx -- -dpi 120 )
+alias sload ( . $home/.xsrc )
+alias sedit ( $EDITOR $home/.xsrc )
+alias sedia ( $EDITOR $home/.xsalias )
+alias xedit ( $EDITOR $home/.Xdefaults )
+alias redit ( $EDITOR $home/.ratpoisonrc )
+alias wika ( $BROWSER /usr/share/doc/arch-wiki/html/index.html )
+alias irb ( /usr/bin/irb --simple-prompt )
+alias diff ( colordiff )
+alias psu ( ps fxo etime,user,pid,pmem,pcpu,comm )
+alias psr ( ps -u root fo etime,user,pid,pmem,pcpu,command )
+alias daemons ( /bin/ls /var/run/daemons )
+alias dfu ( df -hTP )
+alias ping ( /bin/ping -c 5 )
+alias rot ( rtorrent )
+alias ncmp ( ncmpcpp )
+alias mute ( ossrat -m )
+alias vu ( ossrat -i 1 )
+alias vd ( ossrat -d 1 )
+alias upf ( fc-cache -vf )
+alias upd ( sudo updatedb )
+alias abs ( sudo /usr/bin/abs )

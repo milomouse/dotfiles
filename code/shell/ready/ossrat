@@ -1,7 +1,7 @@
 #!/bin/zsh
 # A fork of ossvol with minor changes and ratpoison output.
-# Original by: Daniel J Griffiths <ghost1227@archlinux.us>
-# Modified by: milomouse <vincent@fea.st>
+# Original by: Daniel J Griffiths <ghost1227[at]archlinux.us>
+# Modified by: milomouse <vincent[at]fea.st>
 
 VERSION='1.2-2'
 VOLSTORE=~/.config/.volume
@@ -32,11 +32,11 @@ err() {
 }
 
 toggle() {
-	if [ `mpc|head -2|tail -1|awk '{print $1}'|tr '[]' ' '` = playing ]; then
+	if [ $(mpc|head -2|tail -1|awk '{print $1}'|tr '[]' ' ') = playing ]; then
 	  INFO=$(echo -n ">>> Paused >>> $(mpc|tail -1|awk '{print $2" "$3" "$4" "$5}'|tr 'r' 'R')")
 	  mpc toggle >> /dev/null
-      if [ `ps -a|grep xinit|awk '{print $4}'` ]; then
-        curr=`ossmix|grep outvol|awk '{print $4}'`
+      if [ $(ps -a|grep xinit|awk '{print $4}') ]; then
+        curr=$(ossmix|grep outvol|awk '{print $4}')
 	      ratpoison -c "echo $INFO >>> $curr dB"
       else
         echo "Paused"
@@ -46,7 +46,7 @@ toggle() {
       ONE=$(echo -n ">>> $(mpc|head -1)")
       TWO=$(echo -n ">>> $(mpc|head -2|tail -1|awk '{print $3" "$2}')")
       INFO=$(echo -n $ONE $TWO)
-        if [ `ps -a|grep xinit|awk '{print $4}'` ]; then
+        if [ $(ps -a|grep xinit|awk '{print $4}') ]; then
           ratpoison -c "echo $INFO"
         else
           mpc|head -1
@@ -55,12 +55,12 @@ toggle() {
 }
 
 next() {
-	if [ `mpc|cat -n|cut -f 1|tail -1` = 1 ]; then
+	if [ $(mpc|cat -n|cut -f 1|tail -1) = 1 ]; then
 	  mpc play >> /dev/null
       ONE=$(echo -n ">>> $(mpc|head -1)")
       TWO=$(echo -n ">>> $(mpc|head -2|tail -1|awk '{print $3" "$2}')")
       INFO=$(echo -n $ONE $TWO)
-        if [ `ps -a|grep xinit|awk '{print $4}'` ]; then
+        if [ $(ps -a|grep xinit|awk '{print $4}') ]; then
           ratpoison -c "echo $INFO"
         else
           mpc|head -1
@@ -70,7 +70,7 @@ next() {
       ONE=$(echo -n ">>> $(mpc|head -1)")
       TWO=$(echo -n ">>> $(mpc|head -2|tail -1|awk '{print $3" "$2}')")
       INFO=$(echo -n $ONE $TWO)
-        if [ `ps -a|grep xinit|awk '{print $4}'` ]; then
+        if [ $(ps -a|grep xinit|awk '{print $4}') ]; then
           ratpoison -c "echo $INFO"
         else
           mpc|head -1
@@ -79,8 +79,8 @@ next() {
 }
 
 previous() {
-	if [ `mpc|cat -n|cut -f 1|tail -1` = 1 ]; then
-    if [ `ps -a|grep xinit|awk '{print $4}'` ]; then
+	if [ $(mpc|cat -n|cut -f 1|tail -1) = 1 ]; then
+    if [ $(ps -a|grep xinit|awk '{print $4}') ]; then
 	    INFO=$(echo -n ">>> Nothing playing >>> $(mpc|tail -1|awk '{print $2" "$3" "$4" "$5}'|tr 'r' 'R')")
 	    ratpoison -c "echo $INFO"
     else
@@ -91,7 +91,7 @@ previous() {
       ONE=$(echo -n ">>> $(mpc|head -1)")
       TWO=$(echo -n ">>> $(mpc|head -2|tail -1|awk '{print $3" "$2}')")
       INFO=$(echo -n $ONE $TWO)
-        if [ `ps -a|grep xinit|awk '{print $4}'` ]; then
+        if [ $(ps -a|grep xinit|awk '{print $4}') ]; then
           ratpoison -c "echo $INFO"
         else
           mpc|head -1
@@ -100,17 +100,17 @@ previous() {
 }
 
 cancel() {
-	if [ `mpc|cat -n|cut -f 1|tail -1` = 3 ]; then
+	if [ $(mpc|cat -n|cut -f 1|tail -1) = 3 ]; then
 	  mpc stop >> /dev/null
-    curr=`ossmix|grep outvol|awk '{print $4}'`
+    curr=$(ossmix|grep outvol|awk '{print $4}')
     INFO=$(echo -n ">>> Stopped >>> Volume: $curr dB")
-      if [ `ps -a|grep xinit|awk '{print $4}'` ]; then
+      if [ $(ps -a|grep xinit|awk '{print $4}') ]; then
         ratpoison -c "echo $INFO"
       else
         echo "Stopped."
       fi
 	else
-    if [ `ps -a|grep xinit|awk '{print $4}'` ]; then
+    if [ $(ps -a|grep xinit|awk '{print $4}') ]; then
 	     ratpoison -c "echo"
     else
        return
@@ -121,10 +121,10 @@ cancel() {
 
 mute() {
 	if [ -f $VOLSTORE ]; then
-	  ossmix $CHANNEL `cat $VOLSTORE`
+	  ossmix $CHANNEL $(cat $VOLSTORE)
 	  rm $VOLSTORE
-    curr=`ossmix|grep outvol|awk '{print $4}'`
-      if [ `ps -a|grep xinit|awk '{print $4}'` ]; then
+    curr=$(ossmix|grep outvol|awk '{print $4}')
+      if [ $(ps -a|grep xinit|awk '{print $4}') ]; then
 	      ratpoison -c "echo >>> Volume: $curr dB"
       else
         echo "Volume: $curr dB"
@@ -132,8 +132,8 @@ mute() {
 	else
 	  VOLUME=$(ossmix $CHANNEL | awk '{print $10}' | awk -F : '{print $1}')
 	  ossmix $CHANNEL 0
-	  `echo $VOLUME >> $VOLSTORE`
-      if [ `ps -a|grep xinit|awk '{print $4}'` ]; then
+	  $(echo $VOLUME >> $VOLSTORE)
+      if [ $(ps -a|grep xinit|awk '{print $4}') ]; then
 	      ratpoison -c "echo >>> Volume: MUTED"
       else
         echo "Volume: MUTED"
@@ -143,14 +143,14 @@ mute() {
 
 increase() {
 	if [ -f $VOLSTORE ]; then
-	  TMPVOL=`cat $VOLSTORE`
-	  NEWVOL=`expr $TMPVOL + $ARGUMENT`
+	  TMPVOL=$(cat $VOLSTORE)
+	  NEWVOL=$(expr $TMPVOL + $ARGUMENT)
 	  ossmix $CHANNEL +$NEWVOL
 	  rm $VOLSTORE
 	else
 	  ossmix $CHANNEL +$ARGUMENT
-    curr=`ossmix|grep outvol|awk '{print $4}'`
-      if [ `ps -a|grep xinit|awk '{print $4}'` ]; then
+    curr=$(ossmix|grep outvol|awk '{print $4}')
+      if [ $(ps -a|grep xinit|awk '{print $4}') ]; then
 	      ratpoison -c "echo >>> Volume: $curr dB"
       else
         echo "Volume: $curr dB"
@@ -160,14 +160,14 @@ increase() {
 
 decrease() {
 	if [ -f $VOLSTORE ]; then
-	  TMPVOL=`cat $VOLSTORE`
-	  NEWVOL=`expr $TMPVOL - $ARGUMENT`
+	  TMPVOL=$(cat $VOLSTORE)
+	  NEWVOL=$(expr $TMPVOL - $ARGUMENT)
 	  ossmix $CHANNEL -- -$NEWVOL
 	  rm $VOLSTORE
 	else
 	  ossmix $CHANNEL -- -$ARGUMENT
-    curr=`ossmix|grep outvol|awk '{print $4}'`
-      if [ `ps -a|grep xinit|awk '{print $4}'` ]; then
+    curr=$(ossmix|grep outvol|awk '{print $4}')
+      if [ $(ps -a|grep xinit|awk '{print $4}') ]; then
 	      ratpoison -c "echo >>> Volume: $curr dB"
       else
         echo "Volume: $curr dB"
@@ -177,7 +177,7 @@ decrease() {
 
 version() {
   VERS=$(ls -lt /usr/local/bin/ossrat|awk '{print $6" "$7" "$8}')
-  if [ `ps -a|grep xinit|awk '{print $4}'` ]; then
+  if [ $(ps -a|grep xinit|awk '{print $4}') ]; then
     ratpoison -c "echo ossrat $VERSION (last modified at $VERS)"
   else
     echo "ossrat $VERSION (last modified at $VERS)"
@@ -185,20 +185,20 @@ version() {
 }
 
 announce() {
-  curr=`ossmix|grep outvol|awk '{print $4}'`
-	if [ `mpc|cat -n|cut -f 1|tail -1` = 1 ]; then
+  curr=$(ossmix|grep outvol|awk '{print $4}')
+	if [ $(mpc|cat -n|cut -f 1|tail -1) = 1 ]; then
 	  ONE=$(echo -n ">>> Nothing Playing")
 	  TWO=$(echo -n ">>> $(mpc|tail -1|awk '{print $2" "$3" "$4" "$5}'|tr 'r' 'R')")
 	  INFO=$(echo -n $ONE $TWO)
-      if [ `ps -a|grep xinit|awk '{print $4}'` ]; then
+      if [ $(ps -a|grep xinit|awk '{print $4}') ]; then
 	      ratpoison -c "echo $INFO >>> $curr dB"
       else
         mpc|head -1
       fi
 	else
-	  if [ `mpc|head -2|tail -1|awk '{print $1}'|tr '[]' ' '` = paused ]; then
+	  if [ $(mpc|head -2|tail -1|awk '{print $1}'|tr '[]' ' ') = paused ]; then
 	    INFO=$(echo -n ">>> Paused >>> $(mpc|tail -1|awk '{print $2" "$3" "$4" "$5}'|tr 'r' 'R')")
-        if [ `ps -a|grep xinit|awk '{print $4}'` ]; then
+        if [ $(ps -a|grep xinit|awk '{print $4}') ]; then
           ratpoison -c "echo $INFO >>> $curr dB"
         else
           echo "Paused."
@@ -207,7 +207,7 @@ announce() {
       ONE=$(echo -n ">>> $(mpc|head -1)")
       TWO=$(echo -n ">>> $(mpc|head -2|tail -1|awk '{print $3" "$2}')")
       INFO=$(echo -n $ONE $TWO)
-        if [ `ps -a|grep xinit|awk '{print $4}'` ]; then
+        if [ $(ps -a|grep xinit|awk '{print $4}') ]; then
           ratpoison -c "echo $INFO"
         else
           mpc|head -1

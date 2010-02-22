@@ -5,7 +5,7 @@
 
 CONFIG=$HOME/.config/.brightness
 OUTPUT='sudo setpci -s 00:02.0 F4.B='
-CURRENT=`cat $CONFIG|awk '{print $5}'|cut -c6,7`
+CURRENT=$(cat $CONFIG|awk '{print $5}'|cut -c6,7)
 ARGUMENT="5"
 
 brighter() {
@@ -17,7 +17,7 @@ brighter() {
 			echo $OUTPUT$NEW > $CONFIG
 			sh $CONFIG
 		else
-			NEW=`expr $CURRENT + $ARGUMENT`
+			NEW=$(expr $CURRENT + $ARGUMENT)
 			echo $OUTPUT$NEW > $CONFIG
 			sh $CONFIG
 		fi
@@ -32,7 +32,7 @@ dimmer() {
 			echo $OUTPUT$NEW > $CONFIG
 			sh $CONFIG
 		else
-			NEW=`expr $CURRENT - $ARGUMENT`
+			NEW=$(expr $CURRENT - $ARGUMENT)
 			echo $OUTPUT$NEW > $CONFIG
 			sh $CONFIG
 	fi

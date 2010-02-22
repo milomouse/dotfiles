@@ -1,0 +1,85 @@
+#!/bin/bash
+#
+# GoodSong V 0.1
+#
+# pbrisbin 2009
+#
+# keep a running list of good songs as they
+# pop up in your playlist
+#
+# requires a mpd and mpc
+#
+###
+
+# A place to keep the list
+list="$HOME/.config/.goodsongs"
+
+# Get the now playing song from mpc and check
+# if it's already in the list
+song="$(mpc | head -n1)"
+check=$(grep "$song" "$list")
+
+# just the help message
+message() {
+  echo ""
+  echo " GoodSong keeps a text file of good songs pulled from"
+  echo " mpd. When run with no options, it simply appends the"
+  echo " currently mpd playing song to the list.  other"
+  echo " options are as follows:"
+  echo ""
+  echo "        -s | --show  Displays a random song from the"
+  echo "                     existing list."
+  echo ""
+  echo "        -p | --play  Plays a random song from the"
+  echo "                     existing list."
+  echo ""
+  echo "        -b | --build Builds a playlist of your full"
+  echo "                     existing list."
+  echo ""
+  echo "        -h | --help  Displays this message and quits."
+  echo ""
+
+  exit 1
+}
+
+# get the filename from a line in the list
+getfilename() {
+  artist="$(echo $1 | sed 's/\ \-\ /+/g' | cut -d "+" -f 1)"
+  title="$(echo $1 | sed 's/\ \-\ /+/g' | cut -d "+" -f 2)"
+  filename="$(mpc search artist "$artist" title "$title" | head -n1)"
+}
+
+# create it if it doesn't exist
+[ -f $list ] || touch $list
+
+# parse the CLI options if they're there
+case $1 in
+  -h|--help)
+    message
+  ;;
+  -s|--show)
+    track="$(cat $list | sort -R | head -n1)"
+    echo $track
+  ;;
+  -p|--play)
+    track="$(cat $list | sort -R | head -n1)"
+    getfilename "$track"
+    mpc clear
+    mpc add "$filename"
+    mpc play
+  ;;
+  -b|--build)
+    mpc clear
+    cat $list | while read track; do
+      getfilename "$track"
+      echo $filename
+    done
+    mpc play
+  ;;
+  *)
+    [ -z "$check" ] && echo "$song" >> "$list"
+    echo "Added \"$song\" to the list.  try -h for more options."
+  ;;
+esac
+
+exit 0

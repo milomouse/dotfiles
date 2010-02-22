@@ -22,6 +22,6 @@ if [ "$USER" = "root" ]; then
   fi
     echo "$good_mirrors_ranked" > /etc/pacman.d/mirrorlist
     cat /etc/pacman.d/mirrorlist
-  else
-    echo "User \"$USER\" does not have the required priviledges to run this script."
+else
+  echo "User \"$USER\" does not have the required priviledges to run this script."
 fi

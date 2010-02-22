@@ -1,0 +1,27 @@
+#!/bin/zsh
+
+shufdir="${HOME}/foto/wall/shuf/"
+setpaper="/usr/bin/display -window 1366x768!"
+finder="/usr/bin/find" 
+simulate=0
+
+###
+# -r to search subdirectories too
+# -p to search only pwd
+# -d to specify the base directory
+###
+while getopts d:rps flags 
+do
+  case "$flags" in
+    d)      shufdir="$OPTARG";;
+    r)      findargs="";;
+    p)      findargs="-maxdepth 1";;
+    s)      simulate=1 ;;
+    [?])    echo >&2 "Usage: $(basename $0) [-r|p] [-d wallpaperdir]"
+    exit 1;;
+  esac
+done
+
+paper="$($finder "$shufdir" -type f $findargs | LC_ALL=C sort -R | head -n 1)"
+echo "$paper"
+[ $simulate -eq 0 ] && $setpaper "$paper"

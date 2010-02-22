@@ -2,9 +2,7 @@
 ## Simple manpage selector with dmenu.
 
 MANDIR=/usr/share/man
-DMENU="dmenu -b -fn -*-fixed-medium-r-normal-*-9-*-*-*-*-*-*-* -nb #000 -nf #625873 -sb #a488d9 -sf #000"
+CACHE=$(du -a "$MANDIR"|sed 's:^.*/\([^/]*\.[0-9].*\)$:\1:p; d'|\
+sed 's:^\(.*\)\.[0-9].*$:\1:p; d'|sort -d|awk ' !x[$0]--' )
 
-CACHE=`du -a "$MANDIR"|sed 's:^.*/\([^/]*\.[0-9].*\)$:\1:p; d'|\
-sed 's:^\(.*\)\.[0-9].*$:\1:p; d'|sort -d|awk ' !x[$0]--' `
-
-CHOICE=`echo -e "$CACHE" | $DMENU ${1+"$@"}` && exec urxvt -e man $CHOICE
+CHOICE=$(echo -e "$CACHE" | dmenu -b ${1+"$@"}) && exec urxvt -e man $CHOICE

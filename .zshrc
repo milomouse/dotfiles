@@ -1,15 +1,15 @@
 # extend run-path
-PATH=$PATH:/usr/sbin:/usr/local:/usr/local/sbin:/usr/local/bin
+PATH=$PATH:/usr/local/bin:/usr/local/sbin
 
 # source aliases
-[ ! -f ~/.zshalias ] || . ~/.zshalias
+[[ ! -f ~/.zshalias ]] || . ~/.zshalias
 
 # prompt line
+[[ "$TERM" = "screen" ]] && precmd() {print -Pn "\e]2;%2d\a"} || RPROMPT='%F{white}%~%f'
 PS1='%F{red}» %f'
 PS2='%B%F{white}%_ %b%f%F{red}» %f'
 PS3='%B%F{white}?# %b%f%F{red}» %f'
 PS4='%B%F{white}%_ %b%f%F{red}» %f%B%F{white}+%N:%i %b%f%F{red}» %f'
-[ ! `echo $TERM` = screen ] || precmd() {print -Pn "\e]2;%2d\a"}
 
 # auto-completion
 autoload -U compinit
@@ -84,7 +84,7 @@ bindkey "^[[4~" end-of-line
 bindkey "^?" backward-delete-char
 bindkey '^R' history-incremental-search-backward
 
-# exports
+# global exports
 export HISTSIZE=1400
 export SAVEHIST=$HISTSIZE
 export DIRSTACKSIZE=20
@@ -110,15 +110,28 @@ export LESS_TERMCAP_se=$'\E[0m'
 export LESS_TERMCAP_so=$'\E[01;45;30m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;34m'
+export XDG_CACHE_HOME="/dev/shm/cache"
+export XDG_CONFIG_DIR="$HOME/.config"
+export XDG_CONFIG_DIRS="$HOME/.config:/etc"
+export XDG_DATA_HOME="$HOME/.config/share"
+export XDG_DESKTOP_DIR="/dev/shm"
+export XDG_DOCUMENTS_DIR="$HOME/rite"
+export XDG_DOWNLOAD_DIR="$HOME/down"
+export XDG_MUSIC_DIR="$HOME/muzk"
+export XDG_PICTURES_DIR="$HOME/foto"
+export XDG_PUBLICSHARE_DIR="/dev/shm"
+export XDG_TEMPLATES_DIR="/dev/shm"
+export XDG_VIDEOS_DIR="$HOME/vide"
+export XAUTHORITY="$HOME/.config/.Xauthority"
 
-# ! -f .zshalias || at least have ssh function
+# ! -f .zshalias && at least have ssh function
 function agent-s {
   local SSH_ENV="$HOME/.ssh/environment"
   echo "Initializing new SSH agent ..."
-  if [ -f ${SSH_ENV} ]; then
+  if [[ -f ${SSH_ENV} ]]; then
     rm ${SSH_ENV} >&/dev/null
   fi
-  if [ ! `ps -a|grep -i ssh-agent` ]; then
+  if [ ! $(ps -a|grep -i ssh-agent) ]; then
     /usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
     echo succeeded
     chmod 600 "${SSH_ENV}"

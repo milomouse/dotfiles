@@ -70,7 +70,7 @@ unsetopt TRANSIENT_RPROMPT
 unset MAILCHECK
 autoload -U pick-web-browser
 zstyle ':mime:*' x-browsers firefox-nightly uzbl-browser
-zstyle ':mime:*' tty-browsers w3m links
+zstyle ':mime:*' tty-browsers w3m
 
 # make home/end keys work + other stuff
 bindkey "^[[2~" overwrite-mode

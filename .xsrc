@@ -67,7 +67,6 @@ alias cl clear
 alias startx ( /usr/bin/startx -- -dpi 120 )
 alias sload ( . $home/.xsrc )
 alias sedit ( $EDITOR $home/.xsrc )
-alias sedia ( $EDITOR $home/.xsalias )
 alias xedit ( $EDITOR $home/.Xdefaults )
 alias redit ( $EDITOR $home/.ratpoisonrc )
 alias wika ( $BROWSER /usr/share/doc/arch-wiki/html/index.html )

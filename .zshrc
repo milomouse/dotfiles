@@ -6,10 +6,10 @@ PATH=$PATH:/usr/local/bin:/usr/local/sbin
 
 # prompt line
 [[ "$TERM" = "screen" ]] && precmd() {print -Pn "\e]2;%2d\a"} || RPROMPT='%F{white}%~%f'
-PS1='%F{red}» %f'
-PS2='%B%F{white}%_ %b%f%F{red}» %f'
-PS3='%B%F{white}?# %b%f%F{red}» %f'
-PS4='%B%F{white}%_ %b%f%F{red}» %f%B%F{white}+%N:%i %b%f%F{red}» %f'
+PS1='%F{magenta}» %f'
+PS2='%B%F{white}%_ %b%f%F{magenta}» %f'
+PS3='%B%F{white}?# %b%f%F{magenta}» %f'
+PS4='%B%F{white}%_ %b%f%F{magenta}» %f%B%F{white}+%N:%i %b%f%F{magenta}» %f'
 
 # auto-completion
 autoload -U compinit

@@ -62,7 +62,7 @@ bind z lastmsg
 bind Escape abort
 bind minus dedicate 0
 bind equal dedicate 1
-bind Print exec import -window root ~/foto/shot/$(date +%Y_%m_%d-%k%M).png 
+bind Print exec import -window root ~/foto/shot/$(date +%Y_%m_%d-%H%M).png 
 bind Delete exec alock -bg shade:shade=30 -cursor glyph -auth pam 
 
 definekey top s-n next

@@ -17,8 +17,8 @@ urxvt*cutchars: "()*,<>[]{}|'
 urxvt*saveLines: 8192
 urxvt*borderLess: false
 urxvt*fading: 50
-urxvt*cursorColor: #b092a4
 urxvt*transparent: false
+urxvt*cursorColor: #a488d9
 !urxvt*shading: 1
 
 Xcursor.theme: whiteglass

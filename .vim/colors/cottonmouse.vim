@@ -32,7 +32,7 @@ if &t_Co > 255
   hi Exception      term=none cterm=none ctermfg=249 ctermbg=none
   hi Float          term=none cterm=none ctermfg=251 ctermbg=none
   hi FoldColumn     term=none cterm=none ctermfg=97  ctermbg=238
-  hi Folded         term=none cterm=none ctermfg=97  ctermbg=none
+  hi Folded         term=none cterm=none ctermfg=238 ctermbg=234
   hi Function       term=none cterm=none ctermfg=95  ctermbg=none
   hi Identifier     term=none cterm=none ctermfg=110 ctermbg=none
   hi IncSearch      term=none cterm=none ctermfg=131 ctermbg=none

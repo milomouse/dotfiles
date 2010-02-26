@@ -100,7 +100,7 @@ function up(){
 
 function back() {
   pushd -q -$1
-  }
+}
 
 function mkcd() {
   mkdir -p "$@"

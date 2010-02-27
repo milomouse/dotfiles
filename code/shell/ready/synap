@@ -2,7 +2,7 @@
 # milomouse <vincent[at]fea.st>
 # Banish mouse and disable touchpad, also undo this.
 
-MCORD=$HOME/.config/.mouv
+MCORD=${XDG_CONFIG_HOME}/.mouv
 
 if [ -f $MCORD ]; then
    xdotool mousemove $(cat $MCORD)

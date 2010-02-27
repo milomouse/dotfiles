@@ -1,6 +1,7 @@
 #!/bin/zsh
-# milomouse <vincent[at]fea.st>
 # Banish mouse and disable touchpad, also undo this.
+# Depends: xdotool and synclient (xf86-input-synaptics)
+# TODO: find better way to do this..
 
 MCORD=${XDG_CONFIG_HOME}/.mouv
 

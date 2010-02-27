@@ -1,4 +1,4 @@
-#/bin/zsh
+#!/bin/zsh
 # Banish mouse and disable touchpad, also undo this.
 # Requires: xdotool, xdpyinfo (xorg-utils), synclient (xf86-input-synaptics)
 # TODO: find better way to do this..

@@ -1,0 +1,24 @@
+#!/bin/zsh
+# simple bookmarker for uzbl using ratpoison.
+
+# make sure script only used when uzbl is running.
+if (ps -a|grep uzbl-core); then
+  bookfile=${XDG_DATA_HOME}/uzbl/bookmarks
+
+# don't try to insert if: item already present in $bookfile: [Esc] or empty string is sent.
+  if (! cat $bookfile|grep "$6"); then
+    get=$(ratpoison -c "prompt Are you sure you wish to bookmark \"$(echo "$6"|cut -c1-50)\".. [y/N]: ")
+    for i in $get; do
+      if [[ $i = "(null)" || $i = " " ]]; then
+        ratpoison -c "echo Nothing selected, quitting operation.."
+      else
+        echo -e "$6" >> $bookfile
+        ratpoison -c "echo Bookmark successful."
+      fi
+    done
+  else
+    ratpoison -c "echo This URL already bookmarked, quitting operation.."
+  fi
+
+# quit uzbl.
+fi

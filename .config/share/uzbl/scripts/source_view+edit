@@ -1,0 +1,11 @@
+#!/bin/zsh
+# simple source viewer for uzbl using curl and w3m (which uses vim if you wish to edit)
+
+# keep uzbl as user-agent. set referer until i figure out a "requestpolicy" script.
+uagent="'Uzbl (Webkit $(pacman -Qs libwebkit|sed '$ d'|awk '{print $2}')) ($(uname -o) $(uname -m) [$(uname -m)])'"
+referer="'http://ixquick.com/do/metasearch.pl?query="$7"'"
+output="$(mktemp)"
+
+# junk session cookies, use ixquick as referer, do not redirect to different source, kill after 60s.
+curl -sj --raw --user-agent $uagent --ssl -e $referer --max-redirs 0 -m 60 "$6" -o $output && \
+urxvt -e w3m $output && rm -f $output

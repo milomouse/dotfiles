@@ -2,7 +2,7 @@
 ## milomouse <vincent@fea.st>
 ## complimenting ratpoison scripts found at: github.com/milomouse
 
-source $HOME/.config/.deratify
+source /home/milo/.config/.deratify
 
 bind F1 exec ratpoison -c "select -" -c "only" -c "vsplit" -c "next" -c "echo Layout 1"
 bind F2 exec ratpoison -c "select -" -c "only" -c "hsplit" -c "next" -c "echo Layout 2"
@@ -43,7 +43,8 @@ bind h select -
 bind H exec ratpoison -c "select -" -c "only"
 bind i vsplit
 bind j hsplit
-bind k kill
+bind k delete
+bind K kill
 bind l windows
 bind m exec ratpoison -c "exec urxvt -e man $(ratpoison -c "prompt Manpage:")"
 bind n curframe

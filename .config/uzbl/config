@@ -118,9 +118,8 @@ set title_format_long = \@keycmd_prompt \@raw_modcmd \@raw_keycmd \@TITLE - Uzbl
 @cbind  ?  = spawn @scripts_dir/find_on_page reverse
 @cbind  .  = search
 @cbind  ,  = search_reverse
-
-# - go[1-9,0] jumps. figure out better way to do this - 
-#@cbind go1 = spawn @scripts_dir/go-jumps 1
+@cbind  gu = sh 'echo "uri $(dirname $6)" > $4'
+@cbind  gU = sh 'echo "uri $(echo $6|grep -Eo \"(^[^/]+//[^/]+/)")" > $4'
 
 # - added functionality binds - 
 @cbind  !dump        = sh "expr dump_config > $4"
@@ -132,17 +131,20 @@ set title_format_long = \@keycmd_prompt \@raw_modcmd \@raw_keycmd \@TITLE - Uzbl
 
 # - uri binds - 
 @cbind  s  = spawn @scripts_dir/searchrat
+@cbind  gh = uri http://www.google.com
 @cbind  o  = sh "echo uri `ratpoison -c 'prompt uri:'` > $4"
 @cbind  O  = sh "echo uri `ratpoison -c 'prompt uri:\@uri'` > $4"
 @cbind  n  = sh "uzbl-browser --uri `ratpoison -c 'prompt new:'`"
 @cbind  N  = sh "uzbl-browser --uri `ratpoison -c 'prompt new:\@uri'`"
-@cbind  gh = uri http://www.google.com
 @cbind  yu = sh 'echo -n $6 | xsel'
 @cbind  yt = sh 'echo -n $7 | xsel'
 @cbind  ye = sh 'xsel -x'
 @cbind  gP = sh 'exec uzbl-browser --uri $(xsel --primary -o)'
 @cbind  gS = sh 'exec uzbl-browser --uri $(xsel --secondary -o)'
 @cbind  gC = sh 'exec uzbl-browser --uri $(xsel --clipboard -o)'
+
+# - go[1-9,0] jumps. figure out better way to do this - 
+#@cbind go1 = spawn @scripts_dir/go-jumps 1
 
 # - bookmarks and history binds - 
 @cbind  B = spawn @scripts_dir/bookmark_insert-rp
@@ -152,8 +154,6 @@ set title_format_long = \@keycmd_prompt \@raw_modcmd \@raw_keycmd \@TITLE - Uzbl
 # - link following binds - 
 set follow_hint_keys = 0123456789
 @cbind  fl* = script @scripts_dir/follow.js '@follow_hint_keys %s'
-
-# - web searching binds - 
 
 # - form filler binds - 
 @cbind  ti  = spawn @scripts_dir/formfiller

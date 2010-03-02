@@ -10,9 +10,9 @@ if (ps -a|grep uzbl-core); then
 
 # only create $histfile if there is none. always cleanse fifos.
   [[ -f $histfile ]] || touch $histfile
-  rm -f $fifo_in $fifo_out && mkfifo -m 600 $fifo_in $fifo_out
+  rm -f $fifo_in $fifo_out &>/dev/null ; mkfifo -m 600 $fifo_in $fifo_out
 
-# use fifos to redirect $hsitfile directly back on itself while truncating and appending,
+# use fifos to redirect $histfile directly back on itself while truncating and appending,
 # but do not write item if last entry of $histfile is same as current, as with reloads.
   if [[ ! $(sed '$ !d' <$histfile) = "$6"/ || ! $(sed '$ !d' <$histfile) = "$6" || \
 ! $(expr "$6"|sed "s|tp://|tp://www.|") = "$6" || ! $(expr "$6"/|sed "s|tp://|tp://www.|") = "$6" ]]; then

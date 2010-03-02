@@ -118,8 +118,6 @@ set title_format_long = \@keycmd_prompt \@raw_modcmd \@raw_keycmd \@TITLE - Uzbl
 @cbind  ?  = spawn @scripts_dir/find_on_page reverse
 @cbind  .  = search
 @cbind  ,  = search_reverse
-@cbind  gu = sh 'echo "uri $(dirname $6)" > $4'
-@cbind  gU = sh 'echo "uri $(echo $6|grep -Eo \"(^[^/]+//[^/]+/)")" > $4'
 
 # - added functionality binds - 
 @cbind  !dump        = sh "expr dump_config > $4"
@@ -138,10 +136,14 @@ set title_format_long = \@keycmd_prompt \@raw_modcmd \@raw_keycmd \@TITLE - Uzbl
 @cbind  N  = sh "uzbl-browser --uri `ratpoison -c 'prompt new:\@uri'`"
 @cbind  yu = sh 'echo -n $6 | xsel'
 @cbind  yt = sh 'echo -n $7 | xsel'
-@cbind  ye = sh 'xsel -x'
+@cbind  yx = sh 'xsel -x'
+@cbind  yp = sh 'xsel --clipboard -o|xsel --primary'
+@cbind  yc = sh 'xsel --primary -o|xsel --clipboard'
 @cbind  gP = sh 'exec uzbl-browser --uri $(xsel --primary -o)'
 @cbind  gS = sh 'exec uzbl-browser --uri $(xsel --secondary -o)'
 @cbind  gC = sh 'exec uzbl-browser --uri $(xsel --clipboard -o)'
+@cbind  gu = sh 'echo "uri $(dirname $6)" > $4'
+@cbind  gU = sh 'echo "uri $(echo $6|grep -Eo \"(^[^/]+//[^/]+/)")" > $4'
 
 # - go[1-9,0] jumps. figure out better way to do this - 
 #@cbind go1 = spawn @scripts_dir/go-jumps 1

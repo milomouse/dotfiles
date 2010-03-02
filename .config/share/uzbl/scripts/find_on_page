@@ -1,5 +1,5 @@
 #!/bin/zsh
-# simple find prompts for uzbl using surfraw and ratpoison.
+# simple find prompts for uzbl using ratpoison.
 
 # change value of $1 from config->-*->action.
 config=$1; shift

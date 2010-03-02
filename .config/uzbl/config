@@ -28,7 +28,7 @@ set fifo_dir   = $XDG_CACHE_HOME/uzbl
 set socket_dir = $XDG_CACHE_HOME/uzbl
 set uri        = uzbl.org/doesitwork/@COMMIT
 
-# - disable certain settings despite changes in upstream configuration - 
+# - disable/enable certain settings despite changes in upstream configuration - 
 set scrollbars_visible   = 0
 set enforce_96_dpi       = 0
 set resizable_text_areas = 0
@@ -116,7 +116,6 @@ set title_format_long = \@keycmd_prompt \@raw_modcmd \@raw_keycmd \@TITLE - Uzbl
 @cbind  ?* = search_reverse %s
 @cbind  .  = search
 @cbind  ,  = search_reverse
-@cbind  S  = spawn @scripts_dir/searchrat
 
 # - added functionality binds - 
 @cbind  !dump        = sh "expr dump_config > $4"
@@ -127,6 +126,7 @@ set title_format_long = \@keycmd_prompt \@raw_modcmd \@raw_keycmd \@TITLE - Uzbl
 @cbind  QQ = sh "rm -f $XDG_CACHE_HOME/uzbl/history_{in,out} ; killall xsel &>/dev/null ; expr exit > $4"
 
 # - uri binds - 
+@cbind  s  = spawn @scripts_dir/searchrat
 @cbind  o  = sh "echo uri `ratpoison -c 'prompt uri:'` > $4"
 @cbind  O  = sh "echo uri `ratpoison -c 'prompt uri:\@uri'` > $4"
 @cbind  n  = sh "uzbl-browser --uri `ratpoison -c 'prompt new:'`"

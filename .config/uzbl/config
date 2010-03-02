@@ -123,7 +123,7 @@ set title_format_long = \@keycmd_prompt \@raw_modcmd \@raw_keycmd \@TITLE - Uzbl
 @cbind  <Ctrl><Alt>t = sh 'urxvt -e "socat unix-connect:$5 -"'
 @cbind  +            = toggle_status
 @cbind  E            = spawn @scripts_dir/source_view+edit
-@cbind  QQ = sh "rm -f $XDG_CACHE_HOME/uzbl/history_{in,out} ; killall xsel &>/dev/null ; expr exit > $4"
+@cbind  QA = sh "rm -f $XDG_CACHE_HOME/uzbl/history_{in,out} ; killall xsel &>/dev/null ; killall uzbl-core"
 
 # - uri binds - 
 @cbind  s  = spawn @scripts_dir/searchrat
@@ -159,7 +159,7 @@ set follow_hint_keys = 0123456789
 # - some menu entries i'll never use - 
 menu_editable_add Open in @external_editor = script @scripts_dir/extedit.js
 menu_separator separator_1
-menu_add Quit uzbl = sh "rm -f $XDG_CACHE_HOME/uzbl/history_{in,out} ; killall xsel &>/dev/null ; expr exit > $4"
+menu_add Quit uzbl = exit
 menu_link_add Print Link = print \@SELECTED_URI
 
 # - mode configuration - 

@@ -3,8 +3,8 @@
 
 urxvt*termName: rxvt-256color
 urxvt*loginShell: true
-urxvt*font:    -*-fixed-*-*-*-*-9-*-*-*-*-*-*
-urxvt*boldFont:    -*-fixed-medium-*-*-*-9-*-*-*-*-*-*
+urxvt*font: -*-fixed-*-*-*-*-9-*-*-*-*-*-*
+urxvt*boldFont: -*-fixed-medium-*-*-*-9-*-*-*-*-*-*
 urxvt*italicFont: -*-fixed-medium-*-*-*-9-*-*-*-*-*-*
 urxvt*boldItalicFont: -*-fixed-medium-*-*-*-9-*-*-*-*-*-*
 urxvt*colorIT: #707070
@@ -16,10 +16,10 @@ urxvt*scrollTtyOutput: false
 urxvt*cutchars: "()*,<>[]{}|'
 urxvt*saveLines: 8192
 urxvt*borderLess: false
-urxvt*fading: 50
 urxvt*transparent: false
-urxvt*cursorColor: #a488d9
 !urxvt*shading: 1
+urxvt*fading: 50
+urxvt*cursorColor: #a488d9
 
 Xcursor.theme: whiteglass
 Xcursor.size: 10

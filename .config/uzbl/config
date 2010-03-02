@@ -50,6 +50,8 @@ set authentication_handler = sync_spawn @scripts_dir/auth.py
 @on_event LOAD_COMMIT   @set_status <span foreground="#65bd8b">.</span>
 #@on_event LOAD_COMMIT   script @scripts_dir/scroll-percentage.js
 @on_event LOAD_COMMIT   @set_mode
+#@on_event LOAD_COMMIT   spawn @scripts_dir/adblock.py
+#@on_event LOAD_PROGRESS js uzblAdBlock();
 @on_event LOAD_FINISH   @set_status <span foreground="#606060">.</span>
 @on_event LOAD_FINISH   spawn @scripts_dir/history_insert-rp
 @on_event FORM_ACTIVE   @set_mode command
@@ -112,10 +114,13 @@ set title_format_long = \@keycmd_prompt \@raw_modcmd \@raw_keycmd \@TITLE - Uzbl
 @cbind  Z  = toggle_zoom_type
 @cbind  1  = set zoom_level = 1.0
 @cbind  2  = set zoom_level = 2.0
-@cbind  /* = search %s
-@cbind  ?* = search_reverse %s
+@cbind  /  = spawn @scripts_dir/find_on_page forward
+@cbind  ?  = spawn @scripts_dir/find_on_page reverse
 @cbind  .  = search
 @cbind  ,  = search_reverse
+
+# - go[1-9,0] jumps. figure out better way to do this - 
+#@cbind go1 = spawn @scripts_dir/go-jumps 1
 
 # - added functionality binds - 
 @cbind  !dump        = sh "expr dump_config > $4"

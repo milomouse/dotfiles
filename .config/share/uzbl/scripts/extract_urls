@@ -1,0 +1,7 @@
+#!/bin/zsh
+# simple script to extract urls from a webpage using w3m. grep/sed from "extract.sh"
+temp=$(mktemp)
+w3m -dump_source "$6" | \
+    grep -Eo "<a[^>]*href=\"([^\"]*)\"[^>]*>" | \
+    sed -e 's/<a[^>]*href="//g' -e 's/"[^>]*>//g' >! $temp
+urxvt -e w3m $temp && rm -f $temp

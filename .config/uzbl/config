@@ -1,6 +1,6 @@
 ## ~/.config/uzbl/config
 ## milomouse <vincent[at]fea.st>
-## NOTE: basically all of my scripts and handlers require ratpoison.
+## NOTE: most of this config and my scripts require ratpoison.
 
 # - core settings - 
 set prefix          = /usr
@@ -32,7 +32,7 @@ set uri        = uzbl.org/doesitwork/@COMMIT
 set scrollbars_visible   = 0
 set enforce_96_dpi       = 0
 set resizable_text_areas = 0
-set autoload_images      = 0
+set autoload_images      = 1
 set autoshrink_images    = 0
 set http_debug           = 0
 set verbose              = 0
@@ -46,11 +46,11 @@ set authentication_handler = sync_spawn @scripts_dir/auth.py
 
 # - events - 
 @on_event DOWNLOAD_REQUEST spawn @scripts_dir/download_handler %s \@proxy_url
-@on_event LOAD_START    @set_status <span foreground="#665c64">wait</span>
-@on_event LOAD_COMMIT   @set_status <span foreground="#65bd8b">recv</span>
+@on_event LOAD_START    @set_status <span foreground="#665c64">.</span>
+@on_event LOAD_COMMIT   @set_status <span foreground="#65bd8b">.</span>
 #@on_event LOAD_COMMIT   script @scripts_dir/scroll-percentage.js
 @on_event LOAD_COMMIT   @set_mode
-@on_event LOAD_FINISH   @set_status <span foreground="#606060">done</span>
+@on_event LOAD_FINISH   @set_status <span foreground="#606060">.</span>
 @on_event LOAD_FINISH   spawn @scripts_dir/history_insert-rp
 @on_event FORM_ACTIVE   @set_mode command
 @on_event ROOT_ACTIVE   @set_mode command
@@ -58,22 +58,7 @@ set authentication_handler = sync_spawn @scripts_dir/auth.py
 # - behaviour and appearance - 
 set show_status       = 1
 set status_top        = 0
-set status_background = "#000000"
-set modcmd_style      = foreground="#98a7b6"
-set keycmd_style      = foreground="#98a7b6"
-set prompt_style      = foreground="#606060"
-set completion_style  = foreground="#665c64"
-set cursor_style      = underline="single"
-set hint_style        = weight="light"
-set mode_section      = <span foreground="#a488d9">» [\@[\@mode_indicator]\@]</span>
-set keycmd_section    = [<span \@prompt_style>\@[\@keycmd_prompt]\@</span><span \@modcmd_style>\@modcmd</span><span \@keycmd_style>\@keycmd</span><span \@completion_style>\@completion_list</span>]
-set progress_section  = <span foreground="#606060">\@[\@progress_format]\@</span>
-set scroll_section    = <span foreground="#606060">\@[\@scroll_message]\@</span>
-set uri_section       = <span foreground="#65bd8b">\@[\@uri]\@</span>
-set name_section      = <span foreground="#a488d9">\@[\@NAME]\@</span>
-set status_section    = <span foreground="#606060">\@status_message</span>
-set selected_section  = <span foreground="#606060">\@[\@SELECTED_URI]\@</span>
-set status_format     = <span font_family="fixed" font_size="small">@mode_section @keycmd_section @progress_section @uri_section @selected_section @name_section @status_section @scroll_section </span>
+set status_format     = <span font_family="fixed" font_size="0">@mode_section @keycmd_section @progress_section @uri_section @selected_section @name_section @status_section @scroll_section </span>
 set title_format_long = \@keycmd_prompt \@raw_modcmd \@raw_keycmd \@TITLE - Uzbl browser <\@NAME> \@SELECTED_URI
 @progress width       = 0
 @progress format      = %c
@@ -106,7 +91,7 @@ set title_format_long = \@keycmd_prompt \@raw_modcmd \@raw_keycmd \@TITLE - Uzbl
 @ebind  <Ctrl>e     = event SET_CURSOR_POS -1
 
 # - basic keyboard bindings - 
-@cbind  :_ = %s
+@cbind  :  = sh "echo `ratpoison -c 'prompt Command:'` > $4"
 @cbind  j  = scroll vertical 20
 @cbind  k  = scroll vertical -20
 @cbind  h  = scroll horizontal -20
@@ -131,27 +116,28 @@ set title_format_long = \@keycmd_prompt \@raw_modcmd \@raw_keycmd \@TITLE - Uzbl
 @cbind  ?* = search_reverse %s
 @cbind  .  = search
 @cbind  ,  = search_reverse
+@cbind  S  = spawn @scripts_dir/searchrat
 
 # - added functionality binds - 
-@cbind  :quit_            = sh "killall xsel && echo exit > $4"
-@cbind  !dump             = sh "echo dump_config > $4"
-@cbind  !reload           = sh "sed '/^# === Post-load misc commands/,$d' $1 > $4"
-@cbind  s<var:>_<value:>_ = set %1 = %2
-@cbind  <Ctrl><Alt>t      = sh 'urxvt -e "socat unix-connect:$5 -"'
-@cbind  +                 = toggle_status
-@cbind  E                 = spawn @scripts_dir/source_view+edit
+@cbind  !dump        = sh "expr dump_config > $4"
+@cbind  !reload      = sh "sed '/^# === Post-load misc commands/,$d' $1 > $4"
+@cbind  <Ctrl><Alt>t = sh 'urxvt -e "socat unix-connect:$5 -"'
+@cbind  +            = toggle_status
+@cbind  E            = spawn @scripts_dir/source_view+edit
+@cbind  QQ = sh "rm -f $XDG_CACHE_HOME/uzbl/history_{in,out} ; killall xsel &>/dev/null ; expr exit > $4"
 
 # - uri binds - 
-@cbind  o<uri:>_      = uri %s
-@cbind  O<uri:\@uri>_ = uri %s
-@cbind  n<new:>_      = sh 'uzbl-browser --uri %s'
-@cbind  N<new:\@uri>_ = sh 'uzbl-browser --uri %s'
-@cbind  gh  = uri http://www.google.com
-@cbind  yu  = sh 'echo -n $6 | xsel'
-@cbind  yt  = sh 'echo -n $7 | xsel'
-@cbind  ye  = sh 'xsel -x'
-@cbind  gP  = sh 'exec uzbl-browser --uri $(xsel --primary -o)'
-@cbind  gC  = sh 'exec uzbl-browser --uri $(xsel --clipboard -o)'
+@cbind  o  = sh "echo uri `ratpoison -c 'prompt uri:'` > $4"
+@cbind  O  = sh "echo uri `ratpoison -c 'prompt uri:\@uri'` > $4"
+@cbind  n  = sh "uzbl-browser --uri `ratpoison -c 'prompt new:'`"
+@cbind  N  = sh "uzbl-browser --uri `ratpoison -c 'prompt new:\@uri'`"
+@cbind  gh = uri http://www.google.com
+@cbind  yu = sh 'echo -n $6 | xsel'
+@cbind  yt = sh 'echo -n $7 | xsel'
+@cbind  ye = sh 'xsel -x'
+@cbind  gP = sh 'exec uzbl-browser --uri $(xsel --primary -o)'
+@cbind  gS = sh 'exec uzbl-browser --uri $(xsel --secondary -o)'
+@cbind  gC = sh 'exec uzbl-browser --uri $(xsel --clipboard -o)'
 
 # - bookmarks and history binds - 
 @cbind  B = spawn @scripts_dir/bookmark_insert-rp
@@ -163,9 +149,6 @@ set follow_hint_keys = 0123456789
 @cbind  fl* = script @scripts_dir/follow.js '@follow_hint_keys %s'
 
 # - web searching binds - 
-@cbind  \\google<Google:>_     = uri http://www.google.com/search?q=\@<encodeURIComponent(%r)>\@
-@cbind  \\archwiki<Archwiki:>_ = uri http://wiki.archlinux.org/index.php/Special:Search?search=\@<encodeURIComponent(%r)>\@&go=Go
-@cbind  \\wiki<Wikipedia:>_    = uri http://en.wikipedia.org/w/index.php?title=Special:Search&search=\@<encodeURIComponent(%r)>\@&go=Go
 
 # - form filler binds - 
 @cbind  ti  = spawn @scripts_dir/formfiller
@@ -176,7 +159,7 @@ set follow_hint_keys = 0123456789
 # - some menu entries i'll never use - 
 menu_editable_add Open in @external_editor = script @scripts_dir/extedit.js
 menu_separator separator_1
-menu_add Quit uzbl = sh "killall xsel && echo exit > $4"
+menu_add Quit uzbl = sh "rm -f $XDG_CACHE_HOME/uzbl/history_{in,out} ; killall xsel &>/dev/null ; expr exit > $4"
 menu_link_add Print Link = print \@SELECTED_URI
 
 # - mode configuration - 
@@ -186,13 +169,13 @@ set stack        = @mode_config stack
 set default_mode = command
 
 # - command mode config - 
-@command keycmd_style      = foreground="#b8ddea"
-@command status_background = #202020
-@command mode_indicator    = Cmd
+@command keycmd_style      = foreground="#a488d9"
+@command status_background = #a488d9
+@command mode_indicator    = 
 
 # - insert mode config - 
-@insert  status_background = #303030
-@insert  mode_indicator    = Ins
+@insert  status_background = #b8ddea
+@insert  mode_indicator    =
 
 # - multi-stage-binding mode config - 
 @stack   keycmd_events     = 1
@@ -200,8 +183,8 @@ set default_mode = command
 @stack   forward_keys      = 0
 @stack   keycmd_style      = foreground="#b8ddea"
 @stack   prompt_style      = foreground="#888" weight="light"
-@stack   status_background = #202020
-@stack   mode_indicator    = Bnd
+@stack   status_background = #65bd8b
+@stack   mode_indicator    =
 
 # - examples / reference - 
 #@ebind  <Ctrl>su = event INJECT_KEYCMD \@uri

@@ -16,7 +16,7 @@ for i in $get; do
       return
     fi
     if [[ ! $i = $(surfraw -elvi|awk '{print $1}'|grep $i) ]]; then
-      ratpoison -c "echo Sorry, $i doesn't appear to be a valid mechanism."
+      ratpoison -c "echo Sorry, \"$i\" doesn't appear to be a valid mechanism."
     else
       key=$(ratpoison -c "prompt $i:")
       for word in $key; do

@@ -2,17 +2,18 @@
 # simple download handler using curl.
 # TODO: utilize better base{} dest{} finders.
 
-# keep uzbl as user-agent. set referer until i figure out a "requestpolicy" script.
+# keep uzbl as user-agent. use cookies in case site requires privileges, etc.
+#referer="'http://ixquick.com/do/metasearch.pl?query="$7"'" # curl -e $referer ..
 uagent="'Uzbl (Webkit $(pacman -Qs libwebkit|sed '$ d'|awk '{print $2}')) ($(uname -o) $(uname -m) [$(uname -m)])'"
-referer="'http://ixquick.com/do/metasearch.pl?query="$7"'"
+cjar="$XDG_DATA_HOME/uzbl/cookies.txt"
 
 # basic variables to use for downloading.
 http_proxy="$9"
 export http_proxy
 url="$8"
-basedir=$(expr "$url"|tr ' ' '_'|tr '/' '\n'|grep '.com\|.net\|.org\|.us\|.fm\|.ca'|sed '2,$ d')
+basedir=$(expr "$url"|tr ' ' '_'|tr '/' '\n'|grep '.com\|.net\|.org\|.gov\|.us\|.fm\|.ca\|.jp'|sed '2,$ d')
 basename=$(expr "$url"|tr ' ' '_'|tr '/' '\n'|sed '$ !d')
 dest="$XDG_DOWNLOAD_DIR/$basedir"
 
 # start download..
-curl --user-agent $uagent --ssl -e $referer --max-redirs 1 --create-dirs -C - "$url" -o "$dest/$basename"
+curl --user-agent $uagent --ssl -c $cjar --max-redirs 1 --create-dirs -C - "$url" -o "$dest/$basename"

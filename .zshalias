@@ -63,6 +63,7 @@ alias ping="ping -c 5"
 alias siteget='wget --recursive --page-requisites --convert-links --html-extension --no-parent --wait=10 --limit-rate=20K -U Mozilla -l' #depth, then url
 alias ncmp="ncmpcpp"
 alias rot="rtorrent"
+alias uzbl="uzbl-browser"
 alias cdrwblank="cdrecord -dev=/dev/sr0 -speed=32 -blank=fast"
 #alias bcddata="mkisofs -J -R $@ | cdrecord -dev=/dev/sr0 -driveropts=burnfree -speed=32 -"
 #alias bcdiso="cdrecord -dev=/dev/sr0 -speed=32 -driveropts=burnfree"

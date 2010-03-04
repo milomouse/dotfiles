@@ -3,8 +3,8 @@
 
 get=$(ratpoison -c "prompt Enter search mechanism to use [L for list]:")
 for i in $get; do
-  if [[ $i = "(null)" || $i = " " ]]; then
-    ratpoison -c "echo Nothing selected, quitting operation.."
+  if [[ $i = "(null)" ]]; then
+    return
   else
     if [[ $i = "L" || $i = "list" ]]; then
       ratpoison -c "echo $(surfraw -elvi|awk '{print $1}'|sed '50,$ d')"
@@ -20,8 +20,8 @@ for i in $get; do
     else
       key=$(ratpoison -c "prompt $i:")
       for word in $key; do
-        if [[ $word = "(null)" || $word = " " ]]; then
-          ratpoison -c "echo Nothing selected, quitting operation.."
+        if [[ $word = "(null)" ]]; then
+          return
         else
           echo "uri `surfraw -browser=echo $i $word`" | socat - unix-connect:$5
         fi

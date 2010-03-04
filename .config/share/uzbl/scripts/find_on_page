@@ -19,8 +19,8 @@ if [[ $action = "forward" ]]; then
 # search forward/down.
   get=$(ratpoison -c "prompt Find Forward:")
     for i in $get; do
-      if [[ $i = "(null)" || $i = " " ]]; then
-        ratpoison -c "echo Nothing selected, quitting operation.."
+      if [[ $i = "(null)" ]]; then
+        return
       else
         echo "search $i" | socat - unix-connect:$socket
       fi
@@ -30,8 +30,8 @@ else
 # search reverse/up.
   get=$(ratpoison -c "prompt Find Reverse:")
     for j in $get; do
-      if [[ $j = "(null)" || $j = " " ]]; then
-        ratpoison -c "echo Nothing selected, quitting operation.."
+      if [[ $j = "(null)" ]]; then
+        return
       else
         echo "search_reverse $j" | socat - unix-connect:$socket
       fi

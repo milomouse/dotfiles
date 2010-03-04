@@ -1,0 +1,18 @@
+#!/bin/zsh
+# extremely simple video downloader using "clive".
+
+# basic variables.
+cjar="$XDG_DATA_HOME/uzbl/cookies.txt"
+dest="$XDG_DOWNLOAD_DIR"
+url="$6"
+export CLIVE_CACHE="$XDG_CACHE_HOME"
+
+# first check to see if site is supported before sending the script to work.
+if (! echo "$url"|grep "$(clive --hosts|sed '$ d'|awk '{print $1}')"); then
+  ratpoison -c "echo Sorry, this site isn't supported yet."
+else
+  ratpoison -c "echo Starting download, please wait.."
+  sleep 2
+  clive -qrf best --no-proxy --cookie-jar=$cjar --save-dir=$dest "$url" && \
+  ratpoison -c "echo Download complete."
+fi

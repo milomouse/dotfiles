@@ -68,9 +68,6 @@ setopt RM_STAR_WAIT
 setopt PROMPT_SUBST
 unsetopt TRANSIENT_RPROMPT
 unset MAILCHECK
-autoload -U pick-web-browser
-zstyle ':mime:*' x-browsers uzbl-browser firefox-nightly
-zstyle ':mime:*' tty-browsers w3m
 
 # make home/end keys work + other stuff
 bindkey "^[[2~" overwrite-mode

@@ -12,7 +12,6 @@ if (! echo "$url"|grep "$(clive --hosts|sed '$ d'|awk '{print $1}')"); then
   ratpoison -c "echo Sorry, this site isn't supported yet."
 else
   ratpoison -c "echo Starting download, please wait.."
-  sleep 2
   clive -qrf best --no-proxy --cookie-jar=$cjar --save-dir=$dest "$url" && \
   ratpoison -c "echo Download complete."
 fi

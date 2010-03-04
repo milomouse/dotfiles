@@ -6,21 +6,19 @@
 
 # make sure script only used when uzbl is running.
 if (ps -a|grep uzbl-core); then
-  bookfile=${XDG_DATA_HOME}/uzbl/bookmarks
-  [[ ! -f $bookfile ]] || touch $bookfile
-  nmbr=$(wc $bookfile|awk '{print $1}')
-  ratp=$(ratpoison -c "echo $(cat -n $bookfile|tr ' ' '!'|cut -c5-100|awk '{print $1" - "$2}'|tr '!' ' '|head -$nmbr)")
+  marks=${XDG_DATA_HOME}/uzbl/bookmarks
+  [[ ! -f $marks ]] || touch $marks
+  nmbr=$(wc $marks|awk '{print $1}')
+  ratp=$(ratpoison -c "echo $(cat -n $marks|tr ' ' '!'|cut -c5-100|awk '{print $1" - "$2}'|tr '!' ' '|head -$nmbr)")
   sleep 5
 
-# select bookmark item by line number. don't try to open if [Esc] or empty string is sent.
+# select bookmark item by line number. don't try to open if [Esc] or number greater than $nmbr sent.
   get=$(ratpoison -c "prompt Type the number of the bookmark you wish to view [1-$nmbr]:")
   for i in $get; do
     if [[ $i = "(null)" || $i -gt $nmbr ]]; then
-      ratpoison -c "echo Nothing selected, quitting operation.."
+      return
     else
-      echo "uri $(cat $bookfile|head -n $i|tail -1)" | socat - unix-connect:$5
+      echo "uri $(cat $marks|head -n $i|tail -1)" | socat - unix-connect:$5
     fi
   done
-
-# quit uzbl.
 fi

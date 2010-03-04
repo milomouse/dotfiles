@@ -1,2 +1,2 @@
 REGEXP ((http|https|ftp|gopher):(//)?[^ <>"\t]*|www\.[-a-z0-9.]+)[^ .,;\t<">\):]
-COMMAND firefox-nightly -remote "openURL("%s", new-tab)"
+COMMAND uzbl-browser --uri %s

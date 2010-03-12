@@ -32,6 +32,8 @@ zstyle ':completion:*:*:kill:*' menu yes select
 zstyle ':completion:*:*:kill:*:processes' command 'ps --forest -A -o pid,user,state,pcpu,etime,cmd'
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' force-list always
+[[ $(which bauerbill) = "bauerbill not found" ]] || compdef _pacman bauerbill=pacman
+[[ $(which pacman-color) = "pacman-color not found" ]] || compdef _pacman pacman-color=pacman
 
 # optimize
 setopt VI
@@ -100,11 +102,11 @@ export LANG="en_US.utf8"
 export LC_ALL="en_US.utf8"
 export LC="en_US.utf8"
 export LESSCHARSET="utf-8"
-export LESS_TERMCAP_mb=$'\E[01;31m'
-export LESS_TERMCAP_md=$'\E[01;31m'
+export LESS_TERMCAP_mb=$'\E[00;34m'
+export LESS_TERMCAP_md=$'\E[00;34m'
 export LESS_TERMCAP_me=$'\E[0m'
 export LESS_TERMCAP_se=$'\E[0m'
-export LESS_TERMCAP_so=$'\E[01;45;30m'
+export LESS_TERMCAP_so=$'\E[01;46;30m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;34m'
 export XDG_CACHE_HOME="/dev/shm/cache"

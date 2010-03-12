@@ -57,7 +57,7 @@ fn mix2 { ossmix codec1.jack.int-speaker.mode mix2 >>/dev/null && echo 'Mixer se
 fn mix3 { ossmix codec1.jack.int-speaker.mode mix3 >>/dev/null && echo 'Mixer set to Headphones' }
 fn killn args { pkill -f $args }
 fn pacman args { pacman-color $args }
-fn ay args { yaourt $args }
+fn bb args { bauerbill $args }
 fn todo args { $EDITOR $home/othe/.TODO_$args }
 fn svim args { sudo $EDITOR $args }
 

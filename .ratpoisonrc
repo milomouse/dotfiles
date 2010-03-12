@@ -94,6 +94,7 @@ definekey top XF86AudioRaiseVolume exec ossrat -i 1
 definekey top XF86AudioLowerVolume exec ossrat -d 1
 definekey top XF86AudioMute exec ossrat -m
 definekey top XF86MonBrightnessUp exec moodlight -b
+definekey top C-XF86MonBrightnessUp exec moodlight -m
 definekey top XF86MonBrightnessDown exec moodlight -d
 
 definekey top s-comma rpwsp

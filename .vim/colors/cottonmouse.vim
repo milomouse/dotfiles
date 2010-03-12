@@ -46,7 +46,7 @@ if &t_Co > 255
   hi Number         term=none cterm=none ctermfg=141 ctermbg=none
   hi Operator       term=none cterm=none ctermfg=38  ctermbg=none
   hi PreCondit      term=none cterm=none ctermfg=180 ctermbg=none
-  hi PreProc        term=none cterm=none ctermfg=102 ctermbg=234
+  hi PreProc        term=none cterm=none ctermfg=243 ctermbg=none
   hi Question       term=none cterm=none ctermfg=15  ctermbg=none
   hi Repeat         term=none cterm=none ctermfg=131 ctermbg=none
   hi Search         term=none cterm=none ctermfg=9   ctermbg=none
@@ -58,7 +58,7 @@ if &t_Co > 255
   hi StatusLine     term=none cterm=none ctermfg=6   ctermbg=234
   hi StatusLineNC   term=none cterm=none ctermfg=234 ctermbg=59
   hi StorageClass   term=none cterm=none ctermfg=249 ctermbg=none
-  hi String         term=none cterm=none ctermfg=1   ctermbg=none
+  hi String         term=none cterm=none ctermfg=7   ctermbg=none
   hi Structure      term=none cterm=none ctermfg=229 ctermbg=none
   hi Tag            term=none cterm=none ctermfg=10  ctermbg=none
   hi Title          term=none cterm=none ctermfg=7   ctermbg=none

@@ -6,21 +6,22 @@
 
 defbindings("WTiling", {
     bdoc("Split current frame vertically."),
-    kpress(META.."S", "WTiling.split_at(_, _sub, 'bottom', true)"),
+    kpress(META.."s", "WTiling.split_at(_, _sub, 'bottom', true)"),
     
     bdoc("Go to frame above/below/right/left of current frame."),
     kpress(META..UP, "ioncore.goto_next(_sub, 'up', {no_ascend=_})"),
     kpress(META..DOWN, "ioncore.goto_next(_sub, 'down', {no_ascend=_})"),
-    kpress(META.."Tab", "ioncore.goto_next(_sub, 'right')"),
+    kpress(META.."h", "ioncore.goto_next(_sub, 'left')"),
+    kpress(META.."l", "ioncore.goto_next(_sub, 'right')"),
 
     bdoc("Destroy current frame."),
-    kpress(META.."Z", "WTiling.unsplit_at(_, _sub)"),
+    kpress(META.."z", "WTiling.unsplit_at(_, _sub)"),
 
-    submap(META.."I", {
-        kpress("Tab", "ioncore.goto_next(_sub, 'left')"),
+    submap(META.."semicolon", {
+        --kpress("Tab", "ioncore.goto_next(_sub, 'left')"),
         
         bdoc("Split current frame horizontally."),
-        kpress("S", "WTiling.split_at(_, _sub, 'right', true)"),
+        kpress("s", "WTiling.split_at(_, _sub, 'right', true)"),
         
     }),
 })
@@ -29,7 +30,7 @@ defbindings("WTiling", {
 -- Frame bindings
 
 defbindings("WFrame.floating", {
-    submap(META.."I", {
+    submap(META.."semicolon", {
         bdoc("Tile frame, if no tiling exists on the workspace"),
         kpress("B", "mod_tiling.mkbottom(_)"),
     }),

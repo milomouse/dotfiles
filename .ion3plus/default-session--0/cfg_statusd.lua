@@ -4,16 +4,14 @@ return {
         ["date_format"] = "%a %Y-%m-%d %H:%M",
     },
     ["exec"] = {
-        ["oval"] = {
-            ["program"] = "/home/milo/code/shell/ready/oval",
+        ["mchk"] = {
+            ["program"] = "/home/milo/code/shell/mailcheck",
             ["retry_delay"] = 1000,
         },
     },
     ["load"] = {
         ["critical_threshold"] = 2,
         ["important_threshold"] = 0,
-    },
-    ["mail"] = {
     },
 }
 

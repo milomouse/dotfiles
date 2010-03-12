@@ -1,10 +1,10 @@
--- look_candymouse.lua drawing engine configuration file for Ion.
+-- look_astromouse.lua drawing engine configuration file for Ion.
 -- milomouse <vincent[at]fea.st>
 
 local vivid   = "#ddb4c4"
 local basic   = "#b188a9"
-local faded   = "#433b47"
-local night   = "#625e69"
+local faded   = "#ae969f"
+local night   = "#766169"
 
 local regular_ghost = "#494949"
 local faded_ghost   = "#222"
@@ -39,7 +39,6 @@ de.defstyle("*", {
 
 de.defstyle("frame", {
     based_on = "*",
-    --transparent_background = "true",
     background_colour = "black",
 })
 
@@ -62,26 +61,24 @@ de.defstyle("frame-tiled", {
     padding_pixels = 0,
     highlight_pixels = 1,
     highlight_colour = baleful_ghost,
-    shadow_pixels = 1,
+    shadow_pixels = 2,
     shadow_colour = baleful_ghost,
     de.substyle("active", {
-    	--highlight_colour = baleful_ghost,
-        --shadow_colour = "#090909",
     	highlight_colour = "#a488d9",
         shadow_colour = "#9ed3d7",
     }),
     de.substyle("inactive", {
 	--highlight_colour = "#464051",
-	highlight_colour = baleful_ghost,
-	shadow_colour = "#090909",
+	highlight_colour = "#131117",
+	shadow_colour = "#000",
 })
 })
 
 de.defstyle("tab", {
     based_on = "*",
-    spacing = 1,
+    spacing = 2,
     padding_pixels = 1,
-    highlight_pixels = 1,
+    highlight_pixels = 0,
     shadow_pixels = 1,
     shadow_colour = baleful_ghost,
     text_align = "right",
@@ -91,18 +88,16 @@ de.defstyle("tab", {
         background_colour = "#625873",
     }),
     de.substyle("active-unselected", {
-	--foreground_colour = "#202020",
-	foreground_colour = "#404040",
-        background_colour = "#0e0e0e",
-        --background_colour = "#54464e",
+	foreground_colour = "#202020",
+        background_colour = "#54464e",
     }),
     de.substyle("inactive-selected", {
 	foreground_colour = "#333",
-        background_colour = "#0a0a0a",
+        background_colour = "#030303",
     }),
     de.substyle("inactive-unselected", {
-	foreground_colour = "#161616",
-        background_colour = "#060606",
+	foreground_colour = "#111",
+	background_colour = "#000",
     }),
 })
 

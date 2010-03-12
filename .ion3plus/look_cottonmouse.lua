@@ -1,4 +1,4 @@
--- look_candymouse.lua drawing engine configuration file for Ion.
+-- look_cottonmouse.lua drawing engine configuration file for Ion.
 -- milomouse <vincent[at]fea.st>
 
 local vivid   = "#ddb4c4"
@@ -65,10 +65,8 @@ de.defstyle("frame-tiled", {
     shadow_pixels = 1,
     shadow_colour = baleful_ghost,
     de.substyle("active", {
-    	--highlight_colour = baleful_ghost,
-        --shadow_colour = "#090909",
-    	highlight_colour = "#a488d9",
-        shadow_colour = "#9ed3d7",
+    	highlight_colour = baleful_ghost,
+        shadow_colour = "#090909",
     }),
     de.substyle("inactive", {
 	--highlight_colour = "#464051",

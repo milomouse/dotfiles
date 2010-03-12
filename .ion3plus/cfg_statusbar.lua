@@ -7,7 +7,7 @@
 mod_statusbar.create{
     -- First screen, top right corner
     screen=0,
-    pos='tr',
+    pos='br',
     -- Set this to true if you want a full-width statusbar
     fullsize=true,
     -- Swallow systray windows
@@ -36,8 +36,8 @@ mod_statusbar.create{
     -- right, respectively, and %systray is a placeholder for system tray
     -- windows and icons.
     --
-    template="%flashing %date }} %load }} %linuxbatt%% }} %df }} %wsname %filler%mpd %exec_oval %systray",
-    --template="[ %date || load:% %>load || mail:% %>mail_new/%>mail_total ] %filler%systray",
+    template="[ %linuxbatt%% ] %filler%mpd%systray",
+    --template="%flashing %date | %load  %linuxbatt%%  %df  %wsname %exec_mchk %filler%mpd%systray",
     --template="[ %date || load: %05load_1min || mail: %02mail_new/%02mail_total ] %filler%systray",
 }
 
@@ -69,8 +69,8 @@ mod_statusbar.launch_statusd{
         critical_threshold=2.00,
     },
     exec={
-	 oval={
-		 program = '/home/milo/code/shell/ready/oval',
+	 mchk={
+		 program = '/home/milo/code/shell/mailcheck',
 		 retry_delay = 1 * 1000,
 	 },
     },
@@ -83,10 +83,10 @@ mod_statusbar.launch_statusd{
     -- files = { work = "/path/to/work_email", junk = "/path/to/junk" }
     --
     -- Don't use the keyword 'spool' as it's reserved for mbox.
-    mail={
-        --update_interval=60*1000,
-        --mbox=os.getenv("MAIL"),
-        --files={},
-    },
+--[[    mail={
+        update_interval=60*1000,
+        mbox=os.getenv("mail"),
+        files={ new = "/home/milo/mail/FastMail/INBOX" },
+    }, --]]
 }
 

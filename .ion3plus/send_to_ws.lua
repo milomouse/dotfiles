@@ -21,7 +21,7 @@
 
 -- These are the bindings I use, as an example.
 defbindings("WMPlex", {
-    submap(META.."I", {
+    submap(META.."semicolon", {
         submap("W", {
 	    kpress("H", "send_to_ws(_sub, 'left', true)"),
 	    kpress("L", "send_to_ws(_sub, 'right', true)"),

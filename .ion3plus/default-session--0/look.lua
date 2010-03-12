@@ -1,1 +1,1 @@
-dopath("look_candymouse")
+dopath("look_cottonmouse")

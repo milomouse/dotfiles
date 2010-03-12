@@ -83,7 +83,7 @@ defbindings("WFrame.toplevel", {
 
 defmenu("mainmenu", {
     submenu("Programs",      "appmenu"),
-    menuentry("Lock screen", "ioncore.exec_on(_, 'xlock')"),
+    menuentry("Lock screen", "ioncore.exec_on(_, 'alock -bg shade:shade=30 -cursor glyph -auth pam')"),
     menuentry("Help",        "ioncore.exec_on(_, ':man pwm3')"),
     submenu("Workspaces",    "wsmenu"),
     submenu("Styles",        "stylemenu"),

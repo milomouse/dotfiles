@@ -10,7 +10,7 @@ dopath("mod_query")
 dopath("mod_menu")
 dopath("mod_sp")
 dopath("mod_tiling")
-dopath("mod_statusbar")
+--dopath("mod_statusbar")
 --dopath("mod_dock")
 
 dopath("environment_placement_hook")

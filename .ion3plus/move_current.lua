@@ -15,9 +15,9 @@ end
 
 defbindings("WTiling", {
 --    submap(META.."Control", {
-        kpress(META.."Control+K", function(ws) move_current.move(ws, "up") end),
-        kpress(META.."Control+J", function(ws) move_current.move(ws, "down") end),
-        kpress(META.."Control+H", function(ws) move_current.move(ws, "left") end),
-        kpress(META.."Control+L", function(ws) move_current.move(ws, "right") end),
+        kpress(META.."Shift+k", function(ws) move_current.move(ws, "up") end),
+        kpress(META.."Shift+j", function(ws) move_current.move(ws, "down") end),
+        kpress(META.."Shift+h", function(ws) move_current.move(ws, "left") end),
+        kpress(META.."Shift+l", function(ws) move_current.move(ws, "right") end),
     })
 --})

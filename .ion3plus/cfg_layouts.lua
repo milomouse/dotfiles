@@ -71,22 +71,22 @@ ioncore.deflayout("slide",
 		     mksplit("vertical", a_frame, true))
 ))
 
--- Tiling with horizontal and then two vertical splits
-ioncore.deflayout("1x2",
+-- Tiling with vertical and then two horizontal splits
+ioncore.deflayout("1-2",
     mktiling(mksplit("vertical", 
                      mksplit("horizontal", a_frame),
                      mksplit("horizontal", a_frame, a_frame))
 ))
 
 -- Tiling with vertical split and then two horizontal splits
-ioncore.deflayout("2x1",
+ioncore.deflayout("1|2",
     mktiling(mksplit("horizontal", 
-                     mksplit("vertical", a_frame, a_frame),
-                     mksplit("vertical", a_frame))
+                     mksplit("vertical", a_frame),
+                     mksplit("vertical", a_frame, a_frame))
 ))
 
 -- Tiling with a four way split
-ioncore.deflayout("four",
+ioncore.deflayout("2+2",
     mktiling(mksplit("vertical", 
                      mksplit("horizontal", a_frame, a_frame),
                      mksplit("horizontal", a_frame, a_frame))

@@ -1,5 +1,6 @@
 ## ~/.mutt/muttrc
-## milomouse
+## basically pbrisin's with minor changes.
+## TODO: meaning to change to another email app.
 
 # directories and commands
   set header_cache        = ~/.mutt/cache/headers                 # where to store headers
@@ -10,7 +11,6 @@
   set editor              = "vim +/^$"                            # use vim and skip to first blank line
   set ispell              = "hunspell"                            # use hunspell instead
   set query_command       = "mutt_vc_query '%s'"                  # query vCards
-#  set print_command       = "enscript -p - | psselect -r | lp"    # print email in reverse page order
 
 # maildir settings
   set mbox_type           = Maildir                               # mailbox type
@@ -56,7 +56,7 @@ alternative_order text/plain text/enriched text/html              # but save it 
   set forward_format      = "Fwd: %s"                             # format for subject when forwarding
   set forward_quote                                               # include message in forwards
   set include                                                     # include message in replies
-  set realname            = "Vincent"	                          # who am i?
+  set realname            = "Vincent"	                            # who am i?
   set reply_to                                                    # reply to Reply to: field
   set reverse_name                                                # reply as whomever it was to
 

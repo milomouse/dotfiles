@@ -1,22 +1,40 @@
-"ossrat -t"
+"import -window root ~/foto/shot/$(date +%Y_%m_%d-%H%M).png"
+Alt+Shift+Print
+
+"alock -bg shade:shade=30 -cursor glyph -auth pam"
+Alt+Shift+Delete
+
+"synap"
+Mod1+Escape
+
+"moodlight -b"
+XF86MonBrightnessUp
+
+"moodlight -m"
+Control+XF86MonBrightnessUp
+
+"moodlight -d"
+XF86MonBrightnessDown
+
+"ionoss -t"
 Alt+Home
 
-"ossrat -s"
+"ionoss -s"
 Alt+End
 
-"ossrat -p"
+"ionoss -p"
 Alt+Prior
 
-"ossrat -n"
+"ionoss -n"
 Alt+Next
 
-"ossrat -m"
+"ionoss -m"
 XF86AudioMute
 
-"ossrat -d 1"
+"ionoss -d 1"
 XF86AudioLowerVolume
 
-"ossrat -i 1"
+"ionoss -i 1"
 XF86AudioRaiseVolume
 
 "songrem"
@@ -24,12 +42,3 @@ Control+Delete
 
 "songrem -p"
 Control+Next
-
-"moodlight -b"
-XF86MonBrightnessUp
-
-"moodlight -d"
-XF86MonBrightnessDown
-
-"synap"
-Mod4+Escape

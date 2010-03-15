@@ -7,7 +7,7 @@ Alt+Shift+Delete
 "synap"
 Mod1+Escape
 
-"moodlight -b"
+"moodlight -u"
 XF86MonBrightnessUp
 
 "moodlight -m"
@@ -16,25 +16,25 @@ Control+XF86MonBrightnessUp
 "moodlight -d"
 XF86MonBrightnessDown
 
-"ionoss -t"
+"ossrat -t"
 Alt+Home
 
-"ionoss -s"
+"ossrat -s"
 Alt+End
 
-"ionoss -p"
+"ossrat -p"
 Alt+Prior
 
-"ionoss -n"
+"ossrat -n"
 Alt+Next
 
-"ionoss -m"
+"ossrat -m"
 XF86AudioMute
 
-"ionoss -d 1"
+"ossrat -d 1"
 XF86AudioLowerVolume
 
-"ionoss -i 1"
+"ossrat -i 1"
 XF86AudioRaiseVolume
 
 "songrem"

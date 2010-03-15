@@ -4,17 +4,18 @@
 
 # keep uzbl as user-agent. use cookies in case site requires privileges, etc.
 #referer="'http://ixquick.com/do/metasearch.pl?query="$7"'" # curl -e $referer ..
-uagent="'Uzbl (Webkit $(pacman -Qs libwebkit|sed '$ d'|awk '{print $2}')) ($(uname -o) $(uname -m) [$(uname -m)])'"
+#uagent="'Uzbl (Webkit $(pacman -Qs libwebkit|sed '$ d'|awk '{print $2}')) ($(uname -o) $(uname -m) [$(uname -m)])'"
+uagent="Mozilla/5.0"
 cjar="$XDG_DATA_HOME/uzbl/cookies.txt"
 
 # basic variables to use for downloading.
 export http_proxy="$9"
 url="$8"
-basedir=$(expr "$url"|tr ' ' '_'|tr '/' '\n'|grep '.com\|.net\|.org\|.gov\|.fm\|.jp\|.de\|.pl\|.ca\|.us'|sed '2,$ d')
-basename=$(expr "$url"|tr ' ' '_'|tr '/' '\n'|sed '$ !d')
+basedir=$(print "$url"|tr ' ' '_'|tr '/' '\n'|grep '.com\|.net\|.org\|.gov\|.fm\|.jp\|.de\|.pl\|.ca\|.us'|sed '2,$ d')
+basename=$(print "$url"|tr ' ' '_'|tr '/' '\n'|sed '$ !d')
 dest="$XDG_DOWNLOAD_DIR/$basedir"
 
 # start download..
 ratpoison -c "echo Downloading page, please wait.."
-curl --user-agent $uagent --ssl -c $cjar --max-redirs 1 --create-dirs -C - "$url" -o "$dest/$basename"
+curl --user-agent $uagent --ssl -k --retry 3 --retry-delay 5 -c $cjar --max-redirs 1 --create-dirs -C - "$url" -o "$dest/$basename"
 ratpoison -c "echo Download complete."

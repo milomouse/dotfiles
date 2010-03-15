@@ -22,7 +22,7 @@ if [[ $action = "forward" ]]; then
       if [[ $i = "(null)" ]]; then
         return
       else
-        echo "search $i" | socat - unix-connect:$socket
+        print "search $i" | socat - unix-connect:$socket
       fi
     done
 else
@@ -33,7 +33,7 @@ else
       if [[ $j = "(null)" ]]; then
         return
       else
-        echo "search_reverse $j" | socat - unix-connect:$socket
+        print "search_reverse $j" | socat - unix-connect:$socket
       fi
     done
   fi

@@ -6,11 +6,11 @@ if (ps -a|grep uzbl-core); then
   marks=${XDG_DATA_HOME}/uzbl/bookmarks
 
 # don't try to insert if item already present in $marks
-  if (! cat $marks|grep "$6" >>/dev/null); then
+  if [[ ! -n $(<$marks|grep "$6") ]]; then
   get=$(ratpoison -c "prompt Do you really want to bookmark this page? [y/N]:")
     for i in $get; do
-      if [[ $i = $(echo $i|tr -cd "yY") ]]; then
-        echo -e "$6" >> $marks
+      if [[ $i = [yY] ]]; then
+        print "$6" >> $marks
         ratpoison -c "echo Bookmark successful."
       else
         return

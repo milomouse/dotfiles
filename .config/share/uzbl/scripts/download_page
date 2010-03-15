@@ -9,5 +9,5 @@ dest="$XDG_DOWNLOAD_DIR"
 # start download..
 ratpoison -c "echo Downloading page, please wait.."
 cd $dest
-wget -q --no-proxy --load-cookies $cjar --page-requisites --convert-links --html-extension --no-parent --wait=5 --limit-rate=30K -U Mozilla -l 1 "$url" && cd ; \
+wget -q --no-proxy --load-cookies $cjar --page-requisites --convert-links --html-extension --no-parent --wait=5 --limit-rate=30K -U Mozilla -l 0 "$url" && cd ; \
 ratpoison -c "echo Download complete."

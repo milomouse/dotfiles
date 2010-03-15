@@ -8,7 +8,7 @@ url="$6"
 export CLIVE_CACHE="$XDG_CACHE_HOME"
 
 # first check to see if site is supported before sending the script to work.
-if (! echo "$url"|grep "$(clive --hosts|sed '$ d'|awk '{print $1}')"); then
+if (! print "$url"|grep "$(clive --hosts|sed '$ d'|awk '{print $1}')"); then
   ratpoison -c "echo Sorry, this site isn't supported yet."
 else
   ratpoison -c "echo Starting download, please wait.."

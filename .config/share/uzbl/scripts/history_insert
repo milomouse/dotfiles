@@ -15,9 +15,9 @@ if (ps -a|grep uzbl-core); then
 # use fifos to redirect $histfile directly back on itself while truncating and appending,
 # but do not write item if last entry of $histfile is same as current, as with reloads.
   if [[ ! $(sed '$ !d' <$histfile) = "$6"/ || ! $(sed '$ !d' <$histfile) = "$6" || \
-! $(expr "$6"|sed "s|tp://|tp://www.|") = "$6" || ! $(expr "$6"/|sed "s|tp://|tp://www.|") = "$6" ]]; then
+! $(expr "$6"|sed "s|://|://www.|") = "$6" || ! $(expr "$6"/|sed "s|://|://www.|") = "$6" ]]; then
     tail -50 < $fifo_out < $fifo_in >! $histfile &
-    cat $histfile|awk ' !x[$0]--' >> $fifo_out
+    <$histfile|awk ' !x[$0]--' >> $fifo_out
     expr "$6" >> $fifo_in
   fi
 

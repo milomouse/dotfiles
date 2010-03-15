@@ -1,5 +1,6 @@
 #!/bin/zsh
 # simple script to extract urls from a webpage using w3m. grep/sed from "extract.sh"
+# NOTE: this doesn't seem to work properly everytime. will mess with this later.
 url="$6"
 temp=$(mktemp)
 w3m -dump_source "$url" | \

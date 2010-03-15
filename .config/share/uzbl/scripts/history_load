@@ -22,7 +22,7 @@ if (ps -a|grep uzbl-core); then
       if [[ $i = "(null)" || $i -gt $nmbr ]]; then
         ratpoison -c "echo Nothing selected, quitting operation.."
       else
-        echo "uri $(cat $histfile|head -n $i|tail -1)" | socat - unix-connect:$5
+        echo "uri $(<$histfile|head -n $i|tail -1)" | socat - unix-connect:$5
       fi
     done
   fi

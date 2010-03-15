@@ -1,4 +1,4 @@
-## ~/.rtorrent.rc
+## ~/.rtorrent.rc [extended version]
 ## milomouse
 
 # connection
@@ -29,6 +29,8 @@ schedule = watch_directory3,5,5,"load_start=/home/milo/tors/othe/.down/*.torrent
 schedule = watch_directory4,5,5,"load_start=/home/milo/tors/vide/.down/*.torrent,d.set_directory=/home/milo/tors/vide/"
 
 # actions
+#schedule = snub_leechers,120,120,"snub_leechers=10,5,1M"
+#schedule = ban_slow_peers,120,120,"ban_slow_peers=5,2K,64K,5,128K,10,1M,30"
 system.method.set_key = event.download.finished,notify,"execute=torrat,$d.get_base_filename=,finished"
 #on_finished = notify,"execute=torrat,$d.get_base_filename=,finished"
 schedule = tied_directory,5,60,start_tied=

@@ -3,55 +3,55 @@
 ## fails to detect function keys for it.
 ## More dynamic than /sys/class/backlight/..->
 
-CONFIG=$HOME/.config/.brightness
-OUTPUT='sudo setpci -s 00:02.0 F4.B='
-CURRENT=$(cat $CONFIG|awk '{print $5}'|cut -c6,7)
-ARGUMENT="5"
+config=$XDG_CONFIG_DIR/.brightness
+output='sudo setpci -s 00:02.0 F4.B='
+current=$(cat $config|awk '{print $5}'|cut -c6,7)
+argument="5"
 
-brighter() {
-	if [ $CURRENT = FF ]; then
+brightness_up() {
+	if [ $current = FF ]; then
 		return
 	fi
-		if [ $CURRENT = 95 ]; then
-			NEW=FF
-			echo $OUTPUT$NEW > $CONFIG
-			sh $CONFIG
-		else
-			NEW=$(expr $CURRENT + $ARGUMENT)
-			echo $OUTPUT$NEW > $CONFIG
-			sh $CONFIG
-		fi
-}
-
-dimmer() {
-	if [ $CURRENT = 5 ]; then
-		return
-	fi
-		if [ $CURRENT = FF ]; then
-			NEW=95
-			echo $OUTPUT$NEW > $CONFIG
-			sh $CONFIG
-		else
-			NEW=$(expr $CURRENT - $ARGUMENT)
-			echo $OUTPUT$NEW > $CONFIG
-			sh $CONFIG
+	if [ $current = 95 ]; then
+		NEW=FF
+		echo $output$NEW > $config
+		sh $config
+	else
+		NEW=$(expr $current + $argument)
+		echo $output$NEW > $config
+		sh $config
 	fi
 }
 
-max() {
+brightness_down() {
+	if [ $current = 5 ]; then
+		return
+	fi
+	if [ $current = FF ]; then
+		NEW=95
+		echo $output$NEW > $config
+		sh $config
+	else
+		NEW=$(expr $current - $argument)
+		echo $output$NEW > $config
+		sh $config
+	fi
+}
+
+brightness_max() {
   NEW=FF
-  echo $OUTPUT$NEW > $CONFIG
-  sh $CONFIG
+  echo $output$NEW > $config
+  sh $config
 }
 
 case "$1" in
-	'-b'|'--brighter')
-	brighter
+	'-u'|'--up')
+	brightness_up
 	;;
-	'-d'|'--dimmer')
-	dimmer
+	'-d'|'--down')
+	brightness_down
 	;;
   '-m'|'--max')
-  max
+  brightness_max
   ;;
 esac

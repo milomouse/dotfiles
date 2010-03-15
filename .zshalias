@@ -27,6 +27,7 @@ alias zedit="vim $HOME/.zshrc"
 alias zedia="vim $HOME/.zshalias"
 alias zload=". $HOME/.zshrc"
 alias redit="vim $HOME/.ratpoisonrc"
+alias medit="vim $XDG_CONFIG_DIR/musca/musca_start"
 alias lasi="3view $HOME/othe/archive/$(llt $HOME/othe/archive |tail -1|awk '{print $9}')"
 alias lasid="3view $HOME/othe/archive/$(llt $HOME/othe/archive |tail -2|head -1|awk '{print $9}')"
 alias unrarall='for file in `ls *.rar`; do unrar -x r $file; done'
@@ -51,13 +52,12 @@ alias bcdmuzk="cdrecord -dev=/dev/sr0 -driveropts=burnfree -audio -pad" #*.wav
 alias bdvddata="growisofs -dvd-compat -speed=16 -iso-level 3 -relaxed-filenames -max-iso9660-filenames -input-charset UTF-8 -Z /dev/dvdrw -R -J -joliet-long -v -l" #-graft-points x=/a \b x=/
 #alias bdvdvide="growisofs -dvd-compat -Z /dev/dvdrw -dvd-video" #. #for AUTIO_TS and VIDEO_TS in current dir
 alias hb="HandBrakeCLI -e x264 -E ac3 -6 dp12 -R 48 -b 1800 -B 160 -D 3.0 -2 -T -p --decomb -x qp=0:aq-strength=1.5:direct=auto:bframes=6:mixed-refs:no-fast-pskip:8x8dct -i /dev/dvd" #-t/-L -S xMB -o *.mp4
-alias mpq="$VIDV -really-quiet"
 alias mpn="$VIDV -nosound -really-quiet"
 alias mix2="ossmix codec1.jack.int-speaker.mode mix2 >>/dev/null && echo 'Mixer set to PC Speaker'"
 alias mix3="ossmix codec1.jack.int-speaker.mode mix3 >>/dev/null && echo 'Mixer set to Headphones'"
-alias mute="ionoss -m"
-alias vu="ionoss -i 1"
-alias vd="ionoss -d 1"
+alias mute="ossrat -m"
+alias vu="ossrat -i 1"
+alias vd="ossrat -d 1"
 alias svim="sudo vim"
 alias upf="sudo fc-cache -vf"
 alias upd="sudo updatedb"
@@ -69,6 +69,16 @@ alias ay="yaourt"
 alias aive="ay -Q --date|tee $HOME/othe/archive/$(date +%m_%d_%y) >>/dev/null"
 
 # functions
+function mpq() {
+  [ $(mpc|cat -n|awk '{print $1}') != 3 ] || mpc toggle >>/dev/null
+  for vol in $(ossmix|grep outvol|awk '{print $4}'); do
+    ossmix vmix0-outvol 22 >>/dev/null
+    $VIDV -really-quiet $1
+    ossmix vmix0-outvol $vol >>/dev/null
+  done
+  [[ ! -n $(mpc|grep "\[paused\]") ]] || mpc toggle >>/dev/null
+}
+
 function up(){
   local arg=${1:-1};
   while [ $arg -gt 0 ]; do
@@ -100,15 +110,6 @@ if [[ -d $*[-1] ]]; then
 elif [[ -d ${*[-1]%/*} ]]; then
   mv $* && cd ${*[-1]%/*}
 fi
-}
-
-function timer() {
-  local start=`date +%s`
-  $*
-  local stop=`date +%s`
-  
-  duration=$[$stop - $start]
-  echo "Duration: $duration s"
 }
 
 function reboot() {

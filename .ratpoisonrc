@@ -25,6 +25,8 @@ set bargravity ne
 set inputwidth 400
 set fgcolor #876CBE
 set bgcolor #090909
+set fwcolor #876CBE
+set bwcolor #343434
 set waitcursor 3
 set historysize 50
 set maxundos 50
@@ -83,19 +85,6 @@ definekey top s-C-j ratrelwarp 0 7
 definekey top s-C-h ratrelwarp -7 0
 definekey top s-C-l ratrelwarp 7 0
 definekey top s-C-Return exec ratpoison -c "rathold down" -c "rathold up"
-
-definekey top s-Home exec ossrat -t
-definekey top s-End exec ossrat -s
-definekey top s-Prior exec ossrat -p
-definekey top s-Next exec ossrat -n
-definekey top C-Next exec songrem -p
-definekey top C-Delete exec songrem
-definekey top XF86AudioRaiseVolume exec ossrat -i 1
-definekey top XF86AudioLowerVolume exec ossrat -d 1
-definekey top XF86AudioMute exec ossrat -m
-definekey top XF86MonBrightnessUp exec moodlight -b
-definekey top C-XF86MonBrightnessUp exec moodlight -m
-definekey top XF86MonBrightnessDown exec moodlight -d
 
 definekey top s-comma rpwsp
 definekey top s-period rpwsn

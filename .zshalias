@@ -68,7 +68,6 @@ alias bb="bauerbill"
 alias ay="yaourt"
 alias aive="ay -Q --date|tee $HOME/othe/archive/$(date +%m_%d_%y) >>/dev/null"
 
-# functions
 function mpq() {
   [ $(mpc|wc -l) != 3 ] || mpc toggle >>/dev/null
   for vol in $(ossmix|grep outvol|awk '{print $4}'); do

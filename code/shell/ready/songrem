@@ -1,27 +1,23 @@
 #!/bin/zsh
-#
 # PACKAGE: SongREM
-# VERSION: 0.1-3
+# VERSION: 0.2-1
 # REQUIRE: "mpd" and "mpc"
 #
 # DESCRIPTION:
 # Small script to remember "good songs" and play them back later.
-# This is basically a butchered fork of pbrisbin3's "GoodSong" ;;
+# This is basically a butchered fork of pbrisbin33's "GoodSong"..
 # I [hackishly] added functionality for instant playing of listed
 # songs, matching them against the current running playlist. This
 # is so you don't have to clear and build a new playlist for each
 # song you randomly play. But be warned though: blatant grep, cat
 # and general pipe abuse. Name changed so there isn't clobbering.
-#
 # TODO:
-# 1. Play right song by an artist when >=1 songs have same title.
+# 1. Play right song by an artist when >1 songs have same title..
 #   \ discover a way to do this without using hardcode/filenames.
 # 2. Build new playlist only when a song is not in open playlist.
 #   \ or add that song to current playlist without rebuilding it.
 # 3. Gather and display information about $list. (like mpc stats)
 # 4. Remove current song from $list if found there via -r option.
-#
-###
 
 # Colors for the CLI environment (if desired; for aesthetics).
 c1=$'\E[0;31m'
@@ -39,7 +35,7 @@ skipped_prefix="<<< SongREM:"
 error_prefix="<!> WARNING:"
 
 # File location for remembered songs (different than GoodSong--no clobbering).
-list="$HOME/.config/.songrem"
+list="$XDG_CONFIG_DIR/.songrem"
 
 # Create remembered list if it doesn't exist.
 [ -f $list ] || touch $list
@@ -87,8 +83,8 @@ message() {
 
 # Get the filename from a line in the list.
 getfilename() {
-  artist="$(echo $1 | sed 's/\ \-\ /+/g' | cut -d "+" -f 1)"
-  title="$(echo $1 | sed 's/\ \-\ /+/g' | cut -d "+" -f 2)"
+  artist="$(echo $1 | sed 's| - |+|g' | cut -d "+" -f 1)"
+  title="$(echo $1 | sed 's| - |+|g' | cut -d "+" -f 2)"
   filename="$(mpc search artist "$artist" title "$title" | head -1)"
 }
 
@@ -126,10 +122,11 @@ case $1 in
      ONE=$(echo -n ">>> $(mpc|head -1)")
      TWO=$(echo -n ">>> $(mpc|head -2|tail -1|awk '{print $3" "$2}')")
      INFO=$(echo -n $ONE $TWO)
-       if [ $(ps -a|grep xinit|awk '{print $4}') ]; then
-          ratpoison -c "echo $INFO"
-          ratpoison -c "echo $success_prefix $INFO"
-       fi
+     if [ $(ps -a|grep ratpoison|awk '{print $4}') ]; then
+       ratpoison -c "echo $success_prefix $INFO"
+#       elif [ $(ps -a|grep musca|awk '{print $4}') ]; then
+#          print "$success_prefix $INFO"|dmenu -sb black -nb black -nf "#a488d9" -sf "#a488d9"
+     fi
   ;;
   -b|--build)
   temp="/tmp/.songrem.tmp"
@@ -144,17 +141,23 @@ case $1 in
      mpc play
   ;;
   *)
-  if [ -z "$check" ]; then
-     echo "$song" >> "$list"
-     INFO=$(echo -n ">>> \"$(mpc|head -1)"\")
-       if [ $(ps -a|grep xinit|awk '{print $4}') ]; then
-          ratpoison -c "echo $success_prefix $INFO added to list."
-       fi
+  if [[ -n $(mpc|head -1|grep "volume:") ]]; then
+    exit 0
+  elif [ -z "$check" ]; then
+    echo "$song" >> "$list"
+    INFO=$(echo -n ">>> \"$(mpc|head -1)"\")
+    if [ $(ps -a|grep ratpoison|awk '{print $4}') ]; then
+      ratpoison -c "echo $success_prefix $INFO added to list."
+#       elif [ $(ps -a|grep musca|awk '{print $4}') ]; then
+#          print "$success_prefix $INFO already in list."|dmenu -sb black -nb black -nf "#a488d9" -sf "#a488d9"
+    fi
   else
-     INFO=$(echo -n ">>> \"$(mpc|head -1)"\")
-       if [ $(ps -a|grep xinit|awk '{print $4}') ]; then
-          ratpoison -c "echo $success_prefix $INFO already in list."
-       fi
+    INFO=$(echo -n ">>> \"$(mpc|head -1)"\")
+    if [ $(ps -a|grep ratpoison|awk '{print $4}') ]; then
+      ratpoison -c "echo $success_prefix $INFO already in list."
+#       elif [ $(ps -a|grep musca|awk '{print $4}') ]; then
+#          print "$success_prefix $INFO already in list."|dmenu -sb black -nb black -nf "#a488d9" -sf "#a488d9"
+    fi
   fi
   ;;
 esac

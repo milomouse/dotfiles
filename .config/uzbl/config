@@ -26,7 +26,6 @@ set useragent  = Uzbl (Webkit @WEBKIT_MAJOR.@WEBKIT_MINOR.@WEBKIT_MICRO) (@(+una
 set fifo_dir   = $XDG_CACHE_HOME/uzbl
 set socket_dir = $XDG_CACHE_HOME/uzbl
 set uri        = http://bbs.archlinux.org/search.php?action=show_new
-set new_window = sh 'uzbl-browser -u $8'
 
 # - disable/enable certain settings despite changes in upstream configuration - 
 set status_format        = <span font_family="fixed" font_size="0">@mode_section @keycmd_section @uri_section @selected_section @name_section @status_section @scroll_section </span>
@@ -53,6 +52,7 @@ set authentication_handler = sync_spawn @scripts_dir/auth.py
 @on_event DOWNLOAD_REQUEST   spawn @scripts_dir/download_handler %s \@proxy_url
 @on_event LOAD_COMMIT        @set_mode
 @on_event LOAD_FINISH        spawn @scripts_dir/history_insert
+@on_event NEW_WINDOW         sh 'uzbl-browser -u $8' %r
 
 # - key mapping settings - 
 @modmap <Control>        <Ctrl>

@@ -1,0 +1,100 @@
+#!/bin/zsh
+# simple exit parser merged with a slightly modified session handler.
+
+# change value of $1 from config->-*->action:
+config=$1; shift
+pid=$1;    shift
+xid=$1;    shift
+fifo=$1;   shift
+socket=$1; shift
+url=$1;    shift
+title=$1;  shift
+action=$1
+
+# set environment variables for loading/saving sessions:
+savefile=$XDG_DATA_HOME/uzbl/saved_session
+conf=$XDG_CONFIG_DIR/uzbl/config
+thisscript=$XDG_DATA_HOME/uzbl/scripts/proper_exit
+fifodir=$XDG_CACHE_HOME/uzbl
+focusedfifo="$fifo"
+[[ -f $savefile ]] || touch $savefile
+
+# close all uzbl instances and complimentary handlers:
+close_all_no_save() {
+  killall xsel >&/dev/null
+  killall history_insert >&/dev/null
+  rm -f $XDG_CACHE_HOME/uzbl/history_{in,out} >&/dev/null
+  for each in $(ls -1 $XDG_CACHE_HOME/uzbl/uzbl_fifo_*); do
+    echo "exit" > $each
+  done
+  uzbl-cookie-daemon stop
+  exit 0
+}
+
+# simply exit focused uzbl window:
+close_current_no_save() {
+  if [ $(ps -a|grep uzbl-core|wc -l) = 1 ]; then
+    close_all_no_save
+  else
+    echo "exit" > $focusedfifo
+    exit 0
+  fi
+}
+
+# hidden option to check first:
+hidden_check() {
+    if [ "$url" != "(null)" ]; then
+      echo "$url" >> $savefile;
+    fi
+    echo "exit" > "$focusedfifo"
+}
+
+# save uri's from each uzbl instance to $savefile:
+save_session() {
+  rm -f "$savefile" && touch "$savefile"
+  for fifo in $fifodir/uzbl_fifo_*; do
+    if [ "$fifo" != "$focusedfifo" ]; then
+      echo "spawn $thisscript hidden_check" > "$fifo"
+      fi
+    done
+    echo "spawn $thisscript hidden_check" > "$focusedfifo"
+  exit 0
+}
+
+# load each uri from $savefile into uzbl(s):
+load_session() {
+  if [ $(<$savefile|wc -l) -le 0 ]; then
+    exit 1
+  fi
+  if [ $(<$savefile|wc -l) -eq 1 ]; then
+    if [ $(ps -a|grep uzbl-core|wc -l) = 1 ]; then
+      for one in $(<$savefile); do
+        echo "$one" | socat - unix-connect:$socket
+      done
+    else
+      for one in $(<$savefile); do
+        uzbl-browser -c $conf --uri "$one"
+      done
+    fi
+  elif [ $(<$savefile|wc -l) -gt 1 ]; then
+    for each in $(<$savefile); do
+      uzbl-browser -c $conf --uri "$each" &
+    done
+  fi
+  exit 0
+}
+
+# in case a typo or something is passed in the config:
+error() {
+  ratpoison -c "echo Error: \"proper_exit\" Unknown option."
+  exit 1
+}
+
+case "$action" in
+  'close_current_no_save') close_current_no_save ;;
+  'close_all_no_save')     close_all_no_save ;;
+  'save_session')          save_session ;;
+  'load_session')          load_session ;;
+  'hidden_check')          hidden_check ;;
+  *)                       error ;;
+esac

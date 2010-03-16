@@ -18,7 +18,8 @@ if &t_Co > 255
   hi Conditional    term=none cterm=none ctermfg=6   ctermbg=none
   hi Constant       term=none cterm=none ctermfg=13  ctermbg=none
   hi Cursor         term=none cterm=none ctermfg=233 ctermbg=109
-  hi CursorLine     term=none cterm=none             ctermbg=3
+  hi CursorLine     term=none cterm=none ctermfg=238 ctermbg=234
+  hi CursorColumn   term=none cterm=none ctermfg=none ctermbg=none
   hi Debug          term=none cterm=none ctermfg=181 ctermbg=none
   hi Define         term=none cterm=none ctermfg=13  ctermbg=none
   hi Delimiter      term=none cterm=none ctermfg=109 ctermbg=none

@@ -1,0 +1,42 @@
+#!/bin/zsh
+# Simple /etc/hosts updating script and merging with your own list.
+personalhosts=/etc/hosts.mine
+
+help() {
+<< EOF
+adup is a small script to update the /etc/hosts file.
+usage: adup [OPTIONS]
+OPTIONS:
+-b|--build   Build new /etc/hosts from latest source at:
+             http://www.someonewhocares.org/hosts/
+             Also merging your own $personalhosts file.
+-r|--refresh Only refresh /etc/hosts with changes made from
+             your $personalhosts file.
+-h|--help    Show this message and exit.
+EOF
+}
+
+do_safe() {
+  [[ -f $personalhosts ]] || cp -f /etc/hosts $personalhosts
+  cp -f /etc/hosts /etc/hosts~
+}
+
+case $1 in
+  '-b'|'--build')
+  do_safe
+  w3m -dump http://www.someonewhocares.org/hosts/|\
+    sed -e '1,/#<localhost>/c#<localhost>' -e '/# Acknowledgements/,$s/.*//;/^$/d' >! /etc/hosts
+    <$personalhosts>> /etc/hosts
+  ;;
+
+  '-r'|'--refresh')
+  do_safe
+  <$personalhosts</etc/hosts~|awk ' !x[$0]--'>! /etc/hosts
+  ;;
+
+  '-h'|'--help') help
+  ;;
+
+  * ) print "Error: unrecognized option \"$1\". See --help."
+  ;;
+esac

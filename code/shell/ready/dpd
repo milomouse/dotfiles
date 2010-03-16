@@ -1,3 +1,0 @@
-#!/bin/zsh
-## play song via dmenu
-mpc play `mpc playlist | sed -e "s/^>/ /" | dmenu -i | grep -P -o "^ \d+" `

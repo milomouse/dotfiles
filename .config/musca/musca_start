@@ -5,6 +5,9 @@
 set startup /home/milo/.config/musca/musca_start
 set frame_display_hidden 2
 set frame_resize 10
+set dmenu dmenu -i
+#set dmenu dzen2 -m -fn fixed-7 -bg '#625873' -fg '#b7b7b7' -x 964 -y 2
+#set notify echo " NOTICE: "`cat`|dzen2 -ta l -h 12 -fn fixed-7 -bg '#625873' -fg '#a0a0a0' -x 964 -y 2 -p 4 -w 400
 hook on ^only border off
 # borders
 set border_focus #a488d9
@@ -22,7 +25,7 @@ bind on Mod1+Shift+BackSpace kill
 bind on Mod1+Shift+q quit
 # prompt bindings
 bind on Mod1+m command
-bind on Mod1+e shell
+bind on Mod1+i shell
 bind on Mod1+g switch group
 bind on Mod1+w switch window
 # mode/singular bindings
@@ -31,8 +34,8 @@ bind on Mod1+s stack flip
 bind on Mod1+d dedicate flip
 bind on Mod1+b refresh
 bind on Mod1+r remove
-bind on Mod1+o only
 bind on Mod1+u undo
+bind on Mod1+o only
 # directional/movement bindings
 bind on Mod1+h focus left
 bind on Mod1+j focus down

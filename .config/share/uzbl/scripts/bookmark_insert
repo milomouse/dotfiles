@@ -2,7 +2,6 @@
 # simple bookmarker for uzbl using ratpoison.
 
 # make sure script only used when uzbl is running.
-if (ps -a|grep uzbl-core); then
   marks=${XDG_DATA_HOME}/uzbl/bookmarks
 
 # don't try to insert if item already present in $marks
@@ -19,4 +18,3 @@ if (ps -a|grep uzbl-core); then
   else
     ratpoison -c "echo This URL is already bookmarked."
   fi
-fi

@@ -5,7 +5,6 @@
 #    ^: find better $ratp; no need for cat -n, or cut and tr.
 
 # make sure script only used when uzbl is running.
-if (ps -a|grep uzbl-core); then
   histfile=${XDG_DATA_HOME}/uzbl/history
 
 # do not execute if only item found is current, else execute.
@@ -27,4 +26,3 @@ if (ps -a|grep uzbl-core); then
     done
   fi
 #quit uzbl.
-fi

@@ -5,7 +5,6 @@
 #    ^: find better $ratp-- no need for cat -n, or cut and tr.
 
 # make sure script only used when uzbl is running.
-if (ps -a|grep uzbl-core); then
   marks=${XDG_DATA_HOME}/uzbl/bookmarks
   [[ ! -f $marks ]] || touch $marks
   nmbr=$(wc $marks|awk '{print $1}')
@@ -21,4 +20,3 @@ if (ps -a|grep uzbl-core); then
       echo "uri $(cat $marks|head -n $i|tail -1)" | socat - unix-connect:$5
     fi
   done
-fi

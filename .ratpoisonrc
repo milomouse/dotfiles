@@ -40,7 +40,7 @@ bind C exec urxvt
 bind d time
 bind e exec
 bind f fselect
-bind g exec uzbl-browser -c ~/.config/uzbl/config
+bind g exec uzbl-browser -c ~/.config/uzbl/config >>/dev/null
 bind G exec firefox-nightly >>/dev/null
 bind h select -
 bind H exec ratpoison -c "select -" -c "only"

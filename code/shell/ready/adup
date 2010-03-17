@@ -24,7 +24,7 @@ do_safe() {
 case $1 in
   '-b'|'--build')
   do_safe
-  w3m -dump http://www.someonewhocares.org/hosts/|\
+  curl -s http://someonewhocares.org/hosts/hosts|\
     sed -e '1,/#<localhost>/c#<localhost>' -e '/# Acknowledgements/,$s/.*//;/^$/d' >! /etc/hosts
     <$personalhosts>> /etc/hosts
   ;;

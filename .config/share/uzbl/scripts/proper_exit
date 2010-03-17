@@ -33,7 +33,7 @@ close_all_no_save() {
 
 # simply exit focused uzbl window:
 close_current_no_save() {
-  if [ $(ps xo command|grep uzbl-core|wc -l) = 1 ]; then
+  if [ $(ps xo command|grep uzbl-core|wc -l) = 2 ]; then
     close_all_no_save
   else
     echo "exit" > $focusedfifo

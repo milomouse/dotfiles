@@ -1,22 +1,18 @@
 #!/bin/zsh
 # simple bookmark loader for uzbl using ratpoison.
-# TODO: head/tail based on length. repeat $math until $nmbr -le X
-#    ^: if ROWS instead of COLUMNS, truncate length of display.
-#    ^: find better $ratp-- no need for cat -n, or cut and tr.
 
-# make sure script only used when uzbl is running.
-  marks=${XDG_DATA_HOME}/uzbl/bookmarks
-  [[ ! -f $marks ]] || touch $marks
-  nmbr=$(wc $marks|awk '{print $1}')
-  ratp=$(ratpoison -c "echo $(cat -n $marks|tr ' ' '!'|cut -c5-100|awk '{print $1" - "$2}'|tr '!' ' '|head -$nmbr)")
-  sleep 5
+marks=${XDG_DATA_HOME}/uzbl/bookmarks
+[[ ! -f $marks ]] || touch $marks
+nmbr=$(wc $marks|awk '{print $1}')
+ratp=$(ratpoison -c "echo $(cat -n $marks|tr ' ' '!'|cut -c5-100|awk '{print $1" - "$2}'|tr '!' ' '|head -$nmbr)")
+sleep 5
 
 # select bookmark item by line number. don't try to open if [Esc] or number greater than $nmbr sent.
-  get=$(ratpoison -c "prompt Type the number of the bookmark you wish to view [1-$nmbr]:")
-  for i in $get; do
-    if [[ $i = "(null)" || $i -gt $nmbr ]]; then
-      return
-    else
-      echo "uri $(cat $marks|head -n $i|tail -1)" | socat - unix-connect:$5
-    fi
-  done
+get=$(ratpoison -c "prompt Type the number of the bookmark you wish to view [1-$nmbr]:")
+for i in $get; do
+  if [[ $i = "(null)" || $i -gt $nmbr ]]; then
+    return
+  else
+    echo "uri $(<$marks|head -n $i|tail -1)" | socat - unix-connect:$5
+  fi
+done

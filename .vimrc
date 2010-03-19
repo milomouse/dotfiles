@@ -4,7 +4,7 @@
  set t_Co=256
  colorscheme cottonmouse
  set cursorline
- set cursorcolumn
+ set nocursorcolumn
  set nocompatible
  set ignorecase
  set smartcase

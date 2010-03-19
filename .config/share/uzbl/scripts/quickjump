@@ -16,33 +16,48 @@ savefile=$XDG_DATA_HOME/uzbl/quicklinks
 tempfile=$XDG_CACHE_HOME/uzbl/.tmpqj
 
 # create initial file with 10 lines:
-if [[ ! -f $savefile ]]; then
-  touch $savefile
+hidden() {
   until [[ $(wc -l $savefile|awk '{print $1}') = 10 ]]; do
     print "http://uzbl.org" >> $savefile
   done
+}
+if [[ ! -f $savefile ]]; then
+  touch $savefile
+  hidden
+#elif [[ $(wc -c $savefile|awk '{print $1}') = "0" ]]; then
+#  rm -f $savefile && touch $savefile
+#  hidden
 fi
 
 # show quickjumps for whatever reason:
 show_jumps() {
+  rm -f $tempfile >&/dev/null && touch $tempfile
+  hidden
   ratpoison -c "echo $(<$savefile|cat -n|tr ' ' '!'|cut -c5-100|awk '{print $1" - "$2}'|tr '!' ' ')"
 }
 
 # place current uri into certain line by number:
 quick_set() {
-get=$(ratpoison -c "prompt Enter Value for this Jump [0-9]:")
-for i in $get; do
-  if [[ $i = "(null)" ]]; then
-    exit
-  elif [[ $i -gt 10 ]]; then
-    ratpoison -c "echo Value too high."
-    exit
-  else
-    <$savefile|sed ''"$i"' s|.*$|'"$url"'|'>! $tempfile >! $savefile
-    rm -f $tempfile >&/dev/null
-    exit
-  fi
-done
+  get=$(ratpoison -c "prompt Enter Value for this Jump [0-9]:")
+  for i in $get; do
+    if [[ $i = "(null)" ]]; then
+      exit
+    elif [[ $i -gt 9 ]]; then
+      ratpoison -c "echo Value too high."
+      exit
+    elif [[ $i = "0" ]]; then
+      i="10"
+      rm -f $tempfile >&/dev/null && touch $tempfile
+      <$savefile|sed ''"$i"' s|.*$|'"$url"'|'> $tempfile >! $savefile
+      rm -f $tempfile >&/dev/null
+      exit
+    else
+      rm -f $tempfile >&/dev/null && touch $tempfile
+      <$savefile|sed ''"$i"' s|.*$|'"$url"'|'> $tempfile >! $savefile
+      rm -f $tempfile >&/dev/null
+      exit
+    fi
+  done
 }
 
 # find a better way to do this:
@@ -76,6 +91,5 @@ case "$action" in
   'go8') go8 ;;
   'go9') go9 ;;
   'go0') go0 ;;
-  'go') go ;;
   * ) error ;;
 esac

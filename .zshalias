@@ -36,7 +36,7 @@ alias irb="irb --simple-prompt"
 alias diff="colordiff"
 alias grep="grep --color=auto"
 alias psu="ps fxo etime,pid,pmem,pcpu,command"
-alias psr="ps -u root fo etime,user,pid,pmem,pcpu,command |less"
+alias psr="ps -u root fo etime,user,pid,pmem,pcpu,command"
 alias daemons="ls /var/run/daemons"
 alias dfu="df -hTP"
 alias ping="ping -c 5"
@@ -53,7 +53,7 @@ alias bdvddata="growisofs -dvd-compat -speed=16 -iso-level 3 -relaxed-filenames 
 #alias bdvdvide="growisofs -dvd-compat -Z /dev/dvdrw -dvd-video" #. #for AUTIO_TS and VIDEO_TS in current dir
 alias hb="HandBrakeCLI -e x264 -E ac3 -6 dp12 -R 48 -b 1800 -B 160 -D 3.0 -2 -T -p --decomb -x qp=0:aq-strength=1.5:direct=auto:bframes=6:mixed-refs:no-fast-pskip:8x8dct -i /dev/dvd" #-t/-L -S xMB -o *.mp4
 alias mpn="$VIDV -nosound -really-quiet"
-alias mpr="$VIDV -really-quiet"
+alias mpq="$VIDV -really-quiet"
 alias mix2="ossmix codec1.jack.int-speaker.mode mix2 >>/dev/null && echo 'Mixer set to PC Speaker'"
 alias mix3="ossmix codec1.jack.int-speaker.mode mix3 >>/dev/null && echo 'Mixer set to Headphones'"
 alias mute="ossrat -m"
@@ -68,7 +68,7 @@ alias bb="bauerbill"
 alias ay="yaourt"
 alias aive="ay -Q --date|tee $HOME/othe/archive/$(date +%m_%d_%y) >>/dev/null"
 
-function mpq() {
+function mpm() {
   [ $(mpc|wc -l) != 3 ] || mpc toggle >>/dev/null
   for vol in $(ossmix|grep outvol|awk '{print $4}'); do
     ossmix vmix0-outvol 22 >>/dev/null

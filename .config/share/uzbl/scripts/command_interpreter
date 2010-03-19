@@ -1,0 +1,163 @@
+#!/bin/zsh
+# simple command/uri/session handler for use with ratpoison.
+# the session handling was modified from session.sh
+
+# change value of $1 from config->-*->action.
+config=$1; shift
+pid=$1;    shift
+xid=$1;    shift
+fifo=$1;   shift
+socket=$1; shift
+url=$1;    shift
+title=$1;  shift
+action=$1
+
+# set environment variables for loading/saving sessions:
+savefile=$XDG_DATA_HOME/uzbl/saved_session
+conf=$XDG_CONFIG_DIR/uzbl/config
+thisscript=$XDG_DATA_HOME/uzbl/scripts/command_interpreter
+fifodir=$XDG_CACHE_HOME/uzbl
+focusedfifo="$fifo"
+[[ -f $savefile ]] || touch $savefile
+
+# command prompt, predefined choices; else native uzbl commands:
+command_insert() {
+get=$(ratpoison -c "prompt Command:")
+for i in $get; do
+  if [[ $i = "q!" || $i = "quit" || $i = "exit" ]]; then
+    close_current_no_save >&/dev/null
+  elif [[ $i = "qa!" || $i = "quitall" ]]; then
+    close_all >&/dev/null
+  elif [[ $i = "wq" || $i = "writeall" ]]; then
+    save_session >&/dev/null
+  elif [[ $i = "wl" || $i = "load" ]]; then
+    load_session >&/dev/null
+  elif [[ $i = "(null)" ]]; then
+    exit
+  else
+    print "$i" | socat - unix-connect:$socket >&/dev/null
+  fi
+done
+}
+
+# blank uri prompt, opens in current window:
+here_supply-uri() {
+get=$(ratpoison -c "prompt uri:")
+for i in $get; do
+  if [[ $i = "(null)" ]]; then
+    exit
+  else
+    print uri "$i" | socat - unix-connect:$socket >&/dev/null
+  fi
+done
+}
+
+# current uri in prompt, opens in current window:
+here_current-uri() {
+get=$(ratpoison -c "prompt uri:$url")
+for i in $get; do
+  if [[ $i = "(null)" ]]; then
+    exit
+  else
+    print uri "$i" | socat - unix-connect:$socket >&/dev/null
+  fi
+done
+}
+
+# blank uri prompt, opens in new window:
+new_supply-uri() {
+get=$(ratpoison -c "prompt new:")
+for i in $get; do
+  if [[ $i = "(null)" ]]; then
+    exit
+  else
+    uzbl-browser --uri "$i" | socat - unix-connect:$socket >&/dev/null
+  fi
+done
+}
+
+# current uri in prompt, opens in new window:
+new_current-uri() {
+get=$(ratpoison -c "prompt new:$url")
+for i in $get; do
+  if [[ $i = "(null)" ]]; then
+    exit
+  else
+    uzbl-browser --uri "$i" | socat - unix-connect:$socket >&/dev/null
+  fi
+done
+}
+
+# close all uzbl instances and complimentary handlers:
+close_all() {
+killall xsel >&/dev/null
+killall history_insert >&/dev/null
+rm -f $XDG_CACHE_HOME/uzbl/history_{in,out} >&/dev/null
+for each in $(ls -1 $XDG_CACHE_HOME/uzbl/uzbl_fifo_*); do
+  print "exit" > $each
+done
+uzbl-cookie-daemon stop
+exit 0
+}
+
+# simply exit focused uzbl window:
+close_current_no_save() {
+if [ $(ps xo command|grep uzbl-core|wc -l) = 2 ]; then
+  close_all
+else
+  print "exit" > $focusedfifo
+  exit 0
+fi
+}
+
+# hidden option to check first:
+hidden_check() {
+if [ "$url" != "(null)" ]; then
+  print "$url" >> $savefile;
+fi
+print "exit" > "$focusedfifo"
+}
+
+# save uri's from each uzbl instance to $savefile:
+save_session() {
+rm -f "$savefile" >&/dev/null && touch "$savefile"
+for fifo in $fifodir/uzbl_fifo_*; do
+  if [ "$fifo" != "$focusedfifo" ]; then
+    print "spawn $thisscript hidden_check" > "$fifo"
+  fi
+done
+print "spawn $thisscript hidden_check" > "$focusedfifo"
+close_all
+}
+
+# load each uri from $savefile into uzbl(s):
+load_session() {
+if [ $(<$savefile|wc -l) -le 0 ]; then
+  exit 1
+elif [ $(<$savefile|wc -l) -ge 1 ]; then
+  for each in $(<$savefile); do
+    uzbl-browser -c $conf --uri "$each"
+  done
+fi
+exit 0
+}
+
+# in case a typo or something is passed in the config:
+error() {
+  ratpoison -c "echo Error: Unknown option."
+  exit 1
+}
+
+case "$action" in
+  'here_supply-uri')       here_supply-uri ;;
+  'here_current-uri')      here_current-uri ;;
+  'new_supply-uri')        new_supply-uri ;;
+  'new_current-uri')       new_current-uri ;;
+  'command_insert')        command_insert ;;
+  'close_current_no_save') close_current_no_save ;;
+  'close_all_no_save')     close_all ;;
+  'save_session')          save_session ;;
+  'load_session')          load_session ;;
+  'hidden_check')          hidden_check ;;
+  *) error ;;
+esac

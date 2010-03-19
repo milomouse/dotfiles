@@ -24,7 +24,7 @@ focusedfifo="$fifo"
 command_insert() {
 get=$(ratpoison -c "prompt Command:")
 for i in $get; do
-  if [[ $i = "q!" || $i = "quit" || $i = "exit" ]]; then
+  if [[ $i = "q!" || $i = "Q!" || $i = "quit" || $i = "exit" ]]; then
     close_current_no_save >&/dev/null
   elif [[ $i = "qa!" || $i = "quitall" ]]; then
     close_all >&/dev/null

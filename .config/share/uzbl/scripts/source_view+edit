@@ -1,5 +1,5 @@
 #!/bin/zsh
-# simple source viewer for uzbl using curl and w3m (which uses vim if you wish to edit)
+# simple source viewer for uzbl using curl and w3m (which uses vim if you wish to edit). Shift-e, Esc-e
 
 # set referer until i figure out a "requestpolicy" script. set user-agent because some sites suck.
 referer="'http://ixquick.com/do/metasearch.pl?query="$7"'"

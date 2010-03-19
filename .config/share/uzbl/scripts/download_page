@@ -1,13 +1,9 @@
 #!/bin/zsh
 # simple page downloader using wget (sadly, i dont know a "convert" command in curl).
 
-# basic variables.
-cjar="$XDG_DATA_HOME/uzbl/cookies.txt"
 url="$6"
 dest="$XDG_DOWNLOAD_DIR"
-
-# start download..
 ratpoison -c "echo Downloading page, please wait.."
 cd $dest
-wget -q --no-proxy --load-cookies $cjar --page-requisites --convert-links --html-extension --no-parent --wait=5 --limit-rate=30K -U Mozilla -l 0 "$url" && cd ; \
+wget --wait=10 -q --no-proxy --page-requisites --convert-links --html-extension --no-parent --limit-rate=30K -U Mozilla -l 0 "$url" && cd ; \
 ratpoison -c "echo Download complete."

@@ -1,21 +1,22 @@
 #!/bin/zsh
-# simple history inserter for uzbl using fifos.
+# milomouse <vincent[at]fea.st>
+# NOTE: simple history inserter for uzbl using fifos.
 # TODO: find better fix for duplicates, especially http://{www.}$.com{/}
 
-# set history/fifo locations.
-  histfile="${XDG_DATA_HOME}/uzbl/history"
-  fifo_in="${XDG_CACHE_HOME}/uzbl/history_in"
-  fifo_out="${XDG_CACHE_HOME}/uzbl/history_out"
+# set history/fifo locations:
+histfile="${XDG_DATA_HOME}/uzbl/history"
+fifo_in="${XDG_CACHE_HOME}/uzbl/history_in"
+fifo_out="${XDG_CACHE_HOME}/uzbl/history_out"
 
-  [[ -f $histfile ]] || touch $histfile
+[[ -f $histfile ]] || touch $histfile
 #  rm -f $fifo_in $fifo_out &>/dev/null
-  mkfifo -m 600 $fifo_in $fifo_out &>/dev/null
+mkfifo -m 600 $fifo_in $fifo_out &>/dev/null
 
 # use fifos to redirect $histfile directly back on itself while truncating and appending,
 # but do not write item if last entry of $histfile is same as current, as with reloads.
-  if [[ ! $(sed '$ !d' <$histfile) = "$6"/ || ! $(sed '$ !d' <$histfile) = "$6" || \
-  ! $(expr "$6"|sed "s|://|://www.|") = "$6" || ! $(expr "$6"/|sed "s|://|://www.|") = "$6" ]]; then
-    tail -50 < $fifo_out < $fifo_in >! $histfile &
-    <$histfile|awk ' !x[$0]--' >> $fifo_out
-    expr "$6" >> $fifo_in
-  fi
+if [[ ! $(sed '$ !d' <$histfile) = "$6"/ || ! $(sed '$ !d' <$histfile) = "$6" || \
+! $(expr "$6"|sed "s|://|://www.|") = "$6" || ! $(expr "$6"/|sed "s|://|://www.|") = "$6" ]]; then
+  tail -50 < $fifo_out < $fifo_in >! $histfile &
+  <$histfile|awk ' !x[$0]--' >> $fifo_out
+  expr "$6" >> $fifo_in
+fi

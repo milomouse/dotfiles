@@ -1,5 +1,6 @@
 #!/bin/zsh
-# simple search prompts for uzbl using surfraw and ratpoison.
+# milomouse <vincent[at]fea.st>
+# NOTE: simple search prompts for uzbl using surfraw and ratpoison.
 
 get=$(ratpoison -c "prompt Enter search mechanism to use [L for list]:")
 for i in $get; do
@@ -13,6 +14,7 @@ for i in $get; do
       ratpoison -c "echo $(surfraw -elvi|awk '{print $1}'|sed '50,$ !d')"
       sleep 5
     fi
+    # if list was called, exit afterwards:
     if [[ $i = [lL] || $i = "list" ]]; then
       return
     fi

@@ -1,8 +1,9 @@
 #!/bin/zsh
-# simple command/uri/session handler for use with ratpoison.
-# the session handling was modified from session.sh
+# milomouse <vincent[at]fea.st>
+# NOTE: simple command/uri/session handler for use with ratpoison.
+#       the session handling was modified from session.sh
 
-# change value of $1 from config->-*->action.
+# change value of $1 from config->-*->action:
 config=$1; shift
 pid=$1;    shift
 xid=$1;    shift

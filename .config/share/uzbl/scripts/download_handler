@@ -1,14 +1,14 @@
 #!/bin/zsh
-# simple download handler using curl.
+# milomouse <vincent[at]fea.st>
+# NOTE: simple download handler using curl.
 # TODO: utilize better base{} finders.
 
-# keep uzbl as user-agent. use cookies in case site requires privileges, etc.
 #referer="'http://ixquick.com/do/metasearch.pl?query="$7"'" # curl -e $referer ..
 #uagent="'Uzbl (Webkit $(pacman -Qs libwebkit|sed '$ d'|awk '{print $2}')) ($(uname -o) $(uname -m) [$(uname -m)])'"
 uagent="Mozilla/5.0"
 cjar="$XDG_DATA_HOME/uzbl/cookies.txt"
 
-# basic variables to use for downloading.
+# basic variables; keep website basename as folder for downloads so as not to clobber:
 export http_proxy="$9"
 url="$8"
 basedir=$(print "$url"|tr ' ' '_'|tr '/' '\n'|grep '.com\|.net\|.org\|.gov\|.fm\|.jp\|.de\|.pl\|.ca\|.us'|sed '2,$ d')

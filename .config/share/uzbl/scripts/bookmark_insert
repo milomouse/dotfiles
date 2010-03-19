@@ -1,10 +1,11 @@
 #!/bin/zsh
-# simple bookmarker for uzbl using ratpoison.
+# milomouse <vincent[at]fea.st>
+# NOTE: simple bookmarker for uzbl using ratpoison.
 
-# make sure script only used when uzbl is running.
+# where to store the bookmarks file:
   marks=${XDG_DATA_HOME}/uzbl/bookmarks
 
-# don't try to insert if item already present in $marks
+# don't try to insert if item already present in $marks:
   if [[ ! -n $(<$marks|grep "$6") ]]; then
   get=$(ratpoison -c "prompt Do you really want to bookmark this page? [y/N]:")
     for i in $get; do

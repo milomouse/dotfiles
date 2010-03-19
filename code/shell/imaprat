@@ -1,0 +1,19 @@
+#!/bin/zsh
+# cron job: if: online > imap > if: ratpoison/musca > notify new.
+sleep 10
+if [[ -n $(ls /var/run/daemons|grep network) ]]; then
+  offlineimap -c /home/milo/.offlineimaprc -o -u Noninteractive.Quiet
+  if [[ -n $(ps -a|grep ratpoison) ]]; then
+    local INFO=$(ls -l /home/milo/mail/*/*/new|\
+      grep $HOST|cat -n|awk '{print $1}'|tail -1)
+    ratpoison -c "echo >>> offlineIMAP >>> $INFO new emails"
+    sleep 10
+    ratpoison -c "echo >>> offlineIMAP >>> $INFO new emails"
+  elif [[ -n $(ps -a|grep musca) ]]; then
+    local INFO=$(ls -l /home/milo/mail/*/*/new|\
+      grep $HOST|cat -n|awk '{print $1}'|tail -1)
+    musca -c "say $INFO"
+    sleep 10
+    musca -c "say $INFO"
+  fi
+fi

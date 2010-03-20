@@ -75,3 +75,5 @@ case "$1" in
   '-h'|'--help'|*) help
   ;;
 esac
+
+# vim:ts=2:sw=2:

@@ -2,13 +2,13 @@
 ## milomouse
 
 # set default
-  color normal     white         default
+  color normal     magenta       default
 
 # main colors
   color status     magenta       default
-  color indicator  brightwhite   default
+  color indicator  default       default
   color tree       blue          default
-  color error      brightred     default
+  color error      default       default
   color message    brightmagenta default
 
 # color all ML mails
@@ -23,11 +23,11 @@ uncolor index "~T"
 uncolor index "~D"
 
 # and recolor them appropriately
-  color index      brightblack   default "~P"
+  color index      blue          default "~P"
   color index      green         default "~C @.com"
-  color index      brightcyan    default "~N ~u"  # new ML mail
+  color index      brightmagenta default "~N ~u"  # new ML mail
   color index      brightmagenta default "~N !~u" # new non-ML mail
-  color index      brightgreen   default "~T"
+  color index      red           default "~T"
   color index      brightred     default "~D"
 
 # set up the headers
@@ -45,7 +45,7 @@ uncolor index "~D"
 
 # urls
   color body       brightblue    default "(^|<| )mailto:[^ ]+@[^ ]( |>|$)"
-  color body       brightblue    default "(^|<| )(http|https|ftp|file|telnet|news|finger)://[^ ]+( |>|$)"
+  color body       brightblack   default "(^|<| )(http|https|ftp|file|telnet|news|finger)://[^ ]+( |>|$)"
 
 # emoticons
   color body       brightmagenta default "(^| )+(|[<>|])[8;:](|[^ ])[)(/|DOPS]( |$)+"
@@ -53,15 +53,15 @@ uncolor index "~D"
 
 # *bold*, _underline_, and /italic/
   color body       brightred     default "(^| )\\*[^ ]+\\*( |$)"
-  color body       brightcyan    default "(^| )_[^ ]+_( |$)"
-  color body       brightcyan    default "(^| )/[^ ]+/( |$)"
+#  color body       brightcyan    default "(^| )_[^ ]+_( |$)"
+#  color body       brightcyan    default "(^| )/[^ ]+/( |$)"
 
 # quote blocks
   color quoted     magenta       default
-  color quoted1    cyan          default
-  color quoted2    green         default
+#  color quoted1    cyan          default
+#  color quoted2    green         default
   color quoted3    magenta       default
-  color quoted4    cyan          default
-  color quoted5    green         default
+#  color quoted4    cyan          default
+#  color quoted5    green         default
   color quoted6    magenta       default
-  color quoted7    cyan          default
+#  color quoted7    cyan          default

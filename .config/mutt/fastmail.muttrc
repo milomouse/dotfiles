@@ -3,11 +3,11 @@
 
 color status green default
 
-  set from      = "vincent@fea.st"
-  set sendmail  = "/usr/bin/msmtp -a FastMail"
-  set mbox      = "+FastMail/INBOX"
+set from      = "vincent@fea.st"
+set sendmail  = "/usr/bin/msmtp -a FastMail"
+set mbox      = "+FastMail/INBOX"
 unset record
-  set postponed = "+FastMail/Drafts"
+set postponed = "+FastMail/Drafts"
 
 macro index E "<change-folder>+FastMail/archive<enter><limit>~B " "search everything"
 macro index D "<save-message>+FastMail/trash<enter>" 	       "move message to the trash"

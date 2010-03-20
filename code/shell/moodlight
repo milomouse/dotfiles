@@ -4,8 +4,8 @@
 ## More dynamic than /sys/class/backlight/..->
 
 config=${XDG_CONFIG_DIR:-$HOME/.config}/.brightness
-output='setpci -s 00:02.0 F4.B='
-current=$(cat $config|awk '{print $5}'|cut -c6,7)
+output='sudo setpci -s 00:02.0 F4.B='
+current=$(<$config|awk '{print $5}'|cut -c6,7)
 argument="5"
 
 brightness_up() {

@@ -9,31 +9,31 @@ current=$(<$config|awk '{print $5}'|cut -c6,7)
 argument="5"
 
 brightness_up() {
-	if [ $current = FF ]; then
-		exit
-	elif [ $current = 95 ]; then
-		NEW=FF
-		echo $output$NEW > $config
-		. $config
-	else
-		NEW=$(expr $current + $argument)
-		echo $output$NEW > $config
-		. $config
-	fi
+  if [ $current = FF ]; then
+    exit
+  elif [ $current = 95 ]; then
+    NEW=FF
+    echo $output$NEW > $config
+    . $config
+  else
+    NEW=$(expr $current + $argument)
+    echo $output$NEW > $config
+    . $config
+  fi
 }
 
 brightness_down() {
-	if [ $current = 5 ]; then
-		exit
-	elif [ $current = FF ]; then
-		NEW=95
-		echo $output$NEW > $config
-		. $config
-	else
-		NEW=$(expr $current - $argument)
-		echo $output$NEW > $config
-		. $config
-	fi
+  if [ $current = 5 ]; then
+    exit
+  elif [ $current = FF ]; then
+    NEW=95
+    echo $output$NEW > $config
+    . $config
+  else
+    NEW=$(expr $current - $argument)
+    echo $output$NEW > $config
+    . $config
+  fi
 }
 
 brightness_max() {
@@ -60,12 +60,12 @@ EOF
 }
 
 case "$1" in
-	'-u'|'--up')
-	brightness_up
-	;;
-	'-d'|'--down')
-	brightness_down
-	;;
+  '-u'|'--up')
+  brightness_up
+  ;;
+  '-d'|'--down')
+  brightness_down
+  ;;
   '-m'|'--max')
   brightness_max
   ;;
@@ -75,5 +75,3 @@ case "$1" in
   '-h'|'--help'|*) help
   ;;
 esac
-
-# vim:ts=2:sw=2:

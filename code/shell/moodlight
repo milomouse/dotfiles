@@ -10,9 +10,8 @@ argument="5"
 
 brightness_up() {
 	if [ $current = FF ]; then
-		return
-	fi
-	if [ $current = 95 ]; then
+		exit
+	elif [ $current = 95 ]; then
 		NEW=FF
 		echo $output$NEW > $config
 		sh $config
@@ -25,9 +24,8 @@ brightness_up() {
 
 brightness_down() {
 	if [ $current = 5 ]; then
-		return
-	fi
-	if [ $current = FF ]; then
+		exit
+	elif [ $current = FF ]; then
 		NEW=95
 		echo $output$NEW > $config
 		sh $config

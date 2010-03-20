@@ -14,11 +14,11 @@ brightness_up() {
 	elif [ $current = 95 ]; then
 		NEW=FF
 		echo $output$NEW > $config
-		sh $config
+		. $config
 	else
 		NEW=$(expr $current + $argument)
 		echo $output$NEW > $config
-		sh $config
+		. $config
 	fi
 }
 
@@ -28,22 +28,22 @@ brightness_down() {
 	elif [ $current = FF ]; then
 		NEW=95
 		echo $output$NEW > $config
-		sh $config
+		. $config
 	else
 		NEW=$(expr $current - $argument)
 		echo $output$NEW > $config
-		sh $config
+		. $config
 	fi
 }
 
 brightness_max() {
   NEW=FF
   echo $output$NEW > $config
-  sh $config
+  . $config
 }
 
 reassert() {
-  sh $config
+  . $config
 }
 
 help() {

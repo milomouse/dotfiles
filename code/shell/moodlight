@@ -42,6 +42,23 @@ brightness_max() {
   sh $config
 }
 
+reassert() {
+  sh $config
+}
+
+help() {
+<< EOF
+usage: moodlight [OPTION]
+OPTIONS:
+   -u|--up        Brighten the screen.
+   -d|--down      Dim the screen.
+   -m|--max       Set brightness to max.
+   -r|--reassert  Execute last brightness level.
+                  This is useful for startup.
+   -h|--help      Show this help message.
+EOF
+}
+
 case "$1" in
 	'-u'|'--up')
 	brightness_up
@@ -51,5 +68,13 @@ case "$1" in
 	;;
   '-m'|'--max')
   brightness_max
+  ;;
+  '-r'|'--reassert')
+  reassert
+  ;;
+  '-h'|'--help')
+  help
+  ;;
+  * ) help
   ;;
 esac

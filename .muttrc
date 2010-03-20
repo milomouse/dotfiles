@@ -1,129 +1,111 @@
-## ~/.mutt/muttrc
-## basically pbrisin's with minor changes.
-## TODO: meaning to change to another email app.
+# ~/.mutt/muttrc
+# milomouse <vincent[at]fea.st>
 
-# directories and commands
-  set header_cache        = ~/.mutt/cache/headers                 # where to store headers
-  set message_cachedir    = ~/.mutt/cache/bodies                  # where to store bodies
-  set mailcap_path        = ~/.mutt/mailcap                       # entrys for filetypes
-  set signature           = ~/.mutt/sig                           # signature file
-  set tmpdir              = ~/.mutt/temp                          # where to keep temp files
-  set editor              = "vim +/^$"                            # use vim and skip to first blank line
-  set ispell              = "hunspell"                            # use hunspell instead
-  set query_command       = "mutt_vc_query '%s'"                  # query vCards
+# - intrinsic locations:
+set folder           = ~/mail
+set mbox_type        = Maildir
+set spoolfile        = "+FastMail/INBOX"
+set header_cache     = $XDG_CONFIG_DIR/mutt/cache/headers
+set message_cachedir = $XDG_CONFIG_DIR/mutt/cache/bodies
+set mailcap_path     = $XDG_CONFIG_DIR/mutt/mailcap
+set signature        = $XDG_CONFIG_DIR/mutt/sig
+set tmpdir           = $XDG_CONFIG_DIR/mutt/temp
 
-# maildir settings
-  set mbox_type           = Maildir                               # mailbox type
-  set folder              = ~/mail                                # mailbox location
-  set spoolfile           = "+FastMail/INBOX"                     # default inbox
+# - source colors and accounts:
+source $XDG_CONFIG_DIR/mutt/colors.muttrc
+source $XDG_CONFIG_DIR/mutt/fastmail.muttrc
+folder-hook FastMail/* source $XDG_CONFIG_DIR/mutt/fastmail.muttrc
 
-# main options
-unset confirmappend                                               # don't ask, just do
-  set delete                                                      # don't ask, just do
-  set mail_check          = 0                                     # minimum time between scans
-unset markers                                                     # no ugly plus signs
-unset mark_old                                                    # read/new is good enough for me
-  set menu_scroll                                                 # scroll in menus
-  set pager_index_lines   = 10                                    # number of index lines to show
-  set pager_context       = 5                                     # number of context lines to show
-  set pager_stop                                                  # don't go to next message automatically
-  set pipe_decode                                                 # strip headers and eval mimes when piping
-  set reverse_alias                                               # show names from alias file in index
-  set sort                = threads                               # like fastmail
-  set sort_aux            = reverse-last-date-received            # like fastmail
-unset sort_re                                                     # always thread
-  set thorough_search                                             # strip headers and eval mimes before searching
-  set tilde                                                       # show tildes like in vim
-  set timeout             = 3                                     # idle time before scanning
-
-# enriched messages
-auto_view text/html                                               # view html automatically
-alternative_order text/plain text/enriched text/html              # but save it for last
-
-# formats and regexps
-  set alias_format        = "%4n %t %-20a %r"
-  set date_format         = "%m/%d/%y at %I:%M%P"
-  set index_format        = "%3C %Z %[!%m/%d] %-17.17F %s"
-  set quote_regexp        = "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
-  set reply_regexp        = "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"
-  set status_format       = "-%r- %v ─┴────/ %f %m%?n? [+%n]?%?d? [-%d]?%?t? [*%t]? /%?p?───/ %p waiting to send /?─%>─(%P)───"
-
-# composing mail
-  set askcc                                                       # ask for CC:
-  set attribution         = "On %d, %n wrote:"                    # set the attribution
-  set edit_headers                                                # show headers when composing
-  set fast_reply                                                  # skip to compose when replying
-  set forward_format      = "Fwd: %s"                             # format for subject when forwarding
-  set forward_quote                                               # include message in forwards
-  set include                                                     # include message in replies
-  set realname            = "Vincent"	                            # who am i?
-  set reply_to                                                    # reply to Reply to: field
-  set reverse_name                                                # reply as whomever it was to
-
-# headers to show
-ignore *                                                          # ignore all headers
-unignore from: to: cc: date: subject:                             # show only these
-hdr_order from: to: cc: date: subject:                            # and in this order
-
-# lists and boxes
-subscribe arch-announce arch-dev-public arch-general
+# - watch-folders and subscriptions:
 mailboxes +FastMail/INBOX +FastMail/Forums +FastMail/Filesystems +FastMail/Arch-Dev +FastMail/Uzbl-Dev +FastMail/Storage +FastMail/Junk\ Mail +FastMail/Sent\ Items +FastMail/Drafts +FastMail/Trash
+subscribe arch-announce arch-dev-public arch-general
 
-# conditionally source a 256 colors file
-source `FILE=$HOME/.mutt/colors.muttrc; [[ $TERM =~ 256 ]] && FILE=$HOME/.mutt/256colors.muttrc; echo $FILE`
-#source ~/.mutt/colors.muttrc
+# - external handlers:
+set editor           = "vim +/^$"
+set ispell           = "hunspell"
 
-# conditionally source sidebar options 
-source `FILE=$HOME/.mutt/sidebar.muttrc; mutt -v | grep -q sidebar || FILE=/dev/null; echo $FILE`
+# - core settings:
+unset confirmappend
+set delete
+set mail_check = 0
+unset markers
+unset mark_old
+set menu_scroll
+set pager_index_lines = 10
+set pager_context     = 5
+set pager_stop
+set pipe_decode
+set reverse_alias
+set sort = threads
+set sort_aux = reverse-last-date-received
+unset sort_re
+set thorough_search
+set tilde
+set timeout = 3
 
-# these are always sourced
-#source $alias_file                                                # required for functionality
-source ~/.mutt/fastmail.muttrc                                       # source fastmail as default
+# - order of preferred viewing formats:
+auto_view text/html
+alternative_order text/plain text/enriched text/html
 
-# override with account specific folder-hooks
-folder-hook FastMail/* source ~/.mutt/fastmail.muttrc
+# - header information:
+ignore *
+unignore from: to: cc: date: subject:
+hdr_order from: to: cc: date: subject:
 
-# alternate "me"s
-alternates (@fea.st|.*@.com)
+# - composing mail:
+set askcc
+set attribution    = "On %d, %n wrote:"
+set edit_headers
+set fast_reply
+set forward_format = "Fwd: %s"
+set forward_quote
+set include
+set realname       = "Vincent"
+set reply_to
+set reverse_name
 
-# these just give me headaches
-bind index,pager \#   noop
-bind index,pager \&   noop
-bind index i          noop
+# - un-bind some keys:
+bind index,pager \# noop
+bind index,pager \& noop
+bind index,pager i  noop
+bind index,pager q  noop
 
-# bindings - very vim-like
-bind pager i          exit
-bind pager q          toggle-quoted
-bind pager /          search
-bind pager k          previous-line
-bind pager j          next-line
-bind pager gg         top
-bind pager G          bottom
-bind index gg         first-entry
-bind index G          last-entry
-bind pager K          previous-undeleted
-bind pager J          next-undeleted
-bind index K          previous-unread
-bind index J          next-unread
-bind pager l          view-attachments
-bind index l          display-message
-bind browser l        select-entry
-bind attach  l        view-attach
-bind index,pager R    group-reply
+# - key-bindings:
+bind pager z        exit
+bind pager /        search
+bind pager k        previous-line
+bind pager j        next-line
+bind pager gg       top
+bind pager G        bottom
+bind pager K        previous-undeleted
+bind pager J        next-undeleted
+bind pager l        view-attachments
+bind pager,index R  group-reply
+bind index Z        exit
+bind index gg       first-entry
+bind index G        last-entry
+bind index K        previous-unread
+bind index J        next-unread
+bind index l        display-message
+bind browser l      select-entry
+bind attach  l      view-attach
 bind attach,browser h exit
 
-# macros
+# - macros:
+macro index gh  "<change-folder>!<enter>" "go to Inbox"
 macro index h   "c?" "view folders"
 macro index \Cr "<tag-pattern>all<enter><tag-prefix><clear-flag>N<untag-pattern>all<enter>" "mark all as read"
 macro index B   "<limit>~b " "search message bodies"
-macro index I   "<change-folder>!<enter>" "go to Inbox"
 macro index P   "<pipe-message>cat > ~/" "save message as"
-macro index Z   "<shell-escape>/usr/bin/offlineimap -q -o<enter>" "sync IMAP"
+macro index I   "<shell-escape>/usr/bin/offlineimap -u Curses.Blinkenlights -q -o<enter>" "sync IMAP"
 macro index,pager \Cb ":set pipe_decode\n|urlview\n:unset pipe_decode\n"\
 		  "extract URLs out of a message"
 
-# cc myself when replying to an ML
-# note: with this, you can't :q! mid-compose to abort
-# instead, just :wq and abort from the compose menu
-unhook send-hook
-send-hook "~u" "push '<edit-cc>,vincent@fea.st<enter>'"
+# - appearance / formatting:
+set folder_format = "%3C. %-5.5u %-5.5g %2l %s %N %-52.52f %> %t %F"
+set status_format = "───+ %f %m%?n? [+%n]?%?d? [-%d]?%?t? [*%t]? +%?p?───+ %p waiting to send +?─%>─[%P]──"
+set alias_format  = "%4n %t %-20a %r"
+set date_format   = "%Y-%m-%d %T"
+set index_format  = "%3C. %-4c » %-19.19F  %-52.52s %> %Z %d"
+set quote_regexp  = "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
+set reply_regexp  = "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"

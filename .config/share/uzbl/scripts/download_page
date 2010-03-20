@@ -3,8 +3,8 @@
 # NOTE: simple page downloader using wget (sadly, i dont know a "convert" command in curl).
 
 url="$6"
-dest=$XDG_DOWNLOAD_DIR
+dest="$XDG_DOWNLOAD_DIR"
 ratpoison -c "echo Downloading page, please wait.."
 cd $dest
-wget --wait=10 -q --no-proxy --page-requisites --convert-links --html-extension --no-parent --limit-rate=30K -U Mozilla -l 0 "$url" && cd ; \
+wget --wait=11 -q --no-proxy --page-requisites --convert-links --html-extension --no-parent --limit-rate=30K -U Mozilla -l 0 "$url" && cd ; \
 ratpoison -c "echo Download complete."

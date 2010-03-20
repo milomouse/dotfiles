@@ -103,7 +103,7 @@ exit 0
 
 # simply exit focused uzbl window:
 close_current_no_save() {
-if [ $(ps xo command|grep uzbl-core|wc -l) = 2 ]; then
+if [[ $(ps xo command|grep uzbl-core|wc -l) -eq 2 ]]; then
   close_all
 else
   print "exit" > $focusedfifo

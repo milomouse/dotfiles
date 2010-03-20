@@ -31,19 +31,21 @@ return {
                         ["split_tree"] = {
                             ["tls"] = 682,
                             ["tl"] = {
-                                ["tls"] = 476,
+                                ["tls"] = 346,
                                 ["tl"] = {
                                     ["regparams"] = {
-                                        ["mode"] = 1,
                                         ["type"] = "WFrame",
                                         ["name"] = "WFrame<2>",
+                                        ["saved_x"] = 0,
+                                        ["mode"] = 1,
                                         ["managed"] = {
                                         },
+                                        ["saved_w"] = 682,
                                     },
                                     ["type"] = "WSplitRegion",
                                 },
                                 ["dir"] = "vertical",
-                                ["brs"] = 292,
+                                ["brs"] = 422,
                                 ["br"] = {
                                     ["regparams"] = {
                                         ["type"] = "WFrame",
@@ -52,7 +54,7 @@ return {
                                         ["mode"] = 1,
                                         ["managed"] = {
                                         },
-                                        ["saved_w"] = 762,
+                                        ["saved_w"] = 682,
                                     },
                                     ["type"] = "WSplitRegion",
                                 },
@@ -61,7 +63,7 @@ return {
                             ["dir"] = "horizontal",
                             ["brs"] = 684,
                             ["br"] = {
-                                ["tls"] = 274,
+                                ["tls"] = 346,
                                 ["tl"] = {
                                     ["regparams"] = {
                                         ["mode"] = 1,
@@ -73,32 +75,16 @@ return {
                                     ["type"] = "WSplitRegion",
                                 },
                                 ["dir"] = "vertical",
-                                ["brs"] = 494,
+                                ["brs"] = 422,
                                 ["br"] = {
-                                    ["tls"] = 247,
-                                    ["tl"] = {
-                                        ["regparams"] = {
-                                            ["mode"] = 1,
-                                            ["type"] = "WFrame",
-                                            ["name"] = "WFrame<7>",
-                                            ["managed"] = {
-                                            },
+                                    ["regparams"] = {
+                                        ["mode"] = 1,
+                                        ["type"] = "WFrame",
+                                        ["name"] = "WFrame",
+                                        ["managed"] = {
                                         },
-                                        ["type"] = "WSplitRegion",
                                     },
-                                    ["dir"] = "vertical",
-                                    ["brs"] = 247,
-                                    ["br"] = {
-                                        ["regparams"] = {
-                                            ["mode"] = 1,
-                                            ["type"] = "WFrame",
-                                            ["name"] = "WFrame<4>",
-                                            ["managed"] = {
-                                            },
-                                        },
-                                        ["type"] = "WSplitRegion",
-                                    },
-                                    ["type"] = "WSplitSplit",
+                                    ["type"] = "WSplitRegion",
                                 },
                                 ["type"] = "WSplitSplit",
                             },
@@ -136,7 +122,7 @@ return {
                             ["regparams"] = {
                                 ["mode"] = 1,
                                 ["type"] = "WFrame",
-                                ["name"] = "WFrame<6>",
+                                ["name"] = "WFrame<4>",
                                 ["managed"] = {
                                 },
                             },

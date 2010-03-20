@@ -17,5 +17,6 @@ type = IMAP
 remotehost = mail.messagingengine.com
 remoteuser = vincent@fea.st
 remoteport = 142
+remotepass = mFC4_INS1lY_ba7D
  
 # vim: ft=cfg tw=0

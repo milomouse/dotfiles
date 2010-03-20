@@ -45,6 +45,7 @@ quick_set() {
     elif [[ $i -gt 9 ]]; then
       ratpoison -c "echo Value too high."
       exit
+    # this is important:
     elif [[ $i = "0" ]]; then
       i="10"
       rm -f $tempfile >&/dev/null && touch $tempfile
@@ -60,7 +61,7 @@ quick_set() {
   done
 }
 
-# find a better way to do this:
+# find a better way to do this: (head -$i, but how to read go* from uzbl config)
 go1() { print uri "$(<$savefile|head -1|tail -1)" | socat - unix-connect:$socket >&/dev/null }
 go2() { print uri "$(<$savefile|head -2|tail -1)" | socat - unix-connect:$socket >&/dev/null }
 go3() { print uri "$(<$savefile|head -3|tail -1)" | socat - unix-connect:$socket >&/dev/null }
@@ -74,7 +75,7 @@ go0() { print uri "$(<$savefile|head -10|tail -1)"| socat - unix-connect:$socket
 
 # in case a typo or something is passed in the config:
 error() {
-  ratpoison -c "echo Error: Unknown option."
+  ratpoison -c "echo Error: \"$1\": unknown option."
   exit 1
 }
 

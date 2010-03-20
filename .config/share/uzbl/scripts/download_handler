@@ -3,19 +3,24 @@
 # NOTE: simple download handler using curl.
 # TODO: utilize better base{} finders.
 
-#referer="'http://ixquick.com/do/metasearch.pl?query="$7"'" # curl -e $referer ..
-#uagent="'Uzbl (Webkit $(pacman -Qs libwebkit|sed '$ d'|awk '{print $2}')) ($(uname -o) $(uname -m) [$(uname -m)])'"
-uagent="Mozilla/5.0"
+uagent="Uzbl (Webkit 1.1.22) ($(uname -o) $(uname -m) [$(uname -m)])"
+#uagent="Mozilla/5.0"
 cjar="$XDG_DATA_HOME/uzbl/cookies.txt"
-
-# basic variables; keep website basename as folder for downloads so as not to clobber:
 export http_proxy="$9"
 url="$8"
-basedir=$(print "$url"|tr ' ' '_'|tr '/' '\n'|grep '.com\|.net\|.org\|.gov\|.fm\|.jp\|.de\|.pl\|.ca\|.us'|sed '2,$ d')
+basedir=$(print "$url"|tr ' ' '_'|tr '/' '\n'|grep '.*\.com\|.*\.net\|.*\.org\|.*\.gov\|.*\.fm\|.*\.jp\|.*\.de\|.*\.pl\|.*\.ca\|.*\.us'|sed '2,$d;s|www.||')
 basename=$(print "$url"|tr ' ' '_'|tr '/' '\n'|sed '$ !d')
-dest="$XDG_DOWNLOAD_DIR/$basedir"
+
+# change $dest on special occassions, else put download into a directory named after website:
+if [[ -n $(print $url|grep -E '.*\.torrent') ]]; then
+  dest="$HOME/tors"
+elif [[ -n $(print $url|grep '.*\.png\|.*\.PNG\|.*\.jpg\|.*\.JPG\|.*\.jpeg\|.*\.JPEG\|.*\.gif\|.*\.GIF\|.*\.tiff\|.*\.TIFF\|.*\.svg\|.*\.SVG') ]]; then
+  dest="$XDG_PICTURES_DIR"
+else
+  dest="$XDG_DOWNLOAD_DIR/$basedir"
+fi
 
 # start download..
 ratpoison -c "echo Downloading page, please wait.."
-curl --user-agent $uagent --ssl -k --retry 3 --retry-delay 5 -c $cjar --max-redirs 1 --create-dirs -C - "$url" -o "$dest/$basename"
+curl -s --user-agent $uagent --ssl -k --retry 3 --retry-delay 11 -c $cjar --max-redirs 1 --create-dirs -C - "$url" -o "$dest/$basename"
 ratpoison -c "echo Download complete."

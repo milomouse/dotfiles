@@ -1,10 +1,10 @@
 #!/bin/zsh
-## Change screen brightness on computers where linux
-## fails to detect function keys for it.
-## More dynamic than /sys/class/backlight/..->
+# milomouse <vincent[at]fea.st>
+# NOTE: Change the screen brightness on some computers where linux fails to detect.
 
-config=${XDG_CONFIG_DIR:-$HOME/.config}/.brightness
 output='sudo setpci -s 00:02.0 F4.B='
+config=${XDG_CONFIG_DIR:-$HOME/.config}/.brightness
+[[ -f $config ]] || echo $output\FF > $config
 current=$(<$config|awk '{print $5}'|cut -c6,7)
 argument="5"
 

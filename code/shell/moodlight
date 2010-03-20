@@ -72,9 +72,6 @@ case "$1" in
   '-r'|'--reassert')
   reassert
   ;;
-  '-h'|'--help')
-  help
-  ;;
-  * ) help
+  '-h'|'--help'|*) help
   ;;
 esac

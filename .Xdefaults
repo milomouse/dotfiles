@@ -32,12 +32,12 @@ Xcursor.size: 10
 *color8:  #171717
  !red
 *color1:  #9c8093
-*color9:  #ffadcc
+*color9:  #dfa6bb
  !green
-*color2:  #7ac4ad
-*color10: #9ed7ca
+*color2:  #799c99
+*color10: #85afa9
  !yellow
-*color3:  #adaa8d
+*color3:  #b0ad90
 *color11: #c4c497
  !blue
 *color4:  #3f4f60

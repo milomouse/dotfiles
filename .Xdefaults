@@ -1,5 +1,5 @@
 ## ~/.Xdefaults
-## milomouse
+## milomouse <vincent[at]fea.st>
 
 urxvt*termName: rxvt-256color
 urxvt*loginShell: true
@@ -20,36 +20,48 @@ urxvt*transparent: false
 urxvt*shading: 4
 urxvt*fading: 35
 urxvt*cursorColor: #a488d9
-
 Xcursor.theme: whiteglass
 Xcursor.size: 10
 
- !milomouse
+!!colors:
 *background: #060606
 *foreground: #a9a6af
- !black
+
+  !candymouse
 *color0:  #050505
 *color8:  #171717
- !red
-*color1:  #9c8093
+*color1:  #a28699
 *color9:  #dfa6bb
- !green
 *color2:  #799c99
 *color10: #85afa9
- !yellow
 *color3:  #b0ad90
 *color11: #c4c497
- !blue
-*color4:  #3f4f60
+*color4:  #87afd7
 *color12: #98a7b6
- !magenta
 *color5:  #a488d9
-*color13: #b7a7bc
- !cyan
-*color6:  #8d9fa6
-*color14: #b8ddea
- !white
-*color7:  #665c64
-*color15: #787a76
+*color13: #9f8bab
+*color6:  #6c7373
+*color14: #a3babf
+*color7:  #9d9d9d
+*color15:  #9d9d9d
+!*color15: #787876
+
+#  !cottonmouse
+!*color0:  #050505
+!*color8:  #171717
+!*color1:  #9c8093
+!*color9:  #dfa6bb
+!*color2:  #799c99
+!*color10: #85afa9
+!*color3:  #b0ad90
+!*color11: #c4c497
+!*color4:  #3f4f60
+!*color12: #98a7b6
+!*color5:  #a488d9
+!*color13: #b7a7bc
+!*color6:  #8d9fa6
+!*color14: #b8ddea
+!*color7:  #665c64
+!*color15: #787a76
 
 # vim:enc=utf-8:nu:ai:si:et:ts=4:sw=4:ft=xdefaults:

@@ -1,5 +1,4 @@
 ## ~/.mutt/colors.muttrc
-## milomouse
 
 # set default
   color normal     magenta       default
@@ -25,8 +24,8 @@ uncolor index "~D"
 # and recolor them appropriately
   color index      blue          default "~P"
   color index      green         default "~C @.com"
-  color index      blue          default "~N ~u"  # new ML mail
-  color index      brightmagenta default "~N !~u" # new non-ML mail
+  color index      brightblue    default "~N ~u"  # new ML mail
+  color index      blue          default "~N !~u" # new non-ML mail
   color index      red           default "~T"
   color index      brightred     default "~D"
 
@@ -45,19 +44,19 @@ uncolor index "~D"
 
 # urls
   color body       brightblue    default "(^|<| )mailto:[^ ]+@[^ ]( |>|$)"
-  color body       brightblack   default "(^|<| )(http|https|ftp|file|telnet|news|finger)://[^ ]+( |>|$)"
+  color body       brightblack   default "(^|<| )(scp|http|https|ftp|file|telnet|news|finger)://[^ ]+( |>|$)"
 
 # emoticons
   color body       brightmagenta default "(^| )+(|[<>|])[8;:](|[^ ])[)(/|DOPS]( |$)+"
   color body       brightmagenta default "(^| )+[)(/|DOPS](|[^ ])[8;:](|[<>|])( |$)+"
 
 # *bold*, _underline_, and /italic/
-  color body       brightred     default "(^| )\\*[^ ]+\\*( |$)"
+  color body       white         default "(^| )\\*[^ ]+\\*( |$)"
 #  color body       brightcyan    default "(^| )_[^ ]+_( |$)"
 #  color body       brightcyan    default "(^| )/[^ ]+/( |$)"
 
 # quote blocks
-  color quoted     magenta       default
+  color quoted     blue          default
 #  color quoted1    cyan          default
 #  color quoted2    green         default
   color quoted3    magenta       default

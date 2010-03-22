@@ -1,0 +1,175 @@
+# playing movies:
+function mp() {
+  case $1 in
+  'm')
+  [ $(mpc|wc -l) != 3 ] || mpc toggle >>/dev/null
+  for vol in $(ossmix|grep outvol|awk '{print $4}'); do
+    ossmix vmix0-outvol 22 >>/dev/null
+    mplayer -really-quiet $@
+    ossmix vmix0-outvol $vol >>/dev/null
+  done
+  [[ ! -n $(mpc|grep "\[paused\]") ]] || mpc toggle >>/dev/null
+  ;;
+  'n') mplayer -nosound -really-quiet $@
+  ;;
+  'q') mplayer -really-quiet $@
+  ;;
+  esac
+}
+
+# simple dvd ripping (if I need more flexibility I'll issue manually from cli):
+function vrip() {
+  printf "Enter title number, or -L for longest title: "
+  read T
+  if [[ $T = [0-9] ]]; then
+    T="-t $T"
+  elif [[ $T != "-L" ]]; then
+    print "Title was not -L or numerical, quitting."; return 1
+  fi
+  printf "Enter file size(xMB/GB): "
+  read B
+  if [[ ! -n $(print $B|grep "[0-9].MB\|[0-9]\.GB") ]]; then; print "Incorrect size, quitting."; return 1; fi
+  printf "Enter filename(.ext) for this clip: "
+  read F
+  if [[ ! -n $(print $F|grep '.*\.') ]]; then; print "No file extension found, quitting."; return 1; fi
+  print "Everything seems ok. Starting DVD rip:"
+  HandBrakeCLI -e x264 -E ac3 -6 dp12 -R 48 -b 1800 -B 160 -D 3.0 -2 -T -5 -x \
+  qp=0:aq-strength=1.5:direct=auto:bframes=6:mixed-refs:no-fast-pskip:8x8dct \
+  -i /dev/dvd $T -S $B -o $F
+}
+
+# connect to ssh-agent:
+function agent-s {
+  local SSH_ENV="$HOME/.ssh/environment"
+  echo "Initializing new SSH agent ..."
+  if [[ -f ${SSH_ENV} ]]; then
+    rm ${SSH_ENV} >&/dev/null
+  fi
+  if [ ! $(ps -a|grep -i ssh-agent) ]; then
+    /usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
+    echo succeeded
+    chmod 600 "${SSH_ENV}"
+    . "${SSH_ENV}" > /dev/null
+    /usr/bin/ssh-add;
+    git pull origin master
+  else
+    killall ssh-agent &>/dev/null
+  fi
+}
+
+# show 256 colors:
+function 256co() {
+  perl -e 'foreach $i (0..255) {printf("\e[38;5;$i"."m%03d\e[0m ",$i); }'
+}
+
+# go up X amount of directories:
+function up(){
+  local arg=${1:-1};
+  while [ $arg -gt 0 ]; do
+    cd .. >&/dev/null;
+    arg=$(($arg - 1));
+  done
+}
+
+# jump to previous directory:
+function back() {
+  pushd -q -$1
+}
+
+# copy and follow file to new dir:
+function cpf () {             
+if [[ -d $*[-1] ]]; then
+  cp $* && cd $*[-1]
+elif [[ -d ${*[-1]%/*} ]]; then
+  cp $* && cd ${*[-1]%/*}
+fi
+}
+
+# move and follow file to new dir:
+function mvf () {             
+if [[ -d $*[-1] ]]; then
+  mv $* && cd $*[-1]
+elif [[ -d ${*[-1]%/*} ]]; then
+  mv $* && cd ${*[-1]%/*}
+fi
+}
+
+# make folder and chdir into it:
+function mkcd() {
+  mkdir -p "$@"
+  cd "$@"
+}
+
+# clean up after agent-s before trying to reboot:
+function reboot() {
+  killall ssh-agent &>/dev/null
+  rm $HOME/.ssh/environment &>/dev/null
+  sudo reboot
+}
+
+# clean up after agent-s before trying to poweroff:
+function poweroff() {
+  killall ssh-agent &>/dev/null
+  rm $HOME/.ssh/environment &>/dev/null
+  sudo poweroff
+}
+
+# extract archive with preferred options:
+function extr() {
+  if [ -f $1 ] ; then 
+    case $1 in
+      *.tar.bz2)   tar xjf $1    ;;
+      *.tar.gz)    tar xzf $1    ;;
+      *.bz2)       bunzip2 $1    ;;
+      *.rar)       unrar e $1    ;;
+      *.gz)        gunzip $1     ;;
+      *.tar)       tar xf $1     ;;
+      *.tbz2)      tar xjf $1    ;;
+      *.tgz)       tar xzf $1    ;;
+      *.zip)       unzip $1      ;;
+      *.Z)         uncompress $1 ;;
+      *.7z)        7z x $1    	 ;;
+      *.xz)        unxz -vk $1	 ;;
+      *.lzma)      unlzma -vk $1 ;;
+      *)           echo "'$1' cannot be extracted via extr()" ;;
+    esac
+  else
+    echo "'$1' is not a valid file"
+fi
+}
+
+# {start,stop,restart} daemon:
+function rcstart() { 
+  sudo /etc/rc.d/$1 start; 
+}
+function rcstop() { 
+  sudo /etc/rc.d/$1 stop; 
+}
+function rcrestart() { 
+  sudo /etc/rc.d/$1 restart; 
+}
+
+# reload a module:
+function reprobe() {
+  sudo modprobe -r $1
+  sudo modprobe $1
+}
+
+# quickly view definitions:
+function sd() {
+  case $1 in
+    -w | -wordnet ) sdcv -u "WordNet" $2 ;;
+    -t | -thesaurus ) sdcv -u "English Thesaurus" $2 ;;
+    -a | -all ) sdcv $2 | less ;;
+    *) sdcv -u "WordNet" $1
+  esac
+}
+
+# un-smart function for my todo lists:
+function todo() {
+  local dir=$HOME/othe
+  case $1 in
+    -l ) ls -1 $dir/.TODO* ;;
+    * ) vim $dir/.TODO_$1 ;;
+  esac
+}

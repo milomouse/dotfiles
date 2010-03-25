@@ -6,8 +6,6 @@ set startup /home/milo/.config/musca/musca_start
 set frame_display_hidden 2
 set frame_resize 10
 set dmenu dmenu -i
-#set dmenu dzen2 -m -fn fixed-7 -bg '#625873' -fg '#b7b7b7' -x 964 -y 2
-#set notify echo " NOTICE: "`cat`|dzen2 -ta l -h 12 -fn fixed-7 -bg '#625873' -fg '#a0a0a0' -x 964 -y 2 -p 4 -w 400
 hook on ^only border off
 # borders
 set border_focus #a488d9
@@ -18,6 +16,7 @@ set border_dedicate_focus #ffadcc
 set border_dedicate_unfocus #ffadcc
 # common/ease-of-use bindings
 bind off all
+bind on Mod1+r run /home/milo/.config/musca/only
 bind on Mod1+Return exec urxvt -e tmux
 bind on Mod1+Shift+Return exec urxvt
 bind on Mod1+p exec urxvt -e ncmpcpp
@@ -33,7 +32,7 @@ bind on Mod1+a catchall flip
 bind on Mod1+s stack flip
 bind on Mod1+d dedicate flip
 bind on Mod1+b refresh
-bind on Mod1+r remove
+bind on Mod1+z remove
 bind on Mod1+u undo
 bind on Mod1+o only
 # directional/movement bindings
@@ -77,9 +76,8 @@ bind on Mod1+period use (next)
 bind on Mod1+comma use (prev)
 # layout bindings
 bind on Mod1+F1 load /home/milo/.config/musca/2v-2h
-bind on Mod1+F2 load /home/milo/.config/musca/2v-2h_1big
+bind on Mod1+F2 load /home/milo/.config/musca/2v-3h
 bind on Mod1+F3 load /home/milo/.config/musca/1v-2h
-bind on Mod1+F4 load /home/milo/.config/musca/2v-3h
 # startup stuff
 use 0
 exec urxvt -e tmux

@@ -1,11 +1,9 @@
---
 -- Query module configuration.
---
+-- milomouse <vincent[at]fea.st>
+
 -- Only bindings that are in effect in queries and message displays are
 -- configured here. Actions to display queries are configured in
 -- ion-bindings.lua
--- 
-
 
 defbindings("WEdln", {
     bdoc("Move one character forward/backward."),

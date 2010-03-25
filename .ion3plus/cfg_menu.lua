@@ -1,11 +1,9 @@
---
 -- Menu module configuration. 
--- 
+-- milomouse <vincent[at]fea.st>
+
 -- Only bindings that are effect in menus are configured here. 
 -- See ion-menus.lua for menu definitions and ion-bindings.lua
 -- for bindings to display menus.
---
-
 
 defbindings("WMenu", {
     bdoc("Close the menu."),
@@ -29,4 +27,3 @@ defbindings("WMenu", {
     bdoc("Clear the menu's typeahead find buffer."),
     kpress("BackSpace", "WMenu.typeahead_clear(_)"),
 })
-

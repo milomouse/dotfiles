@@ -1,6 +1,4 @@
---
 -- Ion dock module configuration
---
 
 -- Create a dock
 mod_dock.create{
@@ -22,13 +20,11 @@ mod_dock.create{
     name="*dock*",
 }
 
-
 -- For floating docks, you may want the following toggle binding.
 defbindings("WScreen", {
     bdoc("Toggle floating dock."),
-    kpress(META.."D", "mod_dock.set_floating_shown_on(_, 'toggle')")
+    kpress(META.."d", "mod_dock.set_floating_shown_on(_, 'toggle')")
 })
-
 
 -- Dock settings menu. For this to work, mod_menu must have been loaded 
 -- previously.
@@ -48,4 +44,3 @@ if mod_menu then
         mpress("Button3", "mod_menu.pmenu(_, _sub, 'dock-settings')"),
     })
 end
-

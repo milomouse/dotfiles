@@ -29,24 +29,10 @@ return {
                             ["h"] = 768,
                         },
                         ["split_tree"] = {
-                            ["tls"] = 682,
+                            ["tls"] = 670,
                             ["tl"] = {
-                                ["tls"] = 346,
+                                ["tls"] = 384,
                                 ["tl"] = {
-                                    ["regparams"] = {
-                                        ["type"] = "WFrame",
-                                        ["name"] = "WFrame<2>",
-                                        ["saved_x"] = 0,
-                                        ["mode"] = 1,
-                                        ["managed"] = {
-                                        },
-                                        ["saved_w"] = 682,
-                                    },
-                                    ["type"] = "WSplitRegion",
-                                },
-                                ["dir"] = "vertical",
-                                ["brs"] = 422,
-                                ["br"] = {
                                     ["regparams"] = {
                                         ["type"] = "WFrame",
                                         ["name"] = "WFrame<3>",
@@ -54,28 +40,44 @@ return {
                                         ["mode"] = 1,
                                         ["managed"] = {
                                         },
-                                        ["saved_w"] = 682,
+                                        ["saved_w"] = 683,
+                                    },
+                                    ["type"] = "WSplitRegion",
+                                },
+                                ["dir"] = "vertical",
+                                ["brs"] = 384,
+                                ["br"] = {
+                                    ["regparams"] = {
+                                        ["saved_w"] = 683,
+                                        ["type"] = "WFrame",
+                                        ["name"] = "WFrame<2>",
+                                        ["saved_x"] = 0,
+                                        ["saved_h"] = 384,
+                                        ["mode"] = 1,
+                                        ["managed"] = {
+                                        },
+                                        ["saved_y"] = 384,
                                     },
                                     ["type"] = "WSplitRegion",
                                 },
                                 ["type"] = "WSplitSplit",
                             },
                             ["dir"] = "horizontal",
-                            ["brs"] = 684,
+                            ["brs"] = 696,
                             ["br"] = {
-                                ["tls"] = 346,
+                                ["tls"] = 384,
                                 ["tl"] = {
                                     ["regparams"] = {
                                         ["mode"] = 1,
                                         ["type"] = "WFrame",
-                                        ["name"] = "WFrame<8>",
+                                        ["name"] = "WFrame<1>",
                                         ["managed"] = {
                                         },
                                     },
                                     ["type"] = "WSplitRegion",
                                 },
                                 ["dir"] = "vertical",
-                                ["brs"] = 422,
+                                ["brs"] = 384,
                                 ["br"] = {
                                     ["regparams"] = {
                                         ["mode"] = 1,

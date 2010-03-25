@@ -1,10 +1,5 @@
---
 -- Layouts for Ion
---
-
---
--- Helper routines and structures
---
+-- milomouse <vincent[at]fea.st>
 
 -- Tiled frame template for the layouts below
 local a_frame = {
@@ -39,9 +34,7 @@ local function mktiling(split_tree)
     }
 end
 
---
 -- The layouts
---
 
 -- Tiling with single 1:1 horizontal split
 ioncore.deflayout("hsplit",

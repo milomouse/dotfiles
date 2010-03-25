@@ -1,6 +1,5 @@
---## ~/.ion3/cfg_ion.lua
---## milomouse
-
+-- Ion main configuration file
+-- milomouse <vincent[at]fea.st>
 
 XTERM="urxvt"
 

@@ -24,7 +24,7 @@ de.defstyle("*", {
     shadow_pixels = 3,
     shadow_colour = "black",
     border_style = "elevated",
-    text_align = "right",
+    text_align = "left",
     font = "-*-fixed-*-*-*-*-9-*-*-*-*-*-*-*",
     de.substyle("important", { foreground_colour = "#b092a4", }),
     de.substyle("critical", { foreground_colour = "#b67caa", }),
@@ -84,7 +84,7 @@ de.defstyle("tab", {
     highlight_pixels = 1,
     shadow_pixels = 1,
     shadow_colour = baleful_ghost,
-    text_align = "right",
+    text_align = "left",
     font = "-*-fixed-*-*-*-*-7-*-*-*-*-*-*-*",
     de.substyle("active-selected", {
 	foreground_colour = faded_ghost,

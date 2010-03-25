@@ -1,12 +1,9 @@
---
 -- Ion core configuration file
---
+-- milomouse <vincent[at]fea.st>
 
--- 
 -- Bindings. This includes global bindings and bindings common to
 -- screens and all types of frames only. See modules' configuration 
 -- files for other bindings.
---
 
 -- WScreen context bindings
 --
@@ -52,15 +49,6 @@ defbindings("WScreen", {
         
         bdoc("Clear all tags."),
         kpress("t", "ioncore.tagged_clear()"),
-        
-	      bdoc("Lock the screen."),
-        kpress("Delete", "ioncore.exec_on(_, 'alock -bg shade:shade=30 -cursor glyph -auth pam')"),
-
-        bdoc("Take a screenshot of current workspace."),
-        kpress("End", "ioncore.exec_on(_, 'import -window root ~/foto/shot/$(date +%Y_%m_%d-%H%M).png')"),
-
-        bdoc("Banish the mouse (and then return it to it's previous state)."),
-        kpress("b", "ioncore.exec_on(_, 'synap')"),
     }),
 
     bdoc("Go to n:th screen on multihead setup."),
@@ -108,7 +96,6 @@ defbindings("WScreen", {
 -- Client window bindings
 --
 -- These bindings affect client windows directly.
-
 defbindings("WClientWin", {
     bdoc("Nudge the client window. This might help with some "..
          "programs' resizing problems."),
@@ -126,10 +113,9 @@ defbindings("WClientWin", {
 
 
 -- Client window group bindings
-
 defbindings("WGroupCW", {
     bdoc("Toggle client window group full-screen mode"),
-    kpress_wait(META.."Return", "WGroup.set_fullscreen(_, 'toggle')"),
+    kpress_wait(META.."o", "WGroup.set_fullscreen(_, 'toggle')"),
 })
 
 
@@ -137,7 +123,6 @@ defbindings("WGroupCW", {
 --
 -- These bindings work in frames and on screens. The innermost of such
 -- contexts/objects always gets to handle the key press. 
-
 defbindings("WMPlex", {
     bdoc("Close current object."),
     kpress_wait(META.."x", "WRegion.rqclose_propagate(_, _sub)"),
@@ -148,32 +133,32 @@ defbindings("WMPlex.toplevel", {
     bdoc("Toggle tag of current object."),
     kpress(META.."t", "WRegion.set_tagged(_sub, 'toggle')", "_sub:non-nil"),
 
+    bdoc("Run a terminal emulator with tmux instance."),
+    kpress(META.."Return", "ioncore.exec_on(_, URXVT or 'urxvt -e tmux')"),
+
+    bdoc("Run a terminal emulator."),
+    kpress(META.."Shift+Return", "ioncore.exec_on(_, URXVT or 'urxvt')"),
+    
     bdoc("Query for manual page to be displayed."),
     kpress(ALTMETA.."F1", "mod_query.query_man(_, ':man')"),
 
-    bdoc("Query for Lua code to execute."),
-    kpress(META.."F1", "mod_query.query_lua(_)"),
-    
-    bdoc("Run a terminal emulator with tmux instance."),
-    kpress(ALTMETA.."F2", "ioncore.exec_on(_, URXVT or 'urxvt -e tmux')"),
-
-    bdoc("Run a terminal emulator."),
-    kpress(META.."F2", "ioncore.exec_on(_, URXVT or 'urxvt')"),
-
     bdoc("Query for command line to execute."),
-    kpress(META.."F3", "mod_query.query_exec(_)"),
-    
-    bdoc("Query for command line to execute in current frame."),
-    kpress(ALTMETA.."F3", "run_here(_)"),
+    kpress(ALTMETA.."F2", "mod_query.query_exec(_)"),
 
+    bdoc("Query for command line to execute in current frame."),
+    kpress(META.."F2", "run_here(_)"),
+
+    bdoc("Query for Lua code to execute."),
+    kpress(ALTMETA.."F3", "mod_query.query_lua(_)"),
+    
     bdoc("Query for host to connect to with SSH."),
     kpress(ALTMETA.."F4", "mod_query.query_ssh(_, ':ssh')"),
 
-    bdoc("Query for file to edit."),
-    kpress(ALTMETA.."F5", "mod_query.query_editfile(_, ':vim $1')"),
-
     bdoc("Query for file to view."),
-    kpress(ALTMETA.."F6", "mod_query.query_runfile(_, ':3view $1')"),
+    kpress(ALTMETA.."F7", "mod_query.query_runfile(_, ':3view $1')"),
+
+    bdoc("Query for file to edit."),
+    kpress(ALTMETA.."F8", "mod_query.query_editfile(_, ':vim $1')"),
 
     bdoc("Query for workspace to go to or create a new one."),
     kpress(ALTMETA.."F9", "mod_query.query_workspace(_)"),
@@ -200,19 +185,19 @@ defbindings("WMPlex.toplevel", {
 --
 -- These bindings are common to all types of frames. Some additional
 -- frame bindings are found in some modules' configuration files.
-
 defbindings("WFrame", {
     submap(META.."semicolon", {
         bdoc("Maximize the frame horizontally/vertically."),
         kpress("h", "WFrame.maximize_horiz(_)"),
         kpress("v", "WFrame.maximize_vert(_)"),
+        bdoc("Begin move/resize mode."),
+        kpress("r", "WFrame.begin_kbresize(_)"),
     }),
     
     kpress(META..LEFT.."+Control", "WFrame.dec_index(_, _sub)", "_sub:non-nil"),
     kpress(META..RIGHT.."+Control", "WFrame.inc_index(_, _sub)", "_sub:non-nil"),
     kpress(META.."p", "WFrame.switch_prev(_)"),
     kpress(META.."n", "WFrame.switch_next(_)"),
-    --kpress(META.."Tab", "WFrame.switch_next(_)"),
 
     bdoc("Display context menu."),
     mpress("Button3", "mod_menu.pmenu(_, _sub, 'ctxmenu')"),
@@ -237,7 +222,6 @@ defbindings("WFrame", {
 })
 
 -- Frames for transient windows ignore this bindmap
-
 defbindings("WFrame.toplevel", {
     bdoc("Query for a client window to attach."),
     kpress(META.."a", "mod_query.query_attachclient(_)"),
@@ -276,7 +260,6 @@ defbindings("WFrame.toplevel", {
 })
 
 -- Bindings for floating frames.
-
 defbindings("WFrame.floating", {
     bdoc("Toggle shade mode"),
     mdblclick("Button1@tab", "WFrame.set_shaded(_, 'toggle')"),
@@ -299,7 +282,6 @@ defbindings("WFrame.floating", {
 -- These bindings are available keyboard move/resize mode. The mode
 -- is activated on frames with the command begin_kbresize (bound to
 -- META.."R" above by default).
-
 defbindings("WMoveresMode", {
     bdoc("Cancel the resize mode."),
     kpress("AnyModifier+Escape","WMoveresMode.cancel(_)"),
@@ -339,11 +321,8 @@ defbindings("WMoveresMode", {
 })
 
 
---
 -- Menu definitions
 --
-
-
 -- Main menu
 defmenu("mainmenu", {
     menuentry("Run...",         "mod_query.query_exec(_)"),

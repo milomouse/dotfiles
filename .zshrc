@@ -99,8 +99,8 @@ export LANG="en_US.utf8"
 export LC_ALL="en_US.utf8"
 export LC="en_US.utf8"
 export LESSCHARSET="utf-8"
-export LESS_TERMCAP_mb=$'\E[00;34m'
-export LESS_TERMCAP_md=$'\E[00;34m'
+export LESS_TERMCAP_mb=$'\E[01;35m'
+export LESS_TERMCAP_md=$'\E[01;35m'
 export LESS_TERMCAP_me=$'\E[0m'
 export LESS_TERMCAP_se=$'\E[0m'
 export LESS_TERMCAP_so=$'\E[01;46;30m'
@@ -120,9 +120,9 @@ export XDG_TEMPLATES_DIR="/dev/shm"
 export XDG_VIDEOS_DIR="$HOME/vide"
 export XAUTHORITY="$HOME/.config/.Xauthority"
 
-# candymouse framebuffer colors:
+# framebuffer colors:
 if [ "$TERM" = "linux" ]; then
-    echo -en "\e]P0020202"
+    echo -en "\e]P0090909"
     echo -en "\e]P8171717"
     echo -en "\e]P19c8093"
     echo -en "\e]P9dfa6bb"
@@ -130,13 +130,13 @@ if [ "$TERM" = "linux" ]; then
     echo -en "\e]PA85afa9"
     echo -en "\e]P3b0ad90"
     echo -en "\e]PBc4c497"
-    echo -en "\e]P466AABB"
-    echo -en "\e]PCAACCBB"
+    echo -en "\e]P487afd7"
+    echo -en "\e]PC98a7b6"
     echo -en "\e]P5a488d9"
     echo -en "\e]PD9f8bab"
-    echo -en "\e]P65E7175"
-    echo -en "\e]PEA3BABF"
-    echo -en "\e]P7D6D8D9"
-    echo -en "\e]PF6C887A"
-    clear
+    echo -en "\e]P66c7373"
+    echo -en "\e]PEa3babf"
+    echo -en "\e]P7999999"
+    echo -en "\e]PF98a7b6"
+#    clear
 fi

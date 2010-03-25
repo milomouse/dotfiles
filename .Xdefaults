@@ -23,15 +23,18 @@ urxvt*cursorColor: #a488d9
 Xcursor.theme: whiteglass
 Xcursor.size: 10
 
-!!colors:
+! colors:
+#0:black 1:red 2:green 3:yellow
+#4:blue 5:magenta 6:cyan 7:white
+
 *background: #060606
 *foreground: #a9a6af
 
   !candymouse
-*color0:  #050505
+*color0:  #090909
 *color8:  #171717
 *color1:  #a28699
-*color9:  #dfa6bb
+*color9:  #9c8093
 *color2:  #799c99
 *color10: #85afa9
 *color3:  #b0ad90
@@ -42,9 +45,8 @@ Xcursor.size: 10
 *color13: #9f8bab
 *color6:  #6c7373
 *color14: #a3babf
-*color7:  #9d9d9d
-*color15:  #9d9d9d
-!*color15: #787876
+*color7:  #8d8d8d
+*color15: #9d9d9d
 
 #  !cottonmouse
 !*color0:  #050505

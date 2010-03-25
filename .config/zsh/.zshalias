@@ -49,7 +49,7 @@ alias siteget='wget --recursive --page-requisites --convert-links --html-extensi
 # database/package management:
 alias upf="sudo fc-cache -vf"
 alias upd="sudo updatedb"
-alias pacman="pacman-color"
+alias pacman="sudo pacman-color"
 alias baer="bauerbill"
 alias ay="yaourt"
 alias aive="ay -Q --date|tee $HOME/othe/archive/$(date +%m_%d_%y) >>/dev/null"

@@ -3,7 +3,7 @@
  set enc=utf-8
  set t_Co=256
  colorscheme cottonmouse
- set cursorline
+ set nocursorline
  set nocursorcolumn
  set nocompatible
  set ignorecase

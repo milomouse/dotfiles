@@ -2,7 +2,7 @@
 ## milomouse <vincent[at]fea.st>
 
 # exit ncmpcpp:
-key_quit = 'Z'
+key_quit = 'Z' 'z'
 
 # pane navigation:
 key_clock = '`'

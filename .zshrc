@@ -94,7 +94,6 @@ export CC=/usr/bin/gcc
 export SHELL=/bin/zsh
 export MPD_HOST=lenovo
 export MPD_PORT=6600
-export PAGER=/bin/less
 export LANG="en_US.utf8"
 export LC_ALL="en_US.utf8"
 export LC="en_US.utf8"

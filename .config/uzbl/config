@@ -16,7 +16,7 @@ set toggle_modes    = event TOGGLE_MODES
 set set_mode        = set mode =
 set set_status      = set status_message =
 set scripts_dir     = $XDG_DATA_HOME/uzbl/scripts
-set sylesheet_uri   = $XDG_DATA_HOME/uzbl/pastel.css
+#set sylesheet_uri   = $XDG_DATA_HOME/uzbl/pastel.css
 set ibind           = @mode_bind insert
 set cbind           = @mode_bind command
 set ebind           = @mode_bind global,-insert
@@ -54,6 +54,9 @@ set authentication_handler = sync_spawn @scripts_dir/auth.py
 @on_event LOAD_COMMIT        script @scripts_dir/dark_input.js
 @on_event LOAD_FINISH        spawn @scripts_dir/history_insert
 @on_event NEW_WINDOW         sh 'uzbl-browser -u $8' %r
+@on_event ESCAPE             sh 'expr "set show_status = 0" > $4'
+@on_event ESCAPE             @set_mode
+@on_event ESCAPE             js var elements = doc.getElementById('uzbl_link_hint_div_container'); if (elements) { elements.parentNode.removeChild(elements); }
 
 # - key mapping settings - 
 @modmap <Control>        <Ctrl>
@@ -65,7 +68,7 @@ set authentication_handler = sync_spawn @scripts_dir/auth.py
 @ignore_key <Shift>
 
 # - global & keycmd editing binds - 
-@bind   <Escape>    = sh 'expr "set show_status = 0" > $4 ; expr "@set_mode" > $4'
+@bind   <Escape>    = event ESCAPE
 @cbind  i           = sh 'expr "set show_status = 1" > $4 ; expr "@set_mode insert" > $4'
 @ebind  <Return>    = event KEYCMD_EXEC_CURRENT
 @ebind  <Home>      = event SET_CURSOR_POS
@@ -86,6 +89,8 @@ set authentication_handler = sync_spawn @scripts_dir/auth.py
 @cbind  k  = scroll vertical -20
 @cbind  h  = scroll horizontal -20
 @cbind  l  = scroll horizontal 20
+@cbind  <Ctrl>u = scroll vertical -55%
+@cbind  <Ctrl>d = scroll vertical 55%
 @cbind  K  = scroll vertical -55%
 @cbind  J  = scroll vertical 55%
 @cbind  gg = scroll vertical begin
@@ -128,11 +133,11 @@ set authentication_handler = sync_spawn @scripts_dir/auth.py
 set follow_hint_keys = 0123456789
 @cbind  f* = script @scripts_dir/follow.js '@follow_hint_keys %s'
 @cbind  sr = spawn @scripts_dir/searchrat
-@cbind  gh = uri http://bbs.archlinux.org/search.php?action=show_new
 @cbind  o  = spawn @scripts_dir/command_interpreter here_supply-uri
 @cbind  O  = spawn @scripts_dir/command_interpreter here_current-uri
 @cbind  n  = spawn @scripts_dir/command_interpreter new_supply-uri
 @cbind  N  = spawn @scripts_dir/command_interpreter new_current-uri
+@cbind  gh = uri http://bbs.archlinux.org/search.php?action=show_new
 @cbind  gP = sh 'exec uzbl-browser --uri $(xsel --primary -o)'
 @cbind  gC = sh 'exec uzbl-browser --uri $(xsel --clipboard -o)'
 @cbind  gp = sh 'echo "uri $(xsel --primary -o)" > $4'
@@ -140,7 +145,6 @@ set follow_hint_keys = 0123456789
 @cbind  gu = sh 'echo "uri $(dirname $6)" > $4'
 @cbind  gU = sh 'echo "uri $(echo $6|grep -Eo \"(^[^/]+//[^/]+/)")" > $4'
 @cbind  u  = spawn @scripts_dir/history_load
-@cbind  U  = sh 'urxvt -e w3m $XDG_DATA_HOME/uzbl/history'
 @cbind  bl = spawn @scripts_dir/bookmark_load
 @cbind  bi = spawn @scripts_dir/bookmark_insert
 @cbind  be = sh 'urxvt -e w3m $XDG_DATA_HOME/uzbl/bookmarks'
@@ -148,16 +152,16 @@ set follow_hint_keys = 0123456789
 # - quickjumps [0-9]. figure out a better way to do this - 
 @cbind goset = spawn @scripts_dir/quickjump set
 @cbind gosh = spawn @scripts_dir/quickjump show
-@cbind go1 = spawn @scripts_dir/quickjump go1
-@cbind go2 = spawn @scripts_dir/quickjump go2
-@cbind go3 = spawn @scripts_dir/quickjump go3
-@cbind go4 = spawn @scripts_dir/quickjump go4
-@cbind go5 = spawn @scripts_dir/quickjump go5
-@cbind go6 = spawn @scripts_dir/quickjump go6
-@cbind go7 = spawn @scripts_dir/quickjump go7
-@cbind go8 = spawn @scripts_dir/quickjump go8
-@cbind go9 = spawn @scripts_dir/quickjump go9
-@cbind go0 = spawn @scripts_dir/quickjump go0
+@cbind go1 = spawn @scripts_dir/quickjump mark1
+@cbind go2 = spawn @scripts_dir/quickjump mark2
+@cbind go3 = spawn @scripts_dir/quickjump mark3
+@cbind go4 = spawn @scripts_dir/quickjump mark4
+@cbind go5 = spawn @scripts_dir/quickjump mark5
+@cbind go6 = spawn @scripts_dir/quickjump mark6
+@cbind go7 = spawn @scripts_dir/quickjump mark7
+@cbind go8 = spawn @scripts_dir/quickjump mark8
+@cbind go9 = spawn @scripts_dir/quickjump mark9
+@cbind go0 = spawn @scripts_dir/quickjump mark0
 
 # - some menu entries i'll never use - 
 menu_add Close Page = spawn @scripts_dir/proper_exit close_current_no_save

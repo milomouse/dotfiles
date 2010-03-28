@@ -1,7 +1,7 @@
 "import -window root ~/foto/shot/$(date +%Y_%m_%d-%H%M).png"
 Alt+Shift+Print
 
-"alock -bg shade:shade=30 -cursor glyph -auth pam"
+"alock -bg image:file=$HOME/foto/wall/beheading.jpg -cursor glyph -auth pam >&/dev/null"
 Alt+Shift+Delete
 
 "synap"
@@ -10,11 +10,11 @@ Mod1+Escape
 "moodlight -u"
 XF86MonBrightnessUp
 
-"moodlight -m"
-Control+XF86MonBrightnessUp
-
 "moodlight -d"
 XF86MonBrightnessDown
+
+"moodlight -m"
+Control+XF86MonBrightnessUp
 
 "ossrat -t"
 Alt+Home
@@ -37,8 +37,11 @@ XF86AudioLowerVolume
 "ossrat -i 1"
 XF86AudioRaiseVolume
 
-"songrem"
-Control+Delete
+"songrem -a"
+Control+Home
 
 "songrem -p"
 Control+Next
+
+"songrem -r"
+Control+Delete

@@ -1,6 +1,6 @@
 #!/bin/zsh
 # milomouse <vincent[at]fea.st>
-# NOTE: extremely simple video downloader using "clive".
+# NOTE: extremely simple video downloader using "clive". uses ratpoison (only for notifications).
 
 # cookies in case site requires privileges, download dir, clive cache:
 cjar="$XDG_DATA_HOME/uzbl/cookies.txt"

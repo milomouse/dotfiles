@@ -1,6 +1,6 @@
 #!/bin/zsh
 # milomouse <vincent[at]fea.st>
-# NOTE: simple history loader for uzbl using ratpoison.
+# NOTE: simple history loader for uzbl. uses ratpoison.
 
 # where to save final history file for reading:
 histfile=${XDG_DATA_HOME}/uzbl/history

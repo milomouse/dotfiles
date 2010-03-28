@@ -1,6 +1,7 @@
 #!/bin/zsh
 # milomouse <vincent[at]fea.st>
-# NOTE: simple script to extract urls from a webpage using w3m. modified from extract.sh
+# NOTE: simple script to extract urls from a webpage using w3m.
+#       $?: modified from extract.sh
 
 # i removed #'ed links because they generally clutter up display, and are usually links to same page.
 url="$6"

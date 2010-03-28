@@ -1,6 +1,6 @@
 #!/bin/zsh
 # milomouse <vincent[at]fea.st>
-# NOTE: simple download handler using curl.
+# NOTE: simple download handler using curl. uses ratpoison (only for notifications).
 
 uagent="Uzbl (Webkit 1.1.22) ($(uname -o) $(uname -m) [$(uname -m)])"
 cjar="$XDG_DATA_HOME/uzbl/cookies.txt"

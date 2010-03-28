@@ -12,7 +12,7 @@ fifo_out="${XDG_CACHE_HOME}/uzbl/history_out"
 #  rm -f $fifo_in $fifo_out &>/dev/null
 mkfifo -m 600 $fifo_in $fifo_out &>/dev/null
 
-# use fifos to redirect $histfile directly back on itself while truncating and appending,
+# use fifos to redirect $histfile directly back on itself while truncating to 50 entries, and appending,
 # but do not write item if last entry of $histfile is same as current, as with reloads.
 if [[ ! $(sed '$ !d' <$histfile) = "$6"/ || ! $(sed '$ !d' <$histfile) = "$6" || \
 ! $(expr "$6"|sed "s|://|://www.|") = "$6" || ! $(expr "$6"/|sed "s|://|://www.|") = "$6" ]]; then

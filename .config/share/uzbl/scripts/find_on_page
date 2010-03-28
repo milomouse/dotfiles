@@ -1,5 +1,6 @@
 #!/bin/zsh
-# simple find prompts for uzbl using ratpoison.
+# milomouse <vincent[at]fea.st>
+# NOTE: simple find prompts for searching a page in uzbl. uses ratpoison.
 
 # change value of $1 from config->-*->action.
 config=$1; shift

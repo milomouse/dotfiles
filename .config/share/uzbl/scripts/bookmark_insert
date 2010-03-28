@@ -1,6 +1,6 @@
 #!/bin/zsh
 # milomouse <vincent[at]fea.st>
-# NOTE: simple bookmarker for uzbl using ratpoison.
+# NOTE: simple bookmarker for uzbl. uses ratpoison.
 
 # where to store the bookmarks file:
   marks=${XDG_DATA_HOME}/uzbl/bookmarks

@@ -1,6 +1,6 @@
 #!/bin/zsh
 # milomouse <vincent[at]fea.st>
-# NOTE: simple search prompts for uzbl using surfraw and ratpoison.
+# NOTE: simple search prompts for uzbl using surfraw. uses ratpoison.
 
 get=$(ratpoison -c "prompt Enter search mechanism to use [L for list]:")
 for i in $get; do
@@ -9,13 +9,10 @@ for i in $get; do
   else
     if [[ $i = [lL] || $i = "list" ]]; then
       # thankfully there's only 103 right now. yes, these sed lines are correct.
-      ratpoison -c "echo $(surfraw -elvi|awk '{print $1}'|sed '50,$ d')"
+      ratpoison -c "echo $(surfraw -elvi|awk '{print $1}'|sed '52,$ d')"
       sleep 5
-      ratpoison -c "echo $(surfraw -elvi|awk '{print $1}'|sed '50,$ !d')"
+      ratpoison -c "echo $(surfraw -elvi|awk '{print $1}'|sed '52,$ !d')"
       sleep 5
-    fi
-    # if list was called, exit afterwards:
-    if [[ $i = [lL] || $i = "list" ]]; then
       return
     fi
     if [[ ! $i = $(surfraw -elvi|awk '{print $1}'|grep $i) ]]; then

@@ -1,6 +1,7 @@
 #!/bin/zsh
 # milomouse <vincent[at]fea.st>
-# NOTE: simple page downloader using wget (sadly, i dont know a "convert" command in curl).
+# NOTE: simple page downloader using wget. uses ratpoison (only for notifications).
+#       $?: sadly, i dont know a "convert" command in curl; that's why wget is used.
 
 url="$6"
 dest="$XDG_DOWNLOAD_DIR"

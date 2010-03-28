@@ -7,5 +7,5 @@ url="$6"
 dest="$XDG_DOWNLOAD_DIR"
 ratpoison -c "echo Downloading page, please wait.."
 cd $dest
-wget --wait=11 -q --no-proxy --page-requisites --convert-links --html-extension --no-parent --limit-rate=30K -U Mozilla -l 0 "$url" && cd ; \
+wget --random-wait -q --no-proxy --page-requisites --convert-links --html-extension --no-parent --limit-rate=20K -l 1 "$url" && cd ; \
 ratpoison -c "echo Download complete."

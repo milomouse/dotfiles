@@ -11,7 +11,8 @@ set mailcap_path     = $XDG_CONFIG_DIR/mutt/mailcap
 set signature        = $XDG_CONFIG_DIR/mutt/sig
 set tmpdir           = $XDG_CONFIG_DIR/mutt/temp
 
-# - source colors and accounts:
+# - source gpg, colors and accounts:
+source /etc/Muttrc.gpg.dist
 source $XDG_CONFIG_DIR/mutt/colors.muttrc
 source $XDG_CONFIG_DIR/mutt/fastmail.muttrc
 folder-hook FastMail/* source $XDG_CONFIG_DIR/mutt/fastmail.muttrc

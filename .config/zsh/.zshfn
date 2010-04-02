@@ -43,11 +43,10 @@ function dvdrip() {
   fi
   printf "Enter file size(xMB/GB): "
   read B
-  if [[ ! -n $(print $B|grep "[0-9].MB\|[0-9]\.GB") ]]; then; print "Incorrect size, quitting."; return 1; fi
+  if [[ ! -n $(print $B|grep "[0-9]MB\|[0-9]GB\|[0-9].[0-9]MB\|[0-9].[0-9]GB") ]]; then; print "Incorrect size, quitting."; return 1; fi
   printf "Enter filename(.ext) for this clip: "
   read F
   if [[ ! -n $(print $F|grep '.*\.') ]]; then; print "No file extension found, quitting."; return 1; fi
-  print "Everything seems ok. Starting DVD rip:"
   # the fancy high quality output (alway use this unless it's some rare occasion)
   HandBrakeCLI -e x264 -E ac3 -6 dp12 -R 48 -b 1800 -B 160 -D 3.0 -2 -T -5 -x \
   qp=0:aq-strength=1.5:direct=auto:bframes=6:mixed-refs:no-fast-pskip:8x8dct \
@@ -92,7 +91,7 @@ function back() {
   pushd -q -$1
 }
 
-# copy and follow file to new dir:
+# (adopted) copy and follow file to new dir:
 function cpf () {             
 if [[ -d $*[-1] ]]; then
   cp $* && cd $*[-1]
@@ -101,7 +100,7 @@ elif [[ -d ${*[-1]%/*} ]]; then
 fi
 }
 
-# move and follow file to new dir:
+# (adopted) move and follow file to new dir:
 function mvf () {             
 if [[ -d $*[-1] ]]; then
   mv $* && cd $*[-1]

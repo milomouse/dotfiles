@@ -23,10 +23,10 @@ key_up_album = ','
 key_down_album = '.'
 key_up_artist = '<'
 key_down_artist = '>'
-key_page_up = 'K'
-key_page_down = 'J'
-key_home = '0'
-key_end = '$'
+key_page_up = 'K' 339
+key_page_down = 'J' 338
+key_home = '0' 262
+key_end = '$' 360
 key_find_forward = '/'
 key_find_backward = '?'
 

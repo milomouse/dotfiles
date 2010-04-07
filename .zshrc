@@ -1,10 +1,6 @@
 # extend run-path:
 PATH=$PATH:/usr/local/bin:/usr/local/sbin
 
-# source alias and function files:
-[[ ! -f ~/.config/zsh/.zshalias ]] || . ~/.config/zsh/.zshalias
-[[ ! -f ~/.config/zsh/.zshfn ]] || . ~/.config/zsh/.zshfn
-
 # prompt line:
 [[ "$TERM" = "screen" ]] && precmd() {print -Pn "\e]2;%2d\a"} || RPROMPT='%F{white}%~%f'
 PS1='%F{magenta}» %f'
@@ -119,9 +115,13 @@ export XDG_TEMPLATES_DIR="/dev/shm"
 export XDG_VIDEOS_DIR="$HOME/vide"
 export XAUTHORITY="$HOME/.config/.Xauthority"
 
+# source alias and function files:
+[[ ! -f ~/.config/zsh/.zshalias ]] || . ~/.config/zsh/.zshalias
+[[ ! -f ~/.config/zsh/.zshfn ]] || . ~/.config/zsh/.zshfn
+
 # framebuffer colors:
 if [ "$TERM" = "linux" ]; then
-    echo -en "\e]P0090909"
+    echo -en "\e]P0000000"
     echo -en "\e]P8171717"
     echo -en "\e]P19c8093"
     echo -en "\e]P9dfa6bb"

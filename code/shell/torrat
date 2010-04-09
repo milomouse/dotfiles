@@ -1,3 +1,0 @@
-#!/bin/zsh
-tor=$(echo $@|cut -c1-40)
-ratpoison -c "echo >>> rTorrent >>> $tor.. finished"

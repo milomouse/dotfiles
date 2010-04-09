@@ -1,8 +1,0 @@
-#!/bin/zsh
-## Simple manpage selector with dmenu.
-
-MANDIR=/usr/share/man
-CACHE=$(du -a "$MANDIR"|sed 's:^.*/\([^/]*\.[0-9].*\)$:\1:p; d'|\
-sed 's:^\(.*\)\.[0-9].*$:\1:p; d'|sort -d|awk ' !x[$0]--' )
-
-CHOICE=$(echo -e "$CACHE" | dmenu -b ${1+"$@"}) && exec urxvt -e man $CHOICE

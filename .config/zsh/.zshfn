@@ -11,13 +11,13 @@ function uzbl() {
 function mp() {
   case $1 in
   'm') # movies, toggle mpd and keep/restore old volume.
-  [ $(mpc|wc -l) != 3 ] || mpc toggle >>/dev/null
+  [ $(mpc|head -2|tail -1|awk '{print $1}') != "\[paused\]" ] || mpc toggle >>/dev/null
   for vol in $(ossmix|grep outvol|awk '{print $4}'); do
     ossmix vmix0-outvol 22 >>/dev/null
     mplayer -subfont-osd-scale 2 -really-quiet $@
     ossmix vmix0-outvol $vol >>/dev/null
   done
-  [[ ! -n $(mpc|grep "\[paused\]") ]] || mpc toggle >>/dev/null
+  [ $(mpc|head -2|tail -1|awk '{print $1}') != "\[paused\]" ] || mpc toggle >>/dev/null
   ;;
   'q') # no mplayer statistics, quick plays.
   mplayer -subfont-osd-scale 2 -really-quiet $@

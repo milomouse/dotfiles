@@ -1,5 +1,6 @@
 -- Ion core configuration file
 -- milomouse <vincent[at]fea.st>
+-- last updated: 2010-04-09
 
 -- Bindings. This includes global bindings and bindings common to
 -- screens and all types of frames only. See modules' configuration 
@@ -99,7 +100,7 @@ defbindings("WScreen", {
 defbindings("WClientWin", {
     bdoc("Nudge the client window. This might help with some "..
          "programs' resizing problems."),
-    kpress_wait(META.."e", "WClientWin.nudge(_)"),
+    kpress_wait(META.."b", "WClientWin.nudge(_)"),
     
     submap(META.."semicolon", {
        bdoc("Kill client owning the client window."),
@@ -190,8 +191,6 @@ defbindings("WFrame", {
         bdoc("Maximize the frame horizontally/vertically."),
         kpress("h", "WFrame.maximize_horiz(_)"),
         kpress("v", "WFrame.maximize_vert(_)"),
-        bdoc("Begin move/resize mode."),
-        kpress("r", "WFrame.begin_kbresize(_)"),
     }),
     
     kpress(META..LEFT.."+Control", "WFrame.dec_index(_, _sub)", "_sub:non-nil"),

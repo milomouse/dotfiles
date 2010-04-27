@@ -32,6 +32,7 @@ import XMonad.Layout.MultiToggle
 import XMonad.Layout.Master
 import XMonad.Layout.Tabbed
 import XMonad.Util.Run
+import XMonad.Util.Scratchpad
 import System.IO
 import System.Exit
 import qualified Data.Map as M
@@ -57,7 +58,7 @@ manageHook' = (composeAll . concat $
     , [className    =? c     --> doCenterFloat  |   c   <- myFloatsC] -- float center geometry by class
     , [name         =? n     --> doCenterFloat  |   n   <- myFloatsN] -- float center geometry by name
     , [name         =? n     --> doFullFloat    |   n   <- myTrueFSN] -- float true fullscreen
-    ])
+    ]) <+> manageScratchPad
     where
         role      = stringProperty "WM_WINDOW_ROLE"
         name      = stringProperty "WM_NAME"
@@ -71,14 +72,23 @@ manageHook' = (composeAll . concat $
         -- <<names>>
         myFloatsN = ["gcolor2"]
         myTrueFSN = ["GLiv in fullscreen"]
+-- <scratchpad>
+manageScratchPad :: ManageHook
+manageScratchPad = scratchpadManageHook (W.RationalRect l t w h)
+    where
+    h = (2/5) -- terminal height
+    w = (2/3) -- terminal width
+    t = (1/4) -- distance from top edge, 70%
+    l = (1/6) -- distance from left edge, 0%
+scratchPad = scratchpadSpawnActionTerminal myTerminal
 -- <xmonad's statusbar>
 myLogHook :: Handle -> X ()
 myLogHook h = dynamicLogWithPP $ defaultPP
     {
         ppCurrent           =   dzenColor colorBlueAlt    colorDarkGray . pad
       , ppVisible           =   dzenColor colorCream      colorDarkGray . pad
-      , ppHidden            =   dzenColor colorDarkCream  colorDarkGray . pad
-      , ppHiddenNoWindows   =   dzenColor colorDarkWhite  colorDarkGray . pad
+      , ppHidden            =   dzenColor colorDarkCream  colorDarkGray . noScratchPad
+      , ppHiddenNoWindows   =   dzenColor colorDarkWhite  colorDarkGray . noScratchPad
       , ppUrgent            =   dzenColor colorMagenta    colorDarkGray . pad
       , ppWsSep             =   ""
       , ppSep               =   " | "
@@ -91,6 +101,8 @@ myLogHook h = dynamicLogWithPP $ defaultPP
       , ppTitle             =   (" " ++) . dzenColor colorWhiteAlt colorDarkGray . dzenEscape
       , ppOutput            =   hPutStrLn h
     }
+    where
+      noScratchPad ws = if ws == "NSP" then "" else pad ws -- thanks to pbrisbin
 
 -- Main Config
 main = do
@@ -190,7 +202,8 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask .|. shiftMask,     xK_Delete    ), spawn "alock -bg image:file=/home/milo/foto/wall/beheading.jpg -cursor glyph -auth pam >&/dev/null") -- lock screen
     , ((modMask .|. shiftMask,     xK_Return    ), spawn $ XMonad.terminal conf) -- spawn terminal by itself
     , ((modMask,                   xK_Return    ), spawn "urxvt -e tmux") -- spawn terminal in tmux
-    , ((modMask,                   xK_grave     ), spawn "urxvt -e ncmpcpp") -- spawn audio player
+    --, ((modMask,                   xK_grave     ), spawn "urxvt -e ncmpcpp") -- spawn audio player
+    , ((modMask,                   xK_grave     ), scratchPad)
     , ((modMask,                   xK_f         ), runOrRaiseMaster "firefox" (className =? "Firefox")) -- run or goto/raise firefox
     -- <function/media keys>
     , ((0 .|. controlMask,         0x1008ff02   ), spawn "moodlight -m") -- maximum screen brightness ((XF86MonBrightnessUp [max]))
@@ -252,6 +265,7 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask .|. shiftMask,     xK_space     ), setLayout $ XMonad.layoutHook conf) -- reset layout on current desktop to default
     , ((modMask,                   xK_period    ), nextWS) -- focus next workspace
     , ((modMask,                   xK_comma     ), prevWS) -- focus previous workspace
+    , ((modMask,                   xK_slash     ), toggleWS) -- toggle between last viewed workspace and current
     , ((modMask .|. shiftMask,     xK_period    ), shiftToNext) -- move current frame to next workspace
     , ((modMask .|. shiftMask,     xK_comma     ), shiftToPrev) -- move current frame to previous workspace
     ]

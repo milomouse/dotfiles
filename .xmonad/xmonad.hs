@@ -80,7 +80,7 @@ manageScratchPad = scratchpadManageHook (W.RationalRect l t w h)
     w = (2/3) -- terminal width
     t = (1/4) -- distance from top edge, 70%
     l = (1/6) -- distance from left edge, 0%
-scratchPad = scratchpadSpawnActionTerminal myTerminal
+scratchPad = scratchpadSpawnActionTerminal "urxvt -name scratchpad -fn '-*-fixed-medium-*-*-*-9-*-*-*-*-*'"
 -- <xmonad's statusbar>
 myLogHook :: Handle -> X ()
 myLogHook h = dynamicLogWithPP $ defaultPP

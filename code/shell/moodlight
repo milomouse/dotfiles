@@ -1,0 +1,77 @@
+#!/bin/zsh
+# milomouse <vincent[at]fea.st>
+# NOTE: Change the screen brightness on some computers where linux fails to detect.
+
+output='sudo setpci -s 00:02.0 F4.B='
+config=${XDG_CONFIG_DIR:-$HOME/.config}/.brightness
+[[ -f $config ]] || echo $output\FF > $config
+current=$(<$config|awk '{print $5}'|cut -c6,7)
+argument="5"
+
+brightness_up() {
+  if [ $current = FF ]; then
+    exit
+  elif [ $current = 95 ]; then
+    NEW=FF
+    echo $output$NEW > $config
+    . $config
+  else
+    NEW=$(expr $current + $argument)
+    echo $output$NEW > $config
+    . $config
+  fi
+}
+
+brightness_down() {
+  if [ $current = 5 ]; then
+    exit
+  elif [ $current = FF ]; then
+    NEW=95
+    echo $output$NEW > $config
+    . $config
+  else
+    NEW=$(expr $current - $argument)
+    echo $output$NEW > $config
+    . $config
+  fi
+}
+
+brightness_max() {
+  NEW=FF
+  echo $output$NEW > $config
+  . $config
+}
+
+reassert() {
+  . $config
+}
+
+help() {
+<< EOF
+usage: moodlight [OPTION]
+OPTIONS:
+   -u|--up        Brighten the screen.
+   -d|--down      Dim the screen.
+   -m|--max       Set brightness to max.
+   -r|--reassert  Execute last brightness level.
+                  This is useful for startup.
+   -h|--help      Show this help message.
+EOF
+}
+
+case "$1" in
+  '-u'|'--up')
+  brightness_up
+  ;;
+  '-d'|'--down')
+  brightness_down
+  ;;
+  '-m'|'--max')
+  brightness_max
+  ;;
+  '-r'|'--reassert')
+  reassert
+  ;;
+  '-h'|'--help'|*) help
+  ;;
+esac

@@ -3,36 +3,36 @@
 
 -- Imports
 import XMonad
-import XMonad.Actions.CycleWindows
-import XMonad.Actions.CycleWS
-import XMonad.Actions.FloatKeys
+import XMonad.Actions.CycleWindows (rotFocusedUp,rotFocusedDown,rotUnfocusedUp,rotUnfocusedDown)
+import XMonad.Actions.CycleWS (nextWS,prevWS,toggleWS,shiftToNext,shiftToPrev)
+import XMonad.Actions.FloatKeys (keysResizeWindow,keysMoveWindow)
 import XMonad.Actions.Promote
-import XMonad.Actions.RotSlaves
+import XMonad.Actions.RotSlaves (rotSlavesUp,rotSlavesDown)
 import XMonad.Actions.Submap
 import XMonad.Actions.Search
-import XMonad.Actions.WindowGo
+import XMonad.Actions.WindowGo (runOrRaiseMaster)
 import XMonad.Actions.SinkAll
 import XMonad.Operations
 import XMonad.Prompt
 import XMonad.Prompt.AppendFile (appendFilePrompt)
-import XMonad.Prompt.Man
+import XMonad.Prompt.Man (manPrompt)
 import XMonad.Prompt.Shell
-import XMonad.Prompt.Window
-import XMonad.Hooks.ManageDocks
-import XMonad.Hooks.ManageHelpers
+import XMonad.Prompt.Window (windowPromptBring,windowPromptGoto)
+import XMonad.Hooks.ManageDocks (avoidStruts)
+import XMonad.Hooks.ManageHelpers (doFullFloat,doCenterFloat)
 import XMonad.Hooks.SetWMName
 import XMonad.Hooks.DynamicLog
-import XMonad.Hooks.EwmhDesktops
+import XMonad.Hooks.EwmhDesktops (ewmhDesktopsStartup)
 import XMonad.Hooks.SetWMName
 import XMonad.Layout.PerWorkspace (onWorkspace)
 import XMonad.Layout.WindowNavigation
-import XMonad.Layout.NoBorders
+import XMonad.Layout.NoBorders (noBorders,smartBorders)
 import XMonad.Layout.MultiToggle.Instances
 import XMonad.Layout.MultiToggle
 import XMonad.Layout.Master
 import XMonad.Layout.Tabbed
 import XMonad.Util.Run
-import XMonad.Util.Scratchpad
+import XMonad.Util.Scratchpad (scratchpadSpawnActionCustom,scratchpadManageHook)
 import System.IO
 import System.Exit
 import qualified Data.Map as M
@@ -78,9 +78,9 @@ manageScratchPad = scratchpadManageHook (W.RationalRect l t w h)
     where
     h = (2/5) -- terminal height
     w = (2/3) -- terminal width
-    t = (1/4) -- distance from top edge, 70%
-    l = (1/6) -- distance from left edge, 0%
-scratchPad = scratchpadSpawnActionTerminal "urxvt -name scratchpad -fn '-*-fixed-medium-*-*-*-9-*-*-*-*-*'"
+    t = (1/4) -- distance from top edge
+    l = (1/6) -- distance from left edge
+scratchPad = scratchpadSpawnActionCustom "urxvt -name scratchpad +sb -fn '-*-fixed-medium-*-*-*-9-*-*-*-*-*'"
 -- <xmonad's statusbar>
 myLogHook :: Handle -> X ()
 myLogHook h = dynamicLogWithPP $ defaultPP
@@ -218,7 +218,7 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
                                 , ((0, xK_p       ), spawn "mossrat --prev") -- <play previous song>
                                 , ((0, xK_n       ), spawn "mossrat --next") -- <play next song>
                                 ])
-    , ((modMask,                   xK_s         ), submap . M.fromList $ -- "songrem" common sub-bindings (fav. song script)
+    , ((modMask,                   xK_s         ), submap . M.fromList $ -- "songrem" common sub-bindings (forked fav. song script)
                                 [ ((0, xK_a       ), spawn "songrem --add") -- <add current song to list>
                                 , ((0, xK_r       ), spawn "songrem --remove") -- <remove current song, if in list>
                                 , ((0, xK_e       ), spawn "songrem --edit") -- <manually edit list in terminal>

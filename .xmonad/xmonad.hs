@@ -2,41 +2,39 @@
 -- milomouse <vincent[at]fea.st>
 
 -- Imports
+import qualified Data.Map as M
+import qualified XMonad.StackSet as W
+import System.Exit
+import System.IO
 import XMonad
-import XMonad.Actions.CycleWindows (rotFocusedUp,rotFocusedDown,rotUnfocusedUp,rotUnfocusedDown)
+import XMonad.Actions.CycleWindows (rotFocusedDown,rotFocusedUp,rotUnfocusedDown,rotUnfocusedUp)
 import XMonad.Actions.CycleWS (nextWS,prevWS,toggleWS,shiftToNext,shiftToPrev)
-import XMonad.Actions.FloatKeys (keysResizeWindow,keysMoveWindow)
+import XMonad.Actions.FloatKeys (keysMoveWindow,keysResizeWindow)
 import XMonad.Actions.Promote
-import XMonad.Actions.RotSlaves (rotSlavesUp,rotSlavesDown)
-import XMonad.Actions.Submap
+import XMonad.Actions.RotSlaves (rotSlavesDown,rotSlavesUp)
 import XMonad.Actions.Search
-import XMonad.Actions.WindowGo (runOrRaiseMaster)
 import XMonad.Actions.SinkAll
+import XMonad.Actions.Submap
+import XMonad.Actions.WindowGo (runOrRaiseMaster)
+import XMonad.Hooks.EwmhDesktops (ewmhDesktopsStartup)
+import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.ManageDocks (avoidStruts)
+import XMonad.Hooks.ManageHelpers (doCenterFloat,doFullFloat)
+import XMonad.Hooks.SetWMName
+import XMonad.Layout.Master
+import XMonad.Layout.MultiToggle
+import XMonad.Layout.MultiToggle.Instances
+import XMonad.Layout.NoBorders (noBorders,smartBorders)
+import XMonad.Layout.Tabbed
+import XMonad.Layout.WindowNavigation
 import XMonad.Operations
 import XMonad.Prompt
 import XMonad.Prompt.AppendFile (appendFilePrompt)
 import XMonad.Prompt.Man (manPrompt)
 import XMonad.Prompt.Shell
 import XMonad.Prompt.Window (windowPromptBring,windowPromptGoto)
-import XMonad.Hooks.ManageDocks (avoidStruts)
-import XMonad.Hooks.ManageHelpers (doFullFloat,doCenterFloat)
-import XMonad.Hooks.SetWMName
-import XMonad.Hooks.DynamicLog
-import XMonad.Hooks.EwmhDesktops (ewmhDesktopsStartup)
-import XMonad.Hooks.SetWMName
-import XMonad.Layout.PerWorkspace (onWorkspace)
-import XMonad.Layout.WindowNavigation
-import XMonad.Layout.NoBorders (noBorders,smartBorders)
-import XMonad.Layout.MultiToggle.Instances
-import XMonad.Layout.MultiToggle
-import XMonad.Layout.Master
-import XMonad.Layout.Tabbed
 import XMonad.Util.Run
-import XMonad.Util.Scratchpad (scratchpadSpawnActionCustom,scratchpadManageHook)
-import System.IO
-import System.Exit
-import qualified Data.Map as M
-import qualified XMonad.StackSet as W
+import XMonad.Util.Scratchpad (scratchpadManageHook,scratchpadSpawnActionCustom)
 
 -- Basic Variables
 modMask' :: KeyMask
@@ -52,35 +50,28 @@ layoutHook' = myLayouts
 manageHook' :: ManageHook
 manageHook' = (composeAll . concat $
     [ [resource     =? r     --> doIgnore       |   r   <- myIgnores] -- ignore desktop
-    , [className    =? c     --> doShift  "2"   |   c   <- myWork   ] -- shift myWork's to 2
-    , [className    =? c     --> doShift  "3"   |   c   <- myInet   ] -- shift myInet's to 3
-    , [className    =? c     --> doShift  "4"   |   c   <- myFoto   ] -- shift myFoto's to 4
+    , [className    =? c     --> doShift  "3"   |   c   <- myInet   ] -- shift inet stuff to 3
+    , [className    =? c     --> doShift  "4"   |   c   <- myFoto   ] -- shift foto stuff to 4
     , [className    =? c     --> doCenterFloat  |   c   <- myFloatsC] -- float center geometry by class
     , [name         =? n     --> doCenterFloat  |   n   <- myFloatsN] -- float center geometry by name
-    , [name         =? n     --> doFullFloat    |   n   <- myTrueFSN] -- float true fullscreen
+    , [name         =? n     --> doFullFloat    |   n   <- myTrueFSN] -- float true fullscreen by name
     ]) <+> manageScratchPad
     where
         role      = stringProperty "WM_WINDOW_ROLE"
         name      = stringProperty "WM_NAME"
         -- <<classnames>>
-        myFloatsC = ["MPlayer","Zenity","Save As...","Downloads"]
+        myFloatsC = ["MPlayer","Save As...","Downloads"]
         myFoto    = ["Gliv","Display"]
-        myInet    = ["Navigator","Minefield","Firefox","Uzbl","uzbl","Uzbl-core","uzbl-core"]
-        myWork    = ["Eclipse","eclipse","Netbeans"]
+        myInet    = ["Navigator","Minefield","Firefox"]
         -- <<resources>>
-        myIgnores = ["desktop","desktop_window","notify-osd"]
+        myIgnores = ["desktop","desktop_window"]
         -- <<names>>
         myFloatsN = ["gcolor2"]
         myTrueFSN = ["GLiv in fullscreen"]
 -- <scratchpad>
 manageScratchPad :: ManageHook
-manageScratchPad = scratchpadManageHook (W.RationalRect l t w h)
-    where
-    h = (2/5) -- terminal height
-    w = (2/3) -- terminal width
-    t = (1/4) -- distance from top edge
-    l = (1/6) -- distance from left edge
-scratchPad = scratchpadSpawnActionCustom "urxvt -name scratchpad +sb -fn '-*-fixed-medium-*-*-*-9-*-*-*-*-*'"
+manageScratchPad = scratchpadManageHook (W.RationalRect (1/6) (1/4) (2/3) (2/5))
+scratchPad = scratchpadSpawnActionCustom "urxvt -name scratchpad +sb -fn '-*-fixed-medium-*-*-*-9-*-*-*-*-*' -e tmux -L scratchpad"
 -- <xmonad's statusbar>
 myLogHook :: Handle -> X ()
 myLogHook h = dynamicLogWithPP $ defaultPP
@@ -138,11 +129,12 @@ myTabConfig = defaultTheme { fontName            = xftFont
 smallXPConfig :: XPConfig
 smallXPConfig =
     defaultXPConfig { font                  = xftFont
-                    , bgColor               = colorBlackAlt
+                    , bgColor               = colorDarkGray
                     , fgColor               = colorMagenta
                     , bgHLight              = colorDarkMagenta
                     , fgHLight              = colorDarkGray
-                    , promptBorderWidth     = 0
+                    , borderColor           = colorBlackAlt
+                    , promptBorderWidth     = 1
                     , height                = 16
                     , historyFilter         = deleteConsecutive
                     }
@@ -170,7 +162,7 @@ colorFocusedBorder   = colorMagenta
 -- Fonts
 barFont  = "fixed"
 barXFont = "fixed:size=10"
-xftFont = "xft: fixed-10"
+xftFont  = "xft: fixed-10"
 
 -- Key-Bindings
 keys' :: XConfig Layout -> M.Map (KeyMask, KeySym) (X ())
@@ -178,7 +170,7 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- <basic commands>
     [ ((modMask .|. shiftMask,     xK_q         ), io (exitWith ExitSuccess)) -- exit xmonad
     , ((modMask .|. shiftMask,     xK_r         ), restart "xmonad" True) -- restart xmonad
-    , ((modMask .|. controlMask,   xK_r         ), spawn "xmonad --recompile && xmonad --restart") -- recompile and restart xmonad
+    , ((modMask .|. controlMask,   xK_r         ), unsafeSpawn "xmonad --recompile && xmonad --restart") -- recompile and restart xmonad
     , ((modMask,                   xK_b         ), refresh) -- bump window to correct size
     , ((modMask .|. controlMask,   xK_BackSpace ), kill) -- kill selected window
     -- <prompts/utils>
@@ -195,16 +187,15 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
                                 , ((0, xK_h       ), promptSearchBrowser smallXPConfig "firefox" hoogle)
                                 , ((0, xK_a       ), promptSearchBrowser smallXPConfig "firefox" amazon)
                                 ])
-    , ((0,                         xK_F12       ), appendFilePrompt smallXPConfig "/home/milo/othe/.TODO_now") -- add one-liner to file
+    , ((0,                         xK_F12       ), appendFilePrompt smallXPConfig "/home/milo/othe/.TODO_now") -- add one-liner to file (cannot expand $HOME)
     -- <common programs>
-    , ((modMask,                   xK_Escape    ), spawn "banishmouse") -- hide and freeze the mouse cursor (or bring back to original location)
-    , ((0,                         xK_Print     ), spawn "import -window root /home/milo/foto/shot/$(date +%Y_%m_%d-%H%M%S).png") -- take screenshot of current workspace
-    , ((modMask .|. shiftMask,     xK_Delete    ), spawn "alock -bg image:file=/home/milo/foto/wall/beheading.jpg -cursor glyph -auth pam >&/dev/null") -- lock screen
-    , ((modMask .|. shiftMask,     xK_Return    ), spawn $ XMonad.terminal conf) -- spawn terminal by itself
-    , ((modMask,                   xK_Return    ), spawn "urxvt -e tmux") -- spawn terminal in tmux
-    --, ((modMask,                   xK_grave     ), spawn "urxvt -e ncmpcpp") -- spawn audio player
-    , ((modMask,                   xK_grave     ), scratchPad)
-    , ((modMask,                   xK_f         ), runOrRaiseMaster "firefox" (className =? "Firefox")) -- run or goto/raise firefox
+    , ((modMask,                   xK_Escape    ), safeSpawnProg "banishmouse") -- hide and freeze the mouse cursor (or bring back to original location)
+    , ((0,                         xK_Print     ), unsafeSpawn "import -window root $HOME/foto/shot/$(date +%Y_%m_%d-%H%M%S).png") -- take screenshot of current workspace
+    , ((modMask .|. shiftMask,     xK_Delete    ), unsafeSpawn "alock -bg image:file=$HOME/foto/wall/beheading.jpg -cursor glyph -auth pam >&/dev/null") -- lock screen
+    , ((modMask .|. shiftMask,     xK_Return    ), safeSpawnProg $ XMonad.terminal conf) -- spawn terminal by itself
+    , ((modMask,                   xK_Return    ), unsafeSpawn "urxvt -e tmux") -- spawn terminal in tmux
+    , ((modMask,                   xK_grave     ), scratchPad) -- spawn floating "scratchpad" window
+    , ((modMask,                   xK_f         ), runOrRaiseMaster "firefox" (className =? "Firefox")) -- run or raise/goto firefox
     -- <function/media keys>
     , ((0 .|. controlMask,         0x1008ff02   ), spawn "moodlight -m") -- maximum screen brightness ((XF86MonBrightnessUp [max]))
     , ((0,                         0x1008ff02   ), spawn "moodlight -u") -- increase screen brightness ((XF86MonBrightnessUp))
@@ -224,6 +215,7 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
                                 , ((0, xK_e       ), spawn "songrem --edit") -- <manually edit list in terminal>
                                 , ((0, xK_n       ), spawn "songrem --play") -- <play song from list>
                                 ])
+    , ((modMask .|. shiftMask,     xK_e         ), safeSpawnProg "eject") -- open disc tray
     -- <tiled windows (bindings only suitable for my specific layout it seems)>
     , ((modMask,                   xK_m         ), windows W.focusMaster) -- immediately focus on master
     , ((modMask .|. shiftMask,     xK_m         ), promote) -- swap with & focus on master (if xK_m in master; like "Swap D" but keeps focus)

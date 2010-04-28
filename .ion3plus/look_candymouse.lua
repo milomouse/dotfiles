@@ -1,14 +1,15 @@
 -- look_candymouse.lua drawing engine configuration file for Ion.
 -- milomouse <vincent[at]fea.st>
+-- last updated: 2010-04-09
 
 local vivid   = "#ddb4c4"
 local basic   = "#b188a9"
 local faded   = "#433b47"
 local night   = "#625e69"
 
-local regular_ghost = "#494949"
-local faded_ghost   = "#222"
-local baleful_ghost = "#101010"
+local regular = "#494949"
+local dimmed  = "#222"
+local baleful = "#101010"
 
 if not gr.select_engine("de") then return end
 
@@ -17,8 +18,8 @@ de.reset()
 de.defstyle("*", {
     padding_pixels = 0,
     spacing = 0,
-    foreground_colour = night,
-    background_colour = "#0c0c0c",
+    foreground_colour = "#0a0a0a",
+    background_colour = "#0a0a0a",
     highlight_pixels = 3,
     highlight_colour = "black",
     shadow_pixels = 3,
@@ -47,9 +48,9 @@ de.defstyle("frame-floating", {
     based_on = "frame",
     padding_pixels = 0,
     highlight_pixels = 2,
-    highlight_colour = regular_ghost,
+    highlight_colour = regular,
     shadow_pixels = 2,
-    shadow_colour = regular_ghost,
+    shadow_colour = regular,
     de.substyle("active", {
     	highlight_colour = night,
         shadow_colour = basic,
@@ -61,19 +62,18 @@ de.defstyle("frame-tiled", {
     spacing = 0,
     padding_pixels = 0,
     highlight_pixels = 1,
-    highlight_colour = baleful_ghost,
+    highlight_colour = baleful,
     shadow_pixels = 1,
-    shadow_colour = baleful_ghost,
+    shadow_colour = baleful,
     de.substyle("active", {
-    	--highlight_colour = baleful_ghost,
-        --shadow_colour = "#090909",
     	highlight_colour = "#a488d9",
-        shadow_colour = "#9ed3d7",
+        shadow_colour = "#a488d9",
+        --shadow_colour = "#9ed3d7",
     }),
     de.substyle("inactive", {
-	--highlight_colour = "#464051",
-	highlight_colour = baleful_ghost,
-	shadow_colour = "#090909",
+	  highlight_colour = "#524e58",
+	    shadow_colour = "#524e58",
+	    --shadow_colour = "#090909",
 })
 })
 
@@ -83,26 +83,29 @@ de.defstyle("tab", {
     padding_pixels = 1,
     highlight_pixels = 1,
     shadow_pixels = 1,
-    shadow_colour = baleful_ghost,
+    shadow_colour = baleful,
     text_align = "left",
-    font = "-*-fixed-*-*-*-*-7-*-*-*-*-*-*-*",
+    font = "-*-fixed-*-*-*-*-2-*-*-*-*-*-*-*",
     de.substyle("active-selected", {
-	foreground_colour = faded_ghost,
+	  foreground_colour = "#625873",
         background_colour = "#625873",
+	  --foreground_colour = "#404040",
+        --background_colour = "#0e0e0e",
     }),
     de.substyle("active-unselected", {
-	--foreground_colour = "#202020",
+	  --foreground_colour = "#202020",
         --background_colour = "#54464e",
-	foreground_colour = "#404040",
-        background_colour = "#0e0e0e",
+	  foreground_colour = "#2e2e2e",
+        background_colour = "#2e2e2e",
     }),
     de.substyle("inactive-selected", {
-	foreground_colour = "#333",
-        background_colour = "#0a0a0a",
+	  --foreground_colour = "#333",
+	  foreground_colour = "#161616",
+        background_colour = "#161616",
     }),
     de.substyle("inactive-unselected", {
-	foreground_colour = "#161616",
-        background_colour = "#060606",
+	  foreground_colour = "#0a0a0a",
+        background_colour = "#0a0a0a",
     }),
 })
 
@@ -145,14 +148,14 @@ de.defstyle("tab-menuentry", {
     highlight_pixels = 0,
     font = "-*-fixed-*-*-*-*-9-*-*-*-*-*-*-*",
     foreground_colour = night,
-    background_colour = faded_ghost,
+    background_colour = dimmed,
     de.substyle("active-selected", {
+	  foreground_colour = "black",
         background_colour = faded,
-	foreground_colour = "black",
     }),
     de.substyle("inactive-selected", {
-	background_colour = night,
-	foreground_colour = regular_ghost,
+	  foreground_colour = regular,
+	    background_colour = night,
     }),
 })
 
@@ -164,7 +167,7 @@ de.defstyle("actnotify", {
     shadow_pixels = 1,
     shadow_colour = basic,
     background_colour = vivid,
-    foreground_colour = baleful_ghost,
+    foreground_colour = baleful,
     font = "-*-fixed-*-*-*-*-9-*-*-*-*-*-*-*",
 })
 

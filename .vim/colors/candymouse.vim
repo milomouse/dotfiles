@@ -1,8 +1,8 @@
 " Vim color file
 " Maintainers:  milomouse <vincent[at]fea.st>
-" Last Change:  2009-10-20
+" Last Change:  2010-04-09
 " Inspiration:  "zenburn" and 'asu1dark"
-" A muted yet slightly colorful vim style. Emphasis only on useful text.
+" A colorful vim style. Emphasis only on useful text.
 
 set background=dark
 hi clear          
@@ -37,7 +37,7 @@ if &t_Co > 255
     hi IncSearch       ctermbg=228 ctermfg=238
     hi Keyword         ctermfg=66
     hi Label           ctermfg=187
-    hi LineNr          ctermfg=141  ctermbg=235
+    hi LineNr          ctermfg=141 ctermbg=235
     hi Macro           ctermfg=13
     hi ModeMsg         ctermfg=13  cterm=none
     hi MoreMsg         ctermfg=15
@@ -74,7 +74,7 @@ if &t_Co > 255
     if exists("g:candymouse_high_Contrast")
       hi Normal ctermfg=188 ctermbg=234
     else
-      hi Normal ctermfg=249 ctermbg=237
+      hi Normal ctermfg=249 ctermbg=236
       hi Cursor        ctermbg=109
       hi diffadd       ctermbg=237
       hi diffdelete    ctermbg=238
@@ -83,7 +83,7 @@ if &t_Co > 255
       hi foldcolumn    ctermbg=238
       hi folded        ctermbg=238
       hi incsearch     ctermbg=228
-      hi linenr        ctermbg=238
+      hi linenr        ctermbg=236
       hi search        ctermbg=238
       hi statement     ctermbg=237
       hi statusline    ctermbg=60  ctermfg=13

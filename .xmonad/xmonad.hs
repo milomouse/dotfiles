@@ -10,8 +10,8 @@
 -- |  ghc                  -> 6.12.1-4
 -- |  haskell-mtl          -> 1.1.0.2-3
 -- |  haskell-utf8-string  -> 0.3.6-3
--- |  haskell-x11          -> 1.5.0.0-1
--- |  haskell-x11-xft      -> 0.3-12.1
+-- |  haskell-x11          -> 1.5.0.0-2
+-- |  haskell-x11-xft      -> 0.3-13.1
 -- |  xmonad-darcs         -> 20100423-1
 -- |  xmonad-contrib-darcs -> 20100423-1
 -- |  dzen2-svn            -> 267-1

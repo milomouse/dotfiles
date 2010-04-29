@@ -402,7 +402,7 @@ myKeyBindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask .|. shiftMask,     xK_o         ), withFocused (keysResizeWindow (-10,0) (0,1))) -- decrease right
     , ((modMask .|. controlMask,   xK_o         ), withFocused (keysResizeWindow (10,0) (0,1))) -- increase right
     -- <layout/workspace common>
-    , ((modMask,                   xK_t         ), submap . M.fromList $ -- "songrem" common sub-bindings (forked fav. song script)
+    , ((modMask,                   xK_t         ), submap . M.fromList $ -- common toggle sub-bindings
                                 [ ((0, xK_o       ), sendMessage $ Toggle NBFULL) -- <toggle Full with noBorders (like "only"), and back again>
                                 , ((0, xK_x       ), sendMessage $ Toggle REFLECTX) -- <toggle mirrored layout by X axis>
                                 , ((0, xK_y       ), sendMessage $ Toggle REFLECTY) -- <toggle mirrored layout by Y axis>
@@ -433,4 +433,4 @@ myKeyBindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
 -- end of KEY-BINDINGS }}}
 
--- vim:sw=2 sts=2 ts=2 tw=0 et ai nowrap
+-- vim:foldmethod=marker foldmarker={{{,}}} sw=2 sts=2 ts=2 tw=0 et ai nowrap

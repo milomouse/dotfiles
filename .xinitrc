@@ -10,7 +10,6 @@ xmodmap -e "clear Mod1"
 xmodmap -e "clear Mod4"
 xmodmap -e "add Mod1 = Alt_L Alt_R"
 xmodmap -e "add Mod4 = Super_L Super_R"
-xsetroot -cursor_name left_ptr &
-. ~/.xmonad/dzen2start
+#xsetroot -cursor_name left_ptr &
 display -window root /home/milo/foto/wall/black_mosaic_by_seikq.jpg
 exec xmonad >&/dev/null

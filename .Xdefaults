@@ -27,7 +27,7 @@ Xcursor.size: 10
 #0:black 1:red 2:green 3:yellow
 #4:blue 5:magenta 6:cyan 7:white
 
-*background: #060606
+*background: #090909
 *foreground: #a9a6af
 
   !candymouse

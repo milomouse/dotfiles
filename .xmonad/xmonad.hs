@@ -35,14 +35,16 @@ import XMonad.Actions.CycleWindows (rotFocusedDown,rotFocusedUp,rotUnfocusedDown
 import XMonad.Actions.RotSlaves (rotSlavesDown,rotSlavesUp)
 import XMonad.Actions.Promote
 import XMonad.Actions.WindowGo (runOrRaiseMaster)
+import XMonad.Actions.PerWorkspaceKeys
 import XMonad.Actions.FloatKeys (keysMoveWindow,keysResizeWindow)
-import XMonad.Actions.SinkAll
+import XMonad.Actions.WithAll
 import XMonad.Actions.Search
 import XMonad.Actions.Submap
 import qualified XMonad.Actions.Search as S
 import qualified XMonad.Actions.Submap as SM
 
 -- <hooks>
+import XMonad.Hooks.InsertPosition
 import XMonad.Hooks.ManageHelpers (doCenterFloat,doFullFloat)
 import XMonad.Hooks.ManageDocks (avoidStruts)
 import XMonad.Hooks.EwmhDesktops (ewmhDesktopsStartup)
@@ -50,7 +52,9 @@ import XMonad.Hooks.SetWMName
 import XMonad.Hooks.DynamicLog
 
 -- <utilities>
+import XMonad.Util.Cursor
 import XMonad.Util.Run
+import XMonad.Util.SpawnOnce
 import XMonad.Util.Scratchpad (scratchpadManageHook,scratchpadSpawnActionCustom)
 
 -- <prompts>
@@ -62,8 +66,9 @@ import XMonad.Prompt.Man (manPrompt)
 import XMonad.Prompt.Window (windowPromptBring,windowPromptGoto)
 
 -- <layouts>
-import XMonad.Layout.Tabbed
+import XMonad.Layout.OneBig
 import XMonad.Layout.TwoPane
+import XMonad.Layout.Tabbed
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.MosaicAlt
 import XMonad.Layout.Spiral
@@ -97,14 +102,17 @@ main = do
       , terminal            = "urxvt"
       , workspaces          = map show [1..5]
       , layoutHook          = myLayouts
-      , manageHook          = myManageHook
-      , startupHook         = ewmhDesktopsStartup >> setWMName "LG3D"
+      , manageHook          = insertPosition Above Newer <+> myManageHook
+      , startupHook         = myStartHook
       , logHook             = myLogHook dzenTopBar >> setWMName "LG3D"
       , normalBorderColor   = colorNormalBorder
       , focusedBorderColor  = colorFocusedBorder
       , borderWidth         = 2 -- for floating windows ('noBorders' OR 'withBorder Int' on layouts)
       , focusFollowsMouse   = False
       }
+myStartHook = spawnOnce ". $HOME/.xmonad/dzen2start" <+>
+              setDefaultCursor xC_left_ptr <+>
+              ewmhDesktopsStartup >> setWMName "LG3D"
 
 -- end of MAIN-CONFIGURATION }}}
 
@@ -219,22 +227,23 @@ myLayouts = avoidStruts                   $
             onWorkspace "4" fotoLayouts   $
             (collectiveLayouts)
   where
-    collectiveLayouts = myFull ||| myTile ||| myTabD ||| myMosC ||| myTwoP ||| mySprL
+    collectiveLayouts = myFull ||| myTwoP ||| myTabD ||| myTile ||| myOneB ||| myMosC ||| mySprL
 
     -- <define layouts>
     myFull = named "*" (smartBorders (noBorders Full))
     myTile = named "+" (smartBorders (withBorder 1 (limitWindows 5 (ResizableTall 1 0.03 0.5 []))))
     myTabD = named "=" (smartBorders (noBorders (mastered 0.02 0.4 $ tabbedAlways shrinkText myTabTheme)))
-    myTwoP = named "-" (smartBorders (withBorder 1 (TwoPane 0.02 0.5)))
+    myTwoP = named "-" (smartBorders (withBorder 1 (TwoPane 0.02 0.4)))
     myMosC = named "%" (smartBorders (withBorder 1 (MosaicAlt M.empty)))
     mySprL = named "@" (smartBorders (withBorder 1 (limitWindows 5 (spiral gRatio))))
+    myOneB = named "#" (smartBorders (withBorder 1 (limitWindows 5 (OneBig 0.75 0.75))))
 
     -- <layouts per workspace>
-    inetLayouts = myFull ||| myTabD
-    workLayouts = myTabD ||| myMosC ||| myTwoP
-    fotoLayouts = myFull ||| myMosC
+    workLayouts = myTabD ||| myOneB ||| myTile ||| myMosC ||| myTwoP
+    inetLayouts = myFull ||| myTwoP ||| myTabD
+    fotoLayouts = myFull ||| myMosC ||| mySprL ||| myOneB
 
-    -- <modifiers>
+    -- <<spiral ratio>>
     gRatio = toRational goldenRatio
     goldenRatio = 2/(1+sqrt(5)::Double);
 
@@ -283,6 +292,7 @@ myLogHook h = dynamicLogWithPP $ defaultPP
       , ppSep               =   " | "
       , ppLayout            =   dzenColor colorMagentaAlt colorDarkGray .
                                 (\x -> case x of
+                                    "Full" -> "*"
                                     "ReflectX *" -> "*"
                                     "ReflectX +" -> "+"
                                     "ReflectX =" -> "="
@@ -295,7 +305,13 @@ myLogHook h = dynamicLogWithPP $ defaultPP
                                     "ReflectY -" -> "-"
                                     "ReflectY %" -> "%"
                                     "ReflectY @" -> "@"
-                                    _            -> x
+                                    "ReflectX ReflectY *" -> "*"
+                                    "ReflectX ReflectY +" -> "+"
+                                    "ReflectX ReflectY =" -> "="
+                                    "ReflectX ReflectY -" -> "-"
+                                    "ReflectX ReflectY %" -> "%"
+                                    "ReflectX ReflectY @" -> "@"
+                                    _      -> x
                                 )
       , ppTitle             =   (" " ++) . dzenColor colorWhiteAlt colorDarkGray . dzenEscape
       , ppOutput            =   hPutStrLn h
@@ -369,6 +385,11 @@ myKeyBindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask,                   xK_9         ), sendMessage $ Shrink) -- shrink size of master frame
     , ((modMask .|. shiftMask,     xK_0         ), sendMessage $ MirrorExpand) -- expand size of master frame
     , ((modMask .|. shiftMask,     xK_9         ), sendMessage $ MirrorShrink) -- shrink size of master frame
+    , ((modMask .|. mod1Mask,      xK_0         ), withFocused (sendMessage . expandWindowAlt)) -- expand MosaicAlt frame
+    , ((modMask .|. mod1Mask,      xK_9         ), withFocused (sendMessage . shrinkWindowAlt)) -- shrink MosaicAlt frame
+    , ((modMask .|. mod1Mask,      xK_equal     ), withFocused (sendMessage . tallWindowAlt)) -- create a more horizontal MosaicAlt
+    , ((modMask .|. mod1Mask,      xK_minus     ), withFocused (sendMessage . wideWindowAlt)) -- create a more vertical MosaicAlt
+    , ((modMask .|. mod1Mask,      xK_space     ), sendMessage resetAlt) -- reset MosaicAlt layout
     , ((modMask,                   xK_j         ), sendMessage $ Go D) -- focus down a frame
     , ((modMask,                   xK_k         ), sendMessage $ Go U) -- focus up a frame
     , ((modMask,                   xK_h         ), sendMessage $ Go L) -- focus left a frame
@@ -381,11 +402,11 @@ myKeyBindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask .|. controlMask,   xK_k         ), rotUnfocusedUp) -- rotate unfocused slaves [and/or master] up/next
     , ((modMask .|. controlMask,   xK_h         ), rotFocusedDown) -- rotate focused slaves [and/or master] down/prev
     , ((modMask .|. controlMask,   xK_l         ), rotFocusedUp) -- rotate focused slaves [and/or master] up/next
-    , ((modMask,                   xK_Tab       ), rotSlavesUp) -- rotate all slaves
+    , ((modMask,                   xK_Tab       ), rotSlavesUp) -- rotate all slaves up/prev
     , ((modMask,                   xK_n         ), windows W.focusDown) -- focus down/next (in Full layout, or if you'd rather see tabs move (undesirable))
     , ((modMask,                   xK_p         ), windows W.focusUp) -- focus up/prev (in Full layout, or if you'd rather see tabs move (undesirable))
-    , ((modMask .|. shiftMask,     xK_n         ), windows W.swapDown) -- swap down/next (in Full layout, or for tabbed slave movement (undesirable))
-    , ((modMask .|. shiftMask,     xK_p         ), windows W.swapUp) -- swap up/prev (in Full layout, or for tabbed slave movement (undesirable))
+    , ((modMask .|. controlMask,   xK_n         ), windows W.swapDown) -- swap down/next (in Full layout, or for tabbed slave movement (undesirable))
+    , ((modMask .|. controlMask,   xK_p         ), windows W.swapUp) -- swap up/prev (in Full layout, or for tabbed slave movement (undesirable))
     -- <floating windows (rarely use these)>
     , ((modMask,                   xK_w         ), withFocused $ windows . W.sink) -- push a focused floating window back into tiling
     , ((modMask .|. shiftMask,     xK_w         ), sinkAll) -- push all floating windows in workspace into tiling

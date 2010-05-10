@@ -75,9 +75,10 @@ bind on Mod1+Shift+4 move four
 bind on Mod1+period use (next)
 bind on Mod1+comma use (prev)
 # layout bindings
-bind on Mod1+F1 load /home/milo/.config/musca/2v-2h
+bind on Mod1+F1 load /home/milo/.config/musca/1only
 bind on Mod1+F2 load /home/milo/.config/musca/2v-3h
 bind on Mod1+F3 load /home/milo/.config/musca/1v-2h
+bind on Mod1+F4 load /home/milo/.config/musca/2v-2h
 # startup stuff
 use 0
 exec urxvt -e tmux

@@ -1,9 +1,9 @@
 group	0	0	0	0	default
-frame	0	0	723	384	0	urxvt	unknown
-frame	0	384	723	384	0	urxvt	unknown
-frame	723	0	643	242	0	urxvt	unknown
-frame	723	504	643	264	0	urxvt	unknown
-frame	723	242	643	262	0	urxvt	unknown
+frame	0	304	713	464	0	urxvt	unknown
+frame	713	244	653	262	0	urxvt	unknown
+frame	713	0	653	244	0	urxvt	unknown
+frame	713	506	653	262	0	urxvt	unknown
+frame	0	0	713	304	0	urxvt	unknown
 window	0	urxvt	0:0.0 zsh	unknown
 window	1	urxvt	1:0.0 zsh	unknown
 window	2	urxvt	2:0.0 zsh	unknown

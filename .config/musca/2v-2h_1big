@@ -1,9 +1,0 @@
-group	0	0	0	0	default
-frame	0	0	723	384	0	urxvt	unknown
-frame	0	384	723	384	0	urxvt	unknown
-frame	723	0	643	244	0	urxvt	unknown
-frame	723	244	643	524	0	urxvt	unknown
-window	0	urxvt	0:0.0 zsh	unknown
-window	1	urxvt	1:0.0 zsh	unknown
-window	2	urxvt	2:0.0 zsh	unknown
-window	3	urxvt	3:0.0 zsh	unknown

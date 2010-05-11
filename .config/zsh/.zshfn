@@ -41,33 +41,6 @@ function mp() {
   esac
 }
 
-# simple dvd ripping:
-function dvdrip() {
-  printf "Enter title number, or -L for longest: "
-  read title
-  if [[ $title = <-> ]]; then
-    title="-t $title"
-  elif [[ $title != "-L" ]]; then
-    print "Title was not -L or numerical, quitting."; return 1
-  fi
-  printf "Enter audio track: "
-  read audio
-  if [[ $audio != <-> ]]; then; print "Audio track is invalid, quitting."; return 1; fi
-  printf "Use two-pass? [y/n]: "
-  read twopass
-  if [[ $twopass = [yY] ]]; then; twopass="-2 -T"; else; twopass=""; fi
-  printf "Enter file size(*MB): "
-  read size
-  if [[ ! -n $(print $size|grep "[0-9]MB\|[0-9].[0-9]MB") ]]; then; print "Incorrect size, quitting."; return 1; fi
-  printf "Enter filename(.ext) for this clip: "
-  read filename
-  if [[ ! -n $(print $filename|grep '.*\.') ]]; then; print "No file extension found, quitting."; return 1; fi
-  # the fancy high quality output (alway use this unless it's some rare occasion)
-  HandBrakeCLI -e x264 -E ac3 -a $audio -6 dp12 -R 48 -b 1800 -B 160 -D 3.0 $twopass \
-  -5 -7 -x qp=0:aq-strength=1.5:direct=auto:bframes=6:mixed-refs:no-fast-pskip:8x8dct \
-  -i /dev/dvd $title -S $size -o $filename
-}
-
 # connect to ssh-agent:
 function agent-s {
   local SSH_ENV="$HOME/.ssh/environment"

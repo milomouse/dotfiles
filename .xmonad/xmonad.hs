@@ -383,8 +383,8 @@ myKeyBindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask,                   xK_minus     ), sendMessage $ IncMasterN (-1)) -- decrease number of masters
     , ((modMask,                   xK_0         ), sendMessage $ Expand) -- expand size of master frame
     , ((modMask,                   xK_9         ), sendMessage $ Shrink) -- shrink size of master frame
-    , ((modMask .|. shiftMask,     xK_0         ), sendMessage $ MirrorExpand) -- expand size of master frame
-    , ((modMask .|. shiftMask,     xK_9         ), sendMessage $ MirrorShrink) -- shrink size of master frame
+    , ((modMask .|. shiftMask,     xK_0         ), sendMessage $ MirrorShrink) -- shrink size of master frame
+    , ((modMask .|. shiftMask,     xK_9         ), sendMessage $ MirrorExpand) -- expand size of master frame
     , ((modMask .|. mod1Mask,      xK_0         ), withFocused (sendMessage . expandWindowAlt)) -- expand MosaicAlt frame
     , ((modMask .|. mod1Mask,      xK_9         ), withFocused (sendMessage . shrinkWindowAlt)) -- shrink MosaicAlt frame
     , ((modMask .|. mod1Mask,      xK_equal     ), withFocused (sendMessage . tallWindowAlt)) -- create a more horizontal MosaicAlt

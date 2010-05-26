@@ -66,19 +66,17 @@ import XMonad.Prompt.Man (manPrompt)
 import XMonad.Prompt.Window (windowPromptBring,windowPromptGoto)
 
 -- <layouts>
-import XMonad.Layout.OneBig
-import XMonad.Layout.TwoPane
 import XMonad.Layout.Tabbed
 import XMonad.Layout.ResizableTile
+import XMonad.Layout.MultiColumns
+import XMonad.Layout.OneBig
 import XMonad.Layout.MosaicAlt
-import XMonad.Layout.Spiral
 
 -- <layout helpers>
 import XMonad.Layout.Master
 import XMonad.Layout.LayoutCombinators
 import XMonad.Layout.LimitWindows
 import XMonad.Layout.NoBorders (noBorders,smartBorders,withBorder)
-import XMonad.Layout.Gaps
 import XMonad.Layout.Reflect
 import XMonad.Layout.MultiToggle
 import XMonad.Layout.MultiToggle.Instances
@@ -217,35 +215,29 @@ scratchPad = scratchpadSpawnActionCustom "urxvt -name scratchpad +sb -fn '-*-fix
 -- LAYOUTS {{{
 
 myLayouts = avoidStruts                   $
---            gaps [(D,13)]                 $ -- thinking about another dzen2 bar.
             windowNavigation              $
             mkToggle (single NBFULL)      $
             mkToggle (single REFLECTX)    $
             mkToggle (single REFLECTY)    $
-            onWorkspace "2" workLayouts   $
+            onWorkspace "1" workLayouts   $
             onWorkspace "3" inetLayouts   $
             onWorkspace "4" fotoLayouts   $
             (collectiveLayouts)
   where
-    collectiveLayouts = myFull ||| myTwoP ||| myTabD ||| myTile ||| myOneB ||| myMosC ||| mySprL
+    collectiveLayouts = myFull ||| myTile ||| myOneB ||| myColM ||| myMosC
 
     -- <define layouts>
     myFull = named "*" (smartBorders (noBorders Full))
-    myTile = named "+" (smartBorders (withBorder 1 (limitWindows 5 (ResizableTall 1 0.03 0.5 []))))
     myTabD = named "=" (smartBorders (noBorders (mastered 0.02 0.4 $ tabbedAlways shrinkText myTabTheme)))
-    myTwoP = named "-" (smartBorders (withBorder 1 (TwoPane 0.02 0.4)))
+    myTile = named "+" (smartBorders (withBorder 1 (limitWindows 5 (ResizableTall 1 0.03 0.5 []))))
     myMosC = named "%" (smartBorders (withBorder 1 (MosaicAlt M.empty)))
-    mySprL = named "@" (smartBorders (withBorder 1 (limitWindows 5 (spiral gRatio))))
-    myOneB = named "#" (smartBorders (withBorder 1 (limitWindows 5 (OneBig 0.75 0.75))))
+    myColM = named "#" (smartBorders (withBorder 1 (multiCol [1] 3 0.01 0.5)))
+    myOneB = named "@" (smartBorders (withBorder 1 (limitWindows 5 (OneBig 0.75 0.75))))
 
     -- <layouts per workspace>
-    workLayouts = myTabD ||| myOneB ||| myTile ||| myMosC ||| myTwoP
-    inetLayouts = myFull ||| myTwoP ||| myTabD
-    fotoLayouts = myFull ||| myMosC ||| mySprL ||| myOneB
-
-    -- <<spiral ratio>>
-    gRatio = toRational goldenRatio
-    goldenRatio = 2/(1+sqrt(5)::Double);
+    workLayouts = myFull ||| myTabD
+    inetLayouts = myFull ||| myTile
+    fotoLayouts = myFull ||| myOneB ||| myColM
 
 -- end of LAYOUTS }}}
 
@@ -275,7 +267,7 @@ myManageHook = (composeAll . concat $
         -- <<resource>>
         myIgnores = ["desktop","desktop_window"]
         -- <<name>>
-        myFloatsN = ["gcolor2"]
+        myFloatsN = ["gcolor2","xskat"]
         myTrueFSN = ["GLiv in fullscreen"]
 
 -- <statusbar/logging>
@@ -296,21 +288,21 @@ myLogHook h = dynamicLogWithPP $ defaultPP
                                     "ReflectX *" -> "*"
                                     "ReflectX +" -> "+"
                                     "ReflectX =" -> "="
-                                    "ReflectX -" -> "-"
                                     "ReflectX %" -> "%"
                                     "ReflectX @" -> "@"
+                                    "ReflectX #" -> "#"
                                     "ReflectY *" -> "*"
                                     "ReflectY +" -> "+"
                                     "ReflectY =" -> "="
-                                    "ReflectY -" -> "-"
                                     "ReflectY %" -> "%"
                                     "ReflectY @" -> "@"
+                                    "ReflectY #" -> "#"
                                     "ReflectX ReflectY *" -> "*"
                                     "ReflectX ReflectY +" -> "+"
                                     "ReflectX ReflectY =" -> "="
-                                    "ReflectX ReflectY -" -> "-"
                                     "ReflectX ReflectY %" -> "%"
                                     "ReflectX ReflectY @" -> "@"
+                                    "ReflectX ReflectY #" -> "#"
                                     _      -> x
                                 )
       , ppTitle             =   (" " ++) . dzenColor colorWhiteAlt colorDarkGray . dzenEscape
@@ -357,9 +349,9 @@ myKeyBindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask,                   xK_grave     ), scratchPad) -- spawn floating "scratchpad" window
     , ((modMask,                   xK_f         ), runOrRaiseMaster "firefox" (className =? "Firefox")) -- run or raise/goto firefox
     -- <function/media keys>
-    , ((0 .|. controlMask,         0x1008ff02   ), unsafeSpawn "moodlight -m") -- maximum screen brightness ((XF86MonBrightnessUp [max]))
-    , ((0,                         0x1008ff02   ), unsafeSpawn "moodlight -u") -- increase screen brightness ((XF86MonBrightnessUp))
-    , ((0,                         0x1008ff03   ), unsafeSpawn "moodlight -d") -- decrease screen brightness ((XF86MonBrightnessDown))
+    , ((0 .|. controlMask,         0x1008ff02   ), unsafeSpawn "sudo moodlight -m") -- maximum screen brightness ((XF86MonBrightnessUp [max]))
+    , ((0,                         0x1008ff02   ), unsafeSpawn "sudo moodlight -u") -- increase screen brightness ((XF86MonBrightnessUp))
+    , ((0,                         0x1008ff03   ), unsafeSpawn "sudo moodlight -d") -- decrease screen brightness ((XF86MonBrightnessDown))
     , ((0,                         0x1008ff12   ), unsafeSpawn "mossrat -m")   -- mute volume, via "mossrat" ((XF86AudioMute))
     , ((0,                         0x1008ff11   ), unsafeSpawn "mossrat -d 1") -- decrease volume, via "mossrat" ((XF86AudioLowerVolume))
     , ((0,                         0x1008ff13   ), unsafeSpawn "mossrat -i 1") -- increase volume, via "mossrat" ((XF86AudioRaiseVolume))
@@ -392,16 +384,16 @@ myKeyBindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask .|. mod1Mask,      xK_space     ), sendMessage resetAlt) -- reset MosaicAlt layout
     , ((modMask,                   xK_j         ), sendMessage $ Go D) -- focus down a frame
     , ((modMask,                   xK_k         ), sendMessage $ Go U) -- focus up a frame
-    , ((modMask,                   xK_h         ), sendMessage $ Go L) -- focus left a frame
-    , ((modMask,                   xK_l         ), sendMessage $ Go R) -- focus right a frame
+    , ((modMask,                   xK_h         ), bindOn [("1", rotFocusedDown), ("", sendMessage $ Go L)]) -- focus left a frame
+    , ((modMask,                   xK_l         ), bindOn [("1", rotFocusedUp), ("", sendMessage $ Go R)]) -- focus right a frame
     , ((modMask .|. shiftMask,     xK_j         ), sendMessage $ Swap D) -- swap window with lower frame and focus on it
     , ((modMask .|. shiftMask,     xK_k         ), sendMessage $ Swap U) -- swap window with above frame and focus on it
-    , ((modMask .|. shiftMask,     xK_h         ), sendMessage $ Swap L) -- swap window with left frame and focus on it
-    , ((modMask .|. shiftMask,     xK_l         ), sendMessage $ Swap R) -- swap window with right frame and focus on it
+    , ((modMask .|. shiftMask,     xK_h         ), bindOn [("1", rotSlavesDown), ("", sendMessage $ Swap L)]) -- swap window with left frame and focus on it
+    , ((modMask .|. shiftMask,     xK_l         ), bindOn [("1", rotSlavesUp), ("", sendMessage $ Swap R)]) -- swap window with right frame and focus on it
     , ((modMask .|. controlMask,   xK_j         ), rotUnfocusedDown) -- rotate unfocused slaves [and/or master] down/prev
     , ((modMask .|. controlMask,   xK_k         ), rotUnfocusedUp) -- rotate unfocused slaves [and/or master] up/next
-    , ((modMask .|. controlMask,   xK_h         ), rotFocusedDown) -- rotate focused slaves [and/or master] down/prev
-    , ((modMask .|. controlMask,   xK_l         ), rotFocusedUp) -- rotate focused slaves [and/or master] up/next
+    , ((modMask .|. controlMask,   xK_h         ), bindOn [("1", rotUnfocusedDown), ("", rotFocusedDown)]) -- rotate focused slaves [and/or master] down/prev
+    , ((modMask .|. controlMask,   xK_l         ), bindOn [("1", rotUnfocusedUp), ("", rotFocusedUp)]) -- rotate focused slaves [and/or master] up/next
     , ((modMask,                   xK_Tab       ), rotSlavesUp) -- rotate all slaves up/prev
     , ((modMask,                   xK_n         ), windows W.focusDown) -- focus down/next (in Full layout, or if you'd rather see tabs move (undesirable))
     , ((modMask,                   xK_p         ), windows W.focusUp) -- focus up/prev (in Full layout, or if you'd rather see tabs move (undesirable))

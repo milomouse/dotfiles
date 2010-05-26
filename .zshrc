@@ -29,8 +29,8 @@ zstyle ':completion:*:*:kill:*' menu yes select
 zstyle ':completion:*:*:kill:*:processes' command 'ps --forest -A -o pid,user,state,pcpu,etime,cmd'
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' force-list always
-[[ $(which bauerbill) = "bauerbill not found" ]] || compdef _pacman bauerbill=pacman
-[[ $(which pacman-color) = "pacman-color not found" ]] || compdef _pacman pacman-color=pacman
+[[ -a $(which bauerbill) ]] || compdef _pacman bauerbill=pacman
+[[ -a $(which pacman-color) ]] || compdef _pacman pacman-color=pacman
 
 # optimizations:
 setopt VI

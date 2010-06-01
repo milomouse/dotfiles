@@ -143,17 +143,24 @@ function mp() {
     fi
   fi
   for vol in $(ossmix|grep outvol|awk '{print $4}'); do
-    ossmix vmix0-outvol 23 >>/dev/null
+    ossmix vmix0-outvol 24 >>/dev/null
     if [[ -n "$2" ]]; then
-      if [[ "$2" = <-> ]]; then
-        local movie="$(find $HOME/vide/movi/$2* -maxdepth 1 -type f|sort -R|tail -1)"
+      if [ "$3" ]; then
+        local movie="$(find $HOME/vide/movi/$2.$3.*--* -maxdepth 1 -type f|sort -R|tail -1)"
+        print "["$(find $HOME/vide/movi/$2.$3.*--* -maxdepth 1 -type f|wc -l)"]" $movie
+        mplayer -fs -really-quiet $movie
+      elif [[ "$2" = [1-5] ]]; then
+        local movie="$(find $HOME/vide/movi/$2.*.*--* -maxdepth 1 -type f|sort -R|tail -1)"
+        print "["$(find $HOME/vide/movi/$2.*.*--* -maxdepth 1 -type f|wc -l)"]" $movie
         mplayer -fs -really-quiet $movie
       else
         local movie="$(find $HOME/vide/movi/*.*.*--$2* -maxdepth 1 -type f|sort -R|tail -1)"
+        print "["$(find $HOME/vide/movi/*.*.*--$2* -maxdepth 1 -type f|wc -l)"]" $movie
         mplayer -fs -really-quiet $movie
       fi
     else
       local movie="$(find $HOME/vide/movi -maxdepth 1 -type f|sort -R|tail -1)"
+      print "["$(find $HOME/vide/movi -maxdepth 1 -type f|wc -l)"]" $movie
       mplayer -fs -really-quiet $movie
     fi
     ossmix vmix0-outvol $vol >>/dev/null
@@ -184,6 +191,14 @@ function sd() {
     -a | -all ) sdcv $2 | less ;;
     *) sdcv -u "WordNet" $@
   esac
+}
+
+# show biggest programs (adopted):
+function bps() {
+echo "-----+---------+---------------------------"
+echo " POS | SIZE MB |            NAME " 
+echo "-----+---------+---------------------------"
+pacman -Qs|awk '/local/{print substr($3,2)" "substr($1,7)}'|sort -rn|head -$1|awk '{printf "%4d | %7s | %s\n",NR,$1,$2}'
 }
 
 # un-smart function for my todo lists:

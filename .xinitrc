@@ -12,4 +12,6 @@ xmodmap -e "add Mod1 = Alt_L Alt_R"
 xmodmap -e "add Mod4 = Super_L Super_R"
 #xsetroot -cursor_name left_ptr &
 display -window root /home/milo/foto/wall/black_mosaic_by_seikq.jpg
+#exec musca -s /home/milo/.config/musca/musca_start >&/dev/null
+#exec ion3plus -noerrorlog >&/dev/null
 exec xmonad >&/dev/null

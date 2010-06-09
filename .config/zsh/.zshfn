@@ -124,7 +124,7 @@ function mp() {
     fi
   fi
   for vol in $(ossmix|grep outvol|awk '{print $4}'); do
-    ossmix vmix0-outvol 23 >>/dev/null
+    ossmix vmix0-outvol 25 >>/dev/null
     mplayer -fs -really-quiet $@
     ossmix vmix0-outvol $vol >>/dev/null
   done
@@ -143,7 +143,7 @@ function mp() {
     fi
   fi
   for vol in $(ossmix|grep outvol|awk '{print $4}'); do
-    ossmix vmix0-outvol 24 >>/dev/null
+    ossmix vmix0-outvol 25 >>/dev/null
     if [[ -n "$2" ]]; then
       if [ "$3" ]; then
         local movie="$(find $HOME/vide/movi/$2.$3.*--* -maxdepth 1 -type f|sort -R|tail -1)"
@@ -194,7 +194,7 @@ function sd() {
 }
 
 # show biggest programs (adopted):
-function bps() {
+function biggest() {
 echo "-----+---------+---------------------------"
 echo " POS | SIZE MB |            NAME " 
 echo "-----+---------+---------------------------"

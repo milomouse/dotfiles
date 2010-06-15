@@ -2,6 +2,7 @@
 banished=/home/milo/.config/.banishmouse
 [ ! -f $banished ] || rm -f $banished
 banishmouse
+#xbindkeys &
 xmodmap -e "keycode 133 = Alt_L"
 xmodmap -e "keycode 135 = Alt_R"
 xmodmap -e "keycode 64 = Super_L"

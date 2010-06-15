@@ -40,6 +40,8 @@ alias dfu="df -hTP"
 alias psu="ps fxo etime,pid,pmem,pcpu,command"
 alias psr="ps -u root fo etime,user,pid,pmem,pcpu,command"
 alias daemons="ls /var/run/daemons"
+alias reboot="sudo reboot"
+alias {poweroff,pow}="sudo poweroff"
 
 # media shortcuts:
 alias mix2="ossmix codec1.jack.int-speaker.mode mix2 >>/dev/null && echo 'Mixer set to PC Speaker'"
@@ -47,13 +49,13 @@ alias mix3="ossmix codec1.jack.int-speaker.mode mix3 >>/dev/null && echo 'Mixer 
 alias unrarall='for file in `ls *.rar`; do unrar -x r $file; done'
 alias unzipall='for file in `ls *.zip`; do unzip $file; done'
 alias siteget='wget --recursive --page-requisites --convert-links --html-extension --no-parent --wait=10 --limit-rate=20K -U Mozilla -l' #depth, then url
+alias rot='rtorrent -o http_capath=/etc/ssl/certs'
 
 # database/package management:
 alias upf="sudo fc-cache -vf"
 alias upd="sudo updatedb"
 alias baer="bauerbill"
-alias baerp="sudo pacman-color"
-alias pacman="sudo pacman-color"
+alias {baerp,pacman}="sudo pacman-color"
 alias ay="yaourt"
 alias aive="ay -Q --date|tee $HOME/othe/archive/$(date +%m_%d_%y) >>/dev/null"
 alias lasi="3view $HOME/othe/archive/$(ls -ltr $HOME/othe/archive |tail -1|awk '{print $7}')"

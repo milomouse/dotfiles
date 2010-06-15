@@ -38,20 +38,6 @@ fi
 # make folder and chdir into it:
 function mkcd() {mkdir -p "$@" && cd "$@"}
 
-# clean up after agent-s before trying to reboot:
-function reboot() {
-  killall ssh-agent &>/dev/null
-  rm $HOME/.ssh/environment &>/dev/null
-  sudo reboot
-}
-
-# clean up after agent-s before trying to poweroff:
-function poweroff() {
-  killall ssh-agent &>/dev/null
-  rm $HOME/.ssh/environment &>/dev/null
-  sudo poweroff
-}
-
 # extract archive with preferred options:
 function extr() {
   if [ -f $1 ] ; then 
@@ -85,25 +71,6 @@ function rcrestart() {sudo /etc/rc.d/$1 restart}
 function reprobe() {
   sudo modprobe -r $1
   sudo modprobe $1
-}
-
-# connect to ssh-agent:
-function agent-s {
-  local SSH_ENV="$HOME/.ssh/environment"
-  echo "Initializing new SSH agent ..."
-  if [[ -f ${SSH_ENV} ]]; then
-    rm ${SSH_ENV} >&/dev/null
-  fi
-  if [ ! $(ps -a|grep -i ssh-agent) ]; then
-    /usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
-    echo succeeded
-    chmod 600 "${SSH_ENV}"
-    . "${SSH_ENV}" > /dev/null
-    /usr/bin/ssh-add;
-    git pull origin master
-  else
-    killall ssh-agent &>/dev/null
-  fi
 }
 
 # show 256 colors:
@@ -188,7 +155,7 @@ function sd() {
   case $1 in
     -w | -wordnet ) sdcv -u "WordNet" $2 ;;
     -t | -thesaurus ) sdcv -u "English Thesaurus" $2 ;;
-    -a | -all ) sdcv $2 | less ;;
+    -a | -all ) sdcv $2 ;;
     *) sdcv -u "WordNet" $@
   esac
 }

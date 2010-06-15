@@ -80,5 +80,9 @@ bind on Mod4+F2 load /home/milo/.config/musca/2v-3h
 bind on Mod4+F3 load /home/milo/.config/musca/1v-2h
 bind on Mod4+F4 load /home/milo/.config/musca/2v-2h
 # startup stuff
-use 0
+add one
+add two
+add three
+add four
+use default
 exec urxvt -e tmux

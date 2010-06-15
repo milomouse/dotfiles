@@ -204,7 +204,7 @@ myGSConfig colorizer = (buildDefaultGSConfig myColorizer)
 -- <scratchpad>
 manageScratchPad :: ManageHook
 manageScratchPad = scratchpadManageHook (W.RationalRect (1/6) (1/4) (2/3) (2/5))
-scratchPad = scratchpadSpawnActionCustom "urxvt -name scratchpad +sb -fn '-*-fixed-medium-*-*-*-9-*-*-*-*-*' -e tmux -L sp new-session ncmpcpp"
+scratchPad = scratchpadSpawnActionCustom "urxvt -name scratchpad +sb -fn '-*-fixed-medium-*-*-*-9-*-*-*-*-*' -e tmux -L sp new-session 'ncmpcpp || zsh'"
 
 -- end of UTILITY FUNCTIONS }}}
 

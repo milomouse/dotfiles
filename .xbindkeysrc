@@ -1,11 +1,11 @@
 "import -window root ~/foto/shot/$(date +%Y_%m_%d-%H%M).png"
-Alt+Shift+Print
+Mod4+Shift+Print
 
 "alock -bg image:file=$HOME/foto/wall/beheading.jpg -cursor glyph -auth pam >&/dev/null"
-Alt+Shift+Delete
+Mod4+Shift+Delete
 
 "banishmouse"
-Mod1+Escape
+Mod4+Escape
 
 "moodlight -u"
 XF86MonBrightnessUp
@@ -17,16 +17,16 @@ XF86MonBrightnessDown
 Control+XF86MonBrightnessUp
 
 "mossrat -t"
-Alt+Home
+Mod4+Home
 
 "mossrat -s"
-Alt+End
+Mod4+End
 
 "mossrat -p"
-Alt+Prior
+Mod4+Prior
 
 "mossrat -n"
-Alt+Next
+Mod4+Next
 
 "mossrat -m"
 XF86AudioMute

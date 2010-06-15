@@ -27,18 +27,15 @@ schedule = watch_directory1,5,5,"load_start=/home/milo/tors/foto/.down/*.torrent
 schedule = watch_directory2,5,5,"load_start=/home/milo/tors/muzk/.down/*.torrent,d.set_directory=/home/milo/tors/muzk/"
 schedule = watch_directory3,5,5,"load_start=/home/milo/tors/othe/.down/*.torrent,d.set_directory=/home/milo/tors/othe/"
 schedule = watch_directory4,5,5,"load_start=/home/milo/tors/vide/.down/*.torrent,d.set_directory=/home/milo/tors/vide/"
+schedule = watch_directory5,5,5,"load_start=/home/milo/tors/book/.down/*.torrent,d.set_directory=/home/milo/tors/book/"
 
 # actions
+system.method.set_key = event.download.finished,notify_dzen,"execute=/usr/local/bin/notor,$d.get_base_filename="
+schedule = filter_active,10,10,"view_filter = active,d.get_down_rate="
+#schedule = filter_active,30,30,"view_filter = active,\"or={d.get_up_rate=,d.get_down_rate=}\""
 #schedule = snub_leechers,120,120,"snub_leechers=10,5,1M"
 #schedule = ban_slow_peers,120,120,"ban_slow_peers=5,2K,64K,5,128K,10,1M,30"
-system.method.set_key = event.download.finished,notify,"execute=torrat,$d.get_base_filename=,finished"
-#on_finished = notify,"execute=torrat,$d.get_base_filename=,finished"
 schedule = tied_directory,5,60,start_tied=
 schedule = untied_directory,5,60,close_untied=
 schedule = low_diskspace,5,60,"close_low_diskspace=200M"
 check_hash = yes
-
-# colors (from patch)
-active_fg_color = 5
-done_fg_color = 7
-done_bg_color = 0

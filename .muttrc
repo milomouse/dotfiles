@@ -45,7 +45,7 @@ set tilde
 set timeout = 3
 
 # - order of preferred viewing formats:
-auto_view text/html
+# auto_view text/html
 alternative_order text/plain text/enriched text/html
 
 # - header information:
@@ -81,6 +81,7 @@ bind pager K        previous-undeleted
 bind pager J        next-undeleted
 bind pager l        view-attachments
 bind pager,index R  group-reply
+bind pager,index c  mail
 bind index gg       first-entry
 bind index G        last-entry
 bind index K        previous-unread

@@ -34,7 +34,7 @@ import XMonad.Actions.CycleWS (nextWS,prevWS,toggleWS,shiftToNext,shiftToPrev)
 import XMonad.Actions.CycleWindows (rotFocusedDown,rotFocusedUp,rotUnfocusedDown,rotUnfocusedUp)
 import XMonad.Actions.RotSlaves (rotSlavesDown,rotSlavesUp)
 import XMonad.Actions.Promote
-import XMonad.Actions.WindowGo (runOrRaiseMaster)
+import XMonad.Actions.WindowGo
 import XMonad.Actions.PerWorkspaceKeys
 import XMonad.Actions.FloatKeys (keysMoveWindow,keysResizeWindow)
 import XMonad.Actions.WithAll
@@ -46,7 +46,7 @@ import qualified XMonad.Actions.Submap as SM
 -- <hooks>
 import XMonad.Hooks.InsertPosition
 import XMonad.Hooks.ManageHelpers (doCenterFloat,doFullFloat)
-import XMonad.Hooks.ManageDocks (avoidStruts)
+import XMonad.Hooks.ManageDocks (avoidStruts, ToggleStruts(..))
 import XMonad.Hooks.EwmhDesktops (ewmhDesktopsStartup)
 import XMonad.Hooks.SetWMName
 import XMonad.Hooks.DynamicLog
@@ -77,6 +77,7 @@ import XMonad.Layout.Master
 import XMonad.Layout.LayoutCombinators
 import XMonad.Layout.LimitWindows
 import XMonad.Layout.NoBorders (noBorders,smartBorders,withBorder)
+import XMonad.Layout.Gaps
 import XMonad.Layout.Reflect
 import XMonad.Layout.MultiToggle
 import XMonad.Layout.MultiToggle.Instances
@@ -98,7 +99,7 @@ main = do
       { modMask             = myModMask
       , keys                = myKeyBindings
       , terminal            = "urxvt"
-      , workspaces          = map show [1..5]
+      , workspaces          = map show [1..4]
       , layoutHook          = myLayouts
       , manageHook          = insertPosition Above Newer <+> myManageHook
       , startupHook         = myStartHook
@@ -169,7 +170,7 @@ myXPConfig =
                     , fgHLight              = colorDarkGray
                     , borderColor           = colorBlackAlt
                     , promptBorderWidth     = 1
-                    , height                = 16
+                    , height                = 15
                     , position              = Bottom
                     , historySize           = 100
                     , historyFilter         = deleteConsecutive
@@ -183,7 +184,7 @@ myXPConfig =
 
 -- UTILITY FUNCTIONS {{{
 
--- <grid-select>
+-- <grid-select> (magenta color scheme)
 myColorizer = colorRangeFromClassName
     (0x00,0x00,0x00) -- lowest inactive bg
     (0xBB,0xAA,0xFF) -- highest inactive bg
@@ -219,25 +220,28 @@ myLayouts = avoidStruts                   $
             mkToggle (single NBFULL)      $
             mkToggle (single REFLECTX)    $
             mkToggle (single REFLECTY)    $
-            onWorkspace "1" workLayouts   $
+            gaps [(U,14), (D,14)]         $
+            onWorkspace "1" faveLayouts   $
+            onWorkspace "2" workLayouts   $
             onWorkspace "3" inetLayouts   $
             onWorkspace "4" fotoLayouts   $
             (collectiveLayouts)
   where
-    collectiveLayouts = myFull ||| myTile ||| myOneB ||| myColM ||| myMosC
+    collectiveLayouts = myFull ||| myOneB ||| myMosC ||| myTile ||| myColM ||| myTabD
 
     -- <define layouts>
     myFull = named "*" (smartBorders (noBorders Full))
-    myTabD = named "=" (smartBorders (noBorders (mastered 0.02 0.4 $ tabbedAlways shrinkText myTabTheme)))
+    myTabD = named "=" (smartBorders (noBorders (mastered 0.02 0.33 $ tabbedAlways shrinkText myTabTheme)))
     myTile = named "+" (smartBorders (withBorder 1 (limitWindows 5 (ResizableTall 1 0.03 0.5 []))))
     myMosC = named "%" (smartBorders (withBorder 1 (MosaicAlt M.empty)))
     myColM = named "#" (smartBorders (withBorder 1 (multiCol [1] 3 0.01 0.5)))
     myOneB = named "@" (smartBorders (withBorder 1 (limitWindows 5 (OneBig 0.75 0.75))))
 
     -- <layouts per workspace>
-    workLayouts = myFull ||| myTabD
-    inetLayouts = myFull ||| myTile
-    fotoLayouts = myFull ||| myOneB ||| myColM
+    faveLayouts = myFull ||| myTabD
+    workLayouts = myFull ||| myOneB ||| myMosC ||| myColM ||| myTile
+    inetLayouts = myFull ||| myMosC ||| myTile ||| myOneB
+    fotoLayouts = myFull ||| myOneB ||| myMosC ||| myColM
 
 -- end of LAYOUTS }}}
 
@@ -263,7 +267,7 @@ myManageHook = (composeAll . concat $
         -- <<class>>
         myFloatsC = ["MPlayer","Save As...","Downloads"]
         myFotoC   = ["Gliv","Display"]
-        myInetC   = ["Navigator","Minefield","Firefox"]
+        myInetC   = ["Navigator","Minefield","Firefox","Gran Paradiso"]
         -- <<resource>>
         myIgnores = ["desktop","desktop_window"]
         -- <<name>>
@@ -271,7 +275,7 @@ myManageHook = (composeAll . concat $
         myTrueFSN = ["GLiv in fullscreen"]
 
 -- <statusbar/logging>
-myStatusBar = "dzen2 -x '0' -y '0' -h '13' -w '130' -ta 'l' -bg '#161616' -fg '#a9a6af' -fn '-*-fixed-medium-r-normal-*-10-*-*-*-*-*-*-*'"
+myStatusBar = "dzen2 -x '0' -y '0' -h '13' -w '200' -ta 'l' -bg '#161616' -fg '#a9a6af' -fn '-*-fixed-medium-r-normal-*-10-*-*-*-*-*-*-*'"
 myLogHook :: Handle -> X ()
 myLogHook h = dynamicLogWithPP $ defaultPP
     {
@@ -331,41 +335,53 @@ myKeyBindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask,                   xK_b         ), refresh) -- bump window to correct size
     , ((modMask .|. controlMask,   xK_BackSpace ), kill) -- kill selected window
     -- <prompts/utils>
-    , ((0,                         xK_F1        ), manPrompt myXPConfig) -- manpage prompt
-    , ((0,                         xK_F2        ), shellPrompt myXPConfig) -- shell prompt
-    , ((0,                         xK_F3        ), windowPromptGoto myXPConfig) -- goto window on it's workspace on in it's frame
-    , ((modMask,                   xK_F3        ), windowPromptBring myXPConfig) -- bring window to current workspace in current frame
-    , ((0,                         xK_F4        ), promptSearchBrowser myXPConfig "firefox" multi) -- internet search (engine:string (google default))
-    , ((modMask,                   xK_F4        ), SM.submap $ searchEngineMap $ promptSearchBrowser myXPConfig "firefox") -- internet seach (sub-bindings at end of section)
-    , ((0,                         xK_F12       ), appendFilePrompt myXPConfig "/home/milo/othe/.TODO_now") -- add one-liner to file (cannot expand $HOME)
+    , ((modMask,                   xK_semicolon ), shellPrompt myXPConfig) -- shell prompt
+    , ((modMask .|. shiftMask,     xK_semicolon ), manPrompt myXPConfig) -- manpage prompt
+    , ((0,                         xK_F1        ), windowPromptGoto myXPConfig) -- goto window on it's workspace and focus in it's frame
+    , ((0,                         xK_F2        ), windowPromptBring myXPConfig) -- bring window to current workspace and into currently focused frame
+    , ((0,                         xK_F3        ), promptSearchBrowser myXPConfig "firefox" multi) -- internet search (engine:string (google default))
+    , ((modMask,                   xK_F3        ), SM.submap $ searchEngineMap $ promptSearchBrowser myXPConfig "firefox") -- internet seach (sub-bindings at end of section)
+    , ((0,                         xK_F4        ), appendFilePrompt myXPConfig "/home/milo/othe/.TODO_now") -- add one-liner to file (cannot expand $HOME)
     , ((modMask,                   xK_g         ), goToSelected $ myGSConfig myColorizer) -- show a grid of windows to jump to
     , ((modMask .|. shiftMask,     xK_g         ), bringSelected $ myGSConfig myColorizer) -- show a grid of windows to bring here
     -- <common programs>
-    , ((modMask,                   xK_Escape    ), safeSpawnProg "banishmouse") -- hide and freeze the mouse cursor (or bring back to original location)
-    , ((0,                         xK_Print     ), unsafeSpawn "import -window root $HOME/foto/shot/$(date +%Y_%m_%d-%H%M%S).png") -- take screenshot of current workspace
+    , ((modMask,                   xK_Escape    ), safeSpawnProg "banishmouse") -- hide and lock the mouse cursor (or bring back to original location and unlock mouse)
+    , ((modMask,                   xK_Print     ), unsafeSpawn "import -window root $HOME/foto/shot/$(date +%Y_%m_%d-%H%M%S).png") -- take screenshot of current workspace
     , ((modMask .|. shiftMask,     xK_Delete    ), unsafeSpawn "alock -bg image:file=$HOME/foto/wall/beheading.jpg -cursor glyph -auth pam >&/dev/null") -- lock screen
     , ((modMask .|. shiftMask,     xK_Return    ), safeSpawnProg $ XMonad.terminal conf) -- spawn terminal by itself
     , ((modMask,                   xK_Return    ), unsafeSpawn "urxvt -e tmux") -- spawn terminal in tmux
     , ((modMask,                   xK_grave     ), scratchPad) -- spawn floating "scratchpad" window
-    , ((modMask,                   xK_f         ), runOrRaiseMaster "firefox" (className =? "Firefox")) -- run or raise/goto firefox
+    , ((modMask,                   xK_f         ), submap . M.fromList $ -- frequently used programs; sub-bindings
+                                [ ((0, xK_m       ), runInTerm "" "tmux new-session 'mutt'") -- <open email>
+                                , ((0, xK_n       ), runInTerm "" "tmux new-session 'nsudoku 12'") -- <open a sudoku game>
+                                , ((0, xK_f       ), runOrRaiseMaster "firefox" (className =? "Firefox")) -- <run or raise firefox>
+                                , ((0, xK_w       ), safeSpawnProg "wallie") -- <change wallpaper to a random one>
+                                ])
+    , ((modMask,                   xK_e         ), submap . M.fromList $ -- frequently edited files; sub-bindings
+                                [ ((0, xK_t       ), raiseMaybe (runInTerm "-title 'vim: todo'" "zsh -c 'vim ~/othe/.TODO_now'") (title =? "'vim: todo'"))
+                                , ((0, xK_x       ), raiseMaybe (runInTerm "-title 'vim: xdefaults'" "zsh -c 'vim ~/.Xdefaults'") (title =? "'vim: xdefaults'"))
+                                , ((0, xK_i       ), raiseMaybe (runInTerm "-title 'vim: xinitrc'" "zsh -c 'vim ~/.xinitrc'") (title =? "'vim: xinitrc'"))
+                                , ((0, xK_m       ), raiseMaybe (runInTerm "-title 'vim: xmonad.hs'" "zsh -c 'vim ~/.xmonad/xmonad.hs'") (title =? "'vim: xmonad.hs'"))
+                                , ((0, xK_z       ), raiseMaybe (runInTerm "-title 'vim: zsh'" "zsh -c 'vim -p ~/.zshrc ~/.config/zsh/.zsh{fn,alias}'") (title =? "'vim: zsh'"))
+                                ])
     -- <function/media keys>
     , ((0 .|. controlMask,         0x1008ff02   ), unsafeSpawn "sudo moodlight -m") -- maximum screen brightness ((XF86MonBrightnessUp [max]))
     , ((0,                         0x1008ff02   ), unsafeSpawn "sudo moodlight -u") -- increase screen brightness ((XF86MonBrightnessUp))
     , ((0,                         0x1008ff03   ), unsafeSpawn "sudo moodlight -d") -- decrease screen brightness ((XF86MonBrightnessDown))
-    , ((0,                         0x1008ff12   ), unsafeSpawn "mossrat -m")   -- mute volume, via "mossrat" ((XF86AudioMute))
-    , ((0,                         0x1008ff11   ), unsafeSpawn "mossrat -d 1") -- decrease volume, via "mossrat" ((XF86AudioLowerVolume))
     , ((0,                         0x1008ff13   ), unsafeSpawn "mossrat -i 1") -- increase volume, via "mossrat" ((XF86AudioRaiseVolume))
-    , ((modMask,                   xK_a         ), submap . M.fromList $ -- "mossrat" commong sub-bindings (music playing script)
-                                [ ((0, xK_t       ), unsafeSpawn "mossrat --toggle") -- <toggle song>
-                                , ((0, xK_s       ), unsafeSpawn "mossrat --stop") -- <stop song>
-                                , ((0, xK_p       ), unsafeSpawn "mossrat --prev") -- <play previous song>
-                                , ((0, xK_n       ), unsafeSpawn "mossrat --next") -- <play next song>
+    , ((0,                         0x1008ff11   ), unsafeSpawn "mossrat -d 1") -- decrease volume, via "mossrat" ((XF86AudioLowerVolume))
+    , ((0,                         0x1008ff12   ), safeSpawn "mossrat" ["-m"])   -- mute volume, via "mossrat" ((XF86AudioMute))
+    , ((modMask,                   xK_a         ), submap . M.fromList $ -- "mossrat" common sub-bindings (music playing script)
+                                [ ((0, xK_t       ), safeSpawn "mossrat" ["--toggle"]) -- <toggle song>
+                                , ((0, xK_s       ), safeSpawn "mossrat" ["--stop"]) -- <stop song>
+                                , ((0, xK_p       ), safeSpawn "mossrat" ["--prev"]) -- <play previous song>
+                                , ((0, xK_n       ), safeSpawn "mossrat" ["--next"]) -- <play next song>
                                 ])
     , ((modMask,                   xK_s         ), submap . M.fromList $ -- "songrem" common sub-bindings (forked fav. song script)
-                                [ ((0, xK_a       ), unsafeSpawn "songrem --add") -- <add current song to list>
-                                , ((0, xK_r       ), unsafeSpawn "songrem --remove") -- <remove current song, if in list>
-                                , ((0, xK_e       ), unsafeSpawn "songrem --edit") -- <manually edit list in [internally called] terminal>
-                                , ((0, xK_n       ), unsafeSpawn "songrem --play") -- <play song from list>
+                                [ ((0, xK_a       ), safeSpawn "songrem" ["--add"]) -- <add current song to list>
+                                , ((0, xK_r       ), safeSpawn "songrem" ["--remove"]) -- <remove current song, if in list>
+                                , ((0, xK_e       ), safeSpawn "songrem" ["--edit"]) -- <manually edit list in [internally called] terminal>
+                                , ((0, xK_n       ), safeSpawn "songrem" ["--play"]) -- <play song from list>
                                 ])
     , ((modMask .|. shiftMask,     xK_e         ), safeSpawnProg "eject") -- open disc tray
     -- <tiled windows>
@@ -417,6 +433,10 @@ myKeyBindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- <layout/workspace common>
     , ((modMask,                   xK_t         ), submap . M.fromList $ -- common toggle sub-bindings
                                 [ ((0, xK_o       ), sendMessage $ Toggle NBFULL) -- <toggle Full with noBorders (like "only"), and back again>
+                                , ((0, xK_s       ), sendMessage $ ToggleStruts) -- <toggle struts>
+                                , ((0, xK_g       ), sendMessage $ ToggleGaps) -- <toggle gaps>
+                                , ((0, xK_d       ), sendMessage $ ToggleGap D) -- <toggle bottom gap>
+                                , ((0, xK_u       ), sendMessage $ ToggleGap U) -- <toggle upper gap>
                                 , ((0, xK_x       ), sendMessage $ Toggle REFLECTX) -- <toggle mirrored layout by X axis>
                                 , ((0, xK_y       ), sendMessage $ Toggle REFLECTY) -- <toggle mirrored layout by Y axis>
                                 ])
@@ -431,12 +451,12 @@ myKeyBindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask .|. controlMask,   xK_comma     ), shiftToPrev >> prevWS) -- move current frame to previous workspace and go there
     ]
     ++
-    [((m .|. modMask, k), windows $ f i)
+    [((m .|. modMask, k), windows $ f i) -- focus workspace by modMask+Int
         | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_9]
         , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]
     ]
     where
-      searchEngineMap method = M.fromList $
+      searchEngineMap method = M.fromList $ -- search engines for modMask+F3
           [ ((0, xK_g), method S.google )
           , ((0, xK_i), method S.images )
           , ((0, xK_w), method S.wikipedia )

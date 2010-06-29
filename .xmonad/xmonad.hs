@@ -94,7 +94,7 @@ import XMonad.Layout.WindowNavigation
 -- MAIN CONFIGURATION {{{
 
 main = do
-    dzenTopBar <- spawnPipe myStatusBar
+    dzenStatusBar <- spawnPipe myStatusBar
     xmonad $ defaultConfig
       { modMask             = myModMask
       , keys                = myKeyBindings
@@ -103,7 +103,7 @@ main = do
       , layoutHook          = myLayouts
       , manageHook          = insertPosition Above Newer <+> myManageHook
       , startupHook         = myStartHook
-      , logHook             = myLogHook dzenTopBar >> setWMName "LG3D"
+      , logHook             = myLogHook dzenStatusBar >> setWMName "LG3D"
       , normalBorderColor   = colorNormalBorder
       , focusedBorderColor  = colorFocusedBorder
       , borderWidth         = 2 -- for floating windows ('noBorders' OR 'withBorder Int' on layouts)

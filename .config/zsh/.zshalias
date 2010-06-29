@@ -22,6 +22,7 @@ alias e="bye"
 # useless quick views/edits:
 alias svim="sudo vim"
 alias wika="w3m /usr/share/doc/arch-wiki/html/index.html"
+alias xoc="w3m /usr/share/doc/xmonad-contrib-darcs/html"
 alias uedit="vim $XDG_CONFIG_DIR/uzbl/config"
 alias medit="vim $XDG_CONFIG_DIR/musca/musca_start"
 alias xedit="vim $HOME/.Xdefaults"
@@ -50,6 +51,7 @@ alias unrarall='for file in `ls *.rar`; do unrar -x r $file; done'
 alias unzipall='for file in `ls *.zip`; do unzip $file; done'
 alias siteget='wget --recursive --page-requisites --convert-links --html-extension --no-parent --wait=10 --limit-rate=20K -U Mozilla -l' #depth, then url
 alias rot='rtorrent -o http_capath=/etc/ssl/certs'
+#alias rec='ffmpeg -f x11grab -s 1366x768 - r 150 -i :0.0 -sameq /tmp/capture.mpg'
 
 # database/package management:
 alias upf="sudo fc-cache -vf"

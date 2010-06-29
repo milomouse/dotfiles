@@ -4,7 +4,7 @@
 -- author: milomouse <vincent[at]fea.st>
 -- credit: serrghi     -> config used as my starting grounds--very clean/workable.
 --         serverninja -> too many thanks to mention (formatting, layout ideas, etc.)
---         pbrisbin    -> scratchpad "NSP" workspace hiding, and 'versions' idea.
+--         pbrisbin    -> scratchpad 'NSP' workspace hiding, and "versions" idea.
 -------------------------------------------------------------------------------------------
 -- versions used atoc:
 -- |  ghc                  -> 6.12.1-4
@@ -14,7 +14,7 @@
 -- |  haskell-x11-xft      -> 0.3-13.1
 -- |  xmonad-darcs         -> 20100423-1
 -- |  xmonad-contrib-darcs -> 20100423-1
--- |  dzen2-svn            -> 267-1
+-- |  dzen2-svn            -> 271-1
 -------------------------------------------------------------------------------------------
 
 {-# LANGUAGE NoMonomorphismRestriction #-}

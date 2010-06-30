@@ -1,0 +1,23 @@
+# HTML entity conversion table
+# 
+# Put all entities you want to have converted into this file.
+# File format: &entity;[converted string/char]
+# Example:     &mdash;--
+# 
+# XML defined entities are converted by default. These are:
+# &amp;, &lt;, &gt;, &apos;, &quot;
+# 
+&auml;ä
+&ouml;ö
+&uuml;ü
+&Auml;Ä
+&Ouml;Ö
+&Uuml;Ü
+&szlig;ß
+&nbsp; 
+&mdash;--
+&hellip;...
+&#8220;"
+&#8221;"
+&raquo;"
+&laquo;"

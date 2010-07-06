@@ -1,8 +1,8 @@
-"import -window root ~/foto/shot/$(date +%Y_%m_%d-%H%M).png"
+"import -window root $HOME/foto/shot/$(date +%Y_%m_%d-%H%M).png"
 Mod4+Shift+Print
 
 "alock -bg image:file=$HOME/foto/wall/beheading.jpg -cursor glyph -auth pam >&/dev/null"
-Mod4+Shift+Delete
+Mod4+Shift+F11
 
 "banishmouse"
 Mod4+Escape
@@ -16,19 +16,19 @@ XF86MonBrightnessDown
 "moodlight -m"
 Control+XF86MonBrightnessUp
 
-"mossrat -t"
+"mossrat --toggle"
 Mod4+Home
 
-"mossrat -s"
+"mossrat --stop"
 Mod4+End
 
-"mossrat -p"
+"mossrat --prev"
 Mod4+Prior
 
-"mossrat -n"
+"mossrat --next"
 Mod4+Next
 
-"mossrat -m"
+"mossrat --mute"
 XF86AudioMute
 
 "mossrat -d 1"
@@ -37,11 +37,11 @@ XF86AudioLowerVolume
 "mossrat -i 1"
 XF86AudioRaiseVolume
 
-"songrem -a"
-Control+Home
+"songrem --add"
+Mod4+Shift+Home
 
-"songrem -p"
-Control+Next
+"songrem --play"
+Mod4+Shift+Next
 
-"songrem -r"
-Control+Delete
+"songrem --remove"
+Mod4+Shift+Delete

@@ -1,0 +1,17 @@
+#!/bin/zsh
+# quickly toggle the scratchpad group, then switch back again.
+# NOTE: for some reason "use (last)" from a script wont work. thus; temp file..
+
+local group=$(musca -c "silent show groups" 2>/dev/null|grep "*"|awk '{print $3}')
+local tempf=/home/milo/.config/musca/.last-group
+[[ ! -f $tempf ]] && print "one" >! $tempf
+
+if [[ $group = "!" ]]; then
+  musca -c "silent use $(<$tempf)" &>/dev/null
+elif [[ -z $(musca -c "silent show groups" 2>/dev/null|awk '{print $3}'|grep -x $(<$tempf)) ]]; then
+  print $group >! $tempf
+  musca -c "silent use one" &>/dev/null
+else
+  print $group >! $tempf
+  musca -c "silent use !" &>/dev/null
+fi

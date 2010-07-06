@@ -29,7 +29,7 @@ schedule = watch_directory3,5,5,"load_start=/home/milo/tors/othe/.down/*.torrent
 schedule = watch_directory4,5,5,"load_start=/home/milo/tors/vide/.down/*.torrent,d.set_directory=/home/milo/tors/vide/"
 schedule = watch_directory5,5,5,"load_start=/home/milo/tors/book/.down/*.torrent,d.set_directory=/home/milo/tors/book/"
 
-# actions
+# other actions
 system.method.set_key = event.download.finished,notify_dzen,"execute=/usr/local/bin/notor,$d.get_base_filename="
 schedule = filter_active,10,10,"view_filter = active,d.get_down_rate="
 #schedule = filter_active,30,30,"view_filter = active,\"or={d.get_up_rate=,d.get_down_rate=}\""

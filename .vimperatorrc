@@ -1,0 +1,10 @@
+colorscheme milomouse
+set shell=zsh
+set editor="urxvt -e vim"
+set showtabline=0
+set insertmode=0
+set focuscontent=on
+set defsearch=google
+set followhints=0
+set hintinputs="label,name,value"
+set hintmatching=wordstartswith

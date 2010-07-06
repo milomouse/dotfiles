@@ -7,6 +7,7 @@ set frame_display_hidden 2
 set frame_resize 10
 set dmenu dmenu -i
 hook on ^only border off
+hook on ^add pad 0 0 15 0
 # borders
 set border_focus #a488d9
 set border_unfocus #303030
@@ -16,7 +17,6 @@ set border_dedicate_focus #ffadcc
 set border_dedicate_unfocus #ffadcc
 # common/ease-of-use bindings
 bind off all
-bind on Mod4+r run /home/milo/.config/musca/1only
 bind on Mod4+Return exec urxvt -e tmux
 bind on Mod4+Shift+Return exec urxvt
 bind on Mod4+p exec urxvt -e ncmpcpp
@@ -24,7 +24,7 @@ bind on Mod4+Shift+BackSpace kill
 bind on Mod4+Shift+q quit
 # prompt bindings
 bind on Mod4+m command
-bind on Mod4+i shell
+bind on Mod4+e shell
 bind on Mod4+g switch group
 bind on Mod4+w switch window
 # mode/singular bindings
@@ -62,7 +62,7 @@ bind on Mod4+minus vsplit 1/2
 bind on Mod4+Shift+plus hsplit 33%
 bind on Mod4+Shift+minus vsplit 33%
 # group bindings
-bind on Mod4+grave use default
+bind on Mod4+grave exec /home/milo/.config/musca/group__toggle
 bind on Mod4+1 use one
 bind on Mod4+2 use two
 bind on Mod4+3 use three
@@ -75,14 +75,17 @@ bind on Mod4+Shift+4 move four
 bind on Mod4+period use (next)
 bind on Mod4+comma use (prev)
 # layout bindings
-bind on Mod4+F1 load /home/milo/.config/musca/1only
-bind on Mod4+F2 load /home/milo/.config/musca/2v-3h
-bind on Mod4+F3 load /home/milo/.config/musca/1v-2h
-bind on Mod4+F4 load /home/milo/.config/musca/2v-2h
+#bind on Mod4+F1 load /home/milo/.config/musca/1only
+#bind on Mod4+F2 load /home/milo/.config/musca/2v-3h
+#bind on Mod4+F3 load /home/milo/.config/musca/1v-2h
+#bind on Mod4+F4 load /home/milo/.config/musca/2v-2h
 # startup stuff
+name !
+pad 0 0 15 0
+exec urxvt -e ncmpcpp
 add one
 add two
 add three
 add four
-use default
-exec urxvt -e tmux
+use one
+#exec urxvt -e tmux

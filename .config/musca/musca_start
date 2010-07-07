@@ -21,7 +21,7 @@ bind off all
 bind on Mod4+Return exec urxvt -e tmux
 bind on Mod4+Shift+Return exec urxvt
 bind on Mod4+Shift+BackSpace kill
-bind on Mod4+Shift+q quit
+bind on Mod4+Shift+q exec killall zsh dzen4musca ; musca -c quit
 bind on Mod4+Shift+r exec killall zsh dzen4musca ; exec zsh /home/milo/.config/musca/dzen4musca 2>/dev/null
 # prompt bindings
 bind on Mod4+m command

@@ -3,6 +3,7 @@
 
 # try not to list default settings
 set startup /home/milo/.config/musca/musca_start
+exec zsh /home/milo/.config/musca/dzen4musca 2>/dev/null
 set frame_display_hidden 2
 set frame_resize 10
 set dmenu dmenu -i
@@ -19,9 +20,9 @@ set border_dedicate_unfocus #ffadcc
 bind off all
 bind on Mod4+Return exec urxvt -e tmux
 bind on Mod4+Shift+Return exec urxvt
-bind on Mod4+p exec urxvt -e ncmpcpp
 bind on Mod4+Shift+BackSpace kill
 bind on Mod4+Shift+q quit
+bind on Mod4+Shift+r exec killall zsh dzen4musca ; exec zsh /home/milo/.config/musca/dzen4musca 2>/dev/null
 # prompt bindings
 bind on Mod4+m command
 bind on Mod4+e shell
@@ -67,11 +68,15 @@ bind on Mod4+1 use one
 bind on Mod4+2 use two
 bind on Mod4+3 use three
 bind on Mod4+4 use four
+bind on Mod4+5 use five
+bind on Mod4+6 use six
 bind on Mod4+Shift+grave move default
 bind on Mod4+Shift+1 move one
 bind on Mod4+Shift+2 move two
 bind on Mod4+Shift+3 move three
 bind on Mod4+Shift+4 move four
+bind on Mod4+Shift+5 move five
+bind on Mod4+Shift+6 move six
 bind on Mod4+period use (next)
 bind on Mod4+comma use (prev)
 # layout bindings
@@ -87,5 +92,7 @@ add one
 add two
 add three
 add four
+add five
+add six
 use one
 #exec urxvt -e tmux

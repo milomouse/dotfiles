@@ -109,7 +109,7 @@ main = do
       , borderWidth         = 2 -- for floating windows ('noBorders' OR 'withBorder Int' on layouts)
       , focusFollowsMouse   = False
       }
-myStartHook = spawnOnce ". $HOME/.xmonad/dzen2start" <+>
+myStartHook = spawnOnce ". $HOME/.xmonad/dzen4xmonad" <+>
               setDefaultCursor xC_left_ptr <+>
               ewmhDesktopsStartup >> setWMName "LG3D"
 

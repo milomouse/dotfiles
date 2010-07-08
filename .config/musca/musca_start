@@ -18,11 +18,27 @@ set border_dedicate_focus #ffadcc
 set border_dedicate_unfocus #ffadcc
 # common/ease-of-use bindings
 bind off all
+bind on Mod4+Escape exec banishmouse
 bind on Mod4+Return exec urxvt -e tmux
 bind on Mod4+Shift+Return exec urxvt
 bind on Mod4+Shift+BackSpace kill
 bind on Mod4+Shift+q exec killall zsh dzen4musca ; musca -c quit
 bind on Mod4+Shift+r exec killall zsh dzen4musca ; exec zsh /home/milo/.config/musca/dzen4musca 2>/dev/null
+# media and other bindings
+bind on Mod4+Print exec import -window root /home/milo/foto/shot/$(date +%Y_%m_%d-%H%M%S).png"
+bind on Mod4+Shift+Delete exec alock -bg image:file=/home/milo/foto/wall/beheading.jpg -cursor glyph -auth pam >&/dev/null
+bind on Control+XF86MonBrightnessUp exec moodlight -m
+bind on XF86MonBrightnessUp exec moodlight -u
+bind on XF86MonBrightnessDown exec moodlight -d
+bind on XF86AudioRaiseVolume exec mossrat -i 1
+bind on XF86AudioLowerVolume exec mossrat -d 1
+bind on XF86AudioMute exec mossrat -m
+bind on Mod4+Shift+y exec mossrat --prev
+bind on Mod4+Shift+u exec mossrat --toggle
+bind on Mod4+Shift+i exec mossrat --stop
+bind on Mod4+Shift+o exec mossrat --next
+bind on Mod4+Shift+a exec songrem --add
+bind on Mod4+Shift+t exec songrem --play
 # prompt bindings
 bind on Mod4+m command
 bind on Mod4+e shell

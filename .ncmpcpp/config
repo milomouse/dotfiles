@@ -37,7 +37,7 @@ fancy_scrolling = "yes"
 cyclic_scrolling = "no"
 lines_scrolled = "2"
 
-user_interface = "alternative"
+user_interface = "classic"
 browser_display_mode = "classic"
 search_engine_display_mode = "classic"
 playlist_display_mode = "classic"

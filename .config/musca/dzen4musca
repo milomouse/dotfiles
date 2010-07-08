@@ -12,7 +12,7 @@ _left() {
 W=180
 X=0
 while true; do
-  ws=`musca -c "silent show groups" 2>/dev/null | awk -v ORS="^fg(#0c6389)^bg(#161616)|" '{ print ($2=="*"?"^fg(#6a588d)^bg(#161616)":"^fg(#5f656b)^bg(#161616)")$3}'`
+  ws=`musca -c "silent show groups" 2>/dev/null | awk -v ORS="^fg(#0c6389)^bg(#161616)|" '{ print ($2=="*"?"^fg(#111)^bg(#0c6389)":"^fg(#333)^bg(#63567c)")$3}'`
   print "$ws"
 done | dzen2 -ta 'l' -h $H -tw $W -x $X -y $Y -fg $FG -bg $BG -fn $FN -e &
 }

@@ -8,3 +8,7 @@ set defsearch=google
 set followhints=0
 set hintinputs="label,name,value"
 set hintmatching=wordstartswith
+let clock_format='(%a:%d/%y %t)'
+noremap j 3j
+noremap k 3k
+noremap <C-k> :pageinfo

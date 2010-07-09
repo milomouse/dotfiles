@@ -1,1 +1,1 @@
-w3m %s
+/usr/bin/nohup firefox -remote "openURL("%s", new-tab)" >/dev/null 2>&1 &

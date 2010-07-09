@@ -68,7 +68,6 @@ import XMonad.Prompt.Window (windowPromptBring,windowPromptGoto)
 -- <layouts>
 import XMonad.Layout.Tabbed
 import XMonad.Layout.ResizableTile
-import XMonad.Layout.MultiColumns
 import XMonad.Layout.OneBig
 import XMonad.Layout.MosaicAlt
 
@@ -170,7 +169,7 @@ myXPConfig =
                     , fgHLight              = colorDarkGray
                     , borderColor           = colorBlackAlt
                     , promptBorderWidth     = 1
-                    , height                = 15
+                    , height                = 14
                     , position              = Bottom
                     , historySize           = 100
                     , historyFilter         = deleteConsecutive
@@ -221,27 +220,27 @@ myLayouts = avoidStruts                   $
             mkToggle (single REFLECTX)    $
             mkToggle (single REFLECTY)    $
             gaps [(U,14), (D,14)]         $
-            onWorkspace "1" faveLayouts   $
+            onWorkspace "1" tabdLayouts   $
             onWorkspace "2" workLayouts   $
             onWorkspace "3" inetLayouts   $
             onWorkspace "4" fotoLayouts   $
             (collectiveLayouts)
   where
-    collectiveLayouts = myFull ||| myOneB ||| myMosC ||| myTile ||| myColM ||| myTabD
+    collectiveLayouts = myTile ||| myOneB ||| myMosC ||| myFull ||| myTab1 ||| myTab2
 
     -- <define layouts>
     myFull = named "*" (smartBorders (noBorders Full))
-    myTabD = named "=" (smartBorders (noBorders (mastered 0.02 0.33 $ tabbedAlways shrinkText myTabTheme)))
-    myTile = named "+" (smartBorders (withBorder 1 (limitWindows 5 (ResizableTall 1 0.03 0.5 []))))
+    myTab1 = named "-" (smartBorders (noBorders $ tabbedAlways shrinkText myTabTheme))
+    myTab2 = named "=" (smartBorders (noBorders (mastered 0.02 0.33 $ tabbedAlways shrinkText myTabTheme)))
+    myTile = named "+" (smartBorders (withBorder 1 (mastered 0.02 0.33 (ResizableTall 1 0.03 0.6 []))))
     myMosC = named "%" (smartBorders (withBorder 1 (MosaicAlt M.empty)))
-    myColM = named "#" (smartBorders (withBorder 1 (multiCol [1] 3 0.01 0.5)))
-    myOneB = named "@" (smartBorders (withBorder 1 (limitWindows 5 (OneBig 0.75 0.75))))
+    myOneB = named "@" (smartBorders (withBorder 1 (limitWindows 5 (OneBig 0.75 0.65))))
 
     -- <layouts per workspace>
-    faveLayouts = myFull ||| myTabD
-    workLayouts = myFull ||| myOneB ||| myMosC ||| myColM ||| myTile
-    inetLayouts = myFull ||| myMosC ||| myTile ||| myOneB
-    fotoLayouts = myFull ||| myOneB ||| myMosC ||| myColM
+    tabdLayouts = myTab1 ||| myTab2
+    workLayouts = myTile ||| myOneB ||| myMosC ||| myFull
+    inetLayouts = myOneB ||| myFull
+    fotoLayouts = myFull ||| myOneB ||| myMosC
 
 -- end of LAYOUTS }}}
 
@@ -290,20 +289,23 @@ myLogHook h = dynamicLogWithPP $ defaultPP
                                 (\x -> case x of
                                     "Full" -> "*"
                                     "ReflectX *" -> "*"
-                                    "ReflectX +" -> "+"
+                                    "ReflectX -" -> "-"
                                     "ReflectX =" -> "="
+                                    "ReflectX +" -> "+"
                                     "ReflectX %" -> "%"
                                     "ReflectX @" -> "@"
                                     "ReflectX #" -> "#"
                                     "ReflectY *" -> "*"
-                                    "ReflectY +" -> "+"
+                                    "ReflectY -" -> "-"
                                     "ReflectY =" -> "="
+                                    "ReflectY +" -> "+"
                                     "ReflectY %" -> "%"
                                     "ReflectY @" -> "@"
                                     "ReflectY #" -> "#"
                                     "ReflectX ReflectY *" -> "*"
-                                    "ReflectX ReflectY +" -> "+"
+                                    "ReflectX ReflectY -" -> "-"
                                     "ReflectX ReflectY =" -> "="
+                                    "ReflectX ReflectY +" -> "+"
                                     "ReflectX ReflectY %" -> "%"
                                     "ReflectX ReflectY @" -> "@"
                                     "ReflectX ReflectY #" -> "#"

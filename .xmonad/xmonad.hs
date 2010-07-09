@@ -220,8 +220,8 @@ myLayouts = avoidStruts                   $
             mkToggle (single REFLECTX)    $
             mkToggle (single REFLECTY)    $
             gaps [(U,14), (D,14)]         $
-            onWorkspace "1" tabdLayouts   $
-            onWorkspace "2" workLayouts   $
+            onWorkspace "1" workLayouts   $
+            onWorkspace "2" tabdLayouts   $
             onWorkspace "3" inetLayouts   $
             onWorkspace "4" fotoLayouts   $
             (collectiveLayouts)
@@ -237,8 +237,8 @@ myLayouts = avoidStruts                   $
     myOneB = named "@" (smartBorders (withBorder 1 (limitWindows 5 (OneBig 0.75 0.65))))
 
     -- <layouts per workspace>
-    tabdLayouts = myTab1 ||| myTab2
     workLayouts = myTile ||| myOneB ||| myMosC ||| myFull
+    tabdLayouts = myTab1 ||| myTab2
     inetLayouts = myOneB ||| myFull
     fotoLayouts = myFull ||| myOneB ||| myMosC
 
@@ -402,16 +402,16 @@ myKeyBindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask .|. mod1Mask,      xK_space     ), sendMessage resetAlt) -- reset MosaicAlt layout
     , ((modMask,                   xK_j         ), sendMessage $ Go D) -- focus down a frame
     , ((modMask,                   xK_k         ), sendMessage $ Go U) -- focus up a frame
-    , ((modMask,                   xK_h         ), bindOn [("1", rotFocusedDown), ("", sendMessage $ Go L)]) -- focus left a frame
-    , ((modMask,                   xK_l         ), bindOn [("1", rotFocusedUp), ("", sendMessage $ Go R)]) -- focus right a frame
+    , ((modMask,                   xK_h         ), bindOn [("2", rotFocusedDown), ("", sendMessage $ Go L)]) -- focus left a frame
+    , ((modMask,                   xK_l         ), bindOn [("2", rotFocusedUp), ("", sendMessage $ Go R)]) -- focus right a frame
     , ((modMask .|. shiftMask,     xK_j         ), sendMessage $ Swap D) -- swap window with lower frame and focus on it
     , ((modMask .|. shiftMask,     xK_k         ), sendMessage $ Swap U) -- swap window with above frame and focus on it
-    , ((modMask .|. shiftMask,     xK_h         ), bindOn [("1", rotSlavesDown), ("", sendMessage $ Swap L)]) -- swap window with left frame and focus on it
-    , ((modMask .|. shiftMask,     xK_l         ), bindOn [("1", rotSlavesUp), ("", sendMessage $ Swap R)]) -- swap window with right frame and focus on it
+    , ((modMask .|. shiftMask,     xK_h         ), bindOn [("2", rotSlavesDown), ("", sendMessage $ Swap L)]) -- swap window with left frame and focus on it
+    , ((modMask .|. shiftMask,     xK_l         ), bindOn [("2", rotSlavesUp), ("", sendMessage $ Swap R)]) -- swap window with right frame and focus on it
     , ((modMask .|. controlMask,   xK_j         ), rotUnfocusedDown) -- rotate unfocused slaves [and/or master] down/prev
     , ((modMask .|. controlMask,   xK_k         ), rotUnfocusedUp) -- rotate unfocused slaves [and/or master] up/next
-    , ((modMask .|. controlMask,   xK_h         ), bindOn [("1", rotUnfocusedDown), ("", rotFocusedDown)]) -- rotate focused slaves [and/or master] down/prev
-    , ((modMask .|. controlMask,   xK_l         ), bindOn [("1", rotUnfocusedUp), ("", rotFocusedUp)]) -- rotate focused slaves [and/or master] up/next
+    , ((modMask .|. controlMask,   xK_h         ), bindOn [("2", rotUnfocusedDown), ("", rotFocusedDown)]) -- rotate focused slaves [and/or master] down/prev
+    , ((modMask .|. controlMask,   xK_l         ), bindOn [("2", rotUnfocusedUp), ("", rotFocusedUp)]) -- rotate focused slaves [and/or master] up/next
     , ((modMask,                   xK_Tab       ), rotSlavesUp) -- rotate all slaves up/prev
     , ((modMask,                   xK_n         ), windows W.focusDown) -- focus down/next (in Full layout, or if you'd rather see tabs move (undesirable))
     , ((modMask,                   xK_p         ), windows W.focusUp) -- focus up/prev (in Full layout, or if you'd rather see tabs move (undesirable))

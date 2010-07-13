@@ -41,6 +41,8 @@ set viminfo='20,<50,s10,h,n~/.vim/.viminfo
 set shortmess=aTItoO
 set statusline=[%n]\ %<%f%m%r\ %w\ %y\ \ <%{&fileformat}>%=[%o]\ %l,%c%V\/%L\ \ %P
 set grepprg=grep\ -nH\ $*
+set list
+set listchars=tab:>-,trail:-
 inoremap # X<BS>#
 autocmd FileType python,sh,bash,zsh,ruby,perl      let StartComment="#"  | let EndComment=""
 autocmd FileType lisp,scheme                       let StartComment=";"  | let EndComment=""
@@ -49,7 +51,6 @@ autocmd FileType html    let StartComment="<!--" | let EndComment="-->"
 autocmd FileType haskell let StartComment="--"   | let EndComment=""
 autocmd FileType vim     let StartComment="\""   | let EndComment=""
 autocmd BufNewFile,BufRead *muttrc*           set ft=muttrc
-autocmd BufNewFile,BufRead *.xs{rc,alias}*    set ft=sh
 autocmd BufNewFile,BufRead *.xcolors          set ft=xdefaults
 autocmd BufNewFile,BufRead ~/.mutt/temp/mutt* set ft=mail | set textwidth=72 | set spell
 autocmd BufReadPost *
@@ -60,4 +61,9 @@ filetype on
 filetype indent off
 filetype plugin indent off
 let g:GPGUseAgent = 1
-"let g:tex_flavor = "latex"
+let g:tex_flavor = "latex"
+let python_space_errors = 1
+let ruby_space_errors = 1
+let c_space_errors = 1
+let c_no_trail_space_error = 1
+let c_no_tab_space_error = 1

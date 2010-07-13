@@ -14,9 +14,4 @@ xsetroot -cursor_name left_ptr &
 display -window root -resize $(xdpyinfo|grep dimensions|awk '{print $2}')! \
 /home/milo/foto/wall/wallpaper-249719.jpg
 exec musca -s /home/milo/.config/musca/musca_start >&/dev/null
-#exec catwm >&/dev/null
 #exec xmonad >&/dev/null
-#exec scrotwm >&/dev/null
-#exec wmfs >&/dev/null
-#exec echinus >&/dev/null
-#exec i3 >&/dev/null

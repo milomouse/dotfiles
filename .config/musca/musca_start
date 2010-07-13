@@ -9,6 +9,7 @@ set frame_resize 10
 set dmenu dmenu -i
 hook on ^only border off
 hook on ^add pad 0 0 15 0
+hook on ^(remove|vsplit|hsplit) refresh
 # borders
 set border_focus #a488d9
 set border_unfocus #303030
@@ -45,7 +46,7 @@ bind on Mod4+e shell
 bind on Mod4+g switch group
 bind on Mod4+w switch window
 # mode/singular bindings
-bind on Mod4+a catchall flip
+bind on Mod4+c catchall flip
 bind on Mod4+s stack flip
 bind on Mod4+d dedicate flip
 bind on Mod4+b refresh
@@ -93,6 +94,12 @@ bind on Mod4+Shift+3 move three
 bind on Mod4+Shift+4 move four
 bind on Mod4+Shift+5 move five
 bind on Mod4+Shift+6 move six
+bind on Mod4+Control+1 exec musca -c "move one" ; musca -c "use one"
+bind on Mod4+Control+2 exec musca -c "move two" ; musca -c "use two"
+bind on Mod4+Control+3 exec musca -c "move three" ; musca -c "use three"
+bind on Mod4+Control+4 exec musca -c "move four" ; musca -c "use four"
+bind on Mod4+Control+5 exec musca -c "move five" ; musca -c "use five"
+bind on Mod4+Control+6 exec musca -c "move six" ; musca -c "use six"
 bind on Mod4+period use (next)
 bind on Mod4+comma use (prev)
 # layout bindings
@@ -110,5 +117,7 @@ add three
 add four
 add five
 add six
+pad 0 0 0 0
+border off
+stack flip
 use one
-#exec urxvt -e tmux

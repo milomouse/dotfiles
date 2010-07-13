@@ -221,7 +221,7 @@ myLayouts = avoidStruts                   $
             mkToggle (single REFLECTY)    $
             gaps [(U,14), (D,14)]         $
             onWorkspace "1" workLayouts   $
-            onWorkspace "2" tabdLayouts   $
+            onWorkspace "2" keysLayouts   $
             onWorkspace "3" inetLayouts   $
             onWorkspace "4" fotoLayouts   $
             (collectiveLayouts)
@@ -238,8 +238,8 @@ myLayouts = avoidStruts                   $
 
     -- <layouts per workspace>
     workLayouts = myTile ||| myOneB ||| myMosC ||| myFull
-    tabdLayouts = myTab1 ||| myTab2
-    inetLayouts = myOneB ||| myFull
+    keysLayouts = myTab1 ||| myTab2
+    inetLayouts = myOneB ||| myTab1 ||| myFull
     fotoLayouts = myFull ||| myOneB ||| myMosC
 
 -- end of LAYOUTS }}}

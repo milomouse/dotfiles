@@ -8,15 +8,15 @@ set frame_display_hidden 2
 set frame_resize 10
 set dmenu dmenu -i
 hook on ^only border off
-hook on ^add pad 0 0 15 0
+hook on ^add pad 0 0 12 0
 hook on ^(remove|vsplit|hsplit) refresh
 # borders
-set border_focus #a488d9
+set border_focus #747474
 set border_unfocus #303030
-set border_catchall_focus #b8ddea
-set border_catchall_unfocus #b8ddea
-set border_dedicate_focus #ffadcc
-set border_dedicate_unfocus #ffadcc
+set border_catchall_focus #6a588d
+set border_catchall_unfocus #574b70
+set border_dedicate_focus #526a76
+set border_dedicate_unfocus #55656c
 # common/ease-of-use bindings
 bind off all
 bind on Mod4+Escape exec banishmouse
@@ -39,6 +39,7 @@ bind on Mod4+Shift+u exec mossrat --toggle
 bind on Mod4+Shift+i exec mossrat --stop
 bind on Mod4+Shift+o exec mossrat --next
 bind on Mod4+Shift+a exec songrem --add
+bind on Mod4+Shift+d exec songrem --remove
 bind on Mod4+Shift+t exec songrem --play
 # prompt bindings
 bind on Mod4+m command
@@ -73,12 +74,14 @@ bind on Mod4+Mod1+l swap right
 # cycle/split bindings
 bind on Mod4+n cycle local
 bind on Mod4+Shift+n cycle
-bind on Mod4+bracketleft cycle prev
-bind on Mod4+bracketright cycle next
+bind on Mod4+Shift+bracketleft cycle prev
+bind on Mod4+Shift+bracketright cycle next
 bind on Mod4+plus hsplit 1/2
 bind on Mod4+minus vsplit 1/2
 bind on Mod4+Shift+plus hsplit 33%
 bind on Mod4+Shift+minus vsplit 33%
+bind on Mod4+Control+plus hsplit 66%
+bind on Mod4+Control+minus vsplit 66%
 # group bindings
 bind on Mod4+grave exec /home/milo/.config/musca/group__toggle
 bind on Mod4+1 use one
@@ -102,14 +105,9 @@ bind on Mod4+Control+5 exec musca -c "move five" ; musca -c "use five"
 bind on Mod4+Control+6 exec musca -c "move six" ; musca -c "use six"
 bind on Mod4+period use (next)
 bind on Mod4+comma use (prev)
-# layout bindings
-#bind on Mod4+F1 load /home/milo/.config/musca/1only
-#bind on Mod4+F2 load /home/milo/.config/musca/2v-3h
-#bind on Mod4+F3 load /home/milo/.config/musca/1v-2h
-#bind on Mod4+F4 load /home/milo/.config/musca/2v-2h
 # startup stuff
 name !
-pad 0 0 15 0
+pad 0 0 12 0
 exec urxvt -e ncmpcpp
 add one
 add two

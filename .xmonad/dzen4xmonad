@@ -2,7 +2,7 @@
 # media/date bar at far right.
 while true; do
   echo "$(mossrat -x)^fg(#a488d9) | ^fg(#8c8b8e)$(date '+%Y^fg(#444).^fg()%m^fg(#444).^fg()%d^fg(#007b8c)/^fg(#5f656b)%a ^fg(#a488d9)| ^fg()%H^fg(#444):^fg()%M^fg(#444):^fg()%S') "
-  sleep 1
+#  sleep 1
 done | dzen2 -u -x '625' -y '0' -h '13' -ta 'r' -bg '#161616' -fg '#8c8b8e' -fn '-*-fixed-medium-r-normal-*-10-*-*-*-*-*-*-*' &
 # info bar at top-center, to the right of xmonad's.
 while true; do

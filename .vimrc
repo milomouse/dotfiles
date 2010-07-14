@@ -41,8 +41,6 @@ set viminfo='20,<50,s10,h,n~/.vim/.viminfo
 set shortmess=aTItoO
 set statusline=[%n]\ %<%f%m%r\ %w\ %y\ \ <%{&fileformat}>%=[%o]\ %l,%c%V\/%L\ \ %P
 set grepprg=grep\ -nH\ $*
-set list
-set listchars=tab:>-,trail:-
 inoremap # X<BS>#
 autocmd FileType python,sh,bash,zsh,ruby,perl      let StartComment="#"  | let EndComment=""
 autocmd FileType lisp,scheme                       let StartComment=";"  | let EndComment=""

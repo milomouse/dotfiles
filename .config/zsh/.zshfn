@@ -18,7 +18,7 @@ function back() {
 }
 
 # copy and follow file to new dir:
-function cpf() {             
+function cpf() {
 if [[ -d $*[-1] ]]; then
   cp $* && cd $*[-1]
 elif [[ -d ${*[-1]%/*} ]]; then
@@ -27,7 +27,7 @@ fi
 }
 
 # move and follow file to new dir:
-function mvf() {             
+function mvf() {
 if [[ -d $*[-1] ]]; then
   mv $* && cd $*[-1]
 elif [[ -d ${*[-1]%/*} ]]; then
@@ -52,8 +52,8 @@ function extr() {
       *.tgz)       tar xzf $1    ;;
       *.zip)       unzip $1      ;;
       *.Z)         uncompress $1 ;;
-      *.7z)        7z x $1    	 ;;
-      *.xz)        unxz -vk $1	 ;;
+      *.7z)        7z x $1       ;;
+      *.xz)        unxz -vk $1   ;;
       *.lzma)      unlzma -vk $1 ;;
       *)           echo "'$1' cannot be extracted via extr()" ;;
     esac
@@ -73,12 +73,8 @@ function reprobe() {
   sudo modprobe $1
 }
 
-# show 256 colors:
 function 256co() {perl -e 'foreach $i (0..255) {printf("\e[38;5;$i"."m%03d\e[0m ",$i); }'}
-
-# show public ip address:
 function pubip() {curl http://whatismyip.org/ 2>/dev/null}
-
 function qdep() {pacman-color -Q $@ $(pacman-color -Qi $@|grep Depends|cut -d: -f2-|sed -E 's,>\S+\>,,g')}
 
 # playing videos:

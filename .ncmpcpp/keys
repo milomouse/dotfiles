@@ -54,6 +54,7 @@ key_sort_playlist = 'V'
 key_apply_filter = 'v'
 key_switch_tag_type_list = '%'
 key_shuffle = '^'
+key_toggle_separators_in_playlist = '&'
 
 # song adding/editing:
 key_add_selected_items = 'A'

@@ -46,6 +46,7 @@ bind h select -
 bind H exec ratpoison -c "select -" -c "only"
 bind i vsplit
 bind j hsplit
+bind J exec jumanji
 bind k delete
 bind K kill
 bind l windows
@@ -67,7 +68,7 @@ bind Escape abort
 bind minus dedicate 0
 bind equal dedicate 1
 bind Print exec import -window root ~/foto/shot/$(date +%Y_%m_%d-%H%M).png 
-bind Delete exec alock -bg shade:shade=30 -cursor glyph -auth pam 
+bind Delete exec alock -bg image:file=/home/milo/foto/wall/beheading.jpg -cursor glyph -auth pam >&/dev/null
 
 definekey top s-n next
 definekey top s-p prev

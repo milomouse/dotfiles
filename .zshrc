@@ -1,6 +1,11 @@
 # extend run-path:
 PATH=$PATH:/usr/local/bin:/usr/local/sbin
 
+## start tmux server:
+#[[ -z "$DISPLAY" && $(tty) = /dev/tty1 ]] && tmux start-server
+#[[ -z "$DISPLAY" && $(tty) = /dev/tty[2-4] ]] && tmux
+#[[ -z "$DISPLAY" && $(tty) = /dev/tty[1-4] ]] && tmux -2
+
 # prompt line:
 [[ "$TERM" = "screen" ]] && precmd() {print -Pn "\e]2;%2d\a"} || RPROMPT='%F{white}%~%f'
 PS1='%F{magenta}» %f'

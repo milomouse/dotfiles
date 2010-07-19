@@ -23,7 +23,7 @@ alias e="bye"
 
 # useless quick views/edits:
 alias vim="vim -p"
-alias svim="sudo vim"
+alias svim="sudo vim -p"
 alias wika="w3m /usr/share/doc/arch-wiki/html/index.html"
 alias xoc="w3m /usr/share/doc/xmonad-contrib-darcs/html"
 alias uedit="vim $XDG_CONFIG_DIR/uzbl/config"

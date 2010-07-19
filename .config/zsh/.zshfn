@@ -73,82 +73,10 @@ function reprobe() {
   sudo modprobe $1
 }
 
+# various functions..:
 function 256co() {perl -e 'foreach $i (0..255) {printf("\e[38;5;$i"."m%03d\e[0m ",$i); }'}
 function pubip() {curl http://whatismyip.org/ 2>/dev/null}
 function qdep() {pacman-color -Q $@ $(pacman-color -Qi $@|grep Depends|cut -d: -f2-|sed -E 's,>\S+\>,,g')}
-
-# playing videos:
-function mp() {
-  case $1 in
-  'm') # movies, toggle mpd and keep/restore old volume.
-  if [ $(mpc|wc -l) = 3 ]; then
-    if [ $(mpc|head -2|tail -1|awk '{print $1}') = "[paused]" ]; then
-      :
-    else
-      mpc toggle >>/dev/null
-    fi
-  fi
-  for vol in $(ossmix|grep outvol|awk '{print $4}'); do
-    ossmix vmix0-outvol 25 >>/dev/null
-    mplayer -fs -really-quiet $@
-    ossmix vmix0-outvol $vol >>/dev/null
-  done
-  if [ $(mpc|wc -l) = 3 ]; then
-    if [ $(mpc|head -2|tail -1|awk '{print $1}') = "[paused]" ]; then
-      mpc toggle >>/dev/null
-    fi
-  fi
-  ;;
-  'r') # random movie, same settings above
-  if [ $(mpc|wc -l) = 3 ]; then
-    if [ $(mpc|head -2|tail -1|awk '{print $1}') = "[paused]" ]; then
-      :
-    else
-      mpc toggle >>/dev/null
-    fi
-  fi
-  for vol in $(ossmix|grep outvol|awk '{print $4}'); do
-    ossmix vmix0-outvol 25 >>/dev/null
-    if [[ -n "$2" ]]; then
-      if [ "$3" ]; then
-        local movie="$(find $HOME/vide/movi/$2.$3.*--* -maxdepth 1 -type f|sort -R|tail -1)"
-        [[ -n $(print $movie|grep "(part_") ]] && movie=$(print $movie|sed 's|part_.*)|part_01)|')
-        print "["$(find $HOME/vide/movi/$2.$3.*--* -maxdepth 1 -type f|wc -l)"]" $movie
-        mplayer -fs -really-quiet $movie
-      elif [[ "$2" = [1-5] ]]; then
-        local movie="$(find $HOME/vide/movi/$2.*.*--* -maxdepth 1 -type f|sort -R|tail -1)"
-        print "["$(find $HOME/vide/movi/$2.*.*--* -maxdepth 1 -type f|wc -l)"]" $movie
-        mplayer -fs -really-quiet $movie
-      else
-        local movie="$(find $HOME/vide/movi/*.*.*--$2* -maxdepth 1 -type f|sort -R|tail -1)"
-        print "["$(find $HOME/vide/movi/*.*.*--$2* -maxdepth 1 -type f|wc -l)"]" $movie
-        mplayer -fs -really-quiet $movie
-      fi
-    else
-      local movie="$(find $HOME/vide/movi -maxdepth 1 -type f|sort -R|tail -1)"
-      [[ -n $(print $movie|grep "(part_") ]] && movie=$(print $movie|sed 's|part_.*)|part_01)|')
-      print "["$(find $HOME/vide/movi -maxdepth 1 -type f|wc -l)"]" $movie
-      mplayer -fs -really-quiet $movie
-    fi
-    ossmix vmix0-outvol $vol >>/dev/null
-  done
-  if [ $(mpc|wc -l) = 3 ]; then
-    if [ $(mpc|head -2|tail -1|awk '{print $1}') = "[paused]" ]; then
-      mpc toggle >>/dev/null
-    fi
-  fi
-  ;;
-  'q') # no mplayer statistics, quick plays.
-  mplayer -really-quiet $@
-  ;;
-  'n') # ^+ no sound/reference viewing.
-  mplayer -nosound -really-quiet $@
-  ;;
-  *) # else; just play.
-  mplayer $@
-  ;;
-  esac
-}
 
 # quickly view definitions:
 function sd() {

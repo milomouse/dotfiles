@@ -6,7 +6,7 @@ set startup /home/milo/.config/musca/musca_start
 exec zsh /home/milo/.config/musca/dzen4musca 2>/dev/null
 set frame_display_hidden 2
 set frame_resize 10
-set dmenu dmenu -i
+set dmenu dmenu -i -p 'Musca: '
 hook on ^only border off
 hook on ^add pad 0 0 12 0
 hook on ^(remove|vsplit|hsplit) refresh
@@ -42,10 +42,11 @@ bind on Mod4+Shift+a exec songrem --add
 bind on Mod4+Shift+d exec songrem --remove
 bind on Mod4+Shift+t exec songrem --play
 # prompt bindings
-bind on Mod4+m command
-bind on Mod4+e shell
-bind on Mod4+g switch group
+bind on Mod4+semicolon exec dmenu_run -p 'Execute: '
+bind on Mod4+Shift+semicolon exec manread
+bind on Mod4+Control+semicolon command
 bind on Mod4+w switch window
+bind on Mod4+g switch group
 # mode/singular bindings
 bind on Mod4+c catchall flip
 bind on Mod4+s stack flip
@@ -79,8 +80,8 @@ bind on Mod4+Shift+bracketright cycle next
 bind on Mod4+plus hsplit 1/2
 bind on Mod4+minus vsplit 1/2
 bind on Mod4+Shift+plus hsplit 33%
-bind on Mod4+Shift+minus vsplit 33%
-bind on Mod4+Control+plus hsplit 66%
+bind on Mod4+Shift+minus vsplit 37%
+bind on Mod4+Control+plus hsplit 69%
 bind on Mod4+Control+minus vsplit 66%
 # group bindings
 bind on Mod4+grave exec /home/milo/.config/musca/group__toggle

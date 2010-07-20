@@ -231,15 +231,15 @@ myLayouts = avoidStruts                   $
     -- <define layouts>
     myFull = named "*" (smartBorders (noBorders Full))
     myTab1 = named "-" (smartBorders (noBorders $ tabbedAlways shrinkText myTabTheme))
-    myTab2 = named "=" (smartBorders (noBorders (mastered 0.02 0.33 $ tabbedAlways shrinkText myTabTheme)))
-    myTile = named "+" (smartBorders (withBorder 1 (mastered 0.02 0.33 (ResizableTall 1 0.03 0.6 []))))
-    myMosC = named "%" (smartBorders (withBorder 1 (MosaicAlt M.empty)))
-    myOneB = named "@" (smartBorders (withBorder 1 (limitWindows 5 (OneBig 0.75 0.65))))
+    myTab2 = named "=" (noBorders (mastered 0.02 0.33 $ tabbedAlways shrinkText myTabTheme))
+    myTile = named "+" (withBorder 1 (mastered 0.02 0.33 (ResizableTall 1 0.03 0.6 [])))
+    myMosC = named "%" (withBorder 1 (MosaicAlt M.empty))
+    myOneB = named "@" (withBorder 1 (limitWindows 5 (OneBig 0.75 0.65)))
 
     -- <layouts per workspace>
     workLayouts = myTile ||| myOneB ||| myMosC ||| myFull
     tabdLayout2 = myTab2
-    inetLayouts = myTab1 ||| myFull ||| myOneB
+    inetLayouts = myFull ||| myTab1 ||| myOneB
     fotoLayouts = myFull ||| myOneB ||| myMosC
 
 -- end of LAYOUTS }}}
@@ -361,8 +361,8 @@ myKeyBindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
                                 ])
     , ((modMask,                   xK_e         ), submap . M.fromList $ -- frequently edited files; sub-bindings
                                 [ ((0, xK_t       ), raiseMaybe (runInTerm "-title 'vim: todo'" "zsh -c 'vim ~/othe/.TODO_now'") (title =? "'vim: todo'"))
-                                , ((0, xK_x       ), raiseMaybe (runInTerm "-title 'vim: xdefaults'" "zsh -c 'vim ~/.Xdefaults'") (title =? "'vim: xdefaults'"))
-                                , ((0, xK_i       ), raiseMaybe (runInTerm "-title 'vim: xinitrc'" "zsh -c 'vim ~/.xinitrc'") (title =? "'vim: xinitrc'"))
+                                , ((0, xK_x       ), raiseMaybe (runInTerm "-title 'vim: xdefaults'" "zsh -c 'vim ~/.config/xorg/Xdefaults'") (title =? "'vim: xdefaults'"))
+                                , ((0, xK_i       ), raiseMaybe (runInTerm "-title 'vim: xinitrc'" "zsh -c 'vim ~/.config/xorg/xinitrc'") (title =? "'vim: xinitrc'"))
                                 , ((0, xK_m       ), raiseMaybe (runInTerm "-title 'vim: xmonad.hs'" "zsh -c 'vim ~/.xmonad/xmonad.hs'") (title =? "'vim: xmonad.hs'"))
                                 , ((0, xK_z       ), raiseMaybe (runInTerm "-title 'vim: zsh'" "zsh -c 'vim -p ~/.zshrc ~/.config/zsh/.zsh{fn,alias}'") (title =? "'vim: zsh'"))
                                 ])

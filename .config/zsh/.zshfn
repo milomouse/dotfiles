@@ -88,12 +88,13 @@ function sd() {
   esac
 }
 
-# show biggest programs (adopted):
-function biggest() {
-echo "-----+---------+---------------------------"
-echo " POS | SIZE MB |            NAME " 
-echo "-----+---------+---------------------------"
-pacman -Qs|awk '/local/{print substr($3,2)" "substr($1,7)}'|sort -rn|head -$1|awk '{printf "%4d | %7s | %s\n",NR,$1,$2}'
+# start x-server:
+function startx() {
+  if [[ $(tty) != *pts* && $(runlevel) == *3* ]]; then
+    clear
+    print $(date)
+    /usr/bin/startx $XDG_CONFIG_DIR/xorg/xinitrc -- -dpi 120 -nolisten tcp
+  fi
 }
 
 # un-smart function for my todo lists:

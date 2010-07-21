@@ -6,7 +6,7 @@ while true; do
 done | dzen2 -u -x '625' -y '0' -h '13' -ta 'r' -bg '#161616' -fg '#8c8b8e' -fn '-*-fixed-medium-r-normal-*-10-*-*-*-*-*-*-*' &
 # info bar at top-center, to the right of xmonad's.
 while true; do
-  echo " ^fg(#a488d9)| ^fg(#515056)#$(lsw|grep -v 'Vimperator\|GLiv\| - Downloads'|wc -l) \
+  echo " ^fg(#a488d9)| ^fg(#515056)#$(lsw|grep -v 'gcolor2\|Vimperator\|GLiv\| - Downloads'|wc -l) \
 ^fg(#a488d9)| ^fg()$(cat /proc/loadavg|sed 's/ [0-9]\/.*$//;s/\./'"^fg(#5f656b)"'&'"^fg()"'/g') ^fg(#a488d9)| ^fg()\
 $(df -h|grep "sda2\|sda5\|sda3"|awk '{print "^fg(#5f656b)"$4"^fg(#050505)""""|^fg(#444)"$5" "}'|tr -d '\n')"\
 "^fg(#a488d9)| ^fg(#515056)@fea.st: ^fg()$(ls -1 /home/milo/mail/FastMail/*/new|sed 's|/.*$||'|tr '\n' ' '|wc -w)" \

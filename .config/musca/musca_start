@@ -3,12 +3,12 @@
 
 # try not to list default settings
 set startup /home/milo/.config/musca/musca_start
-exec zsh /home/milo/.config/musca/dzen4musca 2>/dev/null
+#exec zsh /home/milo/.config/musca/dzen4musca 2>/dev/null
 set frame_display_hidden 2
 set frame_resize 10
 set dmenu dmenu -i -p 'Musca: '
 hook on ^only border off
-hook on ^add pad 0 0 12 0
+#hook on ^add pad 0 0 12 0
 hook on ^(remove|vsplit|hsplit) refresh
 # borders
 set border_focus #747474
@@ -23,8 +23,9 @@ bind on Mod4+Escape exec banishmouse
 bind on Mod4+Return exec urxvt -e tmux
 bind on Mod4+Shift+Return exec urxvt
 bind on Mod4+Shift+BackSpace kill
-bind on Mod4+Shift+q exec killall zsh dzen4musca ; musca -c quit
-bind on Mod4+Shift+r exec killall zsh dzen4musca ; exec zsh /home/milo/.config/musca/dzen4musca 2>/dev/null
+bind on Mod4+Shift+q quit
+#bind on Mod4+Shift+q exec killall zsh dzen4musca ; musca -c quit
+#bind on Mod4+Shift+r exec killall zsh dzen4musca ; exec zsh /home/milo/.config/musca/dzen4musca 2>/dev/null
 # media and other bindings
 bind on Mod4+Print exec import -window root /home/milo/foto/shot/$(date +%Y_%m_%d-%H%M%S).png"
 bind on Mod4+Shift+Delete exec alock -bg image:file=/home/milo/foto/wall/beheading.jpg -cursor glyph -auth pam >&/dev/null
@@ -108,7 +109,7 @@ bind on Mod4+period use (next)
 bind on Mod4+comma use (prev)
 # startup stuff
 name !
-pad 0 0 12 0
+#pad 0 0 12 0
 exec urxvt -e ncmpcpp
 add one
 add two
@@ -116,7 +117,7 @@ add three
 add four
 add five
 add six
-pad 0 0 0 0
+#pad 0 0 0 0
 border off
 stack flip
 use one

@@ -1,12 +1,13 @@
-! ~/.Xdefaults
-! milomouse <vincent[at]fea.st>
+!! $XDG_CONFIG_DIR/xorg/Xdefaults
+!! author: milomouse <vincent[at]fea.st>
+!! update: 2010-07-20
 
 urxvt*termName: rxvt-256color
 urxvt*loginShell: true
-urxvt*font: -*-fixed-*-*-*-*-9-*-*-*-*-*-*
-urxvt*boldFont: -*-fixed-medium-*-*-*-9-*-*-*-*-*-*
-urxvt*italicFont: -*-fixed-medium-*-*-*-9-*-*-*-*-*-*
-urxvt*boldItalicFont: -*-fixed-medium-*-*-*-9-*-*-*-*-*-*
+urxvt*font: -*-fixed-medium-r-normal-*-9-*-*-*-*-*-*
+urxvt*boldFont: -*-fixed-medium-r-normal-*-9-*-*-*-*-*-*
+urxvt*italicFont: -*-fixed-medium-r-normal-*-9-*-*-*-*-*-*
+urxvt*boldItalicFont: -*-fixed-medium-r-normal-*-9-*-*-*-*-*-*
 urxvt*colorIT: #707070
 urxvt*scrollBar: false
 urxvt*secondaryScroll: true

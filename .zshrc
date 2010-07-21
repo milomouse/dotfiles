@@ -1,11 +1,16 @@
-# extend run-path:
+# extend run-path for local scripts/binaries:
 PATH=$PATH:/usr/local/bin:/usr/local/sbin
 
-# start tmux server:
-[[ -z "$DISPLAY" && $(tty) = /dev/tty[1-4] ]] && tmux -2
+# start tmux server(s) per tty$:
+if [[ -z "$DISPLAY" && $(tty) = /dev/tty[1-4] ]]; then
+  case $(tty) in
+    *[1-4]) tmux -f ${XDG_CONFIG_DIR:-$HOME/.config}/tmux/tmux.conf \
+    -L console new-session -s "$(print ${$(tty)/*dev\//})" ;;
+  esac
+fi
 
 # prompt line:
-[[ "$TERM" = "screen" ]] && precmd() {print -Pn "\e]2;%2d\a"} || RPROMPT='%F{white}%~%f'
+[[ "$TERM" == *screen* ]] && precmd() {print -Pn "\e]2;%2d\a"} || RPROMPT='%F{white}%~%f'
 PS1='%F{magenta}» %f'
 PS2='%B%F{white}%_ %b%f%F{magenta}» %f'
 PS3='%B%F{white}?# %b%f%F{magenta}» %f'
@@ -97,6 +102,7 @@ export LANG="en_US.utf8"
 export LC_ALL="en_US.utf8"
 export LC="en_US.utf8"
 export LESSCHARSET="utf-8"
+export LESSHISTFILE="/dev/shm/less_history"
 export LESS_TERMCAP_mb=$'\E[01;35m'
 export LESS_TERMCAP_md=$'\E[01;35m'
 export LESS_TERMCAP_me=$'\E[0m'
@@ -119,11 +125,11 @@ export XDG_VIDEOS_DIR="$HOME/vide"
 export XAUTHORITY="$HOME/.config/.Xauthority"
 
 # source alias and function files:
-[[ ! -f ~/.config/zsh/.zshalias ]] || . ~/.config/zsh/.zshalias
-[[ ! -f ~/.config/zsh/.zshfn ]] || . ~/.config/zsh/.zshfn
+[[ -f ${XDG_CONFIG_DIR:-$HOME/.config}/zsh/.zshalias ]] && . ${XDG_CONFIG_DIR:-$HOME/.config}/zsh/.zshalias
+[[ -f ${XDG_CONFIG_DIR:-$HOME/.config}/zsh/.zshfn ]] && . ${XDG_CONFIG_DIR:-$HOME/.config}/zsh/.zshfn
 
 # framebuffer colors:
-if [ "$TERM" = "linux" ]; then
+if [[ "$TERM" = "linux" || "$TERM" == *screen* ]]; then
     echo -en "\e]P0000000"
     echo -en "\e]P8171717"
     echo -en "\e]P19c8093"
@@ -140,5 +146,4 @@ if [ "$TERM" = "linux" ]; then
     echo -en "\e]PEa3babf"
     echo -en "\e]P7999999"
     echo -en "\e]PF98a7b6"
-#    clear
 fi

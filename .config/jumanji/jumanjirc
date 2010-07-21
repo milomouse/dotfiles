@@ -1,0 +1,28 @@
+# ~/.config/jumanji/jumanjirc
+# milomouse <vincent[at]fea.st>
+
+# follow hints:
+script ~/.config/jumanji/scripts/hinting.js
+
+# search engines:
+searchengine google http://www.google.com/earch?q=%s
+searchengine wikipedia https://secure.wikimedia.org/wikipedia/en/w/index.php?search=%s
+
+# appearance:
+set font fixed normal 6
+#set stylesheet file:///home/milo/.config/jumanji/style.css
+set scrollbars false
+set statusbar true
+set tabbar false
+set next_to_current true
+
+# browser settings
+set homepage http://bbs.archlinux.org/search.php?action=show_new
+set auto_save 60
+
+# downloads
+set download_dir ~/down/
+set download_command urxvt -e sh -c "wget --load-cookies ~/.config/jumanji/cookies '%s' -O %s";
+set spawn_editor = "urxvt -e -zsh -c \"vim -p %s\""
+
+# keybindings

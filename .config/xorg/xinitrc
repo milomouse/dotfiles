@@ -2,6 +2,7 @@
 # resources:
 xrdb -load $XDG_CONFIG_DIR/xorg/Xdefaults
 xsetroot -cursor_name left_ptr &
+#xbindkeys -f $XDG_CONFIG_DIR/xorg/xbindkeysrc &
 
 # keyboard:
 xmodmap -e "keycode 133 = Alt_L"
@@ -21,10 +22,8 @@ banishmouse
 # wallpaper:
 display -window root -resize $(xdpyinfo|grep dimensions|awk '{print $2}')! \
 /home/milo/foto/wall/wallpaper-249719.jpg
-#/home/milo/foto/wall/beheading.jpg
 
 # window-manager(s):
 #exec musca -s /home/milo/.config/musca/musca_start >&/dev/null
 exec xmonad >&/dev/null
-#exec catwm
-#exec ratpoison >&/dev/null
+#exec catwm >&/dev/null

@@ -1,3 +1,12 @@
+# vim variables:
+if [[ -z "$DISPLAY" ]]; then
+  alias vim="vim -p -c ':colorscheme candymouse'"
+  alias svim="sudo vim -p -c ':colorscheme candymouse'"
+else
+  alias vim="vim -p"
+  alias svim="sudo vim -p"
+fi
+
 # file management:
 alias ls="ls -h --file-type --time-style='+%m-%d-%y-%R' --color=auto --group-directories-first"
 alias la="ls -A"
@@ -22,8 +31,6 @@ alias cl="clear"
 alias e="bye"
 
 # useless quick views/edits:
-alias vim="vim -p"
-alias svim="sudo vim -p"
 alias wika="w3m /usr/share/doc/arch-wiki/html/index.html"
 alias xoc="w3m /usr/share/doc/xmonad-contrib-darcs/html"
 alias uedit="vim $XDG_CONFIG_DIR/uzbl/config"
@@ -36,26 +43,32 @@ alias zedin="vim $XDG_CONFIG_DIR/zsh/.zshfn"
 alias zedia="vim $XDG_CONFIG_DIR/zsh/.zshalias"
 alias zload=". $HOME/.zshrc"
 
-# basic system stuff:
-alias whicha="/usr/bin/which"
+# program masquing:
 alias diff="colordiff"
 alias grep="grep --color=auto"
-alias ff="find |grep -"
-alias dfu="df -hTP"
-alias psu="ps fxo etime,pid,pmem,pcpu,command"
-alias psr="ps -u root fo etime,user,pid,pmem,pcpu,command"
-alias daemons="ls /var/run/daemons"
-alias reboot="sudo reboot"
-alias {poweroff,pow}="sudo poweroff"
+alias tmux='tmux -f $XDG_CONFIG_DIR/tmux/tmux.conf'
+alias mutt='mutt -F $XDG_CONFIG_DIR/mutt/muttrc'
+alias xskat='xskat -opt $XDG_CONFIG_DIR/xorg/xskat.opt -list $XDG_CONFIG_DIR/xorg/xskat.lst'
+alias offlineimap='offlineimap -c $XDG_CONFIG_DIR/offlineimap/offlineimaprc'
+alias xsel='xsel --logfile /dev/shm/xsel.log'
+alias rot='rtorrent -o http_capath=/etc/ssl/certs'
+alias rmcd='rmcd $@ 2>/dev/null'
+alias whicha="/usr/bin/which"
 
-# media shortcuts:
+# system/media shortcuts:
 alias mix2="ossmix codec1.jack.int-speaker.mode mix2 >>/dev/null && echo 'Mixer set to PC Speaker'"
 alias mix3="ossmix codec1.jack.int-speaker.mode mix3 >>/dev/null && echo 'Mixer set to Headphones'"
 alias unrarall='for file in `ls *.rar`; do unrar -x r $file; done'
 alias unzipall='for file in `ls *.zip`; do unzip $file; done'
 alias siteget='wget --recursive --page-requisites --convert-links --html-extension --no-parent --wait=10 --limit-rate=20K -U Mozilla -l' #depth, then url
-alias rot='rtorrent -o http_capath=/etc/ssl/certs'
+alias dfu="df -hTP"
+alias psa="ps fxo etime,pid,pmem,pcpu,command"
+alias psu="psa|/bin/grep -B 999 '[0-9] -zsh'"
+alias psr="ps -u root fo etime,user,pid,pmem,pcpu,command"
 #alias rec='ffmpeg -f x11grab -s 1366x768 - r 150 -i :0.0 -sameq /tmp/capture.mpg'
+alias daemons="ls /var/run/daemons"
+alias reboot="sudo reboot"
+alias {poweroff,pow}="sudo poweroff"
 
 # database/package management:
 alias upf="sudo fc-cache -vf"

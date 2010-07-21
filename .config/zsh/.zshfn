@@ -1,3 +1,14 @@
+# start x-server:
+function startx() {
+  if [[ $(tty) != *pts* && $(runlevel) == *3* ]]; then
+    clear
+    print $(date)
+    /usr/bin/startx $XDG_CONFIG_DIR/xorg/xinitrc -- -dpi 120 -nolisten tcp
+  else
+    print ERROR: "$(tty)" + "$TERM" + "$DISPLAY"
+  fi
+}
+
 # go up X amount of directories:
 function up(){
   local arg=${1:-1};
@@ -73,11 +84,6 @@ function reprobe() {
   sudo modprobe $1
 }
 
-# various functions..:
-function 256co() {perl -e 'foreach $i (0..255) {printf("\e[38;5;$i"."m%03d\e[0m ",$i); }'}
-function pubip() {curl http://whatismyip.org/ 2>/dev/null}
-function qdep() {pacman-color -Q $@ $(pacman-color -Qi $@|grep Depends|cut -d: -f2-|sed -E 's,>\S+\>,,g')}
-
 # quickly view definitions:
 function sd() {
   case $1 in
@@ -88,15 +94,6 @@ function sd() {
   esac
 }
 
-# start x-server:
-function startx() {
-  if [[ $(tty) != *pts* && $(runlevel) == *3* ]]; then
-    clear
-    print $(date)
-    /usr/bin/startx $XDG_CONFIG_DIR/xorg/xinitrc -- -dpi 120 -nolisten tcp
-  fi
-}
-
 # un-smart function for my todo lists:
 function todo() {
   local dir=$HOME/othe
@@ -105,3 +102,8 @@ function todo() {
     * ) vim $dir/.TODO_$1 ;;
   esac
 }
+
+# various functions..:
+function 256co() {perl -e 'foreach $i (0..255) {printf("\e[38;5;$i"."m%03d\e[0m ",$i); }'}
+function pubip() {curl http://whatismyip.org/ 2>/dev/null}
+function qdep() {pacman-color -Q $@ $(pacman-color -Qi $@|grep Depends|cut -d: -f2-|sed -E 's,>\S+\>,,g')}

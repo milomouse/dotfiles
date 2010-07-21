@@ -1,5 +1,5 @@
-# ~/.mutt/muttrc
-# milomouse <vincent[at]fea.st>
+## $XDG_CONFIG_DIR/mutt/muttrc
+## milomouse <vincent[at]fea.st>
 
 # - intrinsic locations:
 set folder           = ~/mail
@@ -82,14 +82,14 @@ bind pager J        next-undeleted
 bind pager l        view-attachments
 bind pager,index R  group-reply
 bind pager,index c  mail
-bind index gg       first-entry
-bind index G        last-entry
 bind index K        previous-unread
 bind index J        next-unread
 bind index l        display-message
 bind browser l      select-entry
 bind attach  l      view-attach
 bind attach,browser,index,pager z exit
+bind index,browser gg first-entry
+bind index,browser G  last-entry
 
 # - macros:
 macro index gh  "<change-folder>!<enter>" "go to Inbox"
@@ -97,7 +97,7 @@ macro index h   "c?" "view folders"
 macro index \Cr "<tag-pattern>all<enter><tag-prefix><clear-flag>N<untag-pattern>all<enter>" "mark all as read"
 macro index B   "<limit>~b " "search message bodies"
 macro index P   "<pipe-message>cat > ~/" "save message as"
-macro index I   "<shell-escape>/usr/bin/offlineimap -u Curses.Blinkenlights -q -o<enter>" "sync IMAP"
+macro index I   "<shell-escape>/usr/bin/offlineimap -c ${XDG_CONFIG_DIR:-$HOME/.config}/offlineimap/offlineimaprc -u Curses.Blinkenlights -q -o<enter>" "sync IMAP"
 macro index,pager \Cb ":set pipe_decode\n|urlview\n:unset pipe_decode\n"\
 		  "extract URLs out of a message"
 

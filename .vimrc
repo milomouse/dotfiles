@@ -37,7 +37,7 @@ set history=100
 set nomodeline
 set backup
 set backupdir=~/.vim/backup,.
-set viminfo='20,<50,s10,h,n~/.vim/.viminfo
+set viminfo='20,<50,s10,h,n~/.vim/viminfo
 set shortmess=aTItoO
 set statusline=[%n]\ %<%f%m%r\ %w\ %y\ \ <%{&fileformat}>%=[%o]\ %l,%c%V\/%L\ \ %P
 set grepprg=grep\ -nH\ $*

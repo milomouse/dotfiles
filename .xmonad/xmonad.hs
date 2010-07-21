@@ -69,7 +69,7 @@ import XMonad.Prompt.Window (windowPromptBring,windowPromptGoto)
 import XMonad.Layout.Tabbed
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.OneBig
-import XMonad.Layout.MosaicAlt
+import XMonad.Layout.Drawer
 
 -- <layout helpers>
 import XMonad.Layout.Master
@@ -141,7 +141,7 @@ colorNormalBorder   = colorGray
 colorFocusedBorder  = colorMagenta
 
 -- <fonts>
-barFont   = "fixed"
+barFont   = "-*-fixed-medium-r-normal-*-*-*-10-*-*-*-*-*-*-*"
 barXFont  = "fixed:size=10"
 xftFont   = "xft: fixed-10"
 
@@ -203,8 +203,10 @@ myGSConfig colorizer = (buildDefaultGSConfig myColorizer)
 
 -- <scratchpad>
 manageScratchPad :: ManageHook
-manageScratchPad = scratchpadManageHook (W.RationalRect (1/6) (1/4) (2/3) (2/5))
-scratchPad = scratchpadSpawnActionCustom "urxvt -name scratchpad +sb -fn '-*-fixed-medium-*-*-*-9-*-*-*-*-*' -e tmux -L sp new-session 'ncmpcpp || zsh'"
+--manageScratchPad = scratchpadManageHook (W.RationalRect (1/6) (1/4) (2/3) (2/5))
+manageScratchPad = scratchpadManageHook (W.RationalRect 0 0.56 1.00 0.44)
+scratchPad = scratchpadSpawnActionCustom $ -- make sure to indent the next line
+  "urxvt -name scratchpad +sb -fn '-*-fixed-medium-r-normal-*-9-*-*-*-*-*' -e tmux -f $XDG_CONFIG_DIR/tmux/tmux.conf -L sp new-session 'ncmpcpp ; zsh'"
 
 -- end of UTILITY FUNCTIONS }}}
 
@@ -214,33 +216,30 @@ scratchPad = scratchpadSpawnActionCustom "urxvt -name scratchpad +sb -fn '-*-fix
 
 -- LAYOUTS {{{
 
-myLayouts = avoidStruts                   $
+myLayouts = avoidStruts $ gaps [(U,14)]   $
             windowNavigation              $
             mkToggle (single NBFULL)      $
             mkToggle (single REFLECTX)    $
             mkToggle (single REFLECTY)    $
-            gaps [(U,14), (D,14)]         $
-            onWorkspace "1" workLayouts   $
-            onWorkspace "2" tabdLayout2   $
             onWorkspace "3" inetLayouts   $
             onWorkspace "4" fotoLayouts   $
             (collectiveLayouts)
   where
-    collectiveLayouts = myTile ||| myOneB ||| myMosC ||| myFull ||| myTab1 ||| myTab2
+    collectiveLayouts = myTile ||| myTest ||| myOneB ||| myFull
 
     -- <define layouts>
     myFull = named "*" (smartBorders (noBorders Full))
     myTab1 = named "-" (smartBorders (noBorders $ tabbedAlways shrinkText myTabTheme))
     myTab2 = named "=" (noBorders (mastered 0.02 0.33 $ tabbedAlways shrinkText myTabTheme))
     myTile = named "+" (withBorder 1 (mastered 0.02 0.33 (ResizableTall 1 0.03 0.6 [])))
-    myMosC = named "%" (withBorder 1 (MosaicAlt M.empty))
     myOneB = named "@" (withBorder 1 (limitWindows 5 (OneBig 0.75 0.65)))
+    myTest = named "#" (withBorder 1 (drawer `onBottom` (ResizableTall 1 0.03 0.6 [])))
+      where
+        drawer = simpleDrawer 0 0.36 (ClassName "Firefox" `Or` ClassName "Zathura")
 
     -- <layouts per workspace>
-    workLayouts = myTile ||| myOneB ||| myMosC ||| myFull
-    tabdLayout2 = myTab2
     inetLayouts = myFull ||| myTab1 ||| myOneB
-    fotoLayouts = myFull ||| myOneB ||| myMosC
+    fotoLayouts = myFull ||| myOneB
 
 -- end of LAYOUTS }}}
 
@@ -254,6 +253,8 @@ myLayouts = avoidStruts                   $
 myManageHook :: ManageHook
 myManageHook = (composeAll . concat $
     [ [resource     =? r     --> doIgnore       |   r   <- myIgnores] -- ignore desktop
+    , [className    =? c     --> doShift  "2"   |   c   <- myTabdC  ] -- move myTabdC windows to workspace 2
+
     , [className    =? c     --> doShift  "3"   |   c   <- myInetC  ] -- move myInetC windows to workspace 3
     , [className    =? c     --> doShift  "4"   |   c   <- myFotoC  ] -- move myFotoC windows to workspace 4
     , [className    =? c     --> doCenterFloat  |   c   <- myFloatsC] -- float center geometry by class
@@ -265,8 +266,9 @@ myManageHook = (composeAll . concat $
         name      = stringProperty "WM_NAME"
         -- <<class>>
         myFloatsC = ["MPlayer","Save As...","Downloads"]
+        myTabdC   = ["xskat"]
         myFotoC   = ["Gliv","Display"]
-        myInetC   = ["Navigator","Minefield","Firefox","Gran Paradiso"]
+        myInetC   = ["Minefield","Firefox","Jumanji","Dwb","Surf"]
         -- <<resource>>
         myIgnores = ["desktop","desktop_window"]
         -- <<name>>
@@ -315,7 +317,7 @@ myLogHook h = dynamicLogWithPP $ defaultPP
       , ppOutput            =   hPutStrLn h
     }
     where
-      hideScratchpad ws = if ws == "NSP" then "" else pad ws -- don't show scratchpad in workspace list
+      hideScratchpad ws = if ws == "NSP" then "" else pad ws -- hide sp in ws list (thanks to p.brisbin)
 
 -- end of WORKSPACES/STATUSBAR }}}
 
@@ -351,20 +353,15 @@ myKeyBindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask,                   xK_Print     ), unsafeSpawn "import -window root $HOME/foto/shot/$(date +%Y_%m_%d-%H%M%S).png") -- take screenshot of current workspace
     , ((modMask .|. shiftMask,     xK_Delete    ), unsafeSpawn "alock -bg image:file=$HOME/foto/wall/beheading.jpg -cursor glyph -auth pam >&/dev/null") -- lock screen
     , ((modMask .|. shiftMask,     xK_Return    ), safeSpawnProg $ XMonad.terminal conf) -- spawn terminal by itself
-    , ((modMask,                   xK_Return    ), unsafeSpawn "urxvt -e tmux") -- spawn terminal in tmux
+    , ((modMask,                   xK_Return    ), unsafeSpawn "urxvt -e tmux -f $XDG_CONFIG_DIR/tmux/tmux.conf -L xorg") -- spawn terminal in tmux
     , ((modMask,                   xK_grave     ), scratchPad) -- spawn floating "scratchpad" window
+    , ((modMask .|. shiftMask,     xK_f         ), runOrRaise "firefox" (className =? "Firefox")) -- <run or raise firefox>
     , ((modMask,                   xK_f         ), submap . M.fromList $ -- frequently used programs; sub-bindings
-                                [ ((0, xK_m       ), runInTerm "" "tmux new-session 'mutt'") -- <open email>
-                                , ((0, xK_n       ), runInTerm "" "tmux new-session 'nsudoku 12'") -- <open a sudoku game>
-                                , ((0, xK_f       ), runOrRaiseMaster "firefox" (className =? "Firefox")) -- <run or raise firefox>
+                                [ ((0, xK_m       ), runInTerm "" "tmux -f $XDG_CONFIG_DIR/tmux/tmux.conf -L xorg new-session 'mutt -F $XDG_CONFIG_DIR/mutt/muttrc'") -- <open email>
+                                , ((0, xK_n       ), runInTerm "" "tmux -f $XDG_CONFIG_DIR/tmux/tmux.conf -L xorg new-session 'nsudoku 12'") -- <open a sudoku game>
                                 , ((0, xK_w       ), safeSpawnProg "wallie") -- <change wallpaper to a random one>
-                                ])
-    , ((modMask,                   xK_e         ), submap . M.fromList $ -- frequently edited files; sub-bindings
-                                [ ((0, xK_t       ), raiseMaybe (runInTerm "-title 'vim: todo'" "zsh -c 'vim ~/othe/.TODO_now'") (title =? "'vim: todo'"))
-                                , ((0, xK_x       ), raiseMaybe (runInTerm "-title 'vim: xdefaults'" "zsh -c 'vim ~/.config/xorg/Xdefaults'") (title =? "'vim: xdefaults'"))
-                                , ((0, xK_i       ), raiseMaybe (runInTerm "-title 'vim: xinitrc'" "zsh -c 'vim ~/.config/xorg/xinitrc'") (title =? "'vim: xinitrc'"))
-                                , ((0, xK_m       ), raiseMaybe (runInTerm "-title 'vim: xmonad.hs'" "zsh -c 'vim ~/.xmonad/xmonad.hs'") (title =? "'vim: xmonad.hs'"))
-                                , ((0, xK_z       ), raiseMaybe (runInTerm "-title 'vim: zsh'" "zsh -c 'vim -p ~/.zshrc ~/.config/zsh/.zsh{fn,alias}'") (title =? "'vim: zsh'"))
+                                , ((0, xK_f       ), runOrRaise "firefox" (className =? "Firefox")) -- <run or raise firefox>
+                                , ((0, xK_s       ), unsafeSpawn "xskat -opt $XDG_CONFIG_DIR/xorg/xskat.opt -list $XDG_CONFIG_DIR/xorg/xskat.lst") -- <xskat with preferred dirs>
                                 ])
     -- <function/media keys>
     , ((0 .|. controlMask,         0x1008ff02   ), unsafeSpawn "sudo moodlight -m") -- maximum screen brightness ((XF86MonBrightnessUp [max]))
@@ -395,24 +392,19 @@ myKeyBindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask,                   xK_9         ), sendMessage $ Shrink) -- shrink size of master frame
     , ((modMask .|. shiftMask,     xK_0         ), sendMessage $ MirrorShrink) -- shrink size of master frame
     , ((modMask .|. shiftMask,     xK_9         ), sendMessage $ MirrorExpand) -- expand size of master frame
-    , ((modMask .|. mod1Mask,      xK_0         ), withFocused (sendMessage . expandWindowAlt)) -- expand MosaicAlt frame
-    , ((modMask .|. mod1Mask,      xK_9         ), withFocused (sendMessage . shrinkWindowAlt)) -- shrink MosaicAlt frame
-    , ((modMask .|. mod1Mask,      xK_equal     ), withFocused (sendMessage . tallWindowAlt)) -- create a more horizontal MosaicAlt
-    , ((modMask .|. mod1Mask,      xK_minus     ), withFocused (sendMessage . wideWindowAlt)) -- create a more vertical MosaicAlt
-    , ((modMask .|. mod1Mask,      xK_space     ), sendMessage resetAlt) -- reset MosaicAlt layout
     , ((modMask,                   xK_j         ), sendMessage $ Go D) -- focus down a frame
     , ((modMask,                   xK_k         ), sendMessage $ Go U) -- focus up a frame
-    , ((modMask,                   xK_h         ), bindOn [("2", rotFocusedDown), ("", sendMessage $ Go L)]) -- focus left a frame
-    , ((modMask,                   xK_l         ), bindOn [("2", rotFocusedUp), ("", sendMessage $ Go R)]) -- focus right a frame
+    , ((modMask,                   xK_h         ), sendMessage $ Go L) -- focus left a frame
+    , ((modMask,                   xK_l         ), sendMessage $ Go R) -- focus right a frame
     , ((modMask .|. shiftMask,     xK_j         ), sendMessage $ Swap D) -- swap window with lower frame and focus on it
     , ((modMask .|. shiftMask,     xK_k         ), sendMessage $ Swap U) -- swap window with above frame and focus on it
-    , ((modMask .|. shiftMask,     xK_h         ), bindOn [("2", rotSlavesDown), ("", sendMessage $ Swap L)]) -- swap window with left frame and focus on it
-    , ((modMask .|. shiftMask,     xK_l         ), bindOn [("2", rotSlavesUp), ("", sendMessage $ Swap R)]) -- swap window with right frame and focus on it
+    , ((modMask .|. shiftMask,     xK_h         ), sendMessage $ Swap L) -- swap window with left frame and focus on it
+    , ((modMask .|. shiftMask,     xK_l         ), sendMessage $ Swap R) -- swap window with right frame and focus on it
     , ((modMask .|. controlMask,   xK_j         ), rotUnfocusedDown) -- rotate unfocused slaves [and/or master] down/prev
     , ((modMask .|. controlMask,   xK_k         ), rotUnfocusedUp) -- rotate unfocused slaves [and/or master] up/next
-    , ((modMask .|. controlMask,   xK_h         ), bindOn [("2", rotUnfocusedDown), ("", rotFocusedDown)]) -- rotate focused slaves [and/or master] down/prev
-    , ((modMask .|. controlMask,   xK_l         ), bindOn [("2", rotUnfocusedUp), ("", rotFocusedUp)]) -- rotate focused slaves [and/or master] up/next
-    , ((modMask,                   xK_Tab       ), rotSlavesUp) -- rotate all slaves up/prev
+    , ((modMask .|. controlMask,   xK_h         ), rotFocusedDown) -- rotate focused slaves [and/or master] down/prev
+    , ((modMask .|. controlMask,   xK_l         ), rotFocusedUp) -- rotate focused slaves [and/or master] up/next
+    , ((modMask,                   xK_Tab       ), rotSlavesUp) -- rotate all slaves [not master] up/prev
     , ((modMask,                   xK_n         ), windows W.focusDown) -- focus down/next (in Full layout, or if you'd rather see tabs move (undesirable))
     , ((modMask,                   xK_p         ), windows W.focusUp) -- focus up/prev (in Full layout, or if you'd rather see tabs move (undesirable))
     , ((modMask .|. controlMask,   xK_n         ), windows W.swapDown) -- swap down/next (in Full layout, or for tabbed slave movement (undesirable))

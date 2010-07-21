@@ -1,4 +1,5 @@
-## ~/.mutt/colors.muttrc
+## $XDG_CONFIG_DIR/mutt/colors.muttrc
+## milomouse <vincent[at]fea.st>
 
 # set default
   color normal     magenta       default

@@ -35,7 +35,8 @@ set wrap nowrap
 set noerrorbells
 set history=100
 set nomodeline
-set nobackup
+set backup
+set backupdir=/tmp/.VIM-save,.
 set viminfo='20,<50,s10,h,n~/.vim/viminfo
 set shortmess=aTItoO
 set statusline=[%n]\ %<%f%m%r\ %w\ %y\ \ <%{&fileformat}>%=[%o]\ %l,%c%V\/%L\ \ %P

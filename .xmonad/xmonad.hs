@@ -13,7 +13,7 @@
 -- |  haskell-x11          -> 1.5.0.0-2
 -- |  haskell-x11-xft      -> 0.3-13.1
 -- |  xmonad-darcs         -> 20100423-1
--- |  xmonad-contrib-darcs -> 20100423-1
+-- |  xmonad-contrib-darcs -> 20100424-1
 -- |  dzen2-svn            -> 271-1
 -------------------------------------------------------------------------------------------
 
@@ -29,13 +29,11 @@ import System.IO
 import System.Exit
 
 -- <actions>
-import XMonad.Actions.GridSelect
 import XMonad.Actions.CycleWS (nextWS,prevWS,toggleWS,shiftToNext,shiftToPrev)
-import XMonad.Actions.CycleWindows (rotFocusedDown,rotFocusedUp,rotUnfocusedDown,rotUnfocusedUp)
-import XMonad.Actions.RotSlaves (rotSlavesDown,rotSlavesUp)
-import XMonad.Actions.Promote
+import XMonad.Actions.RotSlaves (rotAllDown,rotSlavesDown,rotSlavesUp)
+import XMonad.Actions.GridSelect
 import XMonad.Actions.WindowGo
-import XMonad.Actions.PerWorkspaceKeys
+import XMonad.Actions.SwapWorkspaces
 import XMonad.Actions.FloatKeys (keysMoveWindow,keysResizeWindow)
 import XMonad.Actions.WithAll
 import XMonad.Actions.Search
@@ -45,11 +43,12 @@ import qualified XMonad.Actions.Submap as SM
 
 -- <hooks>
 import XMonad.Hooks.InsertPosition
-import XMonad.Hooks.ManageHelpers (doCenterFloat,doFullFloat)
-import XMonad.Hooks.ManageDocks (avoidStruts, ToggleStruts(..))
+import XMonad.Hooks.ManageHelpers
+import XMonad.Hooks.ManageDocks (avoidStruts,avoidStrutsOn,ToggleStruts(..))
 import XMonad.Hooks.EwmhDesktops (ewmhDesktopsStartup)
 import XMonad.Hooks.SetWMName
 import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.UrgencyHook
 
 -- <utilities>
 import XMonad.Util.Cursor
@@ -66,16 +65,15 @@ import XMonad.Prompt.Man (manPrompt)
 import XMonad.Prompt.Window (windowPromptBring,windowPromptGoto)
 
 -- <layouts>
-import XMonad.Layout.Tabbed
-import XMonad.Layout.ResizableTile
 import XMonad.Layout.OneBig
+import XMonad.Layout.ResizableTile
 import XMonad.Layout.Drawer
+import XMonad.Layout.Tabbed
 
 -- <layout helpers>
-import XMonad.Layout.Master
 import XMonad.Layout.LayoutCombinators
 import XMonad.Layout.LimitWindows
-import XMonad.Layout.NoBorders (noBorders,smartBorders,withBorder)
+import XMonad.Layout.NoBorders
 import XMonad.Layout.Gaps
 import XMonad.Layout.Reflect
 import XMonad.Layout.MultiToggle
@@ -94,18 +92,18 @@ import XMonad.Layout.WindowNavigation
 
 main = do
     dzenStatusBar <- spawnPipe myStatusBar
-    xmonad $ defaultConfig
+    xmonad $ withUrgencyHook dzenUrgencyHook { args = ["-fn", barFont, "-bg", colorDarkCream, "-fg", colorBlue]} $ defaultConfig
       { modMask             = myModMask
       , keys                = myKeyBindings
       , terminal            = "urxvt"
-      , workspaces          = map show [1..4]
+      , workspaces          = map show [1..6]
       , layoutHook          = myLayouts
-      , manageHook          = insertPosition Above Newer <+> myManageHook
+      , manageHook          = insertPosition Below Newer <+> myManageHook
       , startupHook         = myStartHook
       , logHook             = myLogHook dzenStatusBar >> setWMName "LG3D"
       , normalBorderColor   = colorNormalBorder
       , focusedBorderColor  = colorFocusedBorder
-      , borderWidth         = 2 -- for floating windows ('noBorders' OR 'withBorder Int' on layouts)
+      , borderWidth         = 2 -- for floating windows ((..)Borders `Or` withBorder Int $ on Layouts)
       , focusFollowsMouse   = False
       }
 myStartHook = spawnOnce ". $HOME/.xmonad/dzen4xmonad" <+>
@@ -203,10 +201,9 @@ myGSConfig colorizer = (buildDefaultGSConfig myColorizer)
 
 -- <scratchpad>
 manageScratchPad :: ManageHook
---manageScratchPad = scratchpadManageHook (W.RationalRect (1/6) (1/4) (2/3) (2/5))
-manageScratchPad = scratchpadManageHook (W.RationalRect 0 0.56 1.00 0.44)
-scratchPad = scratchpadSpawnActionCustom $ -- make sure to indent the next line
-  "urxvt -name scratchpad +sb -fn '-*-fixed-medium-r-normal-*-9-*-*-*-*-*' -e tmux -f $XDG_CONFIG_DIR/tmux/tmux.conf -L sp new-session 'ncmpcpp ; zsh'"
+manageScratchPad = scratchpadManageHook (W.RationalRect (1/6) (1/4) (2/3) (2/5))
+scratchPad = scratchpadSpawnActionCustom $ -- make sure to indent the next line:
+  "urxvt -name scratchpad +sb -fn '-*-fixed-medium-r-normal-*-9-*-*-*-*-*' -e tmux -f $XDG_CONFIG_DIR/tmux/tmux.conf -L sp new-session 'ncmpcpp || zsh'"
 
 -- end of UTILITY FUNCTIONS }}}
 
@@ -221,25 +218,24 @@ myLayouts = avoidStruts $ gaps [(U,14)]   $
             mkToggle (single NBFULL)      $
             mkToggle (single REFLECTX)    $
             mkToggle (single REFLECTY)    $
-            onWorkspace "3" inetLayouts   $
-            onWorkspace "4" fotoLayouts   $
+            mkToggle (single NOBORDERS)   $
+            onWorkspace "4" inetLayouts   $
+            onWorkspace "5" fotoLayouts   $
             (collectiveLayouts)
   where
-    collectiveLayouts = myTile ||| myTest ||| myOneB ||| myFull
+    collectiveLayouts = myTile ||| myOneB ||| myFull ||| myTabd
 
     -- <define layouts>
-    myFull = named "*" (smartBorders (noBorders Full))
-    myTab1 = named "-" (smartBorders (noBorders $ tabbedAlways shrinkText myTabTheme))
-    myTab2 = named "=" (noBorders (mastered 0.02 0.33 $ tabbedAlways shrinkText myTabTheme))
-    myTile = named "+" (withBorder 1 (mastered 0.02 0.33 (ResizableTall 1 0.03 0.6 [])))
-    myOneB = named "@" (withBorder 1 (limitWindows 5 (OneBig 0.75 0.65)))
-    myTest = named "#" (withBorder 1 (drawer `onBottom` (ResizableTall 1 0.03 0.6 [])))
+    myFull = named "*" (smartBorders $ Full)
+    myTabd = named "-" (smartBorders $ tabbedAlways shrinkText myTabTheme)
+    myOneB = named "@" (lessBorders (OnlyFloat) (withBorder 1 (limitWindows 10 (OneBig 0.75 0.65))))
+    myTile = named "#" (lessBorders (OnlyFloat) (withBorder 1 (drawer `onBottom` (ResizableTall 1 0.03 0.66 []))))
       where
         drawer = simpleDrawer 0 0.36 (ClassName "Firefox" `Or` ClassName "Zathura")
 
     -- <layouts per workspace>
-    inetLayouts = myFull ||| myTab1 ||| myOneB
-    fotoLayouts = myFull ||| myOneB
+    inetLayouts = myOneB ||| myFull ||| myTabd
+    fotoLayouts = myFull ||| myTabd
 
 -- end of LAYOUTS }}}
 
@@ -253,30 +249,29 @@ myLayouts = avoidStruts $ gaps [(U,14)]   $
 myManageHook :: ManageHook
 myManageHook = (composeAll . concat $
     [ [resource     =? r     --> doIgnore       |   r   <- myIgnores] -- ignore desktop
-    , [className    =? c     --> doShift  "2"   |   c   <- myTabdC  ] -- move myTabdC windows to workspace 2
-
-    , [className    =? c     --> doShift  "3"   |   c   <- myInetC  ] -- move myInetC windows to workspace 3
-    , [className    =? c     --> doShift  "4"   |   c   <- myFotoC  ] -- move myFotoC windows to workspace 4
+    , [className    =? c     --> doShift  "4"   |   c   <- myInetC  ] -- move myInetC windows to workspace 4
+    , [className    =? c     --> doShift  "5"   |   c   <- myFotoC  ] -- move myFotoC windows to workspace 5
+    , [className    =? c     --> doShift  "6"   |   c   <- myElseC  ] -- move myElseC windows to workspace 6
     , [className    =? c     --> doCenterFloat  |   c   <- myFloatsC] -- float center geometry by class
-    , [name         =? n     --> doCenterFloat  |   n   <- myFloatsN] -- float center geometry by name
+    , [name         =? n     --> doSideFloat SE |   n   <- myFloatsN] -- float side geometry by name
     , [name         =? n     --> doFullFloat    |   n   <- myTrueFSN] -- float true fullscreen by name
     ]) <+> manageScratchPad
     where
         role      = stringProperty "WM_WINDOW_ROLE"
         name      = stringProperty "WM_NAME"
         -- <<class>>
-        myFloatsC = ["MPlayer","Save As...","Downloads"]
-        myTabdC   = ["xskat"]
-        myFotoC   = ["Gliv","Display"]
+        myFloatsC = ["MPlayer","Save As...","Downloads","xskat"]
+        myElseC   = ["xskat"]
         myInetC   = ["Minefield","Firefox","Jumanji","Dwb","Surf"]
+        myFotoC   = ["Gliv","Display"]
         -- <<resource>>
         myIgnores = ["desktop","desktop_window"]
         -- <<name>>
-        myFloatsN = ["gcolor2","xskat"]
+        myFloatsN = ["gcolor2"]
         myTrueFSN = ["GLiv in fullscreen"]
 
 -- <statusbar/logging>
-myStatusBar = "dzen2 -x '0' -y '0' -h '13' -w '200' -ta 'l' -bg '#161616' -fg '#a9a6af' -fn '-*-fixed-medium-r-normal-*-10-*-*-*-*-*-*-*'"
+myStatusBar = "dzen2 -x '0' -y '0' -h '13' -w '238' -ta 'l' -bg '#161616' -fg '#a9a6af' -fn '-*-fixed-medium-r-normal-*-10-*-*-*-*-*-*-*'"
 myLogHook :: Handle -> X ()
 myLogHook h = dynamicLogWithPP $ defaultPP
     {
@@ -385,13 +380,13 @@ myKeyBindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask .|. shiftMask,     xK_e         ), safeSpawnProg "eject") -- open disc tray
     -- <tiled windows>
     , ((modMask,                   xK_m         ), windows W.focusMaster) -- immediately focus on master
-    , ((modMask .|. shiftMask,     xK_m         ), promote) -- swap with & focus on master (if xK_m in master; like "Swap D" but keeps focus)
+    , ((modMask .|. shiftMask,     xK_m         ), windows W.swapMaster) -- swap with master and focus on it
     , ((modMask,                   xK_equal     ), sendMessage $ IncMasterN 1) -- increase number of masters
     , ((modMask,                   xK_minus     ), sendMessage $ IncMasterN (-1)) -- decrease number of masters
     , ((modMask,                   xK_0         ), sendMessage $ Expand) -- expand size of master frame
     , ((modMask,                   xK_9         ), sendMessage $ Shrink) -- shrink size of master frame
-    , ((modMask .|. shiftMask,     xK_0         ), sendMessage $ MirrorShrink) -- shrink size of master frame
-    , ((modMask .|. shiftMask,     xK_9         ), sendMessage $ MirrorExpand) -- expand size of master frame
+    , ((modMask .|. shiftMask,     xK_0         ), sendMessage $ MirrorShrink) -- shrink size of slave frame (ResizableTile(..))
+    , ((modMask .|. shiftMask,     xK_9         ), sendMessage $ MirrorExpand) -- expand size of slave frame (ResizableTile(..))
     , ((modMask,                   xK_j         ), sendMessage $ Go D) -- focus down a frame
     , ((modMask,                   xK_k         ), sendMessage $ Go U) -- focus up a frame
     , ((modMask,                   xK_h         ), sendMessage $ Go L) -- focus left a frame
@@ -400,15 +395,13 @@ myKeyBindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask .|. shiftMask,     xK_k         ), sendMessage $ Swap U) -- swap window with above frame and focus on it
     , ((modMask .|. shiftMask,     xK_h         ), sendMessage $ Swap L) -- swap window with left frame and focus on it
     , ((modMask .|. shiftMask,     xK_l         ), sendMessage $ Swap R) -- swap window with right frame and focus on it
-    , ((modMask .|. controlMask,   xK_j         ), rotUnfocusedDown) -- rotate unfocused slaves [and/or master] down/prev
-    , ((modMask .|. controlMask,   xK_k         ), rotUnfocusedUp) -- rotate unfocused slaves [and/or master] up/next
-    , ((modMask .|. controlMask,   xK_h         ), rotFocusedDown) -- rotate focused slaves [and/or master] down/prev
-    , ((modMask .|. controlMask,   xK_l         ), rotFocusedUp) -- rotate focused slaves [and/or master] up/next
-    , ((modMask,                   xK_Tab       ), rotSlavesUp) -- rotate all slaves [not master] up/prev
-    , ((modMask,                   xK_n         ), windows W.focusDown) -- focus down/next (in Full layout, or if you'd rather see tabs move (undesirable))
-    , ((modMask,                   xK_p         ), windows W.focusUp) -- focus up/prev (in Full layout, or if you'd rather see tabs move (undesirable))
-    , ((modMask .|. controlMask,   xK_n         ), windows W.swapDown) -- swap down/next (in Full layout, or for tabbed slave movement (undesirable))
-    , ((modMask .|. controlMask,   xK_p         ), windows W.swapUp) -- swap up/prev (in Full layout, or for tabbed slave movement (undesirable))
+    , ((modMask .|. controlMask,   xK_j         ), rotSlavesDown) -- rotate all slaves down/next
+    , ((modMask .|. controlMask,   xK_k         ), rotSlavesUp) -- rotate slaves up/prev
+    , ((modMask,                   xK_Tab       ), rotAllDown) -- rotate all windows [slaves/master] down/next
+    , ((modMask,                   xK_n         ), windows W.focusDown) -- focus next
+    , ((modMask,                   xK_p         ), windows W.focusUp) -- focus prev
+    , ((modMask .|. controlMask,   xK_n         ), windows W.swapDown) -- swap next
+    , ((modMask .|. controlMask,   xK_p         ), windows W.swapUp) -- swap prev
     -- <floating windows (rarely use these)>
     , ((modMask,                   xK_w         ), withFocused $ windows . W.sink) -- push a focused floating window back into tiling
     , ((modMask .|. shiftMask,     xK_w         ), sinkAll) -- push all floating windows in workspace into tiling
@@ -427,10 +420,9 @@ myKeyBindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- <layout/workspace common>
     , ((modMask,                   xK_t         ), submap . M.fromList $ -- common toggle sub-bindings
                                 [ ((0, xK_o       ), sendMessage $ Toggle NBFULL) -- <toggle Full with noBorders (like "only"), and back again>
+                                , ((0, xK_b       ), sendMessage $ Toggle NOBORDERS) -- <toggle borders>
                                 , ((0, xK_s       ), sendMessage $ ToggleStruts) -- <toggle struts>
                                 , ((0, xK_g       ), sendMessage $ ToggleGaps) -- <toggle gaps>
-                                , ((0, xK_d       ), sendMessage $ ToggleGap D) -- <toggle bottom gap>
-                                , ((0, xK_u       ), sendMessage $ ToggleGap U) -- <toggle upper gap>
                                 , ((0, xK_x       ), sendMessage $ Toggle REFLECTX) -- <toggle mirrored layout by X axis>
                                 , ((0, xK_y       ), sendMessage $ Toggle REFLECTY) -- <toggle mirrored layout by Y axis>
                                 ])
@@ -439,15 +431,20 @@ myKeyBindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask,                   xK_period    ), nextWS) -- focus next workspace
     , ((modMask,                   xK_comma     ), prevWS) -- focus previous workspace
     , ((modMask,                   xK_slash     ), toggleWS) -- toggle between last viewed workspace and current
+    , ((modMask .|. shiftMask,     xK_slash     ), focusUrgent) -- quickly focus on urgent window [in it's original workspace]
     , ((modMask .|. shiftMask,     xK_period    ), shiftToNext) -- move current frame to next workspace
     , ((modMask .|. shiftMask,     xK_comma     ), shiftToPrev) -- move current frame to previous workspace
     , ((modMask .|. controlMask,   xK_period    ), shiftToNext >> nextWS) -- move current frame to next workspace and go there
     , ((modMask .|. controlMask,   xK_comma     ), shiftToPrev >> prevWS) -- move current frame to previous workspace and go there
     ]
-    ++
-    [((m .|. modMask, k), windows $ f i) -- focus workspace by modMask+Int
-        | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_9]
+    ++ -- view Nth workspace (modMask+Int) or send focused window to workspace (modMask+Shift+Int)
+    [((m .|. modMask, k), windows $ f i)
+        | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_6]
         , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]
+    ]
+    ++ -- swap windows from current workspace with another (modMask+Control+Int)
+    [((modMask .|. controlMask, k), windows $ swapWithCurrent i)
+        | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_6]
     ]
     where
       searchEngineMap method = M.fromList $ -- search engines for modMask+F3

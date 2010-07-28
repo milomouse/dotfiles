@@ -252,8 +252,9 @@ myManageHook = (composeAll . concat $
     , [className    =? c     --> doShift  "4"   |   c   <- myInetC  ] -- move myInetC windows to workspace 4
     , [className    =? c     --> doShift  "5"   |   c   <- myFotoC  ] -- move myFotoC windows to workspace 5
     , [className    =? c     --> doShift  "6"   |   c   <- myElseC  ] -- move myElseC windows to workspace 6
-    , [className    =? c     --> doCenterFloat  |   c   <- myFloatsC] -- float center geometry by class
-    , [name         =? n     --> doSideFloat SE |   n   <- myFloatsN] -- float side geometry by name
+    , [className    =? c     --> doCenterFloat  |   c   <- myFloatsC] -- float center geometry by 
+    , [name         =? n     --> doCenterFloat  |   n   <- myFloatCN] -- float center geometry by name
+    , [name         =? n     --> doSideFloat SE |   n   <- myFloatSN] -- float side geometry by name
     , [name         =? n     --> doFullFloat    |   n   <- myTrueFSN] -- float true fullscreen by name
     ]) <+> manageScratchPad
     where
@@ -267,7 +268,8 @@ myManageHook = (composeAll . concat $
         -- <<resource>>
         myIgnores = ["desktop","desktop_window"]
         -- <<name>>
-        myFloatsN = ["gcolor2"]
+        myFloatSN = ["gcolor2"]
+        myFloatCN = ["Add-ons"]
         myTrueFSN = ["GLiv in fullscreen"]
 
 -- <statusbar/logging>

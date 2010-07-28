@@ -1,32 +1,36 @@
 ## ~/.config/musca/musca_start
 ## milomouse
 
-# try not to list default settings
-set startup /home/milo/.config/musca/musca_start
+# try not to list default settings:
+set startup ~/.config/musca/musca_start
 #exec zsh /home/milo/.config/musca/dzen4musca 2>/dev/null
+set group_close_empty 1
 set frame_display_hidden 2
 set frame_resize 10
 set dmenu dmenu -i -p 'Musca: '
 hook on ^only border off
 #hook on ^add pad 0 0 12 0
 hook on ^(remove|vsplit|hsplit) refresh
-# borders
+
+# borders:
 set border_focus #747474
 set border_unfocus #303030
-set border_catchall_focus #6a588d
+set border_catchall_focus #a488d9
 set border_catchall_unfocus #574b70
-set border_dedicate_focus #526a76
-set border_dedicate_unfocus #55656c
-# common/ease-of-use bindings
+set border_dedicate_focus #87afd7
+set border_dedicate_unfocus #87afd7
+
+# common/ease-of-use bindings:
 bind off all
 bind on Mod4+Escape exec banishmouse
-bind on Mod4+Return exec urxvt -e tmux
+bind on Mod4+Return exec urxvt -e tmux -f ~/.config/tmux/tmux.conf
 bind on Mod4+Shift+Return exec urxvt
 bind on Mod4+Shift+BackSpace kill
 bind on Mod4+Shift+q quit
 #bind on Mod4+Shift+q exec killall zsh dzen4musca ; musca -c quit
 #bind on Mod4+Shift+r exec killall zsh dzen4musca ; exec zsh /home/milo/.config/musca/dzen4musca 2>/dev/null
-# media and other bindings
+
+# media and other bindings:
 bind on Mod4+Print exec import -window root /home/milo/foto/shot/$(date +%Y_%m_%d-%H%M%S).png"
 bind on Mod4+Shift+Delete exec alock -bg image:file=/home/milo/foto/wall/beheading.jpg -cursor glyph -auth pam >&/dev/null
 bind on Control+XF86MonBrightnessUp exec moodlight -m
@@ -42,13 +46,15 @@ bind on Mod4+Shift+o exec mossrat --next
 bind on Mod4+Shift+a exec songrem --add
 bind on Mod4+Shift+d exec songrem --remove
 bind on Mod4+Shift+t exec songrem --play
-# prompt bindings
+
+# prompt bindings:
 bind on Mod4+semicolon exec dmenu_run -p 'Execute: '
 bind on Mod4+Shift+semicolon exec manread
 bind on Mod4+Control+semicolon command
 bind on Mod4+w switch window
 bind on Mod4+g switch group
-# mode/singular bindings
+
+# mode/singular bindings:
 bind on Mod4+c catchall flip
 bind on Mod4+s stack flip
 bind on Mod4+d dedicate flip
@@ -56,24 +62,26 @@ bind on Mod4+b refresh
 bind on Mod4+z remove
 bind on Mod4+u undo
 bind on Mod4+o only
-# directional/movement bindings
+
+# directional/movement bindings:
 bind on Mod4+h focus left
 bind on Mod4+j focus down
 bind on Mod4+k focus up
 bind on Mod4+l focus right
-bind on Mod4+Control+h resize left
-bind on Mod4+Control+j resize down
-bind on Mod4+Control+k resize up
-bind on Mod4+Control+l resize right
+bind on Mod4+9 resize left
+bind on Mod4+0 resize right
+bind on Mod4+Shift+9 resize up
+bind on Mod4+Shift+0 resize down
 bind on Mod4+Shift+h slide left
 bind on Mod4+Shift+j slide down
 bind on Mod4+Shift+k slide up
 bind on Mod4+Shift+l slide right
-bind on Mod4+Mod1+h swap left
-bind on Mod4+Mod1+j swap down
-bind on Mod4+Mod1+k swap up
-bind on Mod4+Mod1+l swap right
-# cycle/split bindings
+bind on Mod4+Control+h swap left
+bind on Mod4+Control+j swap down
+bind on Mod4+Control+k swap up
+bind on Mod4+Control+l swap right
+
+# cycle/split bindings:
 bind on Mod4+n cycle local
 bind on Mod4+Shift+n cycle
 bind on Mod4+Shift+bracketleft cycle prev
@@ -84,21 +92,22 @@ bind on Mod4+Shift+plus hsplit 33%
 bind on Mod4+Shift+minus vsplit 37%
 bind on Mod4+Control+plus hsplit 69%
 bind on Mod4+Control+minus vsplit 66%
-# group bindings
-bind on Mod4+grave exec /home/milo/.config/musca/group__toggle
-bind on Mod4+1 use one
-bind on Mod4+2 use two
-bind on Mod4+3 use three
-bind on Mod4+4 use four
-bind on Mod4+5 use five
-bind on Mod4+6 use six
-bind on Mod4+Shift+grave move default
-bind on Mod4+Shift+1 move one
-bind on Mod4+Shift+2 move two
-bind on Mod4+Shift+3 move three
-bind on Mod4+Shift+4 move four
-bind on Mod4+Shift+5 move five
-bind on Mod4+Shift+6 move six
+
+# group bindings:
+#bind on Mod4+grave exec /home/milo/.config/musca/group__toggle
+bind on Mod4+1 use 0
+bind on Mod4+2 use 1
+bind on Mod4+3 use 2
+bind on Mod4+4 use 3
+bind on Mod4+5 use 4
+bind on Mod4+6 use 5
+#bind on Mod4+Shift+grave move default
+bind on Mod4+Shift+1 move 0
+bind on Mod4+Shift+2 move 1
+bind on Mod4+Shift+3 move 2
+bind on Mod4+Shift+4 move 3
+bind on Mod4+Shift+5 move 4
+bind on Mod4+Shift+6 move 5
 bind on Mod4+Control+1 exec musca -c "move one" ; musca -c "use one"
 bind on Mod4+Control+2 exec musca -c "move two" ; musca -c "use two"
 bind on Mod4+Control+3 exec musca -c "move three" ; musca -c "use three"
@@ -107,17 +116,6 @@ bind on Mod4+Control+5 exec musca -c "move five" ; musca -c "use five"
 bind on Mod4+Control+6 exec musca -c "move six" ; musca -c "use six"
 bind on Mod4+period use (next)
 bind on Mod4+comma use (prev)
-# startup stuff
-name !
+
+# startup stuff:
 #pad 0 0 12 0
-exec urxvt -e ncmpcpp
-add one
-add two
-add three
-add four
-add five
-add six
-#pad 0 0 0 0
-border off
-stack flip
-use one

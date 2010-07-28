@@ -23,7 +23,7 @@ function back() {
   case $1 in
   [a-zA-Z]) : ;;
   <->) pushd -q +$1 ;;
-  l)   dirs -lpv|sed '2 s|$| \[last\]|' ;;
+  -l)   dirs -lpv|sed '2 s|$| \[last\]|' ;;
   *)   pushd -q -
   esac
 }

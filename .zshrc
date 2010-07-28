@@ -2,15 +2,15 @@
 PATH=$PATH:/usr/local/bin:/usr/local/sbin
 
 # start tmux server(s) per tty$:
-if [[ -z "$DISPLAY" && $(tty) = /dev/tty[1-4] ]]; then
+if [[ -z "$DISPLAY" && $(tty) = /dev/tty[2-4] ]]; then
   case $(tty) in
-    *[1-4]) tmux -f ${XDG_CONFIG_DIR:-$HOME/.config}/tmux/tmux.conf \
+    *[2-4]) tmux -f ${XDG_CONFIG_DIR:-$HOME/.config}/tmux/tmux.conf \
     -L console new-session -s "$(print ${$(tty)/*dev\//})" ;;
   esac
 fi
 
 # prompt line:
-[[ "$TERM" == *screen* ]] && precmd() {print -Pn "\e]2;%2d\a"} || RPROMPT='%F{white}%~%f'
+[[ "$TERM" == screen* ]] && precmd() {print -Pn "\e]2;%2d\a"} || RPROMPT='%F{white}%~%f'
 PS1='%F{magenta}» %f'
 PS2='%B%F{white}%_ %b%f%F{magenta}» %f'
 PS3='%B%F{white}?# %b%f%F{magenta}» %f'
@@ -30,7 +30,7 @@ zstyle ':completion:*:manuals' separate-sections true
 zstyle ':completion:*:manuals.(^1*)' insert-sections true
 zstyle ':completion:*' verbose true
 zstyle ':completion:*' use-cache on
-zstyle ':completion:*' cache-path $HOME/.cache/zsh
+zstyle ':completion:*' cache-path ${XDG_CACHE_HOME:-/dev/shm}/zsh
 zstyle ':completion:*' squeeze-slashes true
 zstyle ':completion:*:functions' ignored-patterns '_*'
 zstyle ':completion:*:*:kill:*' menu yes select
@@ -88,21 +88,24 @@ bindkey "^?" backward-delete-char
 bindkey '^R' history-incremental-search-backward
 
 # global exports:
+[[ -z "$DISPLAY" ]] && export EDITOR="/usr/bin/vim -p -c ':colorscheme candymouse'" \
+|| export EDITOR="/usr/bin/vim -p"
 export HISTSIZE=1400
 export SAVEHIST=$HISTSIZE
 export DIRSTACKSIZE=20
-export FCEDIT=/usr/bin/vim
-export EDITOR=/usr/bin/vim
-export BROWSER=/usr/bin/w3m
-export CC=/usr/bin/gcc
-export SHELL=/bin/zsh
+export FCEDIT="/usr/bin/vim"
+export BROWSER="/usr/bin/w3m"
+export PAGER="/bin/less"
+export SDCV_HISTSIZE=$HISTSIZE
+export SDCV_PAGER="/bin/more"
+export SHELL="/bin/zsh"
 export MPD_HOST=lenovo
 export MPD_PORT=6600
 export LANG="en_US.utf8"
 export LC_ALL="en_US.utf8"
 export LC="en_US.utf8"
 export LESSCHARSET="utf-8"
-export LESSHISTFILE="/dev/shm/less_history"
+export LESSHISTFILE="${XDG_CACHE_HOME:-/dev/shm}/less_history"
 export LESS_TERMCAP_mb=$'\E[01;35m'
 export LESS_TERMCAP_md=$'\E[01;35m'
 export LESS_TERMCAP_me=$'\E[0m'
@@ -125,8 +128,8 @@ export XDG_VIDEOS_DIR="$HOME/vide"
 export XAUTHORITY="$HOME/.config/.Xauthority"
 
 # source alias and function files:
-[[ -f ${XDG_CONFIG_DIR:-$HOME/.config}/zsh/.zshalias ]] && . ${XDG_CONFIG_DIR:-$HOME/.config}/zsh/.zshalias
-[[ -f ${XDG_CONFIG_DIR:-$HOME/.config}/zsh/.zshfn ]] && . ${XDG_CONFIG_DIR:-$HOME/.config}/zsh/.zshfn
+[[ -f ${XDG_CONFIG_DIR:-$HOME/.config}/zsh/zshalias ]] && . ${XDG_CONFIG_DIR:-$HOME/.config}/zsh/zshalias
+[[ -f ${XDG_CONFIG_DIR:-$HOME/.config}/zsh/zshfn ]] && . ${XDG_CONFIG_DIR:-$HOME/.config}/zsh/zshfn
 
 # framebuffer colors:
 if [[ "$TERM" = "linux" || "$TERM" == *screen* ]]; then

@@ -12,8 +12,9 @@ fi
 # prompt line:
 [[ "$TERM" == screen* ]] && precmd() {print -Pn "\e]2;%2d\a"} || RPROMPT='%F{white}%~%f'
 PS1='%F{magenta}» %f'
-PS2='%B%F{white}%_ %b%f%F{magenta}» %f'
-PS3='%B%F{white}?# %b%f%F{magenta}» %f'
+PS2='%F{blue}» %f'
+#PS2='%B%F{white}%_ %b%f%F{blue}» %f'
+PS3='%B%F{white}?# %b%f%F{red}» %f'
 PS4='%B%F{white}%_ %b%f%F{magenta}» %f%B%F{white}+%N:%i %b%f%F{magenta}» %f'
 
 # auto-completion:

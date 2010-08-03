@@ -31,7 +31,7 @@ set scrolloff=2
 set laststatus=2
 set ruler
 set ttyfast
-set wrap nowrap
+set nowrap
 set noerrorbells
 set history=100
 set nomodeline

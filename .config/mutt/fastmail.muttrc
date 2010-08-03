@@ -1,10 +1,10 @@
-## ~/.mutt/fastmail.muttrc
-## milomouse
+## $XDG_CONFIG_DIR/mutt/fastmail.muttrc
+## milomouse <vincent[at]fea.st>
 
 color status green default
 
 set from      = "vincent@fea.st"
-set sendmail  = "/usr/bin/msmtp -a FastMail"
+set sendmail  = "/usr/bin/msmtp --file=/home/milo/.config/msmtp/msmtprc -a FastMail"
 set mbox      = "+FastMail/INBOX"
 unset record
 set postponed = "+FastMail/Drafts"

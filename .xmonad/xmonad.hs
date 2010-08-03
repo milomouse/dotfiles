@@ -53,8 +53,8 @@ import XMonad.Hooks.UrgencyHook
 -- <utilities>
 import XMonad.Util.Cursor
 import XMonad.Util.Run
-import XMonad.Util.SpawnOnce
 import XMonad.Util.Scratchpad (scratchpadManageHook,scratchpadSpawnActionCustom)
+import XMonad.Util.SpawnOnce
 
 -- <prompts>
 import XMonad.Prompt
@@ -67,10 +67,10 @@ import XMonad.Prompt.Window (windowPromptBring,windowPromptGoto)
 -- <layouts>
 import XMonad.Layout.OneBig
 import XMonad.Layout.ResizableTile
-import XMonad.Layout.Drawer
 import XMonad.Layout.Tabbed
 
 -- <layout helpers>
+import XMonad.Layout.Drawer
 import XMonad.Layout.LayoutCombinators
 import XMonad.Layout.LimitWindows
 import XMonad.Layout.NoBorders

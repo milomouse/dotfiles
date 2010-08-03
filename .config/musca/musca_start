@@ -15,10 +15,10 @@ hook on ^(remove|vsplit|hsplit) refresh
 # borders:
 set border_focus #747474
 set border_unfocus #303030
-set border_catchall_focus #a488d9
-set border_catchall_unfocus #574b70
-set border_dedicate_focus #87afd7
-set border_dedicate_unfocus #87afd7
+set border_dedicate_focus #a488d9
+set border_dedicate_unfocus #574b70
+set border_catchall_focus #87afd7
+set border_catchall_unfocus #557493
 
 # common/ease-of-use bindings:
 bind off all

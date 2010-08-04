@@ -1,13 +1,13 @@
 # extend run-path for local scripts/binaries:
 PATH=$PATH:/usr/local/bin:/usr/local/sbin
 
-# start tmux server(s) per tty$:
-if [[ -z "$DISPLAY" && $(tty) = /dev/tty[2-4] ]]; then
-  case $(tty) in
-    *[2-4]) tmux -f ${XDG_CONFIG_DIR:-$HOME/.config}/tmux/tmux.conf \
-    -L console new-session -s "$(print ${$(tty)/*dev\//})" ;;
-  esac
-fi
+## start tmux server(s) per tty$:
+#if [[ -z "$DISPLAY" && $(tty) = /dev/tty[2-4] ]]; then
+#  case $(tty) in
+#    *[2-4]) tmux -f ${XDG_CONFIG_DIR:-$HOME/.config}/tmux/tmux.conf \
+#    -L console new-session -s "$(print ${$(tty)/*dev\//})" ;;
+#  esac
+#fi # not sure if i want this..
 
 # prompt line:
 [[ "$TERM" == screen* ]] && precmd() {print -Pn "\e]2;%2d\a"} || RPROMPT='%F{white}%~%f'

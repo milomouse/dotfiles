@@ -60,6 +60,8 @@ import XMonad.Util.SpawnOnce
 import XMonad.Prompt
 import qualified XMonad.Prompt as P
 import XMonad.Prompt.Shell
+import XMonad.Prompt.AppLauncher
+import XMonad.Prompt.AppLauncher as AL
 import XMonad.Prompt.AppendFile (appendFilePrompt)
 import XMonad.Prompt.Man (manPrompt)
 import XMonad.Prompt.Window (windowPromptBring,windowPromptGoto)
@@ -203,7 +205,7 @@ myGSConfig colorizer = (buildDefaultGSConfig myColorizer)
 manageScratchPad :: ManageHook
 manageScratchPad = scratchpadManageHook (W.RationalRect (1/6) (1/4) (2/3) (2/5))
 scratchPad = scratchpadSpawnActionCustom $ -- make sure to indent the next line:
-  "urxvt -name scratchpad +sb -fn '-*-fixed-medium-r-normal-*-9-*-*-*-*-*' -e tmux -f $XDG_CONFIG_DIR/tmux/tmux.conf -L sp new-session 'ncmpcpp || zsh'"
+  "urxvt -name scratchpad +sb -fn '-*-fixed-medium-r-normal-*-9-*-*-*-*-*' -e tmux -f $XDG_CONFIG_DIR/tmux/tmux.conf -L sp new-session"
 
 -- end of UTILITY FUNCTIONS }}}
 
@@ -358,31 +360,50 @@ myKeyBindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
                                 , ((0, xK_n       ), runInTerm "" "tmux -f $XDG_CONFIG_DIR/tmux/tmux.conf -L xorg new-session 'nsudoku 12'") -- <open a sudoku game>
                                 , ((0, xK_w       ), safeSpawnProg "wallie") -- <change wallpaper to a random one>
                                 , ((0, xK_f       ), runOrRaise "firefox" (className =? "Firefox")) -- <run or raise firefox>
-                                , ((0, xK_s       ), unsafeSpawn "xskat -opt $XDG_CONFIG_DIR/xorg/xskat.opt -list $XDG_CONFIG_DIR/xorg/xskat.lst") -- <xskat with preferred dirs>
+                                , ((0, xK_x       ), unsafeSpawn "xskat -opt $XDG_CONFIG_DIR/xorg/xskat.opt -list $XDG_CONFIG_DIR/xorg/xskat.lst") -- <xskat with preferred dirs>
                                 ])
     -- <function/media keys>
     , ((0 .|. controlMask,         0x1008ff02   ), unsafeSpawn "sudo moodlight -m") -- maximum screen brightness ((XF86MonBrightnessUp [max]))
     , ((0,                         0x1008ff02   ), unsafeSpawn "sudo moodlight -u") -- increase screen brightness ((XF86MonBrightnessUp))
     , ((0,                         0x1008ff03   ), unsafeSpawn "sudo moodlight -d") -- decrease screen brightness ((XF86MonBrightnessDown))
-    , ((0,                         0x1008ff13   ), unsafeSpawn "mossrat -i 1") -- increase volume, via "mossrat" ((XF86AudioRaiseVolume))
-    , ((0,                         0x1008ff11   ), unsafeSpawn "mossrat -d 1") -- decrease volume, via "mossrat" ((XF86AudioLowerVolume))
-    , ((0,                         0x1008ff12   ), safeSpawn "mossrat" ["-m"])   -- mute volume, via "mossrat" ((XF86AudioMute))
-    , ((modMask,                   xK_a         ), submap . M.fromList $ -- "mossrat" common sub-bindings (music playing script)
-                                [ ((0, xK_t       ), safeSpawn "mossrat" ["--toggle"]) -- <toggle song>
-                                , ((0, xK_s       ), safeSpawn "mossrat" ["--stop"]) -- <stop song>
-                                , ((0, xK_p       ), safeSpawn "mossrat" ["--prev"]) -- <play previous song>
-                                , ((0, xK_n       ), safeSpawn "mossrat" ["--next"]) -- <play next song>
+    , ((0,                         0x1008ff13   ), unsafeSpawn "ossvalt -i 1") -- increase volume, via "ossvalt" ((XF86AudioRaiseVolume))
+    , ((0,                         0x1008ff11   ), unsafeSpawn "ossvalt -d 1") -- decrease volume, via "ossvalt" ((XF86AudioLowerVolume))
+    , ((0,                         0x1008ff12   ), safeSpawn "ossvalt" ["-m"])   -- mute volume, via "ossvalt" ((XF86AudioMute))
+    , ((modMask .|. shiftMask,     xK_m         ), AL.launchApp myXPConfig "mifo --command") -- "mifo" command prompt
+    , ((modMask,                   xK_m         ), submap . M.fromList $ -- "mifo" common sub-bindings (mplayer fifo script)
+                                [ ((0, xK_t       ), safeSpawn "mifo" ["--toggle"]) -- <toggle playback>
+                                , ((0, xK_l       ), safeSpawn "mifo" ["--next"]) -- <play next file in list>
+                                , ((0, xK_h       ), safeSpawn "mifo" ["--prev"]) -- <play previous file in list>
+                                , ((0, xK_s       ), safeSpawn "mifo" ["--stop"]) -- <stop mplayer process and start fresh>
+                                , ((0, xK_q       ), safeSpawn "mifo" ["--quit"]) -- <close "mifo" daemon>
+                                , ((0, xK_f       ), safeSpawn "mifo" ["--fullscreen"]) -- <toggle fullscreen state for videos>
+                                , ((0, xK_g       ), safeSpawn "mifo" ["--generate"]) -- <generate cache and play entire music dir>
+                                , ((0, xK_m       ), safeSpawn "mifo" ["--daemon"]) -- <start daemon unless already started>
+                                , ((0, xK_b       ), unsafeSpawn "mifo -c play") -- <play current playlist from beginning>
+                                , ((0, xK_a       ), AL.launchApp myXPConfig "mifo --load") -- <prompt 'load' for files to add>
+                                , ((0, xK_p       ), AL.launchApp myXPConfig "mifo --playlist") -- <prompt 'playlist' for lists to add>
+                                , ((0 .|. shiftMask, xK_a ), AL.launchApp myXPConfig "mifo --append") -- <prompt 'append' for files to add>
+                                , ((0 .|. shiftMask, xK_l ), AL.launchApp myXPConfig "mifo --next") -- <prompt 'next' for [Integer]>
+                                , ((0 .|. shiftMask, xK_h ), AL.launchApp myXPConfig "mifo --prev") -- <prompt 'prev' for [Integer]>
+                                , ((0 .|. shiftMask, xK_f ), safeSpawn "mifo" ["--fav-add"]) -- <add current file to favorites>
+                                , ((0 .|. shiftMask, xK_r ), safeSpawn "mifo" ["--fav-random"]) -- <play random file from favorites>
+                                , ((0 .|. shiftMask, xK_d ), safeSpawn "mifo" ["--fav-delete"]) -- <if found, remove current file from favorites>
                                 ])
-    , ((modMask,                   xK_s         ), submap . M.fromList $ -- "songrem" common sub-bindings (forked fav. song script)
-                                [ ((0, xK_a       ), safeSpawn "songrem" ["--add"]) -- <add current song to list>
-                                , ((0, xK_r       ), safeSpawn "songrem" ["--remove"]) -- <remove current song, if in list>
-                                , ((0, xK_e       ), safeSpawn "songrem" ["--edit"]) -- <manually edit list in [internally called] terminal>
-                                , ((0, xK_n       ), safeSpawn "songrem" ["--play"]) -- <play song from list>
+    , ((modMask,                   xK_s         ), submap . M.fromList $ -- "mifo" seek sub-bindings
+                                [ ((0, xK_l         ), unsafeSpawn "mifo -c seek 15") -- <seek forward 15 seconds>
+                                , ((0, xK_h         ), unsafeSpawn "mifo -c seek -15") -- <seek backward 15 seconds>
+                                , ((0 .|. shiftMask,   xK_l ), unsafeSpawn "mifo -c seek 45")-- <seek forward 45 seconds>
+                                , ((0 .|. shiftMask,   xK_h ), unsafeSpawn "mifo -c seek -44") -- <seek backward 45 seconds>
+                                , ((0 .|. controlMask, xK_l ), unsafeSpawn "mifo -c seek_chapter 1") -- <jump to next chapter>
+                                , ((0 .|. controlMask, xK_h ), unsafeSpawn "mifo -c seek_chapter -1") -- <jump to previous chapter>
+                                , ((0, xK_j         ), unsafeSpawn "mifo -c seek -400") -- <seek backward 400 seconds>
+                                , ((0, xK_k         ), unsafeSpawn "mifo -c seek 400") -- <seek forward 400 seconds>
+                                , ((0, xK_BackSpace ), unsafeSpawn "mifo -c seek 0 1") -- <seek to beginning of file>
                                 ])
     , ((modMask .|. shiftMask,     xK_e         ), safeSpawnProg "eject") -- open disc tray
     -- <tiled windows>
-    , ((modMask,                   xK_m         ), windows W.focusMaster) -- immediately focus on master
-    , ((modMask .|. shiftMask,     xK_m         ), windows W.swapMaster) -- swap with master and focus on it
+    , ((modMask,                   xK_d         ), windows W.focusMaster) -- immediately focus on master
+    , ((modMask .|. shiftMask,     xK_d         ), windows W.swapMaster) -- swap with master and focus on it
     , ((modMask,                   xK_equal     ), sendMessage $ IncMasterN 1) -- increase number of masters
     , ((modMask,                   xK_minus     ), sendMessage $ IncMasterN (-1)) -- decrease number of masters
     , ((modMask,                   xK_0         ), sendMessage $ Expand) -- expand size of master frame

@@ -231,7 +231,7 @@ myLayouts = avoidStruts $ gaps [(U,14)]   $
     myFull = named "*" (smartBorders $ Full)
     myTabd = named "-" (smartBorders $ tabbedAlways shrinkText myTabTheme)
     myOneB = named "@" (lessBorders (OnlyFloat) (withBorder 1 (limitWindows 10 (OneBig 0.75 0.65))))
-    myTile = named "#" (lessBorders (OnlyFloat) (withBorder 1 (drawer `onBottom` (ResizableTall 1 0.03 0.66 []))))
+    myTile = named "#" (lessBorders (OnlyFloat) (withBorder 1 (drawer `onBottom` (ResizableTall 1 0.03 0.60 []))))
       where
         drawer = simpleDrawer 0 0.36 (ClassName "Firefox" `Or` ClassName "Zathura")
 
@@ -374,7 +374,9 @@ myKeyBindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
                                 [ ((0, xK_t       ), safeSpawn "mifo" ["--toggle"]) -- <toggle playback>
                                 , ((0, xK_l       ), safeSpawn "mifo" ["--next"]) -- <play next file in list>
                                 , ((0, xK_h       ), safeSpawn "mifo" ["--prev"]) -- <play previous file in list>
-                                , ((0, xK_s       ), safeSpawn "mifo" ["--stop"]) -- <stop mplayer process and start fresh>
+                                , ((0, xK_j       ), unsafeSpawn "mifo --next 1dir") -- <play next "dirname">
+                                , ((0, xK_k       ), unsafeSpawn "mifo --prev 1dir") -- <play previous "dirname">
+                                , ((0, xK_e       ), safeSpawn "mifo" ["--stop"]) -- <stop mplayer process and start fresh>
                                 , ((0, xK_q       ), safeSpawn "mifo" ["--quit"]) -- <close "mifo" daemon>
                                 , ((0, xK_f       ), safeSpawn "mifo" ["--fullscreen"]) -- <toggle fullscreen state for videos>
                                 , ((0, xK_g       ), safeSpawn "mifo" ["--generate"]) -- <generate cache and play entire music dir>
@@ -382,23 +384,23 @@ myKeyBindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
                                 , ((0, xK_b       ), unsafeSpawn "mifo -c play") -- <play current playlist from beginning>
                                 , ((0, xK_a       ), AL.launchApp myXPConfig "mifo --load") -- <prompt 'load' for files to add>
                                 , ((0, xK_p       ), AL.launchApp myXPConfig "mifo --playlist") -- <prompt 'playlist' for lists to add>
-                                , ((0 .|. shiftMask, xK_a ), AL.launchApp myXPConfig "mifo --append") -- <prompt 'append' for files to add>
                                 , ((0 .|. shiftMask, xK_l ), AL.launchApp myXPConfig "mifo --next") -- <prompt 'next' for [Integer]>
                                 , ((0 .|. shiftMask, xK_h ), AL.launchApp myXPConfig "mifo --prev") -- <prompt 'prev' for [Integer]>
+                                , ((0 .|. shiftMask, xK_a ), AL.launchApp myXPConfig "mifo --append") -- <prompt 'append' for files to add>
                                 , ((0 .|. shiftMask, xK_f ), safeSpawn "mifo" ["--fav-add"]) -- <add current file to favorites>
                                 , ((0 .|. shiftMask, xK_r ), safeSpawn "mifo" ["--fav-random"]) -- <play random file from favorites>
                                 , ((0 .|. shiftMask, xK_d ), safeSpawn "mifo" ["--fav-delete"]) -- <if found, remove current file from favorites>
-                                ])
-    , ((modMask,                   xK_s         ), submap . M.fromList $ -- "mifo" seek sub-bindings
-                                [ ((0, xK_l         ), unsafeSpawn "mifo -c seek 15") -- <seek forward 15 seconds>
-                                , ((0, xK_h         ), unsafeSpawn "mifo -c seek -15") -- <seek backward 15 seconds>
-                                , ((0 .|. shiftMask,   xK_l ), unsafeSpawn "mifo -c seek 45")-- <seek forward 45 seconds>
-                                , ((0 .|. shiftMask,   xK_h ), unsafeSpawn "mifo -c seek -44") -- <seek backward 45 seconds>
-                                , ((0 .|. controlMask, xK_l ), unsafeSpawn "mifo -c seek_chapter 1") -- <jump to next chapter>
-                                , ((0 .|. controlMask, xK_h ), unsafeSpawn "mifo -c seek_chapter -1") -- <jump to previous chapter>
-                                , ((0, xK_j         ), unsafeSpawn "mifo -c seek -400") -- <seek backward 400 seconds>
-                                , ((0, xK_k         ), unsafeSpawn "mifo -c seek 400") -- <seek forward 400 seconds>
-                                , ((0, xK_BackSpace ), unsafeSpawn "mifo -c seek 0 1") -- <seek to beginning of file>
+                                , ((0, xK_s               ), submap . M.fromList $ -- secondary sub-bindings
+                                    [ ((0, xK_l                 ), unsafeSpawn "mifo -c seek 15") -- <seek forward 15 seconds>
+                                    , ((0, xK_h                 ), unsafeSpawn "mifo -c seek -15") -- <seek backward 15 seconds>
+                                    , ((0 .|. shiftMask,   xK_l ), unsafeSpawn "mifo -c seek 45")-- <seek forward 45 seconds>
+                                    , ((0 .|. shiftMask,   xK_h ), unsafeSpawn "mifo -c seek -45") -- <seek backward 45 seconds>
+                                    , ((0 .|. controlMask, xK_l ), unsafeSpawn "mifo -c seek -400") -- <seek backward 400 seconds>
+                                    , ((0 .|. controlMask, xK_h ), unsafeSpawn "mifo -c seek 400") -- <seek forward 400 seconds>
+                                    , ((0 .|. controlMask, xK_j ), unsafeSpawn "mifo -c seek_chapter -1") -- <jump to next chapter>
+                                    , ((0 .|. controlMask, xK_k ), unsafeSpawn "mifo -c seek_chapter 1") -- <jump to previous chapter>
+                                    , ((0, xK_BackSpace ), unsafeSpawn "mifo -c seek 0 1") -- <seek to beginning of file>
+                                    ])
                                 ])
     , ((modMask .|. shiftMask,     xK_e         ), safeSpawnProg "eject") -- open disc tray
     -- <tiled windows>

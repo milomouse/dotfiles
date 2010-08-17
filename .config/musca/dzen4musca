@@ -44,5 +44,5 @@ done | dzen2 -x $X -y $Y -h $H -w $W -ta 'r' -bg $BG -fg $FG -fn $FN &
 }
 
 _left
-_middle
-_right
+#_middle
+#_right

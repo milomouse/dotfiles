@@ -1,15 +1,17 @@
 ## ~/.config/musca/musca_start
-## milomouse
+## milomouse <vincent[at]fea.st>
 
 # try not to list default settings:
-set startup ~/.config/musca/musca_start
+set startup /home/milo/.config/musca/musca_start
+exec zsh /home/milo/.config/musca/dzen0 2>/dev/null
 #exec zsh /home/milo/.config/musca/dzen4musca 2>/dev/null
-set group_close_empty 1
 set frame_display_hidden 2
 set frame_resize 10
 set dmenu dmenu -i -p 'Musca: '
-hook on ^only border off
-#hook on ^add pad 0 0 12 0
+set border_width 0
+hook on ^(catchall|dedicate) border flip
+#hook on ^only border off
+hook on ^add pad 0 0 24 0
 hook on ^(remove|vsplit|hsplit) refresh
 
 # borders:
@@ -23,10 +25,12 @@ set border_catchall_unfocus #557493
 # common/ease-of-use bindings:
 bind off all
 bind on Mod4+Escape exec banishmouse
-bind on Mod4+Return exec urxvt -e tmux -f ~/.config/tmux/tmux.conf
+bind on Mod4+Return exec urxvt -e tmux -f /home/milo/.config/tmux/tmux.conf -L xorg
 bind on Mod4+Shift+Return exec urxvt
-bind on Mod4+Shift+BackSpace kill
-bind on Mod4+Shift+q quit
+bind on Mod4+Control+BackSpace kill
+#bind on Mod4+Shift+q quit
+bind on Mod4+Shift+q exec killall zsh dzen0 ; musca -c quit
+bind on Mod4+Shift+r exec killall zsh dzen0 ; exec zsh /home/milo/.config/musca/dzen4musca 2>/dev/null
 #bind on Mod4+Shift+q exec killall zsh dzen4musca ; musca -c quit
 #bind on Mod4+Shift+r exec killall zsh dzen4musca ; exec zsh /home/milo/.config/musca/dzen4musca 2>/dev/null
 
@@ -36,9 +40,9 @@ bind on Mod4+Shift+Delete exec alock -bg image:file=/home/milo/foto/wall/beheadi
 bind on Control+XF86MonBrightnessUp exec moodlight -m
 bind on XF86MonBrightnessUp exec moodlight -u
 bind on XF86MonBrightnessDown exec moodlight -d
-bind on XF86AudioRaiseVolume exec mossrat -i 1
-bind on XF86AudioLowerVolume exec mossrat -d 1
-bind on XF86AudioMute exec mossrat -m
+bind on XF86AudioRaiseVolume exec ossvalt -i 1
+bind on XF86AudioLowerVolume exec ossvalt -d 1
+bind on XF86AudioMute exec ossvalt -m
 bind on Mod4+Shift+y exec mossrat --prev
 bind on Mod4+Shift+u exec mossrat --toggle
 bind on Mod4+Shift+i exec mossrat --stop
@@ -82,10 +86,10 @@ bind on Mod4+Control+k swap up
 bind on Mod4+Control+l swap right
 
 # cycle/split bindings:
-bind on Mod4+n cycle local
-bind on Mod4+Shift+n cycle
-bind on Mod4+Shift+bracketleft cycle prev
-bind on Mod4+Shift+bracketright cycle next
+bind on Mod4+n cycle local next
+bind on Mod4+p cycle local prev
+bind on Mod4+Shift+n cycle next
+bind on Mod4+Shift+p cycle prev
 bind on Mod4+plus hsplit 1/2
 bind on Mod4+minus vsplit 1/2
 bind on Mod4+Shift+plus hsplit 33%
@@ -94,28 +98,38 @@ bind on Mod4+Control+plus hsplit 69%
 bind on Mod4+Control+minus vsplit 66%
 
 # group bindings:
-#bind on Mod4+grave exec /home/milo/.config/musca/group__toggle
-bind on Mod4+1 use 0
-bind on Mod4+2 use 1
-bind on Mod4+3 use 2
-bind on Mod4+4 use 3
-bind on Mod4+5 use 4
-bind on Mod4+6 use 5
-#bind on Mod4+Shift+grave move default
-bind on Mod4+Shift+1 move 0
-bind on Mod4+Shift+2 move 1
-bind on Mod4+Shift+3 move 2
-bind on Mod4+Shift+4 move 3
-bind on Mod4+Shift+5 move 4
-bind on Mod4+Shift+6 move 5
-bind on Mod4+Control+1 exec musca -c "move one" ; musca -c "use one"
-bind on Mod4+Control+2 exec musca -c "move two" ; musca -c "use two"
-bind on Mod4+Control+3 exec musca -c "move three" ; musca -c "use three"
-bind on Mod4+Control+4 exec musca -c "move four" ; musca -c "use four"
-bind on Mod4+Control+5 exec musca -c "move five" ; musca -c "use five"
-bind on Mod4+Control+6 exec musca -c "move six" ; musca -c "use six"
+bind on Mod4+grave exec /home/milo/.config/musca/pseudoscratchpad
+bind on Mod4+1 use {1}
+bind on Mod4+2 use {2}
+bind on Mod4+3 use {3}
+bind on Mod4+4 use {4}
+bind on Mod4+5 use {5}
+bind on Mod4+5 use {6}
+bind on Mod4+Shift+grave move !
+bind on Mod4+Shift+1 move {1}
+bind on Mod4+Shift+2 move {2}
+bind on Mod4+Shift+3 move {3}
+bind on Mod4+Shift+4 move {4}
+bind on Mod4+Shift+5 move {5}
+bind on Mod4+Shift+5 move {6}
+bind on Mod4+Control+1 exec musca -c "move {1}" ; musca -c "use {1}"
+bind on Mod4+Control+2 exec musca -c "move {2}" ; musca -c "use {2}"
+bind on Mod4+Control+3 exec musca -c "move {3}" ; musca -c "use {3}"
+bind on Mod4+Control+4 exec musca -c "move {4}" ; musca -c "use {4}"
+bind on Mod4+Control+5 exec musca -c "move {5}" ; musca -c "use {5}"
+bind on Mod4+Control+6 exec musca -c "move {6}" ; musca -c "use {6}"
 bind on Mod4+period use (next)
 bind on Mod4+comma use (prev)
 
 # startup stuff:
-#pad 0 0 12 0
+name !
+pad 0 0 24 0
+exec urxvt -e tmux -f /home/milo/.config/tmux/tmux.conf -L sp new-session
+add {1}
+add {2}
+add {3}
+add {4}
+add {5}
+add {6}
+use {1}
+#exec urxvt -e tmux -f /home/milo/.config/tmux/tmux.conf -L xorg new-session

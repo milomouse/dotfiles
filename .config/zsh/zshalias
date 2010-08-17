@@ -27,26 +27,24 @@ alias xoc="$BROWSER /usr/share/doc/xmonad-contrib-darcs/html"
 alias medit="$EDITOR $XDG_CONFIG_DIR/musca/musca_start"
 alias xedit="$EDITOR $XDG_CONFIG_DIR/xorg/{xinitrc,Xdefaults}"
 alias xodit="$EDITOR $HOME/.xmonad/xmonad.hs"
-alias zedit="$EDITOR -p $HOME/.{zshrc,config/zsh/{zshfn,zshalias}}"
 alias zload=". $HOME/.zshrc"
+alias zedit="$EDITOR -p $HOME/.{zshrc,config/zsh/{zshfn,zshalias}}"
 
 # program masquing:
 alias vim="${EDITOR:-/usr/bin/vim -p}"
 alias svim="sudo ${EDITOR:-/usr/bin/vim -p}"
 alias diff="colordiff"
 alias grep="grep --color=auto"
-alias tmux='tmux -f $XDG_CONFIG_DIR/tmux/tmux.conf'
-alias mutt='mutt -F $XDG_CONFIG_DIR/mutt/muttrc'
-alias xskat='xskat -opt $XDG_CONFIG_DIR/xorg/xskat.opt -list $XDG_CONFIG_DIR/xorg/xskat.lst'
-alias offlineimap='offlineimap -c $XDG_CONFIG_DIR/offlineimap/offlineimaprc'
+alias tmux='tmux -f ${XDG_CONFIG_DIR:-$HOME/.config}/tmux/tmux.conf'
+alias mutt='mutt -F ${XDG_CONFIG_DIR:-$HOME/.config}/mutt/muttrc'
+alias xskat='xskat -opt $XDG_CONFIG_DIR/xorg/xskat.opt -list ${XDG_CONFIG_DIR:-$HOME/.config}/xorg/xskat.lst'
+alias offlineimap='offlineimap -c ${XDG_CONFIG_DIR:-$HOME/.config}/offlineimap/offlineimaprc'
 alias xsel='xsel --logfile /dev/shm/xsel.log'
-alias rot='rtorrent -o http_capath=/etc/ssl/certs'
-alias rmcd='rmcd $@ 2>/dev/null'
-alias whicha="/usr/bin/which"
+alias {rot,rtorrent}='rtorrent -o http_capath=/etc/ssl/certs'
 
 # system/media shortcuts:
-alias mix2="ossmix codec1.jack.int-speaker.mode mix2 >>/dev/null && echo 'Mixer set to PC Speaker'"
-alias mix3="ossmix codec1.jack.int-speaker.mode mix3 >>/dev/null && echo 'Mixer set to Headphones'"
+alias mix2="ossmix codec1.jack.int-speaker.mode mix2 1>/dev/null && echo 'Mixer set to PC Speaker'"
+alias mix3="ossmix codec1.jack.int-speaker.mode mix3 1>/dev/null && echo 'Mixer set to Headphones'"
 #alias rec='ffmpeg -f x11grab -s 1366x768 - r 150 -i :0.0 -sameq /tmp/capture.mpg'
 alias siteget='wget --recursive --page-requisites --convert-links --html-extension --no-parent --wait=10 --limit-rate=20K -U Mozilla -l' #depth, then url
 alias dfu="df -hTP"

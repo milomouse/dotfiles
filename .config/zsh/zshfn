@@ -2,10 +2,14 @@
 function startx() {
   if [[ $(tty) != *pts* && $(runlevel) == *3* ]]; then
     clear
-    print $(date)
-    /usr/bin/startx $XDG_CONFIG_DIR/xorg/xinitrc -- -dpi 120 -nolisten tcp
+    date
+    /usr/bin/startx ${XDG_CONFIG_DIR:-$HOME/.config}/xorg/xinitrc -- -dpi 120 -nolisten tcp
   else
-    print ERROR: "$(tty)" + "$TERM" + "$DISPLAY"
+    << EOF
+>1  TTY*: $(tty)
+    TERM: $TERM
+    DISP: $DISPLAY
+EOF
   fi
 }
 
@@ -20,30 +24,32 @@ function up(){
 
 # jump to previous directory by Nth amount or last visited:
 function back() {
-  case $1 in
-    [a-zA-Z]) : ;;
-    <->) pushd -q +$1 ;;
-    -l)  dirs -lpv|sed '2 s|$| \[last\]|' ;;
-    *)   pushd -q -
-  esac
+  if [[ -n $1 ]]; then
+    case $1 in
+      <->)  pushd -q +$1 2>/dev/null ;;
+      *)    dirs -lpv|sed '2s|$| \[last\]|'
+    esac
+  else
+    pushd -q - 2>/dev/null
+  fi
 }
 
 # copy and follow file to new dir:
 function cpf() {
-if [[ -d $*[-1] ]]; then
-  cp $* && cd $*[-1]
-elif [[ -d ${*[-1]%/*} ]]; then
-  cp $* && cd ${*[-1]%/*}
-fi
+  if [[ -d $*[-1] ]]; then
+    cp $* && cd $*[-1]
+  elif [[ -d ${*[-1]%/*} ]]; then
+    cp $* && cd ${*[-1]%/*}
+  fi
 }
 
 # move and follow file to new dir:
 function mvf() {
-if [[ -d $*[-1] ]]; then
-  mv $* && cd $*[-1]
-elif [[ -d ${*[-1]%/*} ]]; then
-  mv $* && cd ${*[-1]%/*}
-fi
+  if [[ -d $*[-1] ]]; then
+    mv $* && cd $*[-1]
+  elif [[ -d ${*[-1]%/*} ]]; then
+    mv $* && cd ${*[-1]%/*}
+  fi
 }
 
 # extract archive with preferred options:
@@ -63,10 +69,10 @@ function extr() {
       *.7z)        7z x $1       ;;
       *.xz)        unxz -vk $1   ;;
       *.lzma)      unlzma -vk $1 ;;
-      *)           echo "'$1' cannot be extracted via extr()" ;;
+      *)           print "'$1' cannot be extracted via extr()" ;;
     esac
   else
-    echo "'$1' is not a valid file"
+    print "'$1' is not a valid file"
 fi
 }
 
@@ -91,14 +97,13 @@ function sd() {
 function todo() {
   local dir=$HOME/othe
   case $1 in
-    '-l') ls -1 $dir/.TODO* ;;
+    l) ls -1 $dir/.TODO* ;;
     *) vim $dir/.TODO_$1 ;;
   esac
 }
 
-# various functions..:
+# one-liners:
 function mkcd() {mkdir -p "$@" && cd "$@"}
-function reprobe() { sudo modprobe -r $1 && sudo modprobe $1 }
 function 256co() {perl -e 'foreach $i (0..255) {printf("\e[38;5;$i"."m%03d\e[0m ",$i); }'}
 function pubip() {curl http://whatismyip.org/ 2>/dev/null}
-function qdep() {pacman-color -Q $@ $(pacman-color -Qi $@|grep Depends|cut -d: -f2-|sed -E 's,>\S+\>,,g')}
+function qdep() {pacman-color -Q $@ $(pacman-color -Qi $@|grep Depends|cut -d: -f2-|sed -E 's|>\S+\>||g')}

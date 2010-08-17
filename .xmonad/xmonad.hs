@@ -7,14 +7,21 @@
 --         pbrisbin    -> scratchpad 'NSP' workspace hiding, and "versions" idea.
 -------------------------------------------------------------------------------------------
 -- versions used atoc:
--- |  ghc                  -> 6.12.1-4
--- |  haskell-mtl          -> 1.1.0.2-3
--- |  haskell-utf8-string  -> 0.3.6-3
--- |  haskell-x11          -> 1.5.0.0-2
--- |  haskell-x11-xft      -> 0.3-13.1
--- |  xmonad-darcs         -> 20100423-1
--- |  xmonad-contrib-darcs -> 20100424-1
--- |  dzen2-svn            -> 271-1
+-- |  ghc                           -> 6.12.3-1
+-- |  haskell-extensible-exceptions -> 0.1.1.0-4
+-- |  haskell-haskeline             -> 0.6.2.2-5
+-- |  haskell-mtl                   -> 1.1.0.2-4
+-- |  haskell-network               -> 2.2.1.7-4
+-- |  haskell-parsec                -> 2.1.0.1-3
+-- |  haskell-stm                   -> 2.1.1.2-3
+-- |  haskell-terminfo              -> 0.3.0.2-3
+-- |  haskell-utf8-string           -> 0.3.6-4
+-- |  haskell-x11                   -> 1.5.0.0-3
+-- |  haskell-x11-xft               -> 0.3-15
+-- |  xmonad-darcs                  -> 20100817-2
+-- |  xmonad-contrib-darcs          -> 20100817-1
+-- |  xmonad-utils-darcs            -> 20100817-1
+-- |  dzen2-svn                     -> 271-1
 -------------------------------------------------------------------------------------------
 
 {-# LANGUAGE NoMonomorphismRestriction #-}
@@ -30,6 +37,7 @@ import System.Exit
 
 -- <actions>
 import XMonad.Actions.CycleWS (nextWS,prevWS,toggleWS,shiftToNext,shiftToPrev)
+import XMonad.Actions.FocusNth
 import XMonad.Actions.RotSlaves (rotAllDown,rotSlavesDown,rotSlavesUp)
 import XMonad.Actions.GridSelect
 import XMonad.Actions.WindowGo
@@ -59,6 +67,7 @@ import XMonad.Util.SpawnOnce
 -- <prompts>
 import XMonad.Prompt
 import qualified XMonad.Prompt as P
+import XMonad.Prompt.XMonad
 import XMonad.Prompt.Shell
 import XMonad.Prompt.AppLauncher
 import XMonad.Prompt.AppLauncher as AL
@@ -205,7 +214,7 @@ myGSConfig colorizer = (buildDefaultGSConfig myColorizer)
 manageScratchPad :: ManageHook
 manageScratchPad = scratchpadManageHook (W.RationalRect (1/6) (1/4) (2/3) (2/5))
 scratchPad = scratchpadSpawnActionCustom $ -- make sure to indent the next line:
-  "urxvt -name scratchpad +sb -fn '-*-fixed-medium-r-normal-*-9-*-*-*-*-*' -e tmux -f $XDG_CONFIG_DIR/tmux/tmux.conf -L sp new-session"
+  "urxvt -name scratchpad +sb -fn '-*-fixed-medium-r-normal-*-9-*-*-*-*-*' -e tmux -f $XDG_CONFIG_DIR/tmux/tmux.conf -L sp new-session 'vim ~/othe/.TODO_now ; zsh'"
 
 -- end of UTILITY FUNCTIONS }}}
 
@@ -215,14 +224,14 @@ scratchPad = scratchpadSpawnActionCustom $ -- make sure to indent the next line:
 
 -- LAYOUTS {{{
 
-myLayouts = avoidStruts $ gaps [(U,14)]   $
-            windowNavigation              $
-            mkToggle (single NBFULL)      $
-            mkToggle (single REFLECTX)    $
-            mkToggle (single REFLECTY)    $
-            mkToggle (single NOBORDERS)   $
-            onWorkspace "4" inetLayouts   $
-            onWorkspace "5" fotoLayouts   $
+myLayouts = avoidStruts $ windowNavigation  $
+            gaps [(U,14),(D,14)]            $
+            mkToggle (single NBFULL)        $
+            mkToggle (single REFLECTX)      $
+            mkToggle (single REFLECTY)      $
+            mkToggle (single NOBORDERS)     $
+            onWorkspace "4" inetLayouts     $
+            onWorkspace "5" fotoLayouts     $
             (collectiveLayouts)
   where
     collectiveLayouts = myTile ||| myOneB ||| myFull ||| myTabd
@@ -237,7 +246,7 @@ myLayouts = avoidStruts $ gaps [(U,14)]   $
 
     -- <layouts per workspace>
     inetLayouts = myOneB ||| myFull ||| myTabd
-    fotoLayouts = myFull ||| myTabd
+    fotoLayouts = myFull ||| myTile
 
 -- end of LAYOUTS }}}
 
@@ -257,22 +266,22 @@ myManageHook = (composeAll . concat $
     , [className    =? c     --> doCenterFloat  |   c   <- myFloatsC] -- float center geometry by 
     , [name         =? n     --> doCenterFloat  |   n   <- myFloatCN] -- float center geometry by name
     , [name         =? n     --> doSideFloat SE |   n   <- myFloatSN] -- float side geometry by name
-    , [name         =? n     --> doFullFloat    |   n   <- myTrueFSN] -- float true fullscreen by name
+    , [name         =? n     --> doFullFloat    |   n   <- myTrueFLN] -- float true fullscreen by name
     ]) <+> manageScratchPad
     where
         role      = stringProperty "WM_WINDOW_ROLE"
         name      = stringProperty "WM_NAME"
         -- <<class>>
         myFloatsC = ["MPlayer","Save As...","Downloads","xskat"]
-        myElseC   = ["xskat"]
         myInetC   = ["Minefield","Firefox","Jumanji","Dwb","Surf"]
         myFotoC   = ["Gliv","Display"]
+        myElseC   = ["xskat"]
         -- <<resource>>
         myIgnores = ["desktop","desktop_window"]
         -- <<name>>
         myFloatSN = ["gcolor2"]
         myFloatCN = ["Add-ons"]
-        myTrueFSN = ["GLiv in fullscreen"]
+        myTrueFLN = ["GLiv in fullscreen"]
 
 -- <statusbar/logging>
 myStatusBar = "dzen2 -x '0' -y '0' -h '13' -w '238' -ta 'l' -bg '#161616' -fg '#a9a6af' -fn '-*-fixed-medium-r-normal-*-10-*-*-*-*-*-*-*'"
@@ -340,6 +349,7 @@ myKeyBindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- <prompts/utils>
     , ((modMask,                   xK_semicolon ), shellPrompt myXPConfig) -- shell prompt
     , ((modMask .|. shiftMask,     xK_semicolon ), manPrompt myXPConfig) -- manpage prompt
+    , ((modMask .|. controlMask,   xK_semicolon ), xmonadPrompt myXPConfig) -- xmonad prompt
     , ((0,                         xK_F1        ), windowPromptGoto myXPConfig) -- goto window on it's workspace and focus in it's frame
     , ((0,                         xK_F2        ), windowPromptBring myXPConfig) -- bring window to current workspace and into currently focused frame
     , ((0,                         xK_F3        ), promptSearchBrowser myXPConfig "firefox" multi) -- internet search (engine:string (google default))
@@ -354,8 +364,7 @@ myKeyBindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask .|. shiftMask,     xK_Return    ), safeSpawnProg $ XMonad.terminal conf) -- spawn terminal by itself
     , ((modMask,                   xK_Return    ), unsafeSpawn "urxvt -e tmux -f $XDG_CONFIG_DIR/tmux/tmux.conf -L xorg") -- spawn terminal in tmux
     , ((modMask,                   xK_grave     ), scratchPad) -- spawn floating "scratchpad" window
-    , ((modMask .|. shiftMask,     xK_f         ), runOrRaise "firefox" (className =? "Firefox")) -- <run or raise firefox>
-    , ((modMask,                   xK_f         ), submap . M.fromList $ -- frequently used programs; sub-bindings
+    , ((modMask,                   xK_f         ), submap . M.fromList $ -- frequently used programs [sub-bindings]
                                 [ ((0, xK_m       ), runInTerm "" "tmux -f $XDG_CONFIG_DIR/tmux/tmux.conf -L xorg new-session 'mutt -F $XDG_CONFIG_DIR/mutt/muttrc'") -- <open email>
                                 , ((0, xK_n       ), runInTerm "" "tmux -f $XDG_CONFIG_DIR/tmux/tmux.conf -L xorg new-session 'nsudoku 12'") -- <open a sudoku game>
                                 , ((0, xK_w       ), safeSpawnProg "wallie") -- <change wallpaper to a random one>
@@ -369,43 +378,44 @@ myKeyBindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((0,                         0x1008ff13   ), unsafeSpawn "ossvalt -i 1") -- increase volume, via "ossvalt" ((XF86AudioRaiseVolume))
     , ((0,                         0x1008ff11   ), unsafeSpawn "ossvalt -d 1") -- decrease volume, via "ossvalt" ((XF86AudioLowerVolume))
     , ((0,                         0x1008ff12   ), safeSpawn "ossvalt" ["-m"])   -- mute volume, via "ossvalt" ((XF86AudioMute))
-    , ((modMask .|. shiftMask,     xK_m         ), AL.launchApp myXPConfig "mifo --command") -- "mifo" command prompt
-    , ((modMask,                   xK_m         ), submap . M.fromList $ -- "mifo" common sub-bindings (mplayer fifo script)
-                                [ ((0, xK_t       ), safeSpawn "mifo" ["--toggle"]) -- <toggle playback>
+    , ((modMask .|. shiftMask,     xK_e         ), safeSpawnProg "eject") -- open disc tray
+    , ((modMask .|. shiftMask,     xK_d         ), AL.launchApp myXPConfig "mifo --command") -- mplayer daemon command prompt
+    , ((modMask,                   xK_d         ), submap . M.fromList $ -- mplayer daemon.. sub-bindings (mplayer fifo script)
+                                [ ((0, xK_d       ), safeSpawn "mifo" ["--daemon"]) -- <start daemon unless already started>
+                                , ((0, xK_t       ), safeSpawn "mifo" ["--toggle"]) -- <toggle playback>
+                                , ((0, xK_r       ), safeSpawn "mifo" ["--random"]) -- <play a random song in playlist>
                                 , ((0, xK_l       ), safeSpawn "mifo" ["--next"]) -- <play next file in list>
                                 , ((0, xK_h       ), safeSpawn "mifo" ["--prev"]) -- <play previous file in list>
-                                , ((0, xK_j       ), unsafeSpawn "mifo --next 1dir") -- <play next "dirname">
-                                , ((0, xK_k       ), unsafeSpawn "mifo --prev 1dir") -- <play previous "dirname">
-                                , ((0, xK_e       ), safeSpawn "mifo" ["--stop"]) -- <stop mplayer process and start fresh>
+                                , ((0 .|. shiftMask, xK_l ), AL.launchApp myXPConfig "mifo --next") -- <prompt 'next' for [Integer]>
+                                , ((0 .|. shiftMask, xK_h ), AL.launchApp myXPConfig "mifo --prev") -- <prompt 'prev' for [Integer]>
+                                , ((0, xK_j       ), unsafeSpawn "mifo --next dir") -- <play next "dirname">
+                                , ((0, xK_k       ), unsafeSpawn "mifo --prev dir") -- <play previous "dirname">
+                                , ((0, xK_s       ), safeSpawn "mifo" ["--stop"]) -- <stop mplayer process and start fresh>
                                 , ((0, xK_q       ), safeSpawn "mifo" ["--quit"]) -- <close "mifo" daemon>
                                 , ((0, xK_f       ), safeSpawn "mifo" ["--fullscreen"]) -- <toggle fullscreen state for videos>
                                 , ((0, xK_g       ), safeSpawn "mifo" ["--generate"]) -- <generate cache and play entire music dir>
-                                , ((0, xK_m       ), safeSpawn "mifo" ["--daemon"]) -- <start daemon unless already started>
-                                , ((0, xK_b       ), unsafeSpawn "mifo -c play") -- <play current playlist from beginning>
+                                , ((0 .|. shiftMask, xK_s ), AL.launchApp myXPConfig "mifo --save") -- <prompt 'save' playlist as..>
                                 , ((0, xK_a       ), AL.launchApp myXPConfig "mifo --load") -- <prompt 'load' for files to add>
-                                , ((0, xK_p       ), AL.launchApp myXPConfig "mifo --playlist") -- <prompt 'playlist' for lists to add>
-                                , ((0 .|. shiftMask, xK_l ), AL.launchApp myXPConfig "mifo --next") -- <prompt 'next' for [Integer]>
-                                , ((0 .|. shiftMask, xK_h ), AL.launchApp myXPConfig "mifo --prev") -- <prompt 'prev' for [Integer]>
+                                , ((0, xK_p       ), AL.launchApp myXPConfig "mifo --playlist") -- <prompt 'playlist' for files to add>
                                 , ((0 .|. shiftMask, xK_a ), AL.launchApp myXPConfig "mifo --append") -- <prompt 'append' for files to add>
-                                , ((0 .|. shiftMask, xK_f ), safeSpawn "mifo" ["--fav-add"]) -- <add current file to favorites>
-                                , ((0 .|. shiftMask, xK_r ), safeSpawn "mifo" ["--fav-random"]) -- <play random file from favorites>
-                                , ((0 .|. shiftMask, xK_d ), safeSpawn "mifo" ["--fav-delete"]) -- <if found, remove current file from favorites>
-                                , ((0, xK_s               ), submap . M.fromList $ -- secondary sub-bindings
-                                    [ ((0, xK_l                 ), unsafeSpawn "mifo -c seek 15") -- <seek forward 15 seconds>
-                                    , ((0, xK_h                 ), unsafeSpawn "mifo -c seek -15") -- <seek backward 15 seconds>
-                                    , ((0 .|. shiftMask,   xK_l ), unsafeSpawn "mifo -c seek 45")-- <seek forward 45 seconds>
-                                    , ((0 .|. shiftMask,   xK_h ), unsafeSpawn "mifo -c seek -45") -- <seek backward 45 seconds>
-                                    , ((0 .|. controlMask, xK_l ), unsafeSpawn "mifo -c seek -400") -- <seek backward 400 seconds>
-                                    , ((0 .|. controlMask, xK_h ), unsafeSpawn "mifo -c seek 400") -- <seek forward 400 seconds>
-                                    , ((0 .|. controlMask, xK_j ), unsafeSpawn "mifo -c seek_chapter -1") -- <jump to next chapter>
-                                    , ((0 .|. controlMask, xK_k ), unsafeSpawn "mifo -c seek_chapter 1") -- <jump to previous chapter>
-                                    , ((0, xK_BackSpace ), unsafeSpawn "mifo -c seek 0 1") -- <seek to beginning of file>
-                                    ])
+                                , ((0, xK_equal   ), safeSpawn "mifo" ["--fav-add"]) -- <add current file to favorites>
+                                , ((0, xK_minus   ), safeSpawn "mifo" ["--fav-delete"]) -- <if found, remove current file from favorites>
+                                , ((0, xK_Return  ), unsafeSpawn "mifo --resume 1") -- <play current playlist from beginning, using last file>
                                 ])
-    , ((modMask .|. shiftMask,     xK_e         ), safeSpawnProg "eject") -- open disc tray
+    , ((modMask, xK_s       ), submap . M.fromList $ -- [seek] navigational sub-bindings
+                                                [ ((0, xK_l                 ), unsafeSpawn "mifo -c seek 15") -- <seek forward 15 seconds>
+                                                , ((0, xK_h                 ), unsafeSpawn "mifo -c seek -17") -- <seek backward 17 seconds>
+                                                , ((0 .|. shiftMask,   xK_l ), unsafeSpawn "mifo -c seek 45")-- <seek forward 45 seconds>
+                                                , ((0 .|. shiftMask,   xK_h ), unsafeSpawn "mifo -c seek -47") -- <seek backward 47 seconds>
+                                                , ((0 .|. controlMask, xK_l ), unsafeSpawn "mifo -c seek 405") -- <seek forward 405 seconds>
+                                                , ((0 .|. controlMask, xK_h ), unsafeSpawn "mifo -c seek -407") -- <seek backward 407 seconds>
+                                                , ((0 .|. shiftMask,   xK_1 ), unsafeSpawn "mifo -c seek_chapter -1") -- <jump to next chapter>
+                                                , ((0 .|. shiftMask,   xK_2 ), unsafeSpawn "mifo -c seek_chapter 1") -- <jump to previous chapter>
+                                                , ((0, xK_BackSpace         ), unsafeSpawn "mifo -c seek 0 1") -- <seek to beginning of file>
+                                                ])
     -- <tiled windows>
-    , ((modMask,                   xK_d         ), windows W.focusMaster) -- immediately focus on master
-    , ((modMask .|. shiftMask,     xK_d         ), windows W.swapMaster) -- swap with master and focus on it
+    , ((modMask,                   xK_m         ), windows W.focusMaster) -- immediately focus on master
+    , ((modMask .|. shiftMask,     xK_m         ), windows W.swapMaster) -- swap with master and focus on it
     , ((modMask,                   xK_equal     ), sendMessage $ IncMasterN 1) -- increase number of masters
     , ((modMask,                   xK_minus     ), sendMessage $ IncMasterN (-1)) -- decrease number of masters
     , ((modMask,                   xK_0         ), sendMessage $ Expand) -- expand size of master frame
@@ -448,6 +458,8 @@ myKeyBindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
                                 , ((0, xK_b       ), sendMessage $ Toggle NOBORDERS) -- <toggle borders>
                                 , ((0, xK_s       ), sendMessage $ ToggleStruts) -- <toggle struts>
                                 , ((0, xK_g       ), sendMessage $ ToggleGaps) -- <toggle gaps>
+                                , ((0, xK_d       ), sendMessage $ ToggleGap D) -- <toggle downward gap>
+                                , ((0, xK_u       ), sendMessage $ ToggleGap U) -- <toggle upward gap>
                                 , ((0, xK_x       ), sendMessage $ Toggle REFLECTX) -- <toggle mirrored layout by X axis>
                                 , ((0, xK_y       ), sendMessage $ Toggle REFLECTY) -- <toggle mirrored layout by Y axis>
                                 ])
@@ -465,12 +477,13 @@ myKeyBindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     ++ -- view Nth workspace (modMask+Int) or send focused window to workspace (modMask+Shift+Int)
     [((m .|. modMask, k), windows $ f i)
         | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_6]
-        , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]
-    ]
+        , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
     ++ -- swap windows from current workspace with another (modMask+Control+Int)
     [((modMask .|. controlMask, k), windows $ swapWithCurrent i)
-        | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_6]
-    ]
+        | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_6]]
+    ++ -- focus Nth window (mod1Mask+Int) on current workspace
+    [((mod1Mask, k), focusNth i)
+        | (i, k) <- zip [0 .. 8] [xK_1 ..]]
     where
       searchEngineMap method = M.fromList $ -- search engines for modMask+F3
           [ ((0, xK_g), method S.google )

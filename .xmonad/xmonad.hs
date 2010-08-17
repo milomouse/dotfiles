@@ -37,7 +37,7 @@ import System.Exit
 
 -- <actions>
 import XMonad.Actions.CycleWS (nextWS,prevWS,toggleWS,shiftToNext,shiftToPrev)
-import XMonad.Actions.FocusNth
+--import XMonad.Actions.FocusNth
 import XMonad.Actions.RotSlaves (rotAllDown,rotSlavesDown,rotSlavesUp)
 import XMonad.Actions.GridSelect
 import XMonad.Actions.WindowGo
@@ -400,7 +400,7 @@ myKeyBindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
                                 , ((0 .|. shiftMask, xK_a ), AL.launchApp myXPConfig "mifo --append") -- <prompt 'append' for files to add>
                                 , ((0, xK_equal   ), safeSpawn "mifo" ["--fav-add"]) -- <add current file to favorites>
                                 , ((0, xK_minus   ), safeSpawn "mifo" ["--fav-delete"]) -- <if found, remove current file from favorites>
-                                , ((0, xK_Return  ), unsafeSpawn "mifo --resume 1") -- <play current playlist from beginning, using last file>
+                                , ((0, xK_Return  ), unsafeSpawn "mifo --reload 1") -- <play current playlist from beginning, using last file>
                                 ])
     , ((modMask, xK_s       ), submap . M.fromList $ -- [seek] navigational sub-bindings
                                                 [ ((0, xK_l                 ), unsafeSpawn "mifo -c seek 15") -- <seek forward 15 seconds>
@@ -481,9 +481,9 @@ myKeyBindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     ++ -- swap windows from current workspace with another (modMask+Control+Int)
     [((modMask .|. controlMask, k), windows $ swapWithCurrent i)
         | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_6]]
-    ++ -- focus Nth window (mod1Mask+Int) on current workspace
-    [((mod1Mask, k), focusNth i)
-        | (i, k) <- zip [0 .. 8] [xK_1 ..]]
+   -- ++ -- focus Nth window (mod1Mask+Int) on current workspace
+   -- [((mod1Mask, k), focusNth i)
+   --     | (i, k) <- zip [0 .. 8] [xK_1 ..]]
     where
       searchEngineMap method = M.fromList $ -- search engines for modMask+F3
           [ ((0, xK_g), method S.google )

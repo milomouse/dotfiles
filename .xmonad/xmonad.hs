@@ -152,7 +152,7 @@ colorFocusedBorder  = colorMagenta
 -- <fonts>
 barFont   = "-*-fixed-medium-r-normal-*-*-*-10-*-*-*-*-*-*-*"
 barXFont  = "fixed:size=10"
-xftFont   = "xft: fixed-10"
+xftFont   = "fixed-10"
 
 -- <tab-bar configuration>
 myTabTheme =

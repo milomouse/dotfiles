@@ -79,6 +79,7 @@ import XMonad.Prompt.Window (windowPromptBring,windowPromptGoto)
 import XMonad.Layout.OneBig
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.Tabbed
+import XMonad.Layout.HintedTile
 
 -- <layout helpers>
 import XMonad.Layout.Drawer
@@ -393,7 +394,6 @@ myKeyBindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
                                 , ((0, xK_s       ), safeSpawn "mifo" ["--stop"]) -- <stop mplayer process and start fresh>
                                 , ((0, xK_q       ), safeSpawn "mifo" ["--quit"]) -- <close "mifo" daemon>
                                 , ((0, xK_f       ), safeSpawn "mifo" ["--fullscreen"]) -- <toggle fullscreen state for videos>
-                                , ((0, xK_g       ), safeSpawn "mifo" ["--generate"]) -- <generate cache and play entire music dir>
                                 , ((0 .|. shiftMask, xK_s ), AL.launchApp myXPConfig "mifo --save") -- <prompt 'save' playlist as..>
                                 , ((0, xK_a       ), AL.launchApp myXPConfig "mifo --load") -- <prompt 'load' for files to add>
                                 , ((0, xK_p       ), AL.launchApp myXPConfig "mifo --playlist") -- <prompt 'playlist' for files to add>

@@ -22,7 +22,7 @@ display_charset UTF-8
 cookie_accept_domains archlinux.org,bbs.archlinux.org,fastmail.fm,deviantart.com,akiba-online.com,wikipedia.org
 cookie_reject_domains google.com,google.ca,encrypted.google.com,yahoo.com
 accept_bad_cookie 2
-accept_cookie 0
+accept_cookie 1
 show_cookie 1
 use_cookie 1
 ssl_ca_file 

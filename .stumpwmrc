@@ -1,0 +1,334 @@
+;;-----------------------------------------------------------------------------------------
+;; ~/.stumpwmrc
+;;-----------------------------------------------------------------------------------------
+;; author: milomouse <vincent[at]fea.st>
+;; credit: splittercode -> config used as my first reference point (along with info pages)
+;;-----------------------------------------------------------------------------------------
+;; versions used atoc:
+;; |  clisp-new-clx     -> 2.48-2
+;; |  ecl (cl-asdf)     -> 10.4.1-1
+;; |  cl-ppcre          -> 2.0.3-1
+;; |  stumpwm-git       -> 20100817-1
+;; |  surfraw-git       -> 20100714-1
+;;-----------------------------------------------------------------------------------------
+
+(in-package :stumpwm)
+
+;; PRE-SETTINGS {{{
+
+(grename "1")
+(gnewbg "2")
+(gnewbg "3")
+(gnewbg "4")
+(gnewbg "5")
+(gnewbg "6")
+;; (banish)
+
+;; end of PRE-SETTINGS }}}
+
+
+
+
+
+;; APPEARANCE {{{
+
+(set-font "-*-fixed-medium-r-normal-*-10-*-*-*-*-*-*-*")
+(set-fg-color "#a9a6af")
+(set-bg-color "grey15")
+(set-border-color "grey45")
+(set-focus-color "#7965ac")
+(set-unfocus-color "grey45")
+(set-win-bg-color "#020202")
+(set-resize-increment 10)
+(set-msg-border-width 1)
+(set-normal-gravity :center)
+(set-maxsize-gravity :center)
+(set-transient-gravity :center)
+(setf *normal-border-width* 1
+      *maxsize-border-width* 1
+      *transient-border-width* 2
+      *mouse-focus-policy* :click
+      *message-window-gravity* :top-right
+      *input-window-gravity* :top-right
+      *window-border-style* :thin
+      *resize-hides-windows* T
+      *startup-message* "^B^7*(StumpWM)^**^b:^B^4*not powered by bee-ant AI yet.^**^b"
+      *timeout-wait* 4)
+
+(setf *colors* (list "#020202" ;; almost black
+                     "#a9a6af" ;; faint white
+                     "indianred"
+                     "#85afa9"
+                     "#57718b" ;; blue
+                     "pink"
+                     "#c4c497"
+                     "#a488d9" ;; magenta
+                     "#a3babf"
+                     "Magenta"))
+
+(update-color-map (current-screen))
+
+;; end of APPEARANCE }}}
+
+
+
+
+
+;; MODE-LINE/INPUT {{{
+
+(setf *screen-mode-line-format*
+      (list "[^B^7*%n^**^b] %d %w"))
+(setf *mode-line-background-color* "grey13"
+      *mode-line-border-color* "grey25"
+      *mode-line-foreground-color* "#a9a6af"
+      *mode-line-border-width* 1
+      *window-format* "^B^4*|^**^b^B^7*%s^b^**%n^5*%m^**^b^1*%16t"
+      *group-format* "%t%s"
+      *mode-line-pad-x* 1
+      *mode-line-pad-y* 1
+      *mode-line-position* :top
+      *mode-line-timeout* 1
+      *default-window-name* "null"
+      *input-history-ignore-duplicate* 0)
+
+(if (not (head-mode-line (current-head)))
+    (toggle-mode-line (current-screen) (current-head)))
+
+;; end of MODE-LINE/INPUT }}}
+
+
+
+
+
+;; EXTRA FUNCTIONS {{{
+;;(define-frame-preference (frame-number raise instance))
+;; <man-page reader>
+(defcommand manpage (command) ((:rest "manpage: "))
+  (run-shell-command
+    (format nil "urxvt -e man ~a" command)))
+
+;; <toggle between vertical/horizontal split for 2 frames [adopted this function]>
+(defcommand toggle-split () ()
+  (let* ((group (current-group))
+         (cur-frame (tile-group-current-frame group))
+         (frames (group-frames group)))
+    (if (eq (length frames) 2)
+        (progn (if (or (neighbour :left cur-frame frames)
+                       (neighbour :right cur-frame frames))
+                   (progn
+                     (only)
+                     (vsplit))
+                 (progn
+                   (only)
+                   (hsplit))))
+      (message "Works only with 2 frames"))))
+
+;; <mifo sub-bindings>
+(defcommand prompt-mifo-command (filename) ((:rest "command: ")) (run-shell-command (format nil "mifo --command ~a" filename)))
+(defcommand prompt-mifo-next (filename) ((:rest "next: ")) (run-shell-command (format nil "mifo --next ~a" filename)))
+(defcommand prompt-mifo-prev (filename) ((:rest "previous: ")) (run-shell-command (format nil "mifo --prev ~a" filename)))
+(defcommand prompt-mifo-save (filename) ((:rest "save-as: ")) (run-shell-command (format nil "mifo --save ~a" filename)))
+(defcommand prompt-mifo-load (filename) ((:rest "load: ")) (run-shell-command (format nil "mifo --load ~a" filename)))
+(defcommand prompt-mifo-append (filename) ((:rest "append: ")) (run-shell-command (format nil "mifo --append ~a" filename)))
+(defcommand prompt-mifo-playlist (filename) ((:rest "playlist: ")) (run-shell-command (format nil "mifo --playlist ~a" filename)))
+
+;; end of EXTRA FUNCTIONS }}}
+
+
+
+
+
+;; KEY-BINDINGS {{{
+
+;; <set "Super + s" as prefix for root-map bindings>
+(set-prefix-key (kbd "s-s"))
+
+;; <help-map bindings>
+(setf *help-map*
+  (let ((m (stumpwm:make-sparse-keymap)))
+     (define-key m (kbd "v")     "describe-variable")
+     (define-key m (kbd "f")     "describe-function")
+     (define-key m (kbd "k")     "describe-key")
+     (define-key m (kbd "c")     "describe-command")
+     (define-key m (kbd "w")     "where-is")
+     (define-key m (kbd "ESC")   "abort")
+    M))
+
+;; <groups-map bindings>
+;;(setf *input-map*
+;;  (let ((m (stumpwm:make-sparse-keymap)))
+;;     (define-key m (kbd "w")     "windowlist")
+;;     (define-key m (kbd "g")     "vgroups")
+;;     (define-key m (kbd "ESC")   "abort")
+;;    M))
+
+;; <groups-map bindings>
+;;(setf *groups-map*
+;;  (let ((m (stumpwm:make-sparse-keymap)))
+;;     (define-key m (kbd "w")     "windowlist")
+;;     (define-key m (kbd "g")     "vgroups")
+;;     (define-key m (kbd "ESC")   "abort")
+;;    M))
+
+;;(setf *root-map*
+;;  (let ((m (stumpwm:make-sparse-keymap)))
+;;     (define-key m (kbd "w")     "windowlist")
+;;     (define-key m (kbd "g")     "vgroups")
+;;     (define-key m (kbd "ESC")   "abort")
+;;    M))
+
+;;(defvar *common-toggle-map*
+;;  (let ((m (stumpwm:make-sparse-keymap)))
+;;    (define-key m (kbd "s") "mode-line")
+;;    (define-key m (kbd "ESC") "abort")
+;;   M))
+
+;; <mplayer-daemon-* bindings>
+(defvar *mplayer-daemon-common*
+  (let ((m (stumpwm:make-sparse-keymap)))
+    (define-key m (kbd "d") "exec mifo --daemon")
+    (define-key m (kbd "t") "exec mifo --toggle")
+    (define-key m (kbd "r") "exec mifo --random")
+    (define-key m (kbd "j") "exec mifo --next dir")
+    (define-key m (kbd "k") "exec mifo --prev dir")
+    (define-key m (kbd "l") "exec mifo --next")
+    (define-key m (kbd "h") "exec mifo --prev")
+    (define-key m (kbd "L") "prompt-mifo-next")
+    (define-key m (kbd "H") "prompt-mifo-prev")
+    (define-key m (kbd "a") "prompt-mifo-load")
+    (define-key m (kbd "A") "prompt-mifo-append")
+    (define-key m (kbd "p") "prompt-mifo-playlist")
+    (define-key m (kbd "s") "prompt-mifo-save")
+    (define-key m (kbd "S") "exec mifo --stop")
+    (define-key m (kbd "q") "exec mifo --quit")
+    (define-key m (kbd "f") "exec mifo --fullscreen")
+    (define-key m (kbd "Return") "exec mifo --reload 1")
+    (define-key m (kbd "equal") "exec mifo --fav-add")
+    (define-key m (kbd "minus") "exec mifo --fav-delete")
+    (define-key m (kbd "ESC") "abort")
+   M))
+(defvar *mplayer-daemon-seek*
+  (let ((m (stumpwm:make-sparse-keymap)))
+    (define-key m (kbd "l") "exec mifo -c seek 15")
+    (define-key m (kbd "h") "exec mifo -c seek -17")
+    (define-key m (kbd "L") "exec mifo -c seek 45")
+    (define-key m (kbd "H") "exec mifo -c seek -47")
+    (define-key m (kbd "C-l") "exec mifo -c seek 405")
+    (define-key m (kbd "C-h") "exec mifo -c seek -407")
+    (define-key m (kbd "!") "exec mifo -c seek_chapter -1")
+    (define-key m (kbd "@") "exec mifo -c seek_chapter 1")
+    (define-key m (kbd "BackSpace") "exec mifo -c seek 0 1")
+    (define-key m (kbd "ESC") "abort")
+   M))
+
+;; <top-map bindings>
+;;(setf *top-map*
+;;  (let ((m (stumpwm:make-sparse-keymap)))
+     (define-key *top-map* (kbd "s-ESC")      "exec banishmouse")
+     (define-key *top-map* (kbd "s-m")         *mplayer-daemon-seek*)
+     (define-key *top-map* (kbd "s-a")         *mplayer-daemon-common*)
+     (define-key *top-map* (kbd "s-A")         "prompt-mifo-command")
+     (define-key *top-map* (kbd "s-c")         "remember")
+     (define-key *top-map* (kbd "s-C")         "place-existing-windows")
+     (define-key *top-map* (kbd "s-f")         "forget")
+     (define-key *top-map* (kbd "s-w")         "windowlist")
+     (define-key *top-map* (kbd "s-W")         "echo-frame-windows")
+     (define-key *top-map* (kbd "s-g")         "vgroups")
+     (define-key *top-map* (kbd "s-G")         "gnew")
+     (define-key *top-map* (kbd "s-=")         "balance-frames")
+     (define-key *top-map* (kbd "s-j")         "move-focus down")
+     (define-key *top-map* (kbd "s-k")         "move-focus up")
+     (define-key *top-map* (kbd "s-h")         "move-focus left")
+     (define-key *top-map* (kbd "s-l")         "move-focus right")
+     (define-key *top-map* (kbd "s-C-j")       "exchange-direction down")
+     (define-key *top-map* (kbd "s-C-k")       "exchange-direction up")
+     (define-key *top-map* (kbd "s-C-h")       "exchange-direction left")
+     (define-key *top-map* (kbd "s-C-l")       "exchange-direction right")
+     (define-key *top-map* (kbd "s-r")         "iresize")
+     (define-key *top-map* (kbd "s-b")         "redisplay")
+     (define-key *top-map* (kbd "s-B")         "balance-frames")
+     (define-key *top-map* (kbd "s-J")         "move-window down")
+     (define-key *top-map* (kbd "s-K")         "move-window up")
+     (define-key *top-map* (kbd "s-H")         "move-window left")
+     (define-key *top-map* (kbd "s-L")         "move-window right")
+     (define-key *top-map* (kbd "s-n")         "next-in-frame")
+     (define-key *top-map* (kbd "s-p")         "prev-in-frame")
+     (define-key *top-map* (kbd "s-N")         "pull-hidden-next")
+     (define-key *top-map* (kbd "s-P")         "pull-hidden-previous")
+     (define-key *top-map* (kbd "s-/")         "fselect")
+     (define-key *top-map* (kbd "s-Tab")       "fnext")
+     (define-key *top-map* (kbd "s-*")         "mark")
+     (define-key *top-map* (kbd "s-8")         "clear-window-marks")
+     (define-key *top-map* (kbd "s-C-8")       "pull-marked")
+     (define-key *top-map* (kbd "s-y")         "window-send-string")
+     (define-key *top-map* (kbd "s-Y")         "meta")
+     ;; <internal window removal>
+     (define-key *top-map* (kbd "s-BackSpace")   "fclear")
+     (define-key *top-map* (kbd "s-S-BackSpace") "delete-window")
+     (define-key *top-map* (kbd "s-C-BackSpace") "kill-window")
+     (define-key *top-map* (kbd "s-t")         "title")
+     (define-key *top-map* (kbd "s-o")         "fullscreen") 
+     (define-key *top-map* (kbd "s-O")         "only") 
+     (define-key *top-map* (kbd "s-z")         "remove")
+     (define-key *top-map* (kbd "s-equal")     "hsplit")
+     (define-key *top-map* (kbd "s-minus")     "vsplit")
+     ;; <internal prompt bindings>
+     (define-key *top-map* (kbd "s-e") "eval")
+     (define-key *top-map* (kbd "s-:") "colon")
+     (define-key *top-map* (kbd "s-;") "exec ")
+     (define-key *top-map* (kbd "s-C-;") "manpage")
+     ;; <internal system bindings>
+     (define-key *top-map* (kbd "s-Q") "quit")
+     (define-key *top-map* (kbd "s-R") "restart-soft")
+     ;; <internal navigational bindings>
+     (define-key *top-map* (kbd "C-0")         "select-window-by-number 0")
+     (define-key *top-map* (kbd "C-1")         "select-window-by-number 1")
+     (define-key *top-map* (kbd "C-2")         "select-window-by-number 2")
+     (define-key *top-map* (kbd "C-3")         "select-window-by-number 3")
+     (define-key *top-map* (kbd "C-4")         "select-window-by-number 4")
+     (define-key *top-map* (kbd "C-5")         "select-window-by-number 5")
+     (define-key *top-map* (kbd "C-6")         "select-window-by-number 6")
+     (define-key *top-map* (kbd "C-7")         "select-window-by-number 7")
+     (define-key *top-map* (kbd "C-8")         "select-window-by-number 8")
+     (define-key *top-map* (kbd "C-9")         "select-window-by-number 9")
+     ;; <various external command bindings>
+     (define-key *top-map* (kbd "s-Return")          "exec urxvt -e tmux -f $XDG_CONFIG_DIR/tmux/tmux.conf -L xorg new-session")
+     (define-key *top-map* (kbd "s-S-Return")        "exec urxvt")
+     (define-key *top-map* (kbd "s-SunPrint_Screen") "exec import -window root $HOME/foto/shot/$(date +%Y_%m_%d-%H%M%S).png")
+     ;; <media bindings>
+     (define-key *top-map* (kbd "XF86AudioRaiseVolume") "exec ossvalt -i 1")
+     (define-key *top-map* (kbd "XF86AudioLowerVolume") "exec ossvalt -d 1")
+     ;;(define-kepp* (kbd "XF86MonBrightnessUp") "exec moodlight --increase")
+     ;;(define-kepp* (kbd "c-XF86MonBrighTNESSUp") "exec moodlight --max")
+     ;;(define-kepp* (kbd "XF86MonBrightnessDown") "exec moodlight --decrease")
+     (define-key *top-map* (kbd "XF86AudioMute") "exec ossvalt -m")
+     (define-key *top-map* (kbd "s-1") "gselect 1")
+     (define-key *top-map* (kbd "s-2") "gselect 2")
+     (define-key *top-map* (kbd "s-3") "gselect 3")
+     (define-key *top-map* (kbd "s-4") "gselect 4")
+     (define-key *top-map* (kbd "s-5") "gselect 5")
+     (define-key *top-map* (kbd "s-!") "gmove 1")
+     (define-key *top-map* (kbd "s-@") "gmove 2")
+     (define-key *top-map* (kbd "s-#") "gmove 3")
+     (define-key *top-map* (kbd "s-$") "gmove 4")
+     (define-key *top-map* (kbd "s-%") "gmove 5")
+     (define-key *top-map* (kbd "s-9") "resize -35  0")
+     (define-key *top-map* (kbd "s-)") "resize  0  25")
+     (define-key *top-map* (kbd "s-(") "resize  0 -25")
+     (define-key *top-map* (kbd "s-0") "resize  35  0")
+     ;; <informational>
+     (define-key *top-map* (kbd "s-F1") "dump-screen-to-file /home/milo/.config/stumpwm/dump_data_1")
+     (define-key *top-map* (kbd "s-F2") "dump-screen-to-file /home/milo/.config/stumpwm/dump_data_2")
+     (define-key *top-map* (kbd "s-F3") "dump-screen-to-file /home/milo/.config/stumpwm/dump_data_3")
+     (define-key *top-map* (kbd "s-F4") "dump-screen-to-file /home/milo/.config/stumpwm/dump_data_4")
+     (define-key *top-map* (kbd "s-F9") "dump-desktop-to-file /home/milo/.config/stumpwm/dump_desktop")
+     (define-key *top-map* (kbd "s-F10") "dump-window-placement-rules /home/milo/.config/stumpwm/placement_rules")
+     (define-key *top-map* (kbd "F1") "restore /home/milo/.config/stumpwm/dump_data_1")
+     (define-key *top-map* (kbd "F2") "restore /home/milo/.config/stumpwm/dump_data_2")
+     (define-key *top-map* (kbd "F3") "restore /home/milo/.config/stumpwm/dump_data_3")
+     (define-key *top-map* (kbd "F4") "restore /home/milo/.config/stumpwm/dump_data_4")
+     (define-key *top-map* (kbd "F9") "restore-from-file /home/milo/.config/stumpwm/dump_desktop")
+     (define-key *top-map* (kbd "F10") "restore-window-placement-rules /home/milo/.config/stumpwm/placement_rules")
+;;    M))
+
+;; end of KEY-BINDINGS }}}

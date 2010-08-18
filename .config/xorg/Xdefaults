@@ -66,6 +66,27 @@ Xcursor.size: 10
 !*color7:  #665c64
 !*color15: #787a76
 
+!! jessica
+!*background:    #1C1C1C
+!*foreground:    #B5B5B5
+!*color0: #1C1C1C   
+!*color8:   #3D3A3A  
+!*color1:   #FE4365
+!*color9:   #FC9D9A
+!*color2:    #BBF144
+!*color10:   #C7F464 
+!*color3:    #F8CA00
+!*color11:    #FEDA3A
+!*color4:    #556270
+!*color12:    #697785
+!*color5:    #73626E
+!*color13:  #B38184 
+!*color6:   #3B8686
+!*color14:  #7ED0CA
+!*color7:    #808080
+!*color15:   #DAD3D3
+
+
 ! various X stuff (yet to mess with this..)
 XFontSel*sampleText.background:       TEXTBG
 XFontSel*menu*showUnselectable:       false

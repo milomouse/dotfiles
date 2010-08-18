@@ -24,6 +24,7 @@ display -window root -resize $(xdpyinfo|grep dimensions|awk '{print $2}')! \
 /home/milo/foto/wall/wallpaper-249719.jpg
 
 # window-manager(s) [from 'startx' function]:
-#exec ratpoison >&/dev/null
-#exec musca -s /home/milo/.config/musca/musca_start >&/dev/null
+#exec musca -s ${XDG_CONFIG_DIR:-$HOME.config}/musca/musca_start >&/dev/null
 exec xmonad >&/dev/null
+#exec ratpoison >&/dev/null
+#exec stumpwm >&/dev/null

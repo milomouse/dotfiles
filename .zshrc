@@ -7,7 +7,7 @@ PATH=$PATH:/usr/local/bin:/usr/local/sbin
 #    *[2-4]) tmux -f ${XDG_CONFIG_DIR:-$HOME/.config}/tmux/tmux.conf \
 #    -L console new-session -s "$(print ${$(tty)/*dev\//})" ;;
 #  esac
-#fi # not sure if i want this..
+#fi # made this but not sure if i want to use it..
 
 # prompt line:
 [[ "$TERM" == screen* ]] && precmd() {print -Pn "\e]2;%2d\a"} || RPROMPT='%F{white}%~%f'
@@ -89,8 +89,8 @@ bindkey "^?" backward-delete-char
 bindkey '^R' history-incremental-search-backward
 
 # global exports:
-[[ -z "$DISPLAY" ]] && export EDITOR="/usr/bin/vim -p -c ':colorscheme candymouse'" \
-|| export EDITOR="/usr/bin/vim -p"
+[[ -z "$DISPLAY" ]] && export EDITOR="/usr/bin/vim -p -c ':colorscheme candymouse'" || \
+export EDITOR="/usr/bin/vim"
 export HISTSIZE=1400
 export SAVEHIST=$HISTSIZE
 export DIRSTACKSIZE=20

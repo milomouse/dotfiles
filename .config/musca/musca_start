@@ -8,7 +8,7 @@ exec zsh /home/milo/.config/musca/dzen0 2>/dev/null
 set frame_display_hidden 2
 set frame_resize 10
 set dmenu dmenu -i -p 'Musca: '
-set border_width 0
+set border_width 1
 hook on ^(catchall|dedicate) border flip
 #hook on ^only border off
 hook on ^add pad 0 0 24 0
@@ -99,25 +99,25 @@ bind on Mod4+Control+minus vsplit 66%
 
 # group bindings:
 bind on Mod4+grave exec /home/milo/.config/musca/pseudoscratchpad
-bind on Mod4+1 use {1}
-bind on Mod4+2 use {2}
-bind on Mod4+3 use {3}
-bind on Mod4+4 use {4}
-bind on Mod4+5 use {5}
-bind on Mod4+5 use {6}
+bind on Mod4+1 use |1
+bind on Mod4+2 use |2
+bind on Mod4+3 use |3
+bind on Mod4+4 use |4
+bind on Mod4+5 use |5
+bind on Mod4+5 use |6
 bind on Mod4+Shift+grave move !
-bind on Mod4+Shift+1 move {1}
-bind on Mod4+Shift+2 move {2}
-bind on Mod4+Shift+3 move {3}
-bind on Mod4+Shift+4 move {4}
-bind on Mod4+Shift+5 move {5}
-bind on Mod4+Shift+5 move {6}
-bind on Mod4+Control+1 exec musca -c "move {1}" ; musca -c "use {1}"
-bind on Mod4+Control+2 exec musca -c "move {2}" ; musca -c "use {2}"
-bind on Mod4+Control+3 exec musca -c "move {3}" ; musca -c "use {3}"
-bind on Mod4+Control+4 exec musca -c "move {4}" ; musca -c "use {4}"
-bind on Mod4+Control+5 exec musca -c "move {5}" ; musca -c "use {5}"
-bind on Mod4+Control+6 exec musca -c "move {6}" ; musca -c "use {6}"
+bind on Mod4+Shift+1 move |1
+bind on Mod4+Shift+2 move |2
+bind on Mod4+Shift+3 move |3
+bind on Mod4+Shift+4 move |4
+bind on Mod4+Shift+5 move |5
+bind on Mod4+Shift+5 move |6
+bind on Mod4+Control+1 exec musca -c "move |1" ; musca -c "use |1"
+bind on Mod4+Control+2 exec musca -c "move |2" ; musca -c "use |2"
+bind on Mod4+Control+3 exec musca -c "move |3" ; musca -c "use |3"
+bind on Mod4+Control+4 exec musca -c "move |4" ; musca -c "use |4"
+bind on Mod4+Control+5 exec musca -c "move |5" ; musca -c "use |5"
+bind on Mod4+Control+6 exec musca -c "move |6" ; musca -c "use |6"
 bind on Mod4+period use (next)
 bind on Mod4+comma use (prev)
 
@@ -125,11 +125,11 @@ bind on Mod4+comma use (prev)
 name !
 pad 0 0 24 0
 exec urxvt -e tmux -f /home/milo/.config/tmux/tmux.conf -L sp new-session
-add {1}
-add {2}
-add {3}
-add {4}
-add {5}
-add {6}
-use {1}
+add |1
+add |2
+add |3
+add |4
+add |5
+add |6
+use |1
 #exec urxvt -e tmux -f /home/milo/.config/tmux/tmux.conf -L xorg new-session

@@ -4,13 +4,13 @@
 
 local group=$(musca -c "silent show groups" 2>/dev/null|grep "*"|awk '{print $3}')
 local tempf=/home/milo/.config/musca/.last-group
-[[ ! -f $tempf ]] && print "{1}" >! $tempf
+[[ ! -f $tempf ]] && print "|1" >! $tempf
 
 if [[ $group = "!" ]]; then
   musca -c "silent use $(<$tempf)" &>/dev/null
 elif [[ -z $(musca -c "silent show groups" 2>/dev/null|awk '{print $3}'|grep -x $(<$tempf)) ]]; then
   print $group >! $tempf
-  musca -c "silent use {1}" &>/dev/null
+  musca -c "silent use |1" &>/dev/null
 else
   print $group >! $tempf
   musca -c "silent use !" &>/dev/null

@@ -139,20 +139,20 @@
 ;;(defcommand prompt-mifo-playlist (filename) ((:rest "playlist: ")) (run-shell-command (format nil "mifo --playlist ~a" filename)))
 
 ;; <toggle between vertical/horizontal split for 2 frames [adopted this function]>
-(defcommand toggle-split () ()
-  (let* ((group (current-group))
-         (cur-frame (tile-group-current-frame group))
-         (frames (group-frames group)))
-    (if (eq (length frames) 2)
-        (progn (if (or (neighbour :left cur-frame frames)
-                       (neighbour :right cur-frame frames))
-                   (progn
-                     (only)
-                     (vsplit))
-                 (progn
-                   (only)
-                   (hsplit))))
-      (message "Works only with 2 frames"))))
+;;(defcommand toggle-split () ()
+;;  (let* ((group (current-group))
+;;         (cur-frame (tile-group-current-frame group))
+;;         (frames (group-frames group)))
+;;    (if (eq (length frames) 2)
+;;        (progn (if (or (neighbour :left cur-frame frames)
+;;                       (neighbour :right cur-frame frames))
+;;                   (progn
+;;                     (only)
+;;                     (vsplit))
+;;                 (progn
+;;                   (only)
+;;                   (hsplit))))
+;;      (message "Works only with 2 frames"))))
 
 ;; end of FUNCTIONS }}}
 
@@ -161,7 +161,6 @@
 
 
 ;; HOOKS/MACROS {{{
-
 
 ;; <show local windows in frame when focusing on it>
 (defun local-list (to-frame from-frame)
@@ -281,13 +280,14 @@
 ;;(setf *top-map*
 ;;  (let ((m (stumpwm:make-sparse-keymap)))
      ;; <numerical bindings>
-     (define-key *top-map* (kbd "s-8")    "clear-window-marks")
-     (define-key *top-map* (kbd "s-C-8")  "pull-marked")
      (define-key *top-map* (kbd "s-1")    "gselect 1")
      (define-key *top-map* (kbd "s-2")    "gselect 2")
      (define-key *top-map* (kbd "s-3")    "gselect 3")
      (define-key *top-map* (kbd "s-4")    "gselect 4")
      (define-key *top-map* (kbd "s-5")    "gselect 5")
+     (define-key *top-map* (kbd "s-8")    "clear-window-marks")
+     (define-key *top-map* (kbd "s-C-8")  "gmove-marked")
+     (define-key *top-map* (kbd "s-M-8")  "pull-marked")
      (define-key *top-map* (kbd "s-9")    "resize -15 0")
      (define-key *top-map* (kbd "s-0")    "resize  15 0")
      (define-key *top-map* (kbd "C-1")    "select-window-by-number 1")

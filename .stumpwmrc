@@ -22,6 +22,9 @@
 ;; PRE-SETTINGS/STARTUP {{{
 
 (in-package :stumpwm)
+(setf *data-dir* "/home/milo/.config/stumpwm"
+      *debug-level* 1)
+(redirect-all-output (data-dir-file "debug-output" "txt"))
 (grename "1")
 (gnewbg "2")
 (gnewbg "3")
@@ -91,7 +94,7 @@
       *min-frame-width* 100
       *min-frame-height* 50
       *resize-increment* 10)
-;; <mode-line>
+;; <mode-line/input>
 (setf *mode-line-background-color* "grey13"
       *mode-line-border-color* "grey25"
       *mode-line-foreground-color* "#a9a6af"
@@ -99,10 +102,7 @@
       *mode-line-pad-x* 1
       *mode-line-pad-y* 1
       *mode-line-timeout* 1
-      *mode-line-position* :top)
-;; <data/history/input>
-(setf *data-dir* "/home/milo/.config/stumpwm"
-      *debug-level* 1
+      *mode-line-position* :top
       *input-history-ignore-duplicates* 0)
 
 (if (not (head-mode-line (current-head)))
@@ -162,11 +162,11 @@
 
 ;; HOOKS/MACROS {{{
 
-;;(redirect-all-output (data-dir-file "debug-output" "txt"))
 
-;;(defun catchall ((frame (tile-group-current-frame group))
-;;  (stumpwm:set-focus-color "#ff6666"))
-;;(stumpwm:add-hook stumpwm:*place-window-hook* 'catchall)
+;; <show local windows in frame when focusing on it>
+(defun local-list (to-frame from-frame)
+  (stumpwm:run-commands "echo-frame-windows"))
+(stumpwm:add-hook stumpwm:*focus-frame-hook* 'local-list)
 
 ;; end of HOOKS/MACROS }}}
 

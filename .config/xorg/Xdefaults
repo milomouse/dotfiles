@@ -1,6 +1,6 @@
-!! $XDG_CONFIG_DIR/xorg/Xdefaults
+!! ${XDG_CONFIG_DIR:-$HOME/.config}/xorg/Xdefaults
 !! author: milomouse <vincent[at]fea.st>
-!! update: 2010-07-20
+!! update: 2010-08-22
 
 urxvt*termName: rxvt-256color
 urxvt*loginShell: true
@@ -23,32 +23,32 @@ urxvt*cursorColor: #a488d9
 Xcursor.theme: whiteglass
 Xcursor.size: 10
 
-! colors:
-!0:black 1:red 2:green 3:yellow
-!4:blue 5:magenta 6:cyan 7:white
-
-*background: #090909
-*foreground: #a9a6af
+!!! 0:black 1:red     2:green 3:yellow
+!!! 4:blue  5:magenta 6:cyan  7:white
 
 !! candymouse:
-*color0:  #090909
-*color8:  #171717
-*color1:  #a28699
-*color9:  #9c8093
-*color2:  #799c99
-*color10: #85afa9
-*color3:  #b0ad90
-*color11: #c4c497
-*color4:  #87afd7
-*color12: #98a7b6
-*color5:  #a488d9
-*color13: #9f8bab
-*color6:  #6c7373
-*color14: #a3babf
-*color7:  #8d8d8d
-*color15: #9d9d9d
+!*background: #090909
+!*foreground: #a9a6af
+!*color0:  #090909
+!*color8:  #171717
+!*color1:  #a28699
+!*color9:  #9c8093
+!*color2:  #799c99
+!*color10: #85afa9
+!*color3:  #b0ad90
+!*color11: #c4c497
+!*color4:  #87afd7
+!*color12: #98a7b6
+!*color5:  #a488d9
+!*color13: #9f8bab
+!*color6:  #6c7373
+!*color14: #a3babf
+!*color7:  #8d8d8d
+!*color15: #9d9d9d
 
 !! cottonmouse
+!*background: #090909
+!*foreground: #a9a6af
 !*color0:  #050505
 !*color8:  #171717
 !*color1:  #9c8093
@@ -66,28 +66,28 @@ Xcursor.size: 10
 !*color7:  #665c64
 !*color15: #787a76
 
-!! jessica
-!*background:    #1C1C1C
-!*foreground:    #B5B5B5
-!*color0: #1C1C1C   
-!*color8:   #3D3A3A  
-!*color1:   #FE4365
-!*color9:   #FC9D9A
-!*color2:    #BBF144
-!*color10:   #C7F464 
-!*color3:    #F8CA00
-!*color11:    #FEDA3A
-!*color4:    #556270
-!*color12:    #697785
-!*color5:    #73626E
-!*color13:  #B38184 
-!*color6:   #3B8686
-!*color14:  #7ED0CA
-!*color7:    #808080
-!*color15:   #DAD3D3
+!! jessicamouse
+*background: #0c0c0c
+*foreground: #b5b5b5
+*color0:  #1c1c1c
+*color8:  #3d3a3a
+*color1:  #d74b73
+*color9:  #b94062
+*color2:  #799c99
+*color10: #85afa9
+*color3:  #c8bc45
+*color11: #baa02c
+*color4:  #76ace2
+*color12: #98a7b6
+*color5:  #a488d9
+*color13: #9f8bab
+*color6:  #508686
+*color14: #569e9a
+*color7:  #8d8d8d
+*color15: #dad3d3
 
 
-! various X stuff (yet to mess with this..)
+!! various X stuff (yet to really mess with this..)
 XFontSel*sampleText.background:       TEXTBG
 XFontSel*menu*showUnselectable:       false
 XFontSel*MenuButton.shadowWidth:      0

@@ -119,6 +119,7 @@ main = do
       , focusFollowsMouse   = False
       }
 myStartHook = spawnOnce ". $HOME/.xmonad/dzen4xmonad" <+>
+              spawnOnce "mifo --daemon" <+>
               setDefaultCursor xC_left_ptr <+>
               ewmhDesktopsStartup >> setWMName "LG3D"
 
@@ -180,7 +181,7 @@ myXPConfig =
                     , borderColor           = colorBlackAlt
                     , promptBorderWidth     = 1
                     , height                = 14
-                    , position              = Bottom
+                    , position              = Top
                     , historySize           = 100
                     , historyFilter         = deleteConsecutive
                     }
@@ -226,7 +227,8 @@ scratchPad = scratchpadSpawnActionCustom $ -- make sure to indent the next line:
 -- LAYOUTS {{{
 
 myLayouts = avoidStruts $ windowNavigation  $
-            gaps [(U,14),(D,14)]            $
+           -- gaps [(U,14),(D,14)]            $
+            gaps [(U,14)]                   $
             mkToggle (single NBFULL)        $
             mkToggle (single REFLECTX)      $
             mkToggle (single REFLECTY)      $
@@ -373,9 +375,9 @@ myKeyBindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
                                 , ((0, xK_x       ), unsafeSpawn "xskat -opt $XDG_CONFIG_DIR/xorg/xskat.opt -list $XDG_CONFIG_DIR/xorg/xskat.lst") -- <xskat with preferred dirs>
                                 ])
     -- <function/media keys>
-    , ((0 .|. controlMask,         0x1008ff02   ), unsafeSpawn "sudo moodlight -m") -- maximum screen brightness ((XF86MonBrightnessUp [max]))
-    , ((0,                         0x1008ff02   ), unsafeSpawn "sudo moodlight -u") -- increase screen brightness ((XF86MonBrightnessUp))
-    , ((0,                         0x1008ff03   ), unsafeSpawn "sudo moodlight -d") -- decrease screen brightness ((XF86MonBrightnessDown))
+    , ((0 .|. controlMask,         0x1008ff02   ), unsafeSpawn "moodlight -m") -- maximum screen brightness ((XF86MonBrightnessUp [max]))
+    , ((0,                         0x1008ff02   ), unsafeSpawn "moodlight -i") -- increase screen brightness ((XF86MonBrightnessUp))
+    , ((0,                         0x1008ff03   ), unsafeSpawn "moodlight -d") -- decrease screen brightness ((XF86MonBrightnessDown))
     , ((0,                         0x1008ff13   ), unsafeSpawn "ossvalt -i 1") -- increase volume, via "ossvalt" ((XF86AudioRaiseVolume))
     , ((0,                         0x1008ff11   ), unsafeSpawn "ossvalt -d 1") -- decrease volume, via "ossvalt" ((XF86AudioLowerVolume))
     , ((0,                         0x1008ff12   ), safeSpawn "ossvalt" ["-m"])   -- mute volume, via "ossvalt" ((XF86AudioMute))
@@ -400,7 +402,7 @@ myKeyBindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
                                 , ((0 .|. shiftMask, xK_a ), AL.launchApp myXPConfig "mifo --append") -- <prompt 'append' for files to add>
                                 , ((0, xK_equal   ), safeSpawn "mifo" ["--fav-add"]) -- <add current file to favorites>
                                 , ((0, xK_minus   ), safeSpawn "mifo" ["--fav-delete"]) -- <if found, remove current file from favorites>
-                                , ((0, xK_Return  ), unsafeSpawn "mifo --reload 1") -- <play current playlist from beginning, using last file>
+                                , ((0, xK_Return  ), AL.launchApp myXPConfig "mifo --reload") -- <prompt 'reload' of current playlist {from beginning,using last file}>
                                 ])
     , ((modMask, xK_s       ), submap . M.fromList $ -- [seek] navigational sub-bindings
                                                 [ ((0, xK_l                 ), unsafeSpawn "mifo -c seek 15") -- <seek forward 15 seconds>

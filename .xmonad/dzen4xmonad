@@ -2,7 +2,7 @@
 # LEFT: info bar to the right of xmonad's:
 while true; do
   echo " ^fg(#a488d9)| ^fg(#515056)#$(lsw|grep -v 'gcolor2\|Vimperator\|GLiv\| - Downloads'|wc -l) \
-^fg(#a488d9)| ^fg()$(print ${$(cat /proc/loadavg)[1,3]}|sed 's/ [0-9]\/.*$//;s/\./'"^fg(#5f656b)"'&'"^fg()"'/g') ^fg(#a488d9)| ^fg()\
+^fg(#a488d9)| ^fg()$(cat /proc/loadavg|sed 's/ [0-9]\/.*$//;s/\./'"^fg(#5f656b)"'&'"^fg()"'/g') ^fg(#a488d9)| ^fg()\
 $(df -h|grep "sda2\|sda5\|sda3"|awk '{print "^fg(#5f656b)"$4"^fg(#050505)""""|^fg(#444)"$5" "}'|tr -d '\n')"\
 "^fg(#a488d9)| ^fg(#515056)@fea.st: ^fg()$(ls -1 /home/milo/mail/FastMail/*/new|sed 's|/.*$||'|tr '\n' ' '|wc -w)"\
 "^fg() ^fg(#a488d9)>""^fg(#007b8c)>""^fg(#444444)>"

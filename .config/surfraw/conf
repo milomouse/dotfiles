@@ -36,7 +36,7 @@ def   SURFRAW_text_browser	w3m
 
 # name/path of browser executable
 # e.g mozilla, netscape etc
-def   SURFRAW_graphical_browser uzbl-browser
+def   SURFRAW_graphical_browser firefox
 
 # text browser arguments, or "none"
 def   SURFRAW_text_browser_args	none

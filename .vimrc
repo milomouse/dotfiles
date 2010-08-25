@@ -1,15 +1,18 @@
 syntax enable
+set nocompatible
 set shell=zsh
 set enc=utf-8
-set t_Co=256
+set viminfo='20,<50,s10,h,n~/.vim/viminfo
+if $DISPLAY =~ ":0.0"
+  set t_Co=256
+endif
 colorscheme cottonmouse
 set nocursorline
 set nocursorcolumn
-set nocompatible
 set ignorecase
 set smartcase
-set noautoindent
 set smartindent
+set noautoindent
 set nocindent
 set smarttab
 set expandtab
@@ -36,8 +39,8 @@ set noerrorbells
 set history=100
 set nomodeline
 set backup
-set backupdir=/tmp/.VIM-save,.
-set viminfo='20,<50,s10,h,n~/.vim/viminfo
+set backupdir=/tmp/.VIM-save/backups,.
+set directory=/tmp/.VIM-save/swapfiles,.
 set shortmess=aTItoO
 set statusline=[%n]\ %<%f%m%r\ %w\ %y\ \ <%{&fileformat}>%=[%o]\ %l,%c%V\/%L\ \ %P
 set grepprg=grep\ -nH\ $*
@@ -58,3 +61,9 @@ let ruby_space_errors = 1
 let c_space_errors = 1
 let c_no_trail_space_error = 1
 let c_no_tab_space_error = 1
+map <Up> <NOP>
+map <Down> <NOP>
+map <Left> <NOP>
+map <Right> <NOP>
+map <End> <NOP>
+map <Home> <NOP>

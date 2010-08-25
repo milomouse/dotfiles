@@ -1,0 +1,24 @@
+((#1="6" 0. |COMMON-LISP|::|T| |COMMON-LISP|::|T| :|CREATE| "screen_data_06"
+  :|CLASS| "Emacs")
+ (#1# 1. |COMMON-LISP|::|T| |COMMON-LISP|::|T| :|RESTORE| "emacs-editing-dump"
+  :|TITLE| "...xdvi")
+ (#2="5" 0. |COMMON-LISP|::|T| |COMMON-LISP|::|T| :|CREATE| "screen_data_05"
+  :|CLASS| "Emacs")
+ (#2# 1. |COMMON-LISP|::|T| |COMMON-LISP|::|T| :|RESTORE| "emacs-editing-dump"
+  :|TITLE| "...xdvi")
+ (#3="4" 0. |COMMON-LISP|::|T| |COMMON-LISP|::|T| :|CREATE| "screen_data_04"
+  :|CLASS| "Emacs")
+ (#3# 1. |COMMON-LISP|::|T| |COMMON-LISP|::|T| :|RESTORE| "emacs-editing-dump"
+  :|TITLE| "...xdvi")
+ ("3" 1. |COMMON-LISP|::|NIL| |COMMON-LISP|::|T| :|CLASS| "aMule")
+ (#4="2" 3. |COMMON-LISP|::|T| |COMMON-LISP|::|T| :|INSTANCE| "qjackctl"
+  :|ROLE| "qjackctlMainForm")
+ (#4# 1. |COMMON-LISP|::|T| |COMMON-LISP|::|T| :|INSTANCE| "qjackctl")
+ (#4# 2. |COMMON-LISP|::|T| |COMMON-LISP|::|T| :|INSTANCE| "jvmetro")
+ (#4# 1. |COMMON-LISP|::|T| |COMMON-LISP|::|T| :|INSTANCE| "ardour_mixer")
+ (#4# 0. |COMMON-LISP|::|T| |COMMON-LISP|::|T| :|TITLE|
+  "Ardour - Session Control")
+ (#4# 0. |COMMON-LISP|::|T| |COMMON-LISP|::|T| :|INSTANCE| "ardour_editor"
+  :|TYPE| :|NORMAL|)
+ ("1" 0. |COMMON-LISP|::|T| |COMMON-LISP|::|NIL| :|CLASS| "Konqueror" :|ROLE|
+  "...konqueror-mainwindow"))

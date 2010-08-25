@@ -1,0 +1,6 @@
+#S(|STUMPWM|::|GDUMP| :|NUMBER| 3. :|NAME| "3"
+   :|TREE|
+   (#S(|STUMPWM|::|FDUMP| :|NUMBER| 0. :|X| 0. :|Y| 0. :|WIDTH| 1366.
+       :|HEIGHT| 768. :|WINDOWS| |COMMON-LISP|::|NIL|
+       :|CURRENT| |COMMON-LISP|::|NIL|))
+   :|CURRENT| 0.)

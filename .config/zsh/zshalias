@@ -22,17 +22,18 @@ alias cl="clear"
 alias e="bye"
 
 # useless quick views/edits:
-alias wika="$BROWSER /usr/share/doc/arch-wiki/html/index.html"
-alias xoc="$BROWSER /usr/share/doc/xmonad-contrib-darcs/html"
-alias medit="$EDITOR $XDG_CONFIG_DIR/musca/musca_start"
-alias xedit="$EDITOR $XDG_CONFIG_DIR/xorg/{xinitrc,Xdefaults}"
-alias xodit="$EDITOR $HOME/.xmonad/xmonad.hs"
-alias zload=". $HOME/.zshrc"
-alias zedit="$EDITOR -p $HOME/.{zshrc,config/zsh/{zshfn,zshalias}}"
+alias wika="${BROWSER:-/usr/bin/w3m} /usr/share/doc/arch-wiki/html/index.html"
+alias xoc="${BROWSER:-/usr/bin/w3m} /usr/share/doc/xmonad-contrib-darcs/html"
+alias medit="${EDITOR:-/usr/bin/vim} $XDG_CONFIG_DIR/musca/musca_start"
+alias sedit="${EDITOR:-/usr/bin/vim} -p ${HOME}/.stumpwmrc $XDG_CONFIG_DIR/stumpwm/{functions,macros,commands,hooks,key-maps}.lisp"
+alias xedit="${EDITOR:-/usr/bin/vim} -p $XDG_CONFIG_DIR/xorg/{xinitrc,Xdefaults}"
+alias xodit="${EDITOR:-/usr/bin/vim} $HOME/.xmonad/xmonad.hs"
+alias zload=". ${HOME}/.zshrc"
+alias zedit="${EDITOR:-/usr/bin/vim} -p ${HOME}/.{zshrc,config/zsh/{zshfn,zshalias}}"
 
 # program masquing:
-alias vim="${EDITOR:-/usr/bin/vim -p}"
-alias svim="sudo ${EDITOR:-/usr/bin/vim -p}"
+alias svim="sudo ${EDITOR:-/usr/bin/vim}"
+alias info="/usr/bin/info --vi-keys"
 alias diff="colordiff"
 alias grep="grep --color=auto"
 alias tmux='tmux -f ${XDG_CONFIG_DIR:-$HOME/.config}/tmux/tmux.conf'
@@ -40,16 +41,18 @@ alias mutt='mutt -F ${XDG_CONFIG_DIR:-$HOME/.config}/mutt/muttrc'
 alias xskat='xskat -opt $XDG_CONFIG_DIR/xorg/xskat.opt -list ${XDG_CONFIG_DIR:-$HOME/.config}/xorg/xskat.lst'
 alias offlineimap='offlineimap -c ${XDG_CONFIG_DIR:-$HOME/.config}/offlineimap/offlineimaprc'
 alias xsel='xsel --logfile /dev/shm/xsel.log'
-alias {rot,rtorrent}='rtorrent -o http_capath=/etc/ssl/certs'
+alias {rot,rtorrent}='/usr/bin/rtorrent -o http_capath=/etc/ssl/certs'
+alias startx="/usr/local/bin/go $@"
 
 # system/media shortcuts:
 alias mix2="ossmix codec1.jack.int-speaker.mode mix2 1>/dev/null && echo 'Mixer set to PC Speaker'"
 alias mix3="ossmix codec1.jack.int-speaker.mode mix3 1>/dev/null && echo 'Mixer set to Headphones'"
 #alias rec='ffmpeg -f x11grab -s 1366x768 - r 150 -i :0.0 -sameq /tmp/capture.mpg'
 alias siteget='wget --recursive --page-requisites --convert-links --html-extension --no-parent --wait=10 --limit-rate=20K -U Mozilla -l' #depth, then url
+alias synt="highlight -t 2 -k fixed -K 8 -l -j 3 -s candy"
 alias dfu="df -hTP"
-alias psa="ps fxo etime,pid,pmem,pcpu,command"
-alias psu="psa|/bin/grep -B 999 '[0-9] -zsh'"
+alias psu="ps fxo etime,pid,pmem,pcpu,command"
+alias psa="psu|/bin/grep -B 999 '[0-9] -zsh'"
 alias psr="ps -u root fo etime,user,pid,pmem,pcpu,command"
 alias daemons="ls /var/run/daemons"
 alias reboot="sudo reboot"
@@ -61,6 +64,6 @@ alias upd="sudo updatedb"
 alias baer="bauerbill"
 alias {baerp,pacman}="sudo pacman-color"
 alias ay="yaourt"
-alias aive="ay -Q --date|tee $HOME/othe/archive/$(date +%m_%d_%y) >>/dev/null"
-alias lasi="3view $HOME/othe/archive/$(ls -ltr $HOME/othe/archive |tail -1|awk '{print $7}')"
-alias lasid="3view $HOME/othe/archive/$(ls -ltr $HOME/othe/archive |tail -2|head -1|awk '{print $7}')"
+alias aive="ay -Q --date|tee ${HOME}/othe/archive/$(date +%m_%d_%y) >>/dev/null"
+alias lasi="3view ${HOME}/othe/archive/$(ls -ltr ${HOME}/othe/archive |tail -1|awk '{print $7}')"
+alias lasid="3view ${HOME}/othe/archive/$(ls -ltr ${HOME}/othe/archive |tail -2|head -1|awk '{print $7}')"

@@ -1,19 +1,10 @@
 # extend run-path for local scripts/binaries:
 PATH=$PATH:/usr/local/bin:/usr/local/sbin
 
-## start tmux server(s) per tty$:
-#if [[ -z "$DISPLAY" && $(tty) = /dev/tty[2-4] ]]; then
-#  case $(tty) in
-#    *[2-4]) tmux -f ${XDG_CONFIG_DIR:-$HOME/.config}/tmux/tmux.conf \
-#    -L console new-session -s "$(print ${$(tty)/*dev\//})" ;;
-#  esac
-#fi # made this but not sure if i want to use it..
-
 # prompt line:
 [[ "$TERM" == screen* ]] && precmd() {print -Pn "\e]2;%2d\a"} || RPROMPT='%F{white}%~%f'
 PS1='%F{magenta}» %f'
 PS2='%F{blue}» %f'
-#PS2='%B%F{white}%_ %b%f%F{blue}» %f'
 PS3='%B%F{white}?# %b%f%F{red}» %f'
 PS4='%B%F{white}%_ %b%f%F{magenta}» %f%B%F{white}+%N:%i %b%f%F{magenta}» %f'
 
@@ -89,13 +80,13 @@ bindkey "^?" backward-delete-char
 bindkey '^R' history-incremental-search-backward
 
 # global exports:
-[[ -z "$DISPLAY" ]] && export EDITOR="/usr/bin/vim -p -c ':colorscheme candymouse'" || \
-export EDITOR="/usr/bin/vim"
 export HISTSIZE=1400
 export SAVEHIST=$HISTSIZE
 export DIRSTACKSIZE=20
+export EDITOR="/usr/bin/vim"
 export FCEDIT="/usr/bin/vim"
 export BROWSER="/usr/bin/w3m"
+export HOMEPAGE="https://bbs.archlinux.org/search.php?action=show_new"
 export PAGER="/bin/less"
 export SDCV_HISTSIZE=$HISTSIZE
 export SDCV_PAGER="/bin/more"
@@ -115,39 +106,57 @@ export LESS_TERMCAP_so=$'\E[01;46;30m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;34m'
 export XDG_CACHE_HOME="/dev/shm/cache"
-export XDG_CONFIG_DIR="$HOME/.config"
-export XDG_CONFIG_DIRS="$HOME/.config:/etc"
-export XDG_DATA_HOME="$HOME/.config/share"
+export XDG_CONFIG_DIR="${HOME}/.config"
+export XDG_CONFIG_DIRS="${HOME}/.config:/etc"
+export XDG_DATA_HOME="${HOME}/.config/share"
 export XDG_DESKTOP_DIR="/dev/shm"
-export XDG_DOCUMENTS_DIR="$HOME/rite"
-export XDG_DOWNLOAD_DIR="$HOME/down"
-export XDG_MUSIC_DIR="$HOME/muzk"
-export XDG_PICTURES_DIR="$HOME/foto"
+export XDG_DOCUMENTS_DIR="${HOME}/rite"
+export XDG_DOWNLOAD_DIR="${HOME}/down"
+export XDG_MUSIC_DIR="${HOME}/muzk"
+export XDG_PICTURES_DIR="${HOME}/foto"
 export XDG_PUBLICSHARE_DIR="/dev/shm"
 export XDG_TEMPLATES_DIR="/dev/shm"
-export XDG_VIDEOS_DIR="$HOME/vide"
-export XAUTHORITY="$HOME/.config/.Xauthority"
+export XDG_VIDEOS_DIR="${HOME}/vide"
+export XAUTHORITY="${HOME}/.config/.Xauthority"
 
 # source alias and function files:
-[[ -f ${XDG_CONFIG_DIR:-$HOME/.config}/zsh/zshalias ]] && . ${XDG_CONFIG_DIR:-$HOME/.config}/zsh/zshalias
-[[ -f ${XDG_CONFIG_DIR:-$HOME/.config}/zsh/zshfn ]] && . ${XDG_CONFIG_DIR:-$HOME/.config}/zsh/zshfn
+[[ -f ${XDG_CONFIG_DIR:-${HOME}/.config}/zsh/zshalias ]] && . ${XDG_CONFIG_DIR:-${HOME}/.config}/zsh/zshalias
+[[ -f ${XDG_CONFIG_DIR:-${HOME}/.config}/zsh/zshfn ]] && . ${XDG_CONFIG_DIR:-${HOME}/.config}/zsh/zshfn
 
 # framebuffer colors:
-if [[ "$TERM" = "linux" || "$TERM" == *screen* ]]; then
+if [[ "${TERM}" = "linux" || "${TERM}" == screen* ]]; then
+#    cottonmouse:
+#    echo -en "\e]P0000000"
+#    echo -en "\e]P8171717"
+#    echo -en "\e]P19c8093"
+#    echo -en "\e]P9dfa6bb"
+#    echo -en "\e]P2799c99"
+#    echo -en "\e]PA85afa9"
+#    echo -en "\e]P3b0ad90"
+#    echo -en "\e]PBc4c497"
+#    echo -en "\e]P487afd7"
+#    echo -en "\e]PC98a7b6"
+#    echo -en "\e]P5a488d9"
+#    echo -en "\e]PD9f8bab"
+#    echo -en "\e]P66c7373"
+#    echo -en "\e]PEa3babf"
+#    echo -en "\e]P7999999"
+#    echo -en "\e]PF98a7b6"
+#   jessicamouse:
     echo -en "\e]P0000000"
-    echo -en "\e]P8171717"
-    echo -en "\e]P19c8093"
-    echo -en "\e]P9dfa6bb"
+    echo -en "\e]P83d3a3a"
+    echo -en "\e]P1d74b73"
+    echo -en "\e]P9b94062"
     echo -en "\e]P2799c99"
     echo -en "\e]PA85afa9"
-    echo -en "\e]P3b0ad90"
-    echo -en "\e]PBc4c497"
-    echo -en "\e]P487afd7"
+    echo -en "\e]P3c8bc45"
+    echo -en "\e]PBbaa02c"
+    echo -en "\e]P476ace2"
     echo -en "\e]PC98a7b6"
     echo -en "\e]P5a488d9"
     echo -en "\e]PD9f8bab"
-    echo -en "\e]P66c7373"
-    echo -en "\e]PEa3babf"
-    echo -en "\e]P7999999"
-    echo -en "\e]PF98a7b6"
+    echo -en "\e]P6508686"
+    echo -en "\e]PE569e9a"
+    echo -en "\e]P78d8d8d"
+    echo -en "\e]PFdad3d3"
 fi

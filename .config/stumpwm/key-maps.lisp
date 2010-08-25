@@ -46,7 +46,7 @@
 ;; <frequently used programs>
 (defvar *frequent-map*
   (let ((m (stumpwm:make-sparse-keymap)))
-    (define-key m (kbd "f") "run-or-raise firefox")
+    (define-key m (kbd "f") "ror__firefox")
     (define-key m (kbd "m") "exec urxvt -e mutt -F ${XDG_CONFIG_DIR:-${HOME}/.config}/mutt/muttrc")
     (define-key m (kbd "s") "exec urxvt -e nsudoku 12")
     (define-key m (kbd "w") "exec wallie")

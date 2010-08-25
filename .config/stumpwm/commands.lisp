@@ -42,6 +42,8 @@
 (defcommand prompt-mifo-playlist (filename) ((:rest "playlist: "))
   (run-shell-command (format nil "mifo --playlist ~a" filename)))
 
+(defcommand ror__firefox () () (run-or-raise "firefox" '(:class "Firefox")))
+
 ;;(defcommand toggle-split () ()
 ;;  (let* ((group (current-group))
 ;;         (cur-frame (tile-group-current-frame group))

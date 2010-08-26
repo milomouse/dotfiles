@@ -1,17 +1,6 @@
 ;; <set "Super + s" as prefix for root-map bindings>
 (set-prefix-key (kbd "s-s"))
 
-;; <help-map bindings>
-(setf *help-map*
-  (let ((m (stumpwm:make-sparse-keymap)))
-     (define-key m (kbd "v")     "describe-variable")
-     (define-key m (kbd "f")     "describe-function")
-     (define-key m (kbd "k")     "describe-key")
-     (define-key m (kbd "c")     "describe-command")
-     (define-key m (kbd "w")     "where-is")
-     (define-key m (kbd "ESC")   "abort")
-    M))
-
 ;; <input-map bindings>
 ;;(setf *input-map*
 ;;  (let ((m (stumpwm:make-sparse-keymap)))
@@ -26,14 +15,6 @@
 ;;     (define-key m (kbd "ESC")   "abort")
 ;;     (define-key m (kbd "w")     "windowlist")
 ;;     (define-key m (kbd "g")     "vgroups")
-;;    M))
-
-;;(setf *root-map*
-;;  (let ((m (stumpwm:make-sparse-keymap)))
-;;     (define-key m (kbd "ESC")   "abort")
-;;     (define-key m (kbd "w")     "windowlist")
-;;     (define-key m (kbd "g")     "vgroups")
-;;     (define-key m (kbd "?")     *help-map*)
 ;;    M))
 
 ;; <commonly toggled options>
@@ -95,7 +76,6 @@
     (define-key m (kbd "f")     "exec mifo --fullscreen")
     (define-key m (kbd "equal") "exec mifo --fav-add")
     (define-key m (kbd "minus") "exec mifo --fav-delete")
-    (define-key m (kbd "Return")"prompt-mifo-reload")
     (define-key m (kbd "ESC")   "abort")
    M))
 (defvar *mplayer-daemon-map2*
@@ -109,6 +89,7 @@
     (define-key m (kbd "!")     "exec mifo -c seek_chapter -1")
     (define-key m (kbd "@")     "exec mifo -c seek_chapter 1")
     (define-key m (kbd "BackSpace") "exec mifo -c seek 0 1")
+    (define-key m (kbd "Return")"prompt-mifo-reload")
     (define-key m (kbd "ESC")   "abort")
    M))
 
@@ -150,9 +131,9 @@
     (define-key m (kbd "s--")    "vsplit")
     (define-key m (kbd "s-=")    "hsplit")
     (define-key m (kbd "s-+")    "balance-frames")
-    (define-key m (kbd "s-;")    "exec ")
+    (define-key m (kbd "s-;")    "colon")
     (define-key m (kbd "s-:")    "manpage")
-    (define-key m (kbd "s-C-;")  "colon")
+    (define-key m (kbd "s-C-;")  "exec ")
     (define-key m (kbd "s-,")    "gprev")
     (define-key m (kbd "s-<")    "gprev-with-window")
     (define-key m (kbd "s-.")    "gnext")
@@ -247,5 +228,25 @@
     (define-key m (kbd "F8")     "restore-window-placement-rules /home/milo/.config/stumpwm/storage/placement_rules")
     (define-key m (kbd "F9")     "restore-from-file /home/milo/.config/stumpwm/storage/screen_data")
     (define-key m (kbd "C-ESC")  "abort")
+    (define-key m (kbd "s-quoteleft") "scratchpad")
    M))
 
+;; <root-map bindings>
+;;(setf *root-map*
+;;  (let ((m (stumpwm:make-sparse-keymap)))
+;;     (define-key m (kbd "ESC")   "abort")
+;;     (define-key m (kbd "w")     "windowlist")
+;;     (define-key m (kbd "g")     "vgroups")
+;;     (define-key m (kbd "?")     *help-map*)
+;;    M))
+
+;; <help-map bindings>
+(setf *help-map*
+  (let ((m (stumpwm:make-sparse-keymap)))
+     (define-key m (kbd "v")     "describe-variable")
+     (define-key m (kbd "f")     "describe-function")
+     (define-key m (kbd "k")     "describe-key")
+     (define-key m (kbd "c")     "describe-command")
+     (define-key m (kbd "w")     "where-is")
+     (define-key m (kbd "ESC")   "abort")
+    M))

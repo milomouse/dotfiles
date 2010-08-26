@@ -3,3 +3,4 @@
 ;;  (stumpwm:run-commands "echo-frame-windows"))
 ;;(stumpwm:add-hook stumpwm:*focus-frame-hook* 'local-list)
 
+;;(stumpwm:add-hook stumpwm:*urgent-window-hook*..

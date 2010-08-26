@@ -2,14 +2,14 @@
 ;; ~/.stumpwmrc
 ;;----------------------------------------------------------------------------
 ;; author: milomouse <vincent[at]fea.st>
-;; update: 2010-08-24 00:48:44
+;; update: 2010-08-25 18:48:44
 ;;----------------------------------------------------------------------------
 ;; versions used atoc:
 ;; |  clisp-new-clx     -> 2.48-2
 ;; |  ecl (cl-asdf)     -> 10.4.1-1
 ;; |  cl-ppcre          -> 2.0.3-1
-;; |  stumpwm-git       -> 20100819-1
-;; |  surfraw-git       -> 20100714-1
+;; |  stumpwm-git       -> 20100825-1
+;; |  surfraw-git       -> 20100825-1
 ;;-TODO:----------------------------------------------------------------------
 ;; >---: show only CURRENT frame title, not every window.
 ;; >>>-: create a 'dedicate' and 'catchall' window-rule (remember * *)
@@ -30,10 +30,15 @@
 (defcommand-alias exec run-shell-command)
 
 ;; -- <module(pre-variables)>
-(setf *data-dir* "/home/milo/.config/stumpwm/")
+(setf *data-dir* "/home/milo/.config/stumpwm/storage/")
 (defvar *disk-usage-paths* '("/" "/home" "/var"))
 (defvar *disk-modeline-fmt* "^B^8*%a^**^b^0*|^**^B^7*%p^**^b")
 (defvar *surfraw-bookmark-file* (data-dir-file "bookmarks" "txt"))
+
+;; -- <scripts>
+;(loop for file in '("mplayer-fix")
+;      do (load (make-pathname :name file :type "lisp" :directory
+;      '(:relative ".config" "stumpwm" "scripts"))))
 
 ;; -- <modules>
 (loop for file in '("cpu" "disk" "surfraw" "notifications")
@@ -84,10 +89,13 @@
 ;                     "#b695f4")) ;; 9 - [bright] magenta
 (update-color-map (current-screen))
 
-;; -- <text formatting>
-(setf *screen-mode-line-format*
-      (list "[^B^3*%n^**^b] ^B^7*%C^**^b " '(:eval (run-shell-command
-      "date '+%m/%d^B^7*(^**^8*%a^**^b) %T'|tr -d '\\n'" t)) " %D"))
+;; -- <text formatting (some only works with *shell-program* /bin/zsh)>
+(setf *screen-mode-line-format* (list "[^B^4*%n^**^b] ^B^7*%C^**^b"))
+;(setf *screen-mode-line-format*
+;      (list "[^B^4*%n^**^b] ^B^7*%C^**^b/" '(:eval (run-shell-command
+;      "printf ${(@@f)$(</proc/loadavg)[1,3]}" t)) " %D " '(:eval (run-shell-command
+;      "date '+%m/%d^B^7*(^**^8*%a^**^b) %T'|tr -d '\\n'" t)) '(:eval (run-shell-command
+;      "mifo --stumpwm|tr -d '\\n'" t))))
 (setf
 *startup-message* "^B^1*together we ate the king^**^b:^B^5*and laughed ourselves to death^**^b"
 *window-format*   "^B^0*|^**^b^B^3*%s^**^b^1*%n^**^5*%m^**^b^B^8*%16t^**^b"
@@ -120,10 +128,13 @@
       '(:relative ".config" "stumpwm"))))
 
 ;; -- <screens/workspaces>
+;(run-shell-command "[[ -n $(pgrep dzen) ]] || . .xmonad/dzen4xmonad &")
 (if (not (head-mode-line (current-head)))
   (toggle-mode-line (current-screen) (current-head)))
 
-(run-commands "grename 1")
+;(setf *frame-number-map* "123456")
+(setf (group-name (first (screen-groups (current-screen)))) "1")
+;(run-commands "gselect Default" "grename 1")
 (make-groups-bg "2" "3" "4" "5" "6")
-(run-commands "restore /home/milo/.config/stumpwm/storage/screen_data_last")
+(restore-from-file (data-dir-file "screen_data_last"))
 

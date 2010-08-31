@@ -38,7 +38,7 @@ bind on Mod4+Shift+r exec killall zsh dzen0 ; exec zsh /home/milo/.config/musca/
 bind on Mod4+Print exec import -window root /home/milo/foto/shot/$(date +%Y_%m_%d-%H%M%S).png"
 bind on Mod4+Shift+Delete exec alock -bg image:file=/home/milo/foto/wall/beheading.jpg -cursor glyph -auth pam >&/dev/null
 bind on Control+XF86MonBrightnessUp exec moodlight -m
-bind on XF86MonBrightnessUp exec moodlight -u
+bind on XF86MonBrightnessUp exec moodlight -i
 bind on XF86MonBrightnessDown exec moodlight -d
 bind on XF86AudioRaiseVolume exec ossvalt -i 1
 bind on XF86AudioLowerVolume exec ossvalt -d 1

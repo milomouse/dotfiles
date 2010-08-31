@@ -71,10 +71,10 @@ function sd() {
   local _ARG
   [[ $(print - $#@) -ge 2 ]] && _ARG=${@:/$1} || _ARG=$1
   case $1 in
-    '-w'|'-wordnet') sdcv -u "WordNet" ${_ARG} ;;
-    '-t'|'-thesaurus') sdcv -u "English Thesaurus" ${_ARG} ;;
-    '-a'|'-all') sdcv ${_ARG} ;;
-    *) sdcv -u "WordNet" ${_ARG}
+    '-w'|'-wordnet') sdcv -u "WordNet" ${_ARG} 2>/dev/null ;;
+    '-t'|'-thesaurus') sdcv -u "English Thesaurus" ${_ARG} 2>/dev/null ;;
+    '-a'|'-all') sdcv ${_ARG} 2>/dev/null ;;
+    *) sdcv -u "WordNet" ${_ARG} 2>/dev/null
   esac
 }
 

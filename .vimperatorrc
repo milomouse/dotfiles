@@ -11,4 +11,6 @@ set hintmatching=wordstartswith
 let clock_format='(%a:%d/%y %t)'
 noremap j 3j
 noremap k 3k
-noremap <C-k> :pageinfo
+noremap <C-k> :pageinfo<CR>
+noremap <C-S-d> :dialog downloads<CR>
+noremap <C-S-a> :dialog addons<CR>

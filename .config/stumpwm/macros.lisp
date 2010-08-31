@@ -20,14 +20,6 @@
               *input-history* history))
       arg)))
 
-(defmacro define-sudo-command (name command &key output)
-  (let ((cmd (gensym)))
-    `(defcommand ,name (password) ((:password "sudo password: "))
-      (let ((,cmd (concat "echo '" password "' | sudo -S " ,command)))
-        ,(if output
-          `(run-prog-collect-output *shell-program* "-c" ,cmd)
-          `(run-prog *shell-program* :args (list "-c" ,cmd) :wait nil))))))
-
 ;; Last rule to match takes precedence!
 ;; TIP: if the argument to :title or :role begins with an ellipsis, a substring
 ;; match is performed.

@@ -2,7 +2,7 @@
 ;; ~/.stumpwmrc
 ;;----------------------------------------------------------------------------
 ;; author: milomouse <vincent[at]fea.st>
-;; update: 2010-08-25 18:48:44
+;; update: 2010-08-29 19:04:44
 ;;----------------------------------------------------------------------------
 ;; versions used atoc:
 ;; |  clisp-new-clx     -> 2.48-2
@@ -11,7 +11,7 @@
 ;; |  stumpwm-git       -> 20100825-1
 ;; |  surfraw-git       -> 20100825-1
 ;;-TODO:----------------------------------------------------------------------
-;; >---: show only CURRENT frame title, not every window.
+;; >---: show only CURRENT frame title, not every window, in mode-line.
 ;; >>>-: create a 'dedicate' and 'catchall' window-rule (remember * *)
 ;; >>--: create a 'dedicate' and 'catchall' hook for changing focus color.
 ;; >---: have '(mplayer daemon)' prompts use filename completion
@@ -30,7 +30,7 @@
 (defcommand-alias exec run-shell-command)
 
 ;; -- <module(pre-variables)>
-(setf *data-dir* "/home/milo/.config/stumpwm/storage/")
+(setf *data-dir* "~/.config/stumpwm/storage/")
 (defvar *disk-usage-paths* '("/" "/home" "/var"))
 (defvar *disk-modeline-fmt* "^B^8*%a^**^b^0*|^**^B^7*%p^**^b")
 (defvar *surfraw-bookmark-file* (data-dir-file "bookmarks" "txt"))
@@ -50,6 +50,8 @@
       *normal-border-width* 2
       *maxsize-border-width* 2
       *transient-border-width* 2
+      *float-window-border* 1
+      *float-window-title-height* 1
       *msg-border-width* 1
       *mouse-focus-policy* :click
       *window-border-style* :thin
@@ -62,21 +64,24 @@
 (set-fg-color        "#a19ea8")
 (set-bg-color        "grey15")
 (set-border-color    "grey45")
+;(set-focus-color     "#d86284")
 (set-focus-color     "#d74b73")
 ;(set-focus-color     "#7965ac")
 (set-unfocus-color   "#1c1c1c")
 (set-win-bg-color    "#0c0c0c")
-;(set-win-bg-color    "#020202")
+(set-win-bg-color    "#020202")
 (setf *colors* (list "#1c1c1c"   ;; 0 - black
                      "#d74b73"   ;; 1 - red
                      "#799c99"   ;; 2 - green
                      "#c8bc45"   ;; 3 - yellow
-                     "#76ace2"   ;; 4 - blue
-                     "#a488d9"   ;; 5 - magenta
+                     "#6c7373"   ;; 4 - blue
+                     "#a488d9"   ;; 5 - magenta /or/ #885ed8
                      "#508686"   ;; 6 - cyan
                      "#8d8d8d"   ;; 7 - white
-                     "#3d3a3a"   ;; 8 - other
-                     "#b94062")) ;; 9 - other
+                     "#585872"   ;; 8 - [faint ] magenta
+                     "#57718b")) ;; 9 - [bright] blue
+;                     "#3d3a3a"   ;; 8 - other
+;                     "#b94062")) ;; 9 - other
 ;(setf *colors* (list "#020202"   ;; 0 - [almost] black
 ;                     "#a9a6af"   ;; 1 - [faint ] white
 ;                     "#a883a3"   ;; 2 - [bright] pink
@@ -89,17 +94,23 @@
 ;                     "#b695f4")) ;; 9 - [bright] magenta
 (update-color-map (current-screen))
 
-;; -- <text formatting (some only works with *shell-program* /bin/zsh)>
-(setf *screen-mode-line-format* (list "[^B^4*%n^**^b] ^B^7*%C^**^b"))
+;; - <text formatting (no mode-line)>
+(setf *time-format-string-default* "%A %B %Y - %T")
+(setf *screen-mode-line-format* nil)
+;; -- <text formatting (most of which only works with: *shell-program* /bin/zsh)>
 ;(setf *screen-mode-line-format*
 ;      (list "[^B^4*%n^**^b] ^B^7*%C^**^b/" '(:eval (run-shell-command
-;      "printf ${(@@f)$(</proc/loadavg)[1,3]}" t)) " %D " '(:eval (run-shell-command
-;      "date '+%m/%d^B^7*(^**^8*%a^**^b) %T'|tr -d '\\n'" t)) '(:eval (run-shell-command
-;      "mifo --stumpwm|tr -d '\\n'" t))))
+;      "printf ${${${(@@f)$(</proc/loadavg)[1,3]}//0./^B^9*-.}//./^B^0*.^**}" t)) "^B^7*|^** %D ^B^7*|^B^0* @fea.st: "
+;      '(:eval (run-shell-command "ls -1 ~/mail/FastMail/*/new|sed 's|/.*$||'|tr '\\n' ' '|wc -w|tr -d '\\n'" t))
+;      " ^B^7*|^** ..^5*/^6*" '(:eval (run-shell-command
+;"print -n ${${${${${${$(<~/.config/mifo/log|grep Playing)}// /_}//\\/home\\/milo\\/muzk\\/}//\\\//^5*\/^**}[-1]}[1,80]}"
+;      t)) " ^B^7*| ^7*"
+;      '(:eval (run-shell-command "print -n ${${$(ossmix|grep outvol)[4,5]}/\)/}" t)) " ^B^7*| ^7*"
+;      '(:eval (run-shell-command "date '+%Y-%m-%d^B^6*/^0*%a^5* |^**^b %T'|tr -d '\\n'" t))))
 (setf
 *startup-message* "^B^1*together we ate the king^**^b:^B^5*and laughed ourselves to death^**^b"
-*window-format*   "^B^0*|^**^b^B^3*%s^**^b^1*%n^**^5*%m^**^b^B^8*%16t^**^b"
-*group-format*    "^B^2*%t^**^b^B^0*|^**^b^B^7*%s^**^b")
+*group-format*    "^B^8*%t^7*%s^07|^**^b"
+*window-format*   "^B^27%s^0*%16t^**^b")
 
 ;; -- <windows/frames>
 (setf *default-window-name* "null"
@@ -129,12 +140,16 @@
 
 ;; -- <screens/workspaces>
 ;(run-shell-command "[[ -n $(pgrep dzen) ]] || . .xmonad/dzen4xmonad &")
-(if (not (head-mode-line (current-head)))
-  (toggle-mode-line (current-screen) (current-head)))
+
+;; -- <show mode-line if not already shown>
+;(if (not (head-mode-line (current-head)))
+;  (toggle-mode-line (current-screen) (current-head)))
+
+;; -- <hide mode-line>
+(run-commands "toggle-mode-line")
 
 ;(setf *frame-number-map* "123456")
 (setf (group-name (first (screen-groups (current-screen)))) "1")
-;(run-commands "gselect Default" "grename 1")
 (make-groups-bg "2" "3" "4" "5" "6")
 (restore-from-file (data-dir-file "screen_data_last"))
 

@@ -35,15 +35,13 @@
 (define-frame-preference "2"
   (0    t     t     :instance "ardour_editor" :type :normal)
   (0    t     t     :title "Ardour - Session Control")
- ;; (0    nil   nil   :class "URxvt")
   (1    t     t     :instance "ardour_mixer")
   (2    t     t     :instance "jvmetro")
   (1    t     t     :instance "qjackctl")
   (3    t     t     :instance "qjackctl" :role "qjackctlMainForm"))
 
 (define-frame-preference "3"
- ;; (0    t     nil   :class "URxvt")
-  (1    nil   t     :class "aMule"))
+  (0    nil   t     :class "Firefox"))
 
 (define-frame-preference "4"
   (1    t     t     :restore "emacs-editing-dump" :title "...xdvi")

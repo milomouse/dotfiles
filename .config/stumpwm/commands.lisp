@@ -18,6 +18,7 @@
   "dump-screen-to-file ~/.config/stumpwm/storage/screen_data_last"
   "quit"))
 
+;; need to create a global command. gview X -> gselect X + echo X
 (defcommand gview_1 () () (run-commands "gselect 1" "echo 1"))
 (defcommand gview_2 () () (run-commands "gselect 2" "echo 2"))
 (defcommand gview_3 () () (run-commands "gselect 3" "echo 3"))
@@ -25,13 +26,12 @@
 (defcommand gview_5 () () (run-commands "gselect 5" "echo 5"))
 (defcommand gview_6 () () (run-commands "gselect 6" "echo 6"))
 
-(defcommand (master-focus tile-group) () () (run-commands "fselect 0"))
+;; better way is to use frame-number.. a little hard to 'make' though.
+(defcommand (master-make tile-group) () () (run-commands "renumber 0"))
+(defcommand (master-focus tile-group) () () (run-commands
+  "select-window-by-number 0"))
 
-;(defcommand resize-left () () (run-commands "resize -15 0" "refresh"))
-;(defcommand resize-right () () (run-commands "resize 15 0" "refresh"))
-;(defcommand resize-up () () (run-commands "resize 0 -15" "refresh"))
-;(defcommand resize-down () () (run-commands "resize 0 15" "refresh"))
-
+;; this doesn't work yet.
 (defcommand (master-swap tile-group) () ()
   (exchange-windows (current-window)
   (frame-window (frame-by-number (current-group 0)))
@@ -50,6 +50,12 @@
 ;(defcommand (master-swap tile-group) () ()
 ;  (exchange-windows (frame-by-number (current-group) (current-window))
 ;  (frame-by-number (current-group) 0)))
+
+;; better way is to 'refresh' all windows in group.. although harder.
+;(defcommand resize-left () () (run-commands "resize -15 0" "refresh"))
+;(defcommand resize-right () () (run-commands "resize 15 0" "refresh"))
+;(defcommand resize-up () () (run-commands "resize 0 -15" "refresh"))
+;(defcommand resize-down () () (run-commands "resize 0 15" "refresh"))
 
 (defcommand announce-mifo () ()
   (echo-string (current-screen) (run-shell-command "mifo --stumpwm" t)))

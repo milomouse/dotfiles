@@ -58,7 +58,8 @@
 ;; <mplayer-daemon-* bindings>
 (defvar *mplayer-daemon-map1*
   (let ((m (stumpwm:make-sparse-keymap)))
-    (define-key m (kbd "d")     "exec mifo --daemon")
+    (define-key m (kbd "d")     "exec sudo /etc/rc.d/mifo start")
+    ;(define-key m (kbd "d")     "exec mifo --daemon")
     (define-key m (kbd "t")     "exec mifo --toggle")
     (define-key m (kbd "r")     "exec mifo --random")
     (define-key m (kbd "j")     "exec mifo --next dir")
@@ -72,7 +73,8 @@
     (define-key m (kbd "p")     "prompt-mifo-playlist")
     (define-key m (kbd "s")     "prompt-mifo-save")
     (define-key m (kbd "S")     "exec mifo --stop")
-    (define-key m (kbd "q")     "exec mifo --quit")
+    (define-key m (kbd "q")     "exec sudo /etc/rc.d/mifo stop")
+    ;(define-key m (kbd "q")     "exec mifo --quit")
     (define-key m (kbd "f")     "exec mifo --fullscreen")
     (define-key m (kbd "equal") "exec mifo --fav-add")
     (define-key m (kbd "minus") "exec mifo --fav-delete")
@@ -191,6 +193,7 @@
     (define-key m (kbd "s-M-l")  "ratrelwarp 7 0")
     (define-key m (kbd "s-m")    "master-focus")
     (define-key m (kbd "s-M")    "master-swap left")
+    (define-key m (kbd "s-C-m")  "master-make")
     (define-key m (kbd "s-n")    "next-in-frame")
     (define-key m (kbd "s-N")    "pull-hidden-next")
     (define-key m (kbd "s-o")    "fullscreen") 

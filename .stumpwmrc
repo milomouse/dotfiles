@@ -95,7 +95,7 @@
 (update-color-map (current-screen))
 
 ;; - <text formatting (no mode-line)>
-(setf *time-format-string-default* "%A %B %Y - %T")
+(setf *time-format-string-default* "%A %B %d - %T")
 (setf *screen-mode-line-format* nil)
 ;; -- <text formatting (most of which only works with: *shell-program* /bin/zsh)>
 ;(setf *screen-mode-line-format*

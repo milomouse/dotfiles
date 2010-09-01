@@ -45,8 +45,9 @@ set shortmess=aTItoO
 set statusline=[%n]\ %<%f%m%r\ %w\ %y\ \ <%{&fileformat}>%=[%o]\ %l,%c%V\/%L\ \ %P
 set grepprg=grep\ -nH\ $*
 inoremap # X<BS>#
-autocmd BufNewFile,BufRead *Xdefaults set ft=xdefaults
+autocmd BufNewFile,BufRead Xdefaults  set ft=xdefaults
 autocmd BufNewFile,BufRead .stumpwmrc set ft=lisp
+autocmd BufNewFile,BufRead .TODO_*    set ft=conf
 autocmd BufReadPost *
   \ if line("'\"") > 0 && line("'\"") <= line("$") |
   \   exe "normal! 9`\"" |

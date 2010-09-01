@@ -117,7 +117,7 @@ export XDG_PICTURES_DIR="${HOME}/foto"
 export XDG_PUBLICSHARE_DIR="/dev/shm"
 export XDG_TEMPLATES_DIR="/dev/shm"
 export XDG_VIDEOS_DIR="${HOME}/vide"
-export XAUTHORITY="${HOME}/.config/.Xauthority"
+export XAUTHORITY="${HOME}/.config/xorg/.Xauthority"
 
 # source alias and function files:
 [[ -f ${XDG_CONFIG_DIR:-${HOME}/.config}/zsh/zshalias ]] && . ${XDG_CONFIG_DIR:-${HOME}/.config}/zsh/zshalias

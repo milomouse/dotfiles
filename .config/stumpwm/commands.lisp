@@ -1,3 +1,20 @@
+;;----------------------------------------------------------------------------
+;; *data-dir*/commands.lisp
+;;----------------------------------------------------------------------------
+
+;; prompt with given arg as command, await further args and execute.
+(defcommand pine (&optional (initial "")) (:rest)
+  (let ((cmd (read-one-line (current-screen) ": " :initial-input initial)))
+    (when cmd
+      (eval-command cmd t))))
+
+;; same as 'pine' but send output to echo-string. may hang if used wrong.
+(defcommand pout (&optional (initial "")) (:rest)
+  (let ((cmd (read-one-line (current-screen) ": " :initial-input initial)))
+    (when cmd
+      (shell-command-output cmd))))
+
+;; evaluate string.
 (defcommand eval-line (cmd) ((:rest "eval: "))
   (handler-case
     (message "^20~{~a~^~%~}"
@@ -6,17 +23,24 @@
     (error (c)
       (err "^B^1*~A" c))))
 
+;; manpage reader. needs filename completion..
 (defcommand manpage (command) ((:rest "manpage: "))
   (run-shell-command
     (format nil "urxvt -e man ~a" command)))
 
+;; remember various states before executing certain commands.
 (defcommand remstart () () (run-commands 
   "dump-screen-to-file ~/.config/stumpwm/storage/screen_data_last"
   "restart-soft"))
-
 (defcommand remquit () () (run-commands 
   "dump-screen-to-file ~/.config/stumpwm/storage/screen_data_last"
   "quit"))
+(defcommand remvsplit () () (run-commands
+  "dump-screen-to-file /dev/shm/cache/.stumpwm_undo_data" "vsplit"
+  "dump-screen-to-file /dev/shm/cache/.stumpwm_redo_data"))
+(defcommand remhsplit () () (run-commands
+  "dump-screen-to-file /dev/shm/cache/.stumpwm_undo_data" "hsplit"
+  "dump-screen-to-file /dev/shm/cache/.stumpwm_redo_data"))
 
 ;; need to create a global command. gview X -> gselect X + echo X
 (defcommand gview_1 () () (run-commands "gselect 1" "echo 1"))
@@ -27,7 +51,8 @@
 (defcommand gview_6 () () (run-commands "gselect 6" "echo 6"))
 
 ;; better way is to use frame-number.. a little hard to 'make' though.
-(defcommand (master-make tile-group) () () (run-commands "renumber 0"))
+(defcommand (master-make tile-group) () () (run-commands
+  "renumber 0" "repack-window-numbers"))
 (defcommand (master-focus tile-group) () () (run-commands
   "select-window-by-number 0"))
 
@@ -57,33 +82,22 @@
 ;(defcommand resize-up () () (run-commands "resize 0 -15" "refresh"))
 ;(defcommand resize-down () () (run-commands "resize 0 15" "refresh"))
 
-(defcommand announce-mifo () ()
-  (echo-string (current-screen) (run-shell-command "mifo --stumpwm" t)))
+;; predefined echoes for speed, else use 'shell-command-output'.
+;(defcommand announce-mifo () ()
+;  (echo-string (current-screen) (run-shell-command "mifo --stumpwm" t)))
 
-(defcommand announce-battery () ()
-  (echo-string (current-screen) (run-shell-command "</proc/acpi/battery/BAT1/state" t)))
-
-(defcommand run-my-command (cmd &optional collect-output-p)
-  ((:shell "execute: ")) (if collect-output-p
-    (run-prog-collect-output *shell-program* "-c sdcv -nu WordNet" cmd)
-    (run-prog *shell-program* :args (list "-c sdcv -nu WordNet" cmd) :wait nil)))
-
-(defun shell-command (command)
-  (check-type command string)
-  (echo-string (current-screen) (run-my-command command t)))
-
-(defcommand dict (command) ((:string "dictionary: "))
+(defcommand shell-command-output (command) ((:string "shell/output: "))
   (check-type command string)
   (shell-command command))
 
-(defcommand dictionary () ()
-  (shell-command "echo example"))
-
+;; undo [toggle] last remembered states.
 (defcommand undo () () (run-commands
-  "restore-from-file ~/.config/stumpwm/storage/.group_undo"))
+  "dump-screen-to-file /dev/shm/cache/.stumpwm_undo_tmp"
+  "restore-from-file /dev/shm/cache/.stumpwm_undo_data"
+  "exec mv -f /dev/shm/cache/.stumpwm_undo_tmp /dev/shm/cache/.stumpwm_undo_data"))
 
-; i don't like Colon showing/editable command in prompt
-; perhaps i'll figure out a global function for this..
+;; i don't like 'Colon' showing/editable command in prompt
+;; perhaps i'll figure out a global macro/function for this..
 (defcommand prompt-mifo-command (filename) ((:rest "command: "))
   (run-shell-command (format nil "mifo --command ~a" filename)))
 (defcommand prompt-mifo-next (filename) ((:rest "next: "))
@@ -101,6 +115,7 @@
 (defcommand prompt-mifo-reload (filename) ((:rest "reload: "))
   (run-shell-command (format nil "mifo --reload ~a" filename)))
 
+;; run or raise.
 (defcommand ror_firefox () () (run-or-raise "firefox" '(:class "Firefox")))
 
 ;;(defcommand toggle-split () ()

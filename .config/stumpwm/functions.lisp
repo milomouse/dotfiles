@@ -1,5 +1,35 @@
+;;----------------------------------------------------------------------------
+;; *data-dir*/functions.lisp
+;;----------------------------------------------------------------------------
+
+;(defvar *keysym-name-translations* (make-hash-table))
+;(defvar *name-keysym-translations* (make-hash-table :test #'equal))
+;
+;(defun define-keysym (keysym name)
+;  "Define a mapping from a keysym name to a keysym."
+;  (setf (gethash keysym *keysym-name-translations*) name
+;        (gethash name *name-keysym-translations*) keysym))
+;
+;(defun keysym-name->keysym (name)
+;  "Return the keysym corresponding to NAME."
+;  (multiple-value-bind (value present-p)
+;      (gethash name *name-keysym-translations*)
+;    (declare (ignore present-p))
+;    value))
+;
+;(defun keysym->keysym-name (keysym)
+;  "Return the name corresponding to KEYSYM."
+;  (multiple-value-bind (value present-p)
+;      (gethash keysym *keysym-name-translations*)
+;    (declare (ignore present-p))
+;    value))
+
 (defun cat (&rest strings)
   (apply `concatenate `string strings))
+
+(defun shell-command (command)
+  (check-type command string)
+  (echo-string (current-screen) (run-shell-command command t)))
 
 (defun ps-exists (ps)
   (let ((f "ps -ef | grep ~S | grep -v -e grep -e stumpish | wc -l"))

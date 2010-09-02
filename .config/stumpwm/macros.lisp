@@ -1,3 +1,7 @@
+;;----------------------------------------------------------------------------
+;; *data-dir*/macros.lisp
+;;----------------------------------------------------------------------------
+
 (defmacro make-groups-bg (&rest names)
   (let ((ns (mapcar #'(lambda (n) (cat "gnewbg " n)) names)))
   `(run-commands ,@ns)))
@@ -33,7 +37,6 @@
  ;; (1    t     nil   :class "URxvt"))
 
 (define-frame-preference "2"
-  (0    t     t     :instance "ardour_editor" :type :normal)
   (0    t     t     :title "Ardour - Session Control")
   (1    t     t     :instance "ardour_mixer")
   (2    t     t     :instance "jvmetro")
@@ -49,9 +52,9 @@
 
 (define-frame-preference "5"
   (1    t     t     :restore "emacs-editing-dump" :title "...xdvi")
-  (0    t     t     :create "screen_data_05" :class "Emacs"))
+  (0    t     t     :create "group_data_05" :class "Emacs"))
 
 (define-frame-preference "6"
   (1    t     t     :restore "emacs-editing-dump" :title "...xdvi")
-  (0    t     t     :create "screen_data_06" :class "Emacs"))
+  (0    t     t     :create "group_data_06" :class "Emacs"))
 

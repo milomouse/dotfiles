@@ -1,5 +1,13 @@
-;; <set "Super + s" as prefix for root-map bindings>
-(set-prefix-key (kbd "s-s"))
+;;----------------------------------------------------------------------------
+;; *data-dir*/key-maps.lisp
+;;----------------------------------------------------------------------------
+
+;; set a few undefined keysyms, unavailable in */stumpwm/keysyms.lisp
+(define-keysym #x1008ff02 "XF86MonBrightnessUp")
+(define-keysym #x1008ff03 "XF86MonBrightnessDown")
+
+;; <set "Super + ~" as prefix for root-map bindings>
+(set-prefix-key (kbd "s-quoteleft"))
 
 ;; <input-map bindings>
 ;;(setf *input-map*
@@ -21,6 +29,14 @@
 (defvar *toggles-map*
   (let ((m (stumpwm:make-sparse-keymap)))
     (define-key m (kbd "s") "mode-line")
+    (define-key m (kbd "ESC") "abort")
+   M))
+
+(defvar *announce-map*
+  (let ((m (stumpwm:make-sparse-keymap)))
+    (define-key m (kbd "a") "pout exec mifo -as")
+    (define-key m (kbd "b") "pout exec </proc/acpi/battery/BAT1/state")
+    (define-key m (kbd "d") "pout exec sdcv -nu WordNet ")
     (define-key m (kbd "ESC") "abort")
    M))
 
@@ -99,18 +115,18 @@
 (setf *top-map*
   (let ((m (stumpwm:make-sparse-keymap)))
     ;; <numerical bindings>
-    ;(define-key m (kbd "s-1")    "gview_1")
-    ;(define-key m (kbd "s-2")    "gview_2")
-    ;(define-key m (kbd "s-3")    "gview_3")
-    ;(define-key m (kbd "s-4")    "gview_4")
-    ;(define-key m (kbd "s-5")    "gview_5")
-    ;(define-key m (kbd "s-6")    "gview_6")
-    (define-key m (kbd "s-1")    "gselect 1")
-    (define-key m (kbd "s-2")    "gselect 2")
-    (define-key m (kbd "s-3")    "gselect 3")
-    (define-key m (kbd "s-4")    "gselect 4")
-    (define-key m (kbd "s-5")    "gselect 5")
-    (define-key m (kbd "s-6")    "gselect 6")
+    (define-key m (kbd "s-1")    "gview_1")
+    (define-key m (kbd "s-2")    "gview_2")
+    (define-key m (kbd "s-3")    "gview_3")
+    (define-key m (kbd "s-4")    "gview_4")
+    (define-key m (kbd "s-5")    "gview_5")
+    (define-key m (kbd "s-6")    "gview_6")
+    ;(define-key m (kbd "s-1")    "gselect 1")
+    ;(define-key m (kbd "s-2")    "gselect 2")
+    ;(define-key m (kbd "s-3")    "gselect 3")
+    ;(define-key m (kbd "s-4")    "gselect 4")
+    ;(define-key m (kbd "s-5")    "gselect 5")
+    ;(define-key m (kbd "s-6")    "gselect 6")
     (define-key m (kbd "s-8")    "clear-window-marks")
     (define-key m (kbd "s-C-8")  "gmove-marked")
     (define-key m (kbd "s-M-8")  "pull-marked")
@@ -136,11 +152,14 @@
     (define-key m (kbd "s-*")    "mark")
     (define-key m (kbd "s-)")    "resize  0  15")
     (define-key m (kbd "s-(")    "resize  0 -15")
-    (define-key m (kbd "s--")    "vsplit")
-    (define-key m (kbd "s-=")    "hsplit")
+    ;(define-key m (kbd "s--")    "vsplit")
+    ;(define-key m (kbd "s-=")    "hsplit")
+    (define-key m (kbd "s--")    "remvsplit")
+    (define-key m (kbd "s-=")    "remhsplit")
     (define-key m (kbd "s-+")    "balance-frames")
     (define-key m (kbd "s-;")    "colon")
     (define-key m (kbd "s-:")    "manpage")
+    (define-key m (kbd "s-C-;")  "eval")
     (define-key m (kbd "s-,")    "gprev")
     (define-key m (kbd "s-<")    "gprev-with-window")
     (define-key m (kbd "s-.")    "gnext")
@@ -158,17 +177,15 @@
     (define-key m (kbd "s-SunPrint_Screen") "exec import -window root ${XDG_PICTURES_DIR:-${HOME}/foto}/shot/$(date +%Y_%m_%d-%H%M%S).png")
     (define-key m (kbd "s-S-Delete")        "exec alock -bg image:=${HOME}/foto/wall/beheading.jpg -cursor glyph -auth pam >&/dev/null")
     ;; <alphabetic bindings>
-    (define-key m (kbd "s-a")    *mplayer-daemon-map2*)
-    (define-key m (kbd "s-A")    "announce-mifo")
+    (define-key m (kbd "s-a")    *announce-map*)
     (define-key m (kbd "s-b")    "redisplay")
     (define-key m (kbd "s-B")    "repack-window-numbers")
-    ;(define-key m (kbd "s-B")    "announce-battery")
     (define-key m (kbd "s-c")    "remember")
     (define-key m (kbd "s-C")    "place-existing-windows")
     (define-key m (kbd "s-d")    *mplayer-daemon-map1*)
     (define-key m (kbd "s-D")    "prompt-mifo-command")
     (define-key m (kbd "s-e")    "exec ")
-    (define-key m (kbd "s-E")    "eval")
+    (define-key m (kbd "s-E")    "shell-command-output")
     (define-key m (kbd "s-f")    *frequent-map*)
     (define-key m (kbd "s-F")    "forget")
     (define-key m (kbd "s-g")    "vgroups")
@@ -204,6 +221,7 @@
     (define-key m (kbd "s-Q")    "remquit")
     (define-key m (kbd "s-r")    "iresize")
     (define-key m (kbd "s-R")    "remstart")
+    (define-key m (kbd "s-s")    *mplayer-daemon-map2*)
     (define-key m (kbd "s-S")    *websearch-map*)
     (define-key m (kbd "s-t")    *toggles-map*)
     (define-key m (kbd "s-T")    "title")
@@ -222,9 +240,9 @@
     ;; <function-key bindings>
     (define-key m (kbd "XF86AudioRaiseVolume") "exec ossvalt -i 1")
     (define-key m (kbd "XF86AudioLowerVolume") "exec ossvalt -d 1")
-    ;;(define-key* (kbd "XF86MonBrightnessUp") "exec moodlight --increase")
-    ;;(define-key* (kbd "c-XF86MonBrightnessUp") "exec moodlight --max")
-    ;;(define-key* (kbd "XF86MonBrightnessDown") "exec moodlight --decrease")
+    (define-key m (kbd "XF86MonBrightnessUp") "exec moodlight --increase")
+    (define-key m (kbd "C-XF86MonBrightnessUp") "exec moodlight --max")
+    (define-key m (kbd "XF86MonBrightnessDown") "exec moodlight --decrease")
     (define-key m (kbd "XF86AudioMute") "exec ossvalt -m")
     (define-key m (kbd "s-F1")   "dump-group-to-file ~/.config/stumpwm/storage/group_1")
     (define-key m (kbd "s-F2")   "dump-group-to-file ~/.config/stumpwm/storage/group_2")
@@ -244,7 +262,7 @@
     (define-key m (kbd "F9")     "restore-from-file ~/.config/stumpwm/storage/screen_data")
     (define-key m (kbd "F10")    "restore-from-file /home/milo/.config/stumpwm/storage/screen_data_last")
     (define-key m (kbd "C-ESC")  "abort")
-    (define-key m (kbd "s-quoteleft") "scratchpad")
+   ; (define-key m (kbd "s-quoteleft") "scratchpad")
    M))
 
 (define-key *root-map* (kbd "h") *help-map*)

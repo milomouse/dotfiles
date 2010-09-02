@@ -86,6 +86,8 @@
 ;(defcommand announce-mifo () ()
 ;  (echo-string (current-screen) (run-shell-command "mifo --stumpwm" t)))
 
+
+;; sent output of command to echo-string.
 (defcommand shell-command-output (command) ((:string "shell/output: "))
   (check-type command string)
   (shell-command command))

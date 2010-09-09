@@ -227,7 +227,6 @@ scratchPad = scratchpadSpawnActionCustom $ -- make sure to indent the next line:
 -- LAYOUTS {{{
 
 myLayouts = avoidStruts $ windowNavigation  $
-           -- gaps [(U,14),(D,14)]            $
             gaps [(U,14)]                   $
             mkToggle (single NBFULL)        $
             mkToggle (single REFLECTX)      $
@@ -243,7 +242,7 @@ myLayouts = avoidStruts $ windowNavigation  $
     myFull = named "*" (smartBorders $ Full)
     myTabd = named "-" (smartBorders $ tabbedAlways shrinkText myTabTheme)
     myOneB = named "@" (lessBorders (OnlyFloat) (withBorder 1 (limitWindows 10 (OneBig 0.75 0.65))))
-    myTile = named "#" (lessBorders (OnlyFloat) (withBorder 1 (drawer `onBottom` (ResizableTall 1 0.03 0.60 []))))
+    myTile = named "#" (lessBorders (OnlyFloat) (withBorder 1 (drawer `onBottom` (ResizableTall 1 0.03 0.65 []))))
       where
         drawer = simpleDrawer 0 0.36 (ClassName "Firefox" `Or` ClassName "Zathura")
 
@@ -264,7 +263,7 @@ myManageHook :: ManageHook
 myManageHook = (composeAll . concat $
     [ [resource     =? r     --> doIgnore       |   r   <- myIgnores] -- ignore desktop
     , [className    =? c     --> doShift  "4"   |   c   <- myInetC  ] -- move myInetC windows to workspace 4
-    , [className    =? c     --> doShift  "5"   |   c   <- myFotoC  ] -- move myFotoC windows to workspace 5
+--    , [className    =? c     --> doShift  "5"   |   c   <- myFotoC  ] -- move myFotoC windows to workspace 5
     , [className    =? c     --> doShift  "6"   |   c   <- myElseC  ] -- move myElseC windows to workspace 6
     , [className    =? c     --> doCenterFloat  |   c   <- myFloatsC] -- float center geometry by 
     , [name         =? n     --> doCenterFloat  |   n   <- myFloatCN] -- float center geometry by name

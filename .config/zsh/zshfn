@@ -37,6 +37,15 @@ function mvf() {
   fi
 }
 
+# use 'real' program, not an alias/function, etc:
+function real() {
+  if [[ -n $1 ]]; then
+    for each in ${${PATH//:/\/$1 }// /\\n}; do
+      eval $(find $(print $each) -type f 2>/dev/null | head -1) $@
+    done
+  else /bin/false ; fi
+}
+
 # extract archive with preferred options:
 function extr() {
   if [ -f $1 ] ; then 

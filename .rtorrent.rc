@@ -1,7 +1,7 @@
-## ~/.rtorrent.rc [extended version]
-## milomouse
+##// ~/.rtorrent.rc [extended version]
+##// milomouse
 
-# connection
+#// connection
 port_range = 49164-49164
 encryption = allow_incoming,try_outgoing,enable_retry
 peer_exchange = yes
@@ -10,8 +10,10 @@ tracker_numwant = 64
 use_udp_trackers = yes
 dht = auto
 dht_port = 6881
+scgi_local = /tmp/rtorrent-xmlrpc.socket
+encoding_list = UTF-8
 
-# {up,down}loads
+#// {up,down}loads
 directory = /home/milo/tors/
 session = /home/milo/tors/.sess
 max_uploads = 24
@@ -22,15 +24,16 @@ download_rate = 0
 max_peers = 82
 max_peers_seed = 24
 
-# watch dirs
+#// watch dirs
 schedule = watch_directory1,5,5,"load_start=/home/milo/tors/foto/.down/*.torrent,d.set_directory=/home/milo/tors/foto/"
 schedule = watch_directory2,5,5,"load_start=/home/milo/tors/muzk/.down/*.torrent,d.set_directory=/home/milo/tors/muzk/"
 schedule = watch_directory3,5,5,"load_start=/home/milo/tors/othe/.down/*.torrent,d.set_directory=/home/milo/tors/othe/"
 schedule = watch_directory4,5,5,"load_start=/home/milo/tors/vide/.down/*.torrent,d.set_directory=/home/milo/tors/vide/"
 schedule = watch_directory5,5,5,"load_start=/home/milo/tors/book/.down/*.torrent,d.set_directory=/home/milo/tors/book/"
 
-# other actions
-system.method.set_key = event.download.finished,notify_dzen,"execute=/usr/local/bin/notor,$d.get_base_filename="
+#// other actions
+schedule = chmod,0,0,"execute=chmod,777,/tmp/rtorrent-xmlrpc.socket"
+system.method.set_key = event.download.finished,notify_stumpwm,"execute=/usr/local/bin/stumpbark,$d.get_base_filename="
 schedule = filter_active,10,10,"view_filter = active,d.get_down_rate="
 #schedule = filter_active,30,30,"view_filter = active,\"or={d.get_up_rate=,d.get_down_rate=}\""
 #schedule = snub_leechers,120,120,"snub_leechers=10,5,1M"

@@ -146,7 +146,7 @@
 ;  (toggle-mode-line (current-screen) (current-head)))
 
 ;; -- <hide mode-line>
-(run-commands "toggle-mode-line")
+;;(run-commands "toggle-mode-line")
 
 ;(setf *frame-number-map* "123456")
 (setf (group-name (first (screen-groups (current-screen)))) "1")

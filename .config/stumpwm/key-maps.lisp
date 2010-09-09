@@ -34,9 +34,10 @@
 
 (defvar *announce-map*
   (let ((m (stumpwm:make-sparse-keymap)))
-    (define-key m (kbd "a") "pout exec mifo -as")
-    (define-key m (kbd "b") "pout exec </proc/acpi/battery/BAT1/state")
+    (define-key m (kbd "a") "announce-mifo")
+    (define-key m (kbd "b") "announce-battery")
     (define-key m (kbd "d") "pout exec sdcv -nu WordNet ")
+    (define-key m (kbd "m") "pout exec mifo -as")
     (define-key m (kbd "ESC") "abort")
    M))
 
@@ -235,7 +236,7 @@
     (define-key m (kbd "s-X")    "getsel")
     (define-key m (kbd "s-y")    "window-send-string")
     (define-key m (kbd "s-Y")    "meta")
-    (define-key m (kbd "s-z")    "remove")
+    (define-key m (kbd "s-z")    "remremove")
     (define-key m (kbd "s-Z")    "remove-split")
     ;; <function-key bindings>
     (define-key m (kbd "XF86AudioRaiseVolume") "exec ossvalt -i 1")

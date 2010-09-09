@@ -30,17 +30,16 @@
 
 ;; remember various states before executing certain commands.
 (defcommand remstart () () (run-commands 
-  "dump-screen-to-file ~/.config/stumpwm/storage/screen_data_last"
-  "restart-soft"))
+  "dump-screen-to-file ~/.config/stumpwm/storage/screen_data_last" "restart-soft"))
 (defcommand remquit () () (run-commands 
-  "dump-screen-to-file ~/.config/stumpwm/storage/screen_data_last"
-  "quit"))
+  "dump-screen-to-file ~/.config/stumpwm/storage/screen_data_last" "quit"))
+;; has to be a global way of doing this -- macro undodata then command remember X..?
 (defcommand remvsplit () () (run-commands
-  "dump-screen-to-file /dev/shm/cache/.stumpwm_undo_data" "vsplit"
-  "dump-screen-to-file /dev/shm/cache/.stumpwm_redo_data"))
+  "dump-screen-to-file /dev/shm/cache/.stumpwm_undo_data" "vsplit"))
 (defcommand remhsplit () () (run-commands
-  "dump-screen-to-file /dev/shm/cache/.stumpwm_undo_data" "hsplit"
-  "dump-screen-to-file /dev/shm/cache/.stumpwm_redo_data"))
+  "dump-screen-to-file /dev/shm/cache/.stumpwm_undo_data" "hsplit"))
+(defcommand remremove () () (run-commands
+  "dump-screen-to-file /dev/shm/cache/.stumpwm_undo_data" "remove"))
 
 ;; need to create a global command. gview X -> gselect X + echo X
 (defcommand gview_1 () () (run-commands "gselect 1" "echo 1"))
@@ -83,8 +82,10 @@
 ;(defcommand resize-down () () (run-commands "resize 0 15" "refresh"))
 
 ;; predefined echoes for speed, else use 'shell-command-output'.
-;(defcommand announce-mifo () ()
-;  (echo-string (current-screen) (run-shell-command "mifo --stumpwm" t)))
+(defcommand announce-mifo () ()
+  (echo-string (current-screen) (run-shell-command "mifo --stumpwm" t)))
+(defcommand announce-battery () ()
+  (echo-string (current-screen) (run-shell-command "</proc/acpi/battery/BAT1/state" t)))
 
 
 ;; sent output of command to echo-string.

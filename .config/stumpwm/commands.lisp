@@ -40,6 +40,8 @@
   "dump-screen-to-file /dev/shm/cache/.stumpwm_undo_data" "hsplit"))
 (defcommand remremove () () (run-commands
   "dump-screen-to-file /dev/shm/cache/.stumpwm_undo_data" "remove"))
+(defcommand remonly () () (run-commands
+  "dump-screen-to-file /dev/shm/cache/.stumpwm_undo_data" "only"))
 
 ;; need to create a global command. gview X -> gselect X + echo X
 (defcommand gview_1 () () (run-commands "gselect 1" "echo 1"))

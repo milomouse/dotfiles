@@ -1,5 +1,5 @@
 # extend run-path for local scripts/binaries:
-PATH=$PATH:/usr/local/bin:/usr/local/sbin
+[[ -n $(print $PATH|grep local/bin) ]] || PATH=$PATH:/usr/local/bin:/usr/local/sbin
 
 # prompt line:
 [[ "$TERM" == screen* ]] && precmd() {print -Pn "\e]2;%2d\a"} || RPROMPT='%F{white}%~%f'

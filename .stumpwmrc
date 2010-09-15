@@ -2,7 +2,7 @@
 ;; ~/.stumpwmrc
 ;;----------------------------------------------------------------------------
 ;; author: milomouse <vincent[at]fea.st>
-;; update: 2010-09-15 10:15:54
+;; update: 2010-09-15 10:34:42
 ;;----------------------------------------------------------------------------
 ;; versions used atoc:
 ;; |  clisp-new-clx     -> 2.49-1
@@ -14,8 +14,8 @@
 ;; >>--: create a 'dedicate' and 'catchall' hook for changing focus color
 ;; >>>-: create a 'dedicate' and 'catchall' window-rule (remember * *)
 ;; >---: have '(mplayer daemon)' prompts use filename completion
-;;!>>>>: function? for dedicating current win/frame as the Master win/frame
-;;!>>>>: function? for swapping current window with the Master win/frame
+;; >>>>: function? for dedicating current win/frame as the Master win/frame
+;; >>>>! function? for swapping current window with the Master win/frame
 ;; >---: better resize; if neighbor {left} then -ARG else +ARG, etc
 ;;----------------------------------------------------------------------------
 ;; file/s: *data-dir*/{commands,functions,hooks,key-maps,macros}.lisp

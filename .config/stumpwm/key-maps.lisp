@@ -45,6 +45,7 @@
     (dk m (kbd "a") "announce-mifo")
     (dk m (kbd "b") "announce-battery")
     (dk m (kbd "d") "echo-date")
+    (dk m (kbd "h") "announce-harddrives")
     (dk m (kbd "l") "announce-loadavg")
     (dk m (kbd "p") "announce-highcpu")
     (dk m (kbd "m") "announce-memory")

@@ -155,7 +155,7 @@
 (defcommand announce-mifo-raw () () (echo-string (current-screen) (run-shell-command "mifo -ar" t)))
 (defcommand announce-battery () () (echo-string (current-screen) (run-shell-command "</proc/acpi/battery/BAT1/state" t)))
 (defcommand announce-harddrives () () (echo-string (current-screen) (run-shell-command "df -hTP;print - '------------------------------------------------------';df -hTP --total|tail -1" t)))
-(defcommand announce-memory () () (echo-string (current-screen) (run-shell-command "print free used base;free -m|awk 'NR==2 {print $3,$4,$2}'" t)))
+(defcommand announce-freememory () () (echo-string (current-screen) (run-shell-command "print free used base;free -m|awk 'NR==2 {print $4,$3,$2}'" t)))
 (defcommand announce-loadavg () () (echo-string (current-screen) (run-shell-command "print ${$(</proc/loadavg)[1,3]}" t)))
 (defcommand announce-highcpu () () (echo-string (current-screen) (run-shell-command "ps -U root --deselect -C tmux,urxvt k -%cpu opid,args:70,etime:8,%cpu,pmem" t)))
 (defcommand announce-volume () () (echo-string (current-screen) (run-shell-command "print ${$(ossmix|awk 'NR==29')[4]}dB" t)))

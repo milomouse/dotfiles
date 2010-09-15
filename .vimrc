@@ -7,6 +7,12 @@ if $DISPLAY =~ ":0.0"
   set t_Co=256
 endif
 colorscheme cottonmouse
+if has ('folding')
+  set foldenable
+  set foldmethod=marker
+  set foldmarker={{{,}}}
+  set foldcolumn=0
+endif
 set nocursorline
 set nocursorcolumn
 set ignorecase
@@ -26,8 +32,10 @@ set number
 set mouse=v
 set mousehide
 set showmatch
+set completeopt=longest
 set splitbelow
 set splitright
+set wildmode=list:longest,full
 set showmode
 set showcmd
 set scrolloff=2
@@ -44,14 +52,21 @@ set directory=/tmp/.VIM-save/swapfiles,.
 set shortmess=aTItoO
 set statusline=[%n]\ %<%f%m%r\ %w\ %y\ \ <%{&fileformat}>%=[%o]\ %l,%c%V\/%L\ \ %P
 set grepprg=grep\ -nH\ $*
-inoremap # X<BS>#
+autocmd BufNewFile,BufRead ~/mail/*   set ft=mail | set textwidth=72 | set spell
 autocmd BufNewFile,BufRead Xdefaults  set ft=xdefaults
 autocmd BufNewFile,BufRead .stumpwmrc set ft=lisp
+autocmd BufNewFile,BufRead ~/.config/stumpwm/storage/* set ft=lisp
 autocmd BufNewFile,BufRead .TODO_*    set ft=conf
 autocmd BufReadPost *
   \ if line("'\"") > 0 && line("'\"") <= line("$") |
   \   exe "normal! 9`\"" |
   \ endif
+autocmd Filetype html,xml,xsl set spell
+autocmd FileType c      set formatoptions+=ro
+autocmd FileType make   set noexpandtab shiftwidth=8
+autocmd FileType python set expandtab shiftwidth=2 tabstop=2
+autocmd FileType c      syn match matchName /\(#define\)\@<= .*/
+autocmd FileType cpp    syn match matchName /\(#define\)\@<= .*/
 filetype on
 filetype indent off
 filetype plugin indent off
@@ -68,3 +83,16 @@ map <Left> <NOP>
 map <Right> <NOP>
 map <End> <NOP>
 map <Home> <NOP>
+inoremap # X<BS>#
+nnoremap q: <Nop>
+nnoremap q/ <Nop>
+nnoremap q? <Nop>
+" MapToggle from p.brisbin's vimrc
+function MapToggle(key, opt) 
+  let cmd = ':set '.a:opt.'! \| set '.a:opt."?\<CR>"
+  exec 'nnoremap '.a:key.' '.cmd
+  exec 'inoremap '.a:key." \<C-O>".cmd
+endfunction
+command -nargs=+ MapToggle call MapToggle(<f-args>)
+"MapToggle <F8> number
+"MapToggle <F11> foldenable 

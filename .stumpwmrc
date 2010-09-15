@@ -2,13 +2,13 @@
 ;; ~/.stumpwmrc
 ;;----------------------------------------------------------------------------
 ;; author: milomouse <vincent[at]fea.st>
-;; update: 2010-09-15 10:34:42
+;; update: 2010-09-15 13:57:44
 ;;----------------------------------------------------------------------------
 ;; versions used atoc:
-;; |  clisp-new-clx     -> 2.49-1
-;; |  ecl (cl-asdf)     -> 10.4.1-1
+;; |  clisp-new-clx     -> 2.48-2
+;; |  cl-asdf           -> 20100915-1
 ;; |  cl-ppcre          -> 2.0.3-1
-;; |  stumpwm-git       -> 20100825-1
+;; |  stumpwm-git       -> 20100915-1
 ;; |  surfraw-git       -> 20100908-1
 ;;-TODO:----------------------------------------------------------------------
 ;; >>--: create a 'dedicate' and 'catchall' hook for changing focus color

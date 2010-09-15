@@ -22,50 +22,27 @@ zstyle ':completion:*:manuals' separate-sections true
 zstyle ':completion:*:manuals.(^1*)' insert-sections true
 zstyle ':completion:*' verbose true
 zstyle ':completion:*' use-cache on
-zstyle ':completion:*' cache-path ${XDG_CACHE_HOME:-/dev/shm}/zsh
+zstyle ':completion:*' cache-path ${XDG_CACHE_HOME:-/dev/shm}
 zstyle ':completion:*' squeeze-slashes true
 zstyle ':completion:*:functions' ignored-patterns '_*'
 zstyle ':completion:*:*:kill:*' menu yes select
-zstyle ':completion:*:*:kill:*:processes' command 'ps --forest -A -o pid,user,state,pcpu,etime,cmd'
+zstyle ':completion:*:*:kill:*:processes' command 'ps haxopid:5,user:4,%cpu:4,ni:2,stat:3,etime:8,args'
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' force-list always
 [[ ! -a $(which bauerbill) ]] || compdef _pacman bauerbill=pacman
 [[ ! -a $(which pacman-color) ]] || compdef _pacman pacman-color=pacman
 
 # optimizations:
-setopt VI
-setopt AUTO_CD
-setopt CHASE_LINKS
-setopt AUTO_PUSHD
-setopt PUSHD_IGNORE_DUPS
-setopt HASH_LIST_ALL
-setopt LIST_TYPES
-setopt LIST_PACKED
-setopt NO_MATCH
-setopt CORRECT
-setopt COMPLETE_IN_WORD
-setopt HIST_VERIFY
-setopt HIST_REDUCE_BLANKS
-setopt HIST_IGNORE_SPACE
-setopt HIST_IGNORE_ALL_DUPS
-setopt HIST_EXPIRE_DUPS_FIRST
-setopt HIST_NO_STORE
-setopt HIST_NO_FUNCTIONS
-setopt HIST_FIND_NO_DUPS
-setopt NO_CLOBBER
-setopt EXTENDED_GLOB
-setopt NUMERIC_GLOB_SORT
-setopt DOT_GLOB
-setopt NO_BEEP
-setopt NOTIFY
-setopt CHECK_JOBS
-setopt LONG_LIST_JOBS
-setopt AUTO_CONTINUE
-setopt INTERACTIVE_COMMENTS
-setopt WARN_CREATE_GLOBAL
-setopt PROMPT_SUBST
+setopt VI \
+AUTO_CD  CHASE_LINKS  AUTO_PUSHD  PUSHD_IGNORE_DUPS \
+HASH_LIST_ALL  LIST_TYPES  LIST_PACKED \
+NOTIFY  NO_BEEP  NO_MATCH  CORRECT  COMPLETE_IN_WORD \
+HIST_VERIFY  HIST_REDUCE_BLANKS  HIST_IGNORE_SPACE  HIST_NO_STORE \
+HIST_IGNORE_ALL_DUPS  HIST_EXPIRE_DUPS_FIRST  HIST_FIND_NO_DUPS  HIST_NO_FUNCTIONS \
+NO_CLOBBER  EXTENDED_GLOB  NUMERIC_GLOB_SORT  DOT_GLOB \
+CHECK_JOBS  LONG_LIST_JOBS  AUTO_CONTINUE \
+INTERACTIVE_COMMENTS  WARN_CREATE_GLOBAL  PROMPT_SUBST
 unsetopt TRANSIENT_RPROMPT
-unset MAILCHECK
 
 # keybindings:
 bindkey "^[[2~" overwrite-mode
@@ -142,7 +119,7 @@ if [[ "${TERM}" = "linux" || "${TERM}" == screen* ]]; then
 #    echo -en "\e]PEa3babf"
 #    echo -en "\e]P7999999"
 #    echo -en "\e]PF98a7b6"
-#   jessicamouse:
+#   candymouse:
     echo -en "\e]P0000000"
     echo -en "\e]P83d3a3a"
     echo -en "\e]P1d74b73"

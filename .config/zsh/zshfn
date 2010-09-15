@@ -37,7 +37,7 @@ function mvf() {
   fi
 }
 
-# use 'real' program, not an alias/function, etc:
+# [TESTING] use 'real' program, not an alias/function, etc:
 function real() {
   if [[ -n $1 ]]; then
     for each in ${${PATH//:/\/$1 }// /\\n}; do
@@ -46,9 +46,36 @@ function real() {
   else /bin/false ; fi
 }
 
+# [TESTING] update/overwrite testing versions with final versions:
+# NOTE: need to use 'find + file', etc, to determine where each file should go,
+#       not just ~/code/shell... need to copy to ~/code/{lisp,lua,perl,python},etc..
+#function codeup() {
+#  for files in $(/bin/ls /usr/local/bin); do
+#    for each in $(/bin/ls ${HOME}/code/shell|/bin/grep -x $files); do
+#      for final in $(print ${$(diff -q /usr/local/bin/$each ${HOME}/code/shell/$each)[2]}); do
+#        cp -v $final ${HOME}/code/shell
+#      done
+#    done
+#  done
+#}
+
+# show ps information with simple output for scripts, quick views, etc.
+function psi() {
+  if [[ ${#${@:/$0}} -ge 2 ]]; then
+    case $1 {
+      '-C'|'-c')  ps -C $2 hoargs ;;
+      '-G'|'-g')  ps -G $2 hoargs ;;
+      '-U'|'-u')  ps -U $2 hoargs ;;
+      '-P'|'-p')  ps -p $2 hoargs ;;
+      '-S'|'-s')  ps -s $2 hoargs ;;
+      '-T'|'-t')  ps -t $2 hoargs ;;
+      *)  print "unrecognized option. read: man ps (section: process selection by list)" ;; }
+  else print "not enough options."; fi
+}
+
 # extract archive with preferred options:
 function extr() {
-  if [ -f $1 ] ; then 
+  if [ -f $1 ]; then 
     case $1 in
       *.tar.bz2)   tar xjf $1    ;;
       *.tar.gz)    tar xzf $1    ;;

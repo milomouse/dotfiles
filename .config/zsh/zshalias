@@ -1,5 +1,6 @@
 # file management:
-alias ls="ls -h --file-type --time-style='+%m-%d-%y %H%M%S' --color=auto --group-directories-first"
+alias ls="/bin/ls -h --file-type --time-style='+%m-%d-%y %H%M%S' --color=auto --group-directories-first"
+alias lss="ls -- *(D.om)"
 alias la="ls -A"
 alias laa="ls -A -- *(D.om)"
 alias lc="la -d .*"
@@ -61,18 +62,20 @@ alias btcli='/usr/bin/btcli -d ${XDG_CONFIG_DIR:-$HOME/.config}/btpd'
 alias startx="/usr/local/bin/go $@"
 
 # system/media shortcuts:
-alias mix2="ossmix codec1.jack.int-speaker.mode mix2 1>/dev/null && echo 'Mixer set to PC Speaker'"
-alias mix3="ossmix codec1.jack.int-speaker.mode mix3 1>/dev/null && echo 'Mixer set to Headphones'"
-#alias rec='ffmpeg -f x11grab -s 1366x768 - r 150 -i :0.0 -sameq /tmp/capture.mpg'
-alias siteget='wget --recursive --page-requisites --convert-links --html-extension --no-parent --wait=10 --limit-rate=20K -U Mozilla -l' #depth, then url
-alias synt="highlight -t 2 -k fixed -K 8 -l -j 3 -s candy"
+alias psu="print 'ELASPING %CPU NI +?  LWPID - COMMAND';ps -U root,http,postgres --deselect -C tmux,urxvt -H hoetime:8,%cpu:4,ni:2,stat:3,pid:5,rtprio:1,args"
+alias psr="print 'ELASPING %CPU NI +?  LWPID - COMMAND';ps -u root -U root -H hoetime:8,%cpu:4,ni:2,stat:3,pid:5,rtprio:1,args"
+alias psa="print 'ELASPING USER %CPU NI +?  LWPID - COMMAND';ps -H haxoetime:8,user:4,%cpu:4,ni:2,stat:3,pid:5,rtprio:1,args"
+alias pso="print 'ELASPING USER %CPU NI +?  LWPID - COMMAND';ps -U root,milo --deselect -u root,milo -H hoetime:8,user:4,%cpu:4,ni:2,stat:3,pid:5,rtprio:1,args"
 alias dfu="df -hTP;print - '------------------------------------------------------';df -hTP --total|tail -1"
-alias psu="ps fxo etime,pid,pmem,pcpu,command"
-alias psa="ps aux"
-alias psr="ps -u root fo etime,user,pid,pmem,pcpu,command"
+alias {lavg,loadavg}='print ${$(</proc/loadavg)[1,3]}'
 alias daemons="lt /var/run/daemons"
 alias reboot="sudo reboot"
 alias {poweroff,pow}="sudo poweroff"
+alias mix2="ossmix codec1.jack.int-speaker.mode mix2 1>/dev/null && print 'Mixer set to PC Speaker'"
+alias mix3="ossmix codec1.jack.int-speaker.mode mix3 1>/dev/null && print 'Mixer set to Headphones'"
+#alias rec='ffmpeg -f x11grab -s 1366x768 - r 150 -i :0.0 -sameq /tmp/capture.mpg'
+alias siteget='wget --recursive --page-requisites --convert-links --html-extension --no-parent --wait=10 --limit-rate=20K -U Mozilla -l' #depth, then url
+alias synt="highlight -t 2 -k fixed -K 8 -l -j 3 -s candy"
 
 # database/package management:
 alias upf="sudo fc-cache -vf"
@@ -81,5 +84,5 @@ alias baer="bauerbill"
 alias {baerp,pacman}="sudo pacman-color"
 alias ay="yaourt"
 alias aive="ay -Q --date|tee ${HOME}/othe/archive/$(date +%m_%d_%y) >>/dev/null"
-alias lasi="3view ${HOME}/othe/archive/$(ls -ltr ${HOME}/othe/archive |tail -1|awk '{print $7}')"
-alias lasid="3view ${HOME}/othe/archive/$(ls -ltr ${HOME}/othe/archive |tail -2|head -1|awk '{print $7}')"
+alias lasi="3view ${HOME}/othe/archive/$(/bin/ls -ltr ${HOME}/othe/archive|tail -1|awk '{print $8}')"
+alias lasid="3view ${HOME}/othe/archive/$(/bin/ls -ltr ${HOME}/othe/archive|tail -2|head -1|awk '{print $8}')"

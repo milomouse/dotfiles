@@ -2,27 +2,10 @@
 ;; *data-dir*/macros.lisp
 ;;----------------------------------------------------------------------------
 
+;; create given groups while keeping focus on current.
 (defmacro make-groups-bg (&rest names)
   (let ((ns (mapcar #'(lambda (n) (cat "gnewbg " n)) names)))
   `(run-commands ,@ns)))
-
-(define-stumpwm-type :password (input prompt)
-  (let ((history *input-history*)
-        (arg (argument-pop input))
-        (fn (symbol-function 'draw-input-bucket)))
-    (unless arg
-      (unwind-protect
-           (setf (symbol-function 'draw-input-bucket)
-                 (lambda (screen prompt input &optional errorp)
-                   (let ((i (copy-structure input)))
-                     (setf (input-line-string i)
-                           (make-string (length (input-line-string i))
-                                        :initial-element #\*))
-                     (funcall fn screen prompt i)))
-                 arg (read-one-line (current-screen) prompt))
-        (setf (symbol-function 'draw-input-bucket) fn
-              *input-history* history))
-      arg)))
 
 ;; Last rule to match takes precedence!
 ;; TIP: if the argument to :title or :role begins with an ellipsis, a substring
@@ -55,6 +38,5 @@
   (0    t     t     :create "group_data_05" :class "Emacs"))
 
 (define-frame-preference "6"
-  (1    t     t     :restore "emacs-editing-dump" :title "...xdvi")
-  (0    t     t     :create "group_data_06" :class "Emacs"))
+  (0    t     t     :instance "ossxmix"))
 

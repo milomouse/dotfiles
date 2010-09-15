@@ -2,19 +2,21 @@
 ;; ~/.stumpwmrc
 ;;----------------------------------------------------------------------------
 ;; author: milomouse <vincent[at]fea.st>
-;; update: 2010-09-02 11:54:44
+;; update: 2010-09-11 22:31:24
 ;;----------------------------------------------------------------------------
 ;; versions used atoc:
 ;; |  clisp-new-clx     -> 2.48-2
 ;; |  ecl (cl-asdf)     -> 10.4.1-1
 ;; |  cl-ppcre          -> 2.0.3-1
 ;; |  stumpwm-git       -> 20100825-1
-;; |  surfraw-git       -> 20100825-1
+;; |  surfraw-git       -> 20100908-1
 ;;-TODO:----------------------------------------------------------------------
-;; >---: show only CURRENT frame title, not every window, in mode-line.
+;; >>--: create a 'dedicate' and 'catchall' hook for changing focus color
 ;; >>>-: create a 'dedicate' and 'catchall' window-rule (remember * *)
-;; >>--: create a 'dedicate' and 'catchall' hook for changing focus color.
 ;; >---: have '(mplayer daemon)' prompts use filename completion
+;; >>>-: function? for dedicating current win/frame as the Master win/frame
+;; >>--: function? for swapping current window with the Master win/frame
+;; ----: better resize; if neighbor {left} then -ARG else +ARG, etc
 ;;----------------------------------------------------------------------------
 ;; file/s: *data-dir*/{commands,functions,hooks,key-maps,macros}.lisp
 ;;----------------------------------------------------------------------------
@@ -22,6 +24,7 @@
 
 (in-package :stumpwm)
 (clear-window-placement-rules)
+(setf *data-dir* "~/.config/stumpwm/storage/")
 (defcommand run-shell-command (cmd &optional collect-output-p)
   ((:shell "execute: ")) (if collect-output-p
     (run-prog-collect-output *shell-program* "-c" cmd)
@@ -29,23 +32,24 @@
 (setf *shell-program* "/bin/zsh")
 (defcommand-alias exec run-shell-command)
 
-;; -- <module(pre-variables)>
-(setf *data-dir* "~/.config/stumpwm/storage/")
-(defvar *disk-usage-paths* '("/" "/home" "/var"))
-(defvar *disk-modeline-fmt* "^B^8*%a^**^b^0*|^**^B^7*%p^**^b")
+;; module(pre-variables)
+;(defvar *disk-usage-paths* '("/" "/home" "/var"))
+;(defvar *disk-modeline-fmt* "^B^8*%a^**^b^0*|^**^B^7*%p^**^b")
 (defvar *surfraw-bookmark-file* (data-dir-file "bookmarks" "txt"))
+(defvar *background-image-path* "~/foto/wall/")
 
-;; -- <scripts>
+;; scripts
 ;(loop for file in '("mplayer-fix")
 ;      do (load (make-pathname :name file :type "lisp" :directory
 ;      '(:relative ".config" "stumpwm" "scripts"))))
 
-;; -- <modules>
-(loop for file in '("cpu" "disk" "surfraw" "notifications")
+;; modules
+;(loop for file in '("cpu" "disk" "surfraw" "notifications")
+(loop for file in '("surfraw" "notifications")
       do (load (make-pathname :name file :type "lisp" :directory
       '(:relative ".config" "stumpwm" "modules"))))
 
-;; -- <borders and gravity>
+;; borders and gravity
 (setf *resize-hides-windows* T
       *normal-border-width* 2
       *maxsize-border-width* 2
@@ -57,15 +61,15 @@
       *window-border-style* :thin
       *message-window-gravity* :top-right
       *input-window-gravity* :top-right
-      *timeout-wait* 4)
+      *timeout-wait* 6)
 
-;; -- <fonts/colors>
+;; fonts/colors
 (set-font "-*-fixed-medium-r-normal-*-10-*-*-*-*-*-*-*")
 (set-fg-color        "#a19ea8")
 (set-bg-color        "grey15")
 (set-border-color    "grey45")
-;(set-focus-color     "#d86284")
-(set-focus-color     "#d74b73")
+;(set-focus-color     "#d74b73")
+(set-focus-color     "#746890")
 ;(set-focus-color     "#7965ac")
 (set-unfocus-color   "#1c1c1c")
 (set-win-bg-color    "#0c0c0c")
@@ -78,6 +82,7 @@
                      "#a488d9"   ;; 5 - magenta /or/ #885ed8
                      "#508686"   ;; 6 - cyan
                      "#8d8d8d"   ;; 7 - white
+                    ; "#746890"   ;; 8 - [faint ] magenta
                      "#585872"   ;; 8 - [faint ] magenta
                      "#57718b")) ;; 9 - [bright] blue
 ;                     "#3d3a3a"   ;; 8 - other
@@ -94,25 +99,15 @@
 ;                     "#b695f4")) ;; 9 - [bright] magenta
 (update-color-map (current-screen))
 
-;; - <text formatting (no mode-line)>
-(setf *time-format-string-default* "%A %B %d - %T")
-(setf *screen-mode-line-format* nil)
-;; -- <text formatting (most of which only works with: *shell-program* /bin/zsh)>
-;(setf *screen-mode-line-format*
-;      (list "[^B^4*%n^**^b] ^B^7*%C^**^b/" '(:eval (run-shell-command
-;      "printf ${${${(@@f)$(</proc/loadavg)[1,3]}//0./^B^9*-.}//./^B^0*.^**}" t)) "^B^7*|^** %D ^B^7*|^B^0* @fea.st: "
-;      '(:eval (run-shell-command "ls -1 ~/mail/FastMail/*/new|sed 's|/.*$||'|tr '\\n' ' '|wc -w|tr -d '\\n'" t))
-;      " ^B^7*|^** ..^5*/^6*" '(:eval (run-shell-command
-;"print -n ${${${${${${$(<~/.config/mifo/log|grep Playing)}// /_}//\\/home\\/milo\\/muzk\\/}//\\\//^5*\/^**}[-1]}[1,80]}"
-;      t)) " ^B^7*| ^7*"
-;      '(:eval (run-shell-command "print -n ${${$(ossmix|grep outvol)[4,5]}/\)/}" t)) " ^B^7*| ^7*"
-;      '(:eval (run-shell-command "date '+%Y-%m-%d^B^6*/^0*%a^5* |^**^b %T'|tr -d '\\n'" t))))
-(setf
-*startup-message* "^B^1*together we ate the king^**^b:^B^5*and laughed ourselves to death^**^b"
-*group-format*    "^B^8*%t^7*%s^07|^**^b"
-*window-format*   "^B^27%s^0*%16t^**^b")
+;; text formatting (no mode-line)
+(setf *time-day-names* #("Mon" "Tue" "Wed" "Thu" "Fri" "Sat" "Sun")
+      *time-format-string-default* "^B^2*%T^9* %Y-%m-%d^**/^8*%A^**^b"
+      *screen-mode-line-format* nil
+      *startup-message* "^B^1*together we ate the king^**^b:^B^5*and laughed ourselves to death^**^b"
+      *group-format*    "^B^8*%t^7*%s^07|^**^b"
+      *window-format*   "^B^27%s^1*%m^0*%16t^**^b")
 
-;; -- <windows/frames>
+;; windows/frames
 (setf *default-window-name* "null"
       *normal-gravity* :top-right
       *maxsize-gravity* :top-right
@@ -122,7 +117,7 @@
       *min-frame-height* 50
       *resize-increment* 10)
 
-;; -- <mode-line/input>
+;; mode-line/input
 (setf *mode-line-background-color* "grey13"
       *mode-line-border-color* "grey25"
       *mode-line-foreground-color* "#a9a6af"
@@ -133,23 +128,14 @@
       *mode-line-position* :top
       *input-history-ignore-duplicates* 0)
 
-;; -- <load external settings' file/s>
+;; load external settings' file/s
 (loop for file in '("functions" "macros" "commands" "hooks" "key-maps")
       do (load (make-pathname :name file :type "lisp" :directory
       '(:relative ".config" "stumpwm"))))
-
-;; -- <screens/workspaces>
-;(run-shell-command "[[ -n $(pgrep dzen) ]] || . .xmonad/dzen4xmonad &")
-
-;; -- <show mode-line if not already shown>
-;(if (not (head-mode-line (current-head)))
-;  (toggle-mode-line (current-screen) (current-head)))
-
-;; -- <hide mode-line>
-;;(run-commands "toggle-mode-line")
 
 ;(setf *frame-number-map* "123456")
 (setf (group-name (first (screen-groups (current-screen)))) "1")
 (make-groups-bg "2" "3" "4" "5" "6")
 (restore-from-file (data-dir-file "screen_data_last"))
+;(display-random-bg)
 

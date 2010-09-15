@@ -2,51 +2,52 @@
 ;; *data-dir*/functions.lisp
 ;;----------------------------------------------------------------------------
 
-;(defvar *keysym-name-translations* (make-hash-table))
-;(defvar *name-keysym-translations* (make-hash-table :test #'equal))
-;
-;(defun define-keysym (keysym name)
-;  "Define a mapping from a keysym name to a keysym."
-;  (setf (gethash keysym *keysym-name-translations*) name
-;        (gethash name *name-keysym-translations*) keysym))
-;
-;(defun keysym-name->keysym (name)
-;  "Return the keysym corresponding to NAME."
-;  (multiple-value-bind (value present-p)
-;      (gethash name *name-keysym-translations*)
-;    (declare (ignore present-p))
-;    value))
-;
-;(defun keysym->keysym-name (keysym)
-;  "Return the name corresponding to KEYSYM."
-;  (multiple-value-bind (value present-p)
-;      (gethash keysym *keysym-name-translations*)
-;    (declare (ignore present-p))
-;    value))
+;; move current window to next group but do not focus.
+(defun move-window-to-next-group (current list)
+  (let ((next (next-group current (non-hidden-groups list)))
+        (win (group-current-window current)))
+    (when (and next win) (move-window-to-group win next))))
 
+;; focus frame [also when splitting] but do not show-frame-indicator.
+(defun focus-frame (group f)
+  (let ((w (frame-window f))
+        (last (tile-group-current-frame group))
+        (show-indicator nil))
+    (setf (tile-group-current-frame group) f)
+    (unless (eq f last)
+      (setf (tile-group-last-frame group) last)
+      (run-hook-with-args *focus-frame-hook* f last)
+      (setf show-indicator t))
+    (if w (focus-window w) (no-focus group (frame-window last)))
+    (if show-indicator (show-frame-outline group))))
+(defun split-frame-in-dir (group dir)
+  (let ((f (tile-group-current-frame group)))
+    (if (split-frame group dir)
+        (progn
+          (update-decoration (frame-window f)))
+        (message "Canot split smaller than minimum size."))))
+
+;; focus frame when switching groups, but do not print frame-indicator-text.
+;(defmethod group-wake-up ((group tile-group))
+;  (focus-frame group (tile-group-current-frame group)))
+;(defmethod group-indicate-focus ((group tile-group)))
+
+;; concatenate provided strings.
 (defun cat (&rest strings)
   (apply `concatenate `string strings))
 
+;; select a random image from *background-image-path* and display it on root window.
+(defun select-random-bg-image ()
+  (let ((file-list (directory (concatenate 'string *background-image-path* "*.png")))
+        (*random-state* (make-random-state t)))
+    (namestring (nth (random (length file-list)) file-list))))
+
+;; run a shell command.
 (defun shell-command (command)
   (check-type command string)
   (echo-string (current-screen) (run-shell-command command t)))
 
-(defun ps-exists (ps)
-  (let ((f "ps -ef | grep ~S | grep -v -e grep -e stumpish | wc -l"))
-    (< 0 (parse-integer (run-shell-command (format nil f ps) t)))))
-
-(defun start-uniq-command-ps (command &key options (background t))
-  (unless (ps-exists command)
-    (run-shell-command
-     (concat command " " options " " (when background "&")))))
-
-(defun kill-ps-command (command)
-  (format nil "kill -TERM `ps -ef | grep ~S | grep -v grep | awk '{print $2}'`"
-          command))
-
-(defun kill-ps (command)
-  (run-shell-command (kill-ps-command command)))
-
+;; expand filenames with special focus on home dir.
 (defun expand-file-name (path &optional default-directory)
   (let ((first-char (subseq path 0 1))
     (home-dir (cat (getenv "HOME") "/"))
@@ -60,6 +61,51 @@
           (cat dir path)
           (expand-file-name (cat dir path))))
         (t (cat home-dir path)))))
+
+;; to ease repetition in commands.
+(defun remember-undo () () (dump-screen-to-file "/dev/shm/cache/.stumpwm_undo_data"))
+(defun remember-last () () (dump-screen-to-file "~/.config/stumpwm/storage/screen_data_last"))
+
+;; use prettier eval error and skip mode-line updates (since i don't use it)
+(defun eval-command (cmd &optional interactivep)
+  (labels ((parse-and-run-command (input)
+             (let* ((arg-line (make-argument-line :string input :start 0))
+                    (cmd (argument-pop arg-line)))
+               (let ((*interactivep* interactivep))
+		 (call-interactively cmd arg-line)))))
+    (multiple-value-bind (result error-p)
+        ;; this fancy footwork lets us grab the backtrace from where the error actually happened.
+      (restart-case (handler-bind 
+              ((error (lambda (c)
+                        (invoke-restart 'eval-command-error
+                                        (format nil "^B^1*Error In Command ^**'^9*~a^**'^0*: ^n~A~a" 
+                                                cmd c (if *show-command-backtrace* 
+                                                          (backtrace-string) ""))))))
+            (parse-and-run-command cmd))
+        (eval-command-error (err-text)
+          (values err-text t)))
+      (cond ((stringp result)
+             (if error-p  (message-no-timeout "~a" result)
+                          (message "~a" result)))
+            ((eq result :abort)
+             (unless *suppress-abort-messages* (message "Abort.")))))))
+
+;; cleaner {i}resize bindings.
+(defun update-resize-map ()
+  (let ((m (setf *resize-map* (make-sparse-keymap))))
+    (let ((i *resize-increment*))
+    (labels ((dk (m k c) (define-key m k (format nil c i))))
+      (dk m (kbd "k") "resize 0 -~D")
+      (dk m (kbd "(") "resize 0 -~D")
+      (dk m (kbd "j") "resize 0 ~D")
+      (dk m (kbd ")") "resize 0 ~D")
+      (dk m (kbd "h") "resize -~D 0")
+      (dk m (kbd "9") "resize -~D 0")
+      (dk m (kbd "l") "resize ~D 0")
+      (dk m (kbd "0") "resize ~D 0")
+      (dk m (kbd "RET") "exit-iresize")
+      (dk m (kbd "ESC") "abort-iresize")
+    M)))) (update-resize-map)
 
 ;(defstruct scratchpad
 ;  (last-group '())

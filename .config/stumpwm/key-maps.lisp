@@ -87,6 +87,7 @@
     (dk m (Kbd "w") "wikipedia")
     (dk m (Kbd "x") "ixsearch")
     (dk m (kbd "y") "youtube")
+    (dk m (kbd ":") "pine exec firefox http://")
   M)))
 
 ;; <mplayer-daemon-* bindings>

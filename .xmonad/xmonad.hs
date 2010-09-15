@@ -119,7 +119,7 @@ main = do
       , focusFollowsMouse   = False
       }
 myStartHook = spawnOnce ". $HOME/.xmonad/dzen4xmonad" <+>
-              spawnOnce "mifo --daemon" <+>
+ --             spawnOnce "sudo /etc/rc.d/mifo start" <+>
               setDefaultCursor xC_left_ptr <+>
               ewmhDesktopsStartup >> setWMName "LG3D"
 

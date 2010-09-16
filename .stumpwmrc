@@ -2,7 +2,7 @@
 ;; ~/.stumpwmrc
 ;;----------------------------------------------------------------------------
 ;; author: milomouse <vincent[at]fea.st>
-;; update: 2010-09-15 16:24:11
+;; update: 2010-09-16 14:48:31
 ;;----------------------------------------------------------------------------
 ;; versions used atoc:
 ;; |  clisp-new-clx     -> 2.48-2
@@ -13,13 +13,15 @@
 ;;-TODO:----------------------------------------------------------------------
 ;; >>--: create a 'dedicate' and 'catchall' hook for changing focus color
 ;; >>>-: create a 'dedicate' and 'catchall' window-rule (remember * *)
-;; >---: have '(mplayer daemon)' prompts use filename completion
+;; >---: have mifo(mplayer-daemon) prompts use filename completion
 ;; >>>>: command for dedicating current win/frame as the Master win/frame
 ;; >>>>! command for swapping current window with the Master win/frame
 ;; >---: better resize; if neighbor {left} then -ARG else +ARG, etc
 ;; >---: command-mode for mifo video:seek to eliminate extra key-presses
 ;;----------------------------------------------------------------------------
 ;; file/s: *data-dir*/{commands,functions,hooks,key-maps,macros}.lisp
+;;-NOTE:----------------------------------------------------------------------
+;; for MPlayer, use: mplayer -nokeepaspect -fstype netwm
 ;;----------------------------------------------------------------------------
 
 

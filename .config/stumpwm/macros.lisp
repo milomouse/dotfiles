@@ -32,7 +32,8 @@
   (0    nil   t     :instance "Navigator")
   (0    nil   t     :class "luakit")
   (0    t     t     :class "Jumanji")
-  (0    t     nil   :class "Mplayer")
+  (0    t     nil   :class "MPlayer")
+  (1    t     t     :title "Add-ons")
   (1    t     nil   :class "URxvt"))
 
 ;(define-frame-preference "4"

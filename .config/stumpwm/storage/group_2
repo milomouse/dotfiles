@@ -1,7 +1,15 @@
-#S(|STUMPWM|::|GDUMP| :|NUMBER| 2. :|NAME| "2"
+#S(|STUMPWM|::|GDUMP| :|NUMBER| 1. :|NAME| "1"
    :|TREE|
-   ((#S(|STUMPWM|::|FDUMP| :|NUMBER| 0. :|X| 0. :|Y| 0. :|WIDTH| 683.
-        :|HEIGHT| 768. :|WINDOWS| (8388617.) :|CURRENT| 8388617.)
-     #S(|STUMPWM|::|FDUMP| :|NUMBER| 1. :|X| 683. :|Y| 0. :|WIDTH| 683.
-        :|HEIGHT| 768. :|WINDOWS| (10485769.) :|CURRENT| 10485769.)))
+   (((#S(|STUMPWM|::|FDUMP| :|NUMBER| 0. :|X| 0. :|Y| 0. :|WIDTH| 743.
+         :|HEIGHT| 449. :|WINDOWS| |COMMON-LISP|::|NIL|
+         :|CURRENT| |COMMON-LISP|::|NIL|)
+      #S(|STUMPWM|::|FDUMP| :|NUMBER| 4. :|X| 0. :|Y| 449. :|WIDTH| 743.
+         :|HEIGHT| 319. :|WINDOWS| |COMMON-LISP|::|NIL|
+         :|CURRENT| |COMMON-LISP|::|NIL|))
+     (#S(|STUMPWM|::|FDUMP| :|NUMBER| 1. :|X| 743. :|Y| 0. :|WIDTH| 623.
+         :|HEIGHT| 309. :|WINDOWS| |COMMON-LISP|::|NIL|
+         :|CURRENT| |COMMON-LISP|::|NIL|)
+      #S(|STUMPWM|::|FDUMP| :|NUMBER| 3. :|X| 743. :|Y| 309. :|WIDTH| 623.
+         :|HEIGHT| 459. :|WINDOWS| |COMMON-LISP|::|NIL|
+         :|CURRENT| |COMMON-LISP|::|NIL|))))
    :|CURRENT| 0.)

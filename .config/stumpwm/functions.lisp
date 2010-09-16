@@ -27,15 +27,6 @@
           (update-decoration (frame-window f)))
         (message "Canot split smaller than minimum size."))))
 
-;; focus frame when switching groups, but do not print frame-indicator-text.
-;(defmethod group-wake-up ((group tile-group))
-;  (focus-frame group (tile-group-current-frame group)))
-;(defmethod group-indicate-focus ((group tile-group)))
-
-;; concatenate provided strings.
-(defun cat (&rest strings)
-  (apply `concatenate `string strings))
-
 ;; select a random image from *background-image-path* and display it on root window.
 (defun select-random-bg-image ()
   (let ((file-list (directory (concatenate 'string *background-image-path* "*.png")))
@@ -50,7 +41,7 @@
 ;; expand filenames with special focus on home dir.
 (defun expand-file-name (path &optional default-directory)
   (let ((first-char (subseq path 0 1))
-    (home-dir (cat (getenv "HOME") "/"))
+    (home-dir (concatenate 'string (getenv "HOME") "/"))
     (dir (if default-directory
       (if (string= (subseq (reverse default-directory) 0 1) "/")
         default-directory
@@ -58,13 +49,15 @@
   (cond ((string= first-char "~") (cat home-dir (subseq path 2)))
         ((string= first-char "/") path)
         (dir (if (strings= (subseq 0 1) "/")
-          (cat dir path)
-          (expand-file-name (cat dir path))))
-        (t (cat home-dir path)))))
+          (concatenate 'string dir path)
+          (expand-file-name (concatenate 'string dir path))))
+        (t (concatenate 'string home-dir path)))))
 
 ;; to ease repetition in commands.
 (defun remember-undo () () (dump-screen-to-file "/dev/shm/cache/.stumpwm_undo_data"))
-(defun remember-last () () (dump-screen-to-file "~/.config/stumpwm/storage/screen_data_last"))
+(defun remember-last () ()
+  (dump-window-placement-rules "~/.config/stumpwm/storage/placement_rules")
+  (dump-screen-to-file "~/.config/stumpwm/storage/screen_data_last"))
 
 ;; use prettier eval error and skip mode-line updates (since i don't use it)
 (defun eval-command (cmd &optional interactivep)
@@ -74,13 +67,13 @@
                (let ((*interactivep* interactivep))
 		 (call-interactively cmd arg-line)))))
     (multiple-value-bind (result error-p)
-        ;; this fancy footwork lets us grab the backtrace from where the error actually happened.
+      ;; this fancy footwork lets us grab the backtrace from where the error actually happened.
       (restart-case (handler-bind 
-              ((error (lambda (c)
-                        (invoke-restart 'eval-command-error
-                                        (format nil "^B^1*Error In Command ^**'^9*~a^**'^0*: ^n~A~a" 
-                                                cmd c (if *show-command-backtrace* 
-                                                          (backtrace-string) ""))))))
+          ((error (lambda (c)
+                    (invoke-restart 'eval-command-error
+                          (format nil "^B^0*{{ ^9*~a ^0*}} ^n~A~a" 
+                                cmd c (if *show-command-backtrace* 
+                                          (backtrace-string) ""))))))
             (parse-and-run-command cmd))
         (eval-command-error (err-text)
           (values err-text t)))

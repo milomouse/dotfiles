@@ -4,7 +4,7 @@
 
 ;; create given groups while keeping focus on current.
 (defmacro make-groups-bg (&rest names)
-  (let ((ns (mapcar #'(lambda (n) (cat "gnewbg " n)) names)))
+  (let ((ns (mapcar #'(lambda (n) (concatenate 'string "gnewbg " n)) names)))
   `(run-commands ,@ns)))
 
 ;; Last rule to match takes precedence!
@@ -14,10 +14,11 @@
 ;; restored from *data-dir*/create file.
 ;; TIP: if the :restore flag is set then group dump is restored even for an
 ;; existing group using *data-dir*/restore file.
-(define-frame-preference "1"
+
 ;; frame raise lock (lock AND raise == jumpto)
-  (0    t     nil   :class "Konqueror" :role "...konqueror-mainwindow"))
- ;; (1    t     nil   :class "URxvt"))
+;(define-frame-preference "1"
+;  (0    t     t     :create "group_1")
+ ; (0    t     t     :class "MPlayer"))
 
 (define-frame-preference "2"
   (0    t     t     :title "Ardour - Session Control")
@@ -27,15 +28,18 @@
   (3    t     t     :instance "qjackctl" :role "qjackctlMainForm"))
 
 (define-frame-preference "3"
-  (0    nil   t     :class "Firefox"))
+;  (0    t     t     :create "group_3")
+  (0    nil   t     :instance "Navigator")
+  (0    nil   t     :class "luakit")
+  (0    t     t     :class "Jumanji")
+  (0    t     nil   :class "Mplayer")
+  (1    t     nil   :class "URxvt"))
 
-(define-frame-preference "4"
-  (1    t     t     :restore "emacs-editing-dump" :title "...xdvi")
-  (0    t     t     :create "screen_data_04" :class "Emacs"))
+;(define-frame-preference "4"
+;  (0    t     t     :create "group_4"))
 
-(define-frame-preference "5"
-  (1    t     t     :restore "emacs-editing-dump" :title "...xdvi")
-  (0    t     t     :create "group_data_05" :class "Emacs"))
+;(define-frame-preference "5"
+;  (0    t     t     :create "group_5"))
 
 (define-frame-preference "6"
   (0    t     t     :instance "ossxmix"))

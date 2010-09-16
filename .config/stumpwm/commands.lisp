@@ -13,6 +13,7 @@
   (let ((win (find-if #'match (group-windows group))))
     (when (and win group) (exchange-windows (current-window) win) (master-make)))))
 
+
 ;; [with *shell-program* "/bin/zsh"] look for detached 'tmux -L xorg' session and attach, else create new.
 (defcommand tmux-attach-else-new () ()
   (run-shell-command
@@ -92,8 +93,8 @@
     (if (atom tree)
         (message "No more frames!")
         (when s
-          (when (frame-is-head group frame)
           (remember-undo)
+          (when (frame-is-head group frame)
             (setf (frame-number l) (frame-number frame)))
           ;; <move the windows from the removed frame to its sibling>
           (migrate-frame-windows group frame l)
@@ -153,9 +154,11 @@
 ;; predefined echoes for speed, else use 'shell-command-output'.
 (defcommand announce-mifo () () (echo-string (current-screen) (run-shell-command "mifo -as" t)))
 (defcommand announce-mifo-raw () () (echo-string (current-screen) (run-shell-command "mifo -ar" t)))
+(defcommand announce-mifo-list () () (echo-string (current-screen) (run-shell-command "mifo --show current|grep -A 7 -B 7 $(mifo -ar)|sed 's|'$(mifo -ar)'|^B^1*&^n|'" t)))
+(defcommand announce-unread-mail () () (echo-string (current-screen) (run-shell-command "print unread: ${#$(find ~/mail/FastMail/*/new -type f)}" t)))
 (defcommand announce-battery () () (echo-string (current-screen) (run-shell-command "</proc/acpi/battery/BAT1/state" t)))
 (defcommand announce-harddrives () () (echo-string (current-screen) (run-shell-command "df -hTP;print - '------------------------------------------------------';df -hTP --total|tail -1" t)))
-(defcommand announce-freememory () () (echo-string (current-screen) (run-shell-command "print free used base;free -m|awk 'NR==2 {print $4,$3,$2}'" t)))
+(defcommand announce-free-mem () () (echo-string (current-screen) (run-shell-command "print free used base;free -m|awk 'NR==2 {print $4,$3,$2}'" t)))
 (defcommand announce-loadavg () () (echo-string (current-screen) (run-shell-command "print ${$(</proc/loadavg)[1,3]}" t)))
 (defcommand announce-highcpu () () (echo-string (current-screen) (run-shell-command "ps -U root --deselect -C tmux,urxvt k -%cpu opid,args:70,etime:8,%cpu,pmem" t)))
 (defcommand announce-volume () () (echo-string (current-screen) (run-shell-command "print ${$(ossmix|awk 'NR==29')[4]}dB" t)))
@@ -209,32 +212,10 @@
     (error (c)
       (err "^B^1*~A" c))))
 
-;; use prettier eval errors and skip mode-line updates (since i don't use it)
-(defun eval-command (cmd &optional interactivep)
-  (labels ((parse-and-run-command (input)
-             (let* ((arg-line (make-argument-line :string input :start 0))
-                    (cmd (argument-pop arg-line)))
-               (let ((*interactivep* interactivep))
-		 (call-interactively cmd arg-line)))))
-    (multiple-value-bind (result error-p)
-        (restart-case (handler-bind 
-                ((error (lambda (c)
-                          (invoke-restart 'eval-command-error
-                               (format nil "^B^0*{{ ^9*~a ^0*}} ^n~A~a" 
-                                cmd c (if *show-command-backtrace* 
-                                          (backtrace-string) ""))))))
-              (parse-and-run-command cmd))
-          (eval-command-error (err-text)
-            (values err-text t)))
-      (cond ((stringp result)
-             (if error-p (message-no-timeout "~a" result)
-                         (message "~a" result)))
-            ((eq result :abort)
-             (unless *suppress-abort-messages* (message "Abort.")))))))
-
-
 ;; run or raise.
-(defcommand ror_firefox () () (setf *run-or-raise-all-groups* t) (run-or-raise "firefox" '(:class "Firefox")))
+(defcommand ror_firefox () () (setf *run-or-raise-all-groups* t) (run-or-raise "firefox" '(:instance "Navigator")))
+(defcommand ror_mutt () () (setf *run-or-raise-all-groups* nil)
+  (run-or-raise "urxvt -e mutt -F ${XDG_CONFIG_DIR:-${HOME}/.config}/mutt/muttrc" '(:title "mutt")))
 
 ;; select a random background image.
 (defcommand display-random-bg () () (run-shell-command

@@ -14,9 +14,10 @@
 ;; >>--: create a 'dedicate' and 'catchall' hook for changing focus color
 ;; >>>-: create a 'dedicate' and 'catchall' window-rule (remember * *)
 ;; >---: have '(mplayer daemon)' prompts use filename completion
-;; >>>>: function? for dedicating current win/frame as the Master win/frame
-;; >>>>! function? for swapping current window with the Master win/frame
+;; >>>>: command for dedicating current win/frame as the Master win/frame
+;; >>>>! command for swapping current window with the Master win/frame
 ;; >---: better resize; if neighbor {left} then -ARG else +ARG, etc
+;; >---: command-mode for mifo video:seek to eliminate extra key-presses
 ;;----------------------------------------------------------------------------
 ;; file/s: *data-dir*/{commands,functions,hooks,key-maps,macros}.lisp
 ;;----------------------------------------------------------------------------
@@ -37,11 +38,6 @@
 ;(defvar *disk-modeline-fmt* "^B^8*%a^**^b^0*|^**^B^7*%p^**^b")
 (defvar *surfraw-bookmark-file* (data-dir-file "bookmarks" "txt"))
 (defvar *background-image-path* "~/foto/wall/")
-
-;; scripts
-;(loop for file in '("mplayer-fix")
-;      do (load (make-pathname :name file :type "lisp" :directory
-;      '(:relative ".config" "stumpwm" "scripts"))))
 
 ;; modules
 ;(loop for file in '("cpu" "disk" "surfraw" "notifications")
@@ -70,7 +66,6 @@
 (set-border-color    "grey45")
 ;(set-focus-color     "#d74b73")
 (set-focus-color     "#746890")
-;(set-focus-color     "#7965ac")
 (set-unfocus-color   "#1c1c1c")
 (set-win-bg-color    "#0c0c0c")
 (set-win-bg-color    "#020202")
@@ -79,24 +74,11 @@
                      "#799c99"   ;; 2 - green
                      "#c8bc45"   ;; 3 - yellow
                      "#6c7373"   ;; 4 - blue
-                     "#a488d9"   ;; 5 - magenta /or/ #885ed8
+                     "#a488d9"   ;; 5 - magenta
                      "#508686"   ;; 6 - cyan
                      "#8d8d8d"   ;; 7 - white
-                    ; "#746890"   ;; 8 - [faint ] magenta
-                     "#585872"   ;; 8 - [faint ] magenta
-                     "#57718b")) ;; 9 - [bright] blue
-;                     "#3d3a3a"   ;; 8 - other
-;                     "#b94062")) ;; 9 - other
-;(setf *colors* (list "#020202"   ;; 0 - [almost] black
-;                     "#a9a6af"   ;; 1 - [faint ] white
-;                     "#a883a3"   ;; 2 - [bright] pink
-;                     "#7a6c78"   ;; 3 - [faint ] pink
-;                     "#57718b"   ;; 4 - [bright] blue
-;                     "pink"      ;; 5 - [almost] pink
-;                     "#585872"   ;; 6 - [faint ] magenta
-;                     "#477289"   ;; 7 - [mild  ] blue
-;                     "#555555"   ;; 8 - [mild  ] grey
-;                     "#b695f4")) ;; 9 - [bright] magenta
+                     "#585872"   ;; 8 - (user) faint magenta
+                     "#57718b")) ;; 9 - (user) bright blue
 (update-color-map (current-screen))
 
 ;; text formatting (no mode-line)
@@ -137,5 +119,6 @@
 (setf (group-name (first (screen-groups (current-screen)))) "1")
 (make-groups-bg "2" "3" "4" "5" "6")
 (restore-from-file (data-dir-file "screen_data_last"))
+(restore-window-placement-rules (data-dir-file "placement_rules"))
 ;(display-random-bg)
 

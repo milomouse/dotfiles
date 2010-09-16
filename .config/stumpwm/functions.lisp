@@ -45,8 +45,8 @@
     (dir (if default-directory
       (if (string= (subseq (reverse default-directory) 0 1) "/")
         default-directory
-        (cat default-directory "/")))))
-  (cond ((string= first-char "~") (cat home-dir (subseq path 2)))
+        (concatenate 'string default-directory "/")))))
+  (cond ((string= first-char "~") (concatenate 'string home-dir (subseq path 2)))
         ((string= first-char "/") path)
         (dir (if (strings= (subseq 0 1) "/")
           (concatenate 'string dir path)

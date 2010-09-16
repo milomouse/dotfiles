@@ -35,9 +35,9 @@ schedule = watch_directory5,5,5,"load_start=/home/milo/tors/book/.down/*.torrent
 schedule = chmod,0,0,"execute=chmod,777,/tmp/rtorrent-xmlrpc.socket"
 system.method.set_key = event.download.finished,notify_stumpwm,"execute=/usr/local/bin/stumpbark,$d.get_base_filename="
 schedule = filter_active,10,10,"view_filter = active,d.get_down_rate="
-#schedule = filter_active,30,30,"view_filter = active,\"or={d.get_up_rate=,d.get_down_rate=}\""
-#schedule = snub_leechers,120,120,"snub_leechers=10,5,1M"
-#schedule = ban_slow_peers,120,120,"ban_slow_peers=5,2K,64K,5,128K,10,1M,30"
+#//schedule = filter_active,30,30,"view_filter = active,\"or={d.get_up_rate=,d.get_down_rate=}\""
+#//schedule = snub_leechers,120,120,"snub_leechers=10,5,1M"
+#//schedule = ban_slow_peers,120,120,"ban_slow_peers=5,2K,64K,5,128K,10,1M,30"
 schedule = tied_directory,5,60,start_tied=
 schedule = untied_directory,5,60,close_untied=
 schedule = low_diskspace,5,60,"close_low_diskspace=200M"

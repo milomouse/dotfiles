@@ -1,0 +1,23 @@
+# global settings:
+nokeepaspect=1
+fstype=netwm
+monitoraspect=16:9
+lavdopts=threads=2
+subfont-osd-scale=3
+vo=xv
+ao=oss
+framedrop=yes
+double=yes
+
+# profiles:
+[vo.fbdev]
+vf=scale=1366:768
+
+[protocol.dvd]
+profile-desc="profile for dvd:// streams"
+alang=en
+
+[protocol.dvdnav]
+profile-desc="profile for dvdnav:// streams"
+profile=protocol.dvd
+nocache=yes

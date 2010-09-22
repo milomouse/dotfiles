@@ -2,6 +2,46 @@
 ;; *data-dir*/commands.lisp
 ;;----------------------------------------------------------------------------
 
+(defcommand mymenu () ()
+            (labels ((pick (options)
+                       (let ((selection (stumpwm::select-from-menu (current-screen) options "")))
+                         (cond
+                           ((null selection)
+                            (throw 'stumpwm::error "Abort."))
+                           ((stringp (second selection))
+                            (second selection))
+                           (t
+                            (pick (cdr selection)))))))
+              (let ((choice (pick *app-menu*)))
+                (run-shell-command choice))))
+(defparameter *app-menu* '(("BookShelf"
+                            ;;submenu
+                            ("Concrete Mathematics" "xpdf /mnt/e/Books/Math/ConcreteMath_CN.pdf")
+                            ("PraiseForPracticalCommonLisp" "xpdf /mnt/e/Books/CommonLisp/PraiseForPracticalCommonLisp.pdf")
+                            ("ANSI Common Lisp" "xpdf '/mnt/e/Books/CommonLisp/Graham, Paul - ANSI Common Lisp.pdf'")
+                            ("Instructors.Manual" "xpdf '/mnt/e/Books/Algorithms/Introduction To Algorithms 2nd Edition Solutions (Instructors.Manual).pdf'")
+                            ("SolutionsToITA" "xpdf /mnt/e/Books/Algorithms/SolutionsToITA.pdf")
+                            ("LispBook" "xpdf /mnt/e/Books/CommonLisp/loveinglisp/LispBook.pdf"))
+                           ("INTERNET"
+                            ;; sub menu
+                            ("Firefox" "firefox")
+                            ("opera" "opera"))
+                           ("FUN"
+                            ;; sub menu
+                            ("option 2" "xlogo")
+                            ("Crack attack" "crack-attack")
+                            ("wesnoth" "wesnoth")
+                            ("supertux" "supertux")
+                            ("GnuChess" "xboard"))
+                           ("WORK"
+                            ;;submenu
+                            ("OpenOffice.org" "openoffice"))
+                           ("GRAPHICS"
+                            ;;submenu
+                            ("GIMP" "gimp"))))
+
+;; ----------------------------------------------------------------------------------------------------
+
 ;; designate master window/frame (should probably use current frame number, but less dynamic?)
 (defcommand (master-make tile-group) () () (renumber 0) (repack-window-numbers) (remember-last))
 (defcommand (master-focus tile-group) () () (select-window-by-number 0))
@@ -66,7 +106,7 @@
         ))) (defcommand (exit-iresize tile-group) () () (resize-unhide) (pop-top-map))
 ;; .. also have a quiet-resize that hides frame-outlines (not used in 'iresize')
 (defcommand (quiet-resize tile-group) (width height) ((:number "+ Width: ")
-                                                (:number "+ Height: "))
+                                                      (:number "+ Height: "))
   (let* ((group (current-group))
          (f (tile-group-current-frame group)))
     (if (atom (tile-group-frame-tree group))
@@ -142,6 +182,20 @@
 ;; remember frame positions before splitting (do not edit split-frames function for this)
 (defcommand (hsplit tile-group) () () (remember-undo) (split-frame-in-dir (current-group) :column))
 (defcommand (vsplit tile-group) () () (remember-undo) (split-frame-in-dir (current-group) :row))
+(defcommand (hsplit-resize tile-group) (group fraction) (horiz-split-frame group)
+  (remember-undo)
+  (let ((frame (tile-group-current-frame group)))
+    (resize-frame group
+                  frame
+                  (truncate (* (- (* 2 fraction) 1) (frame-width frame)))
+                  'width)))
+(defcommand (vsplit-resize tile-group) (group fraction) (vert-split-frame group)
+  (remember-undo)
+  (let ((frame (tile-group-current-frame group)))
+    (resize-frame group
+                  frame
+                  (truncate (* (- (* 2 fraction) 1) (frame-height frame)))
+                  'height)))
 
 ;; dump to file, which is silent, but with more informative prompts.
 (defcommand dump-group-to-file (file) ((:rest "group to file: "))
@@ -160,11 +214,13 @@
 (defcommand announce-harddrives () () (echo-string (current-screen) (run-shell-command "df -hTP;print - '------------------------------------------------------';df -hTP --total|tail -1" t)))
 (defcommand announce-free-mem () () (echo-string (current-screen) (run-shell-command "print free used base;free -m|awk 'NR==2 {print $4,$3,$2}'" t)))
 (defcommand announce-loadavg () () (echo-string (current-screen) (run-shell-command "print ${$(</proc/loadavg)[1,3]}" t)))
-(defcommand announce-highcpu () () (echo-string (current-screen) (run-shell-command "ps -U root --deselect -C tmux,urxvt k -%cpu opid,args:70,etime:8,%cpu,pmem" t)))
+(defcommand announce-highcpu () () (echo-string (current-screen) (run-shell-command "ps -U root,http,postgres --deselect -C tmux,urxvt k -%cpu opid,args:70,etime:8,%cpu,pmem" t)))
 (defcommand announce-volume () () (echo-string (current-screen) (run-shell-command "print ${$(ossmix|awk 'NR==29')[4]}dB" t)))
 (defcommand announce-volup () () (run-shell-command "ossvalt -i 1" t) (announce-volume))
 (defcommand announce-voldown () () (run-shell-command "ossvalt -d 1" t) (announce-volume))
 (defcommand announce-volmute () () (run-shell-command "ossvalt -m" t) (announce-volume))
+(defcommand announce-mix2 () () (echo-string (current-screen) (run-shell-command "ossmix codec1.jack.int-speaker.mode mix2 1>/dev/null && print 'Mixer set to PC Speaker'" t)))
+(defcommand announce-mix3 () () (echo-string (current-screen) (run-shell-command "ossmix codec1.jack.int-speaker.mode mix3 1>/dev/null && print 'Mixer set to Headphones'" t)))
 
 ;; sent output of command to echo-string. may hang if used wrong.
 (defcommand shell-command-output (command) ((:string "shell/output: "))

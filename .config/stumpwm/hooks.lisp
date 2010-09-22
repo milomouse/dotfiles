@@ -6,5 +6,14 @@
 ;; command is cropped when focused frame overlaps part of it's output.
 ;(defun local-list (to-frame from-frame)
 ;  (stumpwm:run-commands "echo-frame-windows"))
-;(stumpwm:add-hook stumpwm:*focus-frame-hook* 'local-list)
+;(replace-hook *focus-frame-hook* 'local-list)
 
+;; display the keysequence in progress
+;(defun key-press-hook (key key-seq cmd)
+;  (declare (ignore key))
+;  (unless (eq *top-map* *resize-map*)
+;    (let ((*message-window-gravity* :top-right))
+;      (message "Key sequence: ~A" (print-key-seq (reverse key-seq))))
+;    (when (stringp cmd)
+;      (sleep 0.1))))
+;(replace-hook *key-press-hook* 'key-press-hook)

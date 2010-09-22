@@ -67,6 +67,8 @@
 (defvar *frequent-map*
   (let ((m (make-sparse-keymap)))
     (labels ((dk (m k c) (define-key m k c)))
+    (dk m (kbd "2") "announce-mix2")
+    (dk m (kbd "3") "announce-mix3")
     (dk m (kbd "f") "ror_firefox")
     (dk m (kbd "b") "display-random-bg")
     (dk m (kbd "B") "exec display -window root -resize 1366x768! ~/foto/wall/wallpaper-249719.png")

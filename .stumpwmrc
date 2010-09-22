@@ -2,7 +2,7 @@
 ;; ~/.stumpwmrc
 ;;----------------------------------------------------------------------------
 ;; author: milomouse <vincent[at]fea.st>
-;; update: 2010-09-16 16:00:59
+;; update: 2010-09-19 22:51:54
 ;;----------------------------------------------------------------------------
 ;; versions used atoc:
 ;; |  clisp-new-clx     -> 2.48-2
@@ -17,6 +17,7 @@
 ;; >>>>: command for dedicating current win/frame as the Master win/frame
 ;; >>>>! command for swapping current window with the Master win/frame
 ;; >---: better resize; if neighbor {left} then -ARG else +ARG, etc
+;; >>--: show frame-indicator for 'resize' only if no window in frame
 ;; >---: command-mode for mifo video:seek to eliminate extra key-presses
 ;;----------------------------------------------------------------------------
 ;; file/s: *data-dir*/{commands,functions,hooks,key-maps,macros}.lisp
@@ -89,7 +90,8 @@
       *screen-mode-line-format* nil
       *startup-message* "^B^1*together we ate the king^**^b:^B^5*and laughed ourselves to death^**^b"
       *group-format*    "^B^8*%t^7*%s^07|^**^b"
-      *window-format*   "^B^27%s^1*%m^0*%16t^**^b")
+      *window-format*   "^B^27%s^1*%m^0*%16t^**^b"
+      *debug-level* 10)
 
 ;; windows/frames
 (setf *default-window-name* "null"
@@ -99,7 +101,8 @@
       *new-frame-action* :empty
       *min-frame-width* 100
       *min-frame-height* 50
-      *resize-increment* 10)
+      *resize-increment* 10
+      *frame-number-map* "jkluio789")
 
 ;; mode-line/input
 (setf *mode-line-background-color* "grey13"
@@ -117,7 +120,6 @@
       do (load (make-pathname :name file :type "lisp" :directory
       '(:relative ".config" "stumpwm"))))
 
-;(setf *frame-number-map* "123456")
 (setf (group-name (first (screen-groups (current-screen)))) "1")
 (make-groups-bg "2" "3" "4" "5" "6")
 (restore-from-file (data-dir-file "screen_data_last"))

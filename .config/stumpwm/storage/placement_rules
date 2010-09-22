@@ -1,30 +1,14 @@
-(("3" 1. |COMMON-LISP|::|T| |COMMON-LISP|::|NIL| :|CLASS| "URxvt" :|INSTANCE|
-  "urxvt" :|TITLE| |COMMON-LISP|::|NIL| :|ROLE| |COMMON-LISP|::|NIL|)
- ("3" 0. |COMMON-LISP|::|T| |COMMON-LISP|::|NIL| :|CLASS| "MPlayer" :|INSTANCE|
-  "xv" :|TITLE| |COMMON-LISP|::|NIL| :|ROLE| |COMMON-LISP|::|NIL|)
- (#1="3" 2. |COMMON-LISP|::|T| |COMMON-LISP|::|NIL| :|CLASS| "URxvt"
-  :|INSTANCE| "urxvt" :|TITLE| |COMMON-LISP|::|NIL| :|ROLE|
-  |COMMON-LISP|::|NIL|)
- (#1# 0. |COMMON-LISP|::|T| |COMMON-LISP|::|T| :|CLASS| "luakit" :|INSTANCE|
-  "luakit" :|TITLE| |COMMON-LISP|::|NIL| :|ROLE| |COMMON-LISP|::|NIL|)
- ("6" 0. |COMMON-LISP|::|T| |COMMON-LISP|::|T| :|INSTANCE| "ossxmix")
- (#2="5" 0. |COMMON-LISP|::|T| |COMMON-LISP|::|T| :|CREATE| "group_data_05"
-  :|CLASS| "Emacs")
- (#2# 1. |COMMON-LISP|::|T| |COMMON-LISP|::|T| :|RESTORE| "emacs-editing-dump"
-  :|TITLE| "...xdvi")
- (#3="4" 0. |COMMON-LISP|::|T| |COMMON-LISP|::|T| :|CREATE| "screen_data_04"
-  :|CLASS| "Emacs")
- (#3# 1. |COMMON-LISP|::|T| |COMMON-LISP|::|T| :|RESTORE| "emacs-editing-dump"
-  :|TITLE| "...xdvi")
- (#4="3" 0. |COMMON-LISP|::|T| |COMMON-LISP|::|T| :|CLASS| "Jumanji")
- (#4# 0. |COMMON-LISP|::|NIL| |COMMON-LISP|::|T| :|CLASS| "luakit")
- (#4# 0. |COMMON-LISP|::|NIL| |COMMON-LISP|::|T| :|INSTANCE| "Navigator")
- (#5="2" 3. |COMMON-LISP|::|T| |COMMON-LISP|::|T| :|INSTANCE| "qjackctl"
+(("6" 0. |COMMON-LISP|::|T| |COMMON-LISP|::|T| :|INSTANCE| "ossxmix")
+ (#1="3" 1. |COMMON-LISP|::|T| |COMMON-LISP|::|NIL| :|CLASS| "URxvt")
+ (#1# 1. |COMMON-LISP|::|T| |COMMON-LISP|::|T| :|TITLE| "Add-ons")
+ (#1# 0. |COMMON-LISP|::|T| |COMMON-LISP|::|NIL| :|CLASS| "MPlayer")
+ (#1# 0. |COMMON-LISP|::|T| |COMMON-LISP|::|T| :|CLASS| "Jumanji")
+ (#1# 0. |COMMON-LISP|::|NIL| |COMMON-LISP|::|T| :|CLASS| "luakit")
+ (#1# 0. |COMMON-LISP|::|NIL| |COMMON-LISP|::|T| :|INSTANCE| "Navigator")
+ (#2="2" 3. |COMMON-LISP|::|T| |COMMON-LISP|::|T| :|INSTANCE| "qjackctl"
   :|ROLE| "qjackctlMainForm")
- (#5# 1. |COMMON-LISP|::|T| |COMMON-LISP|::|T| :|INSTANCE| "qjackctl")
- (#5# 2. |COMMON-LISP|::|T| |COMMON-LISP|::|T| :|INSTANCE| "jvmetro")
- (#5# 1. |COMMON-LISP|::|T| |COMMON-LISP|::|T| :|INSTANCE| "ardour_mixer")
- (#5# 0. |COMMON-LISP|::|T| |COMMON-LISP|::|T| :|TITLE|
-  "Ardour - Session Control")
- ("1" 0. |COMMON-LISP|::|T| |COMMON-LISP|::|NIL| :|CLASS| "Konqueror" :|ROLE|
-  "...konqueror-mainwindow"))
+ (#2# 1. |COMMON-LISP|::|T| |COMMON-LISP|::|T| :|INSTANCE| "qjackctl")
+ (#2# 2. |COMMON-LISP|::|T| |COMMON-LISP|::|T| :|INSTANCE| "jvmetro")
+ (#2# 1. |COMMON-LISP|::|T| |COMMON-LISP|::|T| :|INSTANCE| "ardour_mixer")
+ (#2# 0. |COMMON-LISP|::|T| |COMMON-LISP|::|T| :|TITLE|
+  "Ardour - Session Control"))

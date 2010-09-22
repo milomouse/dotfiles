@@ -2,10 +2,21 @@
 ;; *data-dir*/macros.lisp
 ;;----------------------------------------------------------------------------
 
+;; define a few parameters first.
+;(defparameter X-TERM "exec urxvt")
+;(defparameter X-TERM-BROWSER (concatenate 'string X-TERM " -e w3m"))
+;(defparameter X-WWW-BROWSER "exec firefox ")
+;(defparameter X-IMAGE-VIEWER "exec gliv ")
+
 ;; create given groups while keeping focus on current.
 (defmacro make-groups-bg (&rest names)
   (let ((ns (mapcar #'(lambda (n) (concatenate 'string "gnewbg " n)) names)))
   `(run-commands ,@ns)))
+
+;; faster hook management.
+(defmacro replace-hook (hook fn)
+  `(remove-hook, hook, fn)
+  `(add-hook, hook, fn))
 
 ;; Last rule to match takes precedence!
 ;; TIP: if the argument to :title or :role begins with an ellipsis, a substring
@@ -28,7 +39,7 @@
   (3    t     t     :instance "qjackctl" :role "qjackctlMainForm"))
 
 (define-frame-preference "3"
-;  (0    t     t     :create "group_3")
+;  (0    t     t     :restore "group_3")
   (0    nil   t     :instance "Navigator")
   (0    nil   t     :class "luakit")
   (0    t     t     :class "Jumanji")

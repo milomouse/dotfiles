@@ -37,12 +37,13 @@ function mvf() {
   fi
 }
 
-# [TESTING] use 'real' program, not an alias/function, etc:
+# use 'real' program, not an alias/function, etc:
 function real() {
   if [[ -n $1 ]]; then
-    for each in ${${PATH//:/\/$1 }// /\\n}; do
-      eval $(find $(print $each) -type f 2>/dev/null | head -1) $@
-    done
+    prog=$(/usr/bin/which $1) &>/dev/null
+    if [[ -x $(print ${prog}) ]]; then
+      ${prog} ${@:/$1}
+    fi
   else /bin/false ; fi
 }
 

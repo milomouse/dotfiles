@@ -25,10 +25,10 @@ alias e="bye"
 # useless quick views/edits:
 alias wika="${BROWSER:-/usr/bin/w3m} /usr/share/doc/arch-wiki/html/index.html"
 alias xoc="${BROWSER:-/usr/bin/w3m} /usr/share/doc/xmonad-contrib-darcs/html"
-alias medit="${EDITOR:-/usr/bin/vim} $XDG_CONFIG_DIR/musca/musca_start"
-alias sedit="${EDITOR:-/usr/bin/vim} -p ${HOME}/.stumpwmrc $XDG_CONFIG_DIR/stumpwm/{functions,macros,commands,hooks,key-maps}.lisp"
-alias xodit="${EDITOR:-/usr/bin/vim} $HOME/.xmonad/xmonad.hs"
-alias xedit="${EDITOR:-/usr/bin/vim} -p $XDG_CONFIG_DIR/xorg/{xinitrc,Xdefaults}"
+alias medit="${EDITOR:-/usr/bin/vim} ${XDG_CONFIG_DIR:-${HOME}/.config}/musca/musca_start"
+alias sedit="${EDITOR:-/usr/bin/vim} -p ${HOME}/.stumpwmrc ${XDG_CONFIG_DIR:-${HOME}/.config}/stumpwm/{functions,macros,commands,hooks,key-maps}.lisp"
+alias xodit="${EDITOR:-/usr/bin/vim} ${HOME}/.xmonad/xmonad.hs"
+alias xedit="${EDITOR:-/usr/bin/vim} -p ${XDG_CONFIG_DIR:-${HOME}/.config}/xorg/{xinitrc,Xdefaults}"
 alias zedit="${EDITOR:-/usr/bin/vim} -p ${HOME}/.{zshrc,config/zsh/{zshfn,zshalias}}"
 alias zload=". ${HOME}/.zshrc"
 alias xload="xrdb -load ${XDG_CONFIG_DIR:-${HOME}/.config}/xorg/Xdefaults &>/dev/null"
@@ -38,14 +38,14 @@ alias svim="sudo ${EDITOR:-/usr/bin/vim}"
 alias info="/usr/bin/info --vi-keys"
 alias diff="colordiff"
 alias grep="grep --color=auto"
-alias tmux='tmux -f ${XDG_CONFIG_DIR:-$HOME/.config}/tmux/tmux.conf'
-alias mutt='mutt -F ${XDG_CONFIG_DIR:-$HOME/.config}/mutt/muttrc'
-alias xskat='xskat -opt ${XDG_CONFIG_DIR:-$HOME/.config}/xorg/xskat.opt -list ${XDG_CONFIG_DIR:-$HOME/.config}/xorg/xskat.lst'
-alias offlineimap='offlineimap -c ${XDG_CONFIG_DIR:-$HOME/.config}/offlineimap/offlineimaprc'
+alias tmux='tmux -f ${XDG_CONFIG_DIR:-${HOME}/.config}/tmux/tmux.conf'
+alias mutt='mutt -F ${XDG_CONFIG_DIR:-${HOME}/.config}/mutt/muttrc'
+alias xskat='xskat -opt ${XDG_CONFIG_DIR:-${HOME}/.config}/xorg/xskat.opt -list ${XDG_CONFIG_DIR:-$HOME/.config}/xorg/xskat.lst'
+alias offlineimap='offlineimap -c ${XDG_CONFIG_DIR:-${HOME}/.config}/offlineimap/offlineimaprc'
 alias xsel='xsel --logfile /dev/shm/xsel.log'
 alias {rot,rtorrent}='/usr/bin/rtorrent -o http_capath=/etc/ssl/certs'
-alias btpd='/usr/bin/btpd -d ${XDG_CONFIG_DIR:-$HOME/.config}/btpd'
-alias btcli='/usr/bin/btcli -d ${XDG_CONFIG_DIR:-$HOME/.config}/btpd'
+alias btpd='/usr/bin/btpd -d ${XDG_CONFIG_DIR:-${HOME}/.config}/btpd'
+alias btcli='/usr/bin/btcli -d ${XDG_CONFIG_DIR:-${HOME}/.config}/btpd'
 alias startx="/usr/local/bin/go $@"
 
 # system/media shortcuts:
@@ -71,5 +71,5 @@ alias baer="bauerbill"
 alias {baerp,pacman}="sudo pacman-color"
 alias ay="yaourt"
 alias aive="ay -Q --date|tee ${HOME}/othe/archive/$(date +%m_%d_%y) >>/dev/null"
-alias lasi="3view ${HOME}/othe/archive/$(/bin/ls -ltr ${HOME}/othe/archive|tail -1|awk '{print $8}')"
-alias lasid="3view ${HOME}/othe/archive/$(/bin/ls -ltr ${HOME}/othe/archive|tail -2|head -1|awk '{print $8}')"
+alias lasi="3view ${HOME}/othe/archive/$(print ${$(/bin/ls -tr ${HOME}/othe/archive)[-1]})"
+alias lasid="3view ${HOME}/othe/archive/$(print ${$(/bin/ls -tr ${HOME}/othe/archive)[-2]})"

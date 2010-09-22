@@ -4,11 +4,11 @@ set editor="urxvt -e vim"
 set showtabline=0
 set insertmode=0
 set focuscontent=on
-set defsearch=google
+set defsearch=googlessl
 set followhints=0
 set hintinputs="label,name,value"
 set hintmatching=wordstartswith
-let clock_format='(%a:%d/%y %t)'
+let clock_format='(%d/%a %t)'
 noremap j 3j
 noremap k 3k
 noremap <C-k> :pageinfo<CR>

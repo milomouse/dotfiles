@@ -216,9 +216,9 @@
 (defcommand announce-loadavg () () (echo-string (current-screen) (run-shell-command "print ${$(</proc/loadavg)[1,3]}" t)))
 (defcommand announce-highcpu () () (echo-string (current-screen) (run-shell-command "ps -U root,http,postgres --deselect -C tmux,urxvt k -%cpu opid,args:70,etime:8,%cpu,pmem" t)))
 (defcommand announce-volume () () (echo-string (current-screen) (run-shell-command "print ${$(ossmix|awk 'NR==29')[4]}dB" t)))
-(defcommand announce-volup () () (run-shell-command "ossvalt -i 1" t) (announce-volume))
-(defcommand announce-voldown () () (run-shell-command "ossvalt -d 1" t) (announce-volume))
-(defcommand announce-volmute () () (run-shell-command "ossvalt -m" t) (announce-volume))
+(defcommand announce-volup () () (run-shell-command "ossvol -i 1" t) (announce-volume))
+(defcommand announce-voldown () () (run-shell-command "ossvol -d 1" t) (announce-volume))
+(defcommand announce-volmute () () (run-shell-command "ossvol -m" t) (announce-volume))
 (defcommand announce-mix2 () () (echo-string (current-screen) (run-shell-command "ossmix codec1.jack.int-speaker.mode mix2 1>/dev/null && print 'Mixer set to PC Speaker'" t)))
 (defcommand announce-mix3 () () (echo-string (current-screen) (run-shell-command "ossmix codec1.jack.int-speaker.mode mix3 1>/dev/null && print 'Mixer set to Headphones'" t)))
 

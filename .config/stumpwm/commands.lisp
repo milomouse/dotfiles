@@ -2,46 +2,6 @@
 ;; *data-dir*/commands.lisp
 ;;----------------------------------------------------------------------------
 
-(defcommand mymenu () ()
-            (labels ((pick (options)
-                       (let ((selection (stumpwm::select-from-menu (current-screen) options "")))
-                         (cond
-                           ((null selection)
-                            (throw 'stumpwm::error "Abort."))
-                           ((stringp (second selection))
-                            (second selection))
-                           (t
-                            (pick (cdr selection)))))))
-              (let ((choice (pick *app-menu*)))
-                (run-shell-command choice))))
-(defparameter *app-menu* '(("BookShelf"
-                            ;;submenu
-                            ("Concrete Mathematics" "xpdf /mnt/e/Books/Math/ConcreteMath_CN.pdf")
-                            ("PraiseForPracticalCommonLisp" "xpdf /mnt/e/Books/CommonLisp/PraiseForPracticalCommonLisp.pdf")
-                            ("ANSI Common Lisp" "xpdf '/mnt/e/Books/CommonLisp/Graham, Paul - ANSI Common Lisp.pdf'")
-                            ("Instructors.Manual" "xpdf '/mnt/e/Books/Algorithms/Introduction To Algorithms 2nd Edition Solutions (Instructors.Manual).pdf'")
-                            ("SolutionsToITA" "xpdf /mnt/e/Books/Algorithms/SolutionsToITA.pdf")
-                            ("LispBook" "xpdf /mnt/e/Books/CommonLisp/loveinglisp/LispBook.pdf"))
-                           ("INTERNET"
-                            ;; sub menu
-                            ("Firefox" "firefox")
-                            ("opera" "opera"))
-                           ("FUN"
-                            ;; sub menu
-                            ("option 2" "xlogo")
-                            ("Crack attack" "crack-attack")
-                            ("wesnoth" "wesnoth")
-                            ("supertux" "supertux")
-                            ("GnuChess" "xboard"))
-                           ("WORK"
-                            ;;submenu
-                            ("OpenOffice.org" "openoffice"))
-                           ("GRAPHICS"
-                            ;;submenu
-                            ("GIMP" "gimp"))))
-
-;; ----------------------------------------------------------------------------------------------------
-
 ;; designate master window/frame (should probably use current frame number, but less dynamic?)
 (defcommand (master-make tile-group) () () (renumber 0) (repack-window-numbers) (remember-last))
 (defcommand (master-focus tile-group) () () (select-window-by-number 0))
@@ -209,6 +169,8 @@
 (defcommand announce-mifo () () (echo-string (current-screen) (run-shell-command "mifo -as" t)))
 (defcommand announce-mifo-raw () () (echo-string (current-screen) (run-shell-command "mifo -ar" t)))
 (defcommand announce-mifo-list () () (echo-string (current-screen) (run-shell-command "mifo --show current|grep -A 7 -B 7 $(mifo -ar)|sed 's|'$(mifo -ar)'|^B^1*&^n|'" t)))
+(defcommand announce-mifo-fadd () () (echo-string (current-screen) (run-shell-command "mifo --fav-add" t)))
+(defcommand announce-mifo-fdel () () (echo-string (current-screen) (run-shell-command "mifo --fav-delete" t)))
 (defcommand announce-unread-mail () () (echo-string (current-screen) (run-shell-command "print unread: ${#$(find ~/mail/FastMail/*/new -type f)}" t)))
 (defcommand announce-battery () () (echo-string (current-screen) (run-shell-command "</proc/acpi/battery/BAT1/state" t)))
 (defcommand announce-harddrives () () (echo-string (current-screen) (run-shell-command "df -hTP;print - '------------------------------------------------------';df -hTP --total|tail -1" t)))

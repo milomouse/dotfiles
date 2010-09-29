@@ -26,30 +26,18 @@
        :|CURRENT| 0.)
     #S(|STUMPWM|::|GDUMP| :|NUMBER| 3. :|NAME| "3"
        :|TREE|
-       (((#S(|STUMPWM|::|FDUMP| :|NUMBER| 0. :|X| 0. :|Y| 0. :|WIDTH| 683.
-             :|HEIGHT| 399. :|WINDOWS| |COMMON-LISP|::|NIL|
-             :|CURRENT| |COMMON-LISP|::|NIL|)
-          #S(|STUMPWM|::|FDUMP| :|NUMBER| 3. :|X| 683. :|Y| 0. :|WIDTH| 683.
-             :|HEIGHT| 399. :|WINDOWS| |COMMON-LISP|::|NIL|
-             :|CURRENT| |COMMON-LISP|::|NIL|))
-         (#S(|STUMPWM|::|FDUMP| :|NUMBER| 1. :|X| 0. :|Y| 399. :|WIDTH| 773.
-             :|HEIGHT| 369. :|WINDOWS| |COMMON-LISP|::|NIL|
-             :|CURRENT| |COMMON-LISP|::|NIL|)
-          (#S(|STUMPWM|::|FDUMP| :|NUMBER| 2. :|X| 773. :|Y| 399. :|WIDTH| 593.
-              :|HEIGHT| 184. :|WINDOWS| |COMMON-LISP|::|NIL|
-              :|CURRENT| |COMMON-LISP|::|NIL|)
-           #S(|STUMPWM|::|FDUMP| :|NUMBER| 4. :|X| 773. :|Y| 583. :|WIDTH| 593.
-              :|HEIGHT| 185. :|WINDOWS| |COMMON-LISP|::|NIL|
-              :|CURRENT| |COMMON-LISP|::|NIL|)))))
+       ((#S(|STUMPWM|::|FDUMP| :|NUMBER| 0. :|X| 0. :|Y| 0. :|WIDTH| 1366.
+            :|HEIGHT| 564. :|WINDOWS| |COMMON-LISP|::|NIL|
+            :|CURRENT| |COMMON-LISP|::|NIL|)
+         #S(|STUMPWM|::|FDUMP| :|NUMBER| 1. :|X| 0. :|Y| 564. :|WIDTH| 1366.
+            :|HEIGHT| 204. :|WINDOWS| |COMMON-LISP|::|NIL|
+            :|CURRENT| |COMMON-LISP|::|NIL|)))
        :|CURRENT| 0.)
     #S(|STUMPWM|::|GDUMP| :|NUMBER| 4. :|NAME| "4"
        :|TREE|
-       ((#S(|STUMPWM|::|FDUMP| :|NUMBER| 0. :|X| 0. :|Y| 0. :|WIDTH| 1366.
-            :|HEIGHT| 519. :|WINDOWS| |COMMON-LISP|::|NIL|
-            :|CURRENT| |COMMON-LISP|::|NIL|)
-         #S(|STUMPWM|::|FDUMP| :|NUMBER| 2. :|X| 0. :|Y| 519. :|WIDTH| 1366.
-            :|HEIGHT| 249. :|WINDOWS| |COMMON-LISP|::|NIL|
-            :|CURRENT| |COMMON-LISP|::|NIL|)))
+       (#S(|STUMPWM|::|FDUMP| :|NUMBER| 0. :|X| 0. :|Y| 0. :|WIDTH| 1366.
+           :|HEIGHT| 768. :|WINDOWS| |COMMON-LISP|::|NIL|
+           :|CURRENT| |COMMON-LISP|::|NIL|))
        :|CURRENT| 0.)
     #S(|STUMPWM|::|GDUMP| :|NUMBER| 5. :|NAME| "5"
        :|TREE|

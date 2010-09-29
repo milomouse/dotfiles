@@ -123,8 +123,8 @@
     (dk m (kbd "Q")     "exec sudo /etc/rc.d/mifo kill")
     ;(dk m (kbd "q")     "exec mifo --quit")
     (dk m (kbd "f")     "exec mifo --fullscreen")
-    (dk m (kbd "equal") "exec mifo --fav-add")
-    (dk m (kbd "minus") "exec mifo --fav-delete")
+    (dk m (kbd "equal") "announce-mifo-fadd")
+    (dk m (kbd "minus") "announce-mifo-fdel")
     (dk m (kbd "ESC")   "abort")
    M)))
 (defvar *mplayer-daemon-map2*

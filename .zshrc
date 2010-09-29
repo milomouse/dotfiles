@@ -58,14 +58,14 @@ bindkey '^R' history-incremental-search-backward
 
 # global exports:
 export HISTSIZE=1400
-export SAVEHIST=$HISTSIZE
+export SAVEHIST=${HISTSIZE}
 export DIRSTACKSIZE=20
 export EDITOR="/usr/bin/vim"
 export FCEDIT="/usr/bin/vim"
 export BROWSER="/usr/bin/w3m"
 export HOMEPAGE="https://bbs.archlinux.org/search.php?action=show_new"
 export PAGER="/bin/less"
-export SDCV_HISTSIZE=$HISTSIZE
+export SDCV_HISTSIZE=${HISTSIZE}
 export SDCV_PAGER="/bin/more"
 export SHELL="/bin/zsh"
 export MPD_HOST=lenovo
@@ -97,28 +97,13 @@ export XDG_VIDEOS_DIR="${HOME}/vide"
 export XAUTHORITY="${HOME}/.config/xorg/.Xauthority"
 
 # source alias and function files:
-[[ -f ${XDG_CONFIG_DIR:-${HOME}/.config}/zsh/zshalias ]] && . ${XDG_CONFIG_DIR:-${HOME}/.config}/zsh/zshalias
-[[ -f ${XDG_CONFIG_DIR:-${HOME}/.config}/zsh/zshfn ]] && . ${XDG_CONFIG_DIR:-${HOME}/.config}/zsh/zshfn
+[[ -f ${XDG_CONFIG_DIR:-${HOME}/.config}/zsh/zshalias ]] && \
+. ${XDG_CONFIG_DIR:-${HOME}/.config}/zsh/zshalias
+[[ -f ${XDG_CONFIG_DIR:-${HOME}/.config}/zsh/zshfn ]] && \
+. ${XDG_CONFIG_DIR:-${HOME}/.config}/zsh/zshfn
 
 # framebuffer colors:
 if [[ "${TERM}" = "linux" || "${TERM}" == screen* ]]; then
-#    cottonmouse:
-#    echo -en "\e]P0000000"
-#    echo -en "\e]P8171717"
-#    echo -en "\e]P19c8093"
-#    echo -en "\e]P9dfa6bb"
-#    echo -en "\e]P2799c99"
-#    echo -en "\e]PA85afa9"
-#    echo -en "\e]P3b0ad90"
-#    echo -en "\e]PBc4c497"
-#    echo -en "\e]P487afd7"
-#    echo -en "\e]PC98a7b6"
-#    echo -en "\e]P5a488d9"
-#    echo -en "\e]PD9f8bab"
-#    echo -en "\e]P66c7373"
-#    echo -en "\e]PEa3babf"
-#    echo -en "\e]P7999999"
-#    echo -en "\e]PF98a7b6"
 #   candymouse:
     echo -en "\e]P0000000"
     echo -en "\e]P83d3a3a"

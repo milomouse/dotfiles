@@ -64,44 +64,44 @@ function real() {
 function psi() {
   if [[ ${#${@:/$0}} -ge 2 ]]; then
     case $1 {
-      '-C'|'-c')  ps -C $2 hoargs ;;
-      '-G'|'-g')  ps -G $2 hoargs ;;
-      '-U'|'-u')  ps -U $2 hoargs ;;
-      '-P'|'-p')  ps -p $2 hoargs ;;
-      '-S'|'-s')  ps -s $2 hoargs ;;
-      '-T'|'-t')  ps -t $2 hoargs ;;
+      '-C'|'-c')  real ps -C $2 hoargs ;;
+      '-G'|'-g')  real ps -G $2 hoargs ;;
+      '-U'|'-u')  real ps -U $2 hoargs ;;
+      '-P'|'-p')  real ps -p $2 hoargs ;;
+      '-S'|'-s')  real ps -s $2 hoargs ;;
+      '-T'|'-t')  real ps -t $2 hoargs ;;
       *)  print "unrecognized option. read: man ps (section: process selection by list)" ;; }
-  else print "not enough options."; fi
+  else print "invalid selection. read: man ps (section: process selection by list)" ; fi
 }
 
 # extract archive with preferred options:
 function extr() {
   if [ -f $1 ]; then 
     case $1 in
-      *.tar.bz2)   tar xjf $1    ;;
-      *.tar.gz)    tar xzf $1    ;;
-      *.bz2)       bunzip2 $1    ;;
-      *.rar)       unrar e $1    ;;
-      *.gz)        gunzip $1     ;;
-      *.tar)       tar xf $1     ;;
-      *.tbz2)      tar xjf $1    ;;
-      *.tgz)       tar xzf $1    ;;
-      *.zip)       unzip $1      ;;
-      *.Z)         uncompress $1 ;;
-      *.7z)        7z x $1       ;;
-      *.xz)        unxz -vk $1   ;;
-      *.lzma)      unlzma -vk $1 ;;
+      *.tar.bz2)   real tar xjf $1    ;;
+      *.tar.gz)    real tar xzf $1    ;;
+      *.bz2)       real bunzip2 $1    ;;
+      *.rar)       real unrar e $1    ;;
+      *.gz)        real gunzip $1     ;;
+      *.tar)       real tar xf $1     ;;
+      *.tbz2)      real tar xjf $1    ;;
+      *.tgz)       real tar xzf $1    ;;
+      *.zip)       real unzip $1      ;;
+      *.Z)         real uncompress $1 ;;
+      *.7z)        real 7z x $1       ;;
+      *.xz)        real unxz -vk $1   ;;
+      *.lzma)      real unlzma -vk $1 ;;
       *)           print "'$1' cannot be extracted via extr()" ;;
     esac
   else
     print "'$1' is not a valid file"
-fi
+  fi
 }
 
 # {start,stop,restart} daemon:
-function rcstart() {sudo /etc/rc.d/$1 start}
-function rcstop() {sudo /etc/rc.d/$1 stop}
-function rcrestart() {sudo /etc/rc.d/$1 restart}
+function rcstart() {real sudo /etc/rc.d/$1 start}
+function rcstop() {real sudo /etc/rc.d/$1 stop}
+function rcrestart() {real sudo /etc/rc.d/$1 restart}
 
 # quickly view definitions:
 function sd() {
@@ -119,14 +119,14 @@ function sd() {
 function todo() {
   local _DIR=${HOME}/othe
   case $1 in
-    l) ls -1 ${_DIR}/.TODO* ;;
+    l) real ls -1 ${_DIR}/.TODO* ;;
     *) vim ${_DIR}/.TODO_$1 ;;
   esac
 }
 
 # one-liners:
 function mkcd() {mkdir -p "$@" && cd "$@"}
-function w3m() {[[ -z $1 ]] && /usr/bin/w3m ${HOMEPAGE} || /usr/bin/w3m ${@}}
+function w3m() {[[ -z $1 ]] && real w3m ${HOMEPAGE} || real w3m ${@}}
 function 256co() {perl -e 'foreach $i (0..255) {printf("\e[38;5;$i"."m%03d\e[0m ",$i); }'}
 function pubip() {curl http://whatismyip.org/ 2>/dev/null}
 function qdep() {pacman-color -Q $@ $(pacman-color -Qi $@|grep Depends|cut -d: -f2-|sed -E 's|>\S+\>||g')}

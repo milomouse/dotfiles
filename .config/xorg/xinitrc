@@ -14,13 +14,13 @@ xmodmap -e "add Mod1 = Alt_L Alt_R"
 xmodmap -e "add Mod4 = Super_L Super_R"
 
 # mouse/synclient:
-_file="/dev/shm/.banishmouse"
+_file="/dev/shm/cache/.banishmouse"
 [ ! -f $_file ] || rm -f $_file
 banishmouse
 
 # wallpaper:
 display -window root -resize 1366x768! \
-${XDG_PICTURES_DIR:-${HOME}/foto}/wall/wallpaper-249719.jpg
+${XDG_PICTURES_DIR:-${HOME}/foto}/wall/wallpaper-249719.png
 
 # window-manager:
 exec stumpwm &>/dev/null

@@ -18,7 +18,7 @@ urxvt*saveLines: 8192
 urxvt*borderLess: false
 urxvt*transparent: false
 urxvt*shading: 4
-urxvt*fading: 35
+urxvt*fading: 22
 urxvt*cursorColor: #a488d9
 Xcursor.theme: whiteglass
 Xcursor.size: 10

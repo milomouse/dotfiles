@@ -8,7 +8,7 @@ set defsearch=googlessl
 set followhints=0
 set hintinputs="label,name,value"
 set hintmatching=wordstartswith
-#let clock_format='(%d/%a %t)'
+"let clock_format='(%d/%a %t)'
 noremap j 3j
 noremap k 3k
 noremap <C-k> :pageinfo<CR>

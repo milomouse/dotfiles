@@ -3,15 +3,14 @@
 
 # try not to list default settings:
 set startup /home/milo/.config/musca/musca_start
-exec zsh /home/milo/.config/musca/dzen0 2>/dev/null
 #exec zsh /home/milo/.config/musca/dzen4musca 2>/dev/null
 set frame_display_hidden 2
 set frame_resize 10
 set dmenu dmenu -i -p 'Musca: '
 set border_width 1
 hook on ^(catchall|dedicate) border flip
-#hook on ^only border off
-hook on ^add pad 0 0 24 0
+hook on ^only border off
+#hook on ^add pad 0 0 24 0
 hook on ^(remove|vsplit|hsplit) refresh
 
 # borders:
@@ -28,9 +27,7 @@ bind on Mod4+Escape exec banishmouse
 bind on Mod4+Return exec urxvt -e tmux -f /home/milo/.config/tmux/tmux.conf -L xorg
 bind on Mod4+Shift+Return exec urxvt
 bind on Mod4+Control+BackSpace kill
-#bind on Mod4+Shift+q quit
-bind on Mod4+Shift+q exec killall zsh dzen0 ; musca -c quit
-bind on Mod4+Shift+r exec killall zsh dzen0 ; exec zsh /home/milo/.config/musca/dzen4musca 2>/dev/null
+bind on Mod4+Shift+q quit
 #bind on Mod4+Shift+q exec killall zsh dzen4musca ; musca -c quit
 #bind on Mod4+Shift+r exec killall zsh dzen4musca ; exec zsh /home/milo/.config/musca/dzen4musca 2>/dev/null
 
@@ -123,7 +120,7 @@ bind on Mod4+comma use (prev)
 
 # startup stuff:
 name !
-pad 0 0 24 0
+#pad 0 0 24 0
 exec urxvt -e tmux -f /home/milo/.config/tmux/tmux.conf -L sp new-session
 add |1
 add |2

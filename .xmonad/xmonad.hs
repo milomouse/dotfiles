@@ -38,7 +38,7 @@ import System.Exit
 -- <actions>
 import XMonad.Actions.CycleWS (nextWS,prevWS,toggleWS,shiftToNext,shiftToPrev)
 --import XMonad.Actions.FocusNth
-import XMonad.Actions.RotSlaves (rotAllDown,rotSlavesDown,rotSlavesUp)
+import XMonad.Actions.RotSlaves (rotAllUp,rotAllDown,rotSlavesDown,rotSlavesUp)
 import XMonad.Actions.GridSelect
 import XMonad.Actions.WindowGo
 import XMonad.Actions.SwapWorkspaces
@@ -377,13 +377,14 @@ myKeyBindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((0 .|. controlMask,         0x1008ff02   ), unsafeSpawn "moodlight -m") -- maximum screen brightness ((XF86MonBrightnessUp [max]))
     , ((0,                         0x1008ff02   ), unsafeSpawn "moodlight -i") -- increase screen brightness ((XF86MonBrightnessUp))
     , ((0,                         0x1008ff03   ), unsafeSpawn "moodlight -d") -- decrease screen brightness ((XF86MonBrightnessDown))
-    , ((0,                         0x1008ff13   ), unsafeSpawn "ossvalt -i 1") -- increase volume, via "ossvalt" ((XF86AudioRaiseVolume))
-    , ((0,                         0x1008ff11   ), unsafeSpawn "ossvalt -d 1") -- decrease volume, via "ossvalt" ((XF86AudioLowerVolume))
-    , ((0,                         0x1008ff12   ), safeSpawn "ossvalt" ["-m"])   -- mute volume, via "ossvalt" ((XF86AudioMute))
+    , ((0,                         0x1008ff13   ), unsafeSpawn "ossvol -i 1") -- increase volume, via "ossvol" ((XF86AudioRaiseVolume))
+    , ((0,                         0x1008ff11   ), unsafeSpawn "ossvol -d 1") -- decrease volume, via "ossvol" ((XF86AudioLowerVolume))
+    , ((0,                         0x1008ff12   ), safeSpawn "ossvol" ["-m"])   -- mute volume, via "ossvol" ((XF86AudioMute))
     , ((modMask .|. shiftMask,     xK_e         ), safeSpawnProg "eject") -- open disc tray
     , ((modMask .|. shiftMask,     xK_d         ), AL.launchApp myXPConfig "mifo --command") -- mplayer daemon command prompt
     , ((modMask,                   xK_d         ), submap . M.fromList $ -- mplayer daemon.. sub-bindings (mplayer fifo script)
-                                [ ((0, xK_d       ), safeSpawn "mifo" ["--daemon"]) -- <start daemon unless already started>
+                               -- [ ((0, xK_d       ), safeSpawn "mifo" ["--daemon"]) -- <start daemon unless already started>
+                                [ ((0, xK_d       ), unsafeSpawn "sudo /etc/rc.d/mifo start") -- <start daemon unless already started>
                                 , ((0, xK_t       ), safeSpawn "mifo" ["--toggle"]) -- <toggle playback>
                                 , ((0, xK_r       ), safeSpawn "mifo" ["--random"]) -- <play a random song in playlist>
                                 , ((0, xK_l       ), safeSpawn "mifo" ["--next"]) -- <play next file in list>
@@ -393,7 +394,9 @@ myKeyBindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
                                 , ((0, xK_j       ), unsafeSpawn "mifo --next dir") -- <play next "dirname">
                                 , ((0, xK_k       ), unsafeSpawn "mifo --prev dir") -- <play previous "dirname">
                                 , ((0, xK_s       ), safeSpawn "mifo" ["--stop"]) -- <stop mplayer process and start fresh>
-                                , ((0, xK_q       ), safeSpawn "mifo" ["--quit"]) -- <close "mifo" daemon>
+                               -- , ((0, xK_q       ), safeSpawn "mifo" ["--quit"]) -- <close "mifo" daemon>
+                                , ((0, xK_q       ), unsafeSpawn "sudo /etc/rc.d/mifo stop") -- <close "mifo" daemon>
+                                , ((0 .|. shiftMask, xK_q ), unsafeSpawn "sudo /etc/rc.d/mifo kill") -- <kill "mifo" daemon>
                                 , ((0, xK_f       ), safeSpawn "mifo" ["--fullscreen"]) -- <toggle fullscreen state for videos>
                                 , ((0 .|. shiftMask, xK_s ), AL.launchApp myXPConfig "mifo --save") -- <prompt 'save' playlist as..>
                                 , ((0, xK_a       ), AL.launchApp myXPConfig "mifo --load") -- <prompt 'load' for files to add>
@@ -434,6 +437,7 @@ myKeyBindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask .|. controlMask,   xK_j         ), rotSlavesDown) -- rotate all slaves down/next
     , ((modMask .|. controlMask,   xK_k         ), rotSlavesUp) -- rotate slaves up/prev
     , ((modMask,                   xK_Tab       ), rotAllDown) -- rotate all windows [slaves/master] down/next
+    , ((modMask .|. shiftMask,     xK_Tab       ), rotAllUp) -- rotate all windows [slaves/master] up/prev
     , ((modMask,                   xK_n         ), windows W.focusDown) -- focus next
     , ((modMask,                   xK_p         ), windows W.focusUp) -- focus prev
     , ((modMask .|. controlMask,   xK_n         ), windows W.swapDown) -- swap next

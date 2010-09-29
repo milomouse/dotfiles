@@ -1,5 +1,5 @@
-# ~/.config/jumanji/jumanjirc
-# milomouse <vincent[at]fea.st>
+## ~/.config/jumanji/jumanjirc
+## milomouse <vincent[at]fea.st>
 
 # follow hints:
 script ~/.config/jumanji/scripts/hinting.js
@@ -22,7 +22,8 @@ set auto_save 60
 
 # downloads
 set download_dir ~/down/
-set download_command urxvt -e sh -c "wget --load-cookies ~/.config/jumanji/cookies '%s' -O %s";
+#set download_command urxvt -e zsh -c "wget --load-cookies ~/.config/jumanji/cookies '%s' -O %s";
+set download_command urxvt -e zsh -c "curl -c ~/.config/jumanji/cookies '%s' -o %s";
 set spawn_editor = "urxvt -e -zsh -c \"vim -p %s\""
 
 # keybindings

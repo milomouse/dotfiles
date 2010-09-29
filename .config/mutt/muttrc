@@ -70,6 +70,8 @@ bind index,pager \# noop
 bind index,pager \& noop
 bind index,pager i  noop
 bind index,pager q  noop
+bind index       z  noop
+bind attach,browser,pager x noop
 
 # - key-bindings:
 bind pager /        search
@@ -87,7 +89,9 @@ bind index J        next-unread
 bind index l        display-message
 bind browser l      select-entry
 bind attach  l      view-attach
-bind attach,browser,index,pager z exit
+bind index ZZ       exit
+bind browser,pager z exit
+bind attach h       exit
 bind index,browser gg first-entry
 bind index,browser G  last-entry
 

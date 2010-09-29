@@ -2,17 +2,14 @@
 ## milomouse <vincent[at]fea.st>
 
 # set default
-  color normal     magenta       default
+  color normal     brightblack   default
 
 # main colors
   color status     magenta       default
-  color indicator  default       default
-  color tree       blue          default
+  color indicator  default       brightblack
+  color tree       black         default
   color error      default       default
   color message    brightmagenta default
-
-# color all ML mails
-#  color index      blue          default "~u"
 
 # uncolor certain messages
 uncolor index "~P"
@@ -23,7 +20,7 @@ uncolor index "~T"
 uncolor index "~D"
 
 # and recolor them appropriately
-  color index      blue          default "~P"
+  color index      black         default "~P"
   color index      green         default "~C @.com"
   color index      brightblue    default "~N ~u"  # new ML mail
   color index      blue          default "~N !~u" # new non-ML mail
@@ -44,8 +41,8 @@ uncolor index "~D"
   color tilde      blue          default
 
 # urls
-  color body       brightblue    default "(^|<| )mailto:[^ ]+@[^ ]( |>|$)"
-  color body       brightblack   default "(^|<| )(scp|http|https|ftp|file|telnet|news|finger)://[^ ]+( |>|$)"
+  color body       red           default "(^|<| )mailto:[^ ]+@[^ ]( |>|$)"
+  color body       brightred     default "(^|<| )(scp|http|https|ftp|file|telnet|news|finger)://[^ ]+( |>|$)"
 
 # emoticons
   color body       brightmagenta default "(^| )+(|[<>|])[8;:](|[^ ])[)(/|DOPS]( |$)+"

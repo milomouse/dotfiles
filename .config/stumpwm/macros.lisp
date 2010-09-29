@@ -29,7 +29,7 @@
 ;; frame raise lock (lock AND raise == jumpto)
 ;(define-frame-preference "1"
 ;  (0    t     t     :create "group_1")
- ; (0    t     t     :class "MPlayer"))
+;  (t    t     nil   :class "MPlayer"))
 
 (define-frame-preference "2"
   (0    t     t     :title "Ardour - Session Control")
@@ -43,7 +43,6 @@
   (0    nil   t     :instance "Navigator")
   (0    nil   t     :class "luakit")
   (0    t     t     :class "Jumanji")
-  (0    t     nil   :class "MPlayer")
   (1    t     t     :title "Add-ons")
   (1    t     nil   :class "URxvt"))
 

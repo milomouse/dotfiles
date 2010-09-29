@@ -1,7 +1,5 @@
 (("6" 0. |COMMON-LISP|::|T| |COMMON-LISP|::|T| :|INSTANCE| "ossxmix")
- (#1="3" 1. |COMMON-LISP|::|T| |COMMON-LISP|::|NIL| :|CLASS| "URxvt")
- (#1# 1. |COMMON-LISP|::|T| |COMMON-LISP|::|T| :|TITLE| "Add-ons")
- (#1# 0. |COMMON-LISP|::|T| |COMMON-LISP|::|NIL| :|CLASS| "MPlayer")
+ (#1="3" 1. |COMMON-LISP|::|T| |COMMON-LISP|::|T| :|TITLE| "Add-ons")
  (#1# 0. |COMMON-LISP|::|T| |COMMON-LISP|::|T| :|CLASS| "Jumanji")
  (#1# 0. |COMMON-LISP|::|NIL| |COMMON-LISP|::|T| :|CLASS| "luakit")
  (#1# 0. |COMMON-LISP|::|NIL| |COMMON-LISP|::|T| :|INSTANCE| "Navigator")

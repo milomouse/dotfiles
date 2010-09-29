@@ -57,6 +57,7 @@ bindkey "^?" backward-delete-char
 bindkey '^R' history-incremental-search-backward
 
 # global exports:
+export HISTFILE=${XDG_CONFIG_DIR:-${HOME}/.config}/zsh/.history
 export HISTSIZE=1400
 export SAVEHIST=${HISTSIZE}
 export DIRSTACKSIZE=20

@@ -1,3 +1,18 @@
+# use history, but skip certain cmds/args from being written:
+function zshaddhistory() {
+  local line cmd
+  line=${1%%$'\n'} ; cmd=${line%% *}
+  [[ ${#line} -ge 5
+      && ${cmd} != (cp|cd|man|history|e|exit)
+      && ${cmd} != (l[axclsftm]|srm|rm|rms)
+      && ${cmd} != (losetup|aespipe|crypsetup)
+      && ${cmd} != (baer|baerp|habs|makepkg)
+      && ${cmd} != (pacman|pacman-color|yaourt|bauerbill)
+      && ${cmd} != ([mszx]edit|[zx]load|wika)
+      && ${arg} != (*unrl*|*spar*)
+  ]] && (( ! $argv[(I)*unrl*|*spar*] ))
+}
+
 # go up Nth amount of directories:
 function up(){
   local arg=${1:-1};

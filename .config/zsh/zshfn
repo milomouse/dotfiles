@@ -60,7 +60,7 @@ function real() {
 #  done
 #}
 
-# show ps information with simple output for scripts, quick views, etc.
+# show ps information with simple output for scripts, quick views, etc:
 function psi() {
   if [[ ${#${@:/$0}} -ge 2 ]]; then
     case $1 {
@@ -126,7 +126,8 @@ function todo() {
 
 # one-liners:
 function mkcd() {mkdir -p "$@" && cd "$@"}
-function w3m() {[[ -z $1 ]] && real w3m ${HOMEPAGE} || real w3m ${@}}
+function w3m() {[[ -z $1 ]] && w3m ${HOMEPAGE} || w3m ${@}}
 function 256co() {perl -e 'foreach $i (0..255) {printf("\e[38;5;$i"."m%03d\e[0m ",$i); }'}
+function timec() {while sleep 1 ; do printf '\r%s ' "$(date +'%T %Y-%m-%d')" ; done}
 function pubip() {curl http://whatismyip.org/ 2>/dev/null}
 function qdep() {pacman-color -Q $@ $(pacman-color -Qi $@|grep Depends|cut -d: -f2-|sed -E 's|>\S+\>||g')}

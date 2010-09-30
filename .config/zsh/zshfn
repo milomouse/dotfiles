@@ -4,9 +4,9 @@ function zshaddhistory() {
   line=${1%%$'\n'} ; cmd=${line%% *}
   [[ ${#line} -ge 5
       && ${cmd} != (cp|cd|man|history|e|exit|cl|clear)
-      && ${cmd} != (l[axclsftm]|srm|rm|rms|shred)
+      && ${cmd} != (l[axclsftm]|srm|rm|rms|shred|rd|rds)
       && ${cmd} != (losetup|aespipe|crypsetup|sudo)
-      && ${cmd} != (baer|baerp|habs|makepkg)
+      && ${cmd} != (baer|baerp|habs|makepkg|go|startx)
       && ${cmd} != (pacman|pacman-color|yaourt|bauerbill)
       && ${cmd} != ([mszx]edit|[zx]load|wika)
       && ${arg} != (*unrl*|*spar*)

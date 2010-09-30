@@ -6,9 +6,10 @@ function zshaddhistory() {
       && ${cmd} != (cp|cd|man|history|e|exit|cl|clear)
       && ${cmd} != (l[axclsftm]|srm|rm|rms|shred|rd|rds)
       && ${cmd} != (losetup|aespipe|crypsetup|sudo)
-      && ${cmd} != (baer|baerp|habs|makepkg|go|startx)
+      && ${cmd} != (baer|baerp|habs|makepkg|go|startx|ay)
       && ${cmd} != (pacman|pacman-color|yaourt|bauerbill)
-      && ${cmd} != ([mszx]edit|[zx]load|wika)
+      && ${cmd} != (aive|lasi|lasid|daemons)
+      && ${cmd} != ([mszx]edit|[zx]load|wika|xoc)
       && ${arg} != (*unrl*|*spar*)
   ]] && (( ! $argv[(I)*unrl*|*spar*] ))
 }
@@ -22,12 +23,15 @@ function up(){
   done
 }
 
-# jump to previous directory by Nth amount or last visited:
+# jump to previous directory by Nth amount or argument,
+# else jump to last visited if no argument supplied:
 function back() {
   if [[ -n $1 ]]; then
     case $1 in
-      <->)  pushd -q +$1 2>/dev/null ;;
-      *)    dirs -lpv|sed '2s|$| \[last\]|'
+      <->) pushd -q +$1 2>/dev/null ;;
+      --) dirs -lpv|sed '2s|$| \[last\]|' ;;
+      *) [[ -n $(dirs -lpv|grep -i $1|grep -v ${PWD}) ]] && \
+          pushd -q +${$(dirs -lpv|grep -i $1|grep -v ${PWD})[1]}
     esac
   else
     pushd -q - 2>/dev/null

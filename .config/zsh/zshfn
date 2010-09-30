@@ -16,12 +16,12 @@ function zshaddhistory() {
 # else jump to last visited directory if no argument supplied:
 function back() {
   if [[ -n $1 ]]; then
-    case $1 in
+    case $1 {
       --)   dirs -lpv|sed '2s|$| \[last\]|' ;;
       <->)  pushd -q +$1 2>/dev/null ;;
       *)    [[ -n $(dirs -lpv|grep -i $1|grep -v ${PWD}) ]] && \
               pushd -q +${$(dirs -lpv|grep -i $1|grep -v ${PWD})[1]}
-    esac
+    }
   else pushd -q - 2>/dev/null ; fi
 }
 

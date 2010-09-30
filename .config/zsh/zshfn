@@ -68,7 +68,7 @@ function real() {
 function 256co() {
   for line in {0..15}; do
     for col in {0..15}; do
-      code=$(( $col * 16 + ${line} ))
+      local code=$(( $col * 16 + ${line} ))
       printf $'\e[38;05;%dm %03d' ${code} ${code}
     done
   print ; done
@@ -153,7 +153,7 @@ function todo() {
 
 # one-liners:
 function mkcd() {mkdir -p "$@" && cd "$@"}
-function top10() {fc -l 0 |awk '{print $2}'|awk 'BEGIN {FS="|"} {print $1}'|sort|uniq -c|sort -rn|head -10}
+function top10() {fc -l 0|awk '{print $2}'|awk 'BEGIN {FS="|"} {print $1}'|sort|uniq -c|sort -rn|head -10}
 function w3m() {[[ -z $1 ]] && real w3m ${HOMEPAGE} || real w3m ${@}}
 function timec() {while sleep 1 ; do printf '\r%s ' "$(date +'%T %Y-%m-%d')" ; done}
 function pubip() {curl http://whatismyip.org/ 2>/dev/null}

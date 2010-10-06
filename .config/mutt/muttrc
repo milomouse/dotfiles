@@ -18,7 +18,7 @@ source ${XDG_CONFIG_DIR}/mutt/fastmail.muttrc
 folder-hook FastMail/* source ${XDG_CONFIG_DIR}/mutt/fastmail.muttrc
 
 # - watch-folders and subscriptions:
-mailboxes +FastMail/INBOX +FastMail/Forums +FastMail/Filesystems +FastMail/Arch-Dev +FastMail/Uzbl-Dev +FastMail/Storage +FastMail/Junk\ Mail +FastMail/Sent\ Items +FastMail/Drafts +FastMail/Trash
+mailboxes +FastMail/INBOX +FastMail/Forums +FastMail/Filesystems +FastMail/Arch-Dev +FastMail/Browsers +FastMail/StumpWM +FastMail/Storage +FastMail/Junk\ Mail +FastMail/Sent\ Items +FastMail/Drafts +FastMail/Trash
 subscribe arch-announce arch-dev-public arch-general
 
 # - external handlers:

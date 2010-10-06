@@ -3,13 +3,20 @@ function zshaddhistory() {
   local line cmd
   line=${1%%$'\n'} ; cmd=${line%% *}
   [[ ${#line} -ge 5
-      && ${cmd} != (cp|cd|man|history|fc|e|exit|cl|clear)
-      && ${cmd} != (l[axclsftm]|srm|rm|rms|shred|rd|rds)
-      && ${cmd} != (losetup|aespipe|crypsetup|sudo|top10)
-      && ${cmd} != (pacman|pacman-color|bauerbill|makepkg)
-      && ${cmd} != (baer|baerp|habs|daemons|go|startx)
+      && ${cmd} != (cd|history|fc|e|exit|cl|clear)
+      && ${cmd} != (l[axclsftm]|srm|rms|rds|sudo)
+      && ${cmd} != (losetup|aespipe|crypsetup|top10)
+      && ${cmd} != (daemons|go|startx|mp)
       && ${cmd} != ([mszx]edit|[zx]load|wika|xoc)
   ]] && (( ! $argv[(I)*unrl*|*spar*] ))
+}
+
+# check ownership of given argument, as determined by pacman:
+function owns() {
+  if [[ -n $(for each in $(print ${PATH}|tr ':' '\n'); do
+             find ${each}/$1 2>/dev/null ; done) ]]
+  then /usr/bin/pacman -Qo $(which -p $1)
+  else /usr/bin/pacman -Qo $1 ; fi
 }
 
 # jump to previous directory by integer or reg-exp, also list dirs,
@@ -53,23 +60,24 @@ function mvf() {
 }
 
 # use 'real' program, not an alias/function, etc:
-function real() {
-  if [[ -n $1 ]]; then
-    prog=$(/usr/bin/which $1) &>/dev/null
-    if [[ -x $(print ${prog}) ]]; then
-      ${prog} ${@:/$1}
-    fi
-  else /bin/false ; fi
-}
+#function real() {
+#  if [[ -n $1 ]]; then
+#    local prog=$(which -p $1) &>/dev/null
+#    if [[ -x $(print ${prog}) ]]; then
+#      ${prog} ${@:/$1}
+#    fi
+#  else /bin/false ; fi
+#}
 
 # native function for showing 256 colors, properly formatted:
 function 256co() {
-  for line in {0..15}; do
-    for col in {0..15}; do
+  if [[ ${TERM} != linux ]]; then
+  for line in {0..15}; do for col in {0..15}; do
       local code=$(( $col * 16 + ${line} ))
       printf $'\e[38;05;%dm %03d' ${code} ${code}
     done
   print ; done
+  fi
 }
 
 # [TESTING] update/overwrite testing versions with final versions:
@@ -85,16 +93,17 @@ function 256co() {
 #  done
 #}
 
+
 # show ps information with simple output for scripts, quick views, etc:
 function psi() {
   if [[ ${#${@:/$0}} -ge 2 ]]; then
     case $1 {
-      '-C'|'-c')  real ps -C $2 hoargs ;;
-      '-G'|'-g')  real ps -G $2 hoargs ;;
-      '-U'|'-u')  real ps -U $2 hoargs ;;
-      '-P'|'-p')  real ps -p $2 hoargs ;;
-      '-S'|'-s')  real ps -s $2 hoargs ;;
-      '-T'|'-t')  real ps -t $2 hoargs ;;
+      '-C'|'-c')  command ps -C $2 hopid,args ;; # by- command name
+      '-G'|'-g')  command ps -G $2 hopid,args ;; # by- real group id (RGID)/name
+      '-U'|'-u')  command ps -U $2 hopid,args ;; # by- effective user ID (EUID)/name
+      '-P'|'-p')  command ps -p $2 hopid,args ;; # by- pid
+      '-S'|'-s')  command ps -s $2 hopid,args ;; # by- session id
+      '-T'|'-t')  command ps -t $2 hopid,args ;; # by- tty
       *)  print "unrecognized option. read: man ps (section: process selection by list)" ;; }
   else print "invalid selection. read: man ps (section: process selection by list)" ; fi
 }
@@ -103,19 +112,19 @@ function psi() {
 function extr() {
   if [ -f $1 ]; then 
     case $1 in
-      *.tar.bz2)   real tar xjf $1    ;;
-      *.tar.gz)    real tar xzf $1    ;;
-      *.bz2)       real bunzip2 $1    ;;
-      *.rar)       real unrar e $1    ;;
-      *.gz)        real gunzip $1     ;;
-      *.tar)       real tar xf $1     ;;
-      *.tbz2)      real tar xjf $1    ;;
-      *.tgz)       real tar xzf $1    ;;
-      *.zip)       real unzip $1      ;;
-      *.Z)         real uncompress $1 ;;
-      *.7z)        real 7z x $1       ;;
-      *.xz)        real unxz -vk $1   ;;
-      *.lzma)      real unlzma -vk $1 ;;
+      *.tar.bz2)   command tar xjf $1    ;;
+      *.tar.gz)    command tar xzf $1    ;;
+      *.bz2)       command bunzip2 $1    ;;
+      *.rar)       command unrar e $1    ;;
+      *.gz)        command gunzip $1     ;;
+      *.tar)       command tar xf $1     ;;
+      *.tbz2)      command tar xjf $1    ;;
+      *.tgz)       command tar xzf $1    ;;
+      *.zip)       command unzip $1      ;;
+      *.Z)         command uncompress $1 ;;
+      *.7z)        command 7z x $1       ;;
+      *.xz)        command unxz -vk $1   ;;
+      *.lzma)      command unlzma -vk $1 ;;
       *)           print "'$1' cannot be extracted via extr()" ;;
     esac
   else
@@ -124,9 +133,9 @@ function extr() {
 }
 
 # {start,stop,restart} daemon:
-function rcstart() {real sudo /etc/rc.d/$1 start}
-function rcstop() {real sudo /etc/rc.d/$1 stop}
-function rcrestart() {real sudo /etc/rc.d/$1 restart}
+function rcstart() {command sudo /etc/rc.d/$1 start}
+function rcstop() {command sudo /etc/rc.d/$1 stop}
+function rcrestart() {command sudo /etc/rc.d/$1 restart}
 
 # quickly view definitions:
 function sd() {
@@ -142,17 +151,17 @@ function sd() {
 
 # un-smart function for my todo lists:
 function todo() {
-  local _DIR=${HOME}/othe
+  local _d=${HOME}/othe
   case $1 in
-    l) real ls -1 ${_DIR}/.TODO* ;;
-    *) real vim ${_DIR}/.TODO_$1 ;;
+    -*) command ls -1 ${_d}/.TODO* ;;
+    *)  command vim ${_d}/.TODO_$1 ;;
   esac
 }
 
 # one-liners:
 function mkcd() {mkdir -p "$@" && cd "$@"}
 function top10() {fc -l 0|awk '{print $2}'|awk 'BEGIN {FS="|"} {print $1}'|sort|uniq -c|sort -rn|head -10}
-function w3m() {[[ -z $1 ]] && real w3m ${HOMEPAGE} || real w3m ${@}}
+function w3m() {[[ -z $1 ]] && command w3m ${HOMEPAGE} || command w3m ${@}}
 function timec() {while sleep 1 ; do printf '\r%s ' "$(date +'%T %Y-%m-%d')" ; done}
 function pubip() {curl http://whatismyip.org/ 2>/dev/null}
 function qdep() {pacman-color -Q $@ $(pacman-color -Qi $@|grep Depends|cut -d: -f2-|sed -E 's|>\S+\>||g')}

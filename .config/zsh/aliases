@@ -1,7 +1,7 @@
 # file management:
 alias ls="/bin/ls -h --file-type --time-style='+%m-%d-%y %H%M%S' --color=auto --group-directories-first"
 alias lss="ls -- *(D.om)"
-alias la="ls -A"              ; alias laa="ls -A -- *(D.om)"
+alias la="ls -A"              ; alias laa="ls -A *(D.om)"
 alias lc="la -d .*"           ; alias lcc="la -d .*(D.om)"
 alias lb="la -Ssr"            ; alias lbb="lb -- *(D.om)"
 alias lf="la -Xd *(-/DN)"
@@ -29,19 +29,19 @@ alias medit="${EDITOR:-/usr/bin/vim} ${XDG_CONFIG_DIR:-${HOME}/.config}/musca/mu
 alias sedit="${EDITOR:-/usr/bin/vim} -p ${HOME}/.stumpwmrc ${XDG_CONFIG_DIR:-${HOME}/.config}/stumpwm/{functions,macros,commands,hooks,key-maps}.lisp"
 alias xodit="${EDITOR:-/usr/bin/vim} ${HOME}/.xmonad/xmonad.hs"
 alias xedit="${EDITOR:-/usr/bin/vim} -p ${XDG_CONFIG_DIR:-${HOME}/.config}/xorg/{xinitrc,Xdefaults}"
-alias zedit="${EDITOR:-/usr/bin/vim} -p ${HOME}/.{zshrc,config/zsh/{zshfn,zshalias}}"
+alias zedit="${EDITOR:-/usr/bin/vim} -p ${HOME}/.{zshrc,config/zsh/{functions,aliases,exports,options}}"
 alias zload=". ${HOME}/.zshrc"
 alias xload="xrdb -load ${XDG_CONFIG_DIR:-${HOME}/.config}/xorg/Xdefaults &>/dev/null"
 
 # program masquing:
-alias svim="sudo ${EDITOR:-/usr/bin/vim}"
+alias svim="/usr/bin/sudo ${EDITOR:-/usr/bin/vim}"
 alias info="/usr/bin/info --vi-keys"
 alias diff="colordiff"
 alias grep="grep --color=auto"
-alias tmux='tmux -f ${XDG_CONFIG_DIR:-${HOME}/.config}/tmux/tmux.conf'
-alias mutt='mutt -F ${XDG_CONFIG_DIR:-${HOME}/.config}/mutt/muttrc'
-alias xskat='xskat -opt ${XDG_CONFIG_DIR:-${HOME}/.config}/xorg/xskat.opt -list ${XDG_CONFIG_DIR:-$HOME/.config}/xorg/xskat.lst'
-alias offlineimap='offlineimap -c ${XDG_CONFIG_DIR:-${HOME}/.config}/offlineimap/offlineimaprc'
+alias tmux="tmux -f ${XDG_CONFIG_DIR:-${HOME}/.config}/tmux/tmux.conf"
+alias mutt="mutt -F ${XDG_CONFIG_DIR:-${HOME}/.config}/mutt/muttrc"
+alias xskat="xskat -opt ${XDG_CONFIG_DIR:-${HOME}/.config}/xorg/xskat.opt -list ${XDG_CONFIG_DIR:-$HOME/.config}/xorg/xskat.lst"
+alias offlineimap="/usr/bin/offlineimap -c ${XDG_CONFIG_DIR:-${HOME}/.config}/offlineimap/offlineimaprc"
 alias xsel='xsel --logfile /dev/shm/xsel.log'
 alias {rot,rtorrent}='/usr/bin/rtorrent -o http_capath=/etc/ssl/certs'
 alias btpd='/usr/bin/btpd -d ${XDG_CONFIG_DIR:-${HOME}/.config}/btpd'
@@ -56,16 +56,18 @@ alias pso="print 'ELASPING USER %CPU NI +?  LWPID - COMMAND';ps -U root,milo --d
 alias dfu="df -hTP;print - '------------------------------------------------------';df -hTP --total|tail -1"
 alias {lavg,loadavg}='print ${$(</proc/loadavg)[1,3]}'
 alias daemons="lt /var/run/daemons"
-alias reboot="sudo reboot"
-alias {poweroff,pow}="sudo poweroff"
-alias mix2="ossmix codec1.jack.int-speaker.mode mix2 1>/dev/null && print 'Mixer set to PC Speaker'"
-alias mix3="ossmix codec1.jack.int-speaker.mode mix3 1>/dev/null && print 'Mixer set to Headphones'"
-#alias rec='ffmpeg -f x11grab -s 1366x768 - r 150 -i :0.0 -sameq /tmp/capture.mpg'
-alias siteget='wget --recursive --page-requisites --convert-links --html-extension --no-parent --wait=10 --limit-rate=20K -U Mozilla -l' #depth, then url
+alias reboot="/usr/bin/sudo reboot"
+alias {poweroff,pow}="/usr/bin/sudo poweroff"
+alias mix2="ossmix codec1.jack.int-speaker.mode mix2 1>/dev/null && print 'Mixer set to PC Speaker ($(ossvol -a))'"
+alias mix3="ossmix codec1.jack.int-speaker.mode mix3 1>/dev/null && print 'Mixer set to Headphones ($(ossvol -a))'"
+alias rec="ffmpeg -f x11grab -s 1366x768 - r 150 -i :0.0 -sameq ${XDG_VIDEOS_DIR:-${HOME}/vide}/$(date +%Y-%m-%d)-capture.mkv"
+alias siteget="wget --recursive --page-requisites --convert-links --html-extension --no-parent --wait=10 --limit-rate=20K -U Mozilla -l" #depth, then url
 alias synt="highlight -t 2 -k fixed -K 8 -l -j 3 -s candy"
 
 # database/package management:
-alias upf="sudo fc-cache -vf"
-alias upd="sudo updatedb"
-alias baer="bauerbill"
-alias {baerp,pacman}="sudo pacman-color"
+alias upf="/usr/bin/sudo fc-cache -vf"
+alias upd="/usr/bin/sudo updatedb"
+alias baer="/usr/bin/bauerbill"
+alias {baerp,pacman}="/usr/bin/sudo /usr/bin/pacman-color"
+alias barch="/usr/bin/pacman -Qs >! ${HOME}/othe/archive/installed_$(date +%Y-%m-%d).txt"
+alias bar='<${$(la -tr ~/othe/archive/installed_(*).txt)[1]}|${PAGER}'

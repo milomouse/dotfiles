@@ -166,7 +166,7 @@
   (dump-to-file (dump-desktop) file))
 
 ;; predefined echoes for speed, else use 'shell-command-output'.
-(defcommand announce-mifo () () (echo-string (current-screen) (run-shell-command "mifo -as" t)))
+(defcommand announce-mifo () () (echo-string (current-screen) (run-shell-command "mifo --stumpwm" t)))
 (defcommand announce-mifo-raw () () (echo-string (current-screen) (run-shell-command "mifo -ar" t)))
 (defcommand announce-mifo-list () () (echo-string (current-screen) (run-shell-command "mifo --show current|grep -A 7 -B 7 $(mifo -ar)|sed 's|'$(mifo -ar)'|^B^1*&^n|'" t)))
 (defcommand announce-mifo-fadd () () (echo-string (current-screen) (run-shell-command "mifo --fav-add" t)))

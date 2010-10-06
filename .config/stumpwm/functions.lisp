@@ -100,6 +100,15 @@
       (dk m (kbd "ESC") "abort-iresize")
     M)))) (update-resize-map)
 
+(defun fmt-group-status (group)
+  (let ((screen (group-screen group)))
+    (cond ((eq group (screen-current-group screen))
+           #\*)
+          ((and (typep (second (screen-groups screen)) 'group)
+                (eq group (second (screen-groups screen))))
+           #\+)
+          (t #\-))))
+
 ;(defstruct scratchpad
 ;  (last-group '())
 ;  (group '()))

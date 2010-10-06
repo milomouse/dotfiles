@@ -1,15 +1,15 @@
 #S(|STUMPWM|::|GDUMP| :|NUMBER| 1. :|NAME| "1"
    :|TREE|
-   (((#S(|STUMPWM|::|FDUMP| :|NUMBER| 0. :|X| 0. :|Y| 0. :|WIDTH| 698.
-         :|HEIGHT| 249. :|WINDOWS| (8388617.) :|CURRENT| 8388617.)
-      #S(|STUMPWM|::|FDUMP| :|NUMBER| 4. :|X| 0. :|Y| 249. :|WIDTH| 698.
-         :|HEIGHT| 282. :|WINDOWS| (12582921.) :|CURRENT| 12582921.)
-      #S(|STUMPWM|::|FDUMP| :|NUMBER| 6. :|X| 0. :|Y| 531. :|WIDTH| 698.
-         :|HEIGHT| 237. :|WINDOWS| (14680073.) :|CURRENT| 14680073.))
-     (#S(|STUMPWM|::|FDUMP| :|NUMBER| 5. :|X| 698. :|Y| 0. :|WIDTH| 668.
-         :|HEIGHT| 249. :|WINDOWS| (10485769.) :|CURRENT| 10485769.)
-      #S(|STUMPWM|::|FDUMP| :|NUMBER| 1. :|X| 698. :|Y| 249. :|WIDTH| 668.
-         :|HEIGHT| 282. :|WINDOWS| (16777225.) :|CURRENT| 16777225.)
-      #S(|STUMPWM|::|FDUMP| :|NUMBER| 2. :|X| 698. :|Y| 531. :|WIDTH| 668.
-         :|HEIGHT| 237. :|WINDOWS| (18874377.) :|CURRENT| 18874377.))))
+   (((#S(|STUMPWM|::|FDUMP| :|NUMBER| 0. :|X| 0. :|Y| 0. :|WIDTH| 683.
+         :|HEIGHT| 309. :|WINDOWS| (8388617.) :|CURRENT| 8388617.)
+      #S(|STUMPWM|::|FDUMP| :|NUMBER| 4. :|X| 683. :|Y| 0. :|WIDTH| 683.
+         :|HEIGHT| 309. :|WINDOWS| (16777225.) :|CURRENT| 16777225.))
+     ((#S(|STUMPWM|::|FDUMP| :|NUMBER| 1. :|X| 0. :|Y| 309. :|WIDTH| 683.
+          :|HEIGHT| 222. :|WINDOWS| (12582921.) :|CURRENT| 12582921.)
+       #S(|STUMPWM|::|FDUMP| :|NUMBER| 3. :|X| 0. :|Y| 531. :|WIDTH| 683.
+          :|HEIGHT| 237. :|WINDOWS| (14680073.) :|CURRENT| 14680073.))
+      (#S(|STUMPWM|::|FDUMP| :|NUMBER| 2. :|X| 683. :|Y| 309. :|WIDTH| 683.
+          :|HEIGHT| 349. :|WINDOWS| (18874377.) :|CURRENT| 18874377.)
+       #S(|STUMPWM|::|FDUMP| :|NUMBER| 5. :|X| 683. :|Y| 658. :|WIDTH| 683.
+          :|HEIGHT| 110. :|WINDOWS| (10485769.) :|CURRENT| 10485769.)))))
    :|CURRENT| 0.)

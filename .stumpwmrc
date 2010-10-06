@@ -22,7 +22,7 @@
 ;;----------------------------------------------------------------------------
 ;; file/s: *data-dir*/{commands,functions,hooks,key-maps,macros}.lisp
 ;;-NOTE:----------------------------------------------------------------------
-;; for MPlayer, use: mplayer -nokeepaspect -fstype netwm
+;; for MPlayer, use: mplayer -nokeepaspect {-fstype netwm}
 ;;----------------------------------------------------------------------------
 
 
@@ -82,6 +82,14 @@
                      "#8d8d8d"   ;; 7 - white
                      "#585872"   ;; 8 - (user) faint magenta
                      "#57718b")) ;; 9 - (user) bright blue
+(defun fmt-group-status (group)
+  (let ((screen (group-screen group)))
+    (cond ((eq group (screen-current-group screen))
+           #\*)
+          ((and (typep (second (screen-groups screen)) 'group)
+                (eq group (second (screen-groups screen))))
+           #\+)
+          (t #\-))))
 (update-color-map (current-screen))
 
 ;; text formatting (no mode-line)

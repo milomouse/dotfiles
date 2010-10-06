@@ -52,10 +52,12 @@ set directory=/tmp/.VIM-save/swapfiles,.
 set shortmess=aTItoO
 set statusline=[%n]\ %<%f%m%r\ %w\ %y\ \ <%{&fileformat}>%=[%o]\ %l,%c%V\/%L\ \ %P
 set grepprg=grep\ -nH\ $*
+autocmd BufNewFile,BufRead ~/rite/mine/* set ft=txt | set wrap | set spell
 autocmd BufNewFile,BufRead ~/mail/*   set ft=mail | set textwidth=72 | set spell
 autocmd BufNewFile,BufRead Xdefaults  set ft=xdefaults
 autocmd BufNewFile,BufRead .stumpwmrc set ft=lisp
 autocmd BufNewFile,BufRead ~/.config/stumpwm/storage/* set ft=lisp
+autocmd BufNewFile,BufRead ~/.config/zsh/* set ft=zsh
 autocmd BufNewFile,BufRead .TODO_*    set ft=conf
 autocmd BufReadPost *
   \ if line("'\"") > 0 && line("'\"") <= line("$") |

@@ -20,7 +20,11 @@ banishmouse
 
 # wallpaper:
 display -window root -resize 1366x768! \
-${XDG_PICTURES_DIR:-${HOME}/foto}/wall/wallpaper-249719.png
+  ${XDG_PICTURES_DIR:-${HOME}/foto}/wall/1366x768_Dizorb_Landscape_Study_HD_Wallpaper.png
+#  ${XDG_PICTURES_DIR:-${HOME}/foto}/wall/1366x768-Dizorb-Breakdown-The-Space-HD-Wallpaper.png
+#  ${XDG_PICTURES_DIR:-${HOME}/foto}/wall/1366x768_Dizorb_Landscape_Study_HD_Wallpaper.png
+#  ${XDG_PICTURES_DIR:-${HOME}/foto}/wall/1366x768-Dizorb-The-Homeworld-HD-Wallpaper.png
+#  ${XDG_PICTURES_DIR:-${HOME}/foto}/wall/wallpaper-249719.png
 
 # window-manager:
 exec stumpwm &>/dev/null

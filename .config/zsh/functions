@@ -6,7 +6,7 @@ function zshaddhistory() {
       && ${cmd} != (cd|history|fc|e|exit|cl|clear)
       && ${cmd} != (l[axclsftm]|srm|rms|rds|sudo)
       && ${cmd} != (losetup|aespipe|crypsetup|top10)
-      && ${cmd} != (daemons|go|startx|mp)
+      && ${cmd} != (daemons|go|startx|mp|flashgot)
       && ${cmd} != ([mszx]edit|[zx]load|wika|xoc)
   ]] && (( ! $argv[(I)*unrl*|*spar*] ))
 }
@@ -158,9 +158,21 @@ function todo() {
   esac
 }
 
+# watch FlashGot (curl) download progress and notify when complete:
+function flashgot() {
+  if [[ -n $(pgrep flashgot) ]]; then
+  while sleep 1; do
+    if [[ -z $(pgrep flashgot) ]]; then
+      repeat 3; do
+      stumpish echo "^B^1*curl:^5* download complete.^n" 1>/dev/null
+      sleep 3
+      done && break
+    fi
+  done ; fi
+}
+
 # one-liners:
 function mkcd() {mkdir -p "$@" && cd "$@"}
-function top10() {fc -l 0|awk '{print $2}'|awk 'BEGIN {FS="|"} {print $1}'|sort|uniq -c|sort -rn|head -10}
 function w3m() {[[ -z $1 ]] && command w3m ${HOMEPAGE} || command w3m ${@}}
 function timec() {while sleep 1 ; do printf '\r%s ' "$(date +'%T %Y-%m-%d')" ; done}
 function pubip() {curl http://whatismyip.org/ 2>/dev/null}

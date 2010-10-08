@@ -171,6 +171,7 @@
 (defcommand announce-mifo-list () () (echo-string (current-screen) (run-shell-command "mifo --show current|grep -A 7 -B 7 $(mifo -ar)|sed 's|'$(mifo -ar)'|^B^1*&^n|'" t)))
 (defcommand announce-mifo-fadd () () (echo-string (current-screen) (run-shell-command "mifo --fav-add" t)))
 (defcommand announce-mifo-fdel () () (echo-string (current-screen) (run-shell-command "mifo --fav-delete" t)))
+(defcommand announce-mifo-random () () (echo-string (current-screen) (run-shell-command "mifo -r ; mifo --stumpwm" t)))
 (defcommand announce-unread-mail () () (echo-string (current-screen) (run-shell-command "print unread: ${#$(find ~/mail/FastMail/*/new -type f)}" t)))
 (defcommand announce-battery () () (echo-string (current-screen) (run-shell-command "</proc/acpi/battery/BAT1/state" t)))
 (defcommand announce-harddrives () () (echo-string (current-screen) (run-shell-command "df -hTP;print - '------------------------------------------------------';df -hTP --total|tail -1" t)))

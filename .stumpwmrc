@@ -14,11 +14,12 @@
 ;; >>--: create a 'dedicate' and 'catchall' hook for changing focus color
 ;; >>>-: create a 'dedicate' and 'catchall' window-rule (remember * *)
 ;; >---: have mifo(mplayer-daemon) prompts use filename completion
-;; >>>>: command for dedicating current win/frame as the Master win/frame
+;; >>>-: command for dedicating current win/frame as the Master win/frame
 ;; >>>>! command for swapping current window with the Master win/frame
 ;; >---: better resize; if neighbor {left} then -ARG else +ARG, etc
 ;; >>--: show frame-indicator for 'resize' only if no window in frame
 ;; >---: command-mode for mifo video:seek to eliminate extra key-presses
+;; >---: have my 'undo' uses group and check current group for undos first.
 ;;----------------------------------------------------------------------------
 ;; file/s: *data-dir*/{commands,functions,hooks,key-maps,macros}.lisp
 ;;-NOTE:----------------------------------------------------------------------
@@ -37,16 +38,14 @@
 (defcommand-alias exec run-shell-command)
 
 ;; module(pre-variables)
-;(defvar *disk-usage-paths* '("/" "/home" "/var"))
-;(defvar *disk-modeline-fmt* "^B^8*%a^**^b^0*|^**^B^7*%p^**^b")
 (defvar *surfraw-bookmark-file* (data-dir-file "bookmarks" "txt"))
 (defvar *background-image-path* "~/foto/wall/")
 
 ;; modules
 ;(loop for file in '("cpu" "disk" "surfraw" "notifications")
-(loop for file in '("surfraw" "notifications")
-      do (load (make-pathname :name file :type "lisp" :directory
-      '(:relative ".config" "stumpwm" "modules"))))
+;(loop for file in '("surfraw" "notifications")
+;      do (load (make-pathname :name file :type "lisp" :directory
+;      '(:relative ".config" "stumpwm" "modules"))))
 
 ;; borders and gravity
 (setf *resize-hides-windows* T
@@ -70,8 +69,7 @@
 ;(set-focus-color     "#d74b73")
 (set-focus-color     "#746890")
 (set-unfocus-color   "#1c1c1c")
-(set-win-bg-color    "#0c0c0c")
-(set-win-bg-color    "#020202")
+(set-win-bg-color    "#090909")
 (setf *colors* (list "#1c1c1c"   ;; 0 - black
                      "#d74b73"   ;; 1 - red
                      "#799c99"   ;; 2 - green

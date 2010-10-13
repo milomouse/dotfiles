@@ -109,6 +109,15 @@
            #\+)
           (t #\-))))
 
+(defvar *surfraw-bookmark-file* nil)
+(defun display-file (file)
+  (if (probe-file file)
+      (run-shell-command (concatenate 'string "cat " file) t)
+    (message "The file ~a does not exist." file)))
+;(defmacro surfraw-selection (name engine)
+;  `(defcommand ,name () ()
+;    (surfraw ,engine (get-x-selection))))
+
 ;(defstruct scratchpad
 ;  (last-group '())
 ;  (group '()))

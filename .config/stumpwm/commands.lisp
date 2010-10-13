@@ -203,6 +203,36 @@
 (defcommand manpage (command) ((:rest "manpage: "))
   (run-shell-command (format nil "urxvt -e man ~a" command)))
 
+;; surfraw (copyright (C) 2008 Ivy Foster).
+;; would rather not use the module as everything is predefined, etc.
+(defcommand surfraw (engine search)
+  ((:string "What engine? ") (:string "Search for what? "))
+  (check-type engine string)
+  (check-type search string)
+  (run-shell-command (concatenate 'string "exex surfraw -g " engine " " search)))
+(defcommand sr-bookmark (bmk) ((:string "Bookmark: "))
+  (surfraw "" bmk))
+(defcommand sr-bookmark-file-display () ()
+  (display-file *surfraw-bookmark-file*))
+
+;; surfraw engines i want (from surfraw-git package).
+(defcommand amazon (search) ((:string "Search Amazon: ")) (surfraw "amazon" search))
+(defcommand aur (search) ((:string "Search the AUR: ")) (surfraw "aur" search))
+(defcommand cliki (search) ((:string "Search CLiki: ")) (surfraw "cliki" search))
+(defcommand codesearch (search) ((:string "Search CodeSearch: ")) (surfraw "codesearch" search))
+(defcommand ebay (search) ((:string "Search eBay: ")) (surfraw "ebay" search))
+(defcommand google (search) ((:string "Search Google: ")) (surfraw "google" search))
+(defcommand ixsearch (search) ((:string "Search ixsearch: ")) (surfraw "ixsearch" search))
+(defcommand lastfm (search) ((:string "Search LastFM: ")) (surfraw "lastfm" search))
+(defcommand piratebay (search) ((:string "Search the Pirate Bay: ")) (surfraw "piratebay" search))
+(defcommand slashdot (search) ((:string "Search SlashDot: ")) (surfraw "slashdot" search))
+(defcommand sourceforge (search) ((:string "Search SourceForge: ")) (surfraw "sourceforge" search))
+(defcommand wikipedia (search) ((:string "Search Wikipedia: ")) (surfraw "wikipedia" search))
+(defcommand youtube (search) ((:string "Search YouTube: ")) (surfraw "youtube" search))
+;; surfraw engines (from personal made elvis).
+(defcommand googlessl (search) ((:string "Search GoogleSSL: ")) (surfraw "googlessl" search))
+(defcommand kickass (search) ((:string "Search KickAssTorrents: ")) (surfraw "kickass" search))
+
 ;; i don't like 'Colon' showing/editable command in prompt
 ;; perhaps i'll figure out a global macro/function for this..
 (defcommand prompt-mifo-command (filename) ((:rest "command: "))

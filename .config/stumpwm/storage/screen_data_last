@@ -2,19 +2,16 @@
    :|GROUPS|
    (#S(|STUMPWM|::|GDUMP| :|NUMBER| 1. :|NAME| "1"
        :|TREE|
-       (((#S(|STUMPWM|::|FDUMP| :|NUMBER| 0. :|X| 0. :|Y| 0. :|WIDTH| 698.
-             :|HEIGHT| 449. :|WINDOWS| (8388617.) :|CURRENT| 8388617.)
-          #S(|STUMPWM|::|FDUMP| :|NUMBER| 4. :|X| 0. :|Y| 449. :|WIDTH| 698.
-             :|HEIGHT| 319. :|WINDOWS| (10485769.) :|CURRENT| 10485769.))
-         (#S(|STUMPWM|::|FDUMP| :|NUMBER| 1. :|X| 698. :|Y| 0. :|WIDTH| 668.
-             :|HEIGHT| 275. :|WINDOWS| (23068681. 16777225.)
-             :|CURRENT| 23068681.)
-          #S(|STUMPWM|::|FDUMP| :|NUMBER| 2. :|X| 698. :|Y| 275. :|WIDTH| 668.
-             :|HEIGHT| 291. :|WINDOWS| (12582921.) :|CURRENT| 12582921.)
-          #S(|STUMPWM|::|FDUMP| :|NUMBER| 3. :|X| 698. :|Y| 566. :|WIDTH| 668.
-             :|HEIGHT| 202. :|WINDOWS| (18874377. 14680073.)
-             :|CURRENT| 18874377.))))
-       :|CURRENT| 1.)
+       (((#S(|STUMPWM|::|FDUMP| :|NUMBER| 0. :|X| 0. :|Y| 0. :|WIDTH| 683.
+             :|HEIGHT| 384. :|WINDOWS| |COMMON-LISP|::|NIL|
+             :|CURRENT| |COMMON-LISP|::|NIL|)
+          #S(|STUMPWM|::|FDUMP| :|NUMBER| 3. :|X| 0. :|Y| 384. :|WIDTH| 683.
+             :|HEIGHT| 384. :|WINDOWS| |COMMON-LISP|::|NIL|
+             :|CURRENT| |COMMON-LISP|::|NIL|))
+         #S(|STUMPWM|::|FDUMP| :|NUMBER| 2. :|X| 683. :|Y| 0. :|WIDTH| 683.
+            :|HEIGHT| 768. :|WINDOWS| |COMMON-LISP|::|NIL|
+            :|CURRENT| |COMMON-LISP|::|NIL|)))
+       :|CURRENT| 0.)
     #S(|STUMPWM|::|GDUMP| :|NUMBER| 2. :|NAME| "2"
        :|TREE|
        (((#S(|STUMPWM|::|FDUMP| :|NUMBER| 0. :|X| 0. :|Y| 0. :|WIDTH| 683.
@@ -33,7 +30,8 @@
     #S(|STUMPWM|::|GDUMP| :|NUMBER| 3. :|NAME| "3"
        :|TREE|
        (#S(|STUMPWM|::|FDUMP| :|NUMBER| 0. :|X| 0. :|Y| 0. :|WIDTH| 1366.
-           :|HEIGHT| 768. :|WINDOWS| (20971662.) :|CURRENT| 20971662.))
+           :|HEIGHT| 768. :|WINDOWS| |COMMON-LISP|::|NIL|
+           :|CURRENT| |COMMON-LISP|::|NIL|))
        :|CURRENT| 0.)
     #S(|STUMPWM|::|GDUMP| :|NUMBER| 4. :|NAME| "4"
        :|TREE|
@@ -65,4 +63,4 @@
            :|HEIGHT| 768. :|WINDOWS| |COMMON-LISP|::|NIL|
            :|CURRENT| |COMMON-LISP|::|NIL|))
        :|CURRENT| 0.))
-   :|CURRENT| 1.)
+   :|CURRENT| 4.)

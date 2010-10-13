@@ -12,7 +12,7 @@ basename=$(print "$url"|tr ' ' '_'|tr '/' '\n'|sed '$!d')
 # a directory named after the parent website so as not to clobber:
 if [[ -n $(print $url|grep -E '.*\.torrent') ]]; then
   dest="$HOME/tors"
-elif [[ -n $(print $url|grep '.*\.png\|.*\.PNG\|.*\.jpg\|.*\.JPG\|.*\.jpeg\|.*\.JPEG\|.*\.gif\|.*\.GIF\|.*\.tiff\|.*\.TIFF\|.*\.svg\|.*\.SVG') ]]; then
+elif [[ -n $(print $url|grep -i '.*\.png\|.*\.jpg\|.*\.jpeg\|.*\.gif\|.*\.tiff\|.*\.svg') ]]; then
   dest="$XDG_PICTURES_DIR"
 else
   dest="$XDG_DOWNLOAD_DIR/$basedir"

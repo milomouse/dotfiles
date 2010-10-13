@@ -2,10 +2,9 @@
 [[ -n $(print $PATH|grep local/bin) ]] || PATH=$PATH:/usr/local/bin:/usr/local/sbin
 
 # source external configuration files:
-. ${XDG_CONFIG_DIR:-${HOME}/.config}/zsh/options || print no such file
-. ${XDG_CONFIG_DIR:-${HOME}/.config}/zsh/exports || print no such file
-. ${XDG_CONFIG_DIR:-${HOME}/.config}/zsh/aliases || print no such file
-. ${XDG_CONFIG_DIR:-${HOME}/.config}/zsh/functions || print no such file
+for i in ${XDG_CONFIG_DIR:-${HOME}/.config}/zsh/{options,exports,aliases,functions}; do
+  . $i || print $i: no such file
+done
 
 # prompt line:
 [[ "$TERM" == screen* ]] && precmd() {print -Pn "\e]2;%2d\a"} || RPROMPT='%F{white}%~%f'
@@ -48,7 +47,7 @@ bindkey "^?" backward-delete-char
 bindkey '^R' history-incremental-search-backward
 
 # framebuffer colors:
-if [[ "${TERM}" = "linux" || "${TERM}" == screen* ]]; then
+if [[ ${TERM} == linux || ${TERM} == screen* ]]; then
 #   candymouse:
     echo -en "\e]P0000000" ; echo -en "\e]P83d3a3a"
     echo -en "\e]P1d74b73" ; echo -en "\e]P9b94062"

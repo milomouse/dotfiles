@@ -24,10 +24,8 @@ alias e="bye"
 
 # useless quick views/edits:
 alias wika="${BROWSER:-/usr/bin/w3m} /usr/share/doc/arch-wiki/html/index.html"
-alias xoc="${BROWSER:-/usr/bin/w3m} /usr/share/doc/xmonad-contrib-darcs/html"
 alias medit="${EDITOR:-/usr/bin/vim} ${XDG_CONFIG_DIR:-${HOME}/.config}/musca/musca_start"
 alias sedit="${EDITOR:-/usr/bin/vim} -p ${HOME}/.stumpwmrc ${XDG_CONFIG_DIR:-${HOME}/.config}/stumpwm/{functions,macros,commands,hooks,key-maps}.lisp"
-alias xodit="${EDITOR:-/usr/bin/vim} ${HOME}/.xmonad/xmonad.hs"
 alias xedit="${EDITOR:-/usr/bin/vim} -p ${XDG_CONFIG_DIR:-${HOME}/.config}/xorg/{xinitrc,Xdefaults}"
 alias zedit="${EDITOR:-/usr/bin/vim} -p ${HOME}/.{zshrc,config/zsh/{functions,aliases,exports,options}}"
 alias zload=". ${HOME}/.zshrc"
@@ -35,7 +33,7 @@ alias xload="xrdb -load ${XDG_CONFIG_DIR:-${HOME}/.config}/xorg/Xdefaults &>/dev
 
 # program masquing:
 alias svim="/usr/bin/sudo ${EDITOR:-/usr/bin/vim}"
-alias info="/usr/bin/info --vi-keys"
+alias info="command info --vi-keys"
 alias diff="colordiff"
 alias grep="grep --color=auto"
 alias tmux="tmux -f ${XDG_CONFIG_DIR:-${HOME}/.config}/tmux/tmux.conf"

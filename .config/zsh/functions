@@ -4,19 +4,19 @@ function zshaddhistory() {
   line=${1%%$'\n'} ; cmd=${line%% *}
   [[ ${#line} -ge 5
       && ${cmd} != (cd|history|fc|e|exit|cl|clear)
-      && ${cmd} != (l[axclsftm]|srm|rms|rds|sudo)
-      && ${cmd} != (losetup|aespipe|crypsetup|top10)
+      && ${cmd} != (l[axclsftm]|srm|rms|rds)
+      && ${cmd} != (losetup|aespipe|cryptsetup)
       && ${cmd} != (daemons|go|startx|mp|flashgot)
-      && ${cmd} != ([mszx]edit|[zx]load|wika|xoc)
-  ]] && (( ! $argv[(I)*unrl*|*spar*] ))
+      && ${cmd} != ([mszx]edit|[zx]load|wika)
+  ]] && (( ! $argv[(I)*unrl*|*spar*|*losetup*] ))
 }
 
 # check ownership of given argument, as determined by pacman:
 function owns() {
   if [[ -n $(for each in $(print ${PATH}|tr ':' '\n'); do
              find ${each}/$1 2>/dev/null ; done) ]]
-  then /usr/bin/pacman -Qo $(which -p $1)
-  else /usr/bin/pacman -Qo $1 ; fi
+  then command pacman -Qo $(which -p $1)
+  else command pacman -Qo $1 ; fi
 }
 
 # jump to previous directory by integer or reg-exp, also list dirs,
@@ -24,8 +24,8 @@ function owns() {
 function back() {
   if [[ -n $1 ]]; then
     case $1 {
-      --)   dirs -lpv|sed '2s|$| \[last\]|' ;;
       <->)  pushd -q +$1 2>/dev/null ;;
+      --)   dirs -lpv|sed '2s|$| \[last\]|' ;;
       *)    [[ -n $(dirs -lpv|grep -i $1|grep -v ${PWD}) ]] && \
               pushd -q +${$(dirs -lpv|grep -i $1|grep -v ${PWD})[1]}
     }
@@ -59,16 +59,6 @@ function mvf() {
   fi
 }
 
-# use 'real' program, not an alias/function, etc:
-#function real() {
-#  if [[ -n $1 ]]; then
-#    local prog=$(which -p $1) &>/dev/null
-#    if [[ -x $(print ${prog}) ]]; then
-#      ${prog} ${@:/$1}
-#    fi
-#  else /bin/false ; fi
-#}
-
 # native function for showing 256 colors, properly formatted:
 function 256co() {
   if [[ ${TERM} != linux ]]; then
@@ -79,20 +69,6 @@ function 256co() {
   print ; done
   fi
 }
-
-# [TESTING] update/overwrite testing versions with final versions:
-# NOTE: need to use 'find + file', etc, to determine where each file should go,
-#       not just ~/code/shell... need to copy to ~/code/{lisp,lua,perl,python},etc..
-#function codeup() {
-#  for files in $(/bin/ls /usr/local/bin); do
-#    for each in $(/bin/ls ${HOME}/code/shell|/bin/grep -x $files); do
-#      for final in $(print ${$(diff -q /usr/local/bin/$each ${HOME}/code/shell/$each)[2]}); do
-#        cp -v $final ${HOME}/code/shell
-#      done
-#    done
-#  done
-#}
-
 
 # show ps information with simple output for scripts, quick views, etc:
 function psi() {

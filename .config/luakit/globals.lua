@@ -64,7 +64,7 @@ search_engines.default = search_engines.gs
 cookie_policy = { always = 0, never = 1, no_third_party = 2 }
 
 -- Per-domain webview properties
-domain_props = { --[[
+domain_props = {
     ["all"] = {
         ["enable-scripts"]          = false,
         ["enable-plugins"]          = false,
@@ -75,14 +75,19 @@ domain_props = { --[[
     ["youtube.com"] = {
         ["enable-scripts"] = true,
         ["enable-plugins"] = true,
+        ["accept-policy"]  = cookie_policy.no_third_party,
     },
-    ["lwn.net"] = {
-       ["accept-policy"] = cookie_policy.no_third_party,
+    ["kickasstorrents.com"] = {
+        ["enable-scripts"] = false,
+        ["enable-plugins"] = true,
+        ["enable-private-browsing"] = true,
+        ["accept-policy"]  = cookie_policy.no_third_party,
     },
-    ["forums.archlinux.org"] = {
+    ["bbs.archlinux.org"] = {
         ["user-stylesheet-uri"]     = luakit.data_dir .. "/styles/dark.css",
         ["enable-private-browsing"] = true,
-    }, ]]
+        ["accept-policy"]           = cookie_policy.no_third_party,
+    },
 }
 
 -- vim: et:sw=4:ts=8:sts=4:tw=80

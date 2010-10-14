@@ -2,20 +2,23 @@
 ## milomouse <vincent[at]fea.st>
 
 # - intrinsic locations:
-set folder           = ~/mail
+set folder           = $HOME/mail
 set mbox_type        = Maildir
 set spoolfile        = "+FastMail/INBOX"
-set header_cache     = ${XDG_CONFIG_DIR}/mutt/cache/headers
-set message_cachedir = ${XDG_CONFIG_DIR}/mutt/cache/bodies
-set mailcap_path     = ${XDG_CONFIG_DIR}/mutt/mailcap
-set signature        = ${XDG_CONFIG_DIR}/mutt/sig
-set tmpdir           = ${XDG_CONFIG_DIR}/mutt/temp
+set header_cache     = $XDG_CONFIG_DIR/mutt/cache/headers
+set message_cachedir = $XDG_CONFIG_DIR/mutt/cache/bodies
+set mailcap_path     = $XDG_CONFIG_DIR/mutt/mailcap
+set signature        = $XDG_CONFIG_DIR/mutt/sig
+set tmpdir           = $XDG_CONFIG_DIR/mutt/temp
+
+#set smtp_port = 24
+#set smtp_host = 127.0.0.1
 
 # - source gpg, colors and accounts:
 source /etc/Muttrc.gpg.dist
-source ${XDG_CONFIG_DIR}/mutt/colors.muttrc
-source ${XDG_CONFIG_DIR}/mutt/fastmail.muttrc
-folder-hook FastMail/* source ${XDG_CONFIG_DIR}/mutt/fastmail.muttrc
+source $XDG_CONFIG_DIR/mutt/colors.muttrc
+source $XDG_CONFIG_DIR/mutt/fastmail.muttrc
+folder-hook FastMail/* source $XDG_CONFIG_DIR/mutt/fastmail.muttrc
 
 # - watch-folders and subscriptions:
 mailboxes +FastMail/INBOX +FastMail/Forums +FastMail/Filesystems +FastMail/Arch-Dev +FastMail/Browsers +FastMail/StumpWM +FastMail/Storage +FastMail/Junk\ Mail +FastMail/Sent\ Items +FastMail/Drafts +FastMail/Trash
@@ -74,24 +77,24 @@ bind index       z  noop
 bind attach,browser,pager x noop
 
 # - key-bindings:
-bind pager /        search
-bind pager k        previous-line
-bind pager j        next-line
-bind pager gg       top
-bind pager G        bottom
-bind pager K        previous-undeleted
-bind pager J        next-undeleted
-bind pager l        view-attachments
-bind pager,index R  group-reply
-bind pager,index c  mail
-bind index K        previous-unread
-bind index J        next-unread
-bind index l        display-message
-bind browser l      select-entry
-bind attach  l      view-attach
-bind index ZZ       exit
-bind browser,pager z exit
-bind attach h       exit
+bind pager /          search
+bind pager k          previous-line
+bind pager j          next-line
+bind pager gg         top
+bind pager G          bottom
+bind pager K          previous-undeleted
+bind pager J          next-undeleted
+bind pager l          view-attachments
+bind pager,index R    group-reply
+bind pager,index c    mail
+bind index K          previous-unread
+bind index J          next-unread
+bind index l          display-message
+bind browser l        select-entry
+bind attach  l        view-attach
+bind index ZZ         exit
+bind browser,pager z  exit
+bind attach h         exit
 bind index,browser gg first-entry
 bind index,browser G  last-entry
 
@@ -101,7 +104,7 @@ macro index h   "c?" "view folders"
 macro index \Cr "<tag-pattern>all<enter><tag-prefix><clear-flag>N<untag-pattern>all<enter>" "mark all as read"
 macro index B   "<limit>/home/milob " "search message bodies"
 macro index P   "<pipe-message>cat > ~/" "save message as"
-macro index I   "<shell-escape>/usr/bin/offlineimap -c ${XDG_CONFIG_DIR}/offlineimap/offlineimaprc -u Curses.Blinkenlights -q -o<enter>" "sync IMAP"
+macro index I   "<shell-escape>/usr/bin/offlineimap -c $XDG_CONFIG_DIR/offlineimap/offlineimaprc -u Curses.Blinkenlights -q -o<enter>" "sync IMAP"
 macro index,pager \Cb ":set pipe_decode\n|urlview\n:unset pipe_decode\n"\
 		  "extract URLs out of a message"
 

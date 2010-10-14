@@ -1,7 +1,7 @@
 -- Global variables for luakit
 globals = {
  -- homepage         = "http://luakit.org/",
-    homepage         = "https://bbs.archlinux.org/search.php?action=show_new"
+    homepage         = "https://bbs.archlinux.org/search.php?action=show_new",
     scroll_step      = 40,
     zoom_step        = 0.1,
     max_cmd_history  = 100,

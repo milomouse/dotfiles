@@ -36,7 +36,7 @@ def   SURFRAW_text_browser	w3m
 
 # name/path of browser executable
 # e.g mozilla, netscape etc
-def   SURFRAW_graphical_browser jumanji
+def   SURFRAW_graphical_browser luakit
 
 # text browser arguments, or "none"
 def   SURFRAW_text_browser_args	none

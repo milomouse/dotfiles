@@ -78,7 +78,7 @@ domain_props = {
         ["accept-policy"]  = cookie_policy.no_third_party,
     },
     ["kickasstorrents.com"] = {
-        ["enable-scripts"] = false,
+        ["enable-scripts"] = true,
         ["enable-plugins"] = true,
         ["enable-private-browsing"] = true,
         ["accept-policy"]  = cookie_policy.no_third_party,

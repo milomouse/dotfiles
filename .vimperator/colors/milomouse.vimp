@@ -3,7 +3,7 @@
 " name: milomouse
 hi Bell                 border: 0 none; background-color: black;
 hi Boolean              color: #090909;
-hi CmdLine              font-family: envy-code-r; padding: 1px; font-size: 6pt; font-family: envy-code-r; font-weight: normal; padding: 0px 3px;
+hi CmdLine              font-family: envy-code-r; padding: 1px; font-size: 16pt; font-family: envy-code-r; font-weight: normal; padding: 0px 3px;
 
 hi CmdOutput            white-space: pre;
 hi CompDesc             color: #a488d9; width: 50%;font-size: 6pt;
@@ -18,7 +18,7 @@ hi CompLess::after      content: "\2303" /* Unicode up arrowhead */
 hi CompMore             text-align: center; height: .5ex; line-height: .5ex; margin-bottom: -.5ex;
 hi CompMore::after      content: "\2304" /* Unicode down arrowhead */
 hi CompMsg              font-style: italic; margin-left: 16px;
-hi CompResult           width: 45%; overflow: hidden;font-size: 6pt; font-family: envy-code-r; font-weight: normal;
+hi CompResult           width: 45%; overflow: hidden;font-size: 6pt; font-family: fixed; font-weight: normal;
 hi CompTitle            color: #9f8bab; background: #242421; font-weight: bold;
 hi CompTitle>*          padding: 0 .5ex;
 hi ErrorMsg             color: #242421; background: #a488d9; font-weight: bold;

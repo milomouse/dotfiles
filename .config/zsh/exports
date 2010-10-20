@@ -1,5 +1,5 @@
 # global exports:
-export XDG_CACHE_HOME="/dev/shm/cache"
+export XDG_CACHE_HOME="${HOME}/.config/cache"
 export XDG_CONFIG_DIR="${HOME}/.config"
 export XDG_CONFIG_DIRS="${HOME}/.config:/etc"
 export XDG_DATA_HOME="${HOME}/.config/share"

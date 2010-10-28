@@ -2,17 +2,15 @@
 ## milomouse <vincent[at]fea.st>
 
 # - intrinsic locations:
-set folder           = $HOME/mail
-set mbox_type        = Maildir
-set spoolfile        = "+FastMail/INBOX"
-set header_cache     = $XDG_CONFIG_DIR/mutt/cache/headers
-set message_cachedir = $XDG_CONFIG_DIR/mutt/cache/bodies
-set mailcap_path     = $XDG_CONFIG_DIR/mutt/mailcap
-set signature        = $XDG_CONFIG_DIR/mutt/sig
-set tmpdir           = $XDG_CONFIG_DIR/mutt/temp
-
-#set smtp_port = 24
-#set smtp_host = 127.0.0.1
+  set folder           = $HOME/mail
+  set mbox_type        = Maildir
+  set spoolfile        = "+FastMail/INBOX"
+  set record           = "+FastMail/Sent\ Items"
+  set header_cache     = $XDG_CONFIG_DIR/mutt/cache/headers
+  set message_cachedir = $XDG_CONFIG_DIR/mutt/cache/bodies
+  set mailcap_path     = $XDG_CONFIG_DIR/mutt/mailcap
+  set signature        = $XDG_CONFIG_DIR/mutt/sig
+  set tmpdir           = $XDG_CONFIG_DIR/mutt/temp
 
 # - source gpg, colors and accounts:
 source /etc/Muttrc.gpg.dist
@@ -21,31 +19,43 @@ source $XDG_CONFIG_DIR/mutt/fastmail.muttrc
 folder-hook FastMail/* source $XDG_CONFIG_DIR/mutt/fastmail.muttrc
 
 # - watch-folders and subscriptions:
-mailboxes +FastMail/INBOX +FastMail/Forums +FastMail/Filesystems +FastMail/Arch-Dev +FastMail/Browsers +FastMail/StumpWM +FastMail/Storage +FastMail/Junk\ Mail +FastMail/Sent\ Items +FastMail/Drafts +FastMail/Trash
+mailboxes +FastMail/INBOX
+mailboxes +FastMail/Forums
+mailboxes +FastMail/Filesystems
+mailboxes +FastMail/Arch-Dev
+mailboxes +FastMail/Browsers
+mailboxes +FastMail/StumpWM
+mailboxes +FastMail/Storage
+mailboxes +FastMail/Junk\ Mail
+mailboxes +FastMail/Sent\ Items
+mailboxes +FastMail/Drafts
+mailboxes +FastMail/Trash
 subscribe arch-announce arch-dev-public arch-general
 
 # - external handlers:
-set editor           = "vim +/^$"
-set ispell           = "hunspell"
+  set ispell           = "hunspell"
+  set editor           = "vim +/^$"
+  set edit_headers
 
 # - core settings:
 unset confirmappend
-set delete
-set mail_check = 0
+  set copy=ask-yes
+  set delete
+  set mail_check = 0
 unset markers
 unset mark_old
-set menu_scroll
-set pager_index_lines = 10
-set pager_context     = 5
-set pager_stop
-set pipe_decode
-set reverse_alias
-set sort = threads
-set sort_aux = reverse-last-date-received
+  set menu_scroll
+  set pager_index_lines = 10
+  set pager_context     = 5
+  set pager_stop
+  set pipe_decode
+  set reverse_alias
+  set sort = threads
+  set sort_aux = reverse-last-date-received
 unset sort_re
-set thorough_search
-set tilde
-set timeout = 3
+  set thorough_search
+  set tilde
+  set timeout = 3
 
 # - order of preferred viewing formats:
 # auto_view text/html
@@ -102,11 +112,10 @@ bind index,browser G  last-entry
 macro index gh  "<change-folder>!<enter>" "go to Inbox"
 macro index h   "c?" "view folders"
 macro index \Cr "<tag-pattern>all<enter><tag-prefix><clear-flag>N<untag-pattern>all<enter>" "mark all as read"
-macro index B   "<limit>/home/milob " "search message bodies"
+macro index B   "<limit>/home/milo " "search message bodies"
 macro index P   "<pipe-message>cat > ~/" "save message as"
 macro index I   "<shell-escape>/usr/bin/offlineimap -c $XDG_CONFIG_DIR/offlineimap/offlineimaprc -u Curses.Blinkenlights -q -o<enter>" "sync IMAP"
-macro index,pager \Cb ":set pipe_decode\n|urlview\n:unset pipe_decode\n"\
-		  "extract URLs out of a message"
+macro index,pager \Cb ":set pipe_decode\n|urlview\n:unset pipe_decode\n" "extract URLs out of a message"
 
 # - appearance / formatting:
 set folder_format = "%3C. %-5.5u %-5.5g %2l %s %N %-52.52f %> %t %F"

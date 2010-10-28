@@ -63,12 +63,17 @@ autocmd BufReadPost *
   \ if line("'\"") > 0 && line("'\"") <= line("$") |
   \   exe "normal! 9`\"" |
   \ endif
-autocmd Filetype html,xml,xsl set spell
+autocmd FileType html,xml,xsl set spell
 autocmd FileType c      set formatoptions+=ro
 autocmd FileType make   set noexpandtab shiftwidth=8
 autocmd FileType python set expandtab shiftwidth=2 tabstop=2
 autocmd FileType c      syn match matchName /\(#define\)\@<= .*/
 autocmd FileType cpp    syn match matchName /\(#define\)\@<= .*/
+autocmd FileType mail   set tw=64 autoindent expandtab formatoptions=tcqn
+autocmd FileType mail   set list listchars=tab:»·,trail:·
+autocmd FileType mail   set comments=nb:>
+autocmd FileType mail   vmap D d0[...]^[
+autocmd FileType mail   silent normal /--\s*$^M0^[gg/^$^Mj
 filetype on
 filetype indent off
 filetype plugin indent off

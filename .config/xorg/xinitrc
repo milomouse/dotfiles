@@ -14,16 +14,17 @@ xmodmap -e "add Mod1 = Alt_L Alt_R"
 xmodmap -e "add Mod4 = Super_L Super_R"
 
 # mouse/synclient:
-_file="/dev/shm/cache/.banishmouse"
+_file="/dev/shm/.1000/banishmouse"
 [ ! -f $_file ] || rm -f $_file
 banishmouse
 
 # wallpaper:
 display -window root -resize 1366x768! \
-  ${XDG_PICTURES_DIR:-${HOME}/foto}/wall/1366x768_Dizorb_Landscape_Study_HD_Wallpaper.png
-#  ${XDG_PICTURES_DIR:-${HOME}/foto}/wall/1366x768-Dizorb-Breakdown-The-Space-HD-Wallpaper.png
-#  ${XDG_PICTURES_DIR:-${HOME}/foto}/wall/1366x768_Dizorb_Landscape_Study_HD_Wallpaper.png
-#  ${XDG_PICTURES_DIR:-${HOME}/foto}/wall/1366x768-Dizorb-The-Homeworld-HD-Wallpaper.png
+  ${XDG_PICTURES_DIR:-${HOME}/foto}/wall/1366x768_dizorb_landscape_study_hd_wallpaper.png
+#  ${XDG_PICTURES_DIR:-${HOME}/foto}/wall/1366x768_nasa-2010-1674.png
+#  ${XDG_PICTURES_DIR:-${HOME}/foto}/wall/1366x768-dizorb-breakdown-the-space-hd-wallpaper.png
+#  ${XDG_PICTURES_DIR:-${HOME}/foto}/wall/1366x768_dizorb_landscape_study_hd_wallpaper.png
+#  ${XDG_PICTURES_DIR:-${HOME}/foto}/wall/1366x768-dizorb-the-homeworld-hd-wallpaper.png
 #  ${XDG_PICTURES_DIR:-${HOME}/foto}/wall/wallpaper-249719.png
 
 # window-manager:

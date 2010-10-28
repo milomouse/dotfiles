@@ -2,13 +2,13 @@
 ;; ~/.stumpwmrc
 ;;----------------------------------------------------------------------------
 ;; author: milomouse <vincent[at]fea.st>
-;; update: 2010-09-29 11:35:31
+;; update: 2010-10-24 20:25:06
 ;;----------------------------------------------------------------------------
 ;; versions used atoc:
 ;; |  clisp-new-clx     -> 2.48-2
-;; |  cl-asdf           -> 20100915-1
+;; |  cl-asdf           -> 20101020-1
 ;; |  cl-ppcre          -> 2.0.3-1
-;; |  stumpwm-git       -> 20100929-1
+;; |  stumpwm-git       -> 20101020-1
 ;; |  surfraw-git       -> 20100929-1
 ;;-TODO:----------------------------------------------------------------------
 ;; >>--: create a 'dedicate' and 'catchall' hook for changing focus color
@@ -35,17 +35,11 @@
     (run-prog-collect-output *shell-program* "-c" cmd)
     (run-prog *shell-program* :args (list "-c" cmd) :wait nil)))
 (setf *shell-program* "/bin/zsh")
-(defcommand-alias exec run-shell-command)
+;(defcommand-alias exec run-shell-command)
 
-;; module(pre-variables)
+;; function pre-variables
 (defvar *surfraw-bookmark-file* (data-dir-file "bookmarks" "txt"))
 (defvar *background-image-path* "~/foto/wall/")
-
-;; modules
-;(loop for file in '("cpu" "disk" "surfraw" "notifications")
-;(loop for file in '("surfraw" "notifications")
-;      do (load (make-pathname :name file :type "lisp" :directory
-;      '(:relative ".config" "stumpwm" "modules"))))
 
 ;; borders and gravity
 (setf *resize-hides-windows* T

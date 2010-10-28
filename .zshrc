@@ -2,7 +2,7 @@
 [[ -n $(print $PATH|grep local/bin) ]] || PATH=$PATH:/usr/local/bin:/usr/local/sbin
 
 # source external configuration files:
-for i in ${XDG_CONFIG_DIR:-${HOME}/.config}/zsh/{options,exports,aliases,functions}; do
+for i in ${ZPATH:-${HOME}/.config/zsh}/{options,exports,aliases,functions}; do
   . $i || print $i: no such file
 done
 
@@ -31,6 +31,10 @@ zstyle ':completion:*:*:kill:*' menu yes select
 zstyle ':completion:*:*:kill:*:processes' command 'ps haxopid:5,user:4,%cpu:4,ni:2,stat:3,etime:8,args'
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' force-list always
+#zstyle ':completion:*:*:rc:*' menu yes select
+#zstyle ':completion:*:*:rc:*:processes' command 'print ${$(/bin/ls -- /etc/rc.d/*(D.om)):t}'
+#zstyle ':completion:*:*:rc:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
+#zstyle ':completion:*:rc:*' force-list always
 [[ -a $(which -p bauerbill) ]] && compdef _pacman {bauerbill,baer,baerp}=pacman
 [[ -a $(which -p pacman-color) ]] && compdef _pacman pacman-color=pacman
 
@@ -50,7 +54,7 @@ bindkey '^R' history-incremental-search-backward
 if [[ ${TERM} == linux || ${TERM} == screen* ]]; then
 #   candymouse:
     echo -en "\e]P0000000" ; echo -en "\e]P83d3a3a"
-    echo -en "\e]P1d74b73" ; echo -en "\e]P9b94062"
+    echo -en "\e]P1d74b73" ; echo -en "\e]P9e07895"
     echo -en "\e]P2799c99" ; echo -en "\e]PA85afa9"
     echo -en "\e]P3c8bc45" ; echo -en "\e]PBbaa02c"
     echo -en "\e]P476ace2" ; echo -en "\e]PC98a7b6"
@@ -58,3 +62,9 @@ if [[ ${TERM} == linux || ${TERM} == screen* ]]; then
     echo -en "\e]P6508686" ; echo -en "\e]PE569e9a"
     echo -en "\e]P78d8d8d" ; echo -en "\e]PFdad3d3"
 fi
+
+# show startup information for console logins:
+#if [[ $(tty) == /dev/tty[1-4] ]]; then
+#  clear
+#  eval ${ZPATH:-${HOME}/.config/zsh}/stinfo
+#fi

@@ -54,7 +54,7 @@
         (t (concatenate 'string home-dir path)))))
 
 ;; to ease repetition in commands.
-(defun remember-undo () () (dump-screen-to-file "/dev/shm/cache/.stumpwm_undo_data"))
+(defun remember-undo () () (dump-screen-to-file "/dev/shm/.stumpwm_undo_data"))
 (defun remember-last () ()
   (dump-window-placement-rules "~/.config/stumpwm/storage/placement_rules")
   (dump-screen-to-file "~/.config/stumpwm/storage/screen_data_last"))

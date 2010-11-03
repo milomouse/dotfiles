@@ -2,8 +2,9 @@
 [[ -n $(print $PATH|grep local/bin) ]] || PATH=$PATH:/usr/local/bin:/usr/local/sbin
 
 # source external configuration files:
-for i in ${ZPATH:-${HOME}/.config/zsh}/{options,exports,aliases,functions}; do
-  . $i || print $i: no such file
+ZDOTDIR="${XDG_CONFIG_DIR:-${HOME}/.config}/zsh"
+for i in ${ZDOTDIR}/{options,exports,aliases,functions}; do
+  . $i || (print $i: no such file && setopt cshjunkieloop warncreateglobal)
 done
 
 # prompt line:
@@ -24,7 +25,7 @@ zstyle ':completion:*:manuals' separate-sections true
 zstyle ':completion:*:manuals.(^1*)' insert-sections true
 zstyle ':completion:*' verbose true
 zstyle ':completion:*' use-cache on
-zstyle ':completion:*' cache-path ${XDG_CACHE_HOME:-/dev/shm}
+zstyle ':completion:*' cache-path ${XDG_CACHE_HOME:-~/.config/cache}
 zstyle ':completion:*' squeeze-slashes true
 zstyle ':completion:*:functions' ignored-patterns '_*'
 zstyle ':completion:*:*:kill:*' menu yes select
@@ -62,9 +63,3 @@ if [[ ${TERM} == linux || ${TERM} == screen* ]]; then
     echo -en "\e]P6508686" ; echo -en "\e]PE569e9a"
     echo -en "\e]P78d8d8d" ; echo -en "\e]PFdad3d3"
 fi
-
-# show startup information for console logins:
-#if [[ $(tty) == /dev/tty[1-4] ]]; then
-#  clear
-#  eval ${ZPATH:-${HOME}/.config/zsh}/stinfo
-#fi

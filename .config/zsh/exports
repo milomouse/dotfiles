@@ -1,7 +1,6 @@
 # global exports:
 export XDG_CACHE_HOME="${HOME}/.config/cache"
 export XDG_CONFIG_DIR="${HOME}/.config"
-export XDG_CONFIG_DIRS="${HOME}/.config:/etc"
 export XDG_DATA_HOME="${HOME}/.config/share"
 export XDG_DESKTOP_DIR="/dev/shm"
 export XDG_DOCUMENTS_DIR="${HOME}/rite"
@@ -12,7 +11,6 @@ export XDG_PUBLICSHARE_DIR="/dev/shm"
 export XDG_TEMPLATES_DIR="/dev/shm"
 export XDG_VIDEOS_DIR="${HOME}/vide"
 export XAUTHORITY="${HOME}/.config/xorg/.Xauthority"
-export ZPATH=${XDG_CONFIG_DIR:-${HOME}/.config}/zsh
 export HISTFILE=${ZPATH:-${HOME}/.config/zsh}/.history
 export HISTSIZE=1400
 export SAVEHIST=1000
@@ -29,7 +27,7 @@ export LANG="en_US.utf8"
 export LC_ALL="en_US.utf8"
 export LC="en_US.utf8"
 export LESSCHARSET="utf-8"
-export LESSHISTFILE="${XDG_PUBLICSHARE_DIR}/.1000/.l-hist"
+export LESSHISTFILE="${XDG_PUBLICSHARE_DIR:-/dev/shm}/.1000/.l-hist"
 export LESS_TERMCAP_mb=$'\E[01;31m'
 export LESS_TERMCAP_md=$'\E[00;35m'
 export LESS_TERMCAP_me=$'\E[0m'

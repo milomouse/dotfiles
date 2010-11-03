@@ -7,8 +7,8 @@ function zshaddhistory() {
       && ${cmd} != (l[axclsftm]|srm|rms|rds)
       && ${cmd} != (losetup|aespipe|cryptsetup)
       && ${cmd} != (daemons|go|startx|mp|flashgot)
-      && ${cmd} != ([mszx]edit|[zx]load|wika)
-  ]] && (( ! $argv[(I)*unrl*|*spar*|*losetup*] ))
+      && ${cmd} != ([mszx]edit|[zx]load|zhist|wika)
+  ]] && (( ! $argv[(I)*unrl*|*spar*|*losetup*|*litika*] ))
 }
 
 # check ownership of given argument, as determined by pacman:
@@ -22,7 +22,7 @@ function owns() {
 # jump to previous directory by integer or reg-exp, also list dirs,
 # else jump to last visited directory if no argument supplied:
 function back() {
-  if [[ -n $1 ]]; then
+  if [[ $# == 1 ]]; then
     case $1 {
       <->)  pushd -q +$1 2>/dev/null ;;
       --)   dirs -lpv|sed '2s|$| \[last\]|' ;;
@@ -97,6 +97,25 @@ function extr() {
   fi
 }
 
+# simple sleep function to ease repetition:
+function timer() {
+  if [[ $# == 1 ]]; then
+    case $1 {
+      <->) 
+        sleep $1
+        [[ -n ${DISPLAY} ]] && stumpish echo Timer has finished. || \
+        print Timer has finished.
+      ;;
+      <->[smdh])
+        sleep $1
+        [[ -n ${DISPLAY} ]] && stumpish echo Timer has finished. || \
+        print Timer has finished.
+      ;;
+      *)  print "Time must be an Integer followed by time format [s,m,h,d]. Defaults to seconds."
+    }
+  fi
+}
+
 # native function for showing 256 colors, properly formatted:
 function 256co() {
   if [[ ${TERM} != linux ]]; then
@@ -129,6 +148,17 @@ function todo() {
   esac
 }
 
+# un-smart function for viewing/editing history file (still use 'fc/history'):
+function zhist() {
+  if [[ $# == 1 ]]; then
+    case $1 {
+      e)  ${EDITOR:-/usr/bin/vim} ${ZDOTDIR:-${HOME}/.config/zsh}/.history ;;
+      a)  <${ZDOTDIR:-${HOME}/.config/zsh}/.history | less ;;
+      *)  <${ZDOTDIR:-${HOME}/.config/zsh}/.history|grep -i $1
+    }
+  fi
+}
+
 # watch FlashGot (firefox) download progress and notify when complete:
 function flashgot() {
   if [[ -n $(pgrep flashgot) ]]; then
@@ -143,8 +173,8 @@ function flashgot() {
 }
 
 # one-liners/micro functions:
-function rc() {[[ -n $1 ]] && sudo /etc/rc.d/$1 ${@:/$1}}
-function alv() {local d=${HOME}/othe/archive ; <${${$(ls $d/installed_*)}[-${1:-1}]}|${PAGER}}
+function rc() {[[ $# == 1 ]] && sudo /etc/rc.d/$1 ${@:/$1}}
+function alv() {<${${$(ls ${HOME}/othe/archive/installed_*)}[-${1:-1}]}|${PAGER}}
 function mkcd() {mkdir -p "$@" && cd "$@"}
 function pubip() {curl http://whatismyip.org/ 2>/dev/null}
 function qdep() {pacman-color -Q $@ $(pacman-color -Qi $@|grep Depends|cut -d: -f2-|sed -E 's|>\S+\>||g')}

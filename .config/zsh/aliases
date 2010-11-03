@@ -54,12 +54,12 @@ alias {lavg,loadavg}='print ${$(</proc/loadavg)[1,3]}'
 alias daemons="lt /var/run/daemons"
 alias reboot="/usr/bin/sudo reboot"
 alias {poweroff,pow}="/usr/bin/sudo poweroff"
-alias mix2="ossvol --speakers --quiet && (printf 'Mixer set to PC Speaker: '; ossvol -a)"
-alias mix3="ossvol --headphones --quiet && (printf 'Mixer set to Headphones: '; ossvol -a)"
+alias mix2="ossvol --speakers --quiet && ossvol -a"
+alias mix3="ossvol --headphones --quiet && ossvol -a"
 alias rec="ffmpeg -f x11grab -s 1366x768 - r 150 -i :0.0 -sameq ${XDG_VIDEOS_DIR:-${HOME}/vide}/$(date +%Y-%m-%d)-capture.mkv"
 alias siteget="wget --recursive --page-requisites --convert-links --html-extension --no-parent --wait=10 --limit-rate=20K -U Mozilla -l" #depth, then url
 alias synt="highlight -t 2 -k fixed -K 8 -l -j 3 -s candy"
-alias stinfo=". ${ZPATH:-${HOME}/.config/zsh}/stinfo"
+alias stinfo=". ${ZDOTDIR:-${HOME}/.config/zsh}/stinfo"
 
 # database/package management:
 alias upf="/usr/bin/sudo fc-cache -vr"

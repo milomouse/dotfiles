@@ -154,11 +154,11 @@ unsetopt shoptionletters
 unsetopt shwordsplit
 unsetopt trapsasync
 # 11 -> shell state:
-#  setopt interactive
-#  setopt login
-#unsetopt privileged
-#unsetopt restricted
-#  setopt shinstdin
+#  setopt interactive # do not set!
+#  setopt login       # do not set!
+#unsetopt privileged  # do not set!
+#unsetopt restricted  # do not set!
+#  setopt shinstdin   # do not set!
 unsetopt singlecommand
 # 12 -> zle:
 unsetopt beep

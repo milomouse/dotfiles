@@ -1,13 +1,14 @@
 -- Global variables for luakit
 globals = {
- -- homepage         = "http://luakit.org/",
-    homepage         = "https://bbs.archlinux.org/search.php?action=show_new",
-    scroll_step      = 40,
-    zoom_step        = 0.1,
-    max_cmd_history  = 100,
-    max_srch_history = 100,
- -- http_proxy       = "http://example.com:3128",
-    download_dir     = luakit.get_special_dir("DOWNLOAD") or (os.getenv("HOME") .. "/down"),
+    homepage            = "http://luakit.org/",
+ -- homepage            = "http://github.com/mason-larobina/luakit",
+    scroll_step         = 40,
+    zoom_step           = 0.1,
+    max_cmd_history     = 100,
+    max_srch_history    = 100,
+ -- http_proxy          = "http://example.com:3128",
+    download_dir        = luakit.get_special_dir("DOWNLOAD") or (os.getenv("HOME") .. "/downloads"),
+    default_window_size = "800x600",
 }
 
 -- Make useragent
@@ -57,8 +58,8 @@ search_engines = {
     pt    = "http://thepiratebay.org/search/{0}",
 }
 
--- Set google-ssl (gs) as fallback search engine
-search_engines.default = search_engines.gs
+-- Set google as fallback search engine
+search_engines.default = search_engines.google
 
 -- Fake the cookie policy enum here
 cookie_policy = { always = 0, never = 1, no_third_party = 2 }

@@ -217,6 +217,15 @@ window.init_funcs = {
             [i.input]    = theme.input_ibar_font,
         }) do wi.font = v end
     end,
+
+    set_default_size = function (w)
+        local size = globals.default_window_size or "800x600"
+        if string.match(size, "^%d+x%d+$") then
+            w.win:set_default_size(string.match(size, "^(%d+)x(%d+)$"))
+        else
+            print(string.format("E: window.lua: invalid window size: %q", size))
+        end
+    end,
 }
 
 -- Helper functions which operate on the window widgets or structure.
@@ -537,7 +546,6 @@ window.methods = {
         os.execute(string.format("mkdir -p %q", globals.download_dir))
         local dl = globals.download_dir .. "/" .. filename
         local wget = string.format("wget -q %q -O %q", link, dl)
-       -- local wget = string.format("curl -C - --ssl --ftp-pasv --create-dirs -L %q -o %q", link, dl)
         info("Launching: %s", wget)
         luakit.spawn(wget)
     end,
@@ -709,6 +717,9 @@ function window.new(uris)
 
     -- Set initial mode
     w:set_mode()
+
+    -- Show window
+    w.win:show()
 
     return w
 end

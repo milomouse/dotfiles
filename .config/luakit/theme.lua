@@ -5,7 +5,7 @@
 local theme = {}
 
 -- Default settings
-theme.font = "monospace normal 8"
+theme.font = "monospace normal 9"
 theme.fg   = "#fff"
 theme.bg   = "#000"
 
@@ -34,6 +34,10 @@ theme.loaded_sbar_fg    = "#33AADD"
 -- Input bar specific
 theme.ibar_fg           = "#000"
 theme.ibar_bg           = "#fff"
+
+-- Proxy manager
+theme.proxy_active_fg   = '#000'
+theme.proxy_inactive_fg = '#888'
 
 -- Tab label
 theme.tab_fg            = "#888"

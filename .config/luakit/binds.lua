@@ -43,16 +43,12 @@ binds.mode_binds = {
                                             return false
                                         end),
 
-        key({"Control"}, "i",           function (w) w:set_mode("insert")  end),
+        key({},          "i",           function (w) w:set_mode("insert")  end),
         key({},          ":",           function (w) w:set_mode("command") end),
 
         -- Scrolling
         key({},          "j",           function (w) w:scroll_vert(more)  end),
         key({},          "k",           function (w) w:scroll_vert(less)  end),
-        key({},          "J",           function (w) w:scroll_page(1.0)   end),
-        key({},          "K",           function (w) w:scroll_page(-1.0)  end),
-        key({},          "Page_Down",   function (w) w:scroll_page(1.0)    end),
-        key({},          "Page_Up",     function (w) w:scroll_page(-1.0)   end),
         key({},          "h",           function (w) w:scroll_horiz(less) end),
         key({},          "l",           function (w) w:scroll_horiz(more) end),
         key({"Control"}, "e",           function (w) w:scroll_vert(more)  end),
@@ -65,8 +61,18 @@ binds.mode_binds = {
         key({"Shift"},   "space",       function (w) w:scroll_page(-1.0)  end),
         key({},          "BackSpace",   function (w) w:scroll_page(-1.0)  end),
         buf("^gg$",                     function (w) w:scroll_vert("0%")  end),
-        key({},          "Home",        function (w) w:scroll_vert("0%")   end),
+
+        -- Specific scroll
         buf("^[%%G]$",                  function (w, b, m) w:scroll_vert(m.count.."%") end, {count = 100}),
+
+        -- Traditional scrolling commands
+        key({},          "Down",        function (w) w:scroll_vert(more)   end),
+        key({},          "Up",          function (w) w:scroll_vert(less)   end),
+        key({},          "Left",        function (w) w:scroll_horiz(less)  end),
+        key({},          "Right",       function (w) w:scroll_horiz(more)  end),
+        key({},          "Page_Down",   function (w) w:scroll_page(1.0)    end),
+        key({},          "Page_Up",     function (w) w:scroll_page(-1.0)   end),
+        key({},          "Home",        function (w) w:scroll_vert("0%")   end),
         key({},          "End",         function (w) w:scroll_vert("100%") end),
 
         -- Zooming
@@ -94,15 +100,15 @@ binds.mode_binds = {
         buf("^yt$",                     function (w) w:set_selection(w.win.title) end),
 
         -- Commands
-        buf("]]$",                      function (w)    w:navigate(w:inc_uri(1)) end),
-        buf("}}$",                      function (w)    w:navigate(w:inc_uri(-1)) end),
+        key({"Control"}, "a",           function (w)    w:navigate(w:inc_uri(1)) end),
+        key({"Control"}, "x",           function (w)    w:navigate(w:inc_uri(-1)) end),
         buf("^o$",                      function (w, c) w:enter_cmd(":open ")    end),
         buf("^t$",                      function (w, c) w:enter_cmd(":tabopen ") end),
         buf("^w$",                      function (w, c) w:enter_cmd(":winopen ") end),
         buf("^O$",                      function (w, c) w:enter_cmd(":open "    .. ((w:get_current() or {}).uri or "")) end),
         buf("^T$",                      function (w, c) w:enter_cmd(":tabopen " .. ((w:get_current() or {}).uri or "")) end),
         buf("^W$",                      function (w, c) w:enter_cmd(":winopen " .. ((w:get_current() or {}).uri or "")) end),
-       --[[ buf("^,g$",                     function (w, c) w:enter_cmd(":open google ") end), ]]--
+        buf("^,g$",                     function (w, c) w:enter_cmd(":open google ") end),
 
         -- Searching
         key({},          "/",           function (w)    w:start_search("/")  end),
@@ -128,6 +134,8 @@ binds.mode_binds = {
         -- Tab
         key({"Control"}, "Page_Up",     function (w)       w:prev_tab() end),
         key({"Control"}, "Page_Down",   function (w)       w:next_tab() end),
+        key({"Control"}, "Tab",         function (w)       w:next_tab() end),
+        key({"Shift","Control"}, "Tab", function (w)       w:prev_tab() end),
         buf("^gT$",                     function (w, b, m) w:prev_tab(m.count) end, {count=1}),
         buf("^gt$",                     function (w, b, m) if not w:goto_tab(m.count) then w:next_tab() end end, {count=0}),
 
@@ -148,8 +156,13 @@ binds.mode_binds = {
         key({},          "R",           function (w) w:reload(true) end),
         key({"Control"}, "c",           function (w) w:stop() end),
 
+        -- Config reloading
+        key({"Control", "Shift"}, "R",  function (w) w:restart() end),
+
         -- Window
         buf("^ZZ$",                     function (w) w:save_session() w:close_win() end),
+        buf("^ZQ$",                     function (w) w:close_win() end),
+        buf("^D$",                      function (w) w:close_win() end),
 
         -- Bookmarking
         key({},          "B",           function (w)       w:enter_cmd(":bookmark " .. ((w:get_current() or {}).uri or "http://") .. " ") end),
@@ -209,6 +222,47 @@ binds.mode_binds = {
     search = {
         key({"Control"}, "j",           function (w) w:search(w.search_state.last_search, true) end),
         key({"Control"}, "k",           function (w) w:search(w.search_state.last_search, false) end),
+    },
+
+    proxy = {
+        key({},          "q",           function (w) w:set_mode() end),
+        -- Navigate items
+        key({},          "j",           function (w) w.menu:move_down() end),
+        key({},          "k",           function (w) w.menu:move_up()   end),
+        key({},          "Down",        function (w) w.menu:move_down() end),
+        key({},          "Up",          function (w) w.menu:move_up()   end),
+        key({},          "Tab",         function (w) w.menu:move_down() end),
+        key({"Shift"},   "Tab",         function (w) w.menu:move_up()   end),
+        key({},          "a",           function (w) w:enter_cmd(":proxy ") end),
+        key({},          "Return",      function (w)
+                                            local row = w.menu:get()
+                                            if row and row.address then
+                                                proxy.set_active(row.name)
+                                                w:set_mode()
+                                                -- change proxy for on every tab
+                                                for _, view in ipairs(w.tabs:get_children()) do
+                                                    view:set_prop('proxy-uri', row.address)
+                                                end
+                                                if row.name then
+                                                    w:notify(string.format("Using proxy: %s (%s)", row.name, row.address))
+                                                else
+                                                    w:notify("Unset proxy.")
+                                                end
+                                            end
+                                        end),
+        key({},          "d",           function (w)
+                                            local row = w.menu:get()
+                                            if row and row.name then
+                                                proxy.del(row.name)
+                                                w.menu:del()
+                                            end
+                                        end),
+        key({},          "e",           function (w)
+                                            local row = w.menu:get()
+                                            if row and row.name then
+                                                w:enter_cmd(string.format(":proxy %s %s", row.name, row.address))
+                                            end
+                                        end),
     },
 
     qmarks = {
@@ -342,16 +396,15 @@ binds.commands = {
     cmd("w[inopen]",                    function (w, a) window.new{w:search_open(a)} end),
     cmd("back",                         function (w, a) w:back(tonumber(a) or 1) end),
     cmd("f[orward]",                    function (w, a) w:forward(tonumber(a) or 1) end),
-    cmd("scr[oll]",                     function (w, a) w:scroll_vert(a) end),
-    cmd("q[uit]",                       function (w)    w:close_tab() end),
-    cmd({"qa", "quitall"},              function (w)    w:close_win() end),
+    cmd("scroll",                       function (w, a) w:scroll_vert(a) end),
+    cmd({"qa", "quitall",},             function (w)    w:close_win() end),
     cmd({"wq", "writequit"},            function (w)    w:save_session() w:close_win() end),
+    cmd("q[uit]",                       function (w)    w:close_tab() end),
     cmd("reload",                       function (w)    w:reload() end),
     cmd("reloadconf",                   function (w)    w:reload_config() end),
-    cmd("restart",                      function (w)    w:restart() end),
     cmd("print",                        function (w)    w:eval_js("print()", "rc.lua") end),
-    cmd({"vs" },                        function (w)    w:toggle_source(true) end),
-    cmd({"vs!"},                        function (w)    w:toggle_source() end),
+    cmd({"viewsource",  "vs" },         function (w)    w:toggle_source(true) end),
+    cmd({"viewsource!", "vs!"},         function (w)    w:toggle_source() end),
     cmd("inc[rease]",                   function (w, a) w:navigate(w:inc_uri(tonumber(a) or 1)) end),
     cmd({"bookmark",    "bm" },         function (w, a)
                                             local args = split(a)
@@ -419,6 +472,28 @@ binds.commands = {
                                             end
                                             w.menu:build(rows)
                                             w:notify("Use j/k to move, d delete, w winopen.", false)
+                                        end),
+
+    cmd("proxy",                       function (w, a)
+                                            local params = split(a or '')
+                                            if not a then
+                                                w:set_mode("proxy")
+                                                local afg, ifg = theme.proxy_active_fg, theme.proxy_inactive_fg
+                                                local active = proxy.get_active()
+                                                local rows = {{"Proxy Name", "Server address", title = true},
+                                                    {"None", "", address = '', fg = (active.address == '' and afg) or ifg},}
+                                                for name, address in pairs(proxy.get_list()) do
+                                                    local fg = active.address == address and afg or ifg
+                                                    table.insert(rows, { name, address, fg=fg, name=name, address=address })
+                                                end
+                                                w.menu:build(rows)
+                                                w:notify("Use j/k to move, d delete, e edit, a add, Return activate", false)
+                                            elseif #params == 2 then
+                                                -- add new proxy address: {name, url}
+                                                proxy.add(unpack(params))
+                                            else
+                                                w:error("Bad usage. Correct format  :proxy <name> <address>")
+                                            end
                                         end),
 }
 

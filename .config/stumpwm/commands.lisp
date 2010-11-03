@@ -174,18 +174,18 @@
 (defcommand announce-mifo-random () () (echo-string (current-screen) (run-shell-command "mifo -r" t)) (announce-mifo))
 (defcommand announce-mifo-next () () (echo-string (current-screen) (run-shell-command "mifo --next" t)) (announce-mifo))
 (defcommand announce-mifo-prev () () (echo-string (current-screen) (run-shell-command "mifo --prev" t)) (announce-mifo))
-(defcommand announce-unread-mail () () (echo-string (current-screen) (run-shell-command "print unread: ${#$(find ~/mail/FastMail/*/new -type f)}" t)))
+(defcommand announce-oss-vol () () (echo-string (current-screen) (run-shell-command "ossvol -a" t)))
+(defcommand announce-oss-volup () () (run-shell-command "ossvol -i 1" t) (announce-oss-vol))
+(defcommand announce-oss-voldown () () (run-shell-command "ossvol -d 1" t) (announce-oss-vol))
+(defcommand announce-oss-volmute () () (run-shell-command "ossvol -m" t) (announce-oss-vol))
+(defcommand announce-oss-sp () () (echo-string (current-screen) (run-shell-command "ossvol --speakers --quiet && ossvol -a" t)))
+(defcommand announce-oss-hp () () (echo-string (current-screen) (run-shell-command "ossvol --headphones --quiet && ossvol -a" t)))
+(defcommand announce-unread-mail () () (echo-string (current-screen) (run-shell-command "print - @fea.st: ${#$(find ~/mail/FastMail/*/new -type f)}" t)))
 (defcommand announce-battery () () (echo-string (current-screen) (run-shell-command "</proc/acpi/battery/BAT1/state" t)))
 (defcommand announce-harddrives () () (echo-string (current-screen) (run-shell-command "df -hTP;print - '------------------------------------------------------';df -hTP --total|tail -1" t)))
 (defcommand announce-free-mem () () (echo-string (current-screen) (run-shell-command "print '^B^6/free^1* used^5* base^n';free -m|awk 'NR==2 {print $4,$3,$2}'" t)))
+(defcommand announce-highcpu () () (echo-string (current-screen) (run-shell-command "ps -U root,privoxy,postgres,named --deselect -C tmux,urxvt k -%cpu opid,args:70,etime:10,%cpu,pmem | head -75" t)))
 (defcommand announce-loadavg () () (echo-string (current-screen) (run-shell-command "print ${$(</proc/loadavg)[1,3]}" t)))
-(defcommand announce-highcpu () () (echo-string (current-screen) (run-shell-command "ps -U root,privoxy,http,postgres,named --deselect -C tmux,urxvt k -%cpu opid,args:70,etime:10,%cpu,pmem" t)))
-(defcommand announce-volume () () (echo-string (current-screen) (run-shell-command "print ${$(ossmix|awk 'NR==29')[4]}dB" t)))
-(defcommand announce-volup () () (run-shell-command "ossvol -i 1" t) (announce-volume))
-(defcommand announce-voldown () () (run-shell-command "ossvol -d 1" t) (announce-volume))
-(defcommand announce-volmute () () (run-shell-command "ossvol -m" t) (announce-volume))
-(defcommand announce-mix2 () () (echo-string (current-screen) (run-shell-command "ossvol --speakers --quiet && (printf 'Mixer set to PC Speaker: '; ossvol -a)" t)))
-(defcommand announce-mix3 () () (echo-string (current-screen) (run-shell-command "ossvol --headphones --quiet && (printf 'Mixer set to Headphones: '; ossvol -a)" t)))
 
 ;; sent output of command to echo-string. may hang if used wrong.
 (defcommand shell-command-output (command) ((:string "shell/output: "))
@@ -194,7 +194,7 @@
 ;; prompt with given arg as command, and if needed await further args, and execute.
 (defcommand pine (&optional (initial "")) (:rest)
   (let ((cmd (read-one-line (current-screen) ": " :initial-input initial)))
-    (when cmd (eval-command cmd t))))
+    (when cmd (run-shell-command cmd t))))
 
 ;; same as 'pine' but send output to echo-string. may hang if used wrong.
 (defcommand pout (&optional (initial "")) (:rest)

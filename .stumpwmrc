@@ -2,24 +2,24 @@
 ;; ~/.stumpwmrc
 ;;----------------------------------------------------------------------------
 ;; author: milomouse <vincent[at]fea.st>
-;; update: 2010-10-24 20:25:06
+;; update: 2010-10-31 22:15:20
 ;;----------------------------------------------------------------------------
 ;; versions used atoc:
 ;; |  clisp-new-clx     -> 2.48-2
 ;; |  cl-asdf           -> 20101020-1
 ;; |  cl-ppcre          -> 2.0.3-1
-;; |  stumpwm-git       -> 20101020-1
+;; |  stumpwm-git       -> 20101027-1
 ;; |  surfraw-git       -> 20100929-1
 ;;-TODO:----------------------------------------------------------------------
 ;; >>--: create a 'dedicate' and 'catchall' hook for changing focus color
 ;; >>>-: create a 'dedicate' and 'catchall' window-rule (remember * *)
 ;; >---: have mifo(mplayer-daemon) prompts use filename completion
-;; >>>-: command for dedicating current win/frame as the Master win/frame
+;; >>>>: command for dedicating current win/frame as the Master win/frame
 ;; >>>>! command for swapping current window with the Master win/frame
-;; >---: better resize; if neighbor {left} then -ARG else +ARG, etc
-;; >>--: show frame-indicator for 'resize' only if no window in frame
-;; >---: command-mode for mifo video:seek to eliminate extra key-presses
-;; >---: have my 'undo' uses group and check current group for undos first.
+;; >---: better resize; if neighbor {above} then -ARG else +ARG, etc
+;; >>>-: show frame-indicator for 'resize' only if no window in frame
+;; >>--: command-mode for mifo video:seek to eliminate extra key-presses
+;; >---: have my 'undo' use group and check current group for undos first.
 ;;----------------------------------------------------------------------------
 ;; file/s: *data-dir*/{commands,functions,hooks,key-maps,macros}.lisp
 ;;-NOTE:----------------------------------------------------------------------
@@ -35,7 +35,7 @@
     (run-prog-collect-output *shell-program* "-c" cmd)
     (run-prog *shell-program* :args (list "-c" cmd) :wait nil)))
 (setf *shell-program* "/bin/zsh")
-;(defcommand-alias exec run-shell-command)
+(defcommand-alias exec run-shell-command)
 
 ;; function pre-variables
 (defvar *surfraw-bookmark-file* (data-dir-file "bookmarks" "txt"))

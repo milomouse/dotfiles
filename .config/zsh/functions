@@ -173,7 +173,7 @@ function flashgot() {
 }
 
 # one-liners/micro functions:
-function rc() {[[ $# == 1 ]] && sudo /etc/rc.d/$1 ${@:/$1}}
+function rc() {[[ -n $1 ]] && sudo /etc/rc.d/$1 ${@:/$1}}
 function alv() {<${${$(ls ${HOME}/othe/archive/installed_*)}[-${1:-1}]}|${PAGER}}
 function mkcd() {mkdir -p "$@" && cd "$@"}
 function pubip() {curl http://whatismyip.org/ 2>/dev/null}

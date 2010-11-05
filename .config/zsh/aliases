@@ -24,7 +24,6 @@ alias e="bye"
 
 # useless quick views/edits:
 alias wika="${BROWSER:-/usr/bin/w3m} /usr/share/doc/arch-wiki/html/index.html"
-alias medit="${EDITOR:-/usr/bin/vim} ${XDG_CONFIG_DIR:-${HOME}/.config}/musca/musca_start"
 alias sedit="${EDITOR:-/usr/bin/vim} -p ${HOME}/.stumpwmrc ${XDG_CONFIG_DIR:-${HOME}/.config}/stumpwm/{functions,macros,commands,hooks,key-maps}.lisp"
 alias xedit="${EDITOR:-/usr/bin/vim} -p ${XDG_CONFIG_DIR:-${HOME}/.config}/xorg/{xinitrc,Xdefaults}"
 alias zedit="${EDITOR:-/usr/bin/vim} -p ${HOME}/.{zshrc,config/zsh/{functions,aliases,exports,options,stinfo}}"
@@ -42,7 +41,7 @@ alias xskat="xskat -opt ${XDG_CONFIG_DIR:-${HOME}/.config}/xorg/xskat.opt -list 
 alias offlineimap="/usr/bin/offlineimap -c ${XDG_CONFIG_DIR:-${HOME}/.config}/offlineimap/offlineimaprc"
 alias xsel='command xsel --logfile /dev/shm/xsel.log'
 alias {rot,rtorrent}='/usr/bin/rtorrent -o http_capath=/etc/ssl/certs'
-alias startx="/usr/local/bin/go $@"
+alias startx="command startx ${XDG_CONFIG_DIR:-${HOME}/.config}/xorg/xinitrc -- -dpi 120 -nolisten tcp"
 
 # system/media shortcuts:
 alias psu="print 'ELAPSETIME %CPU NI +?  LWPID - COMMAND';ps -U root,privoxy,http,named,postgres --deselect -C tmux,urxvt -H hoetime:10,%cpu:4,ni:2,stat:3,pid:5,rtprio:1,args"

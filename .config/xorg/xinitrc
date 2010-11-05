@@ -15,7 +15,7 @@ xmodmap -e "add Mod4 = Super_L Super_R"
 
 # mouse/synclient:
 _file="/dev/shm/.1000/banishmouse"
-[ ! -f $_file ] || rm -f $_file
+[[ ! -f $_file ]] || rm -f $_file
 banishmouse
 
 # wallpaper:

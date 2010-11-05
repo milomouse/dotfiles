@@ -2,6 +2,12 @@
 ;; *data-dir*/commands.lisp
 ;;----------------------------------------------------------------------------
 
+;; move focused window to next/prev group without switching to it (unlike gnext-with-window)
+(defcommand gmove-next () ()
+  (move-window-to-next-group (current-group) (sort-groups (current-screen))))
+(defcommand gmove-prev () ()
+  (move-window-to-next-group (current-group) (reverse (sort-groups (current-screen)))))
+
 ;; designate master window/frame (should probably use current frame number, but less dynamic?)
 (defcommand (master-make tile-group) () () (renumber 0) (repack-window-numbers) (remember-last))
 (defcommand (master-focus tile-group) () () (select-window-by-number 0))
@@ -13,8 +19,8 @@
   (let ((win (find-if #'match (group-windows group))))
     (when (and win group) (exchange-windows (current-window) win) (master-make)))))
 
-
 ;; [with *shell-program* "/bin/zsh"] look for detached 'tmux -L xorg' session and attach, else create new.
+;; (useful for StumpWM crashes, as tmux windows survive crashes and this command brings them back)
 (defcommand tmux-attach-else-new () ()
   (run-shell-command
   "if [[ -n ${$(tmux -L xorg list-session|grep -v attached)[1]//:} ]]; then
@@ -33,12 +39,6 @@
   (dump-screen-to-file "/dev/shm/.stumpwm_undo_tmp")
   (restore-from-file "/dev/shm/.stumpwm_undo_data")
   (run-shell-command "mv -f /dev/shm/.stumpwm_undo_tmp /dev/shm/.stumpwm_undo_data"))
-
-;; move window to next/prev group without switching to it (unlike gnext-with-window)
-(defcommand gmove-next () ()
-  (move-window-to-next-group (current-group) (sort-groups (current-screen))))
-(defcommand gmove-prev () ()
-  (move-window-to-next-group (current-group) (reverse (sort-groups (current-screen)))))
 
 ;; remember frame positions before resizing.
 (defcommand (resize tile-group) (width height) ((:number "+ Width: ")
@@ -237,21 +237,21 @@
 
 ;; i don't like 'Colon' showing/editable command in prompt
 ;; perhaps i'll figure out a global macro/function for this..
-(defcommand prompt-mifo-command (filename) ((:rest "command: "))
+(defcommand prompt-mifo-command (filename) ((:rest "mifo.command: "))
   (run-shell-command (format nil "mifo --command ~a" filename)))
-(defcommand prompt-mifo-next (filename) ((:rest "next: "))
+(defcommand prompt-mifo-next (filename) ((:rest "mifo.next: "))
   (run-shell-command (format nil "mifo --next ~a" filename)) (announce-mifo))
-(defcommand prompt-mifo-prev (filename) ((:rest "previous: "))
+(defcommand prompt-mifo-prev (filename) ((:rest "mifo.previous: "))
   (run-shell-command (format nil "mifo --prev ~a" filename)) (announce-mifo))
-(defcommand prompt-mifo-save (filename) ((:rest "save-as: "))
+(defcommand prompt-mifo-save (filename) ((:rest "mifo.save-as: "))
   (echo-string (current-screen) (run-shell-command (format nil "mifo --save ~a" filename) t)))
-(defcommand prompt-mifo-load (filename) ((:rest "load: "))
+(defcommand prompt-mifo-load (filename) ((:rest "mifo.load: "))
   (run-shell-command (format nil "mifo --load ~a" filename)))
-(defcommand prompt-mifo-append (filename) ((:rest "append: "))
+(defcommand prompt-mifo-append (filename) ((:rest "mifo.append: "))
   (run-shell-command (format nil "mifo --append ~a" filename)))
-(defcommand prompt-mifo-playlist (filename) ((:rest "playlist: "))
+(defcommand prompt-mifo-playlist (filename) ((:rest "mifo.playlist: "))
   (run-shell-command (format nil "mifo --playlist ~a" filename)))
-(defcommand prompt-mifo-reload (filename) ((:rest "reload: "))
+(defcommand prompt-mifo-reload (filename) ((:rest "mifo.reload: "))
   (run-shell-command (format nil "mifo --reload ~a" filename)))
 
 ;; evaluate string.

@@ -205,7 +205,7 @@
     (dk m (kbd "s-Return")          "exec urxvt -e tmux -f ${XDG_CONFIG_DIR:-${HOME}/.config}/tmux/tmux.conf -L xorg new-session")
     (dk m (kbd "s-S-Return")        "tmux-attach-else-new")
     (dk m (kbd "s-C-Return")        "exec urxvt")
-    (dk m (kbd "s-M-Return")        "exec xdotool mousedown 1 ; xdotool mouseup 1")
+    (dk m (kbd "s-M-space")         "exec urxvt -e mifo --monitor")
     (dk m (kbd "s-SunPrint_Screen") "exec import -window root ${XDG_PICTURES_DIR:-${HOME}/foto}/shot/$(date +%Y_%m_%d-%H%M%S).png")
     (dk m (kbd "s-S-Delete")        "exec alock -bg image:file=${HOME}/foto/wall/beheading.png -cursor glyph -auth pam >&/dev/null")
     ;; <alphabetic bindings>
@@ -249,6 +249,7 @@
     (dk m (kbd "s-O")    "only") 
     (dk m (kbd "s-p")    "prev-in-frame")
     (dk m (kbd "s-P")    "pull-hidden-previous")
+    (dk m (kbd "s-M-p")  "exec xdotool mousedown 1 ; xdotool mouseup 1")
     (dk m (kbd "s-Q")    "rem-quit")
     (dk m (kbd "s-r")    "rem-loadrc")
     (dk m (kbd "s-R")    "rem-restart")

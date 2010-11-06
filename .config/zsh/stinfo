@@ -77,7 +77,7 @@ fi
 << EOF
 $(_volume) $(_mixer)$c4b ($(print ${$(ossmix | grep jack.int-speaker.mode)[-1]//\)}))$cn $_v3                     $c9$(command date +%a" "%Y-%_m-%_d$c7/%_j"$cn "%R)
 $_v2$c7======================================================================================================$cn
- "$(printf $c7b)I think the Ph.D behind my name means I know a little something about dinosaurs.$cn" - Land of the Lost
+ "$(printf $c7b)I think the Ph.D after my name means I know a little something about dinosaurs.$cn" - Land of the Lost
 
 $_v                                   ▄▄    ▄▓▄         $c7▄████▄$cn    
 $_v                                  ▓█▓█▄▓████        $c7██▓░░▀█  ▄▄███▄$cn 

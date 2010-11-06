@@ -8,7 +8,7 @@ for i in ${ZDOTDIR}/{options,exports,aliases,functions}; do
 done
 
 # prompt line:
-[[ "$TERM" == screen* ]] && precmd() {print -Pn "\e]2;%2d\a"} || RPROMPT='%F{white}%~%f'
+[[ ${TERM} == screen* ]] && precmd() { print -Pn "\e]2;%2d\a" } || RPROMPT='%F{white}%~%f'
 PS1='%F{magenta}» %f'
 PS2='%F{blue}» %f'
 PS3='%B%F{white}?# %b%f%F{red}» %f'

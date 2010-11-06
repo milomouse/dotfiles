@@ -75,7 +75,7 @@ function psi() {
 
 # extract archive with preferred options:
 function extr() {
-  if [ -f $1 ]; then 
+  if [[ -f $1 ]]; then 
     case $1 in
       *.tar.bz2)   command tar xjf $1    ;;
       *.tar.gz)    command tar xzf $1    ;;

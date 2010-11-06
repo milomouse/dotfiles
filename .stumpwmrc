@@ -9,7 +9,7 @@
 ;; |  cl-asdf           -> 20101020-1
 ;; |  cl-ppcre          -> 2.0.3-1
 ;; |  stumpwm-git       -> 20101027-1
-;; |  surfraw-git       -> 20100929-1
+;; |  surfraw-git       -> 20101103-1
 ;;-TODO:----------------------------------------------------------------------
 ;; >>--: create a 'dedicate' and 'catchall' hook for changing focus color
 ;; >>>-: create a 'dedicate' and 'catchall' window-rule (remember * *)
@@ -101,8 +101,8 @@
       *new-frame-action* :empty
       *min-frame-width* 100
       *min-frame-height* 50
-      *resize-increment* 10
-      *frame-number-map* "jkluio789")
+      *resize-increment* 10)
+;;      *frame-number-map* "jkluio789")
 
 ;; mode-line/input
 (setf *mode-line-background-color* "grey13"

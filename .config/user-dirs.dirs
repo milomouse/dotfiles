@@ -1,6 +1,6 @@
 XDG_CACHE_HOME="/dev/shm/cache"
 XDG_CONFIG_DIR="/home/milo/.config"
-XDG_DATA_HOME="/usr/local/share"
+XDG_DATA_HOME="/home/milo/.config/share"
 XDG_DESKTOP_DIR="/dev/shm"
 XDG_DOCUMENTS_DIR="/home/milo/rite"
 XDG_DOWNLOAD_DIR="/home/milo/down"

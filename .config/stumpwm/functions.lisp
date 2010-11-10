@@ -39,25 +39,25 @@
   (echo-string (current-screen) (run-shell-command command t)))
 
 ;; expand filenames with special focus on home dir.
-(defun expand-file-name (path &optional default-directory)
-  (let ((first-char (subseq path 0 1))
-    (home-dir (concatenate 'string (getenv "HOME") "/"))
-    (dir (if default-directory
-      (if (string= (subseq (reverse default-directory) 0 1) "/")
-        default-directory
-        (concatenate 'string default-directory "/")))))
-  (cond ((string= first-char "~") (concatenate 'string home-dir (subseq path 2)))
-        ((string= first-char "/") path)
-        (dir (if (strings= (subseq 0 1) "/")
-          (concatenate 'string dir path)
-          (expand-file-name (concatenate 'string dir path))))
-        (t (concatenate 'string home-dir path)))))
+;(defun expand-file-name (path &optional default-directory)
+;  (let ((first-char (subseq path 0 1))
+;    (home-dir (concatenate 'string (getenv "HOME") "/"))
+;    (dir (if default-directory
+;      (if (string= (subseq (reverse default-directory) 0 1) "/")
+;        default-directory
+;        (concatenate 'string default-directory "/")))))
+;  (cond ((string= first-char "~") (concatenate 'string home-dir (subseq path 2)))
+;        ((string= first-char "/") path)
+;        (dir (if (strings= (subseq 0 1) "/")
+;          (concatenate 'string dir path)
+;          (expand-file-name (concatenate 'string dir path))))
+;        (t (concatenate 'string home-dir path)))))
 
 ;; to ease repetition in commands.
 (defun remember-undo () () (dump-screen-to-file "/dev/shm/.stumpwm_undo_data"))
 (defun remember-last () ()
-  (dump-window-placement-rules "~/.config/stumpwm/storage/placement_rules")
-  (dump-screen-to-file "~/.config/stumpwm/storage/screen_data_last"))
+  (dump-window-placement-rules "/home/milo/.config/stumpwm/storage/placement_rules")
+  (dump-screen-to-file "/home/milo/.config/stumpwm/storage/screen_data_last"))
 
 ;; use prettier eval error and skip mode-line updates (since i don't use it)
 (defun eval-command (cmd &optional interactivep)

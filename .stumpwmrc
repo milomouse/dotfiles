@@ -1,35 +1,36 @@
-;;----------------------------------------------------------------------------
-;; ~/.stumpwmrc
-;;----------------------------------------------------------------------------
-;; author: milomouse <vincent[at]fea.st>
-;; update: 2010-11-05 13:37:04
-;;----------------------------------------------------------------------------
-;; versions used atoc:
-;; |  clisp-new-clx     -> 2.48-2
-;; |  cl-asdf           -> 20101020-1
-;; |  cl-ppcre          -> 2.0.3-1
-;; |  stumpwm-git       -> 20101027-1
-;; |  surfraw-git       -> 20101103-1
-;;-TODO:----------------------------------------------------------------------
-;; >>--: create a 'dedicate' and 'catchall' hook for changing focus color
-;; >>>-: create a 'dedicate' and 'catchall' window-rule (remember * *)
-;; >---: have mifo(mplayer-daemon) prompts use filename completion
-;; >>>>: command for dedicating current win/frame as the Master win/frame
-;; >>>>! command for swapping current window with the Master win/frame
-;; >---: better resize; if neighbor {above} then -ARG else +ARG, etc
-;; >>>-: show frame-indicator for 'resize' only if no window in frame
-;; >>--: command-mode for mifo video:seek to eliminate extra key-presses
-;; >---: have my 'undo' use group and check current group for undos first.
-;;----------------------------------------------------------------------------
-;; file/s: *data-dir*/{commands,functions,hooks,key-maps,macros}.lisp
-;;-NOTE:----------------------------------------------------------------------
-;; for MPlayer, use: mplayer -nokeepaspect {-fstype netwm}
-;;----------------------------------------------------------------------------
-
+;;--------------------------------------------------------------------------;;
+;; ${HOME}/.stumpwmrc                                                       ;;
+;;--------------------------------------------------------------------------;;
+;; author: milomouse <vincent[at]fea.st>                                    ;;
+;; update: 2010-11-09 18:40:39                                              ;;
+;;--------------------------------------------------------------------------;;
+;; versions used atoc:                                                      ;;
+;; |  sbcl              -> 1.0.43-1                                         ;;
+;; |  clx               -> 0.7.4-1                                          ;;
+;; |  cl-ppcre          -> 2.0.3-1                                          ;;
+;; |  stumpwm-git       -> 20101109-1                                       ;;
+;; |  surfraw-git       -> 20101103-1                                       ;;
+;;-TODO:--------------------------------------------------------------------;;
+;; >>--: create a 'dedicate' and 'catchall' hook for changing focus color   ;;
+;; >>>-: create a 'dedicate' and 'catchall' window-rule (remember * *)      ;;
+;; >---: have mifo(mplayer-daemon) prompts use filename completion          ;;
+;; >>>>: command for dedicating current win/frame as the Master win/frame   ;;
+;; >>>>! command for swapping current window with the Master win/frame      ;;
+;; >---: better resize; if neighbor {above} then -ARG else +ARG, etc        ;;
+;; >>>-: show frame-indicator for 'resize' only if no window in frame       ;;
+;; >>--: command-mode for mifo video:seek to eliminate extra key-presses    ;;
+;; >---: have my 'undo' use group and check current group for undos first.  ;;
+;;--------------------------------------------------------------------------;;
+;; files: *data-dir*/../{commands,functions,hooks,key-maps,macros}.lisp     ;;
+;;-NOTE:--------------------------------------------------------------------;;
+;; 1. for MPlayer, use: mplayer -nokeepaspect {-fstype netwm}               ;;
+;; 2. using SBCL now due to stability issues with clisp-new-clx             ;;
+;; 3. had to rework most files to accomodate SBCL's finicky handling        ;;
+;;--------------------------------------------------------------------------;;
 
 (in-package :stumpwm)
 (clear-window-placement-rules)
-(setf *data-dir* "~/.config/stumpwm/storage/")
+(setf *data-dir* "/home/milo/.config/stumpwm/storage/")
 (defcommand run-shell-command (cmd &optional collect-output-p)
   ((:shell "execute: ")) (if collect-output-p
     (run-prog-collect-output *shell-program* "-c" cmd)
@@ -39,41 +40,44 @@
 
 ;; function pre-variables
 (defvar *surfraw-bookmark-file* (data-dir-file "bookmarks" "txt"))
-(defvar *background-image-path* "~/foto/wall/")
+(defvar *background-image-path* "/home/milo/foto/wall/")
 
-;; borders and gravity
+;; gravity
+(setf *mouse-focus-policy* :click
+      *window-border-style* :thin
+      *message-window-gravity* :top-right
+      *input-window-gravity* :top-right)
+(set-normal-gravity :bottom)
+(set-maxsize-gravity :center)
+(set-transient-gravity :bottom)
+
+;; borders
 (setf *resize-hides-windows* T
       *normal-border-width* 2
       *maxsize-border-width* 2
       *transient-border-width* 2
       *float-window-border* 1
-      *float-window-title-height* 1
-      *msg-border-width* 1
-      *mouse-focus-policy* :click
-      *window-border-style* :thin
-      *message-window-gravity* :top-right
-      *input-window-gravity* :top-right
-      *timeout-wait* 6)
+      *float-window-title-height* 1)
+(set-msg-border-width 1)
 
 ;; fonts/colors
 (set-font "-*-fixed-medium-r-normal-*-10-*-*-*-*-*-*-*")
-(set-fg-color        "#a19ea8")
-(set-bg-color        "grey15")
-(set-border-color    "grey45")
-;(set-focus-color     "#d74b73")
-(set-focus-color     "#746890")
-(set-unfocus-color   "#1c1c1c")
-(set-win-bg-color    "#090909")
-(setf *colors* (list "#1c1c1c"   ;; 0 - black
-                     "#d74b73"   ;; 1 - red
-                     "#799c99"   ;; 2 - green
-                     "#c8bc45"   ;; 3 - yellow
-                     "#6c7373"   ;; 4 - blue
-                     "#a488d9"   ;; 5 - magenta
-                     "#508686"   ;; 6 - cyan
-                     "#8d8d8d"   ;; 7 - white
-                     "#585872"   ;; 8 - (user) faint magenta
-                     "#57718b")) ;; 9 - (user) bright blue
+(set-fg-color        "grey64")
+(set-bg-color        "grey14")
+(set-focus-color     "mediumpurple2")
+(set-unfocus-color   "grey16")
+(set-border-color    "grey44")
+(set-win-bg-color    "grey4")
+(setf *colors* (list "grey9" ; 0 black
+                     "palevioletred1" ; 1 red
+                     "lightblue3" ; 2 green
+                     "bisque3" ; 3 yellow
+                     "steelblue3" ; 4 blue
+                     "slateblue1" ; 5 magenta
+                     "aquamarine4" ; 6 cyan
+                     "honeydew4" ; 7 white
+                     "thistle4" ; 8 user
+                     "lightskyblue4")) ; 9 user
 (defun fmt-group-status (group)
   (let ((screen (group-screen group)))
     (cond ((eq group (screen-current-group screen))
@@ -86,11 +90,12 @@
 
 ;; text formatting (no mode-line)
 (setf *time-day-names* #("Mon" "Tue" "Wed" "Thu" "Fri" "Sat" "Sun")
-      *time-format-string-default* "^B^2*%T^9* %Y-%m-%d^**/^8*%A^**^b"
+      *time-format-string-default* "^B^2*%T^9* %Y-%m-%d^**/^8*%A^n"
       *screen-mode-line-format* nil
-      *startup-message* "^B^1*together we ate the king^**^b:^B^5*and laughed ourselves to death^**^b"
-      *group-format*    "^B^8*%t^7*%s^07|^**^b"
-      *window-format*   "^B^27%s^1*%m^0*%16t^**^b"
+      *startup-message* "^B^1*together we ate the king^**^b:^B^5*and laughed ourselves to death^n"
+      *group-format*    "^B^0*%t^7*%s^07|^n"
+      *window-format*   "^B^87%s^9*%m^0*%16t^n"
+      *timeout-wait* 6
       *debug-level* 10)
 
 ;; windows/frames
@@ -107,7 +112,7 @@
 ;; mode-line/input
 (setf *mode-line-background-color* "grey13"
       *mode-line-border-color* "grey25"
-      *mode-line-foreground-color* "#a9a6af"
+      *mode-line-foreground-color* "azure4"
       *mode-line-border-width* 1
       *mode-line-pad-x* 1
       *mode-line-pad-y* 0

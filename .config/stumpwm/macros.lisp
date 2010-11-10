@@ -29,22 +29,22 @@
 ;; frame raise lock (lock AND raise == jumpto)
 ;(define-frame-preference "1"
 ;  (0    t     t     :create "group_1")
-;  (t    t     nil   :class "MPlayer"))
+;  (4    t     t     :title "mifo"))
 
-(define-frame-preference "2"
-  (0    t     t     :title "Ardour - Session Control")
-  (1    t     t     :instance "ardour_mixer")
-  (2    t     t     :instance "jvmetro")
-  (1    t     t     :instance "qjackctl")
-  (3    t     t     :instance "qjackctl" :role "qjackctlMainForm"))
+;(define-frame-preference "2"
+;  (0    t     t     :title "Ardour - Session Control")
+;  (1    t     t     :instance "ardour_mixer")
+;  (2    t     t     :instance "jvmetro")
+;  (1    t     t     :instance "qjackctl")
+;  (3    t     t     :instance "qjackctl" :role "qjackctlMainForm"))
 
 (define-frame-preference "3"
-;  (0    t     t     :restore "group_3")
   (0    nil   t     :instance "Navigator")
   (0    nil   t     :class "luakit")
-  (0    t     t     :class "Jumanji")
+  (0    nil   t     :class "Jumanji")
   (1    t     t     :title "Add-ons")
-  (1    t     nil   :class "URxvt"))
+  (1    t     t     :title "Downloads")
+  (2    t     nil   :class "URxvt"))
 
 ;(define-frame-preference "4"
 ;  (0    t     t     :create "group_4"))

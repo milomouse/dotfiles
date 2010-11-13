@@ -2,18 +2,15 @@
 alias ls="/bin/ls -h --file-type --time-style='+%m-%d-%y %H%M%S' --color=auto --group-directories-first"
 alias lss="ls -- *(D.om)"
 alias la="ls -A"              ; alias laa="ls -A *(D.om)"
-alias lc="la -d .*"           ; alias lcc="la -d .*(D.om)"
 alias lb="la -Ssr"            ; alias lbb="lb -- *(D.om)"
-alias lf="la -Xd *(-/DN)"
+alias lf="la -Xd (-/DN)"      ; alias llf="lf -l"
 alias lt="la -tr"             ; alias ltt="lt -- *(D.om)"
 alias lm="lt --time=use -u"   ; alias lmm="lm -- *(D.om)"
 alias lx="la -X"              ; alias lxx="lx -- *(D.om)"
 alias lls="ls -l"             ; alias llss="lls -- *(D.om)"
 alias lla="lls -A"            ; alias llaa="lla -- *(D.om)"
-alias llc="lla -d .*"         ; alias llcc="lla -d .*(D.om)"
 alias llb="lla -Ssr"          ; alias llbb="llb -- *(D.om)"
 alias llt="lla -tr"           ; alias lltt="llt -- *(D.om)"
-alias llf="lla -Xd *(-/DN)"
 alias llm="llt --time=use -u" ; alias llmm="llm -- *(D.om)"
 alias llx="lx -l"             ; alias llxx="llx -- *(D.om)"
 alias rd="rm -r"
@@ -24,9 +21,11 @@ alias e="bye"
 
 # useless quick views/edits:
 alias wika="${BROWSER:-/usr/bin/w3m} /usr/share/doc/arch-wiki/html/index.html"
+alias xoc="${BROWSER:-/usr/bin/w3m} /usr/share/doc/xmonad-contrib-darcs/html"
 alias sedit="${EDITOR:-/usr/bin/vim} -p ${HOME}/.stumpwmrc ${XDG_CONFIG_DIR:-${HOME}/.config}/stumpwm/{functions,macros,commands,hooks,key-maps}.lisp"
-alias xedit="${EDITOR:-/usr/bin/vim} -p ${XDG_CONFIG_DIR:-${HOME}/.config}/xorg/{xinitrc,Xdefaults}"
 alias zedit="${EDITOR:-/usr/bin/vim} -p ${HOME}/.{zshrc,config/zsh/{functions,aliases,exports,options,stinfo}}"
+alias xodit="${EDITOR:-/usr/bin/vim} ${HOME}/.xmonad/xmonad.hs"
+alias xedit="${EDITOR:-/usr/bin/vim} -p ${XDG_CONFIG_DIR:-${HOME}/.config}/xorg/{xinitrc,Xdefaults}"
 alias zload=". ${HOME}/.zshrc"
 alias xload="xrdb -load ${XDG_CONFIG_DIR:-${HOME}/.config}/xorg/Xdefaults &>/dev/null"
 
@@ -41,7 +40,7 @@ alias xskat="xskat -opt ${XDG_CONFIG_DIR:-${HOME}/.config}/xorg/xskat.opt -list 
 alias offlineimap="/usr/bin/offlineimap -c ${XDG_CONFIG_DIR:-${HOME}/.config}/offlineimap/offlineimaprc"
 alias xsel='command xsel --logfile /dev/shm/xsel.log'
 alias {rot,rtorrent}='/usr/bin/rtorrent -o http_capath=/etc/ssl/certs'
-alias startx="command startx ${XDG_CONFIG_DIR:-${HOME}/.config}/xorg/xinitrc -- -dpi 120 -nolisten tcp"
+alias startx="command startx ${XDG_CONFIG_DIR:-${HOME}/.config}/xorg/xinitrc -- -dpi 120 -nolisten tcp nologo -once -retro"
 
 # system/media shortcuts:
 alias psu="print 'ELAPSETIME %CPU NI +?  LWPID - COMMAND';ps -U root,privoxy,http,named,postgres --deselect -C tmux,urxvt -H hoetime:10,%cpu:4,ni:2,stat:3,pid:5,rtprio:1,args"

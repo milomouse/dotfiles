@@ -1,4 +1,4 @@
-# global exports:
+# global environment exports:
 export XDG_CACHE_HOME="${HOME}/.config/cache"
 export XDG_CONFIG_DIR="${HOME}/.config"
 export XDG_DATA_HOME="${HOME}/.config/share"
@@ -10,15 +10,17 @@ export XDG_PICTURES_DIR="${HOME}/foto"
 export XDG_PUBLICSHARE_DIR="/dev/shm"
 export XDG_TEMPLATES_DIR="/dev/shm"
 export XDG_VIDEOS_DIR="${HOME}/vide"
-export XAUTHORITY="${HOME}/.config/xorg/.Xauthority"
-export HISTFILE=${ZPATH:-${HOME}/.config/zsh}/.history
+export XAUTHORITY="${XDG_CONFIG_DIR}/xorg/.Xauthority"
+export HISTFILE=${ZDOTDIR:-${XDG_CONFIG_DIR}/.config/zsh}/.history
 export HISTSIZE=1400
 export SAVEHIST=1000
 export DIRSTACKSIZE=20
 export EDITOR="/usr/bin/vim"
 export FCEDIT=${EDITOR}
-export BROWSER="/usr/bin/w3m"
+export BZR_EDITOR=${EDITOR}
+export BZR_HOME="${XDG_CONFIG_DIR}/bazaar"
 export HOMEPAGE="https://bbs.archlinux.org/search.php?action=show_new"
+export BROWSER="/usr/bin/w3m"
 export PAGER="/bin/less"
 export SDCV_HISTSIZE=0
 export SDCV_PAGER="/bin/more"
@@ -27,7 +29,7 @@ export LANG="en_US.utf8"
 export LC_ALL="en_US.utf8"
 export LC="en_US.utf8"
 export LESSCHARSET="utf-8"
-export LESSHISTFILE="${XDG_PUBLICSHARE_DIR:-/dev/shm}/.1000/.l-hist"
+export LESSHISTFILE="${XDG_PUBLICSHARE_DIR}/.1000/.l-hist"
 export LESS_TERMCAP_mb=$'\E[01;31m'
 export LESS_TERMCAP_md=$'\E[00;35m'
 export LESS_TERMCAP_me=$'\E[0m'

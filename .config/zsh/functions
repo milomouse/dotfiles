@@ -4,10 +4,11 @@ function zshaddhistory() {
   line=${1%%$'\n'} ; cmd=${line%% *}
   [[ ${#line} -ge 5
       && ${cmd} != (history|fc|e|exit|cl|clear)
-      && ${cmd} != (l[axclsftm]|srm|rms|rds)
+      && ${cmd} != (l[axclsftm]|srm|rms|rds|sudo)
       && ${cmd} != (losetup|aespipe|cryptsetup)
       && ${cmd} != (daemons|go|startx|mp|flashgot)
       && ${cmd} != ([mszx]edit|[zx]load|zhist|wika)
+      && ${cmd} != (sr|surfraw)
   ]] && (( ! $argv[(I)*unrl*|*spar*|*losetup*|*litika*] ))
 }
 
@@ -101,17 +102,12 @@ function extr() {
 function timer() {
   if [[ $# == 1 ]]; then
     case $1 {
-      <->) 
+      <->|<->[smdh]) 
         sleep $1
         [[ -n ${DISPLAY} ]] && stumpish echo Timer has finished. || \
         print Timer has finished.
       ;;
-      <->[smdh])
-        sleep $1
-        [[ -n ${DISPLAY} ]] && stumpish echo Timer has finished. || \
-        print Timer has finished.
-      ;;
-      *)  print "Time must be an Integer followed by time format [s,m,h,d]. Defaults to seconds."
+      *)  print "Time must be an Integer, optionally followed by time format [s,m,h,d].\nDefaults to seconds."
     }
   fi
 }
@@ -127,7 +123,7 @@ function 256co() {
   fi
 }
 
-# quickly view definitions:
+# un-smart function to quickly view word definitions:
 function sd() {
   local _ARG
   [[ $(print - $#@) -ge 2 ]] && _ARG=${@:/$1} || _ARG=$1
@@ -159,12 +155,12 @@ function zhist() {
   fi
 }
 
-# watch FlashGot (firefox) download progress and notify when complete:
+# un-smart function to watch FlashGot (firefox) download progress and notify when complete:
 function flashgot() {
   if [[ -n $(pgrep flashgot) ]]; then
   while sleep 1; do
     if [[ -z $(pgrep flashgot) ]]; then
-      repeat 3; do
+      repeat 3; do # ${DISPLAY} is assumed since FlashGot is Firefox (X) add-on.
         stumpish echo "^B^1*flashgot:^5* download complete.^n" 1>/dev/null
         sleep 3
       done && break

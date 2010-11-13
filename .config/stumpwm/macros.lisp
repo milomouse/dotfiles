@@ -44,6 +44,7 @@
   (0    nil   t     :class "Jumanji")
   (1    t     t     :title "Add-ons")
   (1    t     t     :title "Downloads")
+  (1    t     t     :instance "Dialog")
   (2    t     nil   :class "URxvt"))
 
 ;(define-frame-preference "4"

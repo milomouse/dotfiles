@@ -7,12 +7,12 @@ if $DISPLAY =~ ":0.0"
   set t_Co=256
 endif
 colorscheme cottonmouse
-if has ('folding')
-  set foldenable
-  set foldmethod=marker
-  set foldmarker={{{,}}}
-  set foldcolumn=0
-endif
+"if has ('folding')
+"  set foldenable
+"  set foldmethod=marker
+"  set foldmarker={{{,}}}
+"  set foldcolumn=0
+"endif
 set nocursorline
 set nocursorcolumn
 set ignorecase

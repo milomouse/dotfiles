@@ -4,7 +4,7 @@ function zshaddhistory() {
   line=${1%%$'\n'} ; cmd=${line%% *}
   [[ ${#line} -ge 5
       && ${cmd} != (history|fc|e|exit|cl|clear)
-      && ${cmd} != (l[axclsftm]|srm|rms|rds|sudo)
+      && ${cmd} != (l[axclsftm]|srm|rms|rds)
       && ${cmd} != (losetup|aespipe|cryptsetup)
       && ${cmd} != (daemons|go|startx|mp|flashgot)
       && ${cmd} != ([mszx]edit|[zx]load|zhist|wika)
@@ -123,6 +123,18 @@ function 256co() {
   fi
 }
 
+# quick un-smart function to prepend file:// to local requests:
+# (refine this for multiple files, etc, later on)
+function {jumanji,vimprobable}() {
+  if [[ -f $PWD/$@ ]]; then
+    command $0 file://$PWD/$@
+  elif [[ -f $@ ]]; then
+    command $0 file://$@
+  else
+    command $0 $@
+  fi
+}
+
 # un-smart function to quickly view word definitions:
 function sd() {
   local _ARG
@@ -138,10 +150,11 @@ function sd() {
 # un-smart function for my todo lists:
 function todo() {
   local _d=${HOME}/othe
-  case $1 in
-    --) command ls -1 ${_d}/.TODO* ;;
-    *)  command vim ${_d}/.TODO_$1 ;;
-  esac
+  case $# {
+    0) command ls -1 ${_d}/.TODO_* ;;
+    1) command vim ${_d}/.TODO_$1 ;;
+    *) command vim ${_d}/.TODO_$(print $@|tr ' ' '_')
+  }
 }
 
 # un-smart function for viewing/editing history file (still use 'fc/history'):

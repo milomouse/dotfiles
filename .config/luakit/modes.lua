@@ -3,115 +3,76 @@
 -------------------------------
 
 -- Table of modes and their callback hooks
-modes = {}
+local modes = {}
 
--- Currently active mode hooks
-local current
-
--- Update a modes hook table with new hooks
-function new_mode(mode, hooks)
-    modes[mode] = lousy.util.table.join(modes[mode] or {}, hooks)
+-- Add new mode table (merges with old table).
+function new_mode(name, mode)
+    assert(string.match(name, "^[%w-_]+$"), "invalid mode name: " .. name)
+    modes[name] = lousy.util.table.join(modes[name] or {}, mode, { name = name })
 end
 
--- Input bar history binds, these are only present in modes with a history
--- table so we can make some assumptions.
-local key = lousy.bind.key
-hist_binds = {
-    key({}, "Up", function (w)
-        local h = current.history
-        local lc = h.cursor
-        if not h.cursor and h.len > 0 then
-            h.cursor = h.len
-        elseif (h.cursor or 0) > 1 then
-            h.cursor = h.cursor - 1
-        end
-        if h.cursor and h.cursor ~= lc then
-            if not h.orig then h.orig = w.ibar.input.text end
-            w:set_input(h.items[h.cursor])
-        end
-    end),
-    key({}, "Down", function (w)
-        local h = current.history
-        if not h.cursor then return end
-        if (h.cursor + 1) >= h.len then
-            w:set_input(h.orig)
-            h.cursor = nil
-            h.orig = nil
-        else
-            h.cursor = h.cursor + 1
-            w:set_input(h.items[h.cursor])
-        end
-    end),
-}
+-- Get mode table.
+function get_mode(name)
+    assert(string.match(name, "^[%w-_]+$"), "invalid mode name: " .. name)
+    return modes[name]
+end
 
 -- Attach window & input bar signals for mode hooks
 window.init_funcs.modes_setup = function (w)
     -- Calls the `enter` and `leave` mode hooks.
-    w.win:add_signal("mode-changed", function (_, mode)
-        local leave = (current or {}).leave
+    w:add_signal("mode-changed", function (_, name)
+        local leave = (w.mode or {}).leave
 
-        -- Get new modes functions
-        current = modes[mode]
+        -- Get new modes functions/hooks/data
+        local mode = modes[name]
+        w.mode = mode
 
-        -- Call the last modes `leave` hook.
+        -- Call last modes leave hook.
         if leave then leave(w) end
 
         -- Check new mode
-        if not current then
-            error("changed to un-handled mode: " .. mode)
+        if not mode then
+            error("changed to un-handled mode: " .. name)
         end
 
         -- Update window binds
-        w:update_binds(mode)
+        w:update_binds(name)
 
-        -- Setup history state
-        if current.history then
-            local h = current.history
-            if not h.items then h.items = {} end
-            h.len = #(h.items)
-            h.cursor = nil
-            h.orig = nil
-            -- Add Up & Down history bindings
-            w.binds = lousy.util.table.join(hist_binds, w.binds)
-            -- Trim history
-            if h.maxlen and h.len > (h.maxlen * 1.5) then
-                local items = {}
-                for i = (h.len - h.maxlen), h.len do
-                    table.insert(items, h.items[i])
-                end
-                h.items = items
-                h.len = #items
-            end
-        end
+        -- Call new modes enter hook.
+        if mode.enter then mode.enter(w) end
 
-        -- Call new modes `enter` hook.
-        if current.enter then current.enter(w) end
+        w:emit_signal("mode-entered", mode)
     end)
 
-    -- Calls the `changed` hook on input widget changed.
-    w.ibar.input:add_signal("changed", function()
-        if current and current.changed then
-            current.changed(w, w.ibar.input.text)
+    -- Calls the changed hook on input widget changed.
+    w.ibar.input:add_signal("changed", function ()
+        local mode = w.mode
+        if mode and mode.changed then
+            mode.changed(w, w.ibar.input.text)
         end
     end)
 
     -- Calls the `activate` hook on input widget activate.
-    w.ibar.input:add_signal("activate", function()
-        if current and current.activate then
-            local text, items = w.ibar.input.text, current.history.items
-            if current.activate(w, text) == false or not items then return end
+    w.ibar.input:add_signal("activate", function ()
+        local mode = w.mode
+        if mode and mode.activate then
+            local text, hist = w.ibar.input.text, mode.history
+            if mode.activate(w, text) == false then return end
             -- Check if last history item is identical
-            if items[#items] ~= text then table.insert(items, text) end
+            if hist and hist.items and hist.items[hist.len or -1] ~= text then
+                table.insert(hist.items, text)
+            end
         end
     end)
 
 end
 
 -- Add mode related window methods
+local mset, mget = lousy.mode.set, lousy.mode.get
 for name, func in pairs({
-    set_mode = function (w, name) lousy.mode.set(w.win, name)  end,
-    get_mode = function (w)       return lousy.mode.get(w.win) end,
-    is_mode  = function (w, name) return name == w:get_mode()  end,
+    set_mode = function (w, name)        mset(w, name)   end,
+    get_mode = function (w)       return mget(w)         end,
+    is_mode  = function (w, name) return name == mget(w) end,
 }) do window.methods[name] = func end
 
 -- Setup normal mode
@@ -126,6 +87,13 @@ new_mode("normal", {
 new_mode("insert", {
     enter = function (w)
         w:set_prompt("-- INSERT --")
+        w:set_input()
+    end,
+})
+
+new_mode("passthrough", {
+    enter = function (w)
+        w:set_prompt("-- PASS THROUGH --")
         w:set_input()
     end,
 })
@@ -151,71 +119,4 @@ new_mode("command", {
         end
     end,
     history = {maxlen = 50},
-})
-
--- Setup search mode
-new_mode("search", {
-    enter = function (w)
-        -- Clear old search state
-        w.search_state = {}
-        w:set_prompt()
-        w:set_input("/")
-    end,
-    leave = function (w)
-        -- Check if search was aborted and return to original position
-        local s = w.search_state
-        if s.marker then
-            w:get_current():set_scroll_vert(s.marker)
-            s.marker = nil
-        end
-    end,
-    changed = function (w, text)
-        -- Check that the first character is '/' or '?' and update search
-        if string.match(text, "^[\?\/]") then
-            s = w.search_state
-            s.last_search = string.sub(text, 2)
-            if #text > 3 then
-                w:search(string.sub(text, 2), (string.sub(text, 1, 1) == "/"))
-                if s.ret == false and s.marker then w:get_current():set_scroll_vert(s.marker) end
-            else
-                w:clear_search(false)
-            end
-        else
-            w:clear_search()
-            w:set_mode()
-        end
-    end,
-    activate = function (w, text)
-        w.search_state.marker = nil
-        -- Search if haven't already (won't have for short strings)
-        if not w.search_state.searched then
-            w:search(string.sub(text, 2), (string.sub(text, 1, 1) == "/"))
-        end
-        -- Ghost the last search term
-        if w.search_state.ret then
-            w:set_mode()
-            w:set_prompt(text)
-        else
-            w:error("Pattern not found: " .. string.sub(text, 2))
-        end
-    end,
-    history = {maxlen = 50},
-})
-
-new_mode("qmarks", {
-    leave = function (w)
-        w.menu:hide()
-    end,
-})
-
-new_mode("proxy", {
-    leave = function (w)
-        w.menu:hide()
-    end,
-})
-
-new_mode("undolist", {
-    leave = function (w)
-        w.menu:hide()
-    end,
 })

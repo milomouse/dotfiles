@@ -9,18 +9,11 @@ webview = {}
 webview.init_funcs = {
     -- Set global properties
     set_global_props = function (view, w)
-        -- Set proxy options
-        local proxy_address
-        local active_proxy = proxy.get_active()
-        if active_proxy then
-            proxy_address = active_proxy.address
-        else
-            proxy_address = globals.http_proxy or os.getenv("http_proxy")
-        end
-        if proxy_address then
-            view:set_prop('proxy-uri', proxy_address)
-        end
         view:set_prop('user-agent', globals.useragent)
+
+        -- Set proxy options
+        local proxy = globals.http_proxy or os.getenv("http_proxy")
+        if proxy then view:set_prop('proxy-uri', proxy) end
 
         -- Set ssl options
         if globals.ssl_strict ~= nil then
@@ -101,19 +94,24 @@ webview.init_funcs = {
     -- Clicking a form field automatically enters insert mode
     form_insert_mode = function (view, w)
         view:add_signal("form-active", function ()
-            (w.search_state or {}).marker = nil
-            w:set_mode("insert")
+            if w:get_mode() ~= "passthrough" then
+                (w.search_state or {}).marker = nil
+                w:set_mode("insert")
+            end
         end)
         view:add_signal("root-active", function ()
-            (w.search_state or {}).marker = nil
-            w:set_mode()
+            if w:get_mode() ~= "passthrough" then
+                (w.search_state or {}).marker = nil
+                w:set_mode()
+            end
         end)
     end,
 
     -- Stop key events hitting the webview if the user isn't in insert mode
     mode_key_filter = function (view, w)
         view:add_signal("key-press", function ()
-            if not w:is_mode("insert") then return true end
+            local mode = w:get_mode()
+            if mode ~= "insert" and mode ~= "passthrough" then return true end
         end)
     end,
 
@@ -279,52 +277,6 @@ webview.methods = {
     zoom_set = function (view, w, level, full_zoom)
         view:set_prop("full-content-zoom", not not full_zoom)
         view:set_prop("zoom-level", level or 1.0)
-    end,
-
-    -- Searching functions
-    start_search = function (view, w, text)
-        if string.match(text, "^[?/]") then
-            w:set_mode("search")
-            w:set_input(text)
-        else
-            return error("invalid search term, must start with '?' or '/'")
-        end
-    end,
-
-    search = function (view, w, text, forward)
-        if forward == nil then forward = true end
-
-        -- Get search state (or new state)
-        if not w.search_state then w.search_state = {} end
-        local s = w.search_state
-
-        -- Get search term
-        text = text or s.last_search
-        if not text or #text == 0 then
-            return w:clear_search()
-        end
-        s.last_search = text
-
-        if s.forward == nil then
-            -- Haven't searched before, save some state.
-            s.forward = forward
-            s.marker = view:get_scroll_vert()
-        else
-            -- Invert direction if originally searching in reverse
-            forward = (s.forward == forward)
-        end
-
-        s.searched = true
-        s.ret = view:search(text, text ~= string.lower(text), forward, true);
-    end,
-
-    clear_search = function (view, w, clear_state)
-        view:clear_search()
-        if clear_state ~= false then
-            w.search_state = {}
-        else
-            w.search_state.searched = false
-        end
     end,
 
     -- Webview scroll functions

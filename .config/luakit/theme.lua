@@ -5,7 +5,7 @@
 local theme = {}
 
 -- Default settings
-theme.font = "monospace normal 9"
+theme.font = "monospace normal 6"
 theme.fg   = "#fff"
 theme.bg   = "#000"
 
@@ -26,6 +26,12 @@ theme.menu_title_bg             = "#fff"
 theme.menu_primary_title_fg     = "#f00"
 theme.menu_secondary_title_fg   = "#666"
 
+-- Proxy manager
+theme.proxy_active_menu_fg      = '#000'
+theme.proxy_active_menu_bg      = '#FFF'
+theme.proxy_inactive_menu_fg    = '#888'
+theme.proxy_inactive_menu_bg    = '#FFF'
+
 -- Statusbar specific
 theme.sbar_fg           = "#fff"
 theme.sbar_bg           = "#000"
@@ -34,10 +40,6 @@ theme.loaded_sbar_fg    = "#33AADD"
 -- Input bar specific
 theme.ibar_fg           = "#000"
 theme.ibar_bg           = "#fff"
-
--- Proxy manager
-theme.proxy_active_fg   = '#000'
-theme.proxy_inactive_fg = '#888'
 
 -- Tab label
 theme.tab_fg            = "#888"

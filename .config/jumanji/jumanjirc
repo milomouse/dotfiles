@@ -10,39 +10,45 @@ set proxy 127.0.0.1:8118
 set private_browsing false
 set plugin_blocker true
 set single_instance true
-set auto_save 60
-set download_dir ~/down/
-#set download_command urxvt -e zsh -c "wget --load-cookies ~/.config/jumanji/cookies '%s' -O %s";
-set download_command urxvt -e zsh -c "curl -sL34 -c ~/.config/jumanji/cookies -b ~/.config/jumanji/cookies '%s' -o %s";
-set spawn_editor = "urxvt -e -zsh -c \"vim -p %s\""
-
-## search engines:
-searchengine googlessl  https://www.google.com/search?q=%s
-searchengine google     http://www.google.com/search?q=%s
-searchengine images     http://www.google.com/images?q=%s&um=1&ie=UTF-8&source=og&sa=N&hl=en&tab=wi
-searchengine wikipedia  https://secure.wikimedia.org/wikipedia/en/w/index.php?search=%s
-searchengine wikipedias https://secure.wikimedia.org/wikipedia/en/w/index.php?search=%s
-searchengine bbs        https://bbs.archlinux.org/search.php?action=search&keywords=%s&author=&forum=-1&search_in=all&sort_by=0&sort_dir=DESC&show_as=topics
-searchengine github     https://github.com/search?q=%s&type=Everything&repo=&langOverride=&start_value=1
-searchengine newegg     http://www.newegg.com/Product/ProductList.aspx?Submit=ENE&DEPA=0&Order=BESTMATCH&Description=%s
-searchengine tigerdirect http://www.tigerdirect.com/applications/SearchTools/search.asp?keywords=%s
-searchengine imdb       http://www.imdb.com/find?s=all&q=%s
-searchengine youtube    http://www.youtube.com/results?search_query=%s
-searchengine deviantart http://browse.deviantart.com/?qh=&section=&global=1&q=%s
-searchengine lastfm     http://www.last.fm/music/?q=%s
-searchengine amazon     http://www.amazon.com/s/ref=nb_ss_gw?url=search-alias%3Dall&field-keywords=%s
-searchengine ebay       http://shop.ebay.com/?_from=R40&_trksid=p3907.m570.l1313&_nkw=%s&_sacat=See-All-Categories
-searchengine kickass    http://www.kickasstorrents.com/search/%s/
-searchengine btjunkie   http://btjunkie.org/search?q=%s
-searchengine piratebay  http://thepiratebay.org/search/%s
-}
-
-## browser display:
+set n_completion_items 10
 #set stylesheet file:///home/milo/.config/jumanji/style.css
+set 96dpi true
 set scrollbars false
 set statusbar true
 set tabbar false
 set next_to_current true
+set page_cache true
+set images true
+set auto_shrink_images false
+set background true
+set full_content_zoom true
+set developer_extras true
+set spell_checking true
+set resizable_text_areas false
+set auto_save 60
+set download_dir ~/down/
+set download_command zsh -c "curl -sL134 -c ~/.config/jumanji/cookies -b ~/.config/jumanji/cookies '%s' -o %s";
+set spawn_editor = "urxvt -e -zsh -c \"vim -p %s\""
+
+## search engines:
+searchengine googlessl https://www.google.com/search?q=%s
+searchengine google http://www.google.com/search?q=%s
+searchengine images http://www.google.com/images?q=%s&um=1&ie=UTF-8&source=og&sa=N&hl=en&tab=wi
+searchengine wikipedia https://secure.wikimedia.org/wikipedia/en/w/index.php?search=%s
+searchengine wikipedias https://secure.wikimedia.org/wikipedia/en/w/index.php?search=%s
+searchengine bbs https://bbs.archlinux.org/search.php?action=search&keywords=%s&author=&forum=-1&search_in=all&sort_by=0&sort_dir=DESC&show_as=topics
+searchengine github https://github.com/search?q=%s&type=Everything&repo=&langOverride=&start_value=1
+searchengine newegg http://www.newegg.com/Product/ProductList.aspx?Submit=ENE&DEPA=0&Order=BESTMATCH&Description=%s
+searchengine tigerdirect http://www.tigerdirect.com/applications/SearchTools/search.asp?keywords=%s
+searchengine imdb http://www.imdb.com/find?s=all&q=%s
+searchengine youtube http://www.youtube.com/results?search_query=%s
+searchengine deviantart http://browse.deviantart.com/?qh=&section=&global=1&q=%s
+searchengine lastfm http://www.last.fm/music/?q=%s
+searchengine amazon http://www.amazon.com/s/ref=nb_ss_gw?url=search-alias%3Dall&field-keywords=%s
+searchengine ebay http://shop.ebay.com/?_from=R40&_trksid=p3907.m570.l1313&_nkw=%s&_sacat=See-All-Categories
+searchengine kickass http://www.kickasstorrents.com/search/%s/
+searchengine btjunkie http://btjunkie.org/search?q=%s
+searchengine piratebay http://thepiratebay.org/search/%s
 
 ## browser colors:
 set font fixed normal 6

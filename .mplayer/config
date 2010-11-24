@@ -1,13 +1,14 @@
 # global settings:
-nokeepaspect=1
-fstype=netwm
-monitoraspect=16:9
 lavdopts=threads=2
+prefer-ipv4=yes
+monitoraspect=16:9
 subfont-osd-scale=3
-vo=xv
-ao=oss
 framedrop=yes
 double=yes
+ao=oss
+vo=xv
+# so StumpWM doesn't crash:
+nokeepaspect=1
 
 # profiles:
 [vo.fbdev]
@@ -16,6 +17,7 @@ vf=scale=1366:768
 [protocol.dvd]
 profile-desc="profile for dvd:// streams"
 alang=en
+spuaa=4
 
 [protocol.dvdnav]
 profile-desc="profile for dvdnav:// streams"

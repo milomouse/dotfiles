@@ -8,7 +8,7 @@ set frame_display_hidden 2
 set frame_resize 10
 set dmenu dmenu -i -p 'Musca: '
 set border_width 1
-hook on ^(catchall|dedicate) border flip
+#hook on ^(catchall|dedicate) border flip
 hook on ^only border off
 #hook on ^add pad 0 0 24 0
 hook on ^(remove|vsplit|hsplit) refresh
@@ -33,20 +33,20 @@ bind on Mod4+Shift+q quit
 
 # media and other bindings:
 bind on Mod4+Print exec import -window root /home/milo/foto/shot/$(date +%Y_%m_%d-%H%M%S).png"
-bind on Mod4+Shift+Delete exec alock -bg image:file=/home/milo/foto/wall/beheading.jpg -cursor glyph -auth pam >&/dev/null
-bind on Control+XF86MonBrightnessUp exec moodlight -m
-bind on XF86MonBrightnessUp exec moodlight -i
-bind on XF86MonBrightnessDown exec moodlight -d
-bind on XF86AudioRaiseVolume exec ossvalt -i 1
-bind on XF86AudioLowerVolume exec ossvalt -d 1
+bind on Mod4+Shift+Delete exec alock -bg image:file=/home/milo/foto/wall/beheading.png -cursor glyph -auth pam >&/dev/null
+bind on Control+XF86MonBrightnessUp exec moodlight --max
+bind on XF86MonBrightnessUp exec moodlight --increase
+bind on XF86MonBrightnessDown exec moodlight --decrease
+bind on XF86AudioRaiseVolume exec ossvol --increase 1
+bind on XF86AudioLowerVolume exec ossvalt --decrease 1
 bind on XF86AudioMute exec ossvalt -m
-bind on Mod4+Shift+y exec mossrat --prev
-bind on Mod4+Shift+u exec mossrat --toggle
-bind on Mod4+Shift+i exec mossrat --stop
-bind on Mod4+Shift+o exec mossrat --next
-bind on Mod4+Shift+a exec songrem --add
-bind on Mod4+Shift+d exec songrem --remove
-bind on Mod4+Shift+t exec songrem --play
+bind on Mod4+Shift+y exec mifo --prev
+bind on Mod4+Shift+u exec mifo --toggle
+bind on Mod4+Shift+i exec mifo --stop
+bind on Mod4+Shift+o exec mifo --next
+#bind on Mod4+Shift+a exec --add
+#bind on Mod4+Shift+d exec --remove
+bind on Mod4+Shift+t exec mifo --toggle
 
 # prompt bindings:
 bind on Mod4+semicolon exec dmenu_run -p 'Execute: '
@@ -121,7 +121,7 @@ bind on Mod4+comma use (prev)
 # startup stuff:
 name !
 #pad 0 0 24 0
-exec urxvt -e tmux -f /home/milo/.config/tmux/tmux.conf -L sp new-session
+#exec urxvt -e tmux -f /home/milo/.config/tmux/tmux.conf -L sp new-session
 add |1
 add |2
 add |3

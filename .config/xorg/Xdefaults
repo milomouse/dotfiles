@@ -14,6 +14,8 @@ urxvt*secondaryScroll: true
 urxvt*scrollTtyKeypress: true
 urxvt*scrollWithBuffer: true
 urxvt*scrollTtyOutput: false
+urxvt*visualBell: true
+urxvt*urgentOnBell :true
 urxvt*saveLines: 8192
 urxvt*borderLess: false
 urxvt*transparent: false

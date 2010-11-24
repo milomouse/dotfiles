@@ -74,7 +74,6 @@ import XMonad.Prompt.Window (windowPromptBring,windowPromptGoto)
 
 -- <layouts>
 import XMonad.Layout.TwoPane
-import XMonad.Layout.OneBig
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.Tabbed
 
@@ -110,7 +109,7 @@ main = do
       , terminal            = "urxvt"
       , workspaces          = map show [1..6]
       , layoutHook          = myLayouts
-      , manageHook          = insertPosition Below Newer <+> myManageHook
+      , manageHook          = insertPosition Above Newer <+> myManageHook
       , startupHook         = myStartHook
       , logHook             = myLogHook dzenStatusBar >> setWMName "LG3D"
       , normalBorderColor   = colorNormalBorder
@@ -237,13 +236,12 @@ myLayouts = avoidStruts $ windowNavigation  $
             onWorkspace "5" fotoLayouts     $
             (collectiveLayouts)
   where
-    collectiveLayouts = myTile ||| myOneB ||| myTabd ||| myFull 
+    collectiveLayouts = myTile ||| myTabd ||| myFull
 
     -- <define layouts>
-    myTwoM = named "=" (toggleLayouts (lessBorders (OnlyFloat) (noBorders (mastered 0.01 0.6 $ tabbedAlways shrinkText myTabTheme)))
-                       (lessBorders (OnlyFloat) (noBorders (mastered 0.01 0.4 (mastered 0.01 0.5 $ (tabbedAlways shrinkText myTabTheme))))))
+    myTwoM = named "=" (toggleLayouts (lessBorders (OnlyFloat) (noBorders (mastered 0.01 0.4 (mastered 0.01 0.5 $ (tabbedAlways shrinkText myTabTheme)))))
+                       (lessBorders (OnlyFloat) (noBorders (mastered 0.01 0.6 $ tabbedAlways shrinkText myTabTheme))))
 --    myTwoM = named "=" (lessBorders (OnlyFloat) (noBorders (mastered 0.1 0.6 $ tabbedAlways shrinkText myTabTheme)))
-    myOneB = named "@" (lessBorders (OnlyFloat) (withBorder 1 (limitWindows 10 (OneBig 0.01 0.65))))
     myTile = named "#" (lessBorders (OnlyFloat) (withBorder 1 (drawer `onBottom` (ResizableTall 1 0.01 0.65 []))))
       where
         drawer = simpleDrawer 0 0.36 (ClassName "Firefox" `Or` ClassName "Zathura")
@@ -252,7 +250,7 @@ myLayouts = avoidStruts $ windowNavigation  $
 --    myTest = named "+" (smartBorders (combineTwo (TwoPane 0.03 0.5) (tabbedAlways shrinkText myTabTheme) (Full)))
 
     -- <layouts per workspace>
-    inetLayouts = myOneB ||| myFull ||| myTabd
+    inetLayouts = myFull ||| myTabd
     fotoLayouts = myFull ||| myTile
     uniqueKeys1 = myTwoM
 

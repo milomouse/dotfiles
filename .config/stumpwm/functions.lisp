@@ -8,6 +8,14 @@
         (win (group-current-window current)))
     (when (and next win) (move-window-to-group win next))))
 
+;; exchange windows but focus remains on current frame.
+(defun exchange-windows-remain (win1 win2)
+  (let ((f1 (window-frame win1))
+        (f2 (window-frame win2)))
+    (unless (eq f1 f2)
+      (pull-window win1 f2)
+      (pull-window win2 f1))))
+
 ;; focus frame [also when splitting] but do not show-frame-indicator.
 (defun focus-frame (group f)
   (let ((w (frame-window f))

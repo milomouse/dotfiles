@@ -8,6 +8,17 @@
 (defcommand gmove-prev () ()
   (move-window-to-next-group (current-group) (reverse (sort-groups (current-screen)))))
 
+;; same as 'exchange-direction' but focus remains on current frame
+(defcommand (exchange-direction-remain tile-group) (dir &optional (win (current-window)))
+    ((:direction "Direction: "))
+  (if win
+      (let* ((frame-set (group-frames (window-group win)))
+             (neighbour (neighbour dir (window-frame win) frame-set)))
+        (if (and neighbour (frame-window neighbour))
+            (exchange-windows-remain win (frame-window neighbour))
+            (message "No window in direction ~A!" dir)))
+      (message "No window in current frame!")))
+
 ;; designate master window/frame (should probably use current frame number, but less dynamic?)
 (defcommand (master-make tile-group) () () (renumber 0) (repack-window-numbers) (remember-last))
 (defcommand (master-focus tile-group) () () (select-window-by-number 0))
@@ -168,7 +179,8 @@
 ;; predefined echoes for speed, else use 'shell-command-output'.
 (defcommand echo-mifo-stumpwm () () (echo-string (current-screen) (run-shell-command "mifo --stumpwm" t)))
 (defcommand echo-mifo-raw () () (echo-string (current-screen) (run-shell-command "mifo --raw" t)))
-(defcommand echo-mifo-playlist () () (echo-string (current-screen) (run-shell-command "mifo --show current|grep -A 7 -B 7 $(mifo --raw)|sed 's|'$(mifo --raw)'|^B^1*&^n|'" t)))
+(defcommand echo-mifo-current-list () () (echo-string (current-screen) (run-shell-command "mifo --show current|grep -A 7 -B 7 $(mifo --raw)|sed 's|'$(mifo --raw)'|^B^1*&^n|'" t)))
+(defcommand echo-mifo-playlists () () (echo-string (current-screen) (run-shell-command "mifo --show" t)))
 (defcommand echo-mifo-fav-add () () (echo-string (current-screen) (run-shell-command "mifo --fav-add" t)))
 (defcommand echo-mifo-fav-del () () (echo-string (current-screen) (run-shell-command "mifo --fav-delete" t)))
 (defcommand echo-mifo-random () () (echo-string (current-screen) (run-shell-command "mifo -r" t)) (echo-mifo-stumpwm))
@@ -178,8 +190,8 @@
 (defcommand echo-oss-volup () () (run-shell-command "ossvol -i 1" t) (echo-oss-vol))
 (defcommand echo-oss-voldown () () (run-shell-command "ossvol -d 1" t) (echo-oss-vol))
 (defcommand echo-oss-volmute () () (run-shell-command "ossvol -m" t))
-(defcommand echo-oss-speakers () () (echo-string (current-screen) (run-shell-command "ossvol --speakers --quiet && ossvol -a" t)))
-(defcommand echo-oss-headphones () () (echo-string (current-screen) (run-shell-command "ossvol --headphones --quiet && ossvol -a" t)))
+(defcommand echo-oss-speakers () () (echo-string (current-screen) (run-shell-command "ossvol --speakers --quiet" t)) (echo-oss-vol))
+(defcommand echo-oss-headphones () () (echo-string (current-screen) (run-shell-command "ossvol --headphones --quiet" t)) (echo-oss-vol))
 (defcommand echo-mail () () (echo-string (current-screen) (run-shell-command "print - @fea.st: ${#$(find /home/milo/mail/FastMail/*/new -type f)}" t)))
 (defcommand echo-battery () () (echo-string (current-screen) (run-shell-command "</proc/acpi/battery/BAT1/state" t)))
 (defcommand echo-free-hdd () () (echo-string (current-screen) (run-shell-command "df -hTP;print - '------------------------------------------------------';df -hTP --total|tail -1" t)))

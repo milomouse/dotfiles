@@ -2,7 +2,7 @@
 ;; ${HOME}/.stumpwmrc                                                       ;;
 ;;--------------------------------------------------------------------------;;
 ;; author: milomouse <vincent[at]fea.st>                                    ;;
-;; update: 2010-11-09 18:40:39                                              ;;
+;; update: 2010-11-24 02:27:46                                              ;;
 ;;--------------------------------------------------------------------------;;
 ;; versions used atoc:                                                      ;;
 ;; |  sbcl              -> 1.0.43-1                                         ;;
@@ -13,13 +13,14 @@
 ;;-TODO:--------------------------------------------------------------------;;
 ;; >>--: create a 'dedicate' and 'catchall' hook for changing focus color   ;;
 ;; >>>-: create a 'dedicate' and 'catchall' window-rule (remember * *)      ;;
-;; >---: have mifo(mplayer-daemon) prompts use filename completion          ;;
-;; >>>>: command for dedicating current win/frame as the Master win/frame   ;;
-;; >>>>! command for swapping current window with the Master win/frame      ;;
-;; >---: better resize; if neighbor {above} then -ARG else +ARG, etc        ;;
+;; >>--: have mifo(mplayer-daemon) prompts use filename completion          ;;
+;; >---: better resize; if neighbour {above} then -ARG else +ARG, etc.      ;;
 ;; >>>-: show frame-indicator for 'resize' only if no window in frame       ;;
 ;; >>--: command-mode for mifo video:seek to eliminate extra key-presses    ;;
-;; >---: have my 'undo' use group and check current group for undos first.  ;;
+;; >---: have my 'undo' use group and check current group for undos first   ;;
+;; >>>>? command for dedicating current win/frame as the Master win/frame   ;;
+;; >>>>! command for swapping current window with the Master win/frame      ;;
+;; >>>>! exchange two windows but keep focus in current frame               ;;
 ;;--------------------------------------------------------------------------;;
 ;; files: *data-dir*/../{commands,functions,hooks,key-maps,macros}.lisp     ;;
 ;;-NOTE:--------------------------------------------------------------------;;

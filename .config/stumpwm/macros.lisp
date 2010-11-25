@@ -5,7 +5,7 @@
 ;; define a few parameters first.
 ;(defparameter X-TERM "exec urxvt")
 ;(defparameter X-TERM-BROWSER (concatenate 'string X-TERM " -e w3m"))
-;(defparameter X-WWW-BROWSER "exec firefox ")
+;(defparameter X-WWW-BROWSER "exec jumanji")
 ;(defparameter X-IMAGE-VIEWER "exec gliv ")
 
 ;; create given groups while keeping focus on current.

@@ -304,7 +304,7 @@ NONE ^0*black ^1*red ^2*green ^3*yellow ^4*blue ^5*magenta ^6*cyan ^7*white ^8*u
       (err "^B^1*~A" c))))
 
 ;; run or raise.
-(defcommand ror_firefox () () (setf *run-or-raise-all-groups* t) (run-or-raise "firefox" '(:instance "Navigator")))
+(defcommand ror_jumanji () () (setf *run-or-raise-all-groups* t) (run-or-raise "jumanji" '(:class "Jumanji")))
 (defcommand ror_mutt () () (setf *run-or-raise-all-groups* nil)
   (run-or-raise "urxvt -e mutt -F ${XDG_CONFIG_DIR:-${HOME}/.config}/mutt/muttrc" '(:title "mutt")))
 

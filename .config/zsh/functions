@@ -6,7 +6,7 @@ function zshaddhistory() {
       && ${cmd} != (history|fc|e|exit|cl|clear)
       && ${cmd} != (l[axclsftm]|srm|rms|rds)
       && ${cmd} != (losetup|aespipe|cryptsetup)
-      && ${cmd} != (daemons|go|startx|mp|flashgot)
+      && ${cmd} != (daemons|go|startx|mp)
       && ${cmd} != ([mszx]edit|[zx]load|zhist|wika)
       && ${cmd} != (sr|surfraw)
   ]] && (( ! $argv[(I)*unrl*|*spar*|*losetup*|*litika*] ))
@@ -168,13 +168,13 @@ function zhist() {
   fi
 }
 
-# un-smart function to watch FlashGot (firefox) download progress and notify when complete:
-function flashgot() {
-  if [[ -n $(pgrep flashgot) ]]; then
+# un-smart function to watch curl download progress and notify when complete:
+function curlgot() {
+  if [[ -n $(pgrep curl) ]]; then
   while sleep 1; do
-    if [[ -z $(pgrep flashgot) ]]; then
-      repeat 3; do # ${DISPLAY} is assumed since FlashGot is Firefox (X) add-on.
-        stumpish echo "^B^1*flashgot:^5* download complete.^n" 1>/dev/null
+    if [[ -z $(pgrep curl) ]]; then
+      repeat 3; do # ${DISPLAY} is assumed since downloads are done via jumanji
+        stumpish echo "^B^1*curl:^5* download complete.^n" 1>/dev/null
         sleep 3
       done && break
     fi

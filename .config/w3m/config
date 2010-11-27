@@ -41,7 +41,6 @@ use_proxy 0
 max_news 50
 nntpmode 
 nntpserver 
-dns_order 4
 meta_refresh 0
 follow_redirection 10
 default_url 0
@@ -105,7 +104,7 @@ image_map_list 1
 imgdisplay w3mimgdisplay
 image_scale 100
 ext_image_viewer 0
-max_load_image 0
+max_load_image 1
 auto_image 0
 display_image 0
 view_unseenobject 0

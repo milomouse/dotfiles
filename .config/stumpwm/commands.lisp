@@ -196,8 +196,8 @@
 (defcommand echo-battery () () (echo-string (current-screen) (run-shell-command "</proc/acpi/battery/BAT1/state" t)))
 (defcommand echo-free-hdd () () (echo-string (current-screen) (run-shell-command "df -hTP;print - '------------------------------------------------------';df -hTP --total|tail -1" t)))
 (defcommand echo-free-mem () () (echo-string (current-screen) (run-shell-command "print '^B^6/free^1* used^5* base^n';free -m|awk 'NR==2 {print $4,$3,$2}'" t)))
-(defcommand echo-highcpu-user () () (echo-string (current-screen) (run-shell-command "ps -U root,privoxy,postgres,named --deselect -C tmux,urxvt k -%cpu opid,args:70,etime:10,%cpu,pmem | head -75" t)))
-(defcommand echo-highcpu-root () () (echo-string (current-screen) (run-shell-command "ps -U milo,privoxy,postgres,named --deselect -C tmux,urxvt k -%cpu opid,args:70,etime:10,%cpu,pmem | head -75" t)))
+(defcommand echo-highcpu-user () () (echo-string (current-screen) (run-shell-command "ps -U root,privoxy,15,postgres,named --deselect -C tmux,urxvt k -%cpu opid,args:70,etime:10,%cpu,pmem | head -75" t)))
+(defcommand echo-highcpu-root () () (echo-string (current-screen) (run-shell-command "ps -U milo,privoxy,15,postgres,named --deselect -C tmux,urxvt k -%cpu opid,args:70,etime:10,%cpu,pmem | head -75" t)))
 (defcommand echo-highcpu-rest () () (echo-string (current-screen) (run-shell-command "ps -U root,milo --deselect -C tmux,urxvt k -%cpu opid,args:70,etime:10,%cpu,pmem | head -75" t)))
 (defcommand echo-loadavg () () (echo-string (current-screen) (run-shell-command "print ${$(</proc/loadavg)[1,3]}" t)))
 (defcommand echo-colors-brief () () (echo-string (current-screen) (eval "

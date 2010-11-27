@@ -183,15 +183,15 @@
 (defcommand echo-mifo-playlists () () (echo-string (current-screen) (run-shell-command "mifo --show" t)))
 (defcommand echo-mifo-fav-add () () (echo-string (current-screen) (run-shell-command "mifo --fav-add" t)))
 (defcommand echo-mifo-fav-del () () (echo-string (current-screen) (run-shell-command "mifo --fav-delete" t)))
-(defcommand echo-mifo-random () () (echo-string (current-screen) (run-shell-command "mifo -r" t)) (echo-mifo-stumpwm))
-(defcommand echo-mifo-next () () (echo-string (current-screen) (run-shell-command "mifo --next" t)) (echo-mifo-stumpwm))
-(defcommand echo-mifo-prev () () (echo-string (current-screen) (run-shell-command "mifo --prev" t)) (echo-mifo-stumpwm))
+(defcommand echo-mifo-next () () (run-shell-command "mifo --next") (echo-mifo-stumpwm))
+(defcommand echo-mifo-prev () () (run-shell-command "mifo --prev") (echo-mifo-stumpwm))
+(defcommand echo-mifo-random () () (echo-string (current-screen) (run-shell-command "mifo -r" t)) (echo-mifo-stumpwm)) ; keep echo-string for this.
 (defcommand echo-oss-vol () () (echo-string (current-screen) (run-shell-command "ossvol -a" t)))
-(defcommand echo-oss-volup () () (run-shell-command "ossvol -i 1" t) (echo-oss-vol))
-(defcommand echo-oss-voldown () () (run-shell-command "ossvol -d 1" t) (echo-oss-vol))
-(defcommand echo-oss-volmute () () (run-shell-command "ossvol -m" t))
+(defcommand echo-oss-volup () () (run-shell-command "ossvol -i 1") (echo-oss-vol))
+(defcommand echo-oss-voldown () () (run-shell-command "ossvol -d 1") (echo-oss-vol))
+(defcommand echo-oss-volmute () () (run-shell-command "ossvol -m"))
 (defcommand echo-oss-speakers () () (echo-string (current-screen) (run-shell-command "ossvol --speakers --quiet" t)) (echo-oss-vol))
-(defcommand echo-oss-headphones () () (echo-string (current-screen) (run-shell-command "ossvol --headphones --quiet" t)) (echo-oss-vol))
+(defcommand echo-oss-headphones () () (run-shell-command "ossvol --headphones --quiet") (echo-oss-vol))
 (defcommand echo-mail () () (echo-string (current-screen) (run-shell-command "print - @fea.st: ${#$(find /home/milo/mail/FastMail/*/new -type f)}" t)))
 (defcommand echo-battery () () (echo-string (current-screen) (run-shell-command "</proc/acpi/battery/BAT1/state" t)))
 (defcommand echo-free-hdd () () (echo-string (current-screen) (run-shell-command "df -hTP;print - '------------------------------------------------------';df -hTP --total|tail -1" t)))
@@ -305,6 +305,7 @@ NONE ^0*black ^1*red ^2*green ^3*yellow ^4*blue ^5*magenta ^6*cyan ^7*white ^8*u
 
 ;; run or raise.
 (defcommand ror_jumanji () () (setf *run-or-raise-all-groups* t) (run-or-raise "jumanji" '(:class "Jumanji")))
+(defcommand ror_luakit () () (setf *run-or-raise-all-groups* t) (run-or-raise "luakit" '(:class "Jumanji")))
 (defcommand ror_mutt () () (setf *run-or-raise-all-groups* nil)
   (run-or-raise "urxvt -e mutt -F ${XDG_CONFIG_DIR:-${HOME}/.config}/mutt/muttrc" '(:title "mutt")))
 

@@ -2,16 +2,18 @@
 ## milomouse <vincent[at]fea.st>
 
 ## external scripts:
-script ~/.config/jumanji/scripts/hinting.js
+#script ~/.config/jumanji/scripts/dwb2-hints.js
+script ~/.config/jumanji/scripts/JumNav.js
+#set stylesheet file:///home/milo/.config/jumanji/lich.css
+set stylesheet file:///home/milo/.config/jumanji/mouse.css
 
 ## browser settings:
-set homepage http://bbs.archlinux.org/search.php?action=show_new
 set proxy 127.0.0.1:8118
 set private_browsing false
 set plugin_blocker true
 set single_instance true
-set n_completion_items 10
-#set stylesheet file:///home/milo/.config/jumanji/style.css
+set homepage https://bbs.archlinux.org/search.php?action=show_new
+set n_completion_items 20
 set 96dpi true
 set scrollbars false
 set statusbar true
@@ -27,8 +29,9 @@ set spell_checking true
 set resizable_text_areas false
 set auto_save 60
 set download_dir ~/down/
-set download_command zsh -c "curl -sL134 -c ~/.config/jumanji/cookies -b ~/.config/jumanji/cookies '%s' -o %s";
-set spawn_editor = "urxvt -e -zsh -c \"vim -p %s\""
+#set download_command zsh -c "curl -sL4 -c ~/.config/jumanji/cookies -b ~/.config/jumanji/cookies '%s' -o %s";
+set download_command zsh -c "wget --load-cookies ~/.config/jumanji/cookies '%s' -O %s";
+set spawn_editor "urxvt -e -zsh -c \"vim -p %s\"";
 
 ## search engines:
 searchengine googlessl https://www.google.com/search?q=%s

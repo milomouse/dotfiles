@@ -7,7 +7,8 @@ globals = {
     max_srch_history    = 100,
     http_proxy          = "127.0.0.1:8118",
     download_dir        = luakit.get_special_dir("DOWNLOAD") or (os.getenv("HOME") .. "/down"),
-    default_window_size = "800x600",
+    default_window_size = "1280x800",
+   -- default_window_size = "800x600",
 }
 
 -- Make useragent
@@ -43,7 +44,7 @@ search_engines = {
     gi    = "http://www.google.com/images?q={0}&um=1&ie=UTF-8&source=og&sa=N&hl=en&tab=wi",
     gc    = "http://www.google.com/codesearch?as_q={0}&btnG=Search+Code&hl=en&as_package=&as_lang=&as_filename=&as_class=&as_function=&as_license=&as_case=",
     sf    = "http://sourceforge.net/search/?words={0}",
-    sl    = "http://slashdot.org/search.pl?query={0}",
+    slash = "http://slashdot.org/search.pl?query={0}",
     negg  = "http://www.newegg.com/Product/ProductList.aspx?Submit=ENE&DEPA=0&Order=BESTMATCH&Description={0}",
     tiger = "http://www.tigerdirect.com/applications/SearchTools/search.asp?keywords={0}",
     im    = "http://www.imdb.com/find?s=all&q={0}",
@@ -66,15 +67,16 @@ cookie_policy = { always = 0, never = 1, no_third_party = 2 }
 -- Per-domain webview properties
 domain_props = {
     ["all"] = {
-        ["enable-scripts"]          = false,
+        ["enable-scripts"]          = true,
         ["enable-plugins"]          = false,
-        ["enable-private-browsing"] = false,
+        ["enable-private-browsing"] = true,
         ["user-stylesheet-uri"]     = "",
-        ["accept-policy"]           = cookie_policy.never,
+        ["accept-policy"]           = cookie_policy.no_third_party,
     },
     ["youtube.com"] = {
         ["enable-scripts"] = true,
         ["enable-plugins"] = true,
+        ["enable-private-browsing"] = false,
         ["accept-policy"]  = cookie_policy.no_third_party,
     },
     ["kickasstorrents.com"] = {
@@ -84,9 +86,15 @@ domain_props = {
         ["accept-policy"]  = cookie_policy.no_third_party,
     },
     ["bbs.archlinux.org"] = {
-        ["user-stylesheet-uri"]     = luakit.data_dir .. "/styles/dark.css",
-        ["enable-private-browsing"] = true,
+        ["user-stylesheet-uri"]     = luakit.data_dir .. "/styles/lich.css",
+        ["enable-private-browsing"] = false,
         ["accept-policy"]           = cookie_policy.no_third_party,
+    },
+    ["akiba-online.com"] = {
+        ["enable-scripts"] = true,
+        ["enable-plugins"] = true,
+        ["enable-private-browsing"] = false,
+        ["accept-policy"]  = cookie_policy.no_third_party,
     },
 }
 

@@ -2,17 +2,16 @@
 ;; ${HOME}/.stumpwmrc                                                       ;;
 ;;--------------------------------------------------------------------------;;
 ;; author: milomouse <vincent[at]fea.st>                                    ;;
-;; update: 2010-11-26 20:42:46                                              ;;
+;; update: 2010-11-28 20:42:46                                              ;;
 ;;--------------------------------------------------------------------------;;
 ;; versions used atoc:                                                      ;;
 ;; |  sbcl              -> 1.0.43-1                                         ;;
 ;; |  clx               -> 0.7.4-1                                          ;;
 ;; |  cl-ppcre          -> 2.0.3-1                                          ;;
 ;; |  stumpwm-git       -> 20101109-1                                       ;;
-;; |  surfraw-git       -> 20101103-1                                       ;;
 ;;-TODO:--------------------------------------------------------------------;;
-;; >>--: create a 'dedicate' and 'catchall' hook for changing focus color   ;;
 ;; >>>-: create a 'dedicate' and 'catchall' window-rule (remember * *)      ;;
+;; >>--: create a 'dedicate' and 'catchall' hook for changing focus color   ;;
 ;; >>--: have mifo(mplayer-daemon) prompts use filename completion          ;;
 ;; >---: better resize; if neighbour {above} then -ARG else +ARG, etc.      ;;
 ;; >>>-: show frame-indicator for 'resize' only if no window in frame       ;;
@@ -32,15 +31,16 @@
 (in-package :stumpwm)
 (clear-window-placement-rules)
 (setf *data-dir* "/home/milo/.config/stumpwm/storage/")
-(defcommand run-shell-command (cmd &optional collect-output-p)
-  ((:shell "execute: ")) (if collect-output-p
+(defcommand run-shell-command (cmd &optional collect-output-p) ((:shell "execute: "))
+  "Run the specified shell command. If @var{collect-output-p} is @code{T}
+then run the command synchronously and collect the output."
+  (if collect-output-p
     (run-prog-collect-output *shell-program* "-c" cmd)
     (run-prog *shell-program* :args (list "-c" cmd) :wait nil)))
 (setf *shell-program* "/bin/zsh")
 (defcommand-alias exec run-shell-command)
 
 ;; function pre-variables
-(defvar *surfraw-bookmark-file* (data-dir-file "bookmarks" "txt"))
 (defvar *background-image-path* "/home/milo/foto/wall/")
 
 ;; gravity

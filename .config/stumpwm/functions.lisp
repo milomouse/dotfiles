@@ -16,7 +16,7 @@
       (pull-window win1 f2)
       (pull-window win2 f1))))
 
-;; focus frame [also when splitting] but do not show-frame-indicator.
+;; focus frame [also when splitting] but do not show-frame-indicator in some cases.
 (defun focus-frame (group f)
   (let ((w (frame-window f))
         (last (tile-group-current-frame group))
@@ -28,6 +28,7 @@
       (setf show-indicator t))
     (if w (focus-window w) (no-focus group (frame-window last)))
     (if show-indicator (show-frame-outline group))))
+
 (defun split-frame-in-dir (group dir)
   (let ((f (tile-group-current-frame group)))
     (if (split-frame group dir)

@@ -3,17 +3,16 @@
 ;;----------------------------------------------------------------------------
 
 ;; export custom maps.
-(export '(*toggles-map* *echo-map* *frequent-map* *websearch-map*
+(export '(*toggles-map* *echo-map* *frequent-map*
           *mplayer-daemon-map1* *mplayer-daemon-map2*))
 
-;; set a few undefined keysyms, unavailable in */stumpwm/keysyms.lisp
+;; set a few undefined keysyms, [currently] unavailable in */stumpwm/keysyms.lisp
 (define-keysym #x1008ff02 "XF86MonBrightnessUp")
 (define-keysym #x1008ff03 "XF86MonBrightnessDown")
 
 ;; set "Super+Shift+\" as prefix for root-map bindings (this will not be used)
 (set-prefix-key (kbd "s-|"))
 
-;; <input-map bindings>
 ;;(setf *input-map*
 ;;  (let ((m (make-sparse-keymap)))
 ;;    (labels ((dk (m k c) (define-key m k c)))
@@ -22,7 +21,6 @@
 ;;    (dk m (kbd "g")     "vgroups")
 ;;   M)))
 
-;; <groups-map bindings>
 ;;(setf *groups-map*
 ;;  (let ((m (make-sparse-keymap)))
 ;;    (labels ((dk (m k c) (define-key m k c)))
@@ -37,11 +35,21 @@
     (dk m (kbd "ESC") "abort")
    M)))
 
-;; <commonly toggled options>
 (defvar *toggles-map*
   (let ((m (make-sparse-keymap)))
     (labels ((dk (m k c) (define-key m k c)))
     (dk m (kbd "s") "mode-line")
+    (dk m (kbd "ESC") "abort")
+   M)))
+
+(defvar *xclip-map*
+  (let ((m (make-sparse-keymap)))
+    (labels ((dk (m k c) (define-key m k c)))
+    (dk m (kbd "b") "exec xclip -selection clipboard -o | xclip -selection buffer-cut -i")
+    (dk m (kbd "p") "exec xclip -selection clipboard -o | xclip -selection primary -i")
+    (dk m (kbd "s") "exec xclip -selection clipboard -o | xclip -selection secondary -i")
+    (dk m (kbd ";") "prompt-xclip")
+    (dk m (kbd ":") "echo-xclip")
     (dk m (kbd "ESC") "abort")
    M)))
 
@@ -67,7 +75,6 @@
     (dk m (kbd "ESC") "abort")
    M)))
 
-;; <frequently used programs>
 (defvar *frequent-map*
   (let ((m (make-sparse-keymap)))
     (labels ((dk (m k c) (define-key m k c)))
@@ -87,54 +94,29 @@
     (dk m (kbd "ESC") "abort")
    M)))
 
-;; <search-engine bindings>
-(defvar *websearch-map*
-  (let ((m (make-sparse-keymap)))
-    (labels ((dk (m k c) (define-key m k c)))
-    (dk m (kbd "a") "amazon")
-    (dk m (kbd "c") "cliki")
-    (dk m (kbd "e") "ebay")
-    (dk m (kbd "f") "sourceforge")
-    (dk m (kbd "g") "google")
-    (dk m (kbd "G") "googlessl")
-    (dk m (kbd "i") "imdb")
-    (dk m (kbd "k") "kickass")
-    (dk m (kbd "l") "lastfm")
-    (dk m (kbd "o") "codesearch")
-    (dk m (kbd "p") "piratebay")
-    (dk m (kbd "r") "aur")
-    (dk m (kbd "s") "slashdot")
-    (dk m (kbd "w") "wikipedia")
-    (dk m (kbd "x") "ixsearch")
-    (dk m (kbd "y") "youtube")
-    (dk m (kbd ";") "surfraw")
-    (dk m (kbd "ESC") "abort")
-  M)))
-
-;; <mplayer-daemon-* bindings>
 (defvar *mplayer-daemon-map1*
   (let ((m (make-sparse-keymap)))
     (labels ((dk (m k c) (define-key m k c)))
+    (dk m (kbd "a")     "prompt-mifo-load")
+    (dk m (kbd "A")     "prompt-mifo-append")
     (dk m (kbd "d")     "exec sudo /etc/rc.d/mifo start")
     ;(dk m (kbd "d")     "exec mifo --daemon")
-    (dk m (kbd "t")     "exec mifo --toggle")
-    (dk m (kbd "r")     "echo-mifo-random")
+    (dk m (kbd "f")     "exec mifo --fullscreen")
+    (dk m (kbd "h")     "echo-mifo-prev")
+    (dk m (kbd "H")     "prompt-mifo-prev")
     (dk m (kbd "j")     "exec mifo --next +")
     (dk m (kbd "k")     "exec mifo --prev dir")
     (dk m (kbd "l")     "echo-mifo-next")
-    (dk m (kbd "h")     "echo-mifo-prev")
     (dk m (kbd "L")     "prompt-mifo-next")
-    (dk m (kbd "H")     "prompt-mifo-prev")
-    (dk m (kbd "a")     "prompt-mifo-load")
-    (dk m (kbd "A")     "prompt-mifo-append")
     (dk m (kbd "p")     "prompt-mifo-playlist")
     (dk m (kbd "P")     "echo-mifo-playlists")
+    (dk m (kbd "q")     "exec sudo /etc/rc.d/mifo stop")
+    ;(dk m (kbd "q")     "exec mifo --quit")
+    (dk m (kbd "Q")     "exec sudo /etc/rc.d/mifo kill")
+    (dk m (kbd "r")     "echo-mifo-random")
     (dk m (kbd "s")     "prompt-mifo-save")
     (dk m (kbd "S")     "exec mifo --stop")
-    (dk m (kbd "q")     "exec sudo /etc/rc.d/mifo stop")
-    (dk m (kbd "Q")     "exec sudo /etc/rc.d/mifo kill")
-    ;(dk m (kbd "q")     "exec mifo --quit")
-    (dk m (kbd "f")     "exec mifo --fullscreen")
+    (dk m (kbd "t")     "exec mifo --toggle")
     (dk m (kbd "+")     "echo-mifo-fav-add")
     (dk m (kbd "-")     "echo-mifo-fav-del")
     (dk m (kbd "Return")"prompt-mifo-reload")
@@ -143,19 +125,20 @@
 (defvar *mplayer-daemon-map2*
   (let ((m (make-sparse-keymap)))
     (labels ((dk (m k c) (define-key m k c)))
-    (dk m (kbd "l")     "exec mifo -c seek 15")
-    (dk m (kbd "C-l")   "exec mifo -c seek 405")
-    (dk m (kbd "h")     "exec mifo -c seek -17")
-    (dk m (kbd "L")     "exec mifo -c seek 45")
-    (dk m (kbd "H")     "exec mifo -c seek -47")
-    (dk m (kbd "C-h")   "exec mifo -c seek -407")
+    (dk m (kbd "h")     "exec mifo -c seek -7")
+    (dk m (kbd "H")     "exec mifo -c seek -17")
+    (dk m (kbd "C-h")   "exec mifo -c seek -47")
+    (dk m (kbd "M-h")   "exec mifo -c seek -407")
+    (dk m (kbd "l")     "exec mifo -c seek 5")
+    (dk m (kbd "L")     "exec mifo -c seek 15")
+    (dk m (kbd "C-l")   "exec mifo -c seek 45")
+    (dk m (kbd "M-l")   "exec mifo -c seek 405")
     (dk m (kbd "!")     "exec mifo -c seek_chapter -1")
     (dk m (kbd "@")     "exec mifo -c seek_chapter 1")
     (dk m (kbd "BackSpace") "exec mifo -c seek 0 1")
     (dk m (kbd "ESC")   "abort")
    M)))
 
-;; <top-map bindings>
 (setf *top-map*
   (let ((m (make-sparse-keymap)))
     (labels ((dk (m k c) (define-key m k c)))
@@ -264,7 +247,7 @@
     (dk m (kbd "s-r")    "rem-loadrc")
     (dk m (kbd "s-R")    "rem-restart")
     (dk m (kbd "s-s")    *mplayer-daemon-map2*)
-    (dk m (kbd "s-S")    *websearch-map*)
+    (dk m (kbd "s-S")    *xclip-map*)
     (dk m (kbd "s-t")    *toggles-map*)
     (dk m (kbd "s-T")    "title")
     (dk m (kbd "s-u")    "undo")
@@ -275,9 +258,8 @@
     (dk m (kbd "s-w")    "echo-frame-windows")
     (dk m (kbd "s-W")    "windowlist")
     (dk m (kbd "s-x")    "putsel")
-    (dk m (kbd "s-X")    "getsel")
-    ;(dk m (kbd "s-y")    "pine exec jumanji http://")
-    ;(dk m (kbd "s-Y")    "pine exec luakit http://")
+    (dk m (kbd "s-X")    "copy-last-message")
+    (dk m (kbd "s-C-x")  "getsel")
     (dk m (kbd "s-y")    "meta")
     (dk m (kbd "s-Y")    "window-send-string")
     (dk m (kbd "s-M-y")  "ratrelwarp -7 0")

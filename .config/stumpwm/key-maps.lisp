@@ -3,38 +3,17 @@
 ;;----------------------------------------------------------------------------
 
 ;; export custom maps.
-(export '(*toggles-map* *echo-map* *frequent-map*
-          *mplayer-daemon-map1* *mplayer-daemon-map2*))
+(export '(*echo-map* *frequent-map* *xsel-map* *xclip-map* *win-frame-map*
+          *toggles-map* *cursor-warp-map* *mplayer-map1* *mplayer-map2*))
 
-;; set a few undefined keysyms, [currently] unavailable in */stumpwm/keysyms.lisp
+;; set a few undefined keysyms, unavailable in */stumpwm/keysyms.lisp
 (define-keysym #x1008ff02 "XF86MonBrightnessUp")
 (define-keysym #x1008ff03 "XF86MonBrightnessDown")
 
 ;; set "Super+Shift+\" as prefix for root-map bindings (this will not be used)
 (set-prefix-key (kbd "s-|"))
 
-;;(setf *input-map*
-;;  (let ((m (make-sparse-keymap)))
-;;    (labels ((dk (m k c) (define-key m k c)))
-;;    (dk m (kbd "ESC")   "abort")
-;;    (dk m (kbd "w")     "windowlist")
-;;    (dk m (kbd "g")     "vgroups")
-;;   M)))
-
-;;(setf *groups-map*
-;;  (let ((m (make-sparse-keymap)))
-;;    (labels ((dk (m k c) (define-key m k c)))
-;;    (dk m (kbd "ESC")   "abort")
-;;    (dk m (kbd "w")     "windowlist")
-;;    (dk m (kbd "g")     "vgroups")
-;;   M)))
-
-(setf *root-map*
-  (let ((m (make-sparse-keymap)))
-    (labels ((dk (m k c) (define-key m k c)))
-    (dk m (kbd "ESC") "abort")
-   M)))
-
+;; toggle options not often used.
 (defvar *toggles-map*
   (let ((m (make-sparse-keymap)))
     (labels ((dk (m k c) (define-key m k c)))
@@ -42,6 +21,18 @@
     (dk m (kbd "ESC") "abort")
    M)))
 
+;; some useful window/frame commands.
+(defvar *win-frame-map*
+  (let ((m (make-sparse-keymap)))
+    (labels ((dk (m k c) (define-key m k c)))
+    (dk m (kbd "r")   "remember")
+    (dk m (kbd "f")   "forget")
+    (dk m (kbd "p")   "place-existing-windows")
+    (dk m (kbd "n")   "repack-window-numbers")
+    (dk m (kbd "ESC") "abort")
+   M)))
+
+;; transfer contents of clipboard into other buffers, or manually type cmd.
 (defvar *xclip-map*
   (let ((m (make-sparse-keymap)))
     (labels ((dk (m k c) (define-key m k c)))
@@ -53,12 +44,24 @@
     (dk m (kbd "ESC") "abort")
    M)))
 
+;; interact with the xselection and meta commands.
+(defvar *xsel-map*
+  (let ((m (make-sparse-keymap)))
+    (labels ((dk (m k c) (define-key m k c)))
+    (dk m (kbd "c")   "copy-last-message")
+    (dk m (kbd "g")   "getsel")
+    (dk m (kbd "m")   "meta")
+    (dk m (kbd "p")   "putsel")
+    (dk m (kbd "s")   "window-send-string")
+    (dk m (kbd "ESC") "abort")
+  M)))
+
+;; frequently used echoes for quick information grabbing.
 (defvar *echo-map*
   (let ((m (make-sparse-keymap)))
     (labels ((dk (m k c) (define-key m k c)))
     (dk m (kbd "b")   "echo-battery")
     (dk m (kbd "c")   "echo-colors-brief")
-    (dk m (kbd "C")   "echo-colors-full")
     (dk m (kbd "d")   "echo-date")
     (dk m (kbd "f")   "echo-free-mem")
     (dk m (kbd "h")   "echo-free-hdd")
@@ -75,6 +78,7 @@
     (dk m (kbd "ESC") "abort")
    M)))
 
+;; frequently used commands.
 (defvar *frequent-map*
   (let ((m (make-sparse-keymap)))
     (labels ((dk (m k c) (define-key m k c)))
@@ -94,7 +98,8 @@
     (dk m (kbd "ESC") "abort")
    M)))
 
-(defvar *mplayer-daemon-map1*
+;; mplayer daemon (mifo) frequently used commands.
+(defvar *mplayer-map1*
   (let ((m (make-sparse-keymap)))
     (labels ((dk (m k c) (define-key m k c)))
     (dk m (kbd "a")     "prompt-mifo-load")
@@ -122,7 +127,9 @@
     (dk m (kbd "Return")"prompt-mifo-reload")
     (dk m (kbd "ESC")   "abort")
    M)))
-(defvar *mplayer-daemon-map2*
+
+;; mplayer daemon (mifo) useful seek commands.
+(defvar *mplayer-map2*
   (let ((m (make-sparse-keymap)))
     (labels ((dk (m k c) (define-key m k c)))
     (dk m (kbd "h")     "exec mifo -c seek -7")
@@ -137,6 +144,27 @@
     (dk m (kbd "@")     "exec mifo -c seek_chapter 1")
     (dk m (kbd "BackSpace") "exec mifo -c seek 0 1")
     (dk m (kbd "ESC")   "abort")
+   M)))
+
+;; still a little silly..
+(defvar *cursor-warp-map*
+  (let ((m (make-sparse-keymap)))
+    (labels ((dk (m k c) (define-key m k c)))
+    (dk m (kbd "1") "exec xdotool mousedown 1")
+    (dk m (kbd "2") "exec xdotool mousedown 2")
+    (dk m (kbd "3") "exec xdotool mousedown 3")
+    (dk m (kbd "8") "exec xdotool mouseup 1")
+    (dk m (kbd "9") "exec xdotool mouseup 2")
+    (dk m (kbd "0") "exec xdotool mouseup 3")
+    (dk m (kbd "k")   "ratrelwarp 0 -5")
+    (dk m (kbd "C-k") "ratrelwarp 0 -10")
+    (dk m (kbd "l")   "ratrelwarp 5 0")
+    (dk m (kbd "C-l") "ratrelwarp 10 0")
+    (dk m (kbd "j")   "ratrelwarp 0 5")
+    (dk m (kbd "h")   "ratrelwarp -5 0")
+    (dk m (kbd "C-h") "ratrelwarp -10 0")
+    (dk m (kbd "Return") "exec xdotool click 1")
+    (dk m (kbd "ESC") "abort")
    M)))
 
 (setf *top-map*
@@ -196,21 +224,20 @@
     (dk m (kbd "s-Return")          "exec urxvt -e tmux -f ${XDG_CONFIG_DIR:-${HOME}/.config}/tmux/tmux.conf -L xorg new-session")
     (dk m (kbd "s-S-Return")        "tmux-attach-else-new")
     (dk m (kbd "s-C-Return")        "exec urxvt")
-    (dk m (kbd "s-S-space")         "exec urxvt -e mifo --monitor")
     (dk m (kbd "s-SunPrint_Screen") "exec import -window root ${XDG_PICTURES_DIR:-${HOME}/foto}/shot/$(date +%Y_%m_%d-%H%M%S).png")
     (dk m (kbd "s-S-Delete")        "exec alock -bg image:file=${HOME}/foto/wall/beheading.png -cursor glyph -auth pam >&/dev/null")
     ;; <alphabetic bindings>
     (dk m (kbd "s-a")    *echo-map*)
-    (dk m (kbd "s-b")    "redisplay")
-    (dk m (kbd "s-B")    "refresh")
-    (dk m (kbd "s-c")    "remember")
-    (dk m (kbd "s-C")    "place-existing-windows")
-    (dk m (kbd "s-d")    *mplayer-daemon-map1*)
+    (dk m (kbd "s-b")    "refresh")
+    (dk m (kbd "s-B")    "redisplay")
+    (dk m (kbd "s-c")    *xclip-map*)
+    (dk m (kbd "s-C")    "cursor-warp-mode")
+    (dk m (kbd "s-d")    *mplayer-map1*)
     (dk m (kbd "s-D")    "prompt-mifo-command")
     (dk m (kbd "s-e")    "exec ")
     (dk m (kbd "s-E")    "shell-command-output")
     (dk m (kbd "s-f")    *frequent-map*)
-    (dk m (kbd "s-F")    "forget")
+    (dk m (kbd "s-F")    *win-frame-map*)
     (dk m (kbd "s-g")    "vgroups")
     (dk m (kbd "s-G")    "grouplist")
     (dk m (kbd "s-h")    "move-focus left")
@@ -218,8 +245,6 @@
     (dk m (kbd "s-C-h")  "exchange-direction left")
     (dk m (kbd "s-M-h")  "exchange-direction-remain left")
     (dk m (kbd "s-i")    "iresize")
-    (dk m (kbd "s-I")    "fselect")
-    (dk m (kbd "s-M-i")  "ratrelwarp 0 -7")
     (dk m (kbd "s-j")    "move-focus down")
     (dk m (kbd "s-J")    "move-window down")
     (dk m (kbd "s-C-j")  "exchange-direction down")
@@ -239,30 +264,21 @@
     (dk m (kbd "s-N")    "pull-hidden-next")
     (dk m (kbd "s-o")    "fullscreen") 
     (dk m (kbd "s-O")    "only") 
-    (dk m (kbd "s-M-o")  "ratrelwarp 7 0")
     (dk m (kbd "s-p")    "prev-in-frame")
     (dk m (kbd "s-P")    "pull-hidden-previous")
-    (dk m (kbd "s-M-p")  "exec xdotool mousedown 1 ; xdotool mouseup 1")
-    (dk m (kbd "s-Q")    "rem-quit")
-    (dk m (kbd "s-r")    "rem-loadrc")
-    (dk m (kbd "s-R")    "rem-restart")
-    (dk m (kbd "s-s")    *mplayer-daemon-map2*)
-    (dk m (kbd "s-S")    *xclip-map*)
+    (dk m (kbd "s-Q")    "quit")
+    (dk m (kbd "s-r")    "loadrc")
+    (dk m (kbd "s-R")    "restart")
+    (dk m (kbd "s-s")    *mplayer-map2*)
     (dk m (kbd "s-t")    *toggles-map*)
     (dk m (kbd "s-T")    "title")
     (dk m (kbd "s-u")    "undo")
-    (dk m (kbd "s-U")    "repack-window-numbers")
-    (dk m (kbd "s-M-u")  "ratrelwarp 0 7")
     (dk m (kbd "s-v")    "show-window-properties")
     (dk m (kbd "s-V")    "list-window-properties")
     (dk m (kbd "s-w")    "echo-frame-windows")
     (dk m (kbd "s-W")    "windowlist")
-    (dk m (kbd "s-x")    "putsel")
-    (dk m (kbd "s-X")    "copy-last-message")
-    (dk m (kbd "s-C-x")  "getsel")
-    (dk m (kbd "s-y")    "meta")
-    (dk m (kbd "s-Y")    "window-send-string")
-    (dk m (kbd "s-M-y")  "ratrelwarp -7 0")
+    (dk m (kbd "s-x")    *xsel-map*)
+    (dk m (kbd "s-y")    "fselect")
     (dk m (kbd "s-z")    "remove-split")
     ;; <function-key bindings>
     (dk m (kbd "XF86AudioMute")         "echo-oss-volmute")
@@ -287,7 +303,7 @@
     (dk m (kbd "F6")     "restore-from-file /home/milo/.config/stumpwm/storage/group_6")
     (dk m (kbd "F7")     "restore-window-placement-rules /home/milo/.config/stumpwm/storage/placement_rules")
     (dk m (kbd "F9")     "restore-from-file /home/milo/.config/stumpwm/storage/screen_data")
-    (dk m (kbd "F10")    "restore-from-file /home/milo/.config/stumpwm/storage/screen_data_last")
+    (dk m (kbd "F10")    "restore-from-file /home/milo/.config/stumpwm/storage/desktop_data")
     (dk m (kbd "s-quoteleft") "abort")
    ; (dk m (kbd "s-quoteleft") "scratchpad")
    M)))

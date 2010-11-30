@@ -4,9 +4,9 @@
 
 ;; show local windows in frame when focusing on it. unfortunately the echo
 ;; command is cropped when focused frame overlaps part of it's output.
-;(defun local-list (to-frame from-frame)
-;  (stumpwm:run-commands "echo-frame-windows"))
-;(replace-hook *focus-frame-hook* 'local-list)
+;(defun local-list (from-frame to-frame)
+;  (run-commands "echo-frame-windows"))
+;(add-hook *focus-frame-hook* 'local-list)
 
 ;; display the keysequence in progress
 ;(defun key-press-hook (key key-seq cmd)

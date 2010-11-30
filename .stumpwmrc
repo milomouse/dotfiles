@@ -2,7 +2,7 @@
 ;; ${HOME}/.stumpwmrc                                                       ;;
 ;;--------------------------------------------------------------------------;;
 ;; author: milomouse <vincent[at]fea.st>                                    ;;
-;; update: 2010-11-28 20:42:46                                              ;;
+;; update: 2010-11-29 11:21:09                                              ;;
 ;;--------------------------------------------------------------------------;;
 ;; versions used atoc:                                                      ;;
 ;; |  sbcl              -> 1.0.43-1                                         ;;
@@ -30,8 +30,12 @@
 
 (in-package :stumpwm)
 (clear-window-placement-rules)
-(setf *data-dir* "/home/milo/.config/stumpwm/storage/")
-(defcommand run-shell-command (cmd &optional collect-output-p) ((:shell "execute: "))
+(setf *data-dir*
+  (make-pathname :directory '(:relative ".config" "stumpwm" "storage")))
+
+;; redefine run-shell-command for 'zsh', change :shell "", and fix a typo.
+(defcommand run-shell-command (cmd &optional collect-output-p)
+  ((:shell "execute: "))
   "Run the specified shell command. If @var{collect-output-p} is @code{T}
 then run the command synchronously and collect the output."
   (if collect-output-p
@@ -40,10 +44,20 @@ then run the command synchronously and collect the output."
 (setf *shell-program* "/bin/zsh")
 (defcommand-alias exec run-shell-command)
 
-;; function pre-variables
-(defvar *background-image-path* "/home/milo/foto/wall/")
+;; define a background-image-path for random image setting function.
+;; (will soon change this to accept optional sub-dir for situations where user
+;; wants to use 'work' or 'family' wallpapers instead)
+(defvar *background-image-path*
+  (merge-pathnames
+    (make-pathname :directory '(:relative "foto" "wall"))
+    *default-pathname-defaults*))
 
-;; gravity
+;; set undo directory to store each group undo state. still a work in progress
+;; as far as the function goes, currently only undos as a bulk screen process.
+;; (will soon change this to undo on a per group basis)
+(defvar *undo-data-dir* (make-pathname :directory "/dev/shm/.1000"))
+
+;; gravities.
 (setf *mouse-focus-policy* :click
       *window-border-style* :thin
       *message-window-gravity* :top-right
@@ -52,7 +66,7 @@ then run the command synchronously and collect the output."
 (set-maxsize-gravity :center)
 (set-transient-gravity :bottom)
 
-;; borders
+;; borders.
 (setf *resize-hides-windows* T
       *normal-border-width* 2
       *maxsize-border-width* 2
@@ -61,7 +75,7 @@ then run the command synchronously and collect the output."
       *float-window-title-height* 1)
 (set-msg-border-width 1)
 
-;; fonts/colors
+;; fonts/colors.
 (set-font "-*-fixed-medium-r-normal-*-10-*-*-*-*-*-*-*")
 (set-fg-color        "grey64")
 (set-bg-color        "grey14")
@@ -69,16 +83,16 @@ then run the command synchronously and collect the output."
 (set-unfocus-color   "grey16")
 (set-border-color    "grey44")
 (set-win-bg-color    "grey4")
-(setf *colors* (list "grey9" ; 0 black
+(setf *colors* (list "grey9"          ; 0 black
                      "palevioletred1" ; 1 red
-                     "lightblue3" ; 2 green
-                     "bisque3" ; 3 yellow
-                     "steelblue3" ; 4 blue
-                     "slateblue1" ; 5 magenta
-                     "aquamarine4" ; 6 cyan
-                     "honeydew4" ; 7 white
-                     "thistle4" ; 8 user
-                     "lightskyblue4")) ; 9 user
+                     "lightblue3"     ; 2 green
+                     "bisque3"        ; 3 yellow
+                     "steelblue3"     ; 4 blue
+                     "slateblue1"     ; 5 magenta
+                     "aquamarine4"    ; 6 cyan
+                     "honeydew4"      ; 7 white
+                     "thistle4"       ; 8 user
+                     "lightskyblue4")); 9 user
 (defun fmt-group-status (group)
   (let ((screen (group-screen group)))
     (cond ((eq group (screen-current-group screen))
@@ -89,17 +103,18 @@ then run the command synchronously and collect the output."
           (t #\-))))
 (update-color-map (current-screen))
 
-;; text formatting (no mode-line)
-(setf *time-day-names* #("Mon" "Tue" "Wed" "Thu" "Fri" "Sat" "Sun")
-      *time-format-string-default* "^B^2*%T^9* %Y-%m-%d^**/^8*%A^n"
+;; text formatting (no mode-line). shorten time-day-names, etc.
+(setf *startup-message*
+       "^B^1*together we ate the king^n:^B^5*and laughed ourselves to death^n"
       *screen-mode-line-format* nil
-      *startup-message* "^B^1*together we ate the king^**^b:^B^5*and laughed ourselves to death^n"
+      *time-day-names* #("Mon" "Tue" "Wed" "Thu" "Fri" "Sat" "Sun")
+      *time-format-string-default* "^B^2*%T^9* %Y-%m-%d^**/^8*%A^n"
       *group-format*    "^B^0*%t^7*%s^07|^n"
       *window-format*   "^B^87%s^9*%m^0*%16t^n"
       *timeout-wait* 6
       *debug-level* 10)
 
-;; windows/frames
+;; windows/frames. use more intuitive frame-numbers (with 'fselect' <s-y>).
 (setf *default-window-name* "null"
       *normal-gravity* :top-right
       *maxsize-gravity* :top-right
@@ -107,10 +122,10 @@ then run the command synchronously and collect the output."
       *new-frame-action* :empty
       *min-frame-width* 100
       *min-frame-height* 50
-      *resize-increment* 10)
-;;      *frame-number-map* "jkluio789")
+      *resize-increment* 10
+      *frame-number-map* "yhjukilop")
 
-;; mode-line/input
+;; mode-line/input.
 (setf *mode-line-background-color* "grey13"
       *mode-line-border-color* "grey25"
       *mode-line-foreground-color* "azure4"
@@ -121,14 +136,19 @@ then run the command synchronously and collect the output."
       *mode-line-position* :top
       *input-history-ignore-duplicates* 0)
 
-;; load external settings' file/s
+;; load external settings files. these are the bulk of setup/optimizations.
 (loop for file in '("functions" "macros" "commands" "hooks" "key-maps")
-      do (load (make-pathname :name file :type "lisp" :directory
-      '(:relative ".config" "stumpwm"))))
+      do (load (make-pathname :name file :type "lisp"
+      :directory '(:relative ".config" "stumpwm"))))
 
+;; set first group as 1, then create every other group in background.
 (setf (group-name (first (screen-groups (current-screen)))) "1")
 (make-groups-bg "2" "3" "4" "5" "6")
-(restore-from-file (data-dir-file "screen_data_last"))
+
+;; restore data from previous exit (state StumpWM was last using).
+(restore-from-file (data-dir-file "desktop_data"))
 (restore-window-placement-rules (data-dir-file "placement_rules"))
+
+;; display a random background image on root window.
 ;(display-random-bg)
 

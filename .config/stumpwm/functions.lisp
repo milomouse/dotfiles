@@ -9,12 +9,49 @@
     (when (and next win) (move-window-to-group win next))))
 
 ;; exchange windows but focus remains on current frame.
+;; (this is unlike exchange-windows where focus follows new frame)
 (defun exchange-windows-remain (win1 win2)
   (let ((f1 (window-frame win1))
         (f2 (window-frame win2)))
     (unless (eq f1 f2)
       (pull-window win1 f2)
       (pull-window win2 f1))))
+
+;; dump screen information to file so a previous state can be reapplied later.
+;; (will change this later to accomodate (current-group) instead of screen)
+(defun remember-undo () ()
+  (if (ensure-directories-exist *undo-data-dir*)
+    (dump-screen-to-file
+      (make-pathname :name "undo" :type "lisp" :defaults *undo-data-dir*))))
+
+;; same as 'remember-undo' except all information is dumped for next startup.
+(defun remember-all () ()
+  (dump-window-placement-rules (data-dir-file "placement_rules"))
+  (dump-desktop-to-file (data-dir-file "desktop_data")))
+
+;; select a random image from *background-image-path* and display it on root window.
+;; i had to rewrite this from original to check for errors, have optional sub-dirs,
+;; have optional file types, and be able to use non-type(?) dirs (from merges, etc).
+(defun select-random-bg-image ()
+  (ensure-directories-exist *background-image-path*)
+  (let ((file-list (directory (make-pathname :defaults *background-image-path*
+          :name :wild :type :wild :case :common)))
+        (*random-state* (make-random-state t)))
+    (namestring (nth (random (length file-list)) file-list))))
+
+;; display key-bindings for a given map. ends with proper error color parsing and a prettier format.
+(defun print-key-seq (seq) (format nil "^B^9*~{~a~^ ~}^n^1*" (mapcar 'print-key seq)))
+(defun display-bindings-for-keymaps (key-seq &rest keymaps)
+  (let* ((screen (current-screen))
+         (data (mapcan (lambda (map)
+                         (mapcar (lambda (b) (format nil "^B^5*~5a^n ~a" (print-key (binding-key b)) (binding-command b))) (kmap-bindings map)))
+                       keymaps))
+         (cols (ceiling (1+ (length data))
+                        (truncate (- (head-height (current-head)) (* 2 (screen-msg-border-width screen)))
+                                  (font-height (screen-font screen))))))
+    (message-no-timeout "Prefix: ~a~%~{~a~^~%~}"
+                        (print-key-seq key-seq)
+                        (columnize data cols))))
 
 ;; focus frame [also when splitting] but do not show-frame-indicator in some cases.
 (defun focus-frame (group f)
@@ -36,14 +73,8 @@
           (update-decoration (frame-window f)))
         (message "Canot split smaller than minimum size."))))
 
-;; select a random image from *background-image-path* and display it on root window.
-(defun select-random-bg-image ()
-  (let ((file-list (directory (concatenate 'string *background-image-path* "*.png")))
-        (*random-state* (make-random-state t)))
-    (namestring (nth (random (length file-list)) file-list))))
-
-;; run a shell command.
-(defun shell-command (command)
+;; run a shell command and display results (may hang if used wrong)
+(defun run-shell-command-output (command)
   (check-type command string)
   (echo-string (current-screen) (run-shell-command command t)))
 
@@ -61,12 +92,6 @@
 ;          (concatenate 'string dir path)
 ;          (expand-file-name (concatenate 'string dir path))))
 ;        (t (concatenate 'string home-dir path)))))
-
-;; to ease repetition in commands.
-(defun remember-undo () () (dump-screen-to-file "/dev/shm/.stumpwm_undo_data"))
-(defun remember-last () ()
-  (dump-window-placement-rules "/home/milo/.config/stumpwm/storage/placement_rules")
-  (dump-screen-to-file "/home/milo/.config/stumpwm/storage/screen_data_last"))
 
 ;; use prettier eval error and skip mode-line updates (since i don't use it)
 (defun eval-command (cmd &optional interactivep)
@@ -117,15 +142,6 @@
                 (eq group (second (screen-groups screen))))
            #\+)
           (t #\-))))
-
-(defvar *surfraw-bookmark-file* nil)
-(defun display-file (file)
-  (if (probe-file file)
-      (run-shell-command (concatenate 'string "cat " file) t)
-    (message "The file ~a does not exist." file)))
-;(defmacro surfraw-selection (name engine)
-;  `(defcommand ,name () ()
-;    (surfraw ,engine (get-x-selection))))
 
 ;(defstruct scratchpad
 ;  (last-group '())

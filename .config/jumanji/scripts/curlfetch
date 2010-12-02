@@ -1,0 +1,88 @@
+#!/bin/zsh
+# author: milomouse <vincent[at]fea.st>
+# detail: simple download parser (useful with Jumanji, Luakit, etc.)
+# todo: use curl, lol. probably not though.. wget is just too full featured.
+unsetopt nomatch functionargzero
+
+## FILES
+cookies="${XDG_CONFIG_DIR:-${HOME}/.config}/jumanji/cookies"
+downlog="${XDG_CONFIG_DIR:-${HOME}/.config}/jumanji/download.log"
+
+## DIRECTORIES
+basedir="${XDG_DOWNLOAD_DIR:-${HOME}/down}"
+bd_image="$basedir/foto" # image files # (png, jpg, bmp, tiff..)
+bd_video="$basedir/vide/fire" # video files # (mkv, ogv, mp4, wmv..)
+bd_audio="$basedir/muzk" # audio files # (mp3, ogg, m4a, flac..)
+bd_texts="$basedir/docs" # document(s) # (txt, pdf, ps, rtf..)
+bd_packs="$basedir/pkgs" # archive/iso # (tar, zip, iso, img..)
+bd_undef="$basedir" # everything else # (undefined types/webpages)
+
+## CODE <do not edit below line unless you know what you're doing> {{{
+
+# Check variables.
+[[ ${+cookies} == 0 || ${+downlog} == 0 ]] && _error=true
+[[ ${+_error} == 1 ]] && { print "variables must be set \
+(cookies: ${${${+cookies}/0/unset}/1/set}) \
+(downlog: ${${${+downlog}/0/unset}/1/set})" && exit 1 }
+[[ ! -f ${cookies} ]] && { touch ${cookies} || exit 1 }
+
+# Per folder/option file types (according to personal preference).
+if [[ -n "$1" ]]; then
+  case $1:l:t:e {
+    # [useful] image files:
+    bmp|exif|gif*|jpg*|jpeg*|png*|tiff|svg*)
+      OPTION=(--progress=dot:default --no-clobber --no-directories --max-redirect=5 \
+      --directory-prefix=${bd_image})
+    ;;
+    # [useful] video +related files:
+    26[3-4]|3gp|3ivx|aaf|asf|avc|avi|cam|dvx|divx|h26[3-4]|hdmov|m[1-2]v|m4v|m4p|\
+    mkv|mov|moov|movie|mp4|mp4v|mpg|mpg2|mpeg|mpegpes|mpeg4|nut|ogm|ogv|ogx|vob|qt|\
+    qtm|x26[3-4]|xvid|vob|wmv|yuv|yuv4mpeg|vdpau|vivo|ifo|sbt|srt|idx|btn|usf|drc|\
+    f4v|fli|flv|real|rm|rmd|rmp|rms|rmvb|roq|swf|m2p|mpv|mpv2|rts|rv|ts|webm|ra|\
+    mks|webmv|rv|ram|ass|ssa|ivf|vp8|sup)
+      OPTION=(--progress=dot:mega --continue --no-directories --limit-rate=60k \
+      --max-redirect=5 --directory-prefix=${bd_video})
+    ;;
+    # [useful] audio files:
+    a52|aac|ac3|aifc|aiff|flac|m4a|midi|mp3|ogg|pcm|raw|wav|wma|mka|webma|tta|\
+    dts|dtshd|dts-hd)
+      OPTION=(--progress=dot:binary --continue --no-directories --max-redirect=5 \
+      --directory-prefix=${bd_audio})
+    ;;
+    # [useful] document files:
+    doc|docx|nfo|obt|pdf|readme|rtf|txt)
+      OPTION=(--progress=dot:default --no-clobber --no-directories --max-redirect=3 \
+      --directory-prefix=${bd_texts})
+    ;;
+    # [useful] archive/package file:
+    7z|ace|bz|bz2|bzip|bzip2|deb|gz|gzi|gzip|jgz|lz|lzm|lzma|lzo|r0|\
+    r[0-9][0-9]|r[0-9][0-9][0-9]|rar|rpm|sfs|sh|shr|tar|taz|tbz|tbz2|\
+    tg|tgz|tlz|tlzma|txz|tz|xpi|xz|z|z[0-9]|z[0-9][0-9]|zi|zip|zipx|\
+    zix|zl|zpi|zz|ark|car|cbr|cbt|dar|p7m|pkg|s[0-9]|s[0-9][0-9]|s[0-9][0-9][0-9]|\
+    [0-9]|[0-9][0-9]|[0-9][0-9][0-9]|a00|a[0-9][0-9]|\
+    aa|bin|cdr|cfs|cif|cue|dao|img|iso|isz|mbi|md[0-9]|partimg|tao)
+      OPTION=(--progress=dot:mega --continue --no-directories --limit-rate=60k \
+      --max-redirect=5 --directory-prefix=${bd_packs})
+    ;;
+    # undefined (everything else):
+    *)
+      OPTION=(--progress=dot:default --no-clobber -e robots=off --ignore-length \
+      --max-redirect=10 --recursive --level=1 --page-requisites --convert-links \
+      --random-wait --html-extension --adjust-extension --no-parent --ignore-case \
+      --accept "css,*htm*,gif,jpg,jpeg,js,png" --directory-prefix=${bd_undef})
+    ;;
+  }
+  until [[ -z $(pidof -o %PPID \
+  $(wget --background --verbose --server-response --append-output=${downlog} \
+  --load-cookies ${cookies} --user-agent="Mozilla/5.0" --content-disposition \
+  --prefer-family=IPv4 --secure-protocol=auto --retry-connrefused --tries=10 \
+  ${OPTION} "$1")) ]] { sleep 1 }
+
+  print "Download has finished or connection timeout ($1)"
+else
+  print nothing specified
+fi
+
+# end of CODE }}}
+
+# EOF

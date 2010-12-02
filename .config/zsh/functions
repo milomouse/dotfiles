@@ -114,13 +114,13 @@ function timer() {
 
 # native function for showing 256 colors, properly formatted:
 function 256co() {
-  if [[ ${TERM} != linux ]]; then
+#  if [[ ${TERM} != linux ]]; then
   for line in {0..15}; do for col in {0..15}; do
       local code=$(( $col * 16 + ${line} ))
       printf $'\e[38;05;%dm %03d' ${code} ${code}
     done
   print ; done
-  fi
+#  fi
 }
 
 # quick un-smart function to prepend file:// to local requests:
@@ -183,7 +183,7 @@ function curlgot() {
 
 # one-liners/micro functions:
 function rc() {[[ -n $1 ]] && sudo /etc/rc.d/$1 ${@:/$1}}
-function alv() {<${${$(ls ${HOME}/othe/archive/installed_*)}[-${1:-1}]}|${PAGER}}
+function alv() {<${${$(command ls -r ${HOME}/othe/archive/installed_*)}[${1:-1}]}|${PAGER}}
 function mkcd() {mkdir -p "$@" && cd "$@"}
 function pubip() {curl http://whatismyip.org/ 2>/dev/null}
 function qdep() {pacman-color -Q $@ $(pacman-color -Qi $@|grep Depends|cut -d: -f2-|sed -E 's|>\S+\>||g')}

@@ -1,5 +1,5 @@
 # file management:
-alias ls="/bin/ls -h -u --file-type --time-style='+%m-%d-%y %H%M%S' --color=auto --group-directories-first"
+alias ls="/bin/ls -h --file-type --time-style='+%m-%d-%y %H%M%S' --color=auto --group-directories-first"
 alias lss="ls -- *(D.om)"
 alias la="ls -A"              ; alias laa="ls -A *(D.om)"
 alias lb="ls -Ssr"            ; alias lbb="lb -- *(D.om)"
@@ -38,7 +38,6 @@ alias tmux="tmux -f ${XDG_CONFIG_DIR:-${HOME}/.config}/tmux/tmux.conf"
 alias mutt="mutt -F ${XDG_CONFIG_DIR:-${HOME}/.config}/mutt/muttrc"
 alias xskat="xskat -opt ${XDG_CONFIG_DIR:-${HOME}/.config}/xorg/xskat.opt -list ${XDG_CONFIG_DIR:-$HOME/.config}/xorg/xskat.lst"
 alias offlineimap="/usr/bin/offlineimap -c ${XDG_CONFIG_DIR:-${HOME}/.config}/offlineimap/offlineimaprc"
-alias xsel='command xsel --logfile /dev/shm/xsel.log'
 alias {rot,rtorrent}='/usr/bin/rtorrent -o http_capath=/etc/ssl/certs'
 alias startx="command startx ${XDG_CONFIG_DIR:-${HOME}/.config}/xorg/xinitrc -- -dpi 120 -nolisten tcp nologo -once -retro"
 

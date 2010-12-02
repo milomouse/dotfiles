@@ -37,20 +37,11 @@
 ;  (3    t     t     :instance "qjackctl" :role "qjackctlMainForm"))
 
 (define-frame-preference "3"
-;  (0    nil   t     :instance "Navigator")
-;  (1    t     t     :title "Add-ons")
-;  (1    t     t     :title "Downloads")
   (1    t     t     :instance "Dialog")
   (0    nil   t     :class "luakit")
   (0    nil   t     :class "Jumanji")
   (3    t     nil   :class "URxvt"))
 
-;(define-frame-preference "4"
-;  (0    t     t     :create "group_4"))
-
-;(define-frame-preference "5"
-;  (0    t     t     :create "group_5"))
-
 (define-frame-preference "6"
-  (0    t     t     :instance "ossxmix"))
+  (0    t     t     :class "Ossxmix"))
 

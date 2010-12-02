@@ -67,9 +67,7 @@ window with Master and designate this as the new Master."
 ;; remember layout before reloading/restarting/quitting, also clean log file after clean exit.
 ;; reassign original commands to *-forget
 (defcommand quit-forget () () "Quit StumpWM without remembering current state."
-  (with-open-file (stream (data-dir-file "log" "lisp")
-      :direction :IO
-      :if-exists :SUPERSEDE))
+  (with-open-file (stream *debug-file* :direction :io :if-exists :supersede))
   (throw :top-level :quit))
 
 (defcommand restart-soft-forget () () "Soft Restart StumpWM without remembering current state.

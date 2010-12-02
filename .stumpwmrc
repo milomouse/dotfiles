@@ -2,7 +2,7 @@
 ;; ${HOME}/.stumpwmrc                                                       ;;
 ;;--------------------------------------------------------------------------;;
 ;; author: milomouse <vincent[at]fea.st>                                    ;;
-;; update: 2010-11-29 11:21:09                                              ;;
+;; update: 2010-12-02 06:35:34                                              ;;
 ;;--------------------------------------------------------------------------;;
 ;; versions used atoc:                                                      ;;
 ;; |  sbcl              -> 1.0.43-1                                         ;;
@@ -29,9 +29,26 @@
 ;;--------------------------------------------------------------------------;;
 
 (in-package :stumpwm)
-(clear-window-placement-rules)
-(setf *data-dir*
-  (make-pathname :directory '(:relative ".config" "stumpwm" "storage")))
+
+;; set data-dir for storing debug-file, group and placement dumps, etc.
+(setf *data-dir* (make-pathname :directory
+                 '(:relative ".config" "stumpwm" "storage"))
+      *debug-level* 1)
+
+;; setup a quick function for redirecting debug information directly to file.
+;; (didn't want to use (redirect-all-output) as that's not what i want..)
+;; (prefer internal handling as opposed to redirecting via exec $ >>! file)
+(defvar *debug-restream* nil)
+(defun redirect-debug (file) "Redirect *debug-stream* directly to a file."
+  (when (typep *debug-restream* 'file-stream)
+    (close *debug-restream*))
+  (setf *debug-restream* (open file :direction :output :if-exists :append
+                         :if-does-not-exist :create)
+        *debug-stream* *debug-restream*))
+
+;; setup debug-file variable for referencing (e.g. quitting) purposes.
+(defvar *debug-file* (data-dir-file "log" "lisp"))
+(redirect-debug *debug-file*)
 
 ;; redefine run-shell-command for 'zsh', change :shell "", and fix a typo.
 (defcommand run-shell-command (cmd &optional collect-output-p)
@@ -111,8 +128,7 @@ then run the command synchronously and collect the output."
       *time-format-string-default* "^B^2*%T^9* %Y-%m-%d^**/^8*%A^n"
       *group-format*    "^B^0*%t^7*%s^07|^n"
       *window-format*   "^B^87%s^9*%m^0*%16t^n"
-      *timeout-wait* 6
-      *debug-level* 10)
+      *timeout-wait* 6)
 
 ;; windows/frames. use more intuitive frame-numbers (with 'fselect' <s-y>).
 (setf *default-window-name* "null"
@@ -120,9 +136,9 @@ then run the command synchronously and collect the output."
       *maxsize-gravity* :top-right
       *transient-gravity* :center
       *new-frame-action* :empty
-      *min-frame-width* 100
+      *min-frame-width* 50
       *min-frame-height* 50
-      *resize-increment* 10
+      *resize-increment* 5
       *frame-number-map* "yhjukilop")
 
 ;; mode-line/input.
@@ -146,6 +162,7 @@ then run the command synchronously and collect the output."
 (make-groups-bg "2" "3" "4" "5" "6")
 
 ;; restore data from previous exit (state StumpWM was last using).
+(clear-window-placement-rules)
 (restore-from-file (data-dir-file "desktop_data"))
 (restore-window-placement-rules (data-dir-file "placement_rules"))
 

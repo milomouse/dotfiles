@@ -1,5 +1,5 @@
 # global settings:
-lavdopts=threads=2
+lavdopts=threads=4
 prefer-ipv4=yes
 monitoraspect=16:9
 subfont-osd-scale=3
@@ -12,11 +12,11 @@ nokeepaspect=1
 
 # profiles:
 [vo.fbdev]
-vf=scale=1366:768
+vf=scale=1600:900
 
 [protocol.dvd]
 profile-desc="profile for dvd:// streams"
-alang=en
+#alang=en
 spuaa=4
 
 [protocol.dvdnav]

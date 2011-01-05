@@ -1,0 +1,6 @@
+(require 'asdf)
+(require 'asdf-install)
+(pushnew #p"/usr/share/common-lisp/systems/" asdf:*central-registry* :test #'equal)
+(asdf:operate 'asdf:load-op 'clx)
+(push #p"/usr/share/common-lisp/systems/" asdf:*central-registry*)
+(asdf:operate 'asdf:load-op 'cl-ppcre)

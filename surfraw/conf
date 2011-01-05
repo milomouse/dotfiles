@@ -1,0 +1,89 @@
+# Surfraw -- Shell Users' Revolutionary Front Against the World wide web
+#
+# $Id$
+#
+# (c) 2000-2001 Julian Assange, all rights reserved.
+# (c) 2001 Australian Institute for Collaborative Research, all rights reserved.
+# (c) 2000 Melbourne Institute for Advanced Study, all rights reserved.
+#
+# see the file COPYING for further copyright details
+#
+# this file is shell script
+#
+# defintion commands:
+#
+#   def    -- define configuration variable unless already defined
+#             (i.e by the environment)
+#   defyn  -- define boolean configuration variable unless
+#	      already defined
+#
+# WARNING: This file has a different format to that of $HOME/.surfraw.conf!
+# $HOME/.surfraw.conf entries should always be written sh style:
+#
+# 	SURFRAW_text_browser=w3m
+# etc
+
+# autoconf guessed prefix
+prefix=/usr
+
+# graphical browser? defaults to yes for meatminds. text browser users can
+# work it out how to change it.
+defyn   SURFRAW_graphical		yes
+
+# name/path of text browser executable
+# e.g links, lynx, w3m
+def   SURFRAW_text_browser	w3m
+
+# name/path of browser executable
+# e.g mozilla, netscape etc
+def   SURFRAW_graphical_browser jumanji
+
+# text browser arguments, or "none"
+def   SURFRAW_text_browser_args	none
+
+# graphical browser arguments, or "none"
+#def   SURFRAW_graphical_browser_args -remote "openURL(%s, new-tab)"
+def   SURFRAW_graphical_browser_args none
+
+# use -remote openURL for graphical browser
+defyn   SURFRAW_graphical_remote	no
+
+# when using the -remote, open a new window?
+defyn   SURFRAW_new_window	no
+
+# name of screen command to run
+def   SURFRAW_screen  tmux
+
+# If surfraw is running under screen(1), start a new screen
+# for each text browser invocation?
+defyn SURFRAW_new_screen	no
+
+# I can't enjoy it with you talking all the time
+defyn SURFRAW_quiet		no
+
+# "quote" arguments
+defyn SURFRAW_quote_args	no
+
+# requote arguments if they have spaces in
+# ie so:
+#  sr google foo "bar baz" bam
+# works.
+defyn SURFRAW_quote_ifs    yes
+
+# default number of results to return
+def   SURFRAW_results		30
+
+# escape [% "@$%&+,/:;<=>?@@[\^{|}~'] characters in command line arguments
+# subsequently used to construct a url
+defyn SURFRAW_escape_url_args	yes
+
+# just print search url?
+defyn SURFRAW_print             no
+
+# Fetch and dump url?
+defyn SURFRAW_dump		no
+
+# Language/country (for elvi that support it)
+# Should be a 2-letter iso country code
+def SURFRAW_lang     	  	""
+

@@ -1,0 +1,155 @@
+body {
+    background-color: #3f3f3f !important;
+    bgcolor: #3f3f3f !important;
+    background: #3f3f3f !important;
+    border: solid #3f3f3f !important;
+    color: #bbbbbb !important;
+    font:"DejaVu Sans" !important ;
+    font-family:"DejaVu Sans", sans-serif !important ;
+    font-family:"DejaVu Sans", serif !important ;
+    font-family:"DejaVu Sans", monospace !important ;
+    font-size:13px;
+ 
+}
+ 
+pre
+{
+   font-family:"DejaVu Sans Mono", monospace !important ;
+   font-size:13px;
+}
+ 
+p {
+    color: #bbbbbb !important;
+    background-color: #3f3f3f !important;
+    border: 0px;
+}
+ 
+h1,h2,h3,h4,h5,h6 {
+    color: #B8DDEA !important;
+    background-color: #3f3f3f !important;
+}
+ 
+a:link {
+    color: #B8DDEA !important;
+    background-color: #3f3f3f !important;
+    text-decoration: none !important;
+    outline: none;
+}
+ 
+a:active {
+    color: #CC896D !important;
+    background-color: #3f3f3f !important;
+    text-decoration: none !important;
+    outline: none;
+}
+ 
+a:hover {
+    color: #CC896D !important;
+    background-color: #3f3f3f !important;
+    text-decoration: none !important;
+    outline: none;
+}
+ 
+a:visited {
+    color: #CC896D !important;
+    background-color: #3f3f3f !important;
+    text-decoration: none !important;
+    outline: none;
+}
+ 
+input {
+    background-color: #3f3f3f !important;
+    border: 1px solid #bbbbbb !important;
+    outline: none !important;
+    color: #bbbbbb !important;
+}
+ 
+input:hover {
+    background-color: #353535 !important;
+    border: 1px solid #bbbbbb !important;
+    outline: none;
+    color: #bbbbbb;
+}
+ 
+img {
+    border-color: 0px solid #3f3f3f !important;
+}
+ 
+textarea {
+    background-color: #3f3f3f;
+    border: 1px solid #bbbbbb;
+    outline: none;
+    color: #bbbbbb;
+}
+ 
+td {
+    background-color: #3f3f3f !important;
+    border: 0px solid #bbbbbb !important;
+    color: #bbbbbb !important;
+}
+ 
+tr {
+    background-color: #3f3f3f !important;
+    border: 0px solid #bbbbbb !important;
+    color: #bbbbbb !important;
+}
+ 
+dl {
+    background-color: #3f3f3f !important;
+    border: 0px;
+    color: #bbbbbb !important;
+}
+dd {
+    background-color: #3f3f3f !important;
+    border: 0px #bbbbbb !important;
+    color: #bbbbbb !important;
+}
+ 
+th {
+    background-color: #3f3f3f !important;
+    border: 0px solid #bbbbbb !important;
+    color: #bbbbbb !important;
+}
+ 
+li {
+    background-color: #3f3f3f !important;
+    border: 0px;
+    color: #bbbbbb !important;
+}
+ 
+ul {
+    background-color: #3f3f3f !important;
+    border: 0px;
+    color: #bbbbbb !important;
+}
+ 
+ol {
+    background-color: #3f3f3f !important;
+    border: 0px;
+    color: #bbbbbb !important;
+}
+ 
+blockquote {
+    background-color: #505050 !important;
+    color: #bbbbbb;
+    border: 0px !important;
+}
+ 
+.box {
+    border: 0px !important;
+}
+ 
+div.postright, div.postfootright, div.box {
+    border-left-color: #3f3f3f !important;
+}
+ 
+div {
+    background-color: #3f3f3f !important;
+    color: #bbbbbb !important;
+    border: 1px solid #3f3f3f; !important
+}
+ 
+div.incqbox, div.codebox,div.scrollbox {
+    background-color: #505050 !important;
+    border: 0px !important;
+}

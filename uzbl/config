@@ -1,0 +1,193 @@
+## ~/.config/uzbl/config
+## milomouse <vincent[at]fea.st>
+## NOTE: most of this config and my scripts require ratpoison.
+
+# - core settings - 
+set prefix          = /usr
+set shell_cmd       = zsh -c
+set bind            = request BIND
+set mode_bind       = request MODE_BIND
+set mode_config     = request MODE_CONFIG
+set on_event        = request ON_EVENT
+set modmap          = request MODMAP
+set ignore_key      = request IGNORE_KEY
+set modkey_addition = request MODKEY_ADDITION
+set toggle_modes    = event TOGGLE_MODES
+set set_mode        = set mode =
+set set_status      = set status_message =
+set scripts_dir     = $XDG_DATA_HOME/uzbl/scripts
+#set sylesheet_uri   = $XDG_DATA_HOME/uzbl/pastel.css
+set ibind           = @mode_bind insert
+set cbind           = @mode_bind command
+set ebind           = @mode_bind global,-insert
+
+# - added functionality settings - 
+set useragent  = Uzbl (Webkit @WEBKIT_MAJOR.@WEBKIT_MINOR.@WEBKIT_MICRO) (@(+uname -o)@ @(+uname -m)@ [@ARCH_UZBL]) (Commit @COMMIT)
+set fifo_dir   = $XDG_CACHE_HOME/uzbl
+set socket_dir = $XDG_CACHE_HOME/uzbl
+set uri        = http://bbs.archlinux.org/search.php?action=show_new
+
+# - disable/enable certain settings despite changes in upstream configuration - 
+set status_format        = <span font_family="fixed" font_size="0">@mode_section @keycmd_section @uri_section @selected_section @name_section @status_section @scroll_section </span>
+set title_format_short   = \@TITLE
+set title_format_long    = [Uzbl] \@TITLE
+set show_status          = 0
+set status_top           = 1
+set scrollbars_visible   = 0
+set enforce_96_dpi       = 0
+set resizable_text_areas = 0
+set enable_spellcheck    = 1
+set autoload_images      = 1
+set autoshrink_images    = 1
+set caret_browsing       = 0
+set disable_plugins      = 0
+set print_events         = 0
+set http_debug           = 0
+set verbose              = 0
+
+# - core handlers/events -
+set cookie_handler         = talk_to_socket $XDG_CACHE_HOME/uzbl/cookie_daemon_socket
+set scheme_handler         = sync_spawn @scripts_dir/scheme.py
+set authentication_handler = sync_spawn @scripts_dir/auth.py
+@on_event DOWNLOAD_REQUEST   spawn @scripts_dir/download_handler %s \@proxy_url
+@on_event LOAD_COMMIT        @set_mode
+@on_event LOAD_COMMIT        script @scripts_dir/dark_input.js
+@on_event LOAD_FINISH        spawn @scripts_dir/history_insert
+@on_event NEW_WINDOW         sh 'uzbl-browser -u $8' %r
+@on_event ESCAPE             sh 'expr "set show_status = 0" > $4'
+@on_event ESCAPE             @set_mode
+@on_event ESCAPE             js var elements = doc.getElementById('uzbl_link_hint_div_container'); if (elements) { elements.parentNode.removeChild(elements); }
+
+# - key mapping settings - 
+@modmap <Control>        <Ctrl>
+@modmap <ISO_Left_Tab>   <Shift-Tab>
+@modmap <space>          <Space>
+@modkey_addition <Shift> <Ctrl>      <Meta>
+@modkey_addition <Shift> <Tab>       <Shift-Tab>
+@ignore_key <ISO_*>
+@ignore_key <Shift>
+
+# - global & keycmd editing binds - 
+@bind   <Escape>    = event ESCAPE
+@cbind  i           = sh 'expr "set show_status = 1" > $4 ; expr "@set_mode insert" > $4'
+@ebind  <Return>    = event KEYCMD_EXEC_CURRENT
+@ebind  <Home>      = event SET_CURSOR_POS
+@ebind  <End>       = event SET_CURSOR_POS -1
+@ebind  <Left>      = event SET_CURSOR_POS -
+@ebind  <Right>     = event SET_CURSOR_POS +
+@ebind  <BackSpace> = event KEYCMD_BACKSPACE
+@ebind  <Delete>    = event KEYCMD_DELETE
+@ebind  <Tab>       = event START_COMPLETION
+@ebind  <Ctrl>w     = event KEYCMD_STRIP_WORD
+@ebind  <Ctrl>u     = event SET_KEYCMD
+@ebind  <Ctrl>a     = event SET_CURSOR_POS 0
+@ebind  <Ctrl>e     = event SET_CURSOR_POS -1
+
+# - basic keyboard bindings - 
+@cbind  :  = spawn @scripts_dir/command_interpreter command_insert
+@cbind  j  = scroll vertical 20
+@cbind  k  = scroll vertical -20
+@cbind  h  = scroll horizontal -20
+@cbind  l  = scroll horizontal 20
+@cbind  <Ctrl>u = scroll vertical -55%
+@cbind  <Ctrl>d = scroll vertical 55%
+@cbind  K  = scroll vertical -55%
+@cbind  J  = scroll vertical 55%
+@cbind  gg = scroll vertical begin
+@cbind  G  = scroll vertical end
+@cbind  0  = scroll horizontal begin
+@cbind  $  = scroll horizontal end
+@cbind  H  = back
+@cbind  L  = forward
+@cbind  S  = stop
+@cbind  r  = reload
+@cbind  R  = reload_ign_cache
+@cbind  (  = zoom_out
+@cbind  )  = zoom_in
+@cbind  Z  = toggle_zoom_type
+@cbind  1  = set zoom_level = 1.0
+@cbind  2  = set zoom_level = 1.5
+@cbind  /  = spawn @scripts_dir/find_on_page forward
+@cbind  ?  = spawn @scripts_dir/find_on_page reverse
+@cbind  .  = search
+@cbind  ,  = search_reverse
+
+# - added functionality binds - 
+@cbind  +       = toggle_status
+@cbind  dv      = spawn @scripts_dir/download_video
+@cbind  dp      = spawn @scripts_dir/download_page
+@cbind  E       = spawn @scripts_dir/source_view+edit
+@cbind  e       = spawn @scripts_dir/extract_urls
+@cbind  !dump   = sh "expr dump_config > $4"
+@cbind  !reload = sh "sed '/^# === Post-load misc commands/,$d' $1 > $4 && expr reload_ign_cache > $4"
+@cbind  AU      = sh 'ratpoison -c "echo $6"'
+@cbind  AT      = sh 'ratpoison -c "echo $7"'
+@cbind  AP      = sh 'ratpoison -c "echo $(xsel --primary -o)"'
+@cbind  AC      = sh 'ratpoison -c "echo $(xsel --clipboard -o)"'
+@cbind  yu      = sh 'echo -n $6 | xsel'
+@cbind  yt      = sh 'echo -n $7 | xsel'
+@cbind  yx = sh 'xsel --clipboard -o|xsel --secondary;xsel --primary -o|xsel --clipboard;xsel --secondary -o|xsel --primary'
+@cbind  <Ctrl><Alt>t = sh 'urxvt -e "socat unix-connect:$5 -"'
+
+# - uri binds - 
+set follow_hint_keys = 0123456789
+@cbind  f* = script @scripts_dir/follow.js '@follow_hint_keys %s'
+@cbind  sr = spawn @scripts_dir/searchrat
+@cbind  o  = spawn @scripts_dir/command_interpreter here_supply-uri
+@cbind  O  = spawn @scripts_dir/command_interpreter here_current-uri
+@cbind  n  = spawn @scripts_dir/command_interpreter new_supply-uri
+@cbind  N  = spawn @scripts_dir/command_interpreter new_current-uri
+@cbind  gh = uri http://bbs.archlinux.org/search.php?action=show_new
+@cbind  gP = sh 'exec uzbl-browser --uri $(xsel --primary -o)'
+@cbind  gC = sh 'exec uzbl-browser --uri $(xsel --clipboard -o)'
+@cbind  gp = sh 'echo "uri $(xsel --primary -o)" > $4'
+@cbind  gc = sh 'echo "uri $(xsel --clipboard -o)" > $4'
+@cbind  gu = sh 'echo "uri $(dirname $6)" > $4'
+@cbind  gU = sh 'echo "uri $(echo $6|grep -Eo \"(^[^/]+//[^/]+/)")" > $4'
+@cbind  u  = spawn @scripts_dir/history_load
+@cbind  bl = spawn @scripts_dir/bookmark_load
+@cbind  bi = spawn @scripts_dir/bookmark_insert
+@cbind  be = sh 'urxvt -e w3m $XDG_DATA_HOME/uzbl/bookmarks'
+
+# - quickjumps [0-9]. figure out a better way to do this - 
+@cbind goset = spawn @scripts_dir/quickjump set
+@cbind gosh = spawn @scripts_dir/quickjump show
+@cbind go1 = spawn @scripts_dir/quickjump mark1
+@cbind go2 = spawn @scripts_dir/quickjump mark2
+@cbind go3 = spawn @scripts_dir/quickjump mark3
+@cbind go4 = spawn @scripts_dir/quickjump mark4
+@cbind go5 = spawn @scripts_dir/quickjump mark5
+@cbind go6 = spawn @scripts_dir/quickjump mark6
+@cbind go7 = spawn @scripts_dir/quickjump mark7
+@cbind go8 = spawn @scripts_dir/quickjump mark8
+@cbind go9 = spawn @scripts_dir/quickjump mark9
+@cbind go0 = spawn @scripts_dir/quickjump mark0
+
+# - some menu entries i'll never use - 
+menu_add Close Page = spawn @scripts_dir/proper_exit close_current_no_save
+menu_add Save and Quit = spawn @scripts_dir/proper_exit save_session
+menu_link_add Print Link = print \@SELECTED_URI
+
+# - mode configuration - 
+set command      = @mode_config command
+set insert       = @mode_config insert
+set stack        = @mode_config stack
+set default_mode = command
+
+# - command mode config - 
+@command keycmd_style      = foreground="b8ddea"
+@command status_background = #b8ddea
+@command mode_indicator    = 
+
+# - insert mode config - 
+@insert  status_background = #a488d9
+@insert  mode_indicator    =
+
+# - multi-stage-binding mode config - 
+@stack   keycmd_events     = 1
+@stack   modcmd_updates    = 1
+@stack   forward_keys      = 0
+@stack   keycmd_style      = foreground="#b8ddea"
+@stack   prompt_style      = foreground="#888" weight="light"
+@stack   status_background = #65bd8b
+@stack   mode_indicator    =

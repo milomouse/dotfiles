@@ -1,0 +1,13 @@
+#!/bin/zsh
+# milomouse <vincent[at]fea.st>
+# NOTE: simple source viewer for uzbl using curl. uses w3m.
+#       $?: w3m uses vim if you wish to edit: Shift-e / Esc-e
+
+# set referer until i figure out a "requestpolicy" script.
+referer="'http://ixquick.com/do/metasearch.pl?query="$7"'"
+uagent="Uzbl (Webkit 1.1.22) ($(uname -o) $(uname -m) [$(uname -m)])"
+output="$(mktemp)"
+
+# junk session cookies, use ixquick as referer, do not redirect to different source, max of 60s.
+curl -sj --raw --user-agent $uagent --ssl -e $referer --max-redirs 0 -m 60 "$6" -o $output && \
+urxvt -e w3m $output && rm -f $output

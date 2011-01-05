@@ -14,8 +14,8 @@ scgi_local = /tmp/rtorrent-xmlrpc.socket
 encoding_list = UTF-8
 
 #// {up,down}loads
-directory = /home/milo/tors/
-session = /home/milo/tors/.sess
+directory = /howl/tors/
+session = /howl/tors/.sess
 max_uploads = 24
 max_uploads_global = 24
 upload_rate = 24
@@ -25,11 +25,11 @@ max_peers = 82
 max_peers_seed = 24
 
 #// watch dirs
-schedule = watch_directory1,5,5,"load_start=/home/milo/tors/foto/.down/*.torrent,d.set_directory=/home/milo/tors/foto/"
-schedule = watch_directory2,5,5,"load_start=/home/milo/tors/muzk/.down/*.torrent,d.set_directory=/home/milo/tors/muzk/"
-schedule = watch_directory3,5,5,"load_start=/home/milo/tors/othe/.down/*.torrent,d.set_directory=/home/milo/tors/othe/"
-schedule = watch_directory4,5,5,"load_start=/home/milo/tors/vide/.down/*.torrent,d.set_directory=/home/milo/tors/vide/"
-schedule = watch_directory5,5,5,"load_start=/home/milo/tors/book/.down/*.torrent,d.set_directory=/home/milo/tors/book/"
+schedule = watch_directory1,5,5,"load_start=/howl/tors/foto/.down/*.torrent,d.set_directory=/howl/tors/foto/"
+schedule = watch_directory2,5,5,"load_start=/howl/tors/muzk/.down/*.torrent,d.set_directory=/howl/tors/muzk/"
+schedule = watch_directory3,5,5,"load_start=/howl/tors/othe/.down/*.torrent,d.set_directory=/howl/tors/othe/"
+schedule = watch_directory4,5,5,"load_start=/howl/tors/vide/.down/*.torrent,d.set_directory=/howl/tors/vide/"
+schedule = watch_directory5,5,5,"load_start=/howl/tors/book/.down/*.torrent,d.set_directory=/howl/tors/book/"
 
 #// other actions
 schedule = chmod,0,0,"execute=chmod,777,/tmp/rtorrent-xmlrpc.socket"

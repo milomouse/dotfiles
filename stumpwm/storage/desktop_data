@@ -1,0 +1,117 @@
+#S(DDUMP
+   :SCREENS (#S(SDUMP
+                :NUMBER 0
+                :GROUPS (#S(GDUMP
+                            :NUMBER 1
+                            :NAME "1"
+                            :TREE (((#S(FDUMP
+                                        :NUMBER 0
+                                        :X 0
+                                        :Y 0
+                                        :WIDTH 950
+                                        :HEIGHT 480
+                                        :WINDOWS NIL
+                                        :CURRENT NIL)
+                                     #S(FDUMP
+                                        :NUMBER 2
+                                        :X 0
+                                        :Y 480
+                                        :WIDTH 950
+                                        :HEIGHT 420
+                                        :WINDOWS NIL
+                                        :CURRENT NIL))
+                                    (#S(FDUMP
+                                        :NUMBER 1
+                                        :X 950
+                                        :Y 0
+                                        :WIDTH 650
+                                        :HEIGHT 225
+                                        :WINDOWS NIL
+                                        :CURRENT NIL)
+                                     #S(FDUMP
+                                        :NUMBER 4
+                                        :X 950
+                                        :Y 225
+                                        :WIDTH 650
+                                        :HEIGHT 270
+                                        :WINDOWS NIL
+                                        :CURRENT NIL)
+                                     #S(FDUMP
+                                        :NUMBER 3
+                                        :X 950
+                                        :Y 495
+                                        :WIDTH 650
+                                        :HEIGHT 285
+                                        :WINDOWS NIL
+                                        :CURRENT NIL)
+                                     #S(FDUMP
+                                        :NUMBER 5
+                                        :X 950
+                                        :Y 780
+                                        :WIDTH 650
+                                        :HEIGHT 120
+                                        :WINDOWS NIL
+                                        :CURRENT NIL))))
+                            :CURRENT 0)
+                         #S(GDUMP
+                            :NUMBER 2
+                            :NAME "2"
+                            :TREE (#S(FDUMP
+                                      :NUMBER 0
+                                      :X 0
+                                      :Y 0
+                                      :WIDTH 1600
+                                      :HEIGHT 900
+                                      :WINDOWS NIL
+                                      :CURRENT NIL))
+                            :CURRENT 0)
+                         #S(GDUMP
+                            :NUMBER 3
+                            :NAME "3"
+                            :TREE (#S(FDUMP
+                                      :NUMBER 0
+                                      :X 0
+                                      :Y 0
+                                      :WIDTH 1600
+                                      :HEIGHT 900
+                                      :WINDOWS NIL
+                                      :CURRENT NIL))
+                            :CURRENT 0)
+                         #S(GDUMP
+                            :NUMBER 4
+                            :NAME "4"
+                            :TREE (#S(FDUMP
+                                      :NUMBER 0
+                                      :X 0
+                                      :Y 0
+                                      :WIDTH 1600
+                                      :HEIGHT 900
+                                      :WINDOWS NIL
+                                      :CURRENT NIL))
+                            :CURRENT 0)
+                         #S(GDUMP
+                            :NUMBER 5
+                            :NAME "5"
+                            :TREE (#S(FDUMP
+                                      :NUMBER 0
+                                      :X 0
+                                      :Y 0
+                                      :WIDTH 1600
+                                      :HEIGHT 900
+                                      :WINDOWS NIL
+                                      :CURRENT NIL))
+                            :CURRENT 0)
+                         #S(GDUMP
+                            :NUMBER 6
+                            :NAME "6"
+                            :TREE (#S(FDUMP
+                                      :NUMBER 0
+                                      :X 0
+                                      :Y 0
+                                      :WIDTH 1600
+                                      :HEIGHT 900
+                                      :WINDOWS NIL
+                                      :CURRENT NIL))
+                            :CURRENT 0))
+                :CURRENT 1))
+   :CURRENT 0)

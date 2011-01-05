@@ -2,10 +2,10 @@
 ## milomouse <vincent[at]fea.st>
 
 ## external scripts:
-#script ~/.config/jumanji/scripts/dwb2-hints.js
-script ~/.config/jumanji/scripts/JumNav.js
-#set stylesheet file:///home/milo/.config/jumanji/lich.css
-set stylesheet file:///home/milo/.config/jumanji/mouse.css
+#script ~/jumanji/scripts/dwb2-hints.js
+script ~/jumanji/scripts/JumNav.js
+#set stylesheet file:///howl/conf/jumanji/styles/lich.css
+set stylesheet file:///howl/conf/jumanji/styles/mouse.css
 
 ## browser settings:
 set proxy 127.0.0.1:8118
@@ -28,14 +28,15 @@ set developer_extras true
 set spell_checking true
 set resizable_text_areas false
 set auto_save 60
-set download_dir ~/down/
-#set download_command zsh -c "curl -sL4 -c ~/.config/jumanji/cookies -b ~/.config/jumanji/cookies '%s' -o %s";
-set download_command zsh -c "wget --load-cookies ~/.config/jumanji/cookies '%s' -O %s";
-set spawn_editor "urxvt -e -zsh -c \"vim -p %s\"";
+set download_dir /howl/down/
+set editor "urxvt -e zsh -c \"vim -p %s\""
+set download_command zsh -c "curlfetch '%s'";
+#set download_command zsh -c "cd ~/down ; curl -sL4jk --ssl -C - --retry 3 --retry-delay 3 -c ~/.config/jumanji/cookies -b ~/.config/jumanji/cookies '%s' -o %s";
+#set download_command zsh -c "cd ~/down ; wget --load-cookies ~/.config/jumanji/cookies -Eckpq --prefer-family=IPv4 --random-wait '%s'";
 
 ## search engines:
-searchengine googlessl https://www.google.com/search?q=%s
 searchengine google http://www.google.com/search?q=%s
+searchengine googlessl https://www.google.com/search?q=%s
 searchengine images http://www.google.com/images?q=%s&um=1&ie=UTF-8&source=og&sa=N&hl=en&tab=wi
 searchengine wikipedia https://secure.wikimedia.org/wikipedia/en/w/index.php?search=%s
 searchengine wikipedias https://secure.wikimedia.org/wikipedia/en/w/index.php?search=%s
@@ -45,7 +46,6 @@ searchengine newegg http://www.newegg.com/Product/ProductList.aspx?Submit=ENE&DE
 searchengine tigerdirect http://www.tigerdirect.com/applications/SearchTools/search.asp?keywords=%s
 searchengine imdb http://www.imdb.com/find?s=all&q=%s
 searchengine youtube http://www.youtube.com/results?search_query=%s
-searchengine deviantart http://browse.deviantart.com/?qh=&section=&global=1&q=%s
 searchengine lastfm http://www.last.fm/music/?q=%s
 searchengine amazon http://www.amazon.com/s/ref=nb_ss_gw?url=search-alias%3Dall&field-keywords=%s
 searchengine ebay http://shop.ebay.com/?_from=R40&_trksid=p3907.m570.l1313&_nkw=%s&_sacat=See-All-Categories
@@ -54,7 +54,7 @@ searchengine btjunkie http://btjunkie.org/search?q=%s
 searchengine piratebay http://thepiratebay.org/search/%s
 
 ## browser colors:
-set font fixed normal 6
+set font fixed normal 9
 set default_bgcolor #191919
 set default_fgcolor #eeeeee
 set inputbar_bgcolor #000000

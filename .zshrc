@@ -2,17 +2,17 @@
 [[ -n $(print $PATH|grep local/bin) ]] || PATH=$PATH:/usr/local/bin:/usr/local/sbin
 
 # source external configuration files:
-ZDOTDIR="${XDG_CONFIG_DIR:-${HOME}/.config}/zsh"
+ZDOTDIR="${XDG_CONFIG_DIR:-${HOME}}/zsh"
 for i in ${ZDOTDIR}/{options,exports,aliases,functions}; do
-  . $i || (print $i: no such file && setopt cshjunkieloop warncreateglobal)
-done
+  . $i || {print $i: no such file && setopt cshjunkieloop warncreateglobal}
+done ; clear
 
 # prompt line:
 [[ ${TERM} == screen* ]] && precmd() { print -Pn "\e]2;%2d\a" } || RPROMPT='%F{white}%~%f'
-PS1='%F{magenta}» %f'
-PS2='%F{blue}» %f'
-PS3='%B%F{white}?# %b%f%F{red}» %f'
-PS4='%B%F{white}%_ %b%f%F{magenta}» %f%B%F{white}+%N:%i %b%f%F{magenta}» %f'
+PS1='%F{magenta}%# %f'
+PS2='%F{blue}%# %f'
+PS3='%B%F{white}?# %b%f%F{red}%# %f'
+PS4='%B%F{white}%_ %b%f%F{magenta}%# %f%B%F{white}+%N:%i %b%f%F{magenta}%# %f'
 
 # auto-completion:
 autoload -U compinit
@@ -48,7 +48,7 @@ bindkey "^?" backward-delete-char
 bindkey '^R' history-incremental-search-backward
 
 # framebuffer colors:
-if [[ ${TERM} == linux || ${TERM} == screen* ]]; then
+if [[ ${TERM} == linux || ${TERM} =~ screen ]]; then
 #   candymouse:
     echo -en "\e]P0000000" ; echo -en "\e]P83d3a3a"
     echo -en "\e]P1d74b73" ; echo -en "\e]P9e07895"

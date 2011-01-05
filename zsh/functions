@@ -1,0 +1,191 @@
+# use history, but skip certain cmds/args from being written:
+function zshaddhistory() {
+  local line cmd
+  line=${1%%$'\n'} ; cmd=${line%% *}
+  [[ ${#line} -ge 5
+      && ${cmd} != (history|fc|e|exit|cl|clear)
+      && ${cmd} != (l[axclsftm]|srm|rms|rds)
+      && ${cmd} != (losetup|aespipe|cryptsetup)
+      && ${cmd} != (daemons|go|startx|mp)
+      && ${cmd} != ([mszx]edit|[zx]load|zhist|wika)
+      && ${cmd} != (sr|surfraw)
+  ]] && (( ! $argv[(I)*unrl*|*spar*|*losetup*|*litika*] ))
+}
+
+# check ownership of given argument, as determined by pacman:
+function owns() {
+  if [[ -n $(for each in $(print ${PATH}|tr ':' '\n'); do
+             find ${each}/$1 2>/dev/null ; done) ]]
+  then command pacman -Qo $(which -p $1)
+  else command pacman -Qo $1 ; fi
+}
+
+# jump to previous directory by integer or reg-exp, also list dirs,
+# else jump to last visited directory if no argument supplied:
+function back() {
+  if [[ $# == 1 ]]; then
+    case $1 {
+      <->)  pushd -q +$1 2>/dev/null ;;
+      --)   dirs -lpv|sed '2s|$| \[last\]|' ;;
+      *)    [[ -n $(dirs -lpv|grep -i $1|grep -v ${PWD}) ]] && \
+              pushd -q +${$(dirs -lpv|grep -i $1|grep -v ${PWD})[1]}
+    }
+  else pushd -q - 2>/dev/null ; fi
+}
+
+# go up Nth amount of directories:
+function up(){
+  local arg=${1:-1};
+  while [ ${arg} -gt 0 ]; do
+    cd .. >&/dev/null;
+    arg=$((${arg} - 1));
+  done
+}
+
+# copy and follow file to new dir:
+function cpf() {
+  if [[ -d $*[-1] ]]; then
+    cp $* && cd $*[-1]
+  elif [[ -d ${*[-1]%/*} ]]; then
+    cp $* && cd ${*[-1]%/*}
+  fi
+}
+
+# move and follow file to new dir:
+function mvf() {
+  if [[ -d $*[-1] ]]; then
+    mv $* && cd $*[-1]
+  elif [[ -d ${*[-1]%/*} ]]; then
+    mv $* && cd ${*[-1]%/*}
+  fi
+}
+
+# show ps information with simple output for scripts, quick views, etc:
+function psi() {
+  if [[ ${#${@:/$0}} -ge 2 ]]; then
+    case $1 {
+      '-C'|'-c')  command ps -C $2 hopid,args ;; # by- command name
+      '-G'|'-g')  command ps -G $2 hopid,args ;; # by- real group id (RGID)/name
+      '-U'|'-u')  command ps -U $2 hopid,args ;; # by- effective user ID (EUID)/name
+      '-P'|'-p')  command ps -p $2 hoargs ;;     # by- pid
+      '-S'|'-s')  command ps -s $2 hopid,args ;; # by- session id
+      '-T'|'-t')  command ps -t $2 hopid,args ;; # by- tty
+      *)  print "unrecognized option. read: man ps (section: process selection by list)" ;; }
+  else print "invalid selection. read: man ps (section: process selection by list)" ; fi
+}
+
+# extract archive with preferred options:
+function extr() {
+  if [[ -f $1 ]]; then 
+    case $1 in
+      *.tar.bz2)   command tar xjf $1    ;;
+      *.tar.gz)    command tar xzf $1    ;;
+      *.bz2)       command bunzip2 $1    ;;
+      *.rar)       command unrar x $1    ;;
+      *.gz)        command gunzip $1     ;;
+      *.tar)       command tar xf $1     ;;
+      *.tbz2)      command tar xjf $1    ;;
+      *.tgz)       command tar xzf $1    ;;
+      *.zip)       command unzip $1      ;;
+      *.Z)         command uncompress $1 ;;
+      *.7z)        command 7z x $1       ;;
+      *.xz)        command unxz -vk $1   ;;
+      *.lzma)      command unlzma -vk $1 ;;
+      *)           print "'$1' cannot be extracted via extr()" ;;
+    esac
+  else
+    print "'$1' is not a valid file"
+  fi
+}
+
+# simple sleep function to ease repetition:
+function timer() {
+  if [[ $# == 1 ]]; then
+    case $1 {
+      <->|<->[smdh]) 
+        sleep $1
+        [[ -n ${DISPLAY} ]] && stumpish echo Timer has finished. || \
+        print Timer has finished.
+      ;;
+      *)  print "Time must be an Integer, optionally followed by time format [s,m,h,d].\nDefaults to seconds."
+    }
+  fi
+}
+
+# native function for showing 256 colors, properly formatted:
+function 256co() {
+#  if [[ ${TERM} != linux ]]; then
+  for line in {0..15}; do for col in {0..15}; do
+      local code=$(( $col * 16 + ${line} ))
+      printf $'\e[38;05;%dm %03d' ${code} ${code}
+    done
+  print ; done
+#  fi
+}
+
+# quick un-smart function to prepend file:// to local requests:
+# (refine this for multiple files, etc, later on)
+function {jumanji,vimprobable}() {
+  if [[ -f $PWD/$@ ]]; then
+    command $0 file://$PWD/$@
+  elif [[ -f $@ ]]; then
+    command $0 file://$@
+  else
+    command $0 $@
+  fi
+}
+
+# un-smart function to quickly view word definitions:
+function sd() {
+  local _ARG
+  [[ $(print - $#@) -ge 2 ]] && _ARG=${@:/$1} || _ARG=$1
+  case $1 in
+    '-r'|'-ru') sdcv -u "en-ru-bars" ${_ARG} 2>/dev/null ;;
+    '-w'|'-wordnet') sdcv -u "WordNet" ${_ARG} 2>/dev/null ;;
+    '-t'|'-thesaurus') sdcv -u "English Thesaurus" ${_ARG} 2>/dev/null ;;
+    '-a'|'-all') sdcv ${_ARG} 2>/dev/null ;;
+    *) sdcv -u "WordNet" ${_ARG} 2>/dev/null
+  esac
+}
+
+# un-smart function for my todo lists:
+function todo() {
+  local _d=${H}/othe
+  case $# {
+    0) command ls -1 ${_d}/.TODO_* ;;
+    1) command vim ${_d}/.TODO_$1 ;;
+    *) command vim ${_d}/.TODO_$(print $@|tr ' ' '_')
+  }
+}
+
+# un-smart function for viewing/editing history file (still use 'fc/history'):
+function zhist() {
+  if [[ $# == 1 ]]; then
+    case $1 {
+      e)  ${EDITOR:-/usr/bin/vim} ${ZDOTDIR:-${HOME}/zsh}/.history ;;
+      a)  <${ZDOTDIR:-${HOME}/zsh}/.history | less ;;
+      *)  <${ZDOTDIR:-${HOME}/zsh}/.history|grep -i $1
+    }
+  fi
+}
+
+# un-smart function to watch curl download progress and notify when complete:
+function curlgot() {
+  if [[ -n $(pgrep curl) ]]; then
+  while sleep 1; do
+    if [[ -z $(pgrep curl) ]]; then
+      repeat 3; do # ${DISPLAY} is assumed since downloads are done via jumanji
+        stumpish echo "^B^1*curl:^5* download complete.^n" 1>/dev/null
+        sleep 3
+      done && break
+    fi
+  done ; fi
+}
+
+# one-liners/micro functions:
+function rc() {[[ -n $1 ]] && sudo /etc/rc.d/$1 ${@:/$1}}
+function alv() {<${${$(command ls -r ${H:-/howl}/othe/archive/installed_*)}[${1:-1}]}|w3m -o pagerline=100000 -o confirm_qq=0}
+function mkcd() {mkdir -p "$@" && cd "$@"}
+function pubip() {curl http://whatismyip.org/ 2>/dev/null}
+function qdep() {pacman-color -Q $@ $(pacman-color -Qi $@|grep Depends|cut -d: -f2-|sed -E 's|>\S+\>||g')}
+function timec() {while sleep 1 ; do printf '\r%s ' "$(date +'%T %Y-%m-%d')" ; done}

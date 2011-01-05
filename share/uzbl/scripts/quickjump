@@ -1,0 +1,98 @@
+#!/bin/zsh
+# milomouse <vincent[at]fea.st>
+# NOTE: jump to frequently used urls by assigning numbers 0-9 to each one. uses ratpoison.
+
+# change value of $1 from config->-*->action.
+config=$1; shift
+pid=$1;    shift
+xid=$1;    shift
+fifo=$1;   shift
+socket=$1; shift
+url=$1;    shift
+title=$1;  shift
+action=$1
+
+# where to save the quickjump links:
+savefile=$XDG_DATA_HOME/uzbl/quicklinks
+
+# create initial file with 10 lines:
+hidden() {
+  until [[ $(wc -l $savefile|awk '{print $1}') = 10 ]]; do
+    print "http://uzbl.org" >> $savefile
+  done
+}
+
+# always check file:
+if [[ ! -f $savefile ]]; then
+  touch $savefile
+  hidden
+#elif [[ $(wc -c $savefile|awk '{print $1}') = 0 ]]; then
+#  rm -f $savefile && touch $savefile
+#  hidden
+fi
+
+# show quickjumps for whatever reason:
+show_jumps() {
+  hidden
+  ratpoison -c "echo $(<$savefile|cat -n|tr ' ' '!'|cut -c5-100|awk '{print $1" - "$2}'|tr '!' ' ')"
+}
+
+# place current uri into certain line by number:
+quick_set() {
+  get=$(ratpoison -c "prompt Enter Value for this Jump [0-9]:")
+  tempfile=$XDG_CACHE_HOME/uzbl/.tmpqj
+  for i in $get; do
+    if [[ $i = "(null)" ]]; then
+      exit 0
+    elif [[ $i -gt 9 ]]; then
+      ratpoison -c "echo quickjump: Value too high."
+      exit 1
+    # this is important:
+    elif [[ $i = "0" ]]; then
+      i="10"
+      rm -f $tempfile >&/dev/null && touch $tempfile
+      <$savefile|sed ''"$i"' s|.*$|'"$url"'|'> $tempfile >! $savefile
+      rm -f $tempfile >&/dev/null
+      exit 0
+    else
+      rm -f $tempfile >&/dev/null && touch $tempfile
+      <$savefile|sed ''"$i"' s|.*$|'"$url"'|'> $tempfile >! $savefile
+      rm -f $tempfile >&/dev/null
+      exit 0
+    fi
+  done
+}
+
+# find a better way to do this: (head -$i, but how to read mark* from uzbl config)
+m1() { print uri "$(<$savefile|head -1|tail -1)" | socat - unix-connect:$socket >&/dev/null }
+m2() { print uri "$(<$savefile|head -2|tail -1)" | socat - unix-connect:$socket >&/dev/null }
+m3() { print uri "$(<$savefile|head -3|tail -1)" | socat - unix-connect:$socket >&/dev/null }
+m4() { print uri "$(<$savefile|head -4|tail -1)" | socat - unix-connect:$socket >&/dev/null }
+m5() { print uri "$(<$savefile|head -5|tail -1)" | socat - unix-connect:$socket >&/dev/null }
+m6() { print uri "$(<$savefile|head -6|tail -1)" | socat - unix-connect:$socket >&/dev/null }
+m7() { print uri "$(<$savefile|head -7|tail -1)" | socat - unix-connect:$socket >&/dev/null }
+m8() { print uri "$(<$savefile|head -8|tail -1)" | socat - unix-connect:$socket >&/dev/null }
+m9() { print uri "$(<$savefile|head -9|tail -1)" | socat - unix-connect:$socket >&/dev/null }
+m0() { print uri "$(<$savefile|head -10|tail -1)"| socat - unix-connect:$socket >&/dev/null }
+
+# in case a typo or something is passed in the config:
+error() {
+  ratpoison -c "echo quickjump: Unknown Option."
+  exit 1
+}
+
+case "$action" in
+  'show') show_jumps ;;
+  'set') quick_set ;;
+  'mark1') m1 ;;
+  'mark2') m2 ;;
+  'mark3') m3 ;;
+  'mark4') m4 ;;
+  'mark5') m5 ;;
+  'mark6') m6 ;;
+  'mark7') m7 ;;
+  'mark8') m8 ;;
+  'mark9') m9 ;;
+  'mark0') m0 ;;
+  * ) error ;;
+esac

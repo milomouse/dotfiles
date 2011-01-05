@@ -2,13 +2,13 @@
 ;; ${HOME}/.stumpwmrc                                                       ;;
 ;;--------------------------------------------------------------------------;;
 ;; author: milomouse <vincent[at]fea.st>                                    ;;
-;; update: 2010-12-02 06:35:34                                              ;;
+;; update: 2010-12-28 16:53:04                                              ;;
 ;;--------------------------------------------------------------------------;;
 ;; versions used atoc:                                                      ;;
 ;; |  sbcl              -> 1.0.43-1                                         ;;
 ;; |  clx               -> 0.7.4-1                                          ;;
 ;; |  cl-ppcre          -> 2.0.3-1                                          ;;
-;; |  stumpwm-git       -> 20101109-1                                       ;;
+;; |  stumpwm-git       -> 20101227-1                                       ;;
 ;;-TODO:--------------------------------------------------------------------;;
 ;; >>>-: create a 'dedicate' and 'catchall' window-rule (remember * *)      ;;
 ;; >>--: create a 'dedicate' and 'catchall' hook for changing focus color   ;;
@@ -31,8 +31,10 @@
 (in-package :stumpwm)
 
 ;; set data-dir for storing debug-file, group and placement dumps, etc.
+;; also set a home-dir. not relative *default-pathname-defaults*.
 (setf *data-dir* (make-pathname :directory
-                 '(:relative ".config" "stumpwm" "storage"))
+                 '(:relative "stumpwm" "storage"))
+      *home-dir* (make-pathname :directory "/howl")
       *debug-level* 1)
 
 ;; setup a quick function for redirecting debug information directly to file.
@@ -67,12 +69,12 @@ then run the command synchronously and collect the output."
 (defvar *background-image-path*
   (merge-pathnames
     (make-pathname :directory '(:relative "foto" "wall"))
-    *default-pathname-defaults*))
+    *home-dir*))
 
 ;; set undo directory to store each group undo state. still a work in progress
 ;; as far as the function goes, currently only undos as a bulk screen process.
 ;; (will soon change this to undo on a per group basis)
-(defvar *undo-data-dir* (make-pathname :directory "/dev/shm/.1000"))
+(defvar *undo-data-dir* (make-pathname :directory "/dev/shm/.1009"))
 
 ;; gravities.
 (setf *mouse-focus-policy* :click
@@ -93,7 +95,9 @@ then run the command synchronously and collect the output."
 (set-msg-border-width 1)
 
 ;; fonts/colors.
-(set-font "-*-fixed-medium-r-normal-*-10-*-*-*-*-*-*-*")
+;(set-font "-*-fixed-medium-r-normal-*-10-*-*-*-*-*-*-*")
+(set-font "-misc-fixed-medium-r-semicondensed-*-12-110-75-75-c-60-koi8-r")
+;(set-font "-misc-fixed-medium-r-normal-*-10-100-75-75-c-60-koi8-r")
 (set-fg-color        "grey64")
 (set-bg-color        "grey14")
 (set-focus-color     "mediumpurple2")
@@ -155,7 +159,7 @@ then run the command synchronously and collect the output."
 ;; load external settings files. these are the bulk of setup/optimizations.
 (loop for file in '("functions" "macros" "commands" "hooks" "key-maps")
       do (load (make-pathname :name file :type "lisp"
-      :directory '(:relative ".config" "stumpwm"))))
+      :directory '(:relative "stumpwm"))))
 
 ;; set first group as 1, then create every other group in background.
 (setf (group-name (first (screen-groups (current-screen)))) "1")

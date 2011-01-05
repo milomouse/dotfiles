@@ -1,15 +1,14 @@
 #!/bin/zsh
 # author: milomouse <vincent[at]fea.st>
 # detail: simple download parser (useful with Jumanji, Luakit, etc.)
-# todo: use curl, lol. probably not though.. wget is just too full featured.
 unsetopt nomatch functionargzero
 
 ## FILES
-cookies="${XDG_CONFIG_DIR:-${HOME}/.config}/jumanji/cookies"
-downlog="${XDG_CONFIG_DIR:-${HOME}/.config}/jumanji/download.log"
+cookies="${XDG_CONFIG_DIR:-${HOME}}/jumanji/cookies"
+downlog="${XDG_CONFIG_DIR:-${HOME}}/jumanji/download.log"
 
 ## DIRECTORIES
-basedir="${XDG_DOWNLOAD_DIR:-${HOME}/down}"
+basedir="${XDG_DOWNLOAD_DIR:-${H:-/howl}/down}"
 bd_image="$basedir/foto" # image files # (png, jpg, bmp, tiff..)
 bd_video="$basedir/vide/fire" # video files # (mkv, ogv, mp4, wmv..)
 bd_audio="$basedir/muzk" # audio files # (mp3, ogg, m4a, flac..)

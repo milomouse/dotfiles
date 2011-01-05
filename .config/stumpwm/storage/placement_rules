@@ -1,4 +1,0 @@
-(("6" 0 T T :INSTANCE "ossxmix") ("3" 2 T NIL :CLASS "URxvt")
- ("3" 1 T T :TITLE "Downloads") ("3" 1 T T :TITLE "Add-ons")
- ("3" 0 NIL T :CLASS "Jumanji") ("3" 0 NIL T :CLASS "luakit")
- ("3" 0 NIL T :INSTANCE "Navigator"))

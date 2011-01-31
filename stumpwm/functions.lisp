@@ -17,11 +17,11 @@
       (pull-window win1 f2)
       (pull-window win2 f1))))
 
-;; dump screen information to file so a previous state can be reapplied later.
-;; (will change this later to accomodate (current-group) instead of screen)
+;; dump desktop information to file so a previous state can be reapplied later.
+;; (will change this later to accomodate (current-group) instead of desktop)
 (defun remember-undo () ()
   (if (ensure-directories-exist *undo-data-dir*)
-    (dump-screen-to-file
+    (dump-desktop-to-file
       (make-pathname :name "undo" :type "lisp" :defaults *undo-data-dir*))))
 
 ;; same as 'remember-undo' except all information is dumped for next startup.

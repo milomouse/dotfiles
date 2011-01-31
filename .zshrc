@@ -1,14 +1,16 @@
-# extend run-path for local scripts/binaries:
-[[ -n $(print $PATH|grep local/bin) ]] || PATH=$PATH:/usr/local/bin:/usr/local/sbin
+# some early start console routines:
+[[ ${#PATH/local} != ${#PATH} ]] && PATH=${PATH}:/usr/local/bin:/usr/local/sbin
+[[ -f /tmp/.${UID}/.login ]] && { clear ; command rm /tmp/.${UID}/.login }
+[[ ! -S /tmp/.${UID}/tmux/default ]] && command tmux -q -S /tmp/.${UID}/tmux/default start-server 
 
 # source external configuration files:
 ZDOTDIR="${XDG_CONFIG_DIR:-${HOME}}/zsh"
 for i in ${ZDOTDIR}/{options,exports,aliases,functions}; do
-  . $i || {print $i: no such file && setopt cshjunkieloop warncreateglobal}
-done ; clear
+  . $i || { print "$i: cannnot source file" ; setopt cshjunkieloop warncreateglobal }
+done
 
 # prompt line:
-[[ ${TERM} == screen* ]] && precmd() { print -Pn "\e]2;%2d\a" } || RPROMPT='%F{white}%~%f'
+[[ ${TERM} =~ screen ]] && precmd() { print -Pn "\e]2;%2d\a" } || RPROMPT='%F{white}%~%f'
 PS1='%F{magenta}%# %f'
 PS2='%F{blue}%# %f'
 PS3='%B%F{white}?# %b%f%F{red}%# %f'
@@ -25,7 +27,7 @@ zstyle ':completion:*:manuals' separate-sections true
 zstyle ':completion:*:manuals.(^1*)' insert-sections true
 zstyle ':completion:*' verbose true
 zstyle ':completion:*' use-cache on
-zstyle ':completion:*' cache-path ${XDG_CACHE_HOME:-~/.config/cache}
+zstyle ':completion:*' cache-path ${XDG_CACHE_HOME:-${HOME}/cache}
 zstyle ':completion:*' squeeze-slashes true
 zstyle ':completion:*:functions' ignored-patterns '_*'
 zstyle ':completion:*:*:kill:*' menu yes select
@@ -48,7 +50,7 @@ bindkey "^?" backward-delete-char
 bindkey '^R' history-incremental-search-backward
 
 # framebuffer colors:
-if [[ ${TERM} == linux || ${TERM} =~ screen ]]; then
+if [[ ${TERM} == linux ]] || [[ ${TERM} =~ screen && ${+DISPLAY} == 0 ]]; then
 #   candymouse:
     echo -en "\e]P0000000" ; echo -en "\e]P83d3a3a"
     echo -en "\e]P1d74b73" ; echo -en "\e]P9e07895"

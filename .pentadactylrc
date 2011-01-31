@@ -1,0 +1,58 @@
+" ~/.pentadactylrc
+" milomouse <vincent[at]fea.st>
+
+colorscheme cottonmouse
+
+noremap j 2j
+noremap k 2k
+noremap <C-k> :pageinfo<Return>
+
+set noerrorbells
+set noexrc
+set nofullscreen
+set nohlfind
+set noinsertmode
+set nojsdebugger
+set nousermode
+set novisualbell
+
+set activate=bookmarks,downloads,extoptions,homepage,paste,quickmark,tabopen
+set altwildmode=list:full
+set autocomplete=
+set banghist
+set complete=slf
+set defsearch=google
+set editor="urxvt -e vim -fp +<line> <file>"
+set encoding=UTF-8
+set findcase=smart
+set followhints=1
+set guioptions=sb
+set hintinputs=label,name,value
+set hintkeys=asdfg;lkj
+set hintmatching=contains
+set hinttimeout=0
+set history=300
+set incfind
+set maxitems=12
+set messages=48
+set more
+set newtab=addons,downloads,extoptions
+set pageinfo=gfm
+set popups=tab
+set sanitizeitems=all
+set sanitizetimespan=all
+set sanitizeshutdown=macros,offlineapps
+set scroll=0
+set shell=/bin/zsh
+set shellcmdflag=-c
+set showmode
+set showstatuslinks=command
+set showtabline=never
+set strictfocus
+set suggestengines=google
+set titlestring="pentadactyl"
+set urlseparator=,s
+set verbose=1
+set wildcase=.?:smart
+set wildmode=list:full
+

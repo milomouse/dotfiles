@@ -1,23 +1,52 @@
-# global settings:
-lavdopts=threads=4
+## $XDG_CONFIG_DIR/.mplayer/config
+#################################################
+## global defaults (for StumpWM):
+#################################################
 prefer-ipv4=yes
 monitoraspect=16:9
-subfont-osd-scale=3
-framedrop=yes
+framedrop=no
 double=yes
-ao=oss
+ao=oss,sdl
+volstep=2
+softvol-max=160
 vo=xv
-# so StumpWM doesn't crash:
-nokeepaspect=1
+#autoq=100
+spuaa=4
+spugauss=0.7
+spualign=2
+subpos=96
+font=DejaVuSerif
+ffactor=1
+unicode=yes
+utf8=yes
+subfont-encoding=unicode
+subfont-osd-scale=2.6
+subfont-autoscale=2
+subfont-text-scale=3.6
+subfont-outline=1.0
+subfont-blur=1.4
+menu-startup=no
+mouse-movements=no
+nomouseinput=yes
 
-# profiles:
+#################################################
+## profiles:
+#################################################
+[extension.mp4]
+profile-desc="profile for the mp4 format"
+autosync=30
+
 [vo.fbdev]
+profile-desc="profile for framebuffer vo"
 vf=scale=1600:900
+framedrop=yes
+double=no
 
 [protocol.dvd]
 profile-desc="profile for dvd:// streams"
-#alang=en
-spuaa=4
+slang=eng,en,und,rus,ru
+af=volume=20:0,volnorm=2
+vf=pp=ha:164:7:y/va:y/dr:y/tn:3:5:7:y,unsharp=l5x5:0.01:c5x5:-0.02
 
 [protocol.dvdnav]
 profile-desc="profile for dvdnav:// streams"

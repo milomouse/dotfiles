@@ -54,14 +54,14 @@ window with Master and designate this as the new Master."
   (let ((win (find-if #'match (group-windows group))))
     (when (and win group) (exchange-windows (current-window) win) (master-make)))))
 
-;; [with *shell-program* "/bin/zsh"] look for detached 'tmux -L xorg' session and attach, else create new.
+;; [with *shell-program* "/bin/zsh"] look for detached 'tmux [socket] xorg' session and attach, else create new.
 ;; (useful for StumpWM crashes, as tmux windows survive crashes and this command brings them back)
 (defcommand tmux-attach-else-new () () "Find detached tmux session and attach, else create new session."
   (run-shell-command
-  "if [[ -n ${$(tmux -L xorg list-session|grep -v attached)[1]//:} ]]; then
-    urxvt -e tmux -f ${XDG_CONFIG_DIR:-${HOME}}/tmux/tmux.conf -L xorg attach-session -t $(print ${$(tmux -L xorg list-session|grep -v attached)[1]//:})
+  "if [[ -n ${$(tmux -S /tmp/.${UID}/tmux/xorg list-session|grep -v attached)[1]//:} ]]; then
+    urxvt -e tmux -S /tmp/.${UID}/tmux/xorg attach-session -t $(print ${$(tmux -S /tmp/.${UID}/tmux/xorg list-session|grep -v attached)[1]//:})
   else
-    urxvt -e tmux -f ${XDG_CONFIG_DIR:-${HOME}}/tmux/tmux.conf -L xorg new-session
+    urxvt -e tmux -S /tmp/.${UID}/tmux/xorg new-session
   fi"))
 
 ;; remember layout before reloading/restarting/quitting, also clean log file after clean exit.
@@ -245,9 +245,9 @@ current frame into 2 frames, one on top of the other." (remember-undo) (split-fr
 (defcommand echo-mifo-playlists () () "" (echo-string (current-screen) (run-shell-command "mifo --show" t)))
 (defcommand echo-mifo-fav-add () () "" (echo-string (current-screen) (run-shell-command "mifo --fav-add" t)))
 (defcommand echo-mifo-fav-del () () "" (echo-string (current-screen) (run-shell-command "mifo --fav-delete" t)))
-(defcommand echo-mifo-next () () "" (run-shell-command "mifo --next") (echo-mifo-stumpwm))
-(defcommand echo-mifo-prev () () "" (run-shell-command "mifo --prev") (echo-mifo-stumpwm))
-(defcommand echo-mifo-random () () "" (echo-string (current-screen) (run-shell-command "mifo -r" t)) (echo-mifo-stumpwm)) ; keep echo-string for this.
+(defcommand echo-mifo-next () () "" (echo-string (current-screen) (run-shell-command "mifo --next ; sleep 1 ; mifo --stumpwm" t)))
+(defcommand echo-mifo-prev () () "" (echo-string (current-screen) (run-shell-command "mifo --prev ; sleep 1 ; mifo --stumpwm" t)))
+(defcommand echo-mifo-random () () "" (echo-string (current-screen) (run-shell-command "mifo -r ; sleep 1 ; mifo --stumpwm" t)))
 (defcommand echo-oss-vol () () "" (echo-string (current-screen) (run-shell-command "ossvol -a" t)))
 (defcommand echo-oss-volup () () "" (run-shell-command "ossvol -i 1") (echo-oss-vol))
 (defcommand echo-oss-voldown () () "" (run-shell-command "ossvol -d 1") (echo-oss-vol))
@@ -317,7 +317,6 @@ command's output. This may hang if used wrong."
       (err "^B^5*~A" c))))
 
 ;; run or raise.
-(defcommand ror_jumanji () () "" (setf *run-or-raise-all-groups* t) (run-or-raise "jumanji" '(:class "Jumanji")))
-(defcommand ror_luakit () () "" (setf *run-or-raise-all-groups* t) (run-or-raise "luakit" '(:class "luakit")))
-(defcommand ror_mutt () () "" (setf *run-or-raise-all-groups* nil)
-  (run-or-raise "urxvt -e mutt -F ${XDG_CONFIG_DIR:-${HOME}}/mutt/muttrc" '(:title "mutt")))
+(defcommand ror_firefox () () "" (setf *run-or-raise-all-groups* t) (run-or-raise "firefox" '(:instance "Navigator")))
+(defcommand ror_mutt () () "" (setf *run-or-raise-all-groups* t)
+  (run-or-raise "urxvt -title '[urxvt] mutt' -e mutt -F ${XDG_CONFIG_DIR:-${HOME}}/mutt/muttrc" '(:title "\\[urxvt\\] mutt")))

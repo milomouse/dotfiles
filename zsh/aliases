@@ -1,5 +1,5 @@
 # file management:
-alias ls="/bin/ls -h --file-type --time-style='+%m-%d-%y %H%M%S' --color=auto --group-directories-first"
+alias ls="/bin/ls -h --file-type --time-style='+%y-%m-%d %H%M%S' --color=auto --group-directories-first"
 alias lss="ls -- *(D.om)"
 alias la="ls -A"              ; alias laa="ls -A *(D.om)"
 alias lb="ls -Ssr"            ; alias lbb="lb -- *(D.om)"
@@ -31,15 +31,14 @@ alias xload="xrdb -load ${XDG_CONFIG_DIR:-${HOME}}/xorg/Xdefaults &>/dev/null"
 alias gh="cd ${H:-/howl}"
 
 # program masquing:
-alias svim="/usr/bin/sudo ${EDITOR:-/usr/bin/vim}"
+alias svim="command sudo ${EDITOR:-/usr/bin/vim}"
 alias info="command info --vi-keys"
-alias diff="colordiff"
-alias grep="grep --color=auto"
-alias tmux="tmux -f ${XDG_CONFIG_DIR:-${HOME}}/tmux/tmux.conf"
-alias mutt="mutt -F ${XDG_CONFIG_DIR:-${HOME}}/mutt/muttrc"
-alias xskat="xskat -opt ${XDG_CONFIG_DIR:-${HOME}}/xorg/xskat.opt -list ${XDG_CONFIG_DIR:-${HOME}}/xorg/xskat.lst"
-alias offlineimap="/usr/bin/offlineimap -c ${XDG_CONFIG_DIR:-${HOME}}/.offlineimap/offlineimaprc"
-alias {rot,rtorrent}='/usr/bin/rtorrent -o http_capath=/etc/ssl/certs'
+alias diff="command colordiff"
+alias grep="command grep --color=auto"
+alias mutt="command mutt -F ${XDG_CONFIG_DIR:-${HOME}}/mutt/muttrc"
+alias xskat="command xskat -opt ${XDG_CONFIG_DIR:-${HOME}}/xorg/xskat.opt -list ${XDG_CONFIG_DIR:-${HOME}}/xorg/xskat.lst"
+alias offlineimap="command offlineimap -c ${XDG_CONFIG_DIR:-${HOME}}/.offlineimap/offlineimaprc"
+alias {rot,rtorrent}='command rtorrent -o http_capath=/etc/ssl/certs'
 alias startx="_o=$PWD ; cd ~/ ; command startx ${XDG_CONFIG_DIR:-${HOME}}/xorg/xinitrc -- -nolisten tcp nologo -once -retro ; cd $_o"
 #alias startx="command startx ${XDG_CONFIG_DIR:-${HOME}}/xorg/xinitrc -- -dpi 120 -nolisten tcp nologo -once -retro"
 
@@ -47,7 +46,7 @@ alias startx="_o=$PWD ; cd ~/ ; command startx ${XDG_CONFIG_DIR:-${HOME}}/xorg/x
 alias psu="print 'ELAPSETIME %CPU NI +?  LWPID - COMMAND';ps -U root,privoxy,15,http,named --deselect -C tmux,urxvt -H hoetime:10,%cpu:4,ni:2,stat:3,pid:5,rtprio:1,args"
 alias psr="print 'ELAPSETIME %CPU NI +?  LWPID - COMMAND';ps -u root -U root -H hoetime:10,%cpu:4,ni:2,stat:3,pid:5,rtprio:1,args"
 alias psa="print 'ELAPSETIME USER %CPU NI +?  LWPID - COMMAND';ps -H haxoetime:10,user:4,%cpu:4,ni:2,stat:3,pid:5,rtprio:1,args"
-alias pso="print 'ELAPSETIME USER %CPU NI +?  LWPID - COMMAND';ps -U root,milo --deselect -u root,milo -H hoetime:10,user:4,%cpu:4,ni:2,stat:3,pid:5,rtprio:1,args"
+alias pso="print 'ELAPSETIME USER %CPU NI +?  LWPID - COMMAND';ps -U root,h --deselect -u root,h -H hoetime:10,user:4,%cpu:4,ni:2,stat:3,pid:5,rtprio:1,args"
 alias dfu="df -hTP;print - '------------------------------------------------------';df -hTP --total|tail -1"
 alias {lavg,loadavg}='print ${$(</proc/loadavg)[1,3]}'
 alias daemons="lt /var/run/daemons"

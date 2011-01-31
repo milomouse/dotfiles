@@ -2,7 +2,7 @@
 ;; ${HOME}/.stumpwmrc                                                       ;;
 ;;--------------------------------------------------------------------------;;
 ;; author: milomouse <vincent[at]fea.st>                                    ;;
-;; update: 2010-12-28 16:53:04                                              ;;
+;; update: 2011-01-22 08:17:04                                              ;;
 ;;--------------------------------------------------------------------------;;
 ;; versions used atoc:                                                      ;;
 ;; |  sbcl              -> 1.0.43-1                                         ;;
@@ -72,7 +72,7 @@ then run the command synchronously and collect the output."
     *home-dir*))
 
 ;; set undo directory to store each group undo state. still a work in progress
-;; as far as the function goes, currently only undos as a bulk screen process.
+;; as far as the function goes, currently only undos as a bulk desktop process.
 ;; (will soon change this to undo on a per group basis)
 (defvar *undo-data-dir* (make-pathname :directory "/dev/shm/.1009"))
 
@@ -100,7 +100,8 @@ then run the command synchronously and collect the output."
 ;(set-font "-misc-fixed-medium-r-normal-*-10-100-75-75-c-60-koi8-r")
 (set-fg-color        "grey64")
 (set-bg-color        "grey14")
-(set-focus-color     "mediumpurple2")
+(set-focus-color     "grey60")
+;(set-focus-color     "mediumpurple2")
 (set-unfocus-color   "grey16")
 (set-border-color    "grey44")
 (set-win-bg-color    "grey4")
@@ -140,9 +141,9 @@ then run the command synchronously and collect the output."
       *maxsize-gravity* :top-right
       *transient-gravity* :center
       *new-frame-action* :empty
-      *min-frame-width* 50
-      *min-frame-height* 50
-      *resize-increment* 5
+      *min-frame-width* 45
+      *min-frame-height* 45
+      *resize-increment* 2
       *frame-number-map* "yhjukilop")
 
 ;; mode-line/input.

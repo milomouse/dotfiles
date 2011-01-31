@@ -2,10 +2,10 @@
 ;; *data-dir*/macros.lisp
 ;;----------------------------------------------------------------------------
 
-;; define a few parameters first.
+;; define a few parameters first (not sure if this is necessary..)
 ;(defparameter X-TERM "exec urxvt")
 ;(defparameter X-TERM-BROWSER (concatenate 'string X-TERM " -e w3m"))
-;(defparameter X-WWW-BROWSER "exec jumanji")
+;(defparameter X-WWW-BROWSER "exec firefox")
 ;(defparameter X-IMAGE-VIEWER "exec gliv ")
 
 ;; create given groups while keeping focus on current.
@@ -32,16 +32,15 @@
 ;  (4    t     t     :class "MPlayer"))
 
 ;(define-frame-preference "2"
-;  (0    t     t     :title "Ardour - Session Control")
-;  (1    t     t     :instance "qjackctl")
-;  (3    t     t     :instance "qjackctl" :role "qjackctlMainForm"))
+;  (0    t     t     :title "Ardour - Session Control"))
 
+;; internet related workspace:
 (define-frame-preference "3"
   (1    t     t     :instance "Dialog")
-  (0    nil   t     :class "luakit")
-  (0    nil   t     :class "Jumanji")
-  (3    t     nil   :class "URxvt"))
+  (0    nil   t     :instance "Navigator"))
 
+;; largely undefined, temporal workspace:
 (define-frame-preference "6"
-  (0    t     t     :class "Ossxmix"))
+  (0    t     t     :class "Ossxmix")
+  (0    t     t     :class "Gliv"))
 

@@ -17,3 +17,5 @@
 ;    (when (stringp cmd)
 ;      (sleep 0.1))))
 ;(replace-hook *key-press-hook* 'key-press-hook)
+
+;; EOF

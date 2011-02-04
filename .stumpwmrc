@@ -2,39 +2,39 @@
 ;; ${HOME}/.stumpwmrc                                                       ;;
 ;;--------------------------------------------------------------------------;;
 ;; author: milomouse <vincent[at]fea.st>                                    ;;
-;; update: 2011-01-22 08:17:04                                              ;;
+;; update: 2011-02-03 05:05:23                                              ;;
 ;;--------------------------------------------------------------------------;;
 ;; versions used atoc:                                                      ;;
-;; |  sbcl              -> 1.0.43-1                                         ;;
+;; |  sbcl              -> 1.0.45-1                                         ;;
 ;; |  clx               -> 0.7.4-1                                          ;;
 ;; |  cl-ppcre          -> 2.0.3-1                                          ;;
 ;; |  stumpwm-git       -> 20101227-1                                       ;;
-;;-TODO:--------------------------------------------------------------------;;
+;;-TODO/CHANGELOG:----------------------------------------------------------;;
 ;; >>>-: create a 'dedicate' and 'catchall' window-rule (remember * *)      ;;
 ;; >>--: create a 'dedicate' and 'catchall' hook for changing focus color   ;;
 ;; >>--: have mifo(mplayer-daemon) prompts use filename completion          ;;
 ;; >---: better resize; if neighbour {above} then -ARG else +ARG, etc.      ;;
 ;; >>>-: show frame-indicator for 'resize' only if no window in frame       ;;
-;; >>--: command-mode for mifo video:seek to eliminate extra key-presses    ;;
-;; >---: have my 'undo' use group and check current group for undos first   ;;
 ;; >>>>? command for dedicating current win/frame as the Master win/frame   ;;
 ;; >>>>! command for swapping current window with the Master win/frame      ;;
 ;; >>>>! exchange two windows but keep focus in current frame               ;;
+;; >>>>! have my 'undo' use group and check current group for undos first   ;;
+;; >>>>! create a togglable, on-the-fly scratchpad group (no multi screens) ;;
 ;;--------------------------------------------------------------------------;;
 ;; files: *data-dir*/../{commands,functions,hooks,key-maps,macros}.lisp     ;;
-;;-NOTE:--------------------------------------------------------------------;;
-;; 1. for MPlayer, use: mplayer -nokeepaspect {-fstype netwm}               ;;
-;; 2. using SBCL now due to stability issues with clisp-new-clx             ;;
-;; 3. had to rework most files to accomodate SBCL's finicky handling        ;;
 ;;--------------------------------------------------------------------------;;
 
 (in-package :stumpwm)
 
-;; set data-dir for storing debug-file, group and placement dumps, etc.
-;; also set a home-dir. not relative *default-pathname-defaults*.
-(setf *data-dir* (make-pathname :directory
-                 '(:relative "stumpwm" "storage"))
-      *home-dir* (make-pathname :directory "/howl")
+;; set a home-dir. not relative *default-pathname-defaults*.
+;; set a data-dir for storing debug-file, group and placement dumps, etc.
+;; set undo directory to store each group (and desktop) undo states.
+;; set scratchpad group name for when it's created on the fly (.NAME to hide)
+(setf *home-dir* (make-pathname :directory "/howl")
+      *data-dir* (merge-pathnames (make-pathname :directory
+                 '(:relative "conf" "stumpwm" "storage")) *home-dir*)
+      *undo-data-dir* (make-pathname :directory "/dev/shm/.1009")
+      *scratchpad-group-name* ".scratchpad"
       *debug-level* 1)
 
 ;; setup a quick function for redirecting debug information directly to file.
@@ -51,6 +51,16 @@
 ;; setup debug-file variable for referencing (e.g. quitting) purposes.
 (defvar *debug-file* (data-dir-file "log" "lisp"))
 (redirect-debug *debug-file*)
+
+;; before we go further, rewrite colon command to old behavior.
+;; (this should already be fixed in newest version)
+(defcommand colon (&optional initial-input) (:rest)
+  (let ((cmd (completing-read (current-screen) ": "
+          (all-commands) :initial-input (or initial-input ""))))
+    (unless cmd
+      (throw 'error :abort))
+    (when (plusp (length cmd))
+      (eval-command cmd t))))
 
 ;; redefine run-shell-command for 'zsh', change :shell "", and fix a typo.
 (defcommand run-shell-command (cmd &optional collect-output-p)
@@ -70,11 +80,6 @@ then run the command synchronously and collect the output."
   (merge-pathnames
     (make-pathname :directory '(:relative "foto" "wall"))
     *home-dir*))
-
-;; set undo directory to store each group undo state. still a work in progress
-;; as far as the function goes, currently only undos as a bulk desktop process.
-;; (will soon change this to undo on a per group basis)
-(defvar *undo-data-dir* (make-pathname :directory "/dev/shm/.1009"))
 
 ;; gravities.
 (setf *mouse-focus-policy* :click
@@ -153,24 +158,38 @@ then run the command synchronously and collect the output."
       *mode-line-border-width* 1
       *mode-line-pad-x* 1
       *mode-line-pad-y* 0
-      *mode-line-timeout* 1
+      *mode-line-timeout* 300
       *mode-line-position* :top
       *input-history-ignore-duplicates* 0)
 
 ;; load external settings files. these are the bulk of setup/optimizations.
 (loop for file in '("functions" "macros" "commands" "hooks" "key-maps")
-      do (load (make-pathname :name file :type "lisp"
-      :directory '(:relative "stumpwm"))))
+  do (load (merge-pathnames (make-pathname :name file :type "lisp"
+           :directory '(:relative "conf" "stumpwm")) *home-dir*)))
 
-;; set first group as 1, then create every other group in background.
+;; restore data from previous exit (state StumpWM was last using),
+;; else recreate groups accordingly.
+(clear-window-placement-rules)
 (setf (group-name (first (screen-groups (current-screen)))) "1")
 (make-groups-bg "2" "3" "4" "5" "6")
-
-;; restore data from previous exit (state StumpWM was last using).
-(clear-window-placement-rules)
-(restore-from-file (data-dir-file "desktop_data"))
-(restore-window-placement-rules (data-dir-file "placement_rules"))
+(if (probe-file (data-dir-file "desktop.lisp"))
+    (restore-from-file (data-dir-file "desktop.lisp")))
+(restore-window-placement-rules (data-dir-file "tile-rules.lisp"))
+(cond ((string-equal (group-name (current-group)) *scratchpad-group-name*) (gother)))
+;; figure out how to use *scratchpad-group-name* in list..
+;(defvar *restarted* nil)
+;(let* ((g (current-group))
+;       (n (group-name g)))
+;  (if (eq *restarted* nil)
+;      (progn
+;          (loop for name in '("Default" ".scratchpad")
+;            do (if (find-group (current-screen) name)
+;                 (progn
+;                   (cond ((eq g (find-group (current-screen) name)) (gnext)))
+;                   (kill-group (find-group (current-screen) name) g)))))))
+;    (cond ((string-equal (group-name g) n) (gselect g)))))
 
 ;; display a random background image on root window.
 ;(display-random-bg)
 
+;; EOF

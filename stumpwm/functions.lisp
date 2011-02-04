@@ -2,46 +2,50 @@
 ;; *data-dir*/functions.lisp
 ;;----------------------------------------------------------------------------
 
-;; move current window to next group but do not focus.
 (defun move-window-to-next-group (current list)
+"Move current window to next group but keep focus on current frame."
   (let ((next (next-group current (non-hidden-groups list)))
         (win (group-current-window current)))
     (when (and next win) (move-window-to-group win next))))
 
-;; exchange windows but focus remains on current frame.
-;; (this is unlike exchange-windows where focus follows new frame)
 (defun exchange-windows-remain (win1 win2)
+"Exchange windows but keep focus on current frame, unlike exchange-windows."
   (let ((f1 (window-frame win1))
         (f2 (window-frame win2)))
     (unless (eq f1 f2)
       (pull-window win1 f2)
       (pull-window win2 f1))))
 
-;; dump desktop information to file so a previous state can be reapplied later.
-;; (will change this later to accomodate (current-group) instead of desktop)
-(defun remember-undo () ()
+(defun remember-group (&optional (group (current-group))) ()
+"Remember current group information before calling another command or
+function. Combined with undo command this allows for toggling between
+the two undo states."
   (if (ensure-directories-exist *undo-data-dir*)
-    (dump-desktop-to-file
-      (make-pathname :name "undo" :type "lisp" :defaults *undo-data-dir*))))
+    (when group
+      (dump-group-to-file
+        (make-pathname :name (format nil "screen_~{~A~}_group_~{~A~}"
+        (list (char (getenv "DISPLAY") 1)) (list (group-name (current-group))))
+        :type "lisp" :defaults *undo-data-dir*)))))
 
-;; same as 'remember-undo' except all information is dumped for next startup.
 (defun remember-all () ()
-  (dump-window-placement-rules (data-dir-file "placement_rules"))
-  (dump-desktop-to-file (data-dir-file "desktop_data")))
+"Similiar to remember-group except all information is dumped, useful
+for next startup or recalling all undo actions."
+  (dump-to-datadir "rules") (dump-to-datadir "desktop"))
 
-;; select a random image from *background-image-path* and display it on root window.
-;; i had to rewrite this from original to check for errors, have optional sub-dirs,
-;; have optional file types, and be able to use non-type(?) dirs (from merges, etc).
 (defun select-random-bg-image ()
-  (ensure-directories-exist *background-image-path*)
-  (let ((file-list (directory (make-pathname :defaults *background-image-path*
-          :name :wild :type :wild :case :common)))
-        (*random-state* (make-random-state t)))
-    (namestring (nth (random (length file-list)) file-list))))
+"Select a random image from *background-image-path* and display it
+on the root window. This is a rewrite of another function to check
+for errors and allow more than one picture type, as display command
+will only display valid files anyway."
+  (if (ensure-directories-exist *background-image-path*)
+    (let ((file-list (directory (make-pathname :defaults *background-image-path*
+            :name :wild :type :wild :case :common)))
+          (*random-state* (make-random-state t)))
+      (namestring (nth (random (length file-list)) file-list)))))
 
-;; display key-bindings for a given map. ends with proper error color parsing and a prettier format.
 (defun print-key-seq (seq) (format nil "^B^9*~{~a~^ ~}^n^1*" (mapcar 'print-key seq)))
 (defun display-bindings-for-keymaps (key-seq &rest keymaps)
+"Display key-bindings for a given keymap, using a simple and clean format."
   (let* ((screen (current-screen))
          (data (mapcan (lambda (map)
                          (mapcar (lambda (b) (format nil "^B^5*~5a^n ~a" (print-key (binding-key b)) (binding-command b))) (kmap-bindings map)))
@@ -53,8 +57,8 @@
                         (print-key-seq key-seq)
                         (columnize data cols))))
 
-;; focus frame [also when splitting] but do not show-frame-indicator in some cases.
 (defun focus-frame (group f)
+"Focus frame but do not show-frame-indicator in certain cases."
   (let ((w (frame-window f))
         (last (tile-group-current-frame group))
         (show-indicator nil))
@@ -73,15 +77,15 @@
           (update-decoration (frame-window f)))
         (message "Canot split smaller than minimum size."))))
 
-;; run a shell command and display results (may hang if used wrong)
 (defun run-shell-command-output (command)
+"Run a shell command and display results (may hang if used wrong)."
   (check-type command string)
   (echo-string (current-screen) (run-shell-command command t)))
 
-;; expand filenames with special focus on home dir.
 ;(defun expand-file-name (path &optional default-directory)
+;;"Expand filenames with special focus on home dir."
 ;  (let ((first-char (subseq path 0 1))
-;    (home-dir (concatenate 'string (getenv "HOME") "/"))
+;    (home-dir *home-dir*)
 ;    (dir (if default-directory
 ;      (if (string= (subseq (reverse default-directory) 0 1) "/")
 ;        default-directory
@@ -93,15 +97,16 @@
 ;          (expand-file-name (concatenate 'string dir path))))
 ;        (t (concatenate 'string home-dir path)))))
 
-;; use prettier eval error and skip mode-line updates (since i don't use it)
 (defun eval-command (cmd &optional interactivep)
+"Execute a lisp command and display the result, skipping mode-line updates."
   (labels ((parse-and-run-command (input)
              (let* ((arg-line (make-argument-line :string input :start 0))
                     (cmd (argument-pop arg-line)))
                (let ((*interactivep* interactivep))
 		 (call-interactively cmd arg-line)))))
     (multiple-value-bind (result error-p)
-      ;; this fancy footwork lets us grab the backtrace from where the error actually happened.
+      ;; <original quote=
+      ;; this fancy footwork lets us grab the backtrace from where the error actually happened.>
       (restart-case (handler-bind 
           ((error (lambda (c)
                     (invoke-restart 'eval-command-error
@@ -117,8 +122,8 @@
             ((eq result :abort)
              (unless *suppress-abort-messages* (message "Abort.")))))))
 
-;; cleaner {i}resize bindings.
 (defun update-resize-map ()
+"Update the (i)resize map, using cleaner key-bindings."
   (let ((m (setf *resize-map* (make-sparse-keymap))))
     (let ((i *resize-increment*))
     (labels ((dk (m k c) (define-key m k (format nil c i))))
@@ -134,56 +139,14 @@
       (dk m (kbd "ESC") "abort-iresize")
     M)))) (update-resize-map)
 
-(defun fmt-group-status (group)
-  (let ((screen (group-screen group)))
-    (cond ((eq group (screen-current-group screen))
-           #\*)
-          ((and (typep (second (screen-groups screen)) 'group)
-                (eq group (second (screen-groups screen))))
-           #\+)
-          (t #\-))))
+;; this is here in case i want to change it later, which i might.
+;(defun fmt-group-status (group)
+;  (let ((screen (group-screen group)))
+;    (cond ((eq group (screen-current-group screen))
+;           #\*)
+;          ((and (typep (second (screen-groups screen)) 'group)
+;                (eq group (second (screen-groups screen))))
+;           #\+)
+;          (t #\-))))
 
-;(defstruct scratchpad
-;  (last-group '())
-;  (group '()))
-
-;(defvar *scratchpads* '()
-;  "All scratchpads indexed by screen.")
-
-;(defun current-scratchpad ()
-;  (gethash (current-screen) *scratchpads*))
-
-;(defun create-scratchpad-group (screen)
-;  (let ((scratchpad-group (add-group screen "S")))
-;    (setf (group-number scratchpad-group) 0)
-;    scratchpad-group))
-
-;(unless *scratchpads*
-;  ;; Create a scratchpad for each screen
-;  (setf *scratchpads* (make-hash-table :test #'eq))
-;  (let ((start-screen (car *screen-list*)))
-;    (loop for i in *screen-list*
-;       do (progn (switch-to-screen i)
-;                 (let ((scratchpad-group (create-scratchpad-group i)))
-;                   ;;Store the scratchpad
-;                   (setf (gethash (current-screen)
-;                                  *scratchpads*)
-;                         (make-scratchpad
-;                          :group scratchpad-group)))))
-;    (switch-to-screen start-screen)))
-
-;(defcommand scratchpad () ()
-;            (let ((scratchpad (current-scratchpad)))
-;              (if scratchpad
-;                (cond
-;                    ((scratchpad-last-group scratchpad)
-;                     (switch-to-group (scratchpad-last-group scratchpad))
-;                     (setf (scratchpad-last-group scratchpad) nil))
-;                    ((eq (current-group) (scratchpad-group scratchpad))
-;                     (message "scratchpad: I don't know where home is"))
-;                    (t
-;                     (setf (scratchpad-last-group scratchpad) (current-group))
-;                     (switch-to-group (scratchpad-group scratchpad))
-;                     (message "scratchpad")))
-;                  (message "No scratchpad for this screen."))))
-
+;; EOF

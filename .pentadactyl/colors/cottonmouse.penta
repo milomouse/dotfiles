@@ -44,6 +44,7 @@ highlight Number              color: #94bff3;
 highlight Object              color: maroon;
 highlight Preview             color: gray;
 highlight Question            color: #4e4752 !important; background: #dcdcdc !important; font-weight: bold !important;
+highlight StatusCmdLine       color: #444444 !important; background: #dcdcdc !important; font-weight: normal !important;
 highlight StatusLine          color: #413447 !important; background: #dcdcdc !important; font-family: fixed !important; font-weight: normal !important; font-size: 8pt; 
 highlight StatusLineBroken    color: #413447 !important; background: #dcdcdc !important; font-family: fixed !important; font-weight: normal !important; font-size: 8pt; 
 highlight StatusLineExtended  color: #413447 !important; background: #dcdcdc !important; font-family: fixed !important; font-weight: normal !important; font-size: 8pt; 

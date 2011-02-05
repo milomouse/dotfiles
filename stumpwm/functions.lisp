@@ -18,7 +18,7 @@
 
 (defun remember-group (&optional (group (current-group))) ()
 "Remember current group information before calling another command or
-function. Combined with undo command this allows for toggling between
+function. Combined with 'undo' command this allows for toggling between
 the two undo states."
   (if (ensure-directories-exist *undo-data-dir*)
     (when group

@@ -2,7 +2,7 @@
 ;; ${HOME}/.stumpwmrc                                                       ;;
 ;;--------------------------------------------------------------------------;;
 ;; author: milomouse <vincent[at]fea.st>                                    ;;
-;; update: 2011-02-03 05:05:23                                              ;;
+;; update: 2011-02-05 01:27:58                                              ;;
 ;;--------------------------------------------------------------------------;;
 ;; versions used atoc:                                                      ;;
 ;; |  sbcl              -> 1.0.45-1                                         ;;
@@ -18,6 +18,8 @@
 ;; >>>>? command for dedicating current win/frame as the Master win/frame   ;;
 ;; >>>>! command for swapping current window with the Master win/frame      ;;
 ;; >>>>! exchange two windows but keep focus in current frame               ;;
+;; >>>>! dynamically dump group|screen|desktop|rules to *data-dir* by type  ;;
+;; >>>>! dynamically load group|screen|desktop|rules from *data-dir* by type;;
 ;; >>>>! have my 'undo' use group and check current group for undos first   ;;
 ;; >>>>! create a togglable, on-the-fly scratchpad group (no multi screens) ;;
 ;;--------------------------------------------------------------------------;;

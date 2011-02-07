@@ -1,0 +1,31 @@
+#!/bin/zsh
+# resources:
+xrdb -load ${XDG_CONFIG_DIR:-${HOME:-$H/conf}}/xorg/Xdefaults
+xsetroot -cursor_name left_ptr &
+
+# tmux:
+[[ ! -S /tmp/.${UID}/tmux/xorg ]] && command tmux -q -S /tmp/.${UID}/tmux/xorg start-server 
+
+# keyboard:
+xmodmap -e "keycode 133 = Alt_L"
+xmodmap -e "keycode 135 = Alt_R"
+xmodmap -e "keycode 64 = Super_L"
+xmodmap -e "keycode 108 = Super_R"
+xmodmap -e "clear Mod1"
+xmodmap -e "clear Mod4"
+xmodmap -e "add Mod1 = Alt_L Alt_R"
+xmodmap -e "add Mod4 = Super_L Super_R"
+
+# mouse/synclient:
+FILE="/dev/shm/.1009/banishmouse"
+[[ ! -f $FILE ]] || rm -f $FILE
+banishmouse
+
+# for the holidays:
+#xsnow -notrees -nosanta -norudolf -nokeepsnow -nokeepsnowonwindows -nokeepsnowonscreen &>/dev/null &
+
+# wallpaper:
+display -window root -resize 1600x900! ${XDG_PICTURES_DIR:-${H:-/howl}/foto}/wall/wallpaper-31278.png
+
+# window-manager:
+exec stumpwm &>>${XDG_CONFIG_DIR:-${HOME:-$H/conf}}/stumpwm/log.lisp

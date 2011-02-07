@@ -4,16 +4,28 @@ function zshaddhistory {
   line=${1%%$'\n'} ; cmd=${line%% *}
   [[ ${#line} -ge 5
       && ${cmd} != (history|fc|e|exit|cl|clear)
-      && ${cmd} != (losetup|aespipe|cryptsetup)
       && ${cmd} != (daemons|go|startx)
-      && ${cmd} != ([mszx]edit|[zx]load|zhist|wika)
+      && ${cmd} != ([szx]edit|[zx]load|zhist|wika)
       && ${cmd} != (sr|surfraw|srm|rms|rds)
-  ]] && (( ! $argv[(I)*unrl*|*spar*|*losetup*|*litika*|sudo rm*] ))
+  ]] && (( ! $argv[(I)*unrl*|*spar*|*losetup*|*aespipe*|*litika*|sudo rm*] ))
+}
+
+# test arguments and [if valid] prepend file:// to local requests:
+function {jumanji,vimprobable} {
+  setopt no_warncreateglobal
+  for i in {1..999}; do
+    if [[ ${+i} == 1 && ${(P)i} != ${(P)$(($i - 1))} ]]; then
+      if [[ -f $PWD/${(P)i} ]]; then __urls=(${__urls} file://$PWD/${(P)i})
+      elif [[ -f ${(P)i} ]]; then __urls=(${__urls} file://${(P)i})
+      else __urls=(${__urls} ${(P)i}) ; fi
+    else if [[ ${+__urls} == 1 ]]; then
+        command $0 ${__urls} 2>/dev/null ; unset __urls ; break ; fi ; fi
+  done
 }
 
 # check ownership of given argument, as determined by pacman:
 function owns {
-  if [[ -n $(for each in $(print ${PATH}|tr ':' '\n'); do
+  if [[ -n $(for each in ${PATH//:\\\n}; do
              find ${each}/$1 2>/dev/null ; done) ]]
   then command pacman -Qo $(which -p $1)
   else command pacman -Qo $1 ; fi
@@ -97,20 +109,6 @@ function extr {
   fi
 }
 
-# simple sleep function to ease repetition:
-function timer {
-  if [[ $# == 1 ]]; then
-    case $1 {
-      <->|<->[smdh]) 
-        sleep $1
-        [[ -n ${DISPLAY} ]] && stumpish echo Timer has finished. || \
-        print Timer has finished.
-      ;;
-      *)  print "Time must be an Integer, optionally followed by time format [s,m,h,d].\nDefaults to seconds."
-    }
-  fi
-}
-
 # native function for showing 256 colors, properly formatted:
 function 256co {
 #  if [[ ${TERM} != linux ]]; then
@@ -121,18 +119,6 @@ function 256co {
   print ; done
 #  fi
 }
-
-# quick un-smart function to prepend file:// to local requests:
-# (refine this for multiple files, etc, later on)
-#function {jumanji,vimprobable} {
-#  if [[ -f $PWD/$@ ]]; then
-#    command $0 file://$PWD/$@
-#  elif [[ -f $@ ]]; then
-#    command $0 file://$@
-#  else
-#    command $0 $@
-#  fi
-#}
 
 # un-smart function to quickly view word definitions:
 function sd {

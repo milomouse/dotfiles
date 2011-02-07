@@ -10,11 +10,6 @@ webview.init_funcs = {
     -- Set global properties
     set_global_props = function (view, w)
         view:set_prop('user-agent', globals.useragent)
-
-        -- Set proxy options
-        local proxy = globals.http_proxy or os.getenv("http_proxy")
-        if proxy then view:set_prop('proxy-uri', proxy) end
-
         -- Set ssl options
         if globals.ssl_strict ~= nil then
             view:set_prop('ssl-strict', globals.ssl_strict)
@@ -187,7 +182,9 @@ webview.init_funcs = {
     download_request = function (view, w)
         -- 'link' contains the download link
         -- 'filename' contains the suggested filename (from server or webkit)
-        view:add_signal("download-request", function (v, link, filename) w:download(link, filename) end)
+        view:add_signal("download-request", function (v, link, filename)
+            downloads.add(link)
+        end)
     end,
 
     -- Creates context menu popup from table (and nested tables).

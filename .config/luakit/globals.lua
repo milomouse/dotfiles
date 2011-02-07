@@ -33,7 +33,6 @@ globals.ssl_strict = false
 
 -- Search engines
 search_engines = {
-    lua   = "http://www.luakit.org/search/index/luakit?q={0}",
     bbs   = "https://bbs.archlinux.org/search.php?action=search&keywords={0}&author=&forum=-1&search_in=all&sort_by=0&sort_dir=DESC&show_as=topics",
     aur   = "http://aur.archlinux.org/packages.php?O=0&K={0}",
     abug  = "https://bugs.archlinux.org/index.php?string={0}&project=1&type%5B%5D=&sev%5B%5D=&pri%5B%5D=&due%5B%5D=&reported%5B%5D=&cat%5B%5D=&status%5B%5D=open&percent%5B%5D=&opened=&dev=&closed=&duedatefrom=&duedateto=&changedfrom=&changedto=&openedfrom=&openedto=&closedfrom=&closedto=&do=index",
@@ -42,9 +41,6 @@ search_engines = {
     g     = "http://www.google.com/search?q={0}",
     gs    = "https://www.google.com/search?q={0}",
     gi    = "http://www.google.com/images?q={0}&um=1&ie=UTF-8&source=og&sa=N&hl=en&tab=wi",
-    gc    = "http://www.google.com/codesearch?as_q={0}&btnG=Search+Code&hl=en&as_package=&as_lang=&as_filename=&as_class=&as_function=&as_license=&as_case=",
-    sf    = "http://sourceforge.net/search/?words={0}",
-    slash = "http://slashdot.org/search.pl?query={0}",
     negg  = "http://www.newegg.com/Product/ProductList.aspx?Submit=ENE&DEPA=0&Order=BESTMATCH&Description={0}",
     tiger = "http://www.tigerdirect.com/applications/SearchTools/search.asp?keywords={0}",
     im    = "http://www.imdb.com/find?s=all&q={0}",
@@ -57,43 +53,109 @@ search_engines = {
     bt    = "http://btjunkie.org/search?q={0}",
     pt    = "http://thepiratebay.org/search/{0}",
 }
+-- So, I realized I never use these.. but left there here just in case:
+--    lua   = "http://www.luakit.org/search/index/luakit?q={0}",
+--    gc    = "http://www.google.com/codesearch?as_q={0}&btnG=Search+Code&hl=en&as_package=&as_lang=&as_filename=&as_class=&as_function=&as_license=&as_case=",
+--    sf    = "http://sourceforge.net/search/?words={0}",
+--    slash = "http://slashdot.org/search.pl?query={0}",
 
--- Set google-ssl (gs) as fallback search engine
-search_engines.default = search_engines.gs
+-- Set google as fallback search engine
+search_engines.default = search_engines.g
+-- Use this instead to disable auto-searching
+--search_engines.default = "{0}"
 
 -- Fake the cookie policy enum here
 cookie_policy = { always = 0, never = 1, no_third_party = 2 }
 
 -- Per-domain webview properties
+-- See http://webkitgtk.org/reference/webkitgtk-WebKitWebSettings.html
 domain_props = {
     ["all"] = {
-        ["enable-scripts"]          = true,
-        ["enable-plugins"]          = false,
-        ["enable-private-browsing"] = true,
-        ["user-stylesheet-uri"]     = luakit.data_dir .. "/styles/mouse.css",
-        ["accept-policy"]           = cookie_policy.no_third_party,
-    },
-    ["youtube.com"] = {
         ["enable-scripts"] = true,
-        ["enable-plugins"] = true,
-        ["enable-private-browsing"] = false,
-        ["accept-policy"]  = cookie_policy.no_third_party,
-    },
-    ["kickasstorrents.com"] = {
-        ["enable-scripts"] = true,
-        ["enable-plugins"] = true,
+        ["enable-plugins"] = false,
         ["enable-private-browsing"] = true,
-        ["accept-policy"]  = cookie_policy.no_third_party,
+        ["user-stylesheet-uri"] = luakit.data_dir .. "/styles/mouse.css",
+        ["accept-policy"] = cookie_policy.no_third_party,
     },
     ["bbs.archlinux.org"] = {
         ["enable-private-browsing"] = false,
-        ["accept-policy"]           = cookie_policy.no_third_party,
     },
-    ["akiba-online.com"] = {
-        ["enable-scripts"] = true,
+    ["bugs.archlinux.org"] = {
+        ["enable-private-browsing"] = false,
+    },
+    ["aur.archlinux.org"] = {
+        ["enable-private-browsing"] = false,
+    },
+    ["github.com"] = {
         ["enable-plugins"] = true,
         ["enable-private-browsing"] = false,
-        ["accept-policy"]  = cookie_policy.no_third_party,
+    },
+    ["en.wikipedia.org"] = {
+        ["enable-private-browsing"] = false,
+        ["accept-policy"] = cookie_policy.never,
+    },
+    ["amazon.com"] = {
+        ["enable-plugins"] = true,
+        ["enable-private-browsing"] = false,
+    },
+    ["newegg.com"] = {
+        ["enable-private-browsing"] = false,
+    },
+    ["tigerdirect.com"] = {
+        ["enable-private-browsing"] = false,
+    },
+    ["ebay.com"] = {
+        ["enable-plugins"] = true,
+        ["enable-private-browsing"] = false,
+    },
+    ["shop.ebay.com"] = {
+        ["enable-plugins"] = true,
+        ["enable-private-browsing"] = false,
+    },
+    ["my.ebay.com"] = {
+        ["enable-plugins"] = true,
+        ["enable-private-browsing"] = false,
+    },
+    ["google.com"] = {
+        ["enable-scripts"] = false,
+        ["accept-policy"] = cookie_policy.never,
+    },
+    ["scroogle.org"] = {
+        ["enable-scripts"] = false,
+        ["accept-policy"] = cookie_policy.never,
+    },
+    ["ixsearch.com"] = {
+        ["enable-scripts"] = false,
+        ["accept-policy"] = cookie_policy.never,
+    },
+    ["yahoo.com"] = {
+        ["enable-scripts"] = false,
+        ["accept-policy"] = cookie_policy.never,
+    },
+    ["imdb.com"] = {
+        ["enable-scripts"] = false,
+        ["accept-policy"] = cookie_policy.never,
+    },
+    ["youtube.com"] = {
+        ["enable-plugins"] = true,
+        ["enable-private-browsing"] = false,
+    },
+    ["btjunkie.org"] = {
+        ["accept-policy"] = cookie_policy.never,
+    },
+    ["kickasstorrents.com"] = {
+        ["enable-plugins"] = true,
+    },
+    ["thepiratebay.org"] = {
+        ["accept-policy"] = cookie_policy.never,
+    },
+    ["last.fm"] = {
+        ["enable-plugins"] = true,
+        ["enable-private-browsing"] = false,
+    },
+    ["pandora.com"] = {
+        ["enable-plugins"] = true,
+        ["enable-private-browsing"] = false,
     },
 }
 

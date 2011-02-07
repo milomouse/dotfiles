@@ -1,6 +1,8 @@
-------------------
--- Window class --
-------------------
+-------------------------
+--    Window class     --
+-------------------------
+-- cottonmouse edition --
+-------------------------
 
 -- Window class table
 window = {}
@@ -34,6 +36,8 @@ function window.build()
             l = {
                 layout = hbox(),
                 ebox   = eventbox(),
+                scroll = label(),
+                buf    = label(),
                 uri    = label(),
                 loaded = label(),
             },
@@ -43,10 +47,8 @@ function window.build()
             r = {
                 layout = hbox(),
                 ebox   = eventbox(),
-                buf    = label(),
                 ssl    = label(),
                 tabi   = label(),
-                scroll = label(),
             },
         },
 
@@ -67,7 +69,7 @@ function window.build()
     w.ebox:set_child(w.layout)
     w.win:set_child(w.ebox)
 
-    -- Pack tablist
+    -- Pack tablist (comment out if you don't want a tabbar)
     w.layout:pack_start(w.tablist.widget, false, false, 0)
 
     -- Pack notebook
@@ -75,16 +77,16 @@ function window.build()
 
     -- Pack left-aligned statusbar elements
     local l = w.sbar.l
-    l.layout:pack_start(l.uri,    false, false, 0)
+    l.layout:pack_start(l.scroll, false, false, 0)
+    l.layout:pack_start(l.buf,    false, false, 0)
     l.layout:pack_start(l.loaded, false, false, 0)
     l.ebox:set_child(l.layout)
 
-    -- Pack right-aligned statusbar elements
+    -- Pack right-aligned statusbar elements (reorganized slightly)
     local r = w.sbar.r
-    r.layout:pack_start(r.buf,    false, false, 0)
+    r.layout:pack_start(l.uri,    false, false, 0)
     r.layout:pack_start(r.ssl,    false, false, 0)
     r.layout:pack_start(r.tabi,   false, false, 0)
-    r.layout:pack_start(r.scroll, false, false, 0)
     r.ebox:set_child(r.layout)
 
     -- Pack status bar elements
@@ -177,22 +179,26 @@ window.init_funcs = {
     end,
 
     apply_window_theme = function (w)
-        local s, i  = w.sbar, w.ibar
+        local s, i = w.sbar, w.ibar
 
         -- Set foregrounds
         for wi, v in pairs({
             [s.l.uri]    = theme.uri_sbar_fg,
-            [s.l.loaded] = theme.loaded_sbar_fg,
-            [s.r.buf]    = theme.buf_sbar_fg,
-            [s.r.tabi]   = theme.tabi_sbar_fg,
-            [s.r.scroll] = theme.scroll_sbar_fg,
+            [s.l.loaded] = theme.sbar_loaded_fg,
+--            [s.l.buf]    = theme.buf_sbar_fg,
+            [s.l.buf]    = theme.sbar_loaded_bg,
+--            [s.r.tabi]   = theme.tabi_sbar_fg,
+            [s.r.tabi]   = theme.proxy_inactive_menu_fg,
+--            [s.l.scroll] = theme.scroll_sbar_fg,
+            [s.l.scroll] = theme.menu_selected_fg,
             [i.prompt]   = theme.prompt_ibar_fg,
             [i.input]    = theme.input_ibar_fg,
         }) do wi.fg = v end
 
         -- Set backgrounds
         for wi, v in pairs({
-            [s.l.ebox]   = theme.sbar_bg,
+--            [s.l.ebox]   = theme.sbar_bg,
+            [s.l.ebox]   = theme.menu_selected_bg,
             [s.r.ebox]   = theme.sbar_bg,
             [s.sep]      = theme.sbar_bg,
             [s.ebox]     = theme.sbar_bg,
@@ -203,11 +209,11 @@ window.init_funcs = {
         -- Set fonts
         for wi, v in pairs({
             [s.l.uri]    = theme.uri_sbar_font,
-            [s.l.loaded] = theme.loaded_sbar_font,
-            [s.r.buf]    = theme.buf_sbar_font,
+            [s.l.loaded] = theme.sbar_loaded_font,
+            [s.l.buf]    = theme.buf_sbar_font,
             [s.r.ssl]    = theme.ssl_sbar_font,
             [s.r.tabi]   = theme.tabi_sbar_font,
-            [s.r.scroll] = theme.scroll_sbar_font,
+            [s.l.scroll] = theme.scroll_sbar_font,
             [i.prompt]   = theme.prompt_ibar_font,
             [i.input]    = theme.input_ibar_font,
         }) do wi.font = v end
@@ -218,7 +224,7 @@ window.init_funcs = {
         if string.match(size, "^%d+x%d+$") then
             w.win:set_default_size(string.match(size, "^(%d+)x(%d+)$"))
         else
-            info("E: window.lua: invalid window size: %q", size)
+            warn("E: window.lua: invalid window size: %q", size)
         end
     end,
 }
@@ -237,8 +243,13 @@ window.methods = {
 
     -- Wrapper around the bind plugin's hit method
     hit = function (w, mods, key, opts)
-        local caught, newbuf = lousy.bind.hit(w.binds or {}, mods, key, w.buffer, w:is_mode("normal"), w, opts)
-        if w.win then
+        local opts = lousy.util.table.join(opts or {}, {
+            enable_buffer = w:is_mode("normal"),
+            buffer = w.buffer,
+        })
+
+        local caught, newbuf = lousy.bind.hit(w, w.binds, mods, key, opts)
+        if w.win then -- Check binding didn't cause window to exit
             w.buffer = newbuf
             w:update_buf()
         end
@@ -247,7 +258,7 @@ window.methods = {
 
     -- Wrapper around the bind plugin's match_cmd method
     match_cmd = function (w, buffer)
-        return lousy.bind.match_cmd(get_mode("command").commands, buffer, w)
+        return lousy.bind.match_cmd(w, get_mode("command").commands, buffer, w)
     end,
 
     -- enter command or characters into command line
@@ -287,8 +298,8 @@ window.methods = {
 
     del_line = function (w)
         local i = w.ibar.input
-        if i.text ~= ":" then
-            i.text = ":"
+        if not string.match(i.text, "^[:/?]$") then
+            i.text = string.sub(i.text, 1, 1)
             i.position = -1
         end
     end,
@@ -354,6 +365,11 @@ window.methods = {
         w:set_prompt(msg, { fg = theme.notif_fg, bg = theme.notif_bg })
     end,
 
+    warning = function (w, msg, set_mode)
+        if set_mode ~= false then w:set_mode() end
+        w:set_prompt(msg, { fg = theme.warning_fg, bg = theme.warning_bg })
+    end,
+
     error = function (w, msg, set_mode)
         if set_mode ~= false then w:set_mode() end
         w:set_prompt("Error: "..msg, { fg = theme.error_fg, bg = theme.error_bg })
@@ -384,16 +400,17 @@ window.methods = {
         if input.bg ~= bg then input.bg = bg end
         -- Set text or remain hidden
         if text then
-            input.text = text
+            input.text = ""
             input:show()
             input:focus()
+            input.text = text
             input.position = opts.pos or -1
         end
     end,
 
     -- GUI content update functions
     update_tab_count = function (w, i, t)
-        w.sbar.r.tabi.text = string.format("[%d/%d]", i or w.tabs:current(), t or w.tabs:count())
+        w.sbar.r.tabi.text = string.format("[%d:%d]", i or w.tabs:current(), t or w.tabs:count())
     end,
 
     update_win_title = function (w, view)
@@ -409,7 +426,7 @@ window.methods = {
         if not view then view = w:get_current() end
         local u, escape = w.sbar.l.uri, lousy.util.escape
         if link then
-            u.text = "Link: " .. escape(link)
+            u.text = "URL: " .. escape(link)
         else
             u.text = escape((uri or (view and view.uri) or "about:blank"))
         end
@@ -430,12 +447,12 @@ window.methods = {
 
     update_scroll = function (w, view)
         if not view then view = w:get_current() end
-        local scroll = w.sbar.r.scroll
+        local scroll = w.sbar.l.scroll
         if view then
             local val, max = view:get_scroll_vert()
-            if max == 0 then val = "All"
-            elseif val == 0 then val = "Top"
-            elseif val == max then val = "Bot"
+            if max == 0 then val = "*"
+            elseif val == 0 then val = "0%"
+            elseif val == max then val = "100%"
             else val = string.format("%2d%%", (val/max) * 100)
             end
             if scroll.text ~= val then scroll.text = val end
@@ -451,15 +468,15 @@ window.methods = {
         local ssl = w.sbar.r.ssl
         if trusted ~= nil and not w.checking_ssl then
             ssl.fg = theme.notrust_fg
-            ssl.text = "(nocheck)"
+            ssl.text = "unchecked"
             ssl:show()
         elseif trusted == true then
             ssl.fg = theme.trust_fg
-            ssl.text = "(trust)"
+            ssl.text = "trusted"
             ssl:show()
         elseif trusted == false then
             ssl.fg = theme.notrust_fg
-            ssl.text = "(notrust)"
+            ssl.text = "untrusted"
             ssl:show()
         else
             ssl:hide()
@@ -467,7 +484,7 @@ window.methods = {
     end,
 
     update_buf = function (w)
-        local buf = w.sbar.r.buf
+        local buf = w.sbar.l.buf
         if w.buffer then
             buf.text = lousy.util.escape(string.format(" %-3s", w.buffer))
             buf:show()
@@ -484,33 +501,21 @@ window.methods = {
         w:update_buf()
     end,
 
-    download = function (w, link, filename)
-        if not filename then
-            -- just take the last part of the link
-            filename = string.gsub(string.match(link, "/[^/]*/?$"), "/", "")
-        end
-        -- Make download dir
-        os.execute(string.format("mkdir -p %q", globals.download_dir))
-        local dl = globals.download_dir .. "/" .. filename
-        local wget = string.format("wget -q %q -O %q", link, dl)
-        info("Launching: %s", wget)
-        luakit.spawn(wget)
-    end,
-
     update_tablist = function (w, current)
         local current = current or w.tabs:current()
-        local fg, bg = theme.tab_fg, theme.tab_bg
+        local fg, bg, nfg, snfg = theme.tab_fg, theme.tab_bg, theme.tab_ntheme, theme.selected_ntheme
         local lfg, bfg, gfg = theme.tab_loading_fg, theme.tab_notrust_fg, theme.tab_trust_fg
         local escape, get_title = lousy.util.escape, w.get_tab_title
         local tabs, tfmt = {}, ' <span foreground="%s">%s</span> %s'
 
         for i, view in ipairs(w.tabs:get_children()) do
             -- Get tab number theme
-            local ntheme
+            local ntheme = nfg
             if view:loading() then -- Show loading on all tabs
                 ntheme = lfg
             elseif current == i then -- Show ssl trusted/untrusted on current tab
                 local trusted = view:ssl_trusted()
+                ntheme = snfg
                 if trusted == false or (trusted ~= nil and not w.checking_ssl) then
                     ntheme = bfg
                 elseif trusted then
@@ -529,7 +534,7 @@ window.methods = {
         w.tablist:update(tabs, current)
     end,
 
-    new_tab = function (w, arg, switch)
+    new_tab = function (w, arg, switch, order)
         local view
         -- Use blank tab first
         if w.has_blank and w.tabs:count() == 1 and w.tabs:atindex(1).uri == "about:blank" then
@@ -539,8 +544,21 @@ window.methods = {
         -- Make new webview widget
         if not view then
             view = webview.new(w)
-            local i = w.tabs:append(view)
-            if switch ~= false then w.tabs:switch(i) end
+
+            if not order and taborder then
+                order = (switch == false and taborder.default_bg) or
+                                             taborder.default
+            end
+
+            if not order then
+                -- No taborder, or no taborder defaults. Put new tab last.
+                order = function(w) return w.tabs:count() + 1 end
+            end
+
+            local newindex = order(w, view)
+            newindex = w.tabs:insert(view, newindex)
+
+            if switch ~= false then w.tabs:switch(newindex) end
         end
         -- Load uri or webview history table
         if type(arg) == "string" then view.uri = arg
@@ -566,15 +584,14 @@ window.methods = {
         local index = w.tabs:indexof(view)
         if index ~= 1 then tab.after = w.tabs:atindex(index-1) end
         table.insert(w.closed_tabs, tab)
-        -- Remove & destroy
-        w.tabs:remove(view)
-        view.uri = "about:blank"
         view:destroy()
         w:update_tab_count()
         w:update_tablist()
     end,
 
     close_win = function (w)
+        w:emit_signal("close")
+
         -- Close all tabs
         while w.tabs:count() ~= 0 do
             w:close_tab(nil, false)
@@ -646,9 +663,19 @@ window.methods = {
     search_open = function (w, arg)
         if not arg then return "about:blank" end
         args = lousy.util.string.split(lousy.util.string.strip(arg))
-        -- Detect scheme:// or "." in string
-        if #args == 1 and (string.match(args[1], "%.") or string.match(args[1], "^%w+://")) then
-            return args[1]
+        -- Detect localhost, scheme:// or domain-like beginning in string
+        if #args == 1  then
+            local uri = args[1]
+            local scheme = string.match(uri, "^%w+://")
+            local localhost = string.match(uri, "^localhost[:/]%S*") or string.match(uri, "^localhost$")
+            -- Extract domain from before the first colon or slash
+            local domain = string.match(uri, "^([%w%-_%.]+)[:/]%S*") or string.match(uri, "^([%w%-_%.]+)$")
+            -- A valid domain consists of [%w%-_%.] and has at least one dot
+            -- with at least one [%w%-_] on the left and a TLD on the right
+            -- with at least two letters
+            if scheme or localhost or (domain and string.match(domain, "^[%w%-_%.]*[%w%-_]%.%a%a[%a%.]*$")) then
+                return uri
+            end
         end
         -- Find search engine
         local engine = "default"

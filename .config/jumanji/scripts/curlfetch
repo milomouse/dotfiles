@@ -1,16 +1,18 @@
 #!/bin/zsh
-# author: milomouse <vincent[at]fea.st>
-# detail: simple download parser (useful with Jumanji, Luakit, etc.)
-unsetopt nomatch functionargzero
+####################################################################
+# author: milomouse <vincent[at]fea.st>                            #
+# detail: simple download parser (useful with Jumanji, etc)        #
+####################################################################
+setopt no_nomatch no_functionargzero
 
 ## FILES
-cookies="${XDG_CONFIG_DIR:-${HOME}}/jumanji/cookies"
-downlog="${XDG_CONFIG_DIR:-${HOME}}/jumanji/download.log"
+cookies="${XDG_CONFIG_DIR:-/howl/conf}/.config/jumanji/cookies"
+downlog="${XDG_CONFIG_DIR:-/howl/conf}/.config/jumanji/download.log"
 
 ## DIRECTORIES
-basedir="${XDG_DOWNLOAD_DIR:-${H:-/howl}/down}"
+basedir="${XDG_DOWNLOAD_DIR:-/howl/down}"
 bd_image="$basedir/foto" # image files # (png, jpg, bmp, tiff..)
-bd_video="$basedir/vide/fire" # video files # (mkv, ogv, mp4, wmv..)
+bd_video="$basedir/vide" # video files # (mkv, ogv, mp4, wmv..)
 bd_audio="$basedir/muzk" # audio files # (mp3, ogg, m4a, flac..)
 bd_texts="$basedir/docs" # document(s) # (txt, pdf, ps, rtf..)
 bd_packs="$basedir/pkgs" # archive/iso # (tar, zip, iso, img..)
@@ -27,7 +29,7 @@ bd_undef="$basedir" # everything else # (undefined types/webpages)
 
 # Per folder/option file types (according to personal preference).
 if [[ -n "$1" ]]; then
-  case $1:l:t:e {
+  case ${1:l:t:e} {
     # [useful] image files:
     bmp|exif|gif*|jpg*|jpeg*|png*|tiff|svg*)
       OPTION=(--progress=dot:default --no-clobber --no-directories --max-redirect=5 \
@@ -36,7 +38,7 @@ if [[ -n "$1" ]]; then
     # [useful] video +related files:
     26[3-4]|3gp|3ivx|aaf|asf|avc|avi|cam|dvx|divx|h26[3-4]|hdmov|m[1-2]v|m4v|m4p|\
     mkv|mov|moov|movie|mp4|mp4v|mpg|mpg2|mpeg|mpegpes|mpeg4|nut|ogm|ogv|ogx|vob|qt|\
-    qtm|x26[3-4]|xvid|vob|wmv|yuv|yuv4mpeg|vdpau|vivo|ifo|sbt|srt|idx|btn|usf|drc|\
+    qtm|x26[3-4]|xvid|wmv|yuv|yuv4mpeg|vdpau|vivo|ifo|sbt|srt|idx|vobsub|btn|usf|drc|\
     f4v|fli|flv|real|rm|rmd|rmp|rms|rmvb|roq|swf|m2p|mpv|mpv2|rts|rv|ts|webm|ra|\
     mks|webmv|rv|ram|ass|ssa|ivf|vp8|sup)
       OPTION=(--progress=dot:mega --continue --no-directories --limit-rate=60k \
@@ -77,7 +79,10 @@ if [[ -n "$1" ]]; then
   --prefer-family=IPv4 --secure-protocol=auto --retry-connrefused --tries=10 \
   ${OPTION} "$1")) ]] { sleep 1 }
 
-  print "Download has finished or connection timeout ($1)"
+  if [[ -n $(command pgrep stumpwm) ]]; then
+    command stumpish echo "^B^1*Download has finished or connection timeout:^2*
+(^4* $1 ^2*)^n"
+  else print "Download has finished or connection timeout ($1)" ; fi
 else
   print nothing specified
 fi

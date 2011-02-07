@@ -1,11 +1,12 @@
-## ~/.config/jumanji/jumanjirc
+## ${XDG_CONFIG_DIR:-/howl/conf}/.config/jumanji/jumanjirc
 ## milomouse <vincent[at]fea.st>
 
 ## external scripts:
-#script ~/jumanji/scripts/dwb2-hints.js
-script ~/jumanji/scripts/JumNav.js
-#set stylesheet file:///howl/conf/jumanji/styles/lich.css
-set stylesheet file:///howl/conf/jumanji/styles/mouse.css
+#script ~/.config/jumanji/scripts/hinting.js
+#script ~/.config/jumanji/scripts/dwb2-hints.js
+script ~/.config/jumanji/scripts/JumNav.js
+#set stylesheet file:///howl/conf/.config/jumanji/styles/lich.css
+set stylesheet file:///howl/conf/.config/jumanji/styles/mouse.css
 
 ## browser settings:
 set proxy 127.0.0.1:8118
@@ -13,8 +14,8 @@ set private_browsing false
 set plugin_blocker true
 set single_instance true
 set homepage https://bbs.archlinux.org/search.php?action=show_new
-set n_completion_items 20
-set 96dpi true
+set n_completion_items 10
+set 96dpi false
 set scrollbars false
 set statusbar true
 set tabbar false
@@ -29,10 +30,10 @@ set spell_checking true
 set resizable_text_areas false
 set auto_save 60
 set download_dir /howl/down/
-set editor "urxvt -e zsh -c \"vim -p %s\""
-set download_command zsh -c "curlfetch '%s'";
-#set download_command zsh -c "cd ~/down ; curl -sL4jk --ssl -C - --retry 3 --retry-delay 3 -c ~/.config/jumanji/cookies -b ~/.config/jumanji/cookies '%s' -o %s";
-#set download_command zsh -c "cd ~/down ; wget --load-cookies ~/.config/jumanji/cookies -Eckpq --prefer-family=IPv4 --random-wait '%s'";
+set editor "/usr/bin/urxvt -e /bin/zsh -c \"/usr/bin/vim -p %s\""
+set download_command /bin/zsh -c "/usr/local/bin/curlfetch '%s'";
+#set download_command /bin/zsh -c "cd ${XDG_DOWNLOAD_DIR:-/howl/down} ; /usr/bin/curl -sL4jk --ssl -C - --retry 3 --retry-delay 3 -c ${HOME:-/howl/conf}/.config/jumanji/cookies -b ${HOME:-/howl/conf}/.config/jumanji/cookies '%s' -o %s";
+#set download_command /bin/zsh -c "cd ${XDG_DOWNLOAD_DIR:-/howl/down} ; /usr/bin/wget --load-cookies ${HOME:-/howl/conf}/.config/jumanji/cookies -Eckpq --prefer-family=IPv4 --random-wait '%s'";
 
 ## search engines:
 searchengine google http://www.google.com/search?q=%s
@@ -74,16 +75,16 @@ set completion_g_bgcolor #101010
 set completion_g_fgcolor #eeeeee
 set completion_hl_bgcolor #98a7b2
 set completion_hl_fgcolor #232323
-set notification_e_bgcolor #d554dd
+set notification_e_bgcolor #506e6c
 set notification_e_fgcolor #eeeeee
 set notification_w_bgcolor #98a7b6
 set notification_w_fgcolor #000000
 
 ## keybindings:
-#   Key       Action        Argument
 map J scroll full_down
 map K scroll full_up
 map <PageDown> scroll full_down
 map <PageUp> scroll full_up
+map <Space> scroll full_down
 map H nav_history previous
 map L nav_history next

@@ -1,5 +1,5 @@
 ;;----------------------------------------------------------------------------
-;; *data-dir*/key-maps.lisp
+;; *data-dir*/../key-maps.lisp
 ;;----------------------------------------------------------------------------
 
 ;; export custom maps.
@@ -87,8 +87,10 @@
     (dk m (kbd "b") "display-random-bg")
     (dk m (kbd "B") "exec display -window root -resize 1600x900! /howl/foto/wall/wallpaper-31278.png")
     (dk m (kbd "C-b") "exec display -window root -resize 1600x900! /howl/foto/wall/1366x768_dizorb_landscape_study_hd_wallpaper.png")
+;;    (dk m (kbd "f") "ror_firefox")
     (dk m (kbd "h") "exec urxvt -e htop")
-    (dk m (kbd "f") "ror_firefox")
+;;    (dk m (kbd "j") "ror_jumanji")
+    (dk m (kbd "l") "ror_luakit")
     (dk m (kbd "m") "ror_mutt")
     (dk m (kbd "s") "exec urxvt -e nsudoku 12")
     (dk m (kbd "x") "exec xskat -opt ${XDG_CONFIG_DIR:-${HOME}}/xorg/xskat.opt -list ${XDG_CONFIG_DIR:-${HOME}}/xorg/xskat.lst")

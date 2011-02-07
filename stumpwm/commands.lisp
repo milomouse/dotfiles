@@ -1,5 +1,5 @@
 ;;----------------------------------------------------------------------------
-;; *data-dir*/commands.lisp
+;; *data-dir*/../commands.lisp
 ;;----------------------------------------------------------------------------
 
 ;; create a scratchpad group if none exist and toggle between viewing current group and scratchpad group.
@@ -63,7 +63,7 @@ restore file dynamically by pattern patching, according to what you're restoring
 looking at what you're currently using.
 
 E.g. if you're in group 2 on screen 0 and you enter 'restore-from-datadir group' it will look for a
-file named 'screen_0_group_2.lisp' (most likely created by 'dump-to-datadir') in your data-dir and
+file named 'screen_0_group_2.lisp' (created by accompanying 'dump-to-datadir') in your data-dir and
 restore it. If no matching file is found it will skip loading of any files and print an error message.
 
 Note: if restoring a group file was successful then an undo state is created so you can technically
@@ -410,7 +410,9 @@ command's output. This may hang if used wrong."
       (err "^B^5*~A" c))))
 
 ;; run or raise.
-(defcommand ror_firefox () () "" (setf *run-or-raise-all-groups* t) (run-or-raise "firefox" '(:instance "Navigator")))
+;;(defcommand ror_firefox () () "" (setf *run-or-raise-all-groups* t) (run-or-raise "firefox" '(:instance "Navigator")))
+;;(defcommand ror_jumanji () () "" (setf *run-or-raise-all-groups* t) (run-or-raise "jumanji" '(:class "Jumanji")))
+(defcommand ror_luakit () () "" (setf *run-or-raise-all-groups* t) (run-or-raise "luakit" '(:class "luakit")))
 (defcommand ror_mutt () () "" (setf *run-or-raise-all-groups* t)
   (run-or-raise "urxvt -title '[urxvt] mutt' -e mutt -F ${XDG_CONFIG_DIR:-${HOME}}/mutt/muttrc" '(:title "\\[urxvt\\] mutt")))
 

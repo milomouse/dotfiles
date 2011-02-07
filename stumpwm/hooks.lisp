@@ -1,5 +1,5 @@
 ;;----------------------------------------------------------------------------
-;; *data-dir*/hooks.lisp
+;; *data-dir*/../hooks.lisp
 ;;----------------------------------------------------------------------------
 
 ;; show local windows in frame when focusing on it. unfortunately the echo

@@ -10,25 +10,25 @@ function zshaddhistory {
   ]] && (( ! $argv[(I)*unrl*|*spar*|*losetup*|*aespipe*|*litika*|sudo rm*] ))
 }
 
-# test arguments and [if valid] prepend file:// to local requests:
-function {jumanji,vimprobable} {
-  setopt no_warncreateglobal
-  for i in {1..999}; do
-    if [[ ${+i} == 1 && ${(P)i} != ${(P)$(($i - 1))} ]]; then
-      if [[ -f $PWD/${(P)i} ]]; then __urls=(${__urls} file://$PWD/${(P)i})
-      elif [[ -f ${(P)i} ]]; then __urls=(${__urls} file://${(P)i})
-      else __urls=(${__urls} ${(P)i}) ; fi
-    else if [[ ${+__urls} == 1 ]]; then
-        command $0 ${__urls} 2>/dev/null ; unset __urls ; break ; fi ; fi
-  done
-}
+## test arguments and [if valid] prepend file:// to local requests:
+#function {jumanji,vimprobable} {
+#  setopt no_warncreateglobal
+#  for i in {1..999}; do
+#    if [[ ${+i} == 1 && ${(P)i} != ${(P)$(($i - 1))} ]]; then
+#      if [[ -f $PWD/${(P)i} ]]; then __urls=(${__urls} file://$PWD/${(P)i})
+#      elif [[ -f ${(P)i} ]]; then __urls=(${__urls} file://${(P)i})
+#      else __urls=(${__urls} ${(P)i}) ; fi
+#    else if [[ ${+__urls} == 1 ]]; then
+#        command $0 ${__urls} 2>/dev/null ; unset __urls ; break ; fi ; fi
+#  done
+#}
 
 # check ownership of given argument, as determined by pacman:
 function owns {
   if [[ -n $(for each in ${PATH//:\\\n}; do
              find ${each}/$1 2>/dev/null ; done) ]]
-  then command pacman -Qo $(which -p $1)
-  else command pacman -Qo $1 ; fi
+  then pacman -Qo $(which -p $1)
+  else pacman -Qo $1 ; fi
 }
 
 # jump to previous directory by integer or reg-exp, also list dirs,
@@ -75,12 +75,12 @@ function mvf {
 function psi {
   if [[ ${#${@:/$0}} -ge 2 ]]; then
     case $1 {
-      '-C'|'-c')  command ps -C $2 hopid,args ;; # by- command name
-      '-G'|'-g')  command ps -G $2 hopid,args ;; # by- real group id (RGID)/name
-      '-U'|'-u')  command ps -U $2 hopid,args ;; # by- effective user ID (EUID)/name
-      '-P'|'-p')  command ps -p $2 hoargs ;;     # by- pid
-      '-S'|'-s')  command ps -s $2 hopid,args ;; # by- session id
-      '-T'|'-t')  command ps -t $2 hopid,args ;; # by- tty
+      '-C'|'-c')  ps -C $2 hopid,args ;; # by- command name
+      '-G'|'-g')  ps -G $2 hopid,args ;; # by- real group id (RGID)/name
+      '-U'|'-u')  ps -U $2 hopid,args ;; # by- effective user ID (EUID)/name
+      '-P'|'-p')  ps -p $2 hoargs ;;     # by- pid
+      '-S'|'-s')  ps -s $2 hopid,args ;; # by- session id
+      '-T'|'-t')  ps -t $2 hopid,args ;; # by- tty
       *)  print "unrecognized option. read: man ps (section: process selection by list)" ;; }
   else print "invalid selection. read: man ps (section: process selection by list)" ; fi
 }
@@ -89,19 +89,19 @@ function psi {
 function extr {
   if [[ -f $1 ]]; then 
     case $1 in
-      *.tar.bz2)   command tar xjf $1    ;;
-      *.tar.gz)    command tar xzf $1    ;;
-      *.bz2)       command bunzip2 $1    ;;
-      *.rar)       command unrar x $1    ;;
-      *.gz)        command gunzip $1     ;;
-      *.tar)       command tar xf $1     ;;
-      *.tbz2)      command tar xjf $1    ;;
-      *.tgz)       command tar xzf $1    ;;
-      *.zip)       command unzip $1      ;;
-      *.Z)         command uncompress $1 ;;
-      *.7z)        command 7z x $1       ;;
-      *.xz)        command unxz -vk $1   ;;
-      *.lzma)      command unlzma -vk $1 ;;
+      *.tar.bz2)   tar xjf $1    ;;
+      *.tar.gz)    tar xzf $1    ;;
+      *.bz2)       bunzip2 $1    ;;
+      *.rar)       unrar x $1    ;;
+      *.gz)        gunzip $1     ;;
+      *.tar)       tar xf $1     ;;
+      *.tbz2)      tar xjf $1    ;;
+      *.tgz)       tar xzf $1    ;;
+      *.zip)       unzip $1      ;;
+      *.Z)         uncompress $1 ;;
+      *.7z)        7z x $1       ;;
+      *.xz)        unxz -vk $1   ;;
+      *.lzma)      unlzma -vk $1 ;;
       *)           print "'$1' cannot be extracted via extr()" ;;
     esac
   else
@@ -139,7 +139,7 @@ function todo {
   case $# {
     0) command ls -1 ${_d}/.TODO_* ;;
     1) command vim ${_d}/.TODO_$1 ;;
-    *) command vim ${_d}/.TODO_$(print $@|tr ' ' '_')
+    *) command vim ${_d}/.TODO_${@// /_}
   }
 }
 
@@ -175,10 +175,10 @@ function tmux {
 }
 
 # one-liners/micro functions:
-function rc {[[ -n $1 ]] && command sudo /etc/rc.d/$1 ${@:/$1}}
-function alv {<${${$(command ls -r ${H:-/howl}/othe/archive/installed_*)}[${1:-1}]}|w3m -o pagerline=100000 -o confirm_qq=0}
+function rc {[[ -n $1 ]] && sudo /etc/rc.d/$1 ${@:/$1} ; if [[ $1 == network && $2 == stop ]] && { sudo /etc/rc.d/named restart } }
+function alv {<${${$(command ls -r ${H:-/howl}/othe/archive/installed_*)}[${1:-1}]}|w3m -o pagerline=1000 -o confirm_qq=0}
 function mkcd {command mkdir -p "$@" && cd "$@"}
 function pubip {curl http://whatismyip.org/ 2>/dev/null}
 function qdep {pacman-color -Q $@ $(pacman-color -Qi $@|grep Depends|cut -d: -f2-|sed -E 's|>\S+\>||g')}
 function timec {while sleep 1 ; do printf '\r%s ' "$(date +'%T %Y-%m-%d')" ; done}
-function dropcache {command sync && command su -s /bin/zsh -c 'echo 1 > /proc/sys/vm/drop_caches && echo 0 > /proc/sys/vm/drop_caches' root}
+function dropcache {sync && command su -s /bin/zsh -c 'echo 1 > /proc/sys/vm/drop_caches && echo 0 > /proc/sys/vm/drop_caches' root}

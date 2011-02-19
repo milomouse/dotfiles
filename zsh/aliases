@@ -14,8 +14,8 @@ alias llt="lls -tr"           ; alias lltt="llt -- *(D.om)"
 alias llm="llt -c"            ; alias llmm="llm -- *(D.om)"
 alias llx="lx -l"             ; alias llxx="llx -- *(D.om)"
 alias rd="rm -r"
-alias rds="srm -Evr"
-alias rms="srm -Ev"
+#alias rds="srm -Evr"
+#alias rms="srm -Ev"
 alias cl="clear"
 alias e="bye"
 
@@ -31,39 +31,37 @@ alias xload="xrdb -load ${XDG_CONFIG_DIR:-${HOME}}/xorg/Xdefaults &>/dev/null"
 alias gh="cd ${H:-/howl}"
 
 # program masquing:
-alias svim="command sudo ${EDITOR:-/usr/bin/vim}"
+alias sudo='command sudo '
+alias svim="sudo ${EDITOR:-/usr/bin/vim}"
 alias info="command info --vi-keys"
 alias diff="command colordiff"
-alias grep="command grep --color=auto"
+alias grep="/bin/grep --color=auto"
 alias mutt="command mutt -F ${XDG_CONFIG_DIR:-${HOME}}/mutt/muttrc"
 alias xskat="command xskat -opt ${XDG_CONFIG_DIR:-${HOME}}/xorg/xskat.opt -list ${XDG_CONFIG_DIR:-${HOME}}/xorg/xskat.lst"
 alias offlineimap="command offlineimap -c ${XDG_CONFIG_DIR:-${HOME}}/.offlineimap/offlineimaprc"
 alias {rot,rtorrent}='command rtorrent -o http_capath=/etc/ssl/certs'
 alias startx="_o=$PWD ; cd ~/ ; command startx ${XDG_CONFIG_DIR:-${HOME}}/xorg/xinitrc -- -nolisten tcp nologo -once -retro ; cd $_o"
-#alias startx="command startx ${XDG_CONFIG_DIR:-${HOME}}/xorg/xinitrc -- -dpi 120 -nolisten tcp nologo -once -retro"
 
 # system/media shortcuts:
 alias psu="print 'ELAPSETIME %CPU NI +?  LWPID - COMMAND';ps -U root,privoxy,15,http,named --deselect -C tmux,urxvt -H hoetime:10,%cpu:4,ni:2,stat:3,pid:5,rtprio:1,args"
 alias psr="print 'ELAPSETIME %CPU NI +?  LWPID - COMMAND';ps -u root -U root -H hoetime:10,%cpu:4,ni:2,stat:3,pid:5,rtprio:1,args"
 alias psa="print 'ELAPSETIME USER %CPU NI +?  LWPID - COMMAND';ps -H haxoetime:10,user:4,%cpu:4,ni:2,stat:3,pid:5,rtprio:1,args"
 alias pso="print 'ELAPSETIME USER %CPU NI +?  LWPID - COMMAND';ps -U root,h --deselect -u root,h -H hoetime:10,user:4,%cpu:4,ni:2,stat:3,pid:5,rtprio:1,args"
-alias dfu="df -hTP;print - '------------------------------------------------------';df -hTP --total|tail -1"
+alias dfu="df -hTP"
 alias {lavg,loadavg}='print ${$(</proc/loadavg)[1,3]}'
 alias daemons="lt /var/run/daemons"
-alias reboot="/bin/sync && /usr/bin/sudo reboot"
-alias {poweroff,pow}="/bin/sync && /usr/bin/sudo poweroff"
-alias mix2="ossvol --speakers --quiet && ossvol -a"
-alias mix3="ossvol --headphones --quiet && ossvol -a"
-#alias rec="ffmpeg -f x11grab -s 1366x768 - r 150 -i :0.0 -sameq ${XDG_VIDEOS_DIR:-${HOME}/vide}/$(date +%Y-%m-%d)-capture.mkv"
-alias siteget="wget --recursive --page-requisites --convert-links --html-extension --no-parent --wait=10 --limit-rate=20K -U Mozilla -l" #depth, then url
+alias reboot='command sync && sudo /sbin/reboot'
+alias {poweroff,pow}='command sync && sudo /sbin/poweroff'
+alias mix2="command ossvol --speakers --quiet && command ossvol -a"
+alias mix3="command ossvol --headphones --quiet && command ossvol -a"
+alias siteget="command wget --recursive --page-requisites --convert-links --html-extension --no-parent --wait=random --limit-rate=20K -U Mozilla -l" #depth, then url
 #alias synt="highlight -t 2 -k fixed -K 8 -l -j 3 -s candy"
-#alias stinfo=". ${ZDOTDIR:-${HOME}/zsh}/stinfo"
 
 # database/package management:
-alias upf="/usr/bin/sudo fc-cache -vr"
-alias upd="/usr/bin/sudo updatedb"
-alias upm="/usr/bin/sudo mandb --quiet"
-alias baer="/usr/bin/bauerbill"
-alias {baerp,pacman}="/usr/bin/sudo /usr/bin/pacman-color"
-alias ay="/usr/bin/yaourt"
-alias aive="/usr/bin/yaourt -Q --date >! ${H:-/howl}/othe/archive/installed_$(date +%Y-%m-%d).txt"
+alias upf="sudo fc-cache -vr"
+alias upd="sudo updatedb"
+alias upm="sudo mandb --quiet"
+alias baer="command bauerbill"
+alias {baerp,pacman}="sudo /usr/bin/pacman-color"
+alias ay="commmand yaourt"
+alias aive="ay -Q --date >! ${H:-/howl}/othe/archive/installed_$(date +%Y-%m-%d).txt"

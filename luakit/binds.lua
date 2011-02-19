@@ -154,7 +154,6 @@ add_binds("normal", {
     -- History
     key({},          "H",           function (w, m) w:back(m.count)    end),
     key({},          "L",           function (w, m) w:forward(m.count) end),
-    key({},          "b",           function (w, m) w:back(m.count)    end),
     key({},          "XF86Back",    function (w, m) w:back(m.count)    end),
     key({},          "XF86Forward", function (w, m) w:forward(m.count) end),
     key({"Control"}, "o",           function (w, m) w:back(m.count)    end),
@@ -185,6 +184,7 @@ add_binds("normal", {
     key({},          "r",           function (w) w:reload() end),
     key({},          "R",           function (w) w:reload(true) end),
     key({"Control"}, "c",           function (w) w:stop() end),
+    key({},          "S",           function (w) w:stop() end),
 
     -- Config reloading
     key({"Control", "Shift"}, "R",  function (w) w:restart() end),
@@ -250,10 +250,11 @@ add_cmds({
     cmd("back",                         function (w, a) w:back(tonumber(a) or 1) end),
     cmd("f[orward]",                    function (w, a) w:forward(tonumber(a) or 1) end),
     cmd("scroll",                       function (w, a) w:scroll_vert(a) end),
-    cmd("q[uit]",                       function (w)    w:close_tab() end),
+-- NOTE: quit and writequit are defined in downloads.lua instead:
+--    cmd("q[uit]",                       function (w)    w:close_tab() end),
+--    cmd({"writequit", "wq"},            function (w)    w:save_session() w:close_win() end),
     cmd({"quitall", "qa"},              function (w)    w:close_win() end),
     cmd("write",                        function (w)    w:save_session() end),
-    cmd({"writequit", "wq"},            function (w)    w:save_session() w:close_win() end),
     cmd("c[lose]",                      function (w)    w:close_tab() end),
     cmd("reload",                       function (w)    w:reload() end),
     cmd("restart",                      function (w)    w:restart() end),

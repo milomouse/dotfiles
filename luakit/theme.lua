@@ -64,7 +64,7 @@ theme.tab_ntheme      = "#957f8f"
 theme.selected_fg     = "#343434"
 theme.selected_bg     = "#fefefe"
 theme.selected_ntheme = "#b638b7"
-theme.loading_fg      = "#191919"
+theme.loading_fg      = "#98a7b2"
 theme.loading_bg      = "#898989"
 
 -- Trusted/untrusted ssl colors

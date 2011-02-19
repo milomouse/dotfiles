@@ -59,6 +59,9 @@ require "undoclose"
 -- Add greasemonkey-like javascript userscript support
 require "userscripts"
 
+-- Add adblock-like functionality
+--require "adblock"
+
 -- Add bookmarks support
 require "bookmarks"
 

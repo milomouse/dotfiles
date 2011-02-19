@@ -184,7 +184,8 @@ window.init_funcs = {
         -- Set foregrounds
         for wi, v in pairs({
             [s.l.uri]    = theme.uri_sbar_fg,
-            [s.l.loaded] = theme.sbar_loaded_fg,
+            [s.l.loaded] = theme.error_bg,
+--            [s.l.loaded] = theme.sbar_loaded_fg,
 --            [s.l.buf]    = theme.buf_sbar_fg,
             [s.l.buf]    = theme.sbar_loaded_bg,
 --            [s.r.tabi]   = theme.tabi_sbar_fg,
@@ -451,7 +452,7 @@ window.methods = {
         if view then
             local val, max = view:get_scroll_vert()
             if max == 0 then val = "*"
-            elseif val == 0 then val = "0%"
+            elseif val == 0 then val = " 0%"
             elseif val == max then val = "100%"
             else val = string.format("%2d%%", (val/max) * 100)
             end

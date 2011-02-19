@@ -1,0 +1,41 @@
+## ~/.config/zathura/zathurarc
+#set uri_command "jumanji %s"
+set uri_command "luakit %s"
+
+map + zoom in
+map - zoom out
+map J scroll full_down
+map K scroll full_up
+#map <PageUp> navigate previous
+#map <PageDown> navigate next
+map <PageDown> scroll full_down
+map <PageUp> scroll full_up
+
+set font fixed normal 9
+set default_bgcolor #191919
+set default_fgcolor #eeeeee
+set inputbar_bgcolor #000000
+set inputbar_fgcolor #a488d7
+set statusbar_bgcolor #191919
+set statusbar_fgcolor #9f8bab
+set statusbar_ssl_bgcolor #98a7b2
+set statusbar_ssl_fgcolor #232323
+set tabbar_bgcolor #191919
+set tabbar_fgcolor #98a7b6
+set tabbar_focus_bgcolor #232323
+set tabbar_focus_fgcolor #a488d9
+set tabbar_separator_color #595959
+set completion_bgcolor #232323
+set completion_fgcolor #bbbbbb
+set completion_g_bgcolor #101010
+set completion_g_fgcolor #eeeeee
+set completion_hl_bgcolor #98a7b2
+set completion_hl_fgcolor #232323
+set notification_e_bgcolor #d554dd
+set notification_e_fgcolor #eeeeee
+set notification_w_bgcolor #98a7b6
+set notification_w_fgcolor #000000
+set recolor_darkcolor #cccccc
+set recolor_lightcolor #121212
+set search_highlight #bc000f
+set select_text #0c0c0c

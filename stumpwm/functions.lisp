@@ -1,6 +1,7 @@
-;;----------------------------------------------------------------------------
-;; *data-dir*/../functions.lisp
-;;----------------------------------------------------------------------------
+;;-----------------------------------------
+;; author: milomouse <vincent[at]fea.st> ;;
+;; *data-dir*/../functions.lisp          ;;
+;;-----------------------------------------
 
 (defun move-window-to-next-group (current list)
 "Move current window to next group but keep focus on current frame."

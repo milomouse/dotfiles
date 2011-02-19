@@ -1,6 +1,7 @@
-;;----------------------------------------------------------------------------
-;; *data-dir*/../commands.lisp
-;;----------------------------------------------------------------------------
+;;-----------------------------------------
+;; author: milomouse <vincent[at]fea.st> ;;
+;; *data-dir*/../commands.lisp           ;;
+;;-----------------------------------------
 
 ;; create a scratchpad group if none exist and toggle between viewing current group and scratchpad group.
 ;; (idea from Ion3+ window-manager except scratchpad is a group and not a floating frame)
@@ -137,10 +138,11 @@ window with Master and designate this as the new Master."
 (defcommand tmux-attach-else-new () () "Find detached tmux session and attach, else create new session."
   (run-shell-command
   "if [[ -n ${$(tmux -S /tmp/.${UID}/tmux/xorg list-session|grep -v attached)[1]//:} ]]; then
-    urxvt -e tmux -S /tmp/.${UID}/tmux/xorg attach-session -t $(print ${$(tmux -S /tmp/.${UID}/tmux/xorg list-session|grep -v attached)[1]//:})
+    urxvt -e tmux -S /tmp/.${UID}/tmux/xorg attach-session -t ${$(tmux -S /tmp/.${UID}/tmux/xorg list-session|grep -v attached)[1]//:}
   else
     urxvt -e tmux -S /tmp/.${UID}/tmux/xorg new-session
   fi"))
+    ;urxvt -e tmux -S /tmp/.${UID}/tmux/xorg attach-session -t $(print ${$(tmux -S /tmp/.${UID}/tmux/xorg list-session|grep -v attached)[1]//:})
 
 ;; reassign original commands to *-forget
 (defcommand quit-forget () () "Quit StumpWM without remembering current state."
@@ -349,7 +351,7 @@ current frame into 2 frames, one on top of the other." (remember-group) (split-f
 (defcommand echo-oss-headphones () () "" (run-shell-command "ossvol --headphones --quiet") (echo-oss-vol))
 (defcommand echo-mail () () "" (echo-string (current-screen) (run-shell-command "print - @fea.st: ${#$(find /howl/mail/FastMail/*/new -type f)}" t)))
 (defcommand echo-battery () () "" (echo-string (current-screen) (run-shell-command "</proc/acpi/battery/BAT0/state" t)))
-(defcommand echo-free-hdd () () "" (echo-string (current-screen) (run-shell-command "df -hTP;print - '------------------------------------------------------';df -hTP --total|tail -1" t)))
+(defcommand echo-free-hdd () () "" (echo-string (current-screen) (run-shell-command "df -hTP" t)))
 (defcommand echo-free-mem () () "" (echo-string (current-screen) (run-shell-command "print '^B^6/free^1* used^5* base^n';free -m|awk 'NR==2 {print $4,$3,$2}'" t)))
 (defcommand echo-loadavg () () "" (echo-string (current-screen) (run-shell-command "print ${$(</proc/loadavg)[1,3]}" t)))
 (defcommand echo-colors-brief () () "Output a brief list of currently defined colors." (echo-string (current-screen) (eval "
@@ -383,10 +385,10 @@ command's output. This may hang if used wrong."
 (defcommand prompt-mifo-command (filename) ((:rest "mifo.command: ")) ""
   (run-shell-command (format nil "mifo --command ~a" filename)))
 (defcommand prompt-mifo-next (filename) ((:rest "mifo.next: ")) ""
-  (echo-string (current-screen) (run-shell-command (format nil "mifo --next ~a" filename) t))
+  (echo-string (current-screen) (run-shell-command (format nil "mifo --next ~a && sleep 2" filename) t))
   (echo-mifo-stumpwm))
 (defcommand prompt-mifo-prev (filename) ((:rest "mifo.previous: ")) ""
-  (echo-string (current-screen) (run-shell-command (format nil "mifo --prev ~a" filename) t))
+  (echo-string (current-screen) (run-shell-command (format nil "mifo --prev ~a && sleep 2" filename) t))
   (echo-mifo-stumpwm))
 (defcommand prompt-mifo-save (filename) ((:rest "mifo.save-as: ")) ""
   (echo-string (current-screen) (run-shell-command (format nil "mifo --save ~a" filename) t)))

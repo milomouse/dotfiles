@@ -2,7 +2,7 @@
 ;; ${XDG_CONFIG_DIR:-/howl/conf}/.stumpwmrc                                 ;;
 ;;--------------------------------------------------------------------------;;
 ;; author: milomouse <vincent[at]fea.st>                                    ;;
-;; update: 2011-02-07 03:10:26                                              ;;
+;; update: 2011-02-17 06:14:37                                              ;;
 ;;--------------------------------------------------------------------------;;
 ;; versions used atoc:                                                      ;;
 ;; |  sbcl              -> 1.0.45-1                                         ;;
@@ -16,12 +16,13 @@
 ;; >---: better resize; if neighbour {above} then -ARG else +ARG, etc.      ;;
 ;; >>>-: show frame-indicator for 'resize' only if no window in frame       ;;
 ;; >>>>? command for dedicating current win/frame as the Master win/frame   ;;
+;; >---: better command for Master; remember Master thru re{loadrc,start}   ;;
 ;; >>>>! command for swapping current window with the Master win/frame      ;;
 ;; >>>>! exchange two windows but keep focus in current frame               ;;
 ;; >>>>! dynamically dump group|screen|desktop|rules to *data-dir* by type  ;;
 ;; >>>>! dynamically load group|screen|desktop|rules from *data-dir* by type;;
 ;; >>>>! have my 'undo' use group and check current group for undos first   ;;
-;; >>>>! create a togglable, on-the-fly scratchpad group (no multi screens) ;;
+;; >>>>! create a togglable, on-the-fly scratchpad group                    ;;
 ;;--------------------------------------------------------------------------;;
 ;; files: *data-dir*/../{commands,functions,hooks,key-maps,macros}.lisp     ;;
 ;;--------------------------------------------------------------------------;;
@@ -80,17 +81,16 @@ then run the command synchronously and collect the output."
 ;; wants to use 'work' or 'family' wallpapers instead)
 (defvar *background-image-path*
   (merge-pathnames
-    (make-pathname :directory '(:relative "foto" "wall"))
-    *home-dir*))
+    (make-pathname :directory '(:relative "foto" "wall")) *home-dir*))
 
 ;; gravities.
 (setf *mouse-focus-policy* :click
       *window-border-style* :thin
       *message-window-gravity* :top-right
       *input-window-gravity* :top-right)
-(set-normal-gravity :bottom)
-(set-maxsize-gravity :center)
-(set-transient-gravity :bottom)
+(set-normal-gravity :top) ; top for terminals
+(set-maxsize-gravity :bottom-right) ; bottom-right for gtk-apps
+(set-transient-gravity :center) ; center for save-as/open-popups
 
 ;; borders.
 (setf *resize-hides-windows* T
@@ -142,11 +142,8 @@ then run the command synchronously and collect the output."
       *window-format*   "^B^87%s^9*%m^0*%16t^n"
       *timeout-wait* 6)
 
-;; windows/frames. use more intuitive frame-numbers (with 'fselect' <s-y>).
+;; windows/frames. use more intuitive frame-numbers (with 'fselect').
 (setf *default-window-name* "null"
-      *normal-gravity* :top-right
-      *maxsize-gravity* :top-right
-      *transient-gravity* :center
       *new-frame-action* :empty
       *min-frame-width* 45
       *min-frame-height* 45

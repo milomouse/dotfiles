@@ -1,12 +1,7 @@
-;;----------------------------------------------------------------------------
-;; *data-dir*/../macros.lisp
-;;----------------------------------------------------------------------------
-
-;; define a few parameters first (not sure if this is necessary..)
-;(defparameter X-TERM "exec urxvt")
-;(defparameter X-TERM-BROWSER (concatenate 'string X-TERM " -e w3m"))
-;(defparameter X-WWW-BROWSER "exec firefox")
-;(defparameter X-IMAGE-VIEWER "exec gliv ")
+;;-----------------------------------------
+;; author: milomouse <vincent[at]fea.st> ;;
+;; *data-dir*/../macros.lisp             ;;
+;;-----------------------------------------
 
 ;; create given groups while keeping focus on current.
 (defmacro make-groups-bg (&rest names)

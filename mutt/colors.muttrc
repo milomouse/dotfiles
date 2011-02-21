@@ -1,0 +1,58 @@
+## $XDG_CONFIG_DIR/mutt/colors.muttrc
+## milomouse <vincent[at]fea.st>
+# originally based p.brisbin's color file.
+
+# set default
+  color normal     white         default
+
+# main colors
+  color status     magenta       default
+  color indicator  black         magenta
+  color tree       black         default
+  color error      default       default
+  color message    brightmagenta default
+
+# uncolor certain messages
+uncolor index "~P"
+uncolor index "~C @.com"
+uncolor index "~N ~u"
+uncolor index "~N !~u"
+uncolor index "~T"
+uncolor index "~D"
+
+# and recolor them appropriately
+  color index      black         default "~P"
+  color index      green         default "~C @.com"
+  color index      brightblue    default "~N ~u"  # new ML mail
+  color index      blue          default "~N !~u" # new non-ML mail
+  color index      red           default "~T"
+  color index      brightred     default "~D"
+
+# set up the headers
+  color header     blue          default "^from:"
+  color header     blue          default "^to:"
+  color header     magenta       default "^cc:"
+  color header     brightmagenta default "^date:"
+  color header     brightblue    default "^subject:"
+
+# message bodies
+  color attachment brightblack   default
+  color search     black         magenta
+  color signature  brightblack   default
+  color tilde      blue          default
+
+# urls
+  color body       red           default "(^|<| )mailto:[^ ]+@[^ ]( |>|$)"
+  color body       brightred     default "(^|<| )(scp|http|https|ftp|file|telnet|news|finger)://[^ ]+( |>|$)"
+
+# emoticons
+  color body       brightmagenta default "(^| )+(|[<>|])[8;:](|[^ ])[)(/|DOPS]( |$)+"
+  color body       brightmagenta default "(^| )+[)(/|DOPS](|[^ ])[8;:](|[<>|])( |$)+"
+
+# *bold*, _underline_, and /italic/
+  color body       brightblack   default "(^| )\\*[^ ]+\\*( |$)"
+
+# quote blocks
+  color quoted     blue          default
+  color quoted3    magenta       default
+  color quoted6    magenta       default

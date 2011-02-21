@@ -1,5 +1,7 @@
 # Fuck bash.
-export HISTFILE=/dev/shm/.1009/bash_history
-export LESSHISTFILE=/dev/shm/.1009/less_history
-alias ls='ls --color=auto -F'
+source $H/conf/zsh/exports
+source $H/conf/zsh/aliases
+export HISTFILE=/dev/shm/.${UID}/bash_history
+alias e="exit"
+complete -cf sudo
 PS1='\u [\w]\$ '

@@ -120,6 +120,12 @@ domain_props = {
         ["enable-scripts"] = false,
         ["accept-policy"] = cookie_policy.never,
     },
+    ["youtube.com"] = {
+        ["enable-plugins"] = true,
+    },
+    ["dailymotion.com"] = {
+        ["enable-plugins"] = true,
+    },
     ["scroogle.org"] = {
         ["enable-scripts"] = false,
         ["accept-policy"] = cookie_policy.never,
@@ -135,10 +141,6 @@ domain_props = {
     ["imdb.com"] = {
         ["enable-scripts"] = false,
         ["accept-policy"] = cookie_policy.never,
-    },
-    ["youtube.com"] = {
-        ["enable-plugins"] = true,
-        ["enable-private-browsing"] = false,
     },
     ["btjunkie.org"] = {
         ["accept-policy"] = cookie_policy.never,

@@ -4,7 +4,7 @@ function zshaddhistory {
   line=${1%%$'\n'} ; cmd=${line%% *}
   [[ ${#line} -ge 5
       && ${cmd} != (history|fc|e|exit|cl|clear)
-      && ${cmd} != (daemons|go|startx)
+      && ${cmd} != (daemons|go|startx|mp)
       && ${cmd} != ([szx]edit|[zx]load|zhist|wika)
       && ${cmd} != (sr|surfraw|srm|rms|rds)
   ]] && (( ! $argv[(I)*unrl*|*spar*|*losetup*|*aespipe*|*litika*|sudo rm*] ))
@@ -175,7 +175,7 @@ function tmux {
 }
 
 # one-liners/micro functions:
-function rc {[[ -n $1 ]] && sudo /etc/rc.d/$1 ${@:/$1} ; if [[ $1 == network && $2 == stop ]] && { sudo /etc/rc.d/named restart } }
+function rc {[[ -n $1 ]] && sudo /etc/rc.d/$1 ${@:/$1}}
 function alv {<${${$(command ls -r ${H:-/howl}/othe/archive/installed_*)}[${1:-1}]}|w3m -o pagerline=1000 -o confirm_qq=0}
 function mkcd {command mkdir -p "$@" && cd "$@"}
 function pubip {curl http://whatismyip.org/ 2>/dev/null}

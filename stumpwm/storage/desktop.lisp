@@ -8,24 +8,24 @@
                                        :NUMBER 0
                                        :X 0
                                        :Y 0
-                                       :WIDTH 660
+                                       :WIDTH 550
                                        :HEIGHT 900
                                        :WINDOWS NIL
                                        :CURRENT NIL)
                                     (#S(FDUMP
-                                        :NUMBER 1
-                                        :X 660
+                                        :NUMBER 2
+                                        :X 550
                                         :Y 0
-                                        :WIDTH 940
-                                        :HEIGHT 340
+                                        :WIDTH 1050
+                                        :HEIGHT 450
                                         :WINDOWS NIL
                                         :CURRENT NIL)
                                      #S(FDUMP
-                                        :NUMBER 2
-                                        :X 660
-                                        :Y 340
-                                        :WIDTH 940
-                                        :HEIGHT 560
+                                        :NUMBER 1
+                                        :X 550
+                                        :Y 450
+                                        :WIDTH 1050
+                                        :HEIGHT 450
                                         :WINDOWS NIL
                                         :CURRENT NIL))))
                             :CURRENT 0)
@@ -56,7 +56,7 @@
                                        :HEIGHT 900
                                        :WINDOWS NIL
                                        :CURRENT NIL)))
-                            :CURRENT 0)
+                            :CURRENT 2)
                          #S(GDUMP
                             :NUMBER 3
                             :NAME "3"

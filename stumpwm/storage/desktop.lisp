@@ -17,18 +17,18 @@
                                         :X 550
                                         :Y 0
                                         :WIDTH 1050
-                                        :HEIGHT 450
+                                        :HEIGHT 490
                                         :WINDOWS NIL
                                         :CURRENT NIL)
                                      #S(FDUMP
                                         :NUMBER 1
                                         :X 550
-                                        :Y 450
+                                        :Y 490
                                         :WIDTH 1050
-                                        :HEIGHT 450
+                                        :HEIGHT 410
                                         :WINDOWS NIL
                                         :CURRENT NIL))))
-                            :CURRENT 0)
+                            :CURRENT 2)
                          #S(GDUMP
                             :NUMBER 2
                             :NAME "2"
@@ -72,22 +72,14 @@
                          #S(GDUMP
                             :NUMBER 4
                             :NAME "4"
-                            :TREE (((#S(FDUMP
-                                        :NUMBER 0
-                                        :X 0
-                                        :Y 0
-                                        :WIDTH 800
-                                        :HEIGHT 450
-                                        :WINDOWS NIL
-                                        :CURRENT NIL)
-                                     #S(FDUMP
-                                        :NUMBER 1
-                                        :X 0
-                                        :Y 450
-                                        :WIDTH 800
-                                        :HEIGHT 450
-                                        :WINDOWS NIL
-                                        :CURRENT NIL))
+                            :TREE ((#S(FDUMP
+                                       :NUMBER 0
+                                       :X 0
+                                       :Y 0
+                                       :WIDTH 800
+                                       :HEIGHT 900
+                                       :WINDOWS NIL
+                                       :CURRENT NIL)
                                     #S(FDUMP
                                        :NUMBER 3
                                        :X 800
@@ -121,5 +113,5 @@
                                       :WINDOWS NIL
                                       :CURRENT NIL))
                             :CURRENT 0))
-                :CURRENT 1))
+                :CURRENT 5))
    :CURRENT 0)

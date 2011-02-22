@@ -1,6 +1,7 @@
-;;----------------------------------------------------------------------------
-;; *data-dir*/../key-maps.lisp
-;;----------------------------------------------------------------------------
+;;-----------------------------------------
+;; author: milomouse <vincent[at]fea.st> ;;
+;; *data-dir*/../key-maps.lisp           ;;
+;;-----------------------------------------
 
 ;; export custom maps.
 (export '(*echo-map* *frequent-map* *xsel-map* *xclip-map* *win-frame-map*
@@ -108,8 +109,8 @@
     (dk m (kbd "f")     "exec mifo --fullscreen")
     (dk m (kbd "h")     "echo-mifo-prev")
     (dk m (kbd "H")     "prompt-mifo-prev")
-    (dk m (kbd "j")     "exec mifo --next +")
-    (dk m (kbd "k")     "exec mifo --prev dir")
+    (dk m (kbd "j")     "prompt-mifo-next +")
+    (dk m (kbd "k")     "prompt-mifo-prev dir")
     (dk m (kbd "l")     "echo-mifo-next")
     (dk m (kbd "L")     "prompt-mifo-next")
     (dk m (kbd "p")     "prompt-mifo-playlist")

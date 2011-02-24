@@ -5,5 +5,4 @@ video/*; /usr/bin/mplayer -msglevel all=0 %s 2>/dev/null; test=test -n "$DISPLAY
 video/*; /usr/bin/mplayer -msglevel all=0 -vo fbdev %s 2>/dev/null;
 application/msword; /usr/bin/antiword %s; copiousoutput;
 application/pdf; /usr/bin/zathura %s; test=test -n "$DISPLAY";
-application/pdf; /usr/local/bin/pdf2txt %s; copiousoutput;
 application/gpg; /usr/bin/gpg --decrypt %s; copiousoutput;

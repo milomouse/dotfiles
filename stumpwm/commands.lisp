@@ -331,8 +331,8 @@ current frame into 2 frames, one on top of the other." (remember-group) (split-f
   (dump-to-file (dump-desktop) file))
 
 ;; predefined echoes for speed, else use 'shell-command-output'.
-(defcommand echo-highcpu-user () () "" (message-no-timeout (run-shell-command "ps -U root,privoxy,15,named --deselect -C tmux,urxvt k -%cpu opid,args:70,etime:10,%cpu,pmem | head -75" t)))
-(defcommand echo-highcpu-root () () "" (message-no-timeout (run-shell-command "ps -U h,privoxy,15,named --deselect -C tmux,urxvt k -%cpu opid,args:70,etime:10,%cpu,pmem | head -75" t)))
+(defcommand echo-highcpu-user () () "" (message-no-timeout (run-shell-command "ps -U root,privoxy,15,daemon,nobody --deselect -C tmux,urxvt k -%cpu opid,args:70,etime:10,%cpu,pmem | head -75" t)))
+(defcommand echo-highcpu-root () () "" (message-no-timeout (run-shell-command "ps -U h,privoxy,15,daemon,nobody --deselect -C tmux,urxvt k -%cpu opid,args:70,etime:10,%cpu,pmem | head -75" t)))
 (defcommand echo-highcpu-rest () () "" (message-no-timeout (run-shell-command "ps -U root,h --deselect -C tmux,urxvt k -%cpu opid,args:70,etime:10,%cpu,pmem | head -75" t)))
 (defcommand echo-mifo-stumpwm () () "" (echo-string (current-screen) (run-shell-command "mifo --stumpwm" t)))
 (defcommand echo-mifo-raw () () "" (echo-string (current-screen) (run-shell-command "mifo --raw" t)))

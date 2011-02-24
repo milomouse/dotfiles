@@ -4,31 +4,31 @@
                 :GROUPS (#S(GDUMP
                             :NUMBER 1
                             :NAME "1"
-                            :TREE ((#S(FDUMP
-                                       :NUMBER 0
-                                       :X 0
-                                       :Y 0
-                                       :WIDTH 550
-                                       :HEIGHT 900
-                                       :WINDOWS NIL
-                                       :CURRENT NIL)
-                                    (#S(FDUMP
-                                        :NUMBER 2
-                                        :X 550
+                            :TREE (((#S(FDUMP
+                                        :NUMBER 0
+                                        :X 0
                                         :Y 0
-                                        :WIDTH 1050
-                                        :HEIGHT 490
+                                        :WIDTH 670
+                                        :HEIGHT 485
                                         :WINDOWS NIL
                                         :CURRENT NIL)
                                      #S(FDUMP
-                                        :NUMBER 1
-                                        :X 550
-                                        :Y 490
-                                        :WIDTH 1050
-                                        :HEIGHT 410
+                                        :NUMBER 4
+                                        :X 0
+                                        :Y 485
+                                        :WIDTH 670
+                                        :HEIGHT 415
                                         :WINDOWS NIL
-                                        :CURRENT NIL))))
-                            :CURRENT 2)
+                                        :CURRENT NIL))
+                                    #S(FDUMP
+                                       :NUMBER 2
+                                       :X 670
+                                       :Y 0
+                                       :WIDTH 930
+                                       :HEIGHT 900
+                                       :WINDOWS NIL
+                                       :CURRENT NIL)))
+                            :CURRENT 0)
                          #S(GDUMP
                             :NUMBER 2
                             :NAME "2"
@@ -113,5 +113,5 @@
                                       :WINDOWS NIL
                                       :CURRENT NIL))
                             :CURRENT 0))
-                :CURRENT 5))
+                :CURRENT 1))
    :CURRENT 0)

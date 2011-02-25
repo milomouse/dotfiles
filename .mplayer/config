@@ -1,6 +1,6 @@
-## $XDG_CONFIG_DIR/.mplayer/config
+## $XDG_CONFIG_HOME/.mplayer/config
 #################################################
-## global defaults (for StumpWM):
+## global defaults:
 #################################################
 prefer-ipv4=yes
 monitoraspect=16:9
@@ -9,7 +9,7 @@ double=yes
 ao=oss,sdl
 volstep=2
 softvol-max=160
-vo=xv
+vo=xv,gl2,gl_nosw,gl,sdl
 #autoq=100
 spuaa=4
 spugauss=0.7

@@ -120,6 +120,18 @@ function 256co {
 #  fi
 }
 
+# quickly play video files:
+function mp {
+  [[ -z ${DISPLAY} && $(tty) = /dev/tty[1-3] ]] && _mopt=(-vo fbdev)
+  case $1 {
+    'm') local _vol=${$(command ossmix|grep outvol)[-2]}
+         command ossmix vmix0-outvol 25 &>/dev/null
+         command mplayer ${_mopt} -fs -really-quiet -msglevel all=0 ${@:/$1}
+         command ossmix vmix0-outvol ${_vol} &>/dev/null ;;
+    *)   command mplayer ${_mopt} -really-quiet -msglevel all=0 $@
+  }
+}
+
 # un-smart function to quickly view word definitions:
 function sd {
   local _ARG

@@ -1,3 +1,4 @@
+simple_preserve_space 0
 gb18030_as_ucs 0
 strict_iso2022 1
 use_jisx0213 0
@@ -11,6 +12,7 @@ search_conv 1
 pre_conv 0
 ucs_conv 1
 use_language_tag 1
+east_asian_width 0
 use_combining 1
 use_wide 1
 ext_halfdump 0
@@ -19,6 +21,7 @@ system_charset UTF-8
 auto_detect 2
 document_charset UTF-8
 display_charset UTF-8
+cookie_avoid_wrong_number_of_dots 
 cookie_accept_domains archlinux.org,bbs.archlinux.org,fastmail.fm,deviantart.com,akiba-online.com,wikipedia.org
 cookie_reject_domains google.com,google.ca,encrypted.google.com,yahoo.com
 accept_bad_cookie 2
@@ -36,11 +39,12 @@ noproxy_netaddr 1
 no_proxy 
 ftp_proxy 
 https_proxy 
-http_proxy 
-use_proxy 0
+http_proxy http://127.0.0.1:8118
+use_proxy 1
 max_news 50
 nntpmode 
 nntpserver 
+dns_order 0
 meta_refresh 0
 follow_redirection 10
 default_url 0
@@ -62,6 +66,7 @@ extbrowser3
 extbrowser2 /usr/bin/nohup firefox
 extbrowser /usr/bin/nohup jumanji
 mailer /usr/bin/mutt
+mailto_options 1
 editor /usr/bin/vim
 urimethodmap ~/w3m/urimethodmap, /etc/w3m/urimethodmap
 mailcap ~/mutt/mailcap, /etc/w3m/mailcap
@@ -83,6 +88,9 @@ emacs_like_lineedit 0
 mark 0
 close_tab_back 0
 confirm_qq 1
+save_hist 1
+history 100
+use_history 1
 pagerline 10000
 visited_color cyan
 visited_anchor 0
@@ -106,6 +114,7 @@ image_scale 100
 ext_image_viewer 0
 max_load_image 1
 auto_image 0
+pseudo_inlines 1
 display_image 0
 view_unseenobject 0
 ignore_null_img_alt 1
@@ -120,6 +129,7 @@ dirlist_cmd file:///$LIB/dirlist.cgi
 ext_dirlist 0
 display_lineinfo 1
 decode_url 1
+display_link_number 0
 display_link 1
 open_tab_dl_list 1
 open_tab_blank 0

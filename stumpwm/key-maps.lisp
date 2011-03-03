@@ -34,12 +34,23 @@
    M)))
 
 ;; transfer contents of clipboard into other buffers, or manually type cmd.
-(defvar *xclip-map*
+(defvar *xclip-clipboard-map*
   (let ((m (make-sparse-keymap)))
     (labels ((dk (m k c) (define-key m k c)))
     (dk m (kbd "b") "exec xclip -selection clipboard -o | xclip -selection buffer-cut -i")
     (dk m (kbd "p") "exec xclip -selection clipboard -o | xclip -selection primary -i")
     (dk m (kbd "s") "exec xclip -selection clipboard -o | xclip -selection secondary -i")
+    (dk m (kbd ";") "prompt-xclip")
+    (dk m (kbd ":") "echo-xclip")
+    (dk m (kbd "ESC") "abort")
+   M)))
+
+(defvar *xclip-primary-map*
+  (let ((m (make-sparse-keymap)))
+    (labels ((dk (m k c) (define-key m k c)))
+    (dk m (kbd "b") "exec xclip -selection primary -o | xclip -selection buffer-cut -i")
+    (dk m (kbd "c") "exec xclip -selection primary -o | xclip -selection clipboard -i")
+    (dk m (kbd "s") "exec xclip -selection primary -o | xclip -selection secondary -i")
     (dk m (kbd ";") "prompt-xclip")
     (dk m (kbd ":") "echo-xclip")
     (dk m (kbd "ESC") "abort")
@@ -70,12 +81,14 @@
     (dk m (kbd "m")   "echo-mifo-stumpwm")
     (dk m (kbd "M")   "echo-mifo-raw")
     (dk m (kbd "C-m") "echo-mifo-current-list")
+    (dk m (kbd "n")   "echo-wlan")
     (dk m (kbd "p")   "echo-highcpu-user")
     (dk m (kbd "P")   "echo-highcpu-root")
     (dk m (kbd "C-p") "echo-highcpu-rest")
     (dk m (kbd "u")   "echo-mail")
     (dk m (kbd "v")   "echo-oss-vol")
     (dk m (kbd "w")   "pout exec sdcv -nu WordNet ")
+    (dk m (kbd "W")   "pout exec sdcv -nu \"English Thesaurus\" ")
     (dk m (kbd "ESC") "abort")
    M)))
 
@@ -210,7 +223,8 @@
     (dk m (kbd "s-a")    *echo-map*)
     (dk m (kbd "s-b")    "refresh")
     (dk m (kbd "s-B")    "redisplay")
-    (dk m (kbd "s-c")    *xclip-map*)
+    (dk m (kbd "s-c")    *xclip-primary-map*)
+    (dk m (kbd "s-C")    *xclip-clipboard-map*)
     (dk m (kbd "s-d")    *mplayer-map1*)
     (dk m (kbd "s-D")    "prompt-mifo-command")
     (dk m (kbd "s-e")    "exec ")

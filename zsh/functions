@@ -4,7 +4,7 @@ function zshaddhistory {
   line=${1%%$'\n'} ; cmd=${line%% *}
   [[ ${#line} -ge 5
       && ${cmd} != (history|fc|e|exit|cl|clear)
-      && ${cmd} != (daemons|go|startx|mp)
+      && ${cmd} != (daemons|go|startx|mpq)
       && ${cmd} != ([szx]edit|[zx]load|zhist|wika)
       && ${cmd} != (sr|surfraw|srm|rms|rds)
   ]] && (( ! $argv[(I)*unrl*|*spar*|*losetup*|*aespipe*|*litika*|sudo rm*] ))
@@ -121,14 +121,14 @@ function 256co {
 }
 
 # quickly play video files:
-function mp {
+function mpq {
   [[ -z ${DISPLAY} && $(tty) = /dev/tty[1-3] ]] && _mopt=(-vo fbdev)
   case $1 {
     'm') local _vol=${$(command ossmix|grep outvol)[-2]}
          command ossmix vmix0-outvol 25 &>/dev/null
-         command mplayer ${_mopt} -fs -really-quiet -msglevel all=0 ${@:/$1}
+         command mplayer ${_mopt} -volume 100 -fs -really-quiet -msglevel all=0 ${@:/$1}
          command ossmix vmix0-outvol ${_vol} &>/dev/null ;;
-    *)   command mplayer ${_mopt} -really-quiet -msglevel all=0 $@
+    *)   command mplayer ${_mopt} -volume 100 -really-quiet -msglevel all=0 $@
   }
 }
 
@@ -188,9 +188,9 @@ function tmux {
 
 # one-liners/micro functions:
 function rc {[[ -n $1 ]] && sudo /etc/rc.d/$1 ${@:/$1}}
-function alv {<${${$(command ls -r ${H:-/howl}/othe/archive/installed_*)}[${1:-1}]}|w3m -o pagerline=1000 -o confirm_qq=0}
+function alv {<${${$(command ls -r ${H:-/howl}/othe/archive/installed_*)}[${1:--1}]}|w3m -o pagerline=1000 -o confirm_qq=0}
 function mkcd {command mkdir -p "$@" && cd "$@"}
 function pubip {curl http://whatismyip.org/ 2>/dev/null}
 function qdep {pacman-color -Q $@ $(pacman-color -Qi $@|grep Depends|cut -d: -f2-|sed -E 's|>\S+\>||g')}
 function timec {while sleep 1 ; do printf '\r%s ' "$(date +'%T %Y-%m-%d')" ; done}
-function dropcache {sync && command su -s /bin/zsh -c 'echo 1 > /proc/sys/vm/drop_caches && echo 0 > /proc/sys/vm/drop_caches' root}
+function dropcache {sync && command su -s /bin/zsh -c 'echo 1 > /proc/sys/vm/drop_caches && echo 2 > /proc/sys/vm/drop_caches' root}

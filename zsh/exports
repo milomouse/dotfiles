@@ -15,7 +15,7 @@ export XDG_PUBLICSHARE_DIR="/tmp/.${UID}"
 export XDG_TEMPLATES_DIR="/tmp/.${UID}"
 export XDG_VIDEOS_DIR="${H}/vide"
 export XAUTHORITY="${XDG_CONFIG_HOME}/xorg/.Xauthority"
-export HISTFILE=${ZDOTDIR:-${XDG_CONFIG_HOME}/zsh}/.history
+export HISTFILE="${ZDOTDIR:-${XDG_CONFIG_HOME}/zsh}/.history"
 export HISTSIZE=1400
 export SAVEHIST=1000
 export DIRSTACKSIZE=20
@@ -24,11 +24,12 @@ export SDCV_PAGER="/bin/more"
 export SDCV_HISTSIZE=0
 export EDITOR="/usr/bin/vim"
 export MOST_EDITOR="${EDITOR}"
-export FCEDIT=${EDITOR}
-export BZR_EDITOR=${EDITOR}
+export FCEDIT="${EDITOR}"
+export BZR_EDITOR="${EDITOR}"
 export BZR_HOME="${XDG_CONFIG_HOME}/bazaar"
-export HOMEPAGE="https://bbs.archlinux.org/search.php?action=show_new"
 export BROWSER="/usr/bin/w3m"
+export wiki_browser="${BROWSER}"
+export HOMEPAGE="https://bbs.archlinux.org/search.php?action=show_new"
 export SHELL="/bin/zsh"
 export GPG_TTY="$(tty)"
 export LANG="en_US.UTF-8"

@@ -33,34 +33,28 @@ globals.ssl_strict = false
 
 -- Search engines
 search_engines = {
-    bbs   = "https://bbs.archlinux.org/search.php?action=search&keywords={0}&author=&forum=-1&search_in=all&sort_by=0&sort_dir=DESC&show_as=topics",
-    aur   = "http://aur.archlinux.org/packages.php?O=0&K={0}",
-    abug  = "https://bugs.archlinux.org/index.php?string={0}&project=1&type%5B%5D=&sev%5B%5D=&pri%5B%5D=&due%5B%5D=&reported%5B%5D=&cat%5B%5D=&status%5B%5D=open&percent%5B%5D=&opened=&dev=&closed=&duedatefrom=&duedateto=&changedfrom=&changedto=&openedfrom=&openedto=&closedfrom=&closedto=&do=index",
-    hub   = "https://github.com/search?q={0}&type=Everything&repo=&langOverride=&start_value=1",
-    wiki  = "http://en.wikipedia.org/wiki/Special:Search?search={0}",
-    g     = "http://www.google.com/search?q={0}",
-    gs    = "https://www.google.com/search?q={0}",
-    gi    = "http://www.google.com/images?q={0}&um=1&ie=UTF-8&source=og&sa=N&hl=en&tab=wi",
-    negg  = "http://www.newegg.com/Product/ProductList.aspx?Submit=ENE&DEPA=0&Order=BESTMATCH&Description={0}",
-    tiger = "http://www.tigerdirect.com/applications/SearchTools/search.asp?keywords={0}",
-    im    = "http://www.imdb.com/find?s=all&q={0}",
-    yout  = "http://www.youtube.com/results?search_query={0}",
-    dart  = "http://browse.deviantart.com/?qh=&section=&global=1&q={0}",
-    last  = "http://www.last.fm/music/?q={0}",
-    ama   = "http://www.amazon.com/s/ref=nb_ss_gw?url=search-alias%3Dall&field-keywords={0}",
-    ebay  = "http://shop.ebay.com/?_from=R40&_trksid=p3907.m570.l1313&_nkw={0}&_sacat=See-All-Categories",
-    kt    = "http://www.kickasstorrents.com/search/{0}/",
-    bt    = "http://btjunkie.org/search?q={0}",
-    pt    = "http://thepiratebay.org/search/{0}",
+    archbbs     = "https://bbs.archlinux.org/search.php?action=search&keywords={0}&author=&forum=-1&search_in=all&sort_by=0&sort_dir=DESC&show_as=topics",
+    aur         = "http://aur.archlinux.org/packages.php?O=0&K={0}",
+    archbugs    = "https://bugs.archlinux.org/index.php?string={0}&project=1&type%5B%5D=&sev%5B%5D=&pri%5B%5D=&due%5B%5D=&reported%5B%5D=&cat%5B%5D=&status%5B%5D=open&percent%5B%5D=&opened=&dev=&closed=&duedatefrom=&duedateto=&changedfrom=&changedto=&openedfrom=&openedto=&closedfrom=&closedto=&do=index",
+    github      = "https://github.com/search?q={0}&type=Everything&repo=&langOverride=&start_value=1",
+    wikipedia   = "http://en.wikipedia.org/wiki/Special:Search?search={0}",
+    google      = "http://www.google.com/search?q={0}",
+    googlessl   = "https://www.google.com/search?q={0}",
+    images      = "http://www.google.com/images?q={0}&um=1&ie=UTF-8&source=og&sa=N&hl=en&tab=wi",
+    newegg      = "http://www.newegg.com/Product/ProductList.aspx?Submit=ENE&DEPA=0&Order=BESTMATCH&Description={0}",
+    tigerdirect = "http://www.tigerdirect.com/applications/SearchTools/search.asp?keywords={0}",
+    imdb        = "http://www.imdb.com/find?s=all&q={0}",
+    youtube     = "http://www.youtube.com/results?search_query={0}",
+    lastfm      = "http://www.last.fm/music/?q={0}",
+    amazon      = "http://www.amazon.com/s/ref=nb_ss_gw?url=search-alias%3Dall&field-keywords={0}",
+    ebay        = "http://shop.ebay.com/?_from=R40&_trksid=p3907.m570.l1313&_nkw={0}&_sacat=See-All-Categories",
+    kickass     = "http://www.kickasstorrents.com/search/{0}/",
+    btjunkie    = "http://btjunkie.org/search?q={0}",
+    piratebay   = "http://thepiratebay.org/search/{0}",
 }
--- So, I realized I never use these.. but left there here just in case:
---    lua   = "http://www.luakit.org/search/index/luakit?q={0}",
---    gc    = "http://www.google.com/codesearch?as_q={0}&btnG=Search+Code&hl=en&as_package=&as_lang=&as_filename=&as_class=&as_function=&as_license=&as_case=",
---    sf    = "http://sourceforge.net/search/?words={0}",
---    slash = "http://slashdot.org/search.pl?query={0}",
 
 -- Set google as fallback search engine
-search_engines.default = search_engines.g
+search_engines.default = search_engines.google
 -- Use this instead to disable auto-searching
 --search_engines.default = "{0}"
 
@@ -76,6 +70,18 @@ domain_props = {
         ["enable-private-browsing"] = true,
         ["user-stylesheet-uri"] = luakit.data_dir .. "/styles/mouse.css",
         ["accept-policy"] = cookie_policy.no_third_party,
+    },
+    ["cybernations.net"] = {
+        ["enable-plugins"] = true,
+        ["enable-private-browsing"] = false,
+    },
+    ["nationstates.net"] = {
+        ["enable-plugins"] = true,
+        ["enable-private-browsing"] = false,
+    },
+    ["ars-regendi.com"] = {
+        ["enable-plugins"] = true,
+        ["enable-private-browsing"] = false,
     },
     ["bbs.archlinux.org"] = {
         ["enable-private-browsing"] = false,
@@ -118,21 +124,12 @@ domain_props = {
     },
     ["google.com"] = {
         ["enable-scripts"] = false,
-        ["accept-policy"] = cookie_policy.never,
     },
     ["youtube.com"] = {
         ["enable-plugins"] = true,
     },
     ["dailymotion.com"] = {
         ["enable-plugins"] = true,
-    },
-    ["scroogle.org"] = {
-        ["enable-scripts"] = false,
-        ["accept-policy"] = cookie_policy.never,
-    },
-    ["ixsearch.com"] = {
-        ["enable-scripts"] = false,
-        ["accept-policy"] = cookie_policy.never,
     },
     ["yahoo.com"] = {
         ["enable-scripts"] = false,

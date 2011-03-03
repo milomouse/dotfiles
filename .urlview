@@ -1,2 +1,2 @@
 REGEXP ((http|https|ftp|gopher):(//)?[^ <>"\t]*|www\.[-a-z0-9.]+)[^ .,;\t<">\):]
-COMMAND /usr/bin/w3m %s
+COMMAND /usr/bin/luakit %s

@@ -2,7 +2,7 @@
 ;; ${XDG_CONFIG_DIR:-/howl/conf}/.stumpwmrc                                 ;;
 ;;--------------------------------------------------------------------------;;
 ;; author: milomouse <vincent[at]fea.st>                                    ;;
-;; update: 2011-02-25 14:28:19                                              ;;
+;; update: 2011-03-04 23:02:51                                              ;;
 ;;--------------------------------------------------------------------------;;
 ;; versions used atoc:                                                      ;;
 ;; |  sbcl              -> 1.0.46-1                                         ;;
@@ -77,8 +77,8 @@ then run the command synchronously and collect the output."
 (defcommand-alias exec run-shell-command)
 
 ;; define a background-image-path for random image setting function.
-;; (will soon change this to accept optional sub-dir for situations where user
-;; wants to use 'work' or 'family' wallpapers instead)
+;; (will soon change this to accept optional sub-dir for situations where
+;; user wants to use 'work' or 'family' wallpapers instead)
 (defvar *background-image-path*
   (merge-pathnames
     (make-pathname :directory '(:relative "foto" "wall")) *home-dir*))
@@ -102,9 +102,7 @@ then run the command synchronously and collect the output."
 (set-msg-border-width 1)
 
 ;; fonts/colors.
-;(set-font "-*-fixed-medium-r-normal-*-10-*-*-*-*-*-*-*")
 (set-font "-misc-fixed-medium-r-semicondensed-*-12-110-75-75-c-60-koi8-r")
-;(set-font "-misc-fixed-medium-r-normal-*-10-100-75-75-c-60-koi8-r")
 (set-fg-color        "grey64")
 (set-bg-color        "grey14")
 (set-focus-color     "grey60")
@@ -167,7 +165,6 @@ then run the command synchronously and collect the output."
            :directory '(:relative "conf" "stumpwm")) *home-dir*)))
 
 ;; restore data from previous exit (state StumpWM was last using),
-;; else recreate groups accordingly.
 (clear-window-placement-rules)
 (setf (group-name (first (screen-groups (current-screen)))) "1")
 (make-groups-bg "2" "3" "4" "5" "6")

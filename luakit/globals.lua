@@ -33,13 +33,15 @@ globals.ssl_strict = false
 
 -- Search engines
 search_engines = {
-    ddg         = "https://duckduckgo.com/?q={0}",
     bbs         = "https://bbs.archlinux.org/search.php?action=search&keywords={0}&author=&forum=-1&search_in=all&sort_by=0&sort_dir=DESC&show_as=topics",
     aur         = "http://aur.archlinux.org/packages.php?O=0&K={0}",
+    apkg        = "http://www.archlinux.org/packages?sort=&arch=x86_64&repo=&q={0}&maintainer=&last_update=&flagged=&limit=50",
+    awiki       = "https://wiki.archlinux.org/index.php?title=Special%3ASearch&search={0}&go=Go",
     archbugs    = "https://bugs.archlinux.org/index.php?string={0}&project=1&type%5B%5D=&sev%5B%5D=&pri%5B%5D=&due%5B%5D=&reported%5B%5D=&cat%5B%5D=&status%5B%5D=open&percent%5B%5D=&opened=&dev=&closed=&duedatefrom=&duedateto=&changedfrom=&changedto=&openedfrom=&openedto=&closedfrom=&closedto=&do=index",
     github      = "https://github.com/search?q={0}&type=Everything&repo=&langOverride=&start_value=1",
     wikipedia   = "http://en.wikipedia.org/wiki/Special:Search?search={0}",
     factbites   = "http://www.factbites.com/topics/{0}",
+    ddg         = "https://duckduckgo.com/?q={0}",
     google      = "http://www.google.com/search?q={0}",
     googlessl   = "https://www.google.com/search?q={0}",
     images      = "http://www.google.com/images?q={0}&um=1&ie=UTF-8&source=og&sa=N&hl=en&tab=wi",
@@ -71,7 +73,7 @@ domain_props = {
         ["enable-scripts"] = true,
         ["enable-plugins"] = false,
         ["enable-private-browsing"] = true,
-        ["user-stylesheet-uri"] = luakit.data_dir .. "/styles/mouse.css",
+       -- ["user-stylesheet-uri"] = "file://" .. luakit.data_dir .. "/styles/mouse.css",
         ["accept-policy"] = cookie_policy.no_third_party,
     },
     ["cybernations.net"] = {

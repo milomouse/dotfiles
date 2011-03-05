@@ -138,7 +138,14 @@ add_binds("normal", {
                                         for i = 1, m.count do w:new_tab(w:search_open(uri)) end
                                     end, {count = 1}),
     buf("^yy$",                     function (w) w:set_selection((w:get_current() or {}).uri or "") end),
+    buf("^yY$",                     function (w) w:set_selection((w:get_current() or {}).uri or "", "clipboard") end),
     buf("^yt$",                     function (w) w:set_selection(w.win.title) end),
+    buf("^yT$",                     function (w) w:set_selection(w.win.title, "clipboard") end),
+
+    -- External
+    key({},          "v",           function (w) local uri = (w:get_current() or {}).uri if uri then
+        luakit.spawn("urxvt -e cclive -f best --filename-format '%t.%s' --output-dir '/howl/down' --exec='mplayer %f' '" .. uri .. "'")
+    end end),
 
     -- Commands
     key({"Control"}, "a",           function (w)    w:navigate(w:inc_uri(1)) end),
@@ -169,7 +176,7 @@ add_binds("normal", {
 
     key({"Control"}, "t",           function (w)    w:new_tab(homepage) end),
     key({"Control"}, "w",           function (w)    w:close_tab()       end),
-    key({},          "d",           function (w, m) for i=1,m.count do w:close_tab()      end end, {count=1}),
+--    key({},          "d",           function (w, m) for i=1,m.count do w:close_tab()      end end, {count=1}),
 
     key({},          "<",           function (w, m) w.tabs:reorder(w:get_current(), w.tabs:current() - m.count) end, {count=1}),
     key({},          ">",           function (w, m) w.tabs:reorder(w:get_current(), (w.tabs:current() + m.count) % w.tabs:count()) end, {count=1}),
@@ -185,6 +192,13 @@ add_binds("normal", {
     key({},          "R",           function (w) w:reload(true) end),
     key({"Control"}, "c",           function (w) w:stop() end),
     key({},          "S",           function (w) w:stop() end),
+    key({},          "s",           function (w)
+        if true == w.sbar.hidden then
+          w.sbar.ebox:show() w.sbar.hidden = false
+        else
+          w.sbar.ebox:hide() w.sbar.hidden = true
+        end
+    end),
 
     -- Config reloading
     key({"Control", "Shift"}, "R",  function (w) w:restart() end),

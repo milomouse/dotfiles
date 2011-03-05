@@ -64,6 +64,10 @@ function window.build()
         },
         closed_tabs = {}
     }
+    -- Hide statusbar by default (toggled in binds.lua)
+    if true ~= w.sbar.hidden then
+      w.sbar.ebox:hide() w.sbar.hidden = true
+    end
 
     -- Assemble window
     w.ebox:set_child(w.layout)

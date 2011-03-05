@@ -33,7 +33,7 @@ globals.ssl_strict = false
 
 -- Search engines
 search_engines = {
-    archbbs     = "https://bbs.archlinux.org/search.php?action=search&keywords={0}&author=&forum=-1&search_in=all&sort_by=0&sort_dir=DESC&show_as=topics",
+    bbs         = "https://bbs.archlinux.org/search.php?action=search&keywords={0}&author=&forum=-1&search_in=all&sort_by=0&sort_dir=DESC&show_as=topics",
     aur         = "http://aur.archlinux.org/packages.php?O=0&K={0}",
     archbugs    = "https://bugs.archlinux.org/index.php?string={0}&project=1&type%5B%5D=&sev%5B%5D=&pri%5B%5D=&due%5B%5D=&reported%5B%5D=&cat%5B%5D=&status%5B%5D=open&percent%5B%5D=&opened=&dev=&closed=&duedatefrom=&duedateto=&changedfrom=&changedto=&openedfrom=&openedto=&closedfrom=&closedto=&do=index",
     github      = "https://github.com/search?q={0}&type=Everything&repo=&langOverride=&start_value=1",
@@ -48,6 +48,7 @@ search_engines = {
     lastfm      = "http://www.last.fm/music/?q={0}",
     amazon      = "http://www.amazon.com/s/ref=nb_ss_gw?url=search-alias%3Dall&field-keywords={0}",
     ebay        = "http://shop.ebay.com/?_from=R40&_trksid=p3907.m570.l1313&_nkw={0}&_sacat=See-All-Categories",
+    postrock    = "http://www.postrockxchange.com/?s={0}",
     kickass     = "http://www.kickasstorrents.com/search/{0}/",
     btjunkie    = "http://btjunkie.org/search?q={0}",
     piratebay   = "http://thepiratebay.org/search/{0}",

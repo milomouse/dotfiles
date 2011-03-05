@@ -45,6 +45,11 @@ function back {
 }
 
 # go up Nth amount of directories:
+#up () {
+#  for i in $(seq ${1:-1}); do
+#    cd ../
+#  done
+#}
 function up {
   local arg=${1:-1};
   while [ ${arg} -gt 0 ]; do
@@ -126,9 +131,9 @@ function mpq {
   case $1 {
     'm') local _vol=${$(command ossmix|grep outvol)[-2]}
          command ossmix vmix0-outvol 25 &>/dev/null
-         command mplayer ${_mopt} -volume 100 -fs -really-quiet -msglevel all=0 ${@:/$1}
+         command mplayer ${_mopt} -volume 100 -fs -really-quiet -msglevel all=0 ${@:/$1} &>/dev/null
          command ossmix vmix0-outvol ${_vol} &>/dev/null ;;
-    *)   command mplayer ${_mopt} -volume 100 -really-quiet -msglevel all=0 $@
+    *)   command mplayer ${_mopt} -volume 100 -really-quiet -msglevel all=0 ${@} &>/dev/null
   }
 }
 

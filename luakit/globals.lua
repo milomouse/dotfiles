@@ -33,11 +33,13 @@ globals.ssl_strict = false
 
 -- Search engines
 search_engines = {
+    ddg         = "https://duckduckgo.com/?q={0}",
     bbs         = "https://bbs.archlinux.org/search.php?action=search&keywords={0}&author=&forum=-1&search_in=all&sort_by=0&sort_dir=DESC&show_as=topics",
     aur         = "http://aur.archlinux.org/packages.php?O=0&K={0}",
     archbugs    = "https://bugs.archlinux.org/index.php?string={0}&project=1&type%5B%5D=&sev%5B%5D=&pri%5B%5D=&due%5B%5D=&reported%5B%5D=&cat%5B%5D=&status%5B%5D=open&percent%5B%5D=&opened=&dev=&closed=&duedatefrom=&duedateto=&changedfrom=&changedto=&openedfrom=&openedto=&closedfrom=&closedto=&do=index",
     github      = "https://github.com/search?q={0}&type=Everything&repo=&langOverride=&start_value=1",
     wikipedia   = "http://en.wikipedia.org/wiki/Special:Search?search={0}",
+    factbites   = "http://www.factbites.com/topics/{0}",
     google      = "http://www.google.com/search?q={0}",
     googlessl   = "https://www.google.com/search?q={0}",
     images      = "http://www.google.com/images?q={0}&um=1&ie=UTF-8&source=og&sa=N&hl=en&tab=wi",
@@ -54,8 +56,8 @@ search_engines = {
     piratebay   = "http://thepiratebay.org/search/{0}",
 }
 
--- Set google as fallback search engine
-search_engines.default = search_engines.google
+-- Set fallback search engine
+search_engines.default = search_engines.ddg
 -- Use this instead to disable auto-searching
 --search_engines.default = "{0}"
 

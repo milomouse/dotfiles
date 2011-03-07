@@ -305,14 +305,6 @@ is not already taken up (e.g. already in 'only' mode)."
             (show-frame-indicator group))
         (sync-frame-windows group (tile-group-current-frame group))))))
 
-;; similar to command-mode, cursor-warp-mode pushes *cursor-warp-map* to top.
-(defcommand cursor-warp-mode () ()
-"Cursor Warp mode allows you to move the cursor via keyboard bindings
-without having to hold any modifier keys or use the actual mouse.
-To exit cursor mode, type @key{ESC}."
-  (message "Press ESC to exit cursor-mode.")
-  (push-top-map *cursor-warp-map*))
-
 ;; remember frame positions before splitting (do not edit split-frames function for this)
 (defcommand (hsplit tile-group) () () "Remember current state before splitting the
 current frame into 2 side-by-side frames." (remember-group) (split-frame-in-dir (current-group) :column))

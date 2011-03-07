@@ -3,6 +3,15 @@
 ;; *data-dir*/../functions.lisp          ;;
 ;;-----------------------------------------
 
+(defun fmt-group-status (group)
+  (let ((screen (group-screen group)))
+    (cond ((eq group (screen-current-group screen))
+           #\*)
+          ((and (typep (second (screen-groups screen)) 'group)
+                (eq group (second (screen-groups screen))))
+           #\+)
+          (t #\-))))
+
 (defun move-window-to-next-group (current list)
 "Move current window to next group but keep focus on current frame."
   (let ((next (next-group current (non-hidden-groups list)))

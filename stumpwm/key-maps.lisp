@@ -4,8 +4,8 @@
 ;;-----------------------------------------
 
 ;; export custom maps.
-(export '(*echo-map* *frequent-map* *xsel-map* *xclip-map* *win-frame-map*
-          *toggles-map* *mplayer-map1* *mplayer-map2*))
+(export '(*echo-map* *xsel-map* *xclip-clipboard-map* *xclip-primary-map*
+          *frequent-map* *win-frame-map* *mplayer-map1* *mplayer-map2*))
 
 ;; set a few undefined keysyms, unavailable in */stumpwm/keysyms.lisp
 (define-keysym #x1008ff02 "XF86MonBrightnessUp")
@@ -13,14 +13,6 @@
 
 ;; set "Super+Shift+\" as prefix for root-map bindings (this will not be used)
 (set-prefix-key (kbd "s-|"))
-
-;; toggle options not often used.
-(defvar *toggles-map*
-  (let ((m (make-sparse-keymap)))
-    (labels ((dk (m k c) (define-key m k c)))
-    (dk m (kbd "s") "mode-line")
-    (dk m (kbd "ESC") "abort")
-   M)))
 
 ;; some useful window/frame commands.
 (defvar *win-frame-map*
@@ -101,13 +93,10 @@
     (dk m (kbd "b") "display-random-bg")
     (dk m (kbd "B") "exec display -window root -resize 1600x900! /howl/foto/wall/wallpaper-31278.png")
     (dk m (kbd "C-b") "exec display -window root -resize 1600x900! /howl/foto/wall/1366x768_dizorb_landscape_study_hd_wallpaper.png")
-;;    (dk m (kbd "f") "ror_firefox")
     (dk m (kbd "h") "exec urxvt -e htop")
-;;    (dk m (kbd "j") "ror_jumanji")
     (dk m (kbd "l") "ror_luakit")
     (dk m (kbd "m") "ror_mutt")
     (dk m (kbd "s") "exec urxvt -e nsudoku 12")
-    (dk m (kbd "x") "exec xskat -opt ${XDG_CONFIG_DIR:-${HOME}}/xorg/xskat.opt -list ${XDG_CONFIG_DIR:-${HOME}}/xorg/xskat.lst")
     (dk m (kbd "ESC") "abort")
    M)))
 
@@ -115,6 +104,8 @@
 (defvar *mplayer-map1*
   (let ((m (make-sparse-keymap)))
     (labels ((dk (m k c) (define-key m k c)))
+    (dk m (kbd "0")     "exec mifo --reload 0")
+    (dk m (kbd "1")     "exec mifo --reload 1")
     (dk m (kbd "a")     "prompt-mifo-load")
     (dk m (kbd "A")     "prompt-mifo-append")
     (dk m (kbd "d")     "exec sudo /etc/rc.d/mifo start")
@@ -263,8 +254,7 @@
     (dk m (kbd "s-r")    "loadrc")
     (dk m (kbd "s-R")    "restart")
     (dk m (kbd "s-s")    *mplayer-map2*)
-    (dk m (kbd "s-t")    *toggles-map*)
-    (dk m (kbd "s-T")    "title")
+    (dk m (kbd "s-t")    "title")
     (dk m (kbd "s-u")    "undo")
     (dk m (kbd "s-v")    "show-window-properties")
     (dk m (kbd "s-V")    "list-window-properties")
@@ -277,9 +267,6 @@
     (dk m (kbd "XF86AudioMute")         "echo-oss-volmute")
     (dk m (kbd "XF86AudioRaiseVolume")  "echo-oss-volup")
     (dk m (kbd "XF86AudioLowerVolume")  "echo-oss-voldown")
-    (dk m (kbd "XF86MonBrightnessUp")   "exec moodlight --increase")
-    (dk m (kbd "C-XF86MonBrightnessUp") "exec moodlight --max")
-    (dk m (kbd "XF86MonBrightnessDown") "exec moodlight --decrease")
     (dk m (kbd "s-C-F9")  "dump-to-datadir rules")
     (dk m (kbd "s-C-F10") "dump-to-datadir desktop")
     (dk m (kbd "s-C-F11") "dump-to-datadir screen")
@@ -288,9 +275,6 @@
     (dk m (kbd "s-F10")   "restore-from-datadir desktop")
     (dk m (kbd "s-F11")   "restore-from-datadir screen")
     (dk m (kbd "s-F12")   "restore-from-datadir group")
-    ;(dk m (kbd "s-C-F7") "dump-window-placement-rules /howl/conf/stumpwm/storage/placement_rules")
-    ;(dk m (kbd "s-F7")   "restore-window-placement-rules /howl/conf/stumpwm/storage/placement_rules")
-   ; (dk m (kbd "s-quoteleft") "abort")
     (dk m (kbd "s-quoteleft") "scratchpad")
    M)))
 

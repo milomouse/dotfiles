@@ -3,11 +3,11 @@
 # originally based off p.brisbin's but has changed a lot.
 
 # - intrinsic locations:
-  set folder           = $H/mail
+  set folder           = /howl/mail
   set mbox_type        = Maildir
-  set spoolfile        = "+FastMail/INBOX"
-  set record           = "+FastMail/Sent\ Items"
-  set postponed        = "+FastMail/Drafts"
+  set spoolfile        = "+FastMail/inbox"
+  set record           = "+FastMail/sent"
+  set postponed        = "+FastMail/drafts"
   set certificate_file = $XDG_CONFIG_DIR/mutt/certs
   set header_cache     = $XDG_CONFIG_DIR/mutt/cache/headers
   set message_cachedir = $XDG_CONFIG_DIR/mutt/cache/bodies
@@ -21,17 +21,17 @@ source $XDG_CONFIG_DIR/mutt/colors.muttrc
 folder-hook FastMail/* source $XDG_CONFIG_DIR/mutt/fastmail.muttrc
 
 # - watch-folders and subscriptions:
-mailboxes +FastMail/INBOX
-mailboxes +FastMail/Forums
-mailboxes +FastMail/Filesystems
-mailboxes +FastMail/Arch-Dev
-mailboxes +FastMail/Browsers
-mailboxes +FastMail/StumpWM
-mailboxes +FastMail/Storage
-mailboxes +FastMail/Junk\ Mail
-mailboxes +FastMail/Sent\ Items
-mailboxes +FastMail/Drafts
-mailboxes +FastMail/Trash
+mailboxes +FastMail/inbox
+mailboxes +FastMail/forums
+mailboxes +FastMail/filesystems
+mailboxes +FastMail/arch-dev
+mailboxes +FastMail/browsers
+mailboxes +FastMail/stumpwm
+mailboxes +FastMail/storage
+mailboxes +FastMail/spam
+mailboxes +FastMail/sent
+mailboxes +FastMail/drafts
+mailboxes +FastMail/trash
 subscribe arch-announce arch-dev-public arch-general
 
 # - core settings:
@@ -160,8 +160,7 @@ bind index l          display-message
 bind browser l        select-entry
 bind attach  l        view-attach
 bind index ZZ         exit
-bind browser,pager z  exit
-bind attach h         exit
+bind attach,browser,pager z exit
 bind index,browser gg first-entry
 bind index,browser G  last-entry
 

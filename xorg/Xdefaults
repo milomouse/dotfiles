@@ -76,45 +76,45 @@ Xcursor.size: 10
 !*color7:  #665c64
 !*color15: #787a76
 
-!! jessicamouse
+!! astromouse
 *background: #0c0c0c
 *foreground: #b5b5b5
 *color0:  #1c1c1c
 *color8:  #3d3a3a
 *color1:  #d74b73
 *color9:  #b94062
-*color2:  #799c99
-*color10: #85afa9
-*color3:  #c8bc45
-*color11: #baa02c
-*color4:  #76ace2
-*color12: #98a7b6
+*color2 : #9acc79
+*color10: #8fb676
+*color3:  #d0d26b
+*color11: #c8bc45
+*color4 : #77b6c5
+*color12: #8fa7b9
 *color5:  #a488d9
-*color13: #9f8bab
-*color6:  #508686
-*color14: #569e9a
+*color13: #8888a1
+*color6:  #7fcab3
+*color14: #6ec2a8
 *color7:  #8d8d8d
 *color15: #dad3d3
 
-!! ntsumi
-!*foreground:#a0a0a0
-!*background:#1b1d1e
-!*color0:#1b1d1e
-!*color8:#505354
-!*color1:#f92672
-!*color9:#ff5995
-!*color2:#82b414
-!*color10:#b6e354
-!*color3:#fd971f
-!*color11:#feed6c
-!*color4:#56c2d6
-!*color12:#8cedff
-!*color5:#8c54fe
-!*color13:#9e6ffe
-!*color6:#465457
-!*color14:#899ca1
-!*color7:#ccccc6
-!*color15:#f8f8f2
+!! jessicamouse
+!*background: #0c0c0c
+!*foreground: #b5b5b5
+!*color0:  #1c1c1c
+!*color8:  #3d3a3a
+!*color1:  #d74b73
+!*color9:  #b94062
+!*color2:  #799c99
+!*color10: #85afa9
+!*color3:  #c8bc45
+!*color11: #baa02c
+!*color4:  #76ace2
+!*color12: #a2c7e2
+!*color5:  #a488d9
+!*color13: #b8a2e2
+!*color6:  #508686
+!*color14: #569e9a
+!*color7:  #8d8d8d
+!*color15: #dad3d3
 
 !! various X stuff (yet to really mess with this..)
 XFontSel*sampleText.background:       TEXTBG

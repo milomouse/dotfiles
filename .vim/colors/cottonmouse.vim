@@ -15,7 +15,7 @@ if &t_Co > 255
   hi Boolean        term=none cterm=none ctermfg=9    ctermbg=none
   hi Character      term=none cterm=none ctermfg=9    ctermbg=none
   hi Comment        term=none cterm=none ctermfg=238  ctermbg=234
-  hi Conditional    term=none cterm=none ctermfg=6    ctermbg=none
+  hi Conditional    term=none cterm=none ctermfg=110  ctermbg=none
   hi Constant       term=none cterm=none ctermfg=13   ctermbg=none
   hi Cursor         term=none cterm=none ctermfg=233  ctermbg=109
   hi CursorLine     term=none cterm=none ctermfg=none ctermbg=8
@@ -56,7 +56,7 @@ if &t_Co > 255
   hi Special        term=none cterm=none ctermfg=140  ctermbg=none
   hi SpecialKey     term=none cterm=none ctermfg=151  ctermbg=none
   hi Statement      term=none cterm=none ctermfg=103  ctermbg=none
-  hi StatusLine     term=none cterm=none ctermfg=6    ctermbg=234
+  hi StatusLine     term=none cterm=none ctermfg=103  ctermbg=234
   hi StatusLineNC   term=none cterm=none ctermfg=234  ctermbg=59
   hi StorageClass   term=none cterm=none ctermfg=249  ctermbg=none
   hi String         term=none cterm=none ctermfg=7    ctermbg=none

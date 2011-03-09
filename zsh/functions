@@ -127,6 +127,7 @@ function 256co {
 
 # quickly play video files:
 function mpq {
+  setopt no_warncreateglobal
   [[ -z ${DISPLAY} && $(tty) = /dev/tty[1-3] ]] && _mopt=(-vo fbdev)
   case $1 {
     'm') local _vol=${$(command ossmix|grep outvol)[-2]}
@@ -135,6 +136,7 @@ function mpq {
          command ossmix vmix0-outvol ${_vol} &>/dev/null ;;
     *)   command mplayer ${_mopt} -volume 100 -really-quiet -msglevel all=0 ${@} &>/dev/null
   }
+  setopt warncreateglobal
 }
 
 # un-smart function to quickly view word definitions:
@@ -184,14 +186,20 @@ function curlgot {
   done ; fi
 }
 
+# quirky tmux function:
 function tmux {
-  case ${+DISPLAY} in
-    0)  command tmux -S /tmp/.${UID}/tmux/default $@ ;;
-    1)  command tmux -S /tmp/.${UID}/tmux/xorg $@ ;;
-  esac
+  if [[ $1 == '--' ]]; then
+    command tmux
+  else
+    case ${+DISPLAY} in
+      0)  command tmux -S /tmp/.${UID}/tmux/default $@ ;;
+      1)  command tmux -S /tmp/.${UID}/tmux/xorg $@ ;;
+    esac
+  fi
 }
 
 # one-liners/micro functions:
+function lss { ls -- ${1:-.}/*(D.om) }
 function rc {[[ -n $1 ]] && sudo /etc/rc.d/$1 ${@:/$1}}
 function alv {<${${$(command ls -r ${H:-/howl}/othe/archive/installed_*)}[${1:--1}]}|w3m -o pagerline=1000 -o confirm_qq=0}
 function mkcd {command mkdir -p "$@" && cd "$@"}

@@ -1,8 +1,3 @@
-# some early start console routines:
-[[ ${#PATH/local} != ${#PATH} ]] && PATH=${PATH}:/usr/local/bin:/usr/local/sbin
-[[ -f /tmp/.${UID}/.login ]] && { command clear ; command rm /tmp/.${UID}/.login }
-[[ ! -S /tmp/.${UID}/tmux/default ]] && command tmux -qS /tmp/.${UID}/tmux/default start-server 
-
 # source external configuration files:
 ZDOTDIR="${XDG_CONFIG_DIR:-${HOME}}/zsh"
 for i in ${ZDOTDIR}/{options,exports,aliases,functions}; do

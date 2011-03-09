@@ -8,7 +8,7 @@
                                         :NUMBER 0
                                         :X 0
                                         :Y 0
-                                        :WIDTH 800
+                                        :WIDTH 770
                                         :HEIGHT 450
                                         :WINDOWS NIL
                                         :CURRENT NIL)
@@ -16,27 +16,27 @@
                                         :NUMBER 1
                                         :X 0
                                         :Y 450
-                                        :WIDTH 800
+                                        :WIDTH 770
                                         :HEIGHT 450
                                         :WINDOWS NIL
                                         :CURRENT NIL))
                                     (#S(FDUMP
                                         :NUMBER 4
-                                        :X 800
+                                        :X 770
                                         :Y 0
-                                        :WIDTH 800
-                                        :HEIGHT 450
+                                        :WIDTH 830
+                                        :HEIGHT 340
                                         :WINDOWS NIL
                                         :CURRENT NIL)
                                      #S(FDUMP
                                         :NUMBER 2
-                                        :X 800
-                                        :Y 450
-                                        :WIDTH 800
-                                        :HEIGHT 450
+                                        :X 770
+                                        :Y 340
+                                        :WIDTH 830
+                                        :HEIGHT 560
                                         :WINDOWS NIL
                                         :CURRENT NIL))))
-                            :CURRENT 1)
+                            :CURRENT 0)
                          #S(GDUMP
                             :NUMBER 2
                             :NAME "2"

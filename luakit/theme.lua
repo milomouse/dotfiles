@@ -4,6 +4,15 @@
 
 local theme = {}
 
+-- >> start of CUSTOM
+-- only usable with milomouse's window.lua
+-- or, optionally, modify the file yourself
+theme.sbar_l_ebox_bg  = "#887b8b"
+theme.sbar_r_ebox_bg  = "#191919"
+theme.sbar_ebox_bg    = "#191919"
+theme.sbar_sep_bg     = "#191919"
+-- end of CUSTOM <<
+
 -- Default settings
 theme.font = "Fixed 9"
 theme.fg   = "#191919"
@@ -11,7 +20,9 @@ theme.bg   = "#eeeeee"
 
 -- General colors
 theme.success_fg = "#d680c5"
-theme.loaded_fg = "#98a7b2"
+--theme.loaded_fg = "#98a7b2"
+theme.sbar_loaded_fg = "#232323"
+theme.sbar_loaded_bg = "#eeeeee"
 theme.error_fg = "#39d3c9"
 theme.error_bg = "#232323"
 
@@ -38,22 +49,17 @@ theme.proxy_active_menu_bg    = '#98a7b2'
 theme.proxy_inactive_menu_fg  = '#787878'
 theme.proxy_inactive_menu_bg  = '#191919'
 
--- Statusbar specific [dark]
+-- Statusbar specific
 theme.sbar_fg         = "#aaaaaa"
 theme.sbar_bg         = "#191919"
--- Statusbar specific [bright]
---theme.sbar_fg         = "#464646"
---theme.sbar_bg         = "#ece8ed"
+theme.hist_sbar_fg    = "#8fb676"
 
 -- Downloadbar specific
 theme.dbar_fg         = "#989898"
 theme.dbar_bg         = "#191919"
 theme.dbar_error_fg   = "#8eb8c3"
 
--- Input bar specific [dark]
---theme.ibar_fg         = "#aaaaaa"
---theme.ibar_bg         = "#111111"
--- Input bar specific [bright]
+-- Input bar specific
 theme.ibar_fg         = "#232323"
 theme.ibar_bg         = "#ccc8bf"
 

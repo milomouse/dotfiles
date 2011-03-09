@@ -61,6 +61,33 @@ menu_binds = {
 add_binds("all", {
     key({},          "Escape",  function (w) w:set_mode() end),
     key({"Control"}, "[",       function (w) w:set_mode() end),
+
+    -- Mouse bindings
+    but({},     8,  function (w) w:back()     end),
+    but({},     9,  function (w) w:forward()  end),
+
+    -- Open link in new tab or navigate to selection
+    but({},     2,  function (w, m)
+        -- Ignore button 2 clicks in form fields
+        if not m.context.editable then
+            -- Open hovered uri in new tab
+            local uri = w:get_current().hovered_uri
+            if uri then
+                w:new_tab(uri, false)
+            else -- Open selection in current tab
+                uri = luakit.get_selection()
+                if uri then w:navigate(w:search_open(uri)) end
+            end
+        end
+    end),
+
+    -- Open link in new tab when Ctrl-clicked.
+    but({"Control"}, 1, function (w, m)
+        local uri = w:get_current().hovered_uri
+        if uri then
+            w:new_tab(uri, false)
+        end
+    end),
 })
 
 add_binds("normal", {
@@ -113,8 +140,9 @@ add_binds("normal", {
     key({},          "Right",       function (w) w:scroll_horiz(more)  end),
     key({},          "Page_Down",   function (w) w:scroll_page(1.0)    end),
     key({},          "Page_Up",     function (w) w:scroll_page(-1.0)   end),
-    key({},          "Home",        function (w) w:scroll_vert("0%")   end),
+    key({},          "Home",        function (w) w:scroll_vert(0)   end),
     key({},          "End",         function (w) w:scroll_vert("100%") end),
+    key({},          "0",           function (w, m) if not m.count then w:scroll_horiz(0) else return false end end),
 
     -- Zooming
     key({},          "+",           function (w, m)    w:zoom_in(zoom_step  * m.count)       end, {count=1}),
@@ -137,7 +165,10 @@ add_binds("normal", {
                                         if not uri then w:error("Empty selection.") return end
                                         for i = 1, m.count do w:new_tab(w:search_open(uri)) end
                                     end, {count = 1}),
-    buf("^yy$",                     function (w) w:set_selection((w:get_current() or {}).uri or "") end),
+    buf("^yy$",                     function (w)
+                                        local uri = string.gsub(w:get_current().uri or "", " ", "%%20")
+                                        w:set_selection(uri)
+                                    end),
     buf("^yY$",                     function (w) w:set_selection((w:get_current() or {}).uri or "", "clipboard") end),
     buf("^yt$",                     function (w) w:set_selection(w.win.title) end),
     buf("^yT$",                     function (w) w:set_selection(w.win.title, "clipboard") end),
@@ -186,7 +217,8 @@ add_binds("normal", {
     buf("^gH$",                     function (w, b, m) for i=1,m.count do w:new_tab(homepage) end end, {count=1}),
     buf("^gh$",                     function (w)       w:navigate(homepage) end),
 
-    buf("^gy$",                     function (w) w:new_tab((w:get_current() or {}).history or "") end),
+    -- Open tab from current tab history
+    buf("^gy$",                     function (w) w:new_tab(w:get_current().history or "") end),
 
     key({},          "r",           function (w) w:reload() end),
     key({},          "R",           function (w) w:reload(true) end),
@@ -205,11 +237,6 @@ add_binds("normal", {
 
     -- Window
     buf("^ZZ$",                     function (w) w:save_session() w:close_win() end),
-
-    -- Bookmarking
-    key({},          "B",           function (w)       w:enter_cmd(":bookmark " .. ((w:get_current() or {}).uri or "http://") .. " ") end),
-    buf("^gb$",                     function (w)       w:navigate(bookmarks.dump_html()) end),
-    buf("^gB$",                     function (w, b, m) local u = bookmarks.dump_html() for i=1,m.count do w:new_tab(u) end end, {count=1}),
 
     -- Mouse bindings
     but({},          8,             function (w) w:back()     end),
@@ -277,19 +304,29 @@ add_cmds({
     cmd({"viewsource!", "vs!"},         function (w)    w:toggle_source() end),
     cmd("inc[rease]",                   function (w, a) w:navigate(w:inc_uri(tonumber(a) or 1)) end),
     cmd({"javascript",   "js"},         function (w, a) w:eval_js(a, "javascript") end),
-    cmd("lua",                          function (w, a) assert(loadstring("return function(w) "..a.." end"))()(w) end),
-    cmd("dump",                         function (w, a)
-                                            local fname = string.gsub(w.win.title, '[^a-zA-Z0-9.-]', '_')..'.html' -- sanitize filename
-                                            local downdir = luakit.get_special_dir("DOWNLOAD") or "."
-                                            local file = a or luakit.save_file("Save file", w.win, downdir, fname)
-                                            if file then
-                                                local fd = assert(io.open(file, "w"), "failed to open: " .. file)
-                                                local html = assert(w:eval_js("document.documentElement.outerHTML", "dump"), "Unable to get HTML")
-                                                assert(fd:write(html), "unable to save html")
-                                                io.close(fd)
-                                                w:notify("Dumped HTML to: " .. file)
-                                            end
-                                        end),
+
+    cmd("lua", function (w, a)
+        if a then
+            local ret = assert(loadstring("return function(w) return "..a.." end"))()(w)
+            if ret then print(ret) end
+        else
+            w:set_mode("lua")
+        end
+    end),
+
+    cmd("dump", function (w, a)
+        local fname = string.gsub(w.win.title, '[^a-zA-Z0-9.-]', '_')..'.html' -- sanitize filename
+        local downdir = luakit.get_special_dir("DOWNLOAD") or "."
+        local file = a or luakit.save_file("Save file", w.win, downdir, fname)
+        if file then
+            local fd = assert(io.open(file, "w"), "failed to open: " .. file)
+            local html = assert(w:eval_js("document.documentElement.outerHTML", "dump"), "Unable to get HTML")
+            assert(fd:write(html), "unable to save html")
+            io.close(fd)
+            w:notify("Dumped HTML to: " .. file)
+        end
+    end),
+
     cmd({"bookmark",    "bm" },         function (w, a)
                                             local args = split(a)
                                             local uri = table.remove(args, 1)

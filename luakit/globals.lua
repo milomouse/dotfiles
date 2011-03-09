@@ -8,7 +8,9 @@ globals = {
     http_proxy          = "127.0.0.1:8118",
     download_dir        = luakit.get_special_dir("DOWNLOAD") or (os.getenv("HOME") .. "/down"),
     default_window_size = "1280x800",
-   -- default_window_size = "800x600",
+
+    -- Disables loading of hostnames from /etc/hosts (for large host files)
+    load_etc_hosts      = false,
 }
 
 -- Make useragent
@@ -19,52 +21,62 @@ local awkv = string.format("AppleWebKit/%s.%s+", luakit.webkit_user_agent_major_
 globals.useragent = string.format("Mozilla/5.0 (%s) %s %s %s", arch, awkv, wkv, lkv)
 
 -- Search common locations for a ca file which is used for ssl connection validation.
-local ca_files = {luakit.data_dir .. "/ca-certificates.crt",
-    "/etc/certs/ca-certificates.crt", "/etc/ssl/certs/ca-certificates.crt",}
+local ca_files = {
+    -- $XDG_DATA_HOME/luakit/ca-certificates.crt
+    luakit.data_dir .. "/ca-certificates.crt",
+    "/etc/certs/ca-certificates.crt",
+    "/etc/ssl/certs/ca-certificates.crt",
+}
+-- Use the first ca-file found
 for _, ca_file in ipairs(ca_files) do
     if os.exists(ca_file) then
-        globals.ca_file = ca_file
+        soup.set_property("ssl-ca-file", ca_file)
         break
     end
 end
 
 -- Change to stop navigation sites with invalid or expired ssl certificates
-globals.ssl_strict = false
+soup.set_property("ssl-strict", false)
 
--- Search engines
+-- Set cookie acceptance policy
+cookie_policy = { always = 0, never = 1, no_third_party = 2 }
+soup.set_property("accept-policy", cookie_policy.no_third_party)
+
+-- List of search engines. Each item must contain a single %s which is
+-- replaced by URI encoded search terms. All other occurances of the percent
+-- character (%) may need to be escaped by placing another % before or after
+-- it to avoid collisions with lua's string.format characters.
+-- See: http://www.lua.org/manual/5.1/manual.html#pdf-string.format
 search_engines = {
-    bbs         = "https://bbs.archlinux.org/search.php?action=search&keywords={0}&author=&forum=-1&search_in=all&sort_by=0&sort_dir=DESC&show_as=topics",
-    aur         = "http://aur.archlinux.org/packages.php?O=0&K={0}",
-    apkg        = "http://www.archlinux.org/packages?sort=&arch=x86_64&repo=&q={0}&maintainer=&last_update=&flagged=&limit=50",
-    awiki       = "https://wiki.archlinux.org/index.php?title=Special%3ASearch&search={0}&go=Go",
-    archbugs    = "https://bugs.archlinux.org/index.php?string={0}&project=1&type%5B%5D=&sev%5B%5D=&pri%5B%5D=&due%5B%5D=&reported%5B%5D=&cat%5B%5D=&status%5B%5D=open&percent%5B%5D=&opened=&dev=&closed=&duedatefrom=&duedateto=&changedfrom=&changedto=&openedfrom=&openedto=&closedfrom=&closedto=&do=index",
-    github      = "https://github.com/search?q={0}&type=Everything&repo=&langOverride=&start_value=1",
-    wikipedia   = "http://en.wikipedia.org/wiki/Special:Search?search={0}",
-    factbites   = "http://www.factbites.com/topics/{0}",
-    ddg         = "https://duckduckgo.com/?q={0}",
-    google      = "http://www.google.com/search?q={0}",
-    googlessl   = "https://www.google.com/search?q={0}",
-    images      = "http://www.google.com/images?q={0}&um=1&ie=UTF-8&source=og&sa=N&hl=en&tab=wi",
-    newegg      = "http://www.newegg.com/Product/ProductList.aspx?Submit=ENE&DEPA=0&Order=BESTMATCH&Description={0}",
-    tigerdirect = "http://www.tigerdirect.com/applications/SearchTools/search.asp?keywords={0}",
-    imdb        = "http://www.imdb.com/find?s=all&q={0}",
-    youtube     = "http://www.youtube.com/results?search_query={0}",
-    lastfm      = "http://www.last.fm/music/?q={0}",
-    amazon      = "http://www.amazon.com/s/ref=nb_ss_gw?url=search-alias%3Dall&field-keywords={0}",
-    ebay        = "http://shop.ebay.com/?_from=R40&_trksid=p3907.m570.l1313&_nkw={0}&_sacat=See-All-Categories",
-    postrock    = "http://www.postrockxchange.com/?s={0}",
-    kickass     = "http://www.kickasstorrents.com/search/{0}/",
-    btjunkie    = "http://btjunkie.org/search?q={0}",
-    piratebay   = "http://thepiratebay.org/search/{0}",
+    luakit = "http://luakit.org/search/index/luakit?q=%s",
+    abbs   = "https://bbs.archlinux.org/search.php?action=search&keywords=%s&author=&forum=-1&search_in=all&sort_by=0&sort_dir=DESC&show_as=topics",
+    aur    = "http://aur.archlinux.org/packages.php?O=0&K=%s",
+    apkg   = "http://www.archlinux.org/packages?sort=&arch=x86_64&repo=&q=%s&maintainer=&last_update=&flagged=&limit=50",
+    awiki  = "https://wiki.archlinux.org/index.php?title=Special%3ASearch&search=%s&go=Go",
+    abugs  = "https://bugs.archlinux.org/index.php?string=%s&project=1&type%5B%5D=&sev%5B%5D=&pri%5B%5D=&due%5B%5D=&reported%5B%5D=&cat%5B%5D=&status%5B%5D=open&percent%5B%5D=&opened=&dev=&closed=&duedatefrom=&duedateto=&changedfrom=&changedto=&openedfrom=&openedto=&closedfrom=&closedto=&do=index",
+    github = "https://github.com/search?q=%s&type=Everything&repo=&langOverride=&start_value=1",
+    wiki   = "https://en.wikipedia.org/wiki/Special:Search?search=%s",
+    fact   = "http://www.factbites.com/topics/%s",
+    ddg    = "https://duckduckgo.com/?q=%s",
+    google = "https://www.google.com/search?q=%s",
+    images = "http://www.google.com/images?q=%s&um=1&ie=UTF-8&source=og&sa=N&hl=en&tab=wi",
+    newegg = "http://www.newegg.com/Product/ProductList.aspx?Submit=ENE&DEPA=0&Order=BESTMATCH&Description=%s",
+    tiger  = "http://www.tigerdirect.com/applications/SearchTools/search.asp?keywords=%s",
+    imdb   = "http://www.imdb.com/find?s=all&q=%s",
+    yt     = "http://www.youtube.com/results?search_query=%s",
+    lastfm = "http://www.last.fm/music/?q=%s",
+    post   = "http://www.postrockxchange.com/?s=%s",
+    amazon = "http://www.amazon.com/s/ref=nb_ss_gw?url=search-alias%3Dall&field-keywords=%s",
+    ebay   = "http://shop.ebay.com/?_from=R40&_trksid=p3907.m570.l1313&_nkw=%s&_sacat=See-All-Categories",
+    kt     = "http://www.kickasstorrents.com/search/%s/",
+    bt     = "http://btjunkie.org/search?q=%s",
+    pt     = "http://thepiratebay.org/search/%s",
 }
 
--- Set fallback search engine
+-- Set google as fallback search engine
 search_engines.default = search_engines.ddg
 -- Use this instead to disable auto-searching
---search_engines.default = "{0}"
-
--- Fake the cookie policy enum here
-cookie_policy = { always = 0, never = 1, no_third_party = 2 }
+--search_engines.default = "%s"
 
 -- Per-domain webview properties
 -- See http://webkitgtk.org/reference/webkitgtk-WebKitWebSettings.html
@@ -74,7 +86,6 @@ domain_props = {
         ["enable-plugins"] = false,
         ["enable-private-browsing"] = true,
        -- ["user-stylesheet-uri"] = "file://" .. luakit.data_dir .. "/styles/mouse.css",
-        ["accept-policy"] = cookie_policy.no_third_party,
     },
     ["cybernations.net"] = {
         ["enable-plugins"] = true,
@@ -103,7 +114,6 @@ domain_props = {
     },
     ["en.wikipedia.org"] = {
         ["enable-private-browsing"] = false,
-        ["accept-policy"] = cookie_policy.never,
     },
     ["amazon.com"] = {
         ["enable-plugins"] = true,
@@ -138,20 +148,12 @@ domain_props = {
     },
     ["yahoo.com"] = {
         ["enable-scripts"] = false,
-        ["accept-policy"] = cookie_policy.never,
     },
     ["imdb.com"] = {
         ["enable-scripts"] = false,
-        ["accept-policy"] = cookie_policy.never,
-    },
-    ["btjunkie.org"] = {
-        ["accept-policy"] = cookie_policy.never,
     },
     ["kickasstorrents.com"] = {
         ["enable-plugins"] = true,
-    },
-    ["thepiratebay.org"] = {
-        ["accept-policy"] = cookie_policy.never,
     },
     ["last.fm"] = {
         ["enable-plugins"] = true,

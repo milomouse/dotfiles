@@ -6,11 +6,12 @@ globals = {
     max_cmd_history     = 100,
     max_srch_history    = 100,
     http_proxy          = "127.0.0.1:8118",
-    download_dir        = luakit.get_special_dir("DOWNLOAD") or (os.getenv("HOME") .. "/down"),
     default_window_size = "1280x800",
 
-    -- Disables loading of hostnames from /etc/hosts (for large host files)
+ -- Disables loading of hostnames from /etc/hosts (for large host files)
     load_etc_hosts      = false,
+ -- Disables checking if a filepath exists in search_open function
+ -- check_filepath      = false,
 }
 
 -- Make useragent

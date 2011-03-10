@@ -35,15 +35,7 @@ end
 
 -- Add commands to command mode
 function add_cmds(cmds, before)
-    assert(cmds and type(cmds) == "table", "invalid cmds table type: " .. type(cmds))
-    local mdata = get_mode("command")
-    if mdata and before then
-        mdata.commands = join(cmds, mdata.commands or {})
-    elseif mdata then
-        mdata.commands = join(mdata.commands or {}, cmds)
-    else
-        new_mode("command", { commands = cmds })
-    end
+    add_binds("command", cmds, before)
 end
 
 -- Adds the default menu widget bindings to a mode
@@ -165,11 +157,16 @@ add_binds("normal", {
                                         if not uri then w:error("Empty selection.") return end
                                         for i = 1, m.count do w:new_tab(w:search_open(uri)) end
                                     end, {count = 1}),
+
+    -- Yanking
     buf("^yy$",                     function (w)
                                         local uri = string.gsub(w:get_current().uri or "", " ", "%%20")
                                         w:set_selection(uri)
                                     end),
-    buf("^yY$",                     function (w) w:set_selection((w:get_current() or {}).uri or "", "clipboard") end),
+    buf("^yY$",                     function (w)
+                                        local uri = string.gsub(w:get_current().uri or "", " ", "%%20", clipboard)
+                                        w:set_selection(uri)
+                                    end),
     buf("^yt$",                     function (w) w:set_selection(w.win.title) end),
     buf("^yT$",                     function (w) w:set_selection(w.win.title, "clipboard") end),
 
@@ -184,14 +181,15 @@ add_binds("normal", {
     buf("^o$",                      function (w, c) w:enter_cmd(":open ")    end),
     buf("^t$",                      function (w, c) w:enter_cmd(":tabopen ") end),
     buf("^w$",                      function (w, c) w:enter_cmd(":winopen ") end),
-    buf("^O$",                      function (w, c) w:enter_cmd(":open "    .. ((w:get_current() or {}).uri or "")) end),
-    buf("^T$",                      function (w, c) w:enter_cmd(":tabopen " .. ((w:get_current() or {}).uri or "")) end),
-    buf("^W$",                      function (w, c) w:enter_cmd(":winopen " .. ((w:get_current() or {}).uri or "")) end),
+    buf("^O$",                      function (w, c) w:enter_cmd(":open "    .. (w:get_current().uri or "")) end),
+    buf("^T$",                      function (w, c) w:enter_cmd(":tabopen " .. (w:get_current().uri or "")) end),
+    buf("^W$",                      function (w, c) w:enter_cmd(":winopen " .. (w:get_current().uri or "")) end),
     buf("^,g$",                     function (w, c) w:enter_cmd(":open google ") end),
 
     -- History
     key({},          "H",           function (w, m) w:back(m.count)    end),
     key({},          "L",           function (w, m) w:forward(m.count) end),
+    key({},          "b",           function (w, m) w:back(m.count)    end),
     key({},          "XF86Back",    function (w, m) w:back(m.count)    end),
     key({},          "XF86Forward", function (w, m) w:forward(m.count) end),
     key({"Control"}, "o",           function (w, m) w:back(m.count)    end),
@@ -207,7 +205,6 @@ add_binds("normal", {
 
     key({"Control"}, "t",           function (w)    w:new_tab(homepage) end),
     key({"Control"}, "w",           function (w)    w:close_tab()       end),
---    key({},          "d",           function (w, m) for i=1,m.count do w:close_tab()      end end, {count=1}),
 
     key({},          "<",           function (w, m) w.tabs:reorder(w:get_current(), w.tabs:current() - m.count) end, {count=1}),
     key({},          ">",           function (w, m) w.tabs:reorder(w:get_current(), (w.tabs:current() + m.count) % w.tabs:count()) end, {count=1}),
@@ -223,7 +220,13 @@ add_binds("normal", {
     key({},          "r",           function (w) w:reload() end),
     key({},          "R",           function (w) w:reload(true) end),
     key({"Control"}, "c",           function (w) w:stop() end),
-    key({},          "S",           function (w) w:stop() end),
+
+    -- Config reloading
+    key({"Control", "Shift"}, "R",  function (w) w:restart() end),
+
+    -- Window
+    buf("^ZZ$",                     function (w) w:save_session() w:close_win() end),
+    buf("^ZQ$",                     function (w) w:close_win() end),
     key({},          "s",           function (w)
         if true == w.sbar.hidden then
           w.sbar.ebox:show() w.sbar.hidden = false
@@ -231,26 +234,6 @@ add_binds("normal", {
           w.sbar.ebox:hide() w.sbar.hidden = true
         end
     end),
-
-    -- Config reloading
-    key({"Control", "Shift"}, "R",  function (w) w:restart() end),
-
-    -- Window
-    buf("^ZZ$",                     function (w) w:save_session() w:close_win() end),
-
-    -- Mouse bindings
-    but({},          8,             function (w) w:back()     end),
-    but({},          9,             function (w) w:forward()  end),
-    but({},          2,             function (w)
-                                        -- Open hovered uri in new tab
-                                        local uri = w:get_current().hovered_uri
-                                        if uri then
-                                            w:new_tab(w:search_open(uri), false)
-                                        else -- Open selection in current tab
-                                            uri = luakit.get_selection()
-                                            if uri then w:navigate(w:search_open(uri)) end
-                                        end
-                                    end),
 
     -- Enter passthrough mode
     key({"Control"}, "z",           function (w) w:set_mode("passthrough") end),
@@ -283,27 +266,36 @@ add_binds("normal", mod1binds)
 -- Command bindings which are matched in the "command" mode from text
 -- entered into the input bar.
 add_cmds({
- -- cmd({command, alias1, ...},         function (w, arg, opts) .. end, opts),
- -- cmd("co[mmand]",                    function (w, arg, opts) .. end, opts),
-    cmd("o[pen]",                       function (w, a) w:navigate(w:search_open(a)) end),
-    cmd("t[abopen]",                    function (w, a) w:new_tab(w:search_open(a)) end),
-    cmd("w[inopen]",                    function (w, a) window.new{w:search_open(a)} end),
-    cmd("back",                         function (w, a) w:back(tonumber(a) or 1) end),
-    cmd("f[orward]",                    function (w, a) w:forward(tonumber(a) or 1) end),
-    cmd("scroll",                       function (w, a) w:scroll_vert(a) end),
--- NOTE: quit and writequit are defined in downloads.lua instead:
---    cmd("q[uit]",                       function (w)    w:close_tab() end),
---    cmd({"writequit", "wq"},            function (w)    w:save_session() w:close_win() end),
-    cmd({"quitall", "qa"},              function (w)    w:close_win() end),
-    cmd("write",                        function (w)    w:save_session() end),
-    cmd("c[lose]",                      function (w)    w:close_tab() end),
-    cmd("reload",                       function (w)    w:reload() end),
-    cmd("restart",                      function (w)    w:restart() end),
-    cmd("print",                        function (w)    w:eval_js("print()", "rc.lua") end),
-    cmd({"viewsource",  "vs" },         function (w)    w:toggle_source(true) end),
-    cmd({"viewsource!", "vs!"},         function (w)    w:toggle_source() end),
-    cmd("inc[rease]",                   function (w, a) w:navigate(w:inc_uri(tonumber(a) or 1)) end),
-    cmd({"javascript",   "js"},         function (w, a) w:eval_js(a, "javascript") end),
+    -- Detect bangs (I.e. ":command! <args>")
+    buf("^%S+!", function (w, cmd, opts)
+        local cmd, args = string.match(cmd, "^(%S+)!+(.*)")
+        if cmd then
+            opts = join(opts, { bang = true })
+            return lousy.bind.match_cmd(w, opts.binds, cmd .. args, opts)
+        end
+    end),
+
+ -- cmd({command, alias1, ...}, function (w, arg, opts) .. end, opts),
+ -- cmd("co[mmand]",            function (w, arg, opts) .. end, opts),
+    cmd("c[lose]",              function (w) w:close_tab() end),
+    cmd("print",                function (w) w:eval_js("print()", "rc.lua") end),
+    cmd("reload",               function (w) w:reload() end),
+    cmd("restart",              function (w) w:restart() end),
+    cmd("write",                function (w) w:save_session() end),
+
+    cmd("back",                 function (w, a) w:back(tonumber(a) or 1) end),
+    cmd("f[orward]",            function (w, a) w:forward(tonumber(a) or 1) end),
+    cmd("inc[rease]",           function (w, a) w:navigate(w:inc_uri(tonumber(a) or 1)) end),
+    cmd("o[pen]",               function (w, a) w:navigate(w:search_open(a)) end),
+    cmd("scroll",               function (w, a) w:scroll_vert(a) end),
+    cmd("t[abopen]",            function (w, a) w:new_tab(w:search_open(a)) end),
+    cmd("w[inopen]",            function (w, a) window.new{w:search_open(a)} end),
+    cmd({"javascript",   "js"}, function (w, a) w:eval_js(a, "javascript") end),
+
+    cmd("q[uit]",               function (w, a, o) if w.tabs:count() > 1 then w:close_tab() else w:close_win(o.bang) end end),
+    cmd({"quit!", "q!"},        function (w, a, o) w:close_win(o.bang) end),
+    cmd({"viewsource",  "vs" }, function (w, a, o) w:toggle_source(not o.bang and true or nil) end),
+    cmd({"writequit", "wq"},    function (w, a, o) w:save_session() w:close_win(o.bang) end),
 
     cmd("lua", function (w, a)
         if a then
@@ -315,7 +307,7 @@ add_cmds({
     end),
 
     cmd("dump", function (w, a)
-        local fname = string.gsub(w.win.title, '[^a-zA-Z0-9.-]', '_')..'.html' -- sanitize filename
+        local fname = string.gsub(w.win.title, '[^%w%.%-]', '_')..'.html' -- sanitize filename
         local downdir = luakit.get_special_dir("DOWNLOAD") or "."
         local file = a or luakit.save_file("Save file", w.win, downdir, fname)
         if file then
@@ -326,13 +318,6 @@ add_cmds({
             w:notify("Dumped HTML to: " .. file)
         end
     end),
-
-    cmd({"bookmark",    "bm" },         function (w, a)
-                                            local args = split(a)
-                                            local uri = table.remove(args, 1)
-                                            bookmarks.add(uri, args)
-                                        end),
-    cmd("bookdel",                      function (w, a) bookmarks.del(tonumber(a)) end),
 })
 
 -- vim: et:sw=4:ts=8:sts=4:tw=80

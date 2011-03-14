@@ -163,15 +163,10 @@ add_binds("normal", {
                                         local uri = string.gsub(w:get_current().uri or "", " ", "%%20")
                                         w:set_selection(uri)
                                     end),
-    buf("^yY$",                     function (w)
-                                        local uri = string.gsub(w:get_current().uri or "", " ", "%%20", clipboard)
-                                        w:set_selection(uri)
-                                    end),
     buf("^yt$",                     function (w) w:set_selection(w.win.title) end),
-    buf("^yT$",                     function (w) w:set_selection(w.win.title, "clipboard") end),
 
     -- External
-    key({},          "v",           function (w) local uri = (w:get_current() or {}).uri if uri then
+    key({},          "V",           function (w) local uri = (w:get_current() or {}).uri if uri then
         luakit.spawn("urxvt -e cclive -f best --filename-format '%t.%s' --output-dir '/howl/down' --exec='mplayer %f' '" .. uri .. "'")
     end end),
 
@@ -179,21 +174,20 @@ add_binds("normal", {
     key({"Control"}, "a",           function (w)    w:navigate(w:inc_uri(1)) end),
     key({"Control"}, "x",           function (w)    w:navigate(w:inc_uri(-1)) end),
     buf("^o$",                      function (w, c) w:enter_cmd(":open ")    end),
-    buf("^t$",                      function (w, c) w:enter_cmd(":tabnew ") end),
+    buf("^t$",                      function (w, c) w:enter_cmd(":tabopen ") end),
     buf("^w$",                      function (w, c) w:enter_cmd(":winopen ") end),
     buf("^O$",                      function (w, c) w:enter_cmd(":open "    .. (w:get_current().uri or "")) end),
-    buf("^T$",                      function (w, c) w:enter_cmd(":tabnew " .. (w:get_current().uri or "")) end),
+    buf("^T$",                      function (w, c) w:enter_cmd(":tabopen " .. (w:get_current().uri or "")) end),
     buf("^W$",                      function (w, c) w:enter_cmd(":winopen " .. (w:get_current().uri or "")) end),
-    buf("^,g$",                     function (w, c) w:enter_cmd(":open google ") end),
+    buf("^,s$",                     function (w, c) w:enter_cmd(":open ddg ") end),
 
     -- History
     key({},          "H",           function (w, m) w:back(m.count)    end),
     key({},          "L",           function (w, m) w:forward(m.count) end),
-    key({},          "b",           function (w, m) w:back(m.count)    end),
     key({},          "XF86Back",    function (w, m) w:back(m.count)    end),
     key({},          "XF86Forward", function (w, m) w:forward(m.count) end),
-    key({"Control"}, "o",           function (w, m) w:back(m.count)    end),
-    key({"Control"}, "i",           function (w, m) w:forward(m.count) end),
+    buf("^gp$",                     function (w)    w:navigate("chrome://history") end),
+    buf("^gP$",                     function (w, b, m) w:new_tab("chrome://history") end),
 
     -- Tab
     key({"Control"}, "Page_Up",     function (w)       w:prev_tab() end),
@@ -202,17 +196,11 @@ add_binds("normal", {
     key({"Shift","Control"}, "Tab", function (w)       w:prev_tab() end),
     buf("^gT$",                     function (w, b, m) w:prev_tab(m.count) end, {count=1}),
     buf("^gt$",                     function (w, b, m) if not w:goto_tab(m.count) then w:next_tab() end end, {count=0}),
-
-    key({"Control"}, "t",           function (w)    w:new_tab(homepage) end),
-    key({"Control"}, "w",           function (w)    w:close_tab()       end),
-
-    key({},          "<",           function (w, m) w.tabs:reorder(w:get_current(), w.tabs:current() - m.count) end, {count=1}),
-    key({},          ">",           function (w, m) w.tabs:reorder(w:get_current(), (w.tabs:current() + m.count) % w.tabs:count()) end, {count=1}),
-    key({"Mod1"},    "Page_Up",     function (w, m) w.tabs:reorder(w:get_current(), w.tabs:current() - m.count) end, {count=1}),
-    key({"Mod1"},    "Page_Down",   function (w, m) w.tabs:reorder(w:get_current(), (w.tabs:current() + m.count) % w.tabs:count()) end, {count=1}),
-
     buf("^gH$",                     function (w, b, m) for i=1,m.count do w:new_tab(homepage) end end, {count=1}),
     buf("^gh$",                     function (w)       w:navigate(homepage) end),
+    key({},          "<",           function (w, m)    w.tabs:reorder(w:get_current(), w.tabs:current() - m.count) end, {count=1}),
+    key({},          ">",           function (w, m)    w.tabs:reorder(w:get_current(), (w.tabs:current() + m.count) % w.tabs:count()) end, {count=1}),
+    key({"Control"}, "w",           function (w)       w:close_tab()       end),
 
     -- Open tab from current tab history
     buf("^gy$",                     function (w) w:new_tab(w:get_current().history or "") end),
@@ -288,7 +276,7 @@ add_cmds({
     cmd("inc[rease]",           function (w, a) w:navigate(w:inc_uri(tonumber(a) or 1)) end),
     cmd("o[pen]",               function (w, a) w:navigate(w:search_open(a)) end),
     cmd("scroll",               function (w, a) w:scroll_vert(a) end),
-    cmd("tab[new]",             function (w, a) w:new_tab(w:search_open(a)) end),
+    cmd("tab[open]",            function (w, a) w:new_tab(w:search_open(a)) end),
     cmd("win[open]",            function (w, a) window.new{w:search_open(a)} end),
     cmd({"javascript",   "js"}, function (w, a) w:eval_js(a, "javascript") end),
 

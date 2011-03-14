@@ -278,25 +278,25 @@ add_cmds({
 
  -- cmd({command, alias1, ...}, function (w, arg, opts) .. end, opts),
  -- cmd("co[mmand]",            function (w, arg, opts) .. end, opts),
-    cmd("c[lose]",              function (w) w:close_tab() end),
     cmd("print",                function (w) w:eval_js("print()", "rc.lua") end),
     cmd("reload",               function (w) w:reload() end),
     cmd("restart",              function (w) w:restart() end),
     cmd("stop",                 function (w) w:stop() end),
-    cmd("write",                function (w) w:save_session() end),
 
     cmd("back",                 function (w, a) w:back(tonumber(a) or 1) end),
-    cmd("f[orward]",            function (w, a) w:forward(tonumber(a) or 1) end),
+    cmd("forw[ard]",            function (w, a) w:forward(tonumber(a) or 1) end),
     cmd("inc[rease]",           function (w, a) w:navigate(w:inc_uri(tonumber(a) or 1)) end),
     cmd("o[pen]",               function (w, a) w:navigate(w:search_open(a)) end),
     cmd("scroll",               function (w, a) w:scroll_vert(a) end),
-    cmd("t[abopen]",            function (w, a) w:new_tab(w:search_open(a)) end),
-    cmd("w[inopen]",            function (w, a) window.new{w:search_open(a)} end),
+    cmd("tab[new]",             function (w, a) w:new_tab(w:search_open(a)) end),
+    cmd("win[open]",            function (w, a) window.new{w:search_open(a)} end),
     cmd({"javascript",   "js"}, function (w, a) w:eval_js(a, "javascript") end),
 
+    cmd("c[lose]",              function (w) w:close_tab() end),
     cmd("q[uit]",               function (w, a, o) if w.tabs:count() > 1 then w:close_tab() else w:close_win(o.bang) end end),
     cmd({"quitall", "qa"},      function (w, a, o) w:close_win(o.bang) end),
     cmd({"viewsource",  "vs" }, function (w, a, o) w:toggle_source(not o.bang and true or nil) end),
+    cmd("write[all]",           function (w) w:save_session() end),
     cmd({"writequit", "wq"},    function (w, a, o) w:save_session() w:close_win(o.bang) end),
 
     cmd("lua", function (w, a)

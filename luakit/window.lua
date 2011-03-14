@@ -415,7 +415,7 @@ window.methods = {
 
     -- GUI content update functions
     update_tab_count = function (w, i, t)
-        w.sbar.r.tabi.text = string.format("[%d/%d]", i or w.tabs:current(), t or w.tabs:count())
+        w.sbar.r.tabi.text = string.format("[%d:%d]", i or w.tabs:current(), t or w.tabs:count())
     end,
 
     update_win_title = function (w, view)

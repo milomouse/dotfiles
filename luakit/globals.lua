@@ -43,38 +43,49 @@ soup.set_property("ssl-strict", false)
 cookie_policy = { always = 0, never = 1, no_third_party = 2 }
 soup.set_property("accept-policy", cookie_policy.no_third_party)
 
--- List of search engines. Each item must contain a single %s which is
--- replaced by URI encoded search terms. All other occurances of the percent
--- character (%) may need to be escaped by placing another % before or after
--- it to avoid collisions with lua's string.format characters.
--- See: http://www.lua.org/manual/5.1/manual.html#pdf-string.format
+--[[
+  List of search engines. Each item must contain a single %s which is
+  replaced by URI encoded search terms. All other occurances of the percent
+  character (%) may need to be escaped by placing another % before or after
+  it to avoid collisions with lua's string.format characters.
+  See: http://www.lua.org/manual/5.1/manual.html#pdf-string.format
+  Personal Note:
+    some searches such as !lisp or !perl are excluded because it's just one
+    character extra to type.. while certain sites i'd rather redirect through
+    duckduckgo due to referrers, etc. privoxy also helps. --]]
 search_engines = {
-    luakit   = "http://luakit.org/search/index/luakit?q=%s",
-    aur      = "http://aur.archlinux.org/packages.php?O=0&K=%s",
-    abbs     = "https://bbs.archlinux.org/search.php?action=search&keywords=%s&author=&forum=-1&search_in=all&sort_by=0&sort_dir=DESC&show_as=topics",
-    apkg     = "http://www.archlinux.org/packages?sort=&arch=x86_64&repo=&q=%s&maintainer=&last_update=&flagged=&limit=50",
-    awiki    = "https://wiki.archlinux.org/index.php?title=Special%%3ASearch&search=%s&go=Go",
-    abugs    = "https://bugs.archlinux.org/index.php?string=%s&project=1&type%%5B%%5D=&sev%%5B%%5D=&pri%%5B%%5D=&due%%5B%%5D=&reported%%5B%%5D=&cat%%5B%%5D=&status%%5B%%5D=open&percent%%5B%%5D=&opened=&dev=&closed=&duedatefrom=&duedateto=&changedfrom=&changedto=&openedfrom=&openedto=&closedfrom=&closedto=&do=index",
-    github   = "https://github.com/search?q=%s&type=Everything&repo=&langOverride=&start_value=1",
-    wiki     = "https://en.wikipedia.org/wiki/Special:Search?search=%s",
-    fact     = "http://www.factbites.com/topics/%s",
-    duck     = "https://duckduckgo.com/?q=%s",
-    google   = "https://www.google.com/search?q=%s",
-    newegg   = "http://www.newegg.com/Product/ProductList.aspx?Submit=ENE&DEPA=0&Order=BESTMATCH&Description=%s",
-    tiger    = "http://www.tigerdirect.com/applications/SearchTools/search.asp?keywords=%s",
-    imdb     = "http://www.imdb.com/find?s=all&q=%s",
-    youtube  = "http://www.youtube.com/results?search_query=%s",
-    lastfm   = "http://www.last.fm/music/?q=%s",
+    ddg      = "https://duckduckgo.com/?q=%s&kd=1&k1=-1&ke=-1&ka=s&kb=d&kf=fw&kh=1&kk=-1&ko=s&kp=1&kr=b&kt=n&kv=1&kw=n&kx=e&ky=-1",
+    ducky    = "https://duckduckgo.com/?q=%%21ducky%%20%s&kd=1&k1=-1&ke=-1&ka=s&kb=d&kf=fw&kh=1&kk=-1&ko=s&kp=1&kr=b&kt=n&kv=1&kw=n&kx=e&ky=-1",
+    images   = "https://duckduckgo.com/?q=%%21googleimages%%20%s&kd=1&k1=-1&ke=-1&ka=s&kb=d&kf=fw&kh=1&kk=-1&ko=s&kp=1&kr=b&kt=n&kv=1&kw=n&kx=e&ky=-1",
+    bimages  = "https://duckduckgo.com/?q=%%21bingimages%%20%s&kd=1&k1=-1&ke=-1&ka=s&kb=d&kf=fw&kh=1&kk=-1&ko=s&kp=1&kr=b&kt=n&kv=1&kw=n&kx=e&ky=-1",
+    map      = "https://duckduckgo.com/?q=%%21googlemaps%%20%s&kd=1&k1=-1&ke=-1&ka=s&kb=d&kf=fw&kh=1&kk=-1&ko=s&kp=1&kr=b&kt=n&kv=1&kw=n&kx=e&ky=-1",
+    bmap     = "https://duckduckgo.com/?q=%%21bingmaps%%20%s&kd=1&k1=-1&ke=-1&ka=s&kb=d&kf=fw&kh=1&kk=-1&ko=s&kp=1&kr=b&kt=n&kv=1&kw=n&kx=e&ky=-1",
+    arch     = "https://duckduckgo.com/?q=%%21archlinux%%20%s&kd=1&k1=-1&ke=-1&ka=s&kb=d&kf=fw&kh=1&kk=-1&ko=s&kp=1&kr=b&kt=n&kv=1&kw=n&kx=e&ky=-1",
+    awiki    = "https://duckduckgo.com/?q=%%21archwiki%%20%s&kd=1&k1=-1&ke=-1&ka=s&kb=d&kf=fw&kh=1&kk=-1&ko=s&kp=1&kr=b&kt=n&kv=1&kw=n&kx=e&ky=-1",
+    apkg     = "https://duckduckgo.com/?q=%%21archpkg%%20%s&kd=1&k1=-1&ke=-1&ka=s&kb=d&kf=fw&kh=1&kk=-1&ko=s&kp=1&kr=b&kt=n&kv=1&kw=n&kx=e&ky=-1",
+    aur      = "https://duckduckgo.com/?q=%%21archaur%%20%s&kd=1&k1=-1&ke=-1&ka=s&kb=d&kf=fw&kh=1&kk=-1&ko=s&kp=1&kr=b&kt=n&kv=1&kw=n&kx=e&ky=-1",
+    stack    = "https://duckduckgo.com/?q=%%21stackoverflow%%20%s&kd=1&k1=-1&ke=-1&ka=s&kb=d&kf=fw&kh=1&kk=-1&ko=s&kp=1&kr=b&kt=n&kv=1&kw=n&kx=e&ky=-1",
+    git      = "https://duckduckgo.com/?q=%%21github%%20%s&kd=1&k1=-1&ke=-1&ka=s&kb=d&kf=fw&kh=1&kk=-1&ko=s&kp=1&kr=b&kt=n&kv=1&kw=n&kx=e&ky=-1",
+    wiki     = "https://duckduckgo.com/?q=%%21wikipedia%%20%s&kd=1&k1=-1&ke=-1&ka=s&kb=d&kf=fw&kh=1&kk=-1&ko=s&kp=1&kr=b&kt=n&kv=1&kw=n&kx=e&ky=-1",
+    newegg   = "https://duckduckgo.com/?q=%%21newegg%%20%s&kd=1&k1=-1&ke=-1&ka=s&kb=d&kf=fw&kh=1&kk=-1&ko=s&kp=1&kr=b&kt=n&kv=1&kw=n&kx=e&ky=-1",
+    imdb     = "https://duckduckgo.com/?q=%%21imdb%%20%s&kd=1&k1=-1&ke=-1&ka=s&kb=d&kf=fw&kh=1&kk=-1&ko=s&kp=1&kr=b&kt=n&kv=1&kw=n&kx=e&ky=-1",
+    youtube  = "https://duckduckgo.com/?q=%%21youtube%%20%s&kd=1&k1=-1&ke=-1&ka=s&kb=d&kf=fw&kh=1&kk=-1&ko=s&kp=1&kr=b&kt=n&kv=1&kw=n&kx=e&ky=-1",
+    motion   = "https://duckduckgo.com/?q=%%21dailymotion%%20%s&kd=1&k1=-1&ke=-1&ka=s&kb=d&kf=fw&kh=1&kk=-1&ko=s&kp=1&kr=b&kt=n&kv=1&kw=n&kx=e&ky=-1",
+    lastfm   = "https://duckduckgo.com/?q=%%21lastfm%%20%s&kd=1&k1=-1&ke=-1&ka=s&kb=d&kf=fw&kh=1&kk=-1&ko=s&kp=1&kr=b&kt=n&kv=1&kw=n&kx=e&ky=-1",
+    amazon   = "https://duckduckgo.com/?q=%%21amazon%%20%s&kd=1&k1=-1&ke=-1&ka=s&kb=d&kf=fw&kh=1&kk=-1&ko=s&kp=1&kr=b&kt=n&kv=1&kw=n&kx=e&ky=-1",
+    ebay     = "https://duckduckgo.com/?q=%%21ebay%%20%s&kd=1&k1=-1&ke=-1&ka=s&kb=d&kf=fw&kh=1&kk=-1&ko=s&kp=1&kr=b&kt=n&kv=1&kw=n&kx=e&ky=-1",
+    list     = "https://duckduckgo.com/?q=%%21craigslist%%20%s&kd=1&k1=-1&ke=-1&ka=s&kb=d&kf=fw&kh=1&kk=-1&ko=s&kp=1&kr=b&kt=n&kv=1&kw=n&kx=e&ky=-1",
+    kt       = "https://duckduckgo.com/?q=%%21kickasstorrents%%20%s&kd=1&k1=-1&ke=-1&ka=s&kb=d&kf=fw&kh=1&kk=-1&ko=s&kp=1&kr=b&kt=n&kv=1&kw=n&kx=e&ky=-1",
+    pt       = "https://duckduckgo.com/?q=%%21thepiratebay%%20%s&kd=1&k1=-1&ke=-1&ka=s&kb=d&kf=fw&kh=1&kk=-1&ko=s&kp=1&kr=b&kt=n&kv=1&kw=n&kx=e&ky=-1",
+    bt       = "https://duckduckgo.com/?q=%%21btjunkie%%20%s&kd=1&k1=-1&ke=-1&ka=s&kb=d&kf=fw&kh=1&kk=-1&ko=s&kp=1&kr=b&kt=n&kv=1&kw=n&kx=e&ky=-1",
+    dt       = "https://duckduckgo.com/?q=%%21demonoid%%20%s&kd=1&k1=-1&ke=-1&ka=s&kb=d&kf=fw&kh=1&kk=-1&ko=s&kp=1&kr=b&kt=n&kv=1&kw=n&kx=e&ky=-1",
     postrock = "http://www.postrockxchange.com/?s=%s",
-    amazon   = "http://www.amazon.com/s/ref=nb_ss_gw?url=search-alias%%3Dall&field-keywords=%s",
-    ebay     = "http://shop.ebay.com/?_from=R40&_trksid=p3907.m570.l1313&_nkw=%s&_sacat=See-All-Categories",
-    kt       = "http://www.kickasstorrents.com/search/%s/",
-    bt       = "http://btjunkie.org/search?q=%s",
-    pt       = "http://thepiratebay.org/search/%s",
+    tiger    = "http://www.tigerdirect.com/applications/SearchTools/search.asp?keywords=%s",
+    luakit   = "http://luakit.org/search/index/luakit?q=%s",
 }
 
--- Set google as fallback search engine
-search_engines.default = search_engines.duck
+-- Set duckduckgo as fallback search engine
+search_engines.default = search_engines.ddg
 -- Use this instead to disable auto-searching
 --search_engines.default = "%s"
 
@@ -85,28 +96,19 @@ domain_props = {
         ["enable-scripts"] = true,
         ["enable-plugins"] = false,
         ["enable-private-browsing"] = true,
-        ["user-stylesheet-uri"] = "file://" .. luakit.data_dir .. "/styles/mouse.css",
-    },
-    ["cybernations.net"] = {
-        ["enable-plugins"] = true,
-        ["enable-private-browsing"] = false,
-    },
-    ["nationstates.net"] = {
-        ["enable-plugins"] = true,
-        ["enable-private-browsing"] = false,
-    },
-    ["ars-regendi.com"] = {
-        ["enable-plugins"] = true,
-        ["enable-private-browsing"] = false,
+        --["user-stylesheet-uri"] = "file://" .. luakit.data_dir .. "/styles/everymouse.css",
     },
     ["bbs.archlinux.org"] = {
         ["enable-private-browsing"] = false,
+        ["user-stylesheet-uri"] = "file://" .. luakit.data_dir .. "/styles/archmouse.css",
     },
     ["bugs.archlinux.org"] = {
         ["enable-private-browsing"] = false,
+        ["user-stylesheet-uri"] = "file://" .. luakit.data_dir .. "/styles/archmouse.css",
     },
     ["aur.archlinux.org"] = {
         ["enable-private-browsing"] = false,
+        ["user-stylesheet-uri"] = "file://" .. luakit.data_dir .. "/styles/archmouse.css",
     },
     ["github.com"] = {
         ["enable-plugins"] = true,
@@ -160,6 +162,10 @@ domain_props = {
         ["enable-private-browsing"] = false,
     },
     ["pandora.com"] = {
+        ["enable-plugins"] = true,
+        ["enable-private-browsing"] = false,
+    },
+    ["nationstates.net"] = {
         ["enable-plugins"] = true,
         ["enable-private-browsing"] = false,
     },

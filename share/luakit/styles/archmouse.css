@@ -1,4 +1,5 @@
 /* $XDG_DATA_HOME/luakit/styles/mouse.css */
+/* ArchLinux CSS file, just change a few fonts/colors. */
 
 /* body {
     font:"DejaVu Sans" !important ;
@@ -6,21 +7,21 @@
     font-family:"DejaVu Sans", serif !important ;
     font-family:"DejaVu Sans", monospace !important ;
     font-size:12px;
-} */
+}
 input {
     background-color: #ebf1f5 !important;
     color: #343434 !important;
-/*    font-size:12px;
+    font-size:12px;
     border: 1px solid #bbbbbb !important;
-    outline: none !important; */
+    outline: none !important;
 }
 input:hover {
     background-color: #dedcdf !important;
     color: #343434 !important;
-/*    font-size:12px;
+    font-size:12px;
     border: 1px solid #bbbbbb !important;
-    outline: none; */
-}
+    outline: none;
+} */
 textarea {
     background-color: #ebf1f5 !important;
     color: #343434 !important;

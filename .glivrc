@@ -16,7 +16,7 @@ scale-down    = True
 menu          = False
 
 # Display info about the image
-info          = False
+info          = True
 
 # Display scrollbars
 scrollbars    = False

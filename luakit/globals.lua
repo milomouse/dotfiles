@@ -74,7 +74,7 @@ search_engines = {
 }
 
 -- Set google as fallback search engine
-search_engines.default = search_engines.ddg
+search_engines.default = search_engines.duck
 -- Use this instead to disable auto-searching
 --search_engines.default = "%s"
 

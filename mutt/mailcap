@@ -1,6 +1,6 @@
-#text/html; /usr/bin/luakit %s; test=test -n "$DISPLAY"; copiousoutput;
+text/html; /usr/bin/luakit %s; test=test -n "$DISPLAY"; copiousoutput;
 text/html; /usr/bin/w3m -I %{charset} -T text/html %s; copiousoutput;
-image/*; /usr/bin/gliv %s; test=test -n "$DISPLAY";
+image/*; /usr/bin/sxiv %s; test=test -n "$DISPLAY";
 video/*; /usr/bin/mplayer -msglevel all=0 %s 2>/dev/null; test=test -n "$DISPLAY";
 video/*; /usr/bin/mplayer -msglevel all=0 -vo fbdev %s 2>/dev/null;
 application/msword; /usr/bin/antiword %s; copiousoutput;

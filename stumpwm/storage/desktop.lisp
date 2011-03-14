@@ -8,32 +8,40 @@
                                         :NUMBER 0
                                         :X 0
                                         :Y 0
-                                        :WIDTH 770
-                                        :HEIGHT 450
+                                        :WIDTH 800
+                                        :HEIGHT 410
                                         :WINDOWS NIL
                                         :CURRENT NIL)
-                                     #S(FDUMP
+                                     (#S(FDUMP
+                                         :NUMBER 3
+                                         :X 800
+                                         :Y 0
+                                         :WIDTH 800
+                                         :HEIGHT 135
+                                         :WINDOWS NIL
+                                         :CURRENT NIL)
+                                      #S(FDUMP
+                                         :NUMBER 4
+                                         :X 800
+                                         :Y 135
+                                         :WIDTH 800
+                                         :HEIGHT 275
+                                         :WINDOWS NIL
+                                         :CURRENT NIL)))
+                                    (#S(FDUMP
                                         :NUMBER 1
                                         :X 0
-                                        :Y 450
-                                        :WIDTH 770
-                                        :HEIGHT 450
-                                        :WINDOWS NIL
-                                        :CURRENT NIL))
-                                    (#S(FDUMP
-                                        :NUMBER 4
-                                        :X 770
-                                        :Y 0
-                                        :WIDTH 830
-                                        :HEIGHT 340
+                                        :Y 410
+                                        :WIDTH 800
+                                        :HEIGHT 490
                                         :WINDOWS NIL
                                         :CURRENT NIL)
                                      #S(FDUMP
                                         :NUMBER 2
-                                        :X 770
-                                        :Y 340
-                                        :WIDTH 830
-                                        :HEIGHT 560
+                                        :X 800
+                                        :Y 410
+                                        :WIDTH 800
+                                        :HEIGHT 490
                                         :WINDOWS NIL
                                         :CURRENT NIL))))
                             :CURRENT 0)

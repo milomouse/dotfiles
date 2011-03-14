@@ -219,7 +219,8 @@ add_binds("normal", {
 
     key({},          "r",           function (w) w:reload() end),
     key({},          "R",           function (w) w:reload(true) end),
-    key({"Control"}, "c",           function (w) w:stop() end),
+    key({"Control"}, "c",           function (w) w:stop(true) end),
+    key({},          "S",           function (w) w:stop() end),
 
     -- Config reloading
     key({"Control", "Shift"}, "R",  function (w) w:restart() end),
@@ -281,6 +282,7 @@ add_cmds({
     cmd("print",                function (w) w:eval_js("print()", "rc.lua") end),
     cmd("reload",               function (w) w:reload() end),
     cmd("restart",              function (w) w:restart() end),
+    cmd("stop",                 function (w) w:stop() end),
     cmd("write",                function (w) w:save_session() end),
 
     cmd("back",                 function (w, a) w:back(tonumber(a) or 1) end),
@@ -293,7 +295,7 @@ add_cmds({
     cmd({"javascript",   "js"}, function (w, a) w:eval_js(a, "javascript") end),
 
     cmd("q[uit]",               function (w, a, o) if w.tabs:count() > 1 then w:close_tab() else w:close_win(o.bang) end end),
-    cmd({"quit!", "q!"},        function (w, a, o) w:close_win(o.bang) end),
+    cmd({"quitall", "qa"},      function (w, a, o) w:close_win(o.bang) end),
     cmd({"viewsource",  "vs" }, function (w, a, o) w:toggle_source(not o.bang and true or nil) end),
     cmd({"writequit", "wq"},    function (w, a, o) w:save_session() w:close_win(o.bang) end),
 

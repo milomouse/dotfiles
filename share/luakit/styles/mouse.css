@@ -1,123 +1,62 @@
-body {
+/* $XDG_DATA_HOME/luakit/styles/mouse.css */
+
+/* body {
     font:"DejaVu Sans" !important ;
     font-family:"DejaVu Sans", sans-serif !important ;
     font-family:"DejaVu Sans", serif !important ;
     font-family:"DejaVu Sans", monospace !important ;
     font-size:12px;
-}
- 
-pre {
-    font-size:12px;
-}
- 
-p {
-    font-size:12px;
-}
- 
+} */
 input {
-    font-size:12px;
     background-color: #ebf1f5 !important;
-    border: 1px solid #bbbbbb !important;
-    outline: none !important;
     color: #343434 !important;
-}
- 
-input:hover {
-    font-size:12px;
-    background-color: #dedcdf !important;
+/*    font-size:12px;
     border: 1px solid #bbbbbb !important;
-    outline: none;
-    color: #343434;
+    outline: none !important; */
 }
- 
-img {
-    font-size:12px;
+input:hover {
+    background-color: #dedcdf !important;
+    color: #343434 !important;
+/*    font-size:12px;
+    border: 1px solid #bbbbbb !important;
+    outline: none; */
 }
- 
 textarea {
-    font-size:12px;
-    background-color: #ebf1f5;
+    background-color: #ebf1f5 !important;
+    color: #343434 !important;
+/*    font-size:12px;
     border: 1px solid #bbbbbb;
-    outline: none;
-    color: #343434;
+    outline: none; */
 }
- 
-.box {
-    font-size:12px;
-}
-
-h1,h2,h3,h4,h5,h6 {
-    font-size:12px;
-}
- 
-a:link {
+/* a:link {
     font-size:12px;
     text-decoration: none !important;
     outline: none;
 }
- 
 a:active {
     font-size:12px;
     text-decoration: none !important;
     outline: none;
 }
- 
 a:hover {
     font-size:12px;
     text-decoration: none !important;
     outline: none;
 }
- 
 a:visited {
     font-size:12px;
     text-decoration: none !important;
     outline: none;
 }
- 
-td {
+pre,p {
     font-size:12px;
 }
- 
-tr {
+.box,h1,h2,h3,h4,h5,h6 {
     font-size:12px;
 }
- 
-dl {
+td,tr,dl,dd,th,li,ul,cl,blockquote {
     font-size:12px;
 }
-
-dd {
+div,div.postright,div.postfootright,div.box,div.incqbox,div.codebox,div.scrollbox {
     font-size:12px;
-}
- 
-th {
-    font-size:12px;
-}
- 
-li {
-    font-size:12px;
-}
- 
-ul {
-    font-size:12px;
-}
- 
-ol {
-    font-size:12px;
-}
- 
-blockquote {
-    font-size:12px;
-}
- 
-div.postright, div.postfootright, div.box {
-    font-size:12px;
-}
- 
-div {
-    font-size:12px;
-}
- 
-div.incqbox, div.codebox,div.scrollbox {
-    font-size:12px;
-}
+} */

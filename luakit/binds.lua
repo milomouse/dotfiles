@@ -179,10 +179,10 @@ add_binds("normal", {
     key({"Control"}, "a",           function (w)    w:navigate(w:inc_uri(1)) end),
     key({"Control"}, "x",           function (w)    w:navigate(w:inc_uri(-1)) end),
     buf("^o$",                      function (w, c) w:enter_cmd(":open ")    end),
-    buf("^t$",                      function (w, c) w:enter_cmd(":tabopen ") end),
+    buf("^t$",                      function (w, c) w:enter_cmd(":tabnew ") end),
     buf("^w$",                      function (w, c) w:enter_cmd(":winopen ") end),
     buf("^O$",                      function (w, c) w:enter_cmd(":open "    .. (w:get_current().uri or "")) end),
-    buf("^T$",                      function (w, c) w:enter_cmd(":tabopen " .. (w:get_current().uri or "")) end),
+    buf("^T$",                      function (w, c) w:enter_cmd(":tabnew " .. (w:get_current().uri or "")) end),
     buf("^W$",                      function (w, c) w:enter_cmd(":winopen " .. (w:get_current().uri or "")) end),
     buf("^,g$",                     function (w, c) w:enter_cmd(":open google ") end),
 

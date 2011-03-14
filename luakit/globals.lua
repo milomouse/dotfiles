@@ -85,7 +85,7 @@ domain_props = {
         ["enable-scripts"] = true,
         ["enable-plugins"] = false,
         ["enable-private-browsing"] = true,
-       -- ["user-stylesheet-uri"] = "file://" .. luakit.data_dir .. "/styles/mouse.css",
+        ["user-stylesheet-uri"] = "file://" .. luakit.data_dir .. "/styles/mouse.css",
     },
     ["cybernations.net"] = {
         ["enable-plugins"] = true,

@@ -50,7 +50,6 @@ alias {poweroff,pow}='/bin/sync && sudo /sbin/poweroff'
 alias mix2="/usr/local/bin/ossvol --speakers --quiet && /usr/local/bin/ossvol -a"
 alias mix3="/usr/local/bin/ossvol --headphones --quiet && /usr/local/bin/ossvol -a"
 alias siteget="/usr/bin/wget --recursive --page-requisites --convert-links --html-extension --no-parent --random-wait --limit-rate=20K -U Mozilla -l" #depth, then url
-alias newmail="print - ${(Fw)#$(find /howl/mail/FastMail/*/new -type f)}"
 
 # database/package management:
 alias upf="sudo /usr/bin/fc-cache -vr"

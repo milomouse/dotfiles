@@ -1,6 +1,6 @@
 !! ${XDG_CONFIG_DIR:-$HOME/.config}/xorg/Xdefaults
 !! author: milomouse <vincent[at]fea.st>
-!! update: 2010-12-28
+!! update: 2011-05-07
 
 urxvt*termName: rxvt-256color
 urxvt*loginShell: true
@@ -76,26 +76,6 @@ Xcursor.size: 10
 !*color7:  #665c64
 !*color15: #787a76
 
-!! astromouse
-*background: #0c0c0c
-*foreground: #b5b5b5
-*color0:  #1c1c1c
-*color8:  #3d3a3a
-*color1:  #d74b73
-*color9:  #b94062
-*color2 : #9acc79
-*color10: #8fb676
-*color3:  #d0d26b
-*color11: #c8bc45
-*color4 : #77b6c5
-*color12: #8fa7b9
-*color5:  #a488d9
-*color13: #8888a1
-*color6:  #7fcab3
-*color14: #6ec2a8
-*color7:  #8d8d8d
-*color15: #dad3d3
-
 !! jessicamouse
 !*background: #0c0c0c
 !*foreground: #b5b5b5
@@ -115,6 +95,26 @@ Xcursor.size: 10
 !*color14: #569e9a
 !*color7:  #8d8d8d
 !*color15: #dad3d3
+
+!! astromouse
+*background: #0c0c0c
+*foreground: #b5b5b5
+*color0:  #1c1c1c
+*color8:  #3d3a3a
+*color1:  #d74b73
+*color9:  #b94062
+*color2 : #9acc79
+*color10: #8fb676
+*color3:  #d0d26b
+*color11: #c8bc45
+*color4 : #77b6c5
+*color12: #8fa7b9
+*color5:  #a488d9
+*color13: #8888a1
+*color6:  #7fcab3
+*color14: #6ec2a8
+*color7:  #8d8d8d
+*color15: #dad3d3
 
 !! various X stuff (yet to really mess with this..)
 XFontSel*sampleText.background:       TEXTBG

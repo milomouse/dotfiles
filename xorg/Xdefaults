@@ -1,6 +1,6 @@
 !! ${XDG_CONFIG_DIR:-$HOME/.config}/xorg/Xdefaults
 !! author: milomouse <vincent[at]fea.st>
-!! update: 2011-05-07
+!! update: 2011-03-21
 
 urxvt*termName: rxvt-256color
 urxvt*loginShell: true

@@ -23,6 +23,7 @@ export PAGER="/usr/bin/most"
 export SDCV_PAGER="/bin/more"
 export SDCV_HISTSIZE=0
 export EDITOR="/usr/bin/vim"
+export MOST_SWITCHES="-c"
 export MOST_EDITOR="${EDITOR}"
 export FCEDIT="${EDITOR}"
 export BZR_EDITOR="${EDITOR}"

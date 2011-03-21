@@ -10,10 +10,22 @@ function zshaddhistory {
   ]] && (( ! $argv[(I)*unrl*|*spar*|*losetup*|*aespipe*|*litika*|sudo rm*] ))
 }
 
+function ddg {
+  # be sure to 'strong quote' arguments with characters such as !, %, @, etc..
+  if [[ -n $1 && $1 == "-p" ]]; then
+    print - "https://duckduckgo.com?q=${${${@}// /%20}/\!/%21}&kd=1&k1=-1&ka=s&kb=d&kf=f&kh=1&kk=-1&ko=s&kp=1&kr=b&kt=n&kv=1&kw=n&kx=e&ky=-1"
+  else
+    case ${+DISPLAY} {
+      0) /usr/bin/w3m "https://duckduckgo.com?q=${${${@}// /%20}/\!/%21}&kd=1&k1=-1&ka=s&kb=d&kf=f&kh=1&kk=-1&ko=s&kp=1&kr=b&kt=n&kv=1&kw=n&kx=e&ky=-1" ;;
+      1) /usr/bin/luakit "https://duckduckgo.com?q=${${${@}// /%20}/\!/%21}&kd=1&k1=-1&ka=s&kb=d&kf=f&kh=1&kk=-1&ko=s&kp=1&kr=b&kt=n&kv=1&kw=n&kx=e&ky=-1" & ;;
+    }
+  fi
+}
+
 ## test arguments and [if valid] prepend file:// to local requests:
 #function {jumanji,vimprobable} {
 #  setopt no_warncreateglobal
-#  for i in {1..999}; do
+#  for i in {1..999}; do # this will break when arguments run out
 #    if [[ ${+i} == 1 && ${(P)i} != ${(P)$(($i - 1))} ]]; then
 #      if [[ -f $PWD/${(P)i} ]]; then __urls=(${__urls} file://$PWD/${(P)i})
 #      elif [[ -f ${(P)i} ]]; then __urls=(${__urls} file://${(P)i})
@@ -45,11 +57,6 @@ function back {
 }
 
 # go up Nth amount of directories:
-#up () {
-#  for i in $(seq ${1:-1}); do
-#    cd ../
-#  done
-#}
 function up {
   local arg=${1:-1};
   while [ ${arg} -gt 0 ]; do
@@ -88,30 +95,6 @@ function psi {
       '-T'|'-t')  ps -t $2 hopid,args ;; # by- tty
       *)  print "unrecognized option. read: man ps (section: process selection by list)" ;; }
   else print "invalid selection. read: man ps (section: process selection by list)" ; fi
-}
-
-# extract archive with preferred options:
-function extr {
-  if [[ -f $1 ]]; then 
-    case $1 in
-      *.tar.bz2)   tar xjf $1    ;;
-      *.tar.gz)    tar xzf $1    ;;
-      *.bz2)       bunzip2 $1    ;;
-      *.rar)       unrar x $1    ;;
-      *.gz)        gunzip $1     ;;
-      *.tar)       tar xf $1     ;;
-      *.tbz2)      tar xjf $1    ;;
-      *.tgz)       tar xzf $1    ;;
-      *.zip)       unzip $1      ;;
-      *.Z)         uncompress $1 ;;
-      *.7z)        7z x $1       ;;
-      *.xz)        unxz -vk $1   ;;
-      *.lzma)      unlzma -vk $1 ;;
-      *)           print "'$1' cannot be extracted via extr()" ;;
-    esac
-  else
-    print "'$1' is not a valid file"
-  fi
 }
 
 # native function for showing 256 colors, properly formatted:
@@ -171,19 +154,6 @@ function zhist {
       *)  <${ZDOTDIR:-${HOME}/zsh}/.history|grep -i $1
     }
   fi
-}
-
-# un-smart function to watch curl download progress and notify when complete:
-function curlgot {
-  if [[ -n $(pgrep curl) ]]; then
-  while sleep 1; do
-    if [[ -z $(pgrep curl) ]]; then
-      repeat 3; do # ${DISPLAY} is assumed since downloads are done via jumanji
-        stumpish echo "^B^1*curl:^5* download complete.^n" 1>/dev/null
-        sleep 3
-      done && break
-    fi
-  done ; fi
 }
 
 # quirky tmux function:

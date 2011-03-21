@@ -35,7 +35,7 @@ alias mutt="/usr/bin/mutt -F ${XDG_CONFIG_DIR:-${HOME}}/mutt/muttrc"
 alias xskat="/usr/bin/xskat -opt ${XDG_CONFIG_DIR:-${HOME}}/xorg/xskat.opt -list ${XDG_CONFIG_DIR:-${HOME}}/xorg/xskat.lst"
 alias offlineimap="/usr/bin/offlineimap -c ${XDG_CONFIG_DIR:-${HOME}}/.offlineimap/offlineimaprc"
 alias {rot,rtorrent}='/usr/bin/rtorrent -o http_capath=/etc/ssl/certs'
-alias startx="_o=$PWD ; cd ~/ ; /usr/bin/startx ${XDG_CONFIG_DIR:-${HOME}}/xorg/xinitrc -- -nolisten tcp nologo -once -retro ; cd $_o"
+alias startx="_o=$PWD ; cd ~/ ; /usr/bin/startx ${XDG_CONFIG_DIR:-${HOME}}/xorg/xinitrc -- -nolisten tcp -once -retro ; cd $_o"
 
 # system/media shortcuts:
 alias psu="print 'ELAPSETIME %CPU NI +?  LWPID - COMMAND';/bin/ps -U root,privoxy,15,http,daemon,nobody --deselect -C tmux,urxvt -H hoetime:10,%cpu:4,ni:2,stat:3,pid:5,rtprio:1,args"
@@ -59,4 +59,4 @@ alias {baerp,pacman}="sudo /usr/bin/pacman-color"
 # will soon remove yaourt and possibly bauerbill after my aur handler is finished.
 alias baer="/usr/bin/bauerbill"
 alias ay="/usr/bin/yaourt"
-alias aive="ay -Q --date >! ${H:-/howl}/othe/archive/installed_$(date +%Y-%m-%d).txt"
+alias aive="ay -Q --date >! ${H:-/howl}/othe/archive/installed_$(date +%Y-%m-%d).txt &"

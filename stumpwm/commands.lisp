@@ -344,7 +344,7 @@ current frame into 2 frames, one on top of the other." (remember-group) (split-f
 (defcommand echo-mail () () "" (echo-string (current-screen) (run-shell-command "print - @fea.st: ${#$(find /howl/mail/FastMail/*/new -type f)}" t)))
 (defcommand echo-battery () () "" (echo-string (current-screen) (run-shell-command "<sys/class/power_supply/BAT0/uevent" t)))
 (defcommand echo-wlan () () "" (echo-string (current-screen) (run-shell-command "iwconfig wlan0" t)))
-(defcommand echo-free-hdd () () "" (echo-string (current-screen) (run-shell-command "df -hTP" t)))
+(defcommand echo-free-hdd () () "" (echo-string (current-screen) (run-shell-command "di -x debugfs,tmpfs -Af SMTufI" t)))
 (defcommand echo-free-mem () () "" (echo-string (current-screen) (run-shell-command "print '^B^6/free^1* used^5* base^n';free -m|awk 'NR==2 {print $4,$3,$2}'" t)))
 (defcommand echo-loadavg () () "" (echo-string (current-screen) (run-shell-command "print ${$(</proc/loadavg)[1,3]}" t)))
 (defcommand echo-colors-brief () () "Output a brief list of currently defined colors." (echo-string (current-screen) (eval "

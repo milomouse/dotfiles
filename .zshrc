@@ -1,7 +1,7 @@
 # source external configuration files:
-ZDOTDIR="${XDG_CONFIG_DIR:-${HOME}}/zsh"
+ZDOTDIR="${HOME}/zsh"
 for i in ${ZDOTDIR}/{options,exports,aliases,functions}; do
-  . $i || { print "$i: cannnot source file" && setopt cshjunkieloop warncreateglobal }
+  . $i || { print "$i: cannnot source file" && setopt warncreateglobal }
 done
 
 # prompt line:
@@ -29,7 +29,6 @@ zstyle ':completion:*:*:kill:*' menu yes select
 zstyle ':completion:*:*:kill:*:processes' command 'ps haxopid:5,user:4,%cpu:4,ni:2,stat:3,etime:8,args'
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' force-list always
-[[ -a $(whence -p bauerbill) ]] && compdef _pacman {bauerbill,baer,baerp}=pacman
 [[ -a $(whence -p pacman-color) ]] && compdef _pacman pacman-color=pacman
 
 # keybindings:

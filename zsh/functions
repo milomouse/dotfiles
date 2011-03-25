@@ -159,7 +159,7 @@ function zhist {
 # quirky tmux function:
 function tmux {
   if [[ $1 == '--' ]]; then
-    command tmux
+    command tmux ${@:/$1}
   else
     case ${+DISPLAY} in
       0)  command tmux -S /tmp/.${UID}/tmux/default $@ ;;
@@ -169,6 +169,7 @@ function tmux {
 }
 
 # one-liners/micro functions:
+function flashproc { for f (${$(file /proc/$(pidof luakit)/fd/*|gawk '/\/tmp\/Flash/ {print $1}')//:}){mplayer $f} }
 function lss { ls -- ${1:-.}/*(D.om) }
 function rc {[[ -n $1 ]] && sudo /etc/rc.d/$1 ${@:/$1}}
 function alv {<${${$(command find ${H:-/howl}/othe/archive/installed_*)}[${1:--1}]}|w3m -o pagerline=1000 -o confirm_qq=0}

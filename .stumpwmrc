@@ -180,7 +180,8 @@ then run the command synchronously and collect the output."
 ;; display a random background image on root window.
 ;(display-random-bg)
 
-;; if i ever wanted to use mode-line, which i don't. SO SLOW.
+;; if i ever wanted to use mode-line, which i don't.
+;; even on a quad-core with 12GB of RAM it's vividly slow with a full mode-line.
 ;(if (not (head-mode-line (current-head)))
 ;    (toggle-mode-line (current-screen) (current-head)))
 

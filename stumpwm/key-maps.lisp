@@ -64,7 +64,6 @@
 (defvar *echo-map*
   (let ((m (make-sparse-keymap)))
     (labels ((dk (m k c) (define-key m k c)))
-    (dk m (kbd "b")   "echo-battery")
     (dk m (kbd "c")   "echo-colors-brief")
     (dk m (kbd "d")   "echo-date")
     (dk m (kbd "f")   "echo-free-mem")
@@ -264,7 +263,7 @@
     (dk m (kbd "s-y")    "iresize")
     (dk m (kbd "s-z")    "remove-split")
     ;; <function-key bindings>
-    (dk m (kbd "XF86AudioMute")         "echo-oss-volmute")
+    (dk m (kbd "XF86AudioMute")         "amixer-control PCM toggle")
     (dk m (kbd "XF86AudioRaiseVolume")  "echo-oss-volup")
     (dk m (kbd "XF86AudioLowerVolume")  "echo-oss-voldown")
     (dk m (kbd "s-C-F9")  "dump-to-datadir rules")

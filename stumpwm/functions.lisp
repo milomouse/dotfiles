@@ -3,6 +3,14 @@
 ;; *data-dir*/../functions.lisp          ;;
 ;;-----------------------------------------
 
+(defcommand amixer-control (channel arg)
+  (let ((variance (run-shell-command (concatenate 'string
+      "print ${$(amixer sget " channel ")[-2,-1]//(\[|\]|.*dB|-)}"))))
+    (cond ((and (eq channel "PCM") (not (eq arg "toggle")))
+          (message (first (concatenate 'string variance))))
+          (t (message (second (concatenate 'string variance))))
+          )))
+
 (defun fmt-group-status (group)
   (let ((screen (group-screen group)))
     (cond ((eq group (screen-current-group screen))
@@ -148,15 +156,5 @@ will only display valid files anyway."
       (dk m (kbd "RET") "exit-iresize")
       (dk m (kbd "ESC") "abort-iresize")
     M)))) (update-resize-map)
-
-;; this is here in case i want to change it later, which i might.
-;(defun fmt-group-status (group)
-;  (let ((screen (group-screen group)))
-;    (cond ((eq group (screen-current-group screen))
-;           #\*)
-;          ((and (typep (second (screen-groups screen)) 'group)
-;                (eq group (second (screen-groups screen))))
-;           #\+)
-;          (t #\-))))
 
 ;; EOF

@@ -119,6 +119,9 @@ domain_props = {
     ["google.com"] = {
         ["enable-scripts"] = false,
     },
+    ["s60.photobucket.com"] = {
+        ["enable-plugins"] = true,
+    },
     ["youtube.com"] = {
         ["enable-plugins"] = true,
     },

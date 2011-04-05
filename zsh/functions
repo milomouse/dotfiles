@@ -10,18 +10,6 @@ function zshaddhistory {
   ]] && (( ! $argv[(I)*unrl*|*spar*|*losetup*|*aespipe*|*litika*|sudo rm*] ))
 }
 
-function ddg {
-  # be sure to 'strong quote' arguments with characters such as !, %, @, etc..
-  if [[ -n $1 && $1 == "-p" ]]; then
-    print - "https://duckduckgo.com?q=${${${@}// /%20}/\!/%21}&kd=1&k1=-1&ka=s&kb=d&kf=f&kh=1&kk=-1&ko=s&kp=1&kr=b&kt=n&kv=1&kw=n&kx=e&ky=-1"
-  else
-    case ${+DISPLAY} {
-      0) /usr/bin/w3m "https://duckduckgo.com?q=${${${@}// /%20}/\!/%21}&kd=1&k1=-1&ka=s&kb=d&kf=f&kh=1&kk=-1&ko=s&kp=1&kr=b&kt=n&kv=1&kw=n&kx=e&ky=-1" ;;
-      1) /usr/bin/luakit "https://duckduckgo.com?q=${${${@}// /%20}/\!/%21}&kd=1&k1=-1&ka=s&kb=d&kf=f&kh=1&kk=-1&ko=s&kp=1&kr=b&kt=n&kv=1&kw=n&kx=e&ky=-1" & ;;
-    }
-  fi
-}
-
 ## test arguments and [if valid] prepend file:// to local requests:
 #function {jumanji,vimprobable} {
 #  setopt no_warncreateglobal

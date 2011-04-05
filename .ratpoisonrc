@@ -1,8 +1,7 @@
 ## ~/.ratpoisonrc
 ## milomouse <vincent@fea.st>
-## complimenting ratpoison scripts found at: github.com/milomouse
 
-source /home/milo/.config/.deratify
+#source /howl/conf/.deratify
 
 bind F1 exec ratpoison -c "select -" -c "only" -c "vsplit" -c "next" -c "echo Layout 1"
 bind F2 exec ratpoison -c "select -" -c "only" -c "hsplit" -c "next" -c "echo Layout 2"
@@ -10,7 +9,7 @@ bind F3 exec ratpoison -c "select -" -c "only" -c "hsplit" -c "next" -c "vsplit"
 bind F4 exec ratpoison -c "select -" -c "only" -c "vsplit" -c "next" -c "hsplit" -c "next" -c "focusdown" -c "hsplit" -c "next" -c "echo Layout 4"
 bind F5 exec ratpoison -c "select -" -c "only" -c "vsplit" -c "next" -c "focusdown" -c "hsplit" -c "next" -c "echo Layout 5"
 
-set font fixed-6
+set font fixed-8
 set winname class
 set winfmt %n %s %t
 set winliststyle column
@@ -25,8 +24,8 @@ set bargravity ne
 set inputwidth 400
 set fgcolor #876CBE
 set bgcolor #090909
-#set fwcolor #876CBE
-#set bwcolor #343434
+set fwcolor #876CBE
+set bwcolor #343434
 set waitcursor 3
 set historysize 50
 set maxundos 50
@@ -40,8 +39,7 @@ bind C exec urxvt
 bind d time
 bind e exec
 bind f fselect
-bind G exec uzbl-browser -c ~/.config/uzbl/config >&/dev/null
-bind g exec firefox >&/dev/null
+bind g exec luakit >&/dev/null
 bind h select -
 bind H exec ratpoison -c "select -" -c "only"
 bind i vsplit
@@ -52,7 +50,7 @@ bind l windows
 bind m exec ratpoison -c "exec urxvt -e man $(ratpoison -c "prompt Manpage:")"
 bind n curframe
 bind o only
-bind p exec urxvt -e ncmpcpp
+#bind p exec urxvt -e ncmpcpp
 bind q remove
 bind r resize
 bind s swap
@@ -66,8 +64,8 @@ bind z lastmsg
 bind Escape abort
 bind minus dedicate 0
 bind equal dedicate 1
-bind Print exec import -window root ~/foto/shot/$(date +%Y_%m_%d-%H%M).png 
-bind Delete exec alock -bg shade:shade=30 -cursor glyph -auth pam 
+bind Print exec import -window root /howl/foto/shot/$(date +%Y_%m_%d-%H%M).png 
+bind Delete exec alock -bg image:file=/howl/foto/wall/beheading.png -cursor glyph -auth pam >&/dev/null
 
 definekey top s-n next
 definekey top s-p prev
@@ -81,11 +79,11 @@ definekey top s-K exchangeup
 definekey top s-J exchangedown
 definekey top s-H exchangeleft
 definekey top s-L exchangeright
-definekey top s-C-k ratrelwarp 0 -7
-definekey top s-C-j ratrelwarp 0 7
-definekey top s-C-h ratrelwarp -7 0
-definekey top s-C-l ratrelwarp 7 0
-definekey top s-C-Return exec ratpoison -c "rathold down" -c "rathold up"
+#definekey top s-C-k ratrelwarp 0 -7
+#definekey top s-C-j ratrelwarp 0 7
+#definekey top s-C-h ratrelwarp -7 0
+#definekey top s-C-l ratrelwarp 7 0
+#definekey top s-C-Return exec ratpoison -c "rathold down" -c "rathold up"
 
 definekey top s-comma rpwsp
 definekey top s-period rpwsn

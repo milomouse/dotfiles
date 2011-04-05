@@ -1,0 +1,38 @@
+#!/bin/zsh
+## dzen2 bars for XMonad, ran within xmonad.hs via spawnOnce
+
+## output variables $
+o_dzen=$(whence -p dzen2)
+o_height='14'
+o_font='-misc-fixed-medium-r-semicondensed-*-12-110-75-75-c-60-koi8-r'
+o_bg='#161616'
+o_fg='#8c8b8e'
+o_sep='#a488d9'
+
+## input functions $
+function i_loadavg { print ${${(s. .)$(</proc/loadavg)}[1,3]//./"^fg(#5f656b)"."^fg()"} }
+function i_windows { lsw | grep -cwv '^luakit\|^gcolor2\|^GLiv' }
+function i_newmail { print ${(Fw)#$(find /howl/mail/FastMail/*/new -type f)} }
+function i_drives { print $(di -nx debugfs -d h -f fp / /howl | awk '{print "^fg(#5f656b)"$1"^fg(#050505)""""|^fg(#444)"$2" "}') }
+function i_ossmix { print ${$(ossmix | grep outvol)[-2]} }
+function i_wlan0 { print ${${${(f)${(M)${(F)$(iwconfig wlan0)}/*Rate=}/Tx*Quality=}[0,3]/*\/s/"^fg(#444)"~"^fg()"}/\//"^fg(#007b8c)"\/"^fg(#5f656b)"} }
+function i_date { date "+%Y^fg(#444).^fg()%m^fg(#444).^fg()%d^fg(#007b8c)/^fg(#5f656b)%a ^fg(${o_sep})| ^fg()%H^fg(#444):^fg()%M^fg(#444):^fg()%S" }
+
+## runtime output $
+# LEFT: info bar to the right of XMonads:
+while true; do
+  print " ^fg(${o_sep})| ^fg(#515056)#$(i_windows) ^fg(${o_sep})|^fg() $(i_loadavg) \
+^fg(${o_sep})|^fg() $(i_drives) ^fg(${o_sep})|^fg(#515056) $(i_wlan0)^fg(#515056) \
+^fg(${o_sep})| ^fg(#515056)@fea.st:^fg() $(i_newmail) ^fg()^fg(${o_sep})>""^fg(#007b8c)>""^fg(#444)>"
+  sleep 1
+done | ${o_dzen} -u -x '260' -y '0' -h '14' -w '458' -ta 'l' -bg ${o_bg} -fg ${o_fg} -fn ${o_font} &
+# CENTER: current media:
+while true; do
+  mifo --dzen
+  sleep 1
+done | ${o_dzen} -u -x '718' -y '0' -h '14' -w '641' -ta 'r' -bg ${o_bg} -fg ${o_fg} -fn ${o_font} &
+# RIGHT: OSS volume, date:
+while true; do
+  print " ^fg(${o_sep})>""^fg(#007b8c)>""^fg(#444)> ^fg()$(i_ossmix)^fg(#5f656b)dB ^fg(${o_sep})| ^fg()$(i_date) "
+  sleep 1
+done | ${o_dzen} -u -x '1359' -y '0' -h '14' -w '240' -ta 'r' -bg ${o_bg} -fg ${o_fg} -fn ${o_font} &

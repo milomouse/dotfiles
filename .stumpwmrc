@@ -74,6 +74,7 @@ then run the command synchronously and collect the output."
     (run-prog-collect-output *shell-program* "-c" cmd)
     (run-prog *shell-program* :args (list "-c" cmd) :wait nil)))
 (setf *shell-program* "/bin/zsh")
+;(setf *shell-program* (stumpwm::getenv "SHELL"))
 (defcommand-alias exec run-shell-command)
 
 ;; define a background-image-path for random image setting function.
@@ -89,8 +90,8 @@ then run the command synchronously and collect the output."
       *message-window-gravity* :top-right
       *input-window-gravity* :top-right)
 (set-normal-gravity :top) ; top for terminals
-(set-maxsize-gravity :bottom-right) ; bottom-right for gtk-apps
-(set-transient-gravity :center) ; center for save-as/open-popups
+(set-maxsize-gravity :center) ; center for floating X apps
+(set-transient-gravity :center) ; center for save-as/open popups
 
 ;; borders.
 (setf *resize-hides-windows* T
@@ -164,25 +165,8 @@ then run the command synchronously and collect the output."
     (restore-from-file (data-dir-file "desktop.lisp")))
 (restore-window-placement-rules (data-dir-file "tile-rules.lisp"))
 (cond ((string-equal (group-name (current-group)) *scratchpad-group-name*) (gother)))
-;; figure out how to use *scratchpad-group-name* in list..
-;(defvar *restarted* nil)
-;(let* ((g (current-group))
-;       (n (group-name g)))
-;  (if (eq *restarted* nil)
-;      (progn
-;          (loop for name in '("Default" ".scratchpad")
-;            do (if (find-group (current-screen) name)
-;                 (progn
-;                   (cond ((eq g (find-group (current-screen) name)) (gnext)))
-;                   (kill-group (find-group (current-screen) name) g)))))))
-;    (cond ((string-equal (group-name g) n) (gselect g)))))
 
 ;; display a random background image on root window.
 ;(display-random-bg)
-
-;; if i ever wanted to use mode-line, which i don't.
-;; even on a quad-core with 12GB of RAM it's vividly slow with a full mode-line.
-;(if (not (head-mode-line (current-head)))
-;    (toggle-mode-line (current-screen) (current-head)))
 
 ;; EOF

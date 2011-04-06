@@ -96,6 +96,7 @@
     (dk m (kbd "l") "ror_luakit")
     (dk m (kbd "m") "ror_mutt")
     (dk m (kbd "s") "exec urxvt -e nsudoku 12")
+    (dk m (kbd "x") "exec xskat -opt /howl/conf/xorg/xskat.opt -list /howl/conf/xorg/xskat.lst")
     (dk m (kbd "ESC") "abort")
    M)))
 
@@ -200,6 +201,7 @@
     (dk m (kbd "s-?")    "lastmsg")
     (dk m (kbd "s-ESC")  "exec banishmouse")
     (dk m (kbd "s-Tab")  "fother")
+    (dk m (kbd "s-S-SPC")"rotate-windows")
     (dk m (kbd "s-BackSpace")       "fclear")
     (dk m (kbd "s-S-BackSpace")     "delete-window")
     (dk m (kbd "s-C-BackSpace")     "kill-window")

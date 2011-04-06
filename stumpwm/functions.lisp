@@ -3,14 +3,6 @@
 ;; *data-dir*/../functions.lisp          ;;
 ;;-----------------------------------------
 
-(defcommand amixer-control (channel arg)
-  (let ((variance (run-shell-command (concatenate 'string
-      "print ${$(amixer sget " channel ")[-2,-1]//(\[|\]|.*dB|-)}"))))
-    (cond ((and (eq channel "PCM") (not (eq arg "toggle")))
-          (message (first (concatenate 'string variance))))
-          (t (message (second (concatenate 'string variance))))
-          )))
-
 (defun fmt-group-status (group)
   (let ((screen (group-screen group)))
     (cond ((eq group (screen-current-group screen))
@@ -33,6 +25,15 @@
     (unless (eq f1 f2)
       (pull-window win1 f2)
       (pull-window win2 f1))))
+
+(defun shift-windows-forward (frames win)
+"Exchange windows through cycling frames."
+  (when frames
+          (let ((frame (car frames)))
+                  (shift-windows-forward (cdr frames)
+                                         (frame-window frame))
+                  (when win
+                           (pull-window win frame)))))
 
 (defun remember-group (&optional (group (current-group))) ()
 "Remember current group information before calling another command or
@@ -156,5 +157,14 @@ will only display valid files anyway."
       (dk m (kbd "RET") "exit-iresize")
       (dk m (kbd "ESC") "abort-iresize")
     M)))) (update-resize-map)
+
+;; incomplete, was just testing alsa out..
+;(defcommand amixer-control (channel arg)
+;  (let ((variance (run-shell-command (concatenate 'string
+;      "print ${$(amixer sget " channel ")[-2,-1]//(\[|\]|.*dB|-)}"))))
+;    (cond ((and (eq channel "PCM") (not (eq arg "toggle")))
+;          (message (first (concatenate 'string variance))))
+;          (t (message (second (concatenate 'string variance))))
+;          )))
 
 ;; EOF

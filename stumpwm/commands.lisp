@@ -114,6 +114,12 @@ keeping focus on current frame, unlike 'exchange-direction' where focus moves to
 "Move focused window to previous group without switching to it. Unlike behavior in gprev-with-window."
   (move-window-to-next-group (current-group) (reverse (sort-groups (current-screen)))))
 
+;; from simias: rotate windows.
+(defcommand rotate-windows () ()
+  (let* ((frames (group-frames (current-group)))
+            (win (frame-window (car (last frames)))))
+          (shift-windows-forward frames win)))
+
 ;; rework of original random-bg command, display random wallpaper on root window.
 (defcommand display-random-bg () () "Display a random background image on root window."
   (run-shell-command
@@ -162,7 +168,7 @@ to the very beginning of the stumpwm program. This
 differs from RESTART, which restarts the unix process.
 
 Since the process isn't restarted, existing customizations remain
-after the restart." (setf *restarted* "true") (throw :top-level :restart))
+after the restart." (throw :top-level :restart))
 
 (defcommand loadrc-forget () () "Reload the @file{~/.stumpwmrc} file without remember current state."
   (handler-case
@@ -184,7 +190,7 @@ to the very beginning of the stumpwm program. This
 differs from RESTART, which restarts the unix process.
 
 Since the process isn't restarted, existing customizations remain
-after the restart." (setf *restarted* "true") (remember-all) (restart-soft-forget))
+after the restart." (remember-all) (restart-soft-forget))
 (defcommand-alias restart restart-soft)
 
 (defcommand quit () ()

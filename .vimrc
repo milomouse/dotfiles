@@ -3,7 +3,7 @@ set nocompatible
 set shell=zsh
 set enc=utf-8
 set viminfo='20,<50,s10,h,n~/.vim/viminfo
-if $DISPLAY =~ ":0.0"
+if $DISPLAY =~ ":0"
   set t_Co=256
 endif
 colorscheme cottonmouse

@@ -64,7 +64,7 @@ use_lessopen 0
 bgextviewer 1
 extbrowser3 
 extbrowser2 /usr/bin/nohup firefox
-extbrowser /usr/bin/nohup jumanji
+extbrowser /usr/bin/nohup luakit
 mailer /usr/bin/mutt
 mailto_options 1
 editor /usr/bin/vim
@@ -99,7 +99,7 @@ active_style 0
 bg_color terminal
 mark_color cyan
 form_color magenta
-image_color green
+image_color blue
 anchor_color magenta
 basic_color terminal
 color 1

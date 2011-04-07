@@ -2,6 +2,9 @@
 ## milomouse <vincent[at]fea.st>
 # originally based off p.brisbin's but has changed a lot.
 
+reset all
+push V
+
 # - intrinsic locations:
   set folder           = /howl/mail
   set mbox_type        = Maildir
@@ -18,6 +21,7 @@
 # - source gpg, colors and accounts:
 source /etc/Muttrc.gpg.dist
 source $XDG_CONFIG_DIR/mutt/colors.muttrc
+source $XDG_CONFIG_DIR/mutt/scoring
 folder-hook FastMail/* source $XDG_CONFIG_DIR/mutt/fastmail.muttrc
 
 # - watch-folders and subscriptions:
@@ -53,7 +57,7 @@ unset auto_tag
 unset check_mbox_size
   set check_new
   set collapse_unread
-  set delete=ask-yes
+  set delete = ask-yes
   set duplicate_threads
   set help
 unset keep_flagged
@@ -63,19 +67,22 @@ unset mark_old
 unset meta_key
 unset mh_purge
 unset move
+unset narrow_tree
 unset read_only
   set save_empty
   set sort = threads
   set sort_aux = reverse-last-date-received
-  set sort_browser = alpha
+  set sort_browser = reverse-date
 unset sort_re
 unset status_on_top
 
 # - reading/viewing messages:
   set allow_8bit
 unset allow_ansi
+  set crypt_autopgp
+  set crypt_autosmime
   set crypt_timestamp
-  set crypt_verify_sig=yes
+  set crypt_verify_sig = yes
   set digest_collapse
   set hide_thread_subject
 unset honor_disposition
@@ -100,7 +107,7 @@ unset markers
   set wrap_search
 
 # - composing/replying mail:
-  set abort_nosubject=ask-yes
+  set abort_nosubject = ask-yes
 unset autoedit
 unset askbcc
   set askcc
@@ -108,7 +115,8 @@ unset askbcc
 unset confirmappend
   set confirmcreate
   set content_type = "text/plain"
-  set copy=yes
+  set copy = yes
+  set crypt_replyencrypt
   set edit_headers
   set editor = "vim +/^$"
   set fast_reply
@@ -116,14 +124,16 @@ unset confirmappend
 unset fcc_clear
   set forward_format = "Fwd: %s"
   set forward_quote
+unset hidden_host
   set honor_followup_to
 unset ignore_list_reply_to
-  set include=ask-yes
+  set include = ask-yes
 unset include_onlyfirst
-  set postpone=yes
-  set recall=ask-yes
+  set postpone = yes
+  set recall = ask-yes
   set realname = "Vincent"
   set reply_to
+unset sig_on_top
   set weed
 
 # - header information:
@@ -168,16 +178,15 @@ bind index,browser G  last-entry
 macro index gh  "<change-folder>!<enter>" "go to Inbox"
 macro index h   "c?" "view folders"
 macro index \Cr "<tag-pattern>all<enter><tag-prefix><clear-flag>N<untag-pattern>all<enter>" "mark all as read"
-macro index B   "<limit>/howl " "search message bodies"
 macro index P   "<pipe-message>cat > ~/" "save message as"
 macro index I   "<shell-escape>/usr/bin/offlineimap -c $XDG_CONFIG_DIR/.offlineimap/offlineimaprc -u Curses.Blinkenlights -o<enter>" "sync IMAP"
 macro index,pager \Cb ":set pipe_decode\n|urlview\n:unset pipe_decode\n" "extract URLs out of a message"
 
 # - appearance / formatting:
-set folder_format = "%3C. %-5.5u %-5.5g %2l %s %N %-52.52f %> %t %F"
+set folder_format = "%3C| %u:%g [%N] %f %*. %t %4s %F"
 set status_format = "───+ %f %m%?n? [+%n]?%?d? [-%d]?%?t? [*%t]? +%?p?───+ %p waiting to send +?─%>─[%P]──"
 set alias_format  = "%4n %t %-20a %r"
-set date_format   = "%Y-%m-%d %T"
-set index_format  = "%3C. %-4c » %-19.19F  %-52.52s %> %Z %d"
+set date_format   = "%y-%m-%d %I:%M:%S %Z"
+set index_format  = "%3C| %-4c > %-19.19F  %s%*  %?X?[%X]? %Z|%2N| %d"
 set quote_regexp  = "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
 set reply_regexp  = "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"

@@ -265,7 +265,7 @@
     (dk m (kbd "s-y")    "iresize")
     (dk m (kbd "s-z")    "remove-split")
     ;; <function-key bindings>
-    (dk m (kbd "XF86AudioMute")         "amixer-control PCM toggle")
+    (dk m (kbd "XF86AudioMute")         "echo-oss-volmute")
     (dk m (kbd "XF86AudioRaiseVolume")  "echo-oss-volup")
     (dk m (kbd "XF86AudioLowerVolume")  "echo-oss-voldown")
     (dk m (kbd "s-C-F9")  "dump-to-datadir rules")

@@ -7,8 +7,8 @@
               :Y 0
               :WIDTH 1600
               :HEIGHT 550
-              :WINDOWS NIL
-              :CURRENT NIL)
+              :WINDOWS (8388643)
+              :CURRENT 8388643)
            (#S(FDUMP
                :NUMBER 1
                :X 0
@@ -23,6 +23,6 @@
                :Y 550
                :WIDTH 800
                :HEIGHT 350
-               :WINDOWS NIL
-               :CURRENT NIL))))
-   :CURRENT 1)
+               :WINDOWS (12582921)
+               :CURRENT 12582921))))
+   :CURRENT 2)

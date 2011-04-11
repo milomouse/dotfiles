@@ -1,6 +1,6 @@
 !! ${XDG_CONFIG_DIR:-$HOME/.config}/xorg/Xdefaults
 !! author: milomouse <vincent[at]fea.st>
-!! update: 2011-03-21
+!! update: 2011-04-04
 
 urxvt*termName: rxvt-256color
 urxvt*loginShell: true
@@ -28,7 +28,7 @@ urxvt*saveLines: 8192
 urxvt*borderLess: false
 urxvt*transparent: false
 urxvt*shading: 4
-urxvt*fading: 22
+urxvt*fading: 16
 urxvt*cursorColor: #a488d9
 Xcursor.theme: whiteglass
 Xcursor.size: 10

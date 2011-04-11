@@ -1,25 +1,42 @@
 #!/bin/zsh
-# resources:
+## resources:
 /usr/bin/xrdb -load ${XDG_CONFIG_DIR:-$HOME}/xorg/Xdefaults
 /usr/bin/xsetroot -cursor_name left_ptr &
 
-# keyboard:
-/usr/bin/xmodmap -e "keycode 133 = Alt_L"
-/usr/bin/xmodmap -e "keycode 135 = Alt_R"
-/usr/bin/xmodmap -e "keycode 64 = Super_L"
-/usr/bin/xmodmap -e "keycode 108 = Super_R"
-/usr/bin/xmodmap -e "clear Mod1"
-/usr/bin/xmodmap -e "clear Mod4"
-/usr/bin/xmodmap -e "add Mod1 = Alt_L Alt_R"
-/usr/bin/xmodmap -e "add Mod4 = Super_L Super_R"
+## keyboard:
+# load Capewell-Dvorak (C-Dvorak) keymap
+# rating: 4/5
+#/usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/capewell-dvorak.xmodmap
+#/usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/capewell-dvorak-mod.xmodmap
 
-# mouse/synclient:
+# load Capewell (Close) [pre 0.9.3] keymap
+# rating: 2/5
+#/usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/capewell-close.xmodmap
+#/usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/capewell-close-mod.xmodmap
+
+# load Arensito keymap
+# rating: 4/5
+#/usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/arensito.xmodmap
+#/usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/arensito-mod.xmodmap
+
+# load Klausler's Evolved Layout (2) keymap
+# rating: 3/5
+#/usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/klausler2.xmodmap
+#/usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/klausler2-mod.xmodmap
+
+# load personal preferences (e.g. Alt_L <> Super_L.. Caps <> Control_L)
+/usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/personal.xmodmap
+
+## mouse/touchpad:
+# this must be checked on startup because script uses file for coordinates.
 BANISHFILE="/dev/shm/.1009/banishmouse"
 [[ ! -f $BANISHFILE ]] || rm -f $BANISHFILE
 /usr/local/bin/banishmouse
 
-# wallpaper:
+## wallpaper:
+# high-def deep space astronaut (- Sergei: I see no God up here)
 /usr/bin/display -window root -resize 1600x900! ${XDG_PICTURES_DIR:-${H:-/howl}/foto}/wall/wallpaper-31278.png
 
-# window-manager:
+## window-manager:
+# StumpWM - by far the most programmable, hackable window-manager there is!
 exec /usr/bin/stumpwm &>>${XDG_CONFIG_DIR:-$HOME}/stumpwm/storage/log.lisp

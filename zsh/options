@@ -85,7 +85,7 @@ unsetopt globalrcs
 unsetopt clobber
   setopt correct
 unsetopt correctall
-unsetopt dvorak
+  setopt dvorak
   setopt flowcontrol
 unsetopt ignoreeof
 unsetopt interactivecomments

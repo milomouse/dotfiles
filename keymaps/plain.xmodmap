@@ -1,0 +1,67 @@
+! number row
+keycode 9 = grave asciitilde
+keycode 10 = bracketleft braceleft
+keycode 11 = 9 parenleft
+keycode 12 = 7 ampersand
+keycode 13 = 5 percent
+keycode 14 = 3 numbersign
+keycode 15 = 1 exclam
+keycode 16 = 2 at
+keycode 17 = 4 dollar
+keycode 18 = 6 asciicircum
+keycode 19 = 8 asterisk
+keycode 20 = 0 parenright
+keycode 21 = bracketright braceright
+
+! number row
+keycode 9 = grave asciitilde
+keycode 10 = 1 exclam
+keycode 11 = 2 at
+keycode 12 = 3 numbersign
+keycode 13 = 4 dollar
+keycode 14 = 5 percent
+keycode 15 = 6 asciicircum
+keycode 16 = 7 ampersand
+keycode 17 = 8 asterisk
+keycode 18 = 9 parenleft
+keycode 19 = 0 parenright
+keycode 20 = minus underscore
+keycode 21 = equal plus
+
+! top row
+keycode 24 =
+keycode 25 =
+keycode 26 =
+keycode 27 =
+keycode 28 =
+keycode 29 =
+keycode 30 =
+keycode 31 =
+keycode 32 =
+keycode 33 =
+keycode 34 =
+keycode 35 =
+keycode 36 =
+! middle row
+keycode 38 =
+keycode 39 =
+keycode 40 =
+keycode 41 =
+keycode 42 =
+keycode 43 =
+keycode 44 =
+keycode 45 =
+keycode 46 =
+keycode 47 =
+keycode 48 =
+! bottom row
+keycode 52 =
+keycode 53 =
+keycode 54 =
+keycode 55 =
+keycode 56 =
+keycode 57 =
+keycode 58 =
+keycode 59 =
+keycode 60 =
+keycode 61 =

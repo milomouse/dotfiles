@@ -1,53 +1,69 @@
 !
 ! Capewell-Dvorak (C-Dvorak)
-!_________________________________
+!__________________________________
 !
 !
-! ` 1 2 3 4 5 6 7 8 9 0 [ ]
-!  ' , . p y q f g r k / =
-!   o a e i u d h t n s -
-!    z x c v j l m w b ;
+!    ` 1 2 3 4 5 6 7 8 9 0 [ ]
+!     ' , . p y q f g r k / =
+!      o a e i u d h t n s -
+!       z x c v j l m w b ;
 !
-! ~ ! @ # $ % ^ & * ( ) { }
-!  " < > P Y Q F G R K ? +
-!   O A E I U D H T N S _
-!    Z X C V J L M W B :
+!    ~ ! @ # $ % ^ & * ( ) { }
+!     " < > P Y Q F G R K ? +
+!      O A E I U D H T N S _
+!       Z X C V J L M W B :
 !
-!
-! IMPORTANT: base layout should be Qwerty before loading this keymap.
-! ********** this is better than hardcoding keys since keycodes vary.
-!_________________________________
+!__________________________________
+!! xmodmap created by: milomouse !!
 
-!! beginning of Qwerty <> C-Dvorak substitions:
-keysym minus = bracketleft braceleft
-keysym equal = bracketright braceright
-keysym q = apostrophe quotedbl
-keysym w = comma less
-keysym e = period greater
-keysym r = p P
-keysym t = y Y
-keysym y = q Q
-keysym u = f F
-keysym i = G G
-keysym o = r R
-keysym p = k K
-keysym bracketleft = slash question
-keysym bracketright = equal plus
-keysym a = o O
-keysym s = a A
-keysym d = e E
-keysym f = i I
-keysym g = u U
-keysym h = d D
-keysym j = h H
-keysym k = t T
-keysym l = n N
-keysym semicolon = s S
-keysym apostrophe = minus underscore
-keysym b = j J
-keysym n = l L
-keysym m = m M
-keysym comma = w W
-keysym period = b B
-keysym slash = semicolon colon
-!! end of Qwerty <> C-Dvorak substitions.
+! number row
+keycode 9 = grave asciitilde
+keycode 10 = 1 exclam
+keycode 11 = 2 at
+keycode 12 = 3 numbersign
+keycode 13 = 4 dollar
+keycode 14 = 5 percent
+keycode 15 = 6 asciicircum
+keycode 16 = 7 ampersand
+keycode 17 = 8 asterisk
+keycode 18 = 9 parenleft
+keycode 19 = 0 parenright
+keycode 20 = bracketleft braceleft
+keycode 21 = bracketright braceright
+! top row
+keycode 24 = apostrophe quotedbl
+keycode 25 = comma less
+keycode 26 = period greater
+keycode 27 = p P
+keycode 28 = y Y
+keycode 29 = q Q
+keycode 30 = f F
+keycode 31 = g G
+keycode 32 = r R
+keycode 33 = k K
+keycode 34 = slash question
+keycode 35 = equal plus
+keycode 36 = backslash bar
+! middle row
+keycode 38 = o O
+keycode 39 = a A
+keycode 40 = e E
+keycode 41 = i I
+keycode 42 = u U
+keycode 43 = d D
+keycode 44 = h H
+keycode 45 = t T
+keycode 46 = n N
+keycode 47 = s S
+keycode 48 = minus underscore
+! bottom row
+keycode 52 = z Z
+keycode 53 = x X
+keycode 54 = c C
+keycode 55 = v V
+keycode 56 = j J
+keycode 57 = l L
+keycode 58 = m M
+keycode 59 = w W
+keycode 60 = b B
+keycode 61 = semicolon colon

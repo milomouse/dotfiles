@@ -1,53 +1,70 @@
 !
 ! Klausler's Evolved Layout (2)
-!_________________________________
+!__________________________________
 !
 !
-! ` 1 2 3 4 5 6 7 8 9 0 - =
-!  k , u y p w l m f c [ ]
-!   o a e i d r n t h s /
-!    q . ' ; z x v g b j
+!    ` 1 2 3 4 5 6 7 8 9 0 - =
+!     k , u y p w l m f c [ ]
+!      o a e i d r n t h s /
+!       q . ' ; z x v g b j
 !
-! ~ ! @ # $ % ^ & * ( ) _ +
-!  K < U Y P W L M F C { }
-!   O A E I D R N T H S ?
-!    Q > " : Z X V G B J
+!    ~ ! @ # $ % ^ & * ( ) _ +
+!     K < U Y P W L M F C { }
+!      O A E I D R N T H S ?
+!       Q > " : Z X V G B J
 !
-!
-! IMPORTANT: base layout should be Qwerty before loading this keymap.
-! ********** this is better than hardcoding keys since keycodes vary.
-!_________________________________
+!__________________________________
+!! xmodmap created by: milomouse !!
 
-!! beginning of Qwerty <> Klausler2 substitions:
-keysym q = k K
-keysym w = comma less
-keysym e = u U
-keysym r = y Y
-keysym t = p P
-keysym y = w W
-keysym u = l L
-keysym i = m M
-keysym o = f F
-keysym p = c C
-keysym a = o O
-keysym s = a A
-keysym d = e E
-keysym f = i I
-keysym g = d D
-keysym h = r R
-keysym j = n N
-keysym k = t T
-keysym l = h H
-keysym semicolon = s S
-keysym apostrophe = slash question
-keysym z = q Q
-keysym x = period greater
-keysym c = apostrophe quotedbl
-keysym v = semicolon colon
-keysym b = z Z
-keysym n = x X
-keysym m = v V
-keysym comma = g G
-keysym period = b B
-keysym slash = j J
-!! end of Qwerty <> Klausler2 substitions.
+! number row
+keycode 9 = grave asciitilde
+keycode 10 = 1 exclam
+keycode 11 = 2 at
+keycode 12 = 3 numbersign
+keycode 13 = 4 dollar
+keycode 14 = 5 percent
+keycode 15 = 6 asciicircum
+keycode 16 = 7 ampersand
+keycode 17 = 8 asterisk
+keycode 18 = 9 parenleft
+keycode 19 = 0 parenright
+keycode 20 = minus underscore
+keycode 21 = equal plus
+! top row
+keycode 24 = k K
+keycode 25 = comma less
+keycode 26 = u U
+keycode 27 = y Y
+keycode 28 = p P
+keycode 29 = w W
+keycode 30 = l L
+keycode 31 = m M
+keycode 32 = f F
+keycode 33 = c C
+keycode 34 = bracketleft braceleft
+keycode 35 = braceketright braceright
+keycode 36 = backslash bar
+! middle row
+keycode 38 = o O
+keycode 39 = a A
+keycode 40 = e E
+keycode 41 = i I
+keycode 42 = d D
+keycode 43 = r R
+keycode 44 = n N
+keycode 45 = t T
+keycode 46 = h H
+keycode 47 = s S
+keycode 48 = slash question
+! bottom row
+keycode 52 = q Q
+keycode 53 = period greater
+keycode 54 = apostrophe quotedbl
+keycode 55 = semicolon colon
+keycode 56 = z Z
+keycode 57 = x X
+keycode 58 = v V
+keycode 59 = g G
+keycode 60 = b B
+keycode 61 = j J
+

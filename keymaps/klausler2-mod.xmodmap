@@ -1,17 +1,17 @@
 !
 ! Klausler's Evolved Layout (2)
-!____________/mod\________________
+!______________/mod\_______________
 !
 !
-! ` [ 9 7 5 3 1 2 4 6 8 0 ]
-!  k , u y p w l m f c - =
-!   o a e i d r n t h s /
-!    q . ' ; z x v g b j
+!    ` [ 9 7 5 3 1 2 4 6 8 0 ]
+!     k , u y p w l m f c - =
+!      o a e i d r n t h s /
+!       q . ' ; z x v g b j
 !
-! ~ { ( & % # ! @ $ ^ * ) }
-!  K < U Y P W L M F C _ +
-!   O A E I D R N T H S ?
-!    Q > " : Z X V G B J
+!    ~ { ( & % # ! @ $ ^ * ) }
+!     K < U Y P W L M F C _ +
+!      O A E I D R N T H S ?
+!       Q > " : Z X V G B J
 !
 !
 ! Personal Modifications:
@@ -19,70 +19,60 @@
 !  before: [ ] '
 !  after:  - = /
 !
-! Psuedo Dvorak-style numbers:
-!----------------------------------
 !  before: 1 2 3 4 5 6 7 8 9 0 - =
 !  after:  [ 9 7 5 3 1 2 4 6 8 0 ]
-!  
-!----------------------------------
-!
-! IMPORTANT: base layout should be Qwerty before loading this keymap.
-! ********** this is better than hardcoding keys since keycodes vary.
 !__________________________________
+!! xmodmap created by: milomouse !!
 
-!! beginning of Psuedo Dvorak-style numbers:
-keysym 1 = bracketleft braceleft
-keysym 2 = 9 parenleft
-keysym 3 = 7 ampersand
-keysym 4 = 5 percent
-keysym 5 = 3 numbersign
-keysym 6 = 1 exclam
-keysym 7 = 2 at
-keysym 8 = 4 dollar
-keysym 9 = 6 asciicircum
-keysym 0 = 8 asterisk
-keysym minus = 0 parenright
-keysym equal = bracketright braceright
-!! end of Psuedo Dvorak-style numbers.
+! number row
+keycode 9 = grave asciitilde
+keycode 10 = bracketleft braceleft
+keycode 11 = 9 parenleft
+keycode 12 = 7 ampersand
+keycode 13 = 5 percent
+keycode 14 = 3 numbersign
+keycode 15 = 1 exclam
+keycode 16 = 2 at
+keycode 17 = 4 dollar
+keycode 18 = 6 asciicircum
+keycode 19 = 8 asterisk
+keycode 20 = 0 parenright
+keycode 21 = bracketright braceright
+! top row
+keycode 24 = k K
+keycode 25 = comma less
+keycode 26 = u U
+keycode 27 = y Y
+keycode 28 = p P
+keycode 29 = w W
+keycode 30 = l L
+keycode 31 = m M
+keycode 32 = f F
+keycode 33 = c C
+keycode 34 = minus underscore
+keycode 35 = equal plus
+keycode 36 = backslash bar
+! middle row
+keycode 38 = o O
+keycode 39 = a A
+keycode 40 = e E
+keycode 41 = i I
+keycode 42 = d D
+keycode 43 = r R
+keycode 44 = n N
+keycode 45 = t T
+keycode 46 = h H
+keycode 47 = s S
+keycode 48 = slash question
+! bottom row
+keycode 52 = q Q
+keycode 53 = period greater
+keycode 54 = apostrophe quotedbl
+keycode 55 = semicolon colon
+keycode 56 = z Z
+keycode 57 = x X
+keycode 58 = v V
+keycode 59 = g G
+keycode 60 = b B
+keycode 61 = j J
 
-!! IMPORTANT:
-!! if you don't like Classic Dvorak's egronomic odd-even numbering
-!! then comment the above keysyms and uncomment the 2 lines below.
-!keysym minus = bracketleft braceleft
-!keysym equal = bracketright braceright
-
-!! beginning of Qwerty <> Klausler2 substitions:
-keysym q = k K
-keysym w = comma less
-keysym e = u U
-keysym r = y Y
-keysym t = p P
-keysym y = w W
-keysym u = l L
-keysym i = m M
-keysym o = f F
-keysym p = c C
-keysym bracketleft = minus underscore
-keysym bracketright = equal plus
-keysym a = o O
-keysym s = a A
-keysym d = e E
-keysym f = i I
-keysym g = d D
-keysym h = r R
-keysym j = n N
-keysym k = t T
-keysym l = h H
-keysym semicolon = s S
-keysym apostrophe = slash question
-keysym z = q Q
-keysym x = period greater
-keysym c = apostrophe quotedbl
-keysym v = semicolon colon
-keysym b = z Z
-keysym n = x X
-keysym m = v V
-keysym comma = g G
-keysym period = b B
-keysym slash = j J
-!! end of Qwerty <> Klausler2 substitions.

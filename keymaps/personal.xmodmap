@@ -12,4 +12,5 @@ add mod4 = Super_L
 ! remove [useless] Caps_Lock..
 ! make it an easier Escape key instead
 !remove lock = Caps_Lock
-!keysym Caps_Lock = Escape
+!keysym Caps_Lock = Control_L
+!add lock = Control_L

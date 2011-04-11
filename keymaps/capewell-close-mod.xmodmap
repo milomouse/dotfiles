@@ -1,0 +1,81 @@
+!
+! Capewell (Close) [pre 0.9.3]
+!
+!
+! ` [ 7 5 3 1 9 0 2 4 6 8 ]
+!  . m y d g ; w h , ' - /
+!   a r e s f k t n i o =
+!    x c z v j b p l u q
+!
+!
+! Personal Modifications:
+!----------------------------------
+!  before: [ ] '
+!  after:  - / =
+!
+! Classic Dvorak-style numbers:
+!----------------------------------
+!  before: 1 2 3 4 5 6 7 8 9 0 - =
+!  after:  [ 7 5 3 1 9 0 2 4 6 8 ]
+!  
+!----------------------------------
+!
+! IMPORTANT: base layout should be Qwerty before loading this keymap.
+! ********** this is better than hardcoding keys since keycodes vary.
+!
+
+
+!! beginning of Classic Dvorak-style numbers:
+keysym 1 = bracketleft braceleft
+keysym 2 = 7 ampersand
+keysym 3 = 5 percent
+keysym 4 = 3 numbersign
+keysym 5 = 1 exclam
+keysym 6 = 9 parenleft
+keysym 7 = 0 parenright
+keysym 8 = 2 at
+keysym 9 = 4 dollar
+keysym 0 = 6 asciicircum
+keysym minus = 8 asterisk
+keysym equal = bracketright braceright
+!! end of Classic Dvorak-style numbers.
+
+!! IMPORTANT:
+!! if you don't like Classic Dvorak's egronomic odd-even numbering
+!! then comment the above keysyms and uncomment the 2 lines below.
+!keysym minus = bracketleft braceleft
+!keysym equal = bracketright braceright
+
+!! beginning of Qwerty <> Capewell(Close) substitions:
+keysym q = period greater
+keysym w = m M
+keysym e = y Y
+keysym r = d D
+keysym t = g G
+keysym y = semicolon colon
+keysym u = w W
+keysym i = h H
+keysym o = comma less
+keysym p = apostrophe quotedbl
+keysym bracketleft = minus underscore
+keysym bracketright = slash question
+keysym s = r R
+keysym d = e E
+keysym f = s S
+keysym g = f F
+keysym h = k K
+keysym j = t T
+keysym k = n N
+keysym l = i I
+keysym semicolon = o O
+keysym apostrophe = equal plus
+keysym z = x X
+keysym x = c C
+keysym c = z Z
+keysym b = j J
+keysym n = b B
+keysym m = p P
+keysym comma = l L
+keysym period = u U
+keysym slash = q Q
+!! end of Qwerty <> Capewell(Close) substitions.

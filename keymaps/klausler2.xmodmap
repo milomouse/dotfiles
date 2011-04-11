@@ -1,0 +1,47 @@
+!
+! Klausler's Evolved Layout (2)
+!
+!
+! ` 1 2 3 4 5 6 7 8 9 0 - =
+!  k , u y p w l m f c [ ]
+!   o a e i d r n t h s /
+!    q . ' ; z x v g b j
+!
+!
+! IMPORTANT: base layout should be Qwerty before loading this keymap.
+! ********** this is better than hardcoding keys since keycodes vary.
+!
+
+!! beginning of Qwerty <> Klausler2 substitions:
+keysym q = k K
+keysym w = comma less
+keysym e = u U
+keysym r = y Y
+keysym t = p P
+keysym y = w W
+keysym u = l L
+keysym i = m M
+keysym o = f F
+keysym p = c C
+keysym a = o O
+keysym s = a A
+keysym d = e E
+keysym f = i I
+keysym g = d D
+keysym h = r R
+keysym j = n N
+keysym k = t T
+keysym l = h H
+keysym semicolon = s S
+keysym apostrophe = slash question
+keysym z = q Q
+keysym x = period greater
+keysym c = apostrophe quotedbl
+keysym v = semicolon colon
+keysym b = z Z
+keysym n = x X
+keysym m = v V
+keysym comma = g G
+keysym period = b B
+keysym slash = j J
+!! end of Qwerty <> Klausler2 substitions.

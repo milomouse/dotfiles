@@ -1,0 +1,49 @@
+!
+! Capewell (Close) [pre 0.9.3]
+!
+!
+! ` 1 2 3 4 5 6 7 8 9 0 [ ]
+!  . m y d g ; w h , ' / =
+!   a r e s f k t n i o -
+!    x c z v j b p l u q
+!
+!
+! IMPORTANT: base layout should be Qwerty before loading this keymap.
+! ********** this is better than hardcoding keys since keycodes vary.
+!
+
+!! beginning of Qwerty <> Capewell(Close) substitions:
+keysym minus = bracketleft braceleft
+keysym equal = bracketright braceright
+keysym q = period greater
+keysym w = m M
+keysym e = y Y
+keysym r = d D
+keysym t = g G
+keysym y = semicolon colon
+keysym u = w W
+keysym i = h H
+keysym o = comma less
+keysym p = apostrophe quotedbl
+keysym bracketleft = slash question
+keysym bracketright = equal plus
+keysym s = r R
+keysym d = e E
+keysym f = s S
+keysym g = f F
+keysym h = k K
+keysym j = t T
+keysym k = n N
+keysym l = i I
+keysym semicolon = o O
+keysym apostrophe = minus underscore
+keysym z = x X
+keysym x = c C
+keysym c = z Z
+keysym b = j J
+keysym n = b B
+keysym m = p P
+keysym comma = l L
+keysym period = u U
+keysym slash = q Q
+!! end of Qwerty <> Capewell(Close) substitions.

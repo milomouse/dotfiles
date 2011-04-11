@@ -1,0 +1,47 @@
+!
+! Capewell-Dvorak (C-Dvorak)
+!
+!
+! ` 1 2 3 4 5 6 7 8 9 0 [ ]
+!  ' , . p y q f g r k / =
+!   o a e i u d h t n s -
+!    z x c v j l m w b ;
+!
+!
+! IMPORTANT: base layout should be Qwerty before loading this keymap.
+! ********** this is better than hardcoding keys since keycodes vary.
+!
+
+!! beginning of Qwerty <> C-Dvorak substitions:
+keysym minus = bracketleft braceleft
+keysym equal = bracketright braceright
+keysym q = apostrophe quotedbl
+keysym w = comma less
+keysym e = period greater
+keysym r = p P
+keysym t = y Y
+keysym y = q Q
+keysym u = f F
+keysym i = G G
+keysym o = r R
+keysym p = k K
+keysym bracketleft = slash question
+keysym bracketright = equal plus
+keysym a = o O
+keysym s = a A
+keysym d = e E
+keysym f = i I
+keysym g = u U
+keysym h = d D
+keysym j = h H
+keysym k = t T
+keysym l = n N
+keysym semicolon = s S
+keysym apostrophe = minus underscore
+keysym b = j J
+keysym n = l L
+keysym m = m M
+keysym comma = w W
+keysym period = b B
+keysym slash = semicolon colon
+!! end of Qwerty <> C-Dvorak substitions.

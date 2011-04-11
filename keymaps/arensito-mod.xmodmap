@@ -1,0 +1,80 @@
+!
+! Arensito
+!
+!
+! ` [ 7 5 3 1 9 0 2 4 6 8 ]
+!  q l , p ' ; f u d k - /
+!   a r e n b g s i t o =
+!    z w . h j v c y m x
+!
+!
+! Personal Modifications:
+!----------------------------------
+!  before: [ ] '
+!  after:  - / =
+!
+! Classic Dvorak-style numbers:
+!----------------------------------
+!  before: 1 2 3 4 5 6 7 8 9 0 - =
+!  after:  [ 7 5 3 1 9 0 2 4 6 8 ]
+!  
+!----------------------------------
+!
+! IMPORTANT: base layout should be Qwerty before loading this keymap.
+! ********** this is better than hardcoding keys since keycodes vary.
+!
+
+
+!! beginning of Classic Dvorak-style numbers:
+keysym 1 = bracketleft braceleft
+keysym 2 = 7 ampersand
+keysym 3 = 5 percent
+keysym 4 = 3 numbersign
+keysym 5 = 1 exclam
+keysym 6 = 9 parenleft
+keysym 7 = 0 parenright
+keysym 8 = 2 at
+keysym 9 = 4 dollar
+keysym 0 = 6 asciicircum
+keysym minus = 8 asterisk
+keysym equal = bracketright braceright
+!! end of Classic Dvorak-style numbers.
+
+!! IMPORTANT:
+!! if you don't like Classic Dvorak's egronomic odd-even numbering
+!! then comment the above keysyms and uncomment the 2 lines below.
+!keysym minus = bracketleft braceleft
+!keysym equal = bracketright braceright
+
+!! beginning of Qwerty <> Arensito substitions:
+keysym w = l L
+keysym e = comma less
+keysym r = p P
+keysym t = apostrophe quotedbl
+keysym y = semicolon colon
+keysym u = f F
+keysym i = u U
+keysym o = d D
+keysym p = k K
+keysym bracketleft = minus underscore
+keysym bracketright = slash question
+keysym s = r R
+keysym d = e E
+keysym f = n N
+keysym g = b B
+keysym h = g G
+keysym j = s S
+keysym k = i I
+keysym l = t T
+keysym semicolon = o O
+keysym apostrophe = equal plus
+keysym x = w W
+keysym c = period greater
+keysym v = h H
+keysym b = j J
+keysym n = v V
+keysym m = c C
+keysym comma = y Y
+keysym period = m M
+keysym slash = x X
+!! end of Qwerty <> Arensito substitions.

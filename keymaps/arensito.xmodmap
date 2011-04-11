@@ -1,0 +1,45 @@
+!
+! Arensito
+!
+!
+! ` 1 2 3 4 5 6 7 8 9 0 - =
+!  q l , p ' ; f u d k [ ]
+!   a r e n b g s i t o /
+!    z w . h j v c y m x
+!
+!
+! IMPORTANT: base layout should be Qwerty before loading this keymap.
+! ********** this is better than hardcoding keys since keycodes vary.
+!
+
+
+!! beginning of Qwerty <> Arensito substitions:
+keysym w = l L
+keysym e = comma less
+keysym r = p P
+keysym t = apostrophe quotedbl
+keysym y = semicolon colon
+keysym u = f F
+keysym i = u U
+keysym o = d D
+keysym p = k K
+keysym s = r R
+keysym d = e E
+keysym f = n N
+keysym g = b B
+keysym h = g G
+keysym j = s S
+keysym k = i I
+keysym l = t T
+keysym semicolon = o O
+keysym apostrophe = slash question
+keysym x = w W
+keysym c = period greater
+keysym v = h H
+keysym b = j J
+keysym n = v V
+keysym m = c C
+keysym comma = y Y
+keysym period = m M
+keysym slash = x X
+!! end of Qwerty <> Arensito substitions.

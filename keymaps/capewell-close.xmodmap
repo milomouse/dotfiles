@@ -1,16 +1,22 @@
 !
 ! Capewell (Close) [pre 0.9.3]
+!_________________________________
 !
 !
 ! ` 1 2 3 4 5 6 7 8 9 0 [ ]
 !  . m y d g ; w h , ' / =
 !   a r e s f k t n i o -
 !    x c z v j b p l u q
+! 
+! ~ ! @ # $ % ^ & * ( ) { }
+!  > M Y D G : W H > " ? +
+!   A R E S F K T N I O _
+!    X C Z V J B P L U Q
 !
 !
 ! IMPORTANT: base layout should be Qwerty before loading this keymap.
 ! ********** this is better than hardcoding keys since keycodes vary.
-!
+!_________________________________
 
 !! beginning of Qwerty <> Capewell(Close) substitions:
 keysym minus = bracketleft braceleft

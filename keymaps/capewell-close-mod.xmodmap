@@ -1,44 +1,49 @@
 !
 ! Capewell (Close) [pre 0.9.3]
+!____________/mod\________________
 !
 !
-! ` [ 7 5 3 1 9 0 2 4 6 8 ]
-!  . m y d g ; w h , ' - /
-!   a r e s f k t n i o =
+! ` [ 9 7 5 3 1 2 4 6 8 0 ]
+!  . m y d g ; w h , ' - =
+!   a r e s f k t n i o /
 !    x c z v j b p l u q
+!
+! ~ { ( & % # ! @ $ ^ * ) }
+!  > M Y D G : W H > " _ +
+!   A R E S F K T N I O ?
+!    X C Z V J B P L U Q
 !
 !
 ! Personal Modifications:
 !----------------------------------
 !  before: [ ] '
-!  after:  - / =
+!  after:  - = /
 !
-! Classic Dvorak-style numbers:
+! Psuedo Dvorak-style numbers:
 !----------------------------------
 !  before: 1 2 3 4 5 6 7 8 9 0 - =
-!  after:  [ 7 5 3 1 9 0 2 4 6 8 ]
+!  after:  [ 9 7 5 3 1 2 4 6 8 0 ]
 !  
 !----------------------------------
 !
 ! IMPORTANT: base layout should be Qwerty before loading this keymap.
 ! ********** this is better than hardcoding keys since keycodes vary.
-!
+!__________________________________
 
-
-!! beginning of Classic Dvorak-style numbers:
+!! beginning of Psuedo Dvorak-style numbers:
 keysym 1 = bracketleft braceleft
-keysym 2 = 7 ampersand
-keysym 3 = 5 percent
-keysym 4 = 3 numbersign
-keysym 5 = 1 exclam
-keysym 6 = 9 parenleft
-keysym 7 = 0 parenright
-keysym 8 = 2 at
-keysym 9 = 4 dollar
-keysym 0 = 6 asciicircum
-keysym minus = 8 asterisk
+keysym 2 = 9 parenleft
+keysym 3 = 7 ampersand
+keysym 4 = 5 percent
+keysym 5 = 3 numbersign
+keysym 6 = 1 exclam
+keysym 7 = 2 at
+keysym 8 = 4 dollar
+keysym 9 = 6 asciicircum
+keysym 0 = 8 asterisk
+keysym minus = 0 parenright
 keysym equal = bracketright braceright
-!! end of Classic Dvorak-style numbers.
+!! end of Psuedo Dvorak-style numbers.
 
 !! IMPORTANT:
 !! if you don't like Classic Dvorak's egronomic odd-even numbering
@@ -58,7 +63,7 @@ keysym i = h H
 keysym o = comma less
 keysym p = apostrophe quotedbl
 keysym bracketleft = minus underscore
-keysym bracketright = slash question
+keysym bracketright = equal plus
 keysym s = r R
 keysym d = e E
 keysym f = s S
@@ -68,7 +73,7 @@ keysym j = t T
 keysym k = n N
 keysym l = i I
 keysym semicolon = o O
-keysym apostrophe = equal plus
+keysym apostrophe = slash question
 keysym z = x X
 keysym x = c C
 keysym c = z Z

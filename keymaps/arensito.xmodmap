@@ -1,5 +1,6 @@
 !
 ! Arensito
+!_________________________________
 !
 !
 ! ` 1 2 3 4 5 6 7 8 9 0 - =
@@ -7,11 +8,15 @@
 !   a r e n b g s i t o /
 !    z w . h j v c y m x
 !
+! ~ ! @ # $ % ^ & * ( ) _ +
+!  Q L < P " : F U D K { }
+!   A R E N B G S I T O ?
+!    Z W > H J V C Y M X
+!
 !
 ! IMPORTANT: base layout should be Qwerty before loading this keymap.
 ! ********** this is better than hardcoding keys since keycodes vary.
-!
-
+!_________________________________
 
 !! beginning of Qwerty <> Arensito substitions:
 keysym w = l L

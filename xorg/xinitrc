@@ -22,7 +22,7 @@
 # load Klausler's Evolved Layout (2) keymap
 # rating: 3/5
 #/usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/klausler2.xmodmap
-#/usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/klausler2-mod.xmodmap
+/usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/klausler2-mod.xmodmap
 
 # load personal preferences (e.g. Alt_L <> Super_L.. Caps <> Control_L)
 /usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/personal.xmodmap

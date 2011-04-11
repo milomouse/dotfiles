@@ -1,31 +1,37 @@
 !
 ! Klausler's Evolved Layout (2)
+!____________/mod\________________
 !
 !
-! ` [ 7 5 3 1 9 0 2 4 6 8 ]
-!  k , u y p w l m f c - /
-!   o a e i d r n t h s =
+! ` [ 9 7 5 3 1 2 4 6 8 0 ]
+!  k , u y p w l m f c - =
+!   o a e i d r n t h s /
 !    q . ' ; z x v g b j
+!
+! ~ { ( & % # ! @ $ ^ * ) }
+!  K < U Y P W L M F C _ +
+!   O A E I D R N T H S ?
+!    Q > " : Z X V G B J
 !
 !
 ! Personal Modifications:
 !----------------------------------
 !  before: [ ] '
-!  after:  - / =
+!  after:  - = /
 !
-! Classic Dvorak-style numbers:
+! Psuedo Dvorak-style numbers:
 !----------------------------------
 !  before: 1 2 3 4 5 6 7 8 9 0 - =
-!  after:  [ 7 5 3 1 9 0 2 4 6 8 ]
+!  after:  [ 9 7 5 3 1 2 4 6 8 0 ]
 !  
 !----------------------------------
 !
 ! IMPORTANT: base layout should be Qwerty before loading this keymap.
 ! ********** this is better than hardcoding keys since keycodes vary.
-!
+!__________________________________
 
 
-!! beginning of Classic Dvorak-style numbers:
+!! beginning of Psuedo Dvorak-style numbers:
 keysym 1 = bracketleft braceleft
 keysym 2 = 7 ampersand
 keysym 3 = 5 percent
@@ -38,7 +44,7 @@ keysym 9 = 4 dollar
 keysym 0 = 6 asciicircum
 keysym minus = 8 asterisk
 keysym equal = bracketright braceright
-!! end of Classic Dvorak-style numbers.
+!! end of Psuedo Dvorak-style numbers.
 
 !! IMPORTANT:
 !! if you don't like Classic Dvorak's egronomic odd-even numbering
@@ -58,7 +64,7 @@ keysym i = m M
 keysym o = f F
 keysym p = c C
 keysym bracketleft = minus underscore
-keysym bracketright = slash question
+keysym bracketright = equal plus
 keysym a = o O
 keysym s = a A
 keysym d = e E
@@ -69,7 +75,7 @@ keysym j = n N
 keysym k = t T
 keysym l = h H
 keysym semicolon = s S
-keysym apostrophe = equal plus
+keysym apostrophe = slash question
 keysym z = q Q
 keysym x = period greater
 keysym c = apostrophe quotedbl

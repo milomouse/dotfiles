@@ -1,5 +1,6 @@
 !
 ! Klausler's Evolved Layout (2)
+!_________________________________
 !
 !
 ! ` 1 2 3 4 5 6 7 8 9 0 - =
@@ -7,10 +8,15 @@
 !   o a e i d r n t h s /
 !    q . ' ; z x v g b j
 !
+! ~ ! @ # $ % ^ & * ( ) _ +
+!  K < U Y P W L M F C { }
+!   O A E I D R N T H S ?
+!    Q > " : Z X V G B J
+!
 !
 ! IMPORTANT: base layout should be Qwerty before loading this keymap.
 ! ********** this is better than hardcoding keys since keycodes vary.
-!
+!_________________________________
 
 !! beginning of Qwerty <> Klausler2 substitions:
 keysym q = k K

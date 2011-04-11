@@ -17,7 +17,7 @@
 !! xmodmap created by: milomouse !!
 
 ! number row
-keycode 9 = grave asciitilde
+keycode 49 = grave asciitilde
 keycode 10 = 1 exclam
 keycode 11 = 2 at
 keycode 12 = 3 numbersign

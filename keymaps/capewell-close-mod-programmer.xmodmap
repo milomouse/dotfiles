@@ -26,7 +26,7 @@
 !! xmodmap created by: milomouse !!
 
 ! number row
-keycode 9 = asciitilde grave
+keycode 49 = asciitilde grave
 keycode 10 = braceleft bracketleft
 keycode 11 = parenleft 9
 keycode 12 = ampersand 7

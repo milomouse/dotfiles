@@ -30,19 +30,18 @@
 ! ********** this is better than hardcoding keys since keycodes vary.
 !__________________________________
 
-
 !! beginning of Psuedo Dvorak-style numbers:
 keysym 1 = bracketleft braceleft
-keysym 2 = 7 ampersand
-keysym 3 = 5 percent
-keysym 4 = 3 numbersign
-keysym 5 = 1 exclam
-keysym 6 = 9 parenleft
-keysym 7 = 0 parenright
-keysym 8 = 2 at
-keysym 9 = 4 dollar
-keysym 0 = 6 asciicircum
-keysym minus = 8 asterisk
+keysym 2 = 9 parenleft
+keysym 3 = 7 ampersand
+keysym 4 = 5 percent
+keysym 5 = 3 numbersign
+keysym 6 = 1 exclam
+keysym 7 = 2 at
+keysym 8 = 4 dollar
+keysym 9 = 6 asciicircum
+keysym 0 = 8 asterisk
+keysym minus = 0 parenright
 keysym equal = bracketright braceright
 !! end of Psuedo Dvorak-style numbers.
 

@@ -43,7 +43,7 @@ keycode 32 = comma less
 keycode 33 = apostrophe quotedbl
 keycode 34 = slash question
 keycode 35 = equal plus
-keycode 36 = backslash bar
+keycode 51 = backslash bar
 ! middle row
 keycode 38 = a A
 keycode 39 = r R

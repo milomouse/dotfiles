@@ -51,7 +51,7 @@ keycode 32 = d D
 keycode 33 = k K
 keycode 34 = minus underscore
 keycode 35 = equal plus
-keycode 36 = backslash bar
+keycode 51 = backslash bar
 ! middle row
 keycode 38 = a A
 keycode 39 = r R

@@ -43,7 +43,7 @@ keycode 32 = f F
 keycode 33 = c C
 keycode 34 = bracketleft braceleft
 keycode 35 = braceketright braceright
-keycode 36 = backslash bar
+keycode 51 = backslash bar
 ! middle row
 keycode 38 = o O
 keycode 39 = a A

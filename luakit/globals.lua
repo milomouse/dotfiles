@@ -55,7 +55,7 @@ soup.set_property("accept-policy", cookie_policy.no_third_party)
     duckduckgo also provides \keyword to go to best result.
     i had to define a few searches because ddg didn't hae them. --]]
 search_engines = {
-  d        = "https://duckduckgo.com/?q=%s&kd=1&k1=-1&ke=-1&ka=s&kb=d&kf=fw&kh=1&kk=-1&ko=s&kp=1&kr=b&kt=n&kv=1&kw=n&kx=e&ky=-1",
+  d        = "https://duckduckgo.com/?kd=1&k1=-1&ke=-1&ka=s&kb=d&kf=fw&kh=1&kk=-1&ko=s&kp=1&kr=b&kt=n&kv=1&kw=n&kx=e&ky=-1&q=%s",
   postrock = "http://www.postrockxchange.com/?s=%s",
   tiger    = "http://www.tigerdirect.com/applications/SearchTools/search.asp?keywords=%s",
   luakit   = "http://luakit.org/search/index/luakit?q=%s",

@@ -23,8 +23,8 @@ uncolor index "~D"
 # and recolor them appropriately
   color index      black         default "~P"
   color index      green         default "~C @.com"
-  color index      brightblue    black   "~N ~u"  # new ML mail
-  color index      blue          black   "~N !~u" # new non-ML mail
+  color index      brightblue    default "~N ~u"  # new ML mail
+  color index      blue          default "~N !~u" # new non-ML mail
   color index      red           default "~T"
   color index      brightred     default "~D"
 

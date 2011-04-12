@@ -3,14 +3,14 @@
 !__________________________________
 !
 !
-!    ` 1 2 3 4 5 6 7 8 9 0 - =
+!    ` 1 2 3 4 5 6 7 8 9 0 / =
 !     q l , p ' ; f u d k [ ]
-!      a r e n b g s i t o /
+!      a r e n b g s i t o -
 !       z w . h j v c y m x
 !
-!    ~ ! @ # $ % ^ & * ( ) _ +
+!    ~ ! @ # $ % ^ & * ( ) ? +
 !     Q L < P " : F U D K { }
-!      A R E N B G S I T O ?
+!      A R E N B G S I T O _
 !       Z W > H J V C Y M X
 !
 !__________________________________
@@ -28,7 +28,7 @@ keycode 16 = 7 ampersand
 keycode 17 = 8 asterisk
 keycode 18 = 9 parenleft
 keycode 19 = 0 parenright
-keycode 20 = minus underscore
+keycode 20 = slash question
 keycode 21 = equal plus
 ! top row
 keycode 24 = q Q
@@ -55,7 +55,7 @@ keycode 44 = s S
 keycode 45 = i I
 keycode 46 = t T
 keycode 47 = o O
-keycode 48 = slash question
+keycode 48 = minus underscore
 ! bottom row
 keycode 52 = z Z
 keycode 53 = w W

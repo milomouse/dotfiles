@@ -4,27 +4,15 @@
 /usr/bin/xsetroot -cursor_name left_ptr &
 
 ## keyboard:
-# load Capewell-Dvorak (C-Dvorak) keymap
-# rating: 4/5
-#/usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/capewell-dvorak.xmodmap
-#/usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/capewell-dvorak-mod.xmodmap
-
-# load Capewell (Close) [pre 0.9.3] keymap
-# rating: 2/5
-#/usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/capewell-close.xmodmap
-#/usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/capewell-close-mod.xmodmap
-
-# load Arensito keymap
-# rating: 4/5
 #/usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/arensito.xmodmap
 #/usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/arensito-mod.xmodmap
-
-# load Klausler's Evolved Layout (2) keymap
-# rating: 3/5
+#/usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/arensito-mod-programmer.xmodmap
 #/usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/klausler2.xmodmap
-/usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/klausler2-mod.xmodmap
-
-# load personal preferences (e.g. Alt_L <> Super_L.. Caps <> Control_L)
+#/usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/klausler2-mod.xmodmap
+/usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/klausler2-mod-programmer.xmodmap
+#/usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/capewell-dvorak.xmodmap
+#/usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/capewell-dvorak-mod.xmodmap
+#/usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/capewell-dvorak-mod-programmer.xmodmap
 /usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/personal.xmodmap
 
 ## mouse/touchpad:

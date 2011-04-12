@@ -6,18 +6,18 @@
 !    ~ { ( & % # ! @ $ ^ * ) }
 !     k , u y p w l j f c - =
 !      o a e i d r n t h s /
-!       q . ' ; x v m g b z
+!       q ; ' . x v m g b z
 !
 !    ` [ 9 7 5 3 1 2 4 6 8 0 ]
 !     K < U Y P W L J F C _ +
 !      O A E I D R N T H S ?
-!       Q > " : X V M G B Z
+!       Q : " > X V M G B Z
 !
 !
 ! Personal Modifications:
 !----------------------------------
-!  before: [ ] z m j v
-!  after:  - = x j z m
+!  before: [ ] . z x v m f j
+!  after:  - = ; x v m f j z
 !
 !  before: 1 2 3 4 5 6 7 8 9 0 - =
 !  after:  { ( & % # ! @ $ ^ * ) }
@@ -47,7 +47,7 @@ keycode 28 = p P
 keycode 29 = w W
 keycode 30 = l L
 keycode 31 = j J
-keycode 32 = f F
+keycode 32 = f f
 keycode 33 = c C
 keycode 34 = minus underscore
 keycode 35 = equal plus
@@ -66,9 +66,9 @@ keycode 47 = s S
 keycode 48 = slash question
 ! bottom row
 keycode 52 = q Q
-keycode 53 = period greater
+keycode 53 = semicolon colon
 keycode 54 = apostrophe quotedbl
-keycode 55 = semicolon colon
+keycode 55 = period greater
 keycode 56 = x X
 keycode 57 = v V
 keycode 58 = m M

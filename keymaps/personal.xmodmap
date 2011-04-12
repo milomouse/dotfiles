@@ -1,7 +1,11 @@
-!
 ! personal preferences
+!
+! [tab]
+! [shift]
+! [ctrl]
+! [ctrl][alt][win]
 
-! swap Alt_L with Super_L (my StumpWM Modifier)
+!! swap Alt_L with Super_L (my StumpWM Modifier)
 remove mod1 = Alt_L
 remove mod4 = Super_L
 keycode 133 = Alt_L
@@ -9,8 +13,9 @@ keycode 64 = Super_L
 add mod1 = Alt_L
 add mod4 = Super_L
 
-! remove [useless] Caps_Lock..
-! make it an easier Escape key instead
-!remove lock = Caps_Lock
-!keysym Caps_Lock = Control_L
-!add lock = Control_L
+!! remove [useless] Caps_Lock action..
+!! clone Control_L into Caps_Lock instead
+remove lock = Caps_Lock
+keysym Caps_Lock = Control_L
+add lock = Caps_Lock
+add control = Control_L

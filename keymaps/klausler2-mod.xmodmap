@@ -1,23 +1,23 @@
-!
 ! Klausler's Evolved Layout (2)
+!
 !______________/mod\_______________
 !
 !
 !    ` [ 9 7 5 3 1 2 4 6 8 0 ]
-!     k , u y p w l m f c - =
+!     k , u y p w l j f c - =
 !      o a e i d r n t h s /
-!       q . ' ; z x v g b j
+!       q . ' ; x v m g b z
 !
 !    ~ { ( & % # ! @ $ ^ * ) }
-!     K < U Y P W L M F C _ +
+!     K < U Y P W L J F C _ +
 !      O A E I D R N T H S ?
-!       Q > " : Z X V G B J
+!       Q > " : X V M G B Z
 !
 !
 ! Personal Modifications:
 !----------------------------------
-!  before: [ ] '
-!  after:  - = /
+!  before: [ ] ' z m j v
+!  after:  - = / x j z m
 !
 !  before: 1 2 3 4 5 6 7 8 9 0 - =
 !  after:  [ 9 7 5 3 1 2 4 6 8 0 ]
@@ -46,7 +46,7 @@ keycode 27 = y Y
 keycode 28 = p P
 keycode 29 = w W
 keycode 30 = l L
-keycode 31 = m M
+keycode 31 = j J
 keycode 32 = f F
 keycode 33 = c C
 keycode 34 = minus underscore
@@ -69,10 +69,10 @@ keycode 52 = q Q
 keycode 53 = period greater
 keycode 54 = apostrophe quotedbl
 keycode 55 = semicolon colon
-keycode 56 = z Z
-keycode 57 = x X
-keycode 58 = v V
+keycode 56 = x X
+keycode 57 = v V
+keycode 58 = m M
 keycode 59 = g G
 keycode 60 = b B
-keycode 61 = j J
+keycode 61 = z Z
 

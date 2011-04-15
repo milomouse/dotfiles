@@ -42,7 +42,7 @@ keycode 31 = m M
 keycode 32 = f F
 keycode 33 = c C
 keycode 34 = bracketleft braceleft
-keycode 35 = braceketright braceright
+keycode 35 = bracketright braceright
 keycode 51 = backslash bar
 ! middle row
 keycode 38 = o O

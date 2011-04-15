@@ -4,12 +4,15 @@
 /usr/bin/xsetroot -cursor_name left_ptr &
 
 ## keyboard:
+/usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/dvausler.xmodmap
+#/usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/dvausler-oldnum.xmodmap
+#/usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/dvausler-programmmer.xmodmap
 #/usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/arensito.xmodmap
 #/usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/arensito-mod.xmodmap
 #/usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/arensito-mod-programmer.xmodmap
 #/usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/klausler2.xmodmap
 #/usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/klausler2-mod.xmodmap
-/usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/klausler2-mod-programmer.xmodmap
+#/usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/klausler2-mod-programmer.xmodmap
 #/usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/capewell-dvorak.xmodmap
 #/usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/capewell-dvorak-mod.xmodmap
 #/usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/capewell-dvorak-mod-programmer.xmodmap

@@ -5,12 +5,12 @@
 !
 !    ~ { ( & % # ! @ $ ^ * ) }
 !     ' , . p y g f c r l - =
-!      o a e i u d h t n s /
+!      a o e i u d h t n s /
 !       ; q j k x b m w v z
 !
 !    ` [ 9 7 5 3 1 2 4 6 8 0 ]
 !     " < > P Y G F C R L _ +
-!      O A E I U D H T N S ?
+!      A O E I U D H T N S ?
 !       : Q J K X B M W V Z
 !
 !
@@ -53,8 +53,8 @@ keycode 34 = minus underscore
 keycode 35 = equal plus
 keycode 51 = backslash bar
 ! middle row
-keycode 38 = o O
-keycode 39 = a A
+keycode 38 = a A
+keycode 39 = o O
 keycode 40 = e E
 keycode 41 = i I
 keycode 42 = u U

@@ -56,8 +56,8 @@ if &t_Co > 255
   hi Special        term=none cterm=none ctermfg=140  ctermbg=none
   hi SpecialKey     term=none cterm=none ctermfg=151  ctermbg=none
   hi Statement      term=none cterm=none ctermfg=103  ctermbg=none
-  hi StatusLine     term=none cterm=none ctermfg=103  ctermbg=234
-  hi StatusLineNC   term=none cterm=none ctermfg=234  ctermbg=59
+  hi StatusLine     term=none cterm=none ctermfg=234  ctermbg=59
+  hi StatusLineNC   term=none cterm=none ctermfg=103  ctermbg=234
   hi StorageClass   term=none cterm=none ctermfg=249  ctermbg=none
   hi String         term=none cterm=none ctermfg=7    ctermbg=none
   hi Structure      term=none cterm=none ctermfg=229  ctermbg=none

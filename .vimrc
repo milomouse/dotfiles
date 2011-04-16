@@ -1,9 +1,11 @@
 syntax enable
 set nocompatible
 set shell=zsh
+"no sense setting this by default; only when X enters qwerty/ru
+"set keymap=russian-dvorak
 set enc=utf-8
 set viminfo='20,<50,s10,h,n~/.vim/viminfo
-if $DISPLAY =~ ":0"
+if $DISPLAY =~ ":"
   set t_Co=256
 endif
 colorscheme cottonmouse
@@ -84,10 +86,10 @@ let ruby_space_errors = 1
 let c_space_errors = 1
 let c_no_trail_space_error = 1
 let c_no_tab_space_error = 1
-map <Up> <NOP>
-map <Down> <NOP>
-map <Left> <NOP>
-map <Right> <NOP>
+"map <Up> <NOP>
+"map <Down> <NOP>
+"map <Left> <NOP>
+"map <Right> <NOP>
 map <End> <NOP>
 map <Home> <NOP>
 inoremap # X<BS>#

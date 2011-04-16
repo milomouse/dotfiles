@@ -5,19 +5,19 @@
 !
 !    ` [ 9 7 5 3 1 2 4 6 8 0 ]
 !     ' , . p y g f c r l - =
-!      a o e i u d h t n s /
+!      a o e i u d h n t s /
 !       ; q j k x b m w v z
 !
 !    ~ { ( & % # ! @ $ ^ * ) }
 !     " < > P Y G F C R L _ +
-!      A O E I U D H T N S ?
+!      A O E I U D H N T S ?
 !       : Q J K X B M W V Z
 !
 !
 ! Personal Modifications:
 !----------------------------------
-!  before: / - u i f g
-!  after:  - / i u g f
+!  before: / - u i f g n t
+!  after:  - / i u g f t n
 !
 !  before: 1 2 3 4 5 6 7 8 9 0 [ ]
 !  after:  [ 9 7 5 3 1 2 4 6 8 0 ]
@@ -60,8 +60,8 @@ keycode 41 = i I
 keycode 42 = u U
 keycode 43 = d D
 keycode 44 = h H
-keycode 45 = t T
-keycode 46 = n N
+keycode 45 = n N
+keycode 46 = t T
 keycode 47 = s S
 keycode 48 = slash question
 ! bottom row

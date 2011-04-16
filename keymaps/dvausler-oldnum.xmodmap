@@ -1,46 +1,16 @@
-! Dvausler
-!
-!__________________________________
-!
-!
-!    ` 1 2 3 4 5 6 7 8 9 0 [ ]
-!     k , u p y z f g l c - =
-!      o a e i d r n h t s /
-!       ; ' q m b v w . j x
-!
-!    ~ ! @ # $ % ^ & * ( ) [ ]
-!     K < U P Y Z F G L C _ +
-!      O A E I D R N H T S ?
-!       : " Q M B V W > J X
-!
-!__________________________________
-!
-! >> this has undergone quite a few
-! >> revisions but this seems to be
-! >> as good as i can get it so far
-!
-! NOTE: this is a layout i designed
-! for my own use because i couldn't
-! find a comfortable medium between
-! Dvorak and Klausler (the two most
-! usable layouts i have discovered)
-! this layout attempts to merge the
-! best of both worlds, keeping good
-! key-rolls and hand alteration, as
-! well as minding common Linux keys
-! and control commands, even though
-! i didn't have to change anything!
-!
-! i'm in the process of running it
-! through key algorithms and so far
-! it seems to hold up exceptionally
-! well to other modern layouts. :)
-! although, with any modern layout,
-! it's still a matter of personal
-! taste and comfortability. try it!
-!
-! will post more when i have more.
-!__________________________________
+! Dvausler -> old numbers         !
+!_________________________________!
+!                                 !
+!    ` 1 2 3 4 5 6 7 8 9 0 [ ]    !
+!     k , u p y z f g l c - =     !
+!      o a e i d r n h t s /      !
+!       ; ' q m b v w . j x       !
+!                                 !
+!    ~ ! @ # $ % ^ & * ( ) [ ]    !
+!     K < U P Y Z F G L C _ +     !
+!      O A E I D R N H T S ?      !
+!       : " Q M B V W > J X       !
+!_________________________________!
 !! xmodmap created by: milomouse !!
 
 ! number row

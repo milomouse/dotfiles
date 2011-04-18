@@ -8,27 +8,43 @@
                                         :NUMBER 0
                                         :X 0
                                         :Y 0
-                                        :WIDTH 1060
-                                        :HEIGHT 590
+                                        :WIDTH 800
+                                        :HEIGHT 254
                                         :WINDOWS NIL
                                         :CURRENT NIL)
                                      #S(FDUMP
-                                        :NUMBER 2
-                                        :X 1060
+                                        :NUMBER 1
+                                        :X 800
                                         :Y 0
-                                        :WIDTH 540
-                                        :HEIGHT 590
+                                        :WIDTH 800
+                                        :HEIGHT 254
+                                        :WINDOWS NIL
+                                        :CURRENT NIL))
+                                    (#S(FDUMP
+                                        :NUMBER 2
+                                        :X 0
+                                        :Y 254
+                                        :WIDTH 800
+                                        :HEIGHT 253
+                                        :WINDOWS NIL
+                                        :CURRENT NIL)
+                                     #S(FDUMP
+                                        :NUMBER 4
+                                        :X 800
+                                        :Y 254
+                                        :WIDTH 800
+                                        :HEIGHT 253
                                         :WINDOWS NIL
                                         :CURRENT NIL))
                                     #S(FDUMP
-                                       :NUMBER 1
+                                       :NUMBER 3
                                        :X 0
-                                       :Y 590
+                                       :Y 507
                                        :WIDTH 1600
-                                       :HEIGHT 310
+                                       :HEIGHT 393
                                        :WINDOWS NIL
                                        :CURRENT NIL)))
-                            :CURRENT 1)
+                            :CURRENT 3)
                          #S(GDUMP
                             :NUMBER 2
                             :NAME "2"
@@ -97,5 +113,5 @@
                                        :WINDOWS NIL
                                        :CURRENT NIL)))
                             :CURRENT 0))
-                :CURRENT 3))
+                :CURRENT 1))
    :CURRENT 0)

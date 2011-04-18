@@ -86,10 +86,10 @@ let ruby_space_errors = 1
 let c_space_errors = 1
 let c_no_trail_space_error = 1
 let c_no_tab_space_error = 1
-"map <Up> <NOP>
-"map <Down> <NOP>
-"map <Left> <NOP>
-"map <Right> <NOP>
+map <Up> <NOP>
+map <Down> <NOP>
+map <Left> <NOP>
+map <Right> <NOP>
 map <End> <NOP>
 map <Home> <NOP>
 inoremap # X<BS>#

@@ -87,6 +87,10 @@ domain_props = {
         ["enable-private-browsing"] = false,
         --["user-stylesheet-uri"] = "file://" .. luakit.data_dir .. "/styles/archmouse.css",
     },
+    ["russianlessons.net"] = {
+        ["enable-plugins"] = true,
+        ["enable-private-browsing"] = false,
+    },
     ["github.com"] = {
         ["enable-plugins"] = true,
         ["enable-private-browsing"] = false,

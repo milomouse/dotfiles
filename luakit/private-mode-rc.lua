@@ -53,6 +53,9 @@ require "tabhistory"
 -- Add greasemonkey-like javascript userscript support
 require "userscripts"
 
+-- Add bookmarks support
+require "bookmarks"
+
 -- Add download support
 require "downloads"
 require "downloads_chrome"

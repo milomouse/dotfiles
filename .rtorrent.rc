@@ -10,7 +10,6 @@ tracker_numwant = 64
 use_udp_trackers = yes
 dht = auto
 dht_port = 6881
-scgi_local = /dev/shm/.1009/rtorrent-xmlrpc.socket
 encoding_list = UTF-8
 
 #// {up,down}loads
@@ -23,24 +22,26 @@ max_downloads_global = 241
 download_rate = 0
 max_peers = 82
 max_peers_seed = 24
+check_hash = yes
 
-#// watch dirs
+#// watch dirs -> destination dirs
 schedule = watch_directory1,5,7,"load=/howl/tors/foto/.down/*.torrent,d.set_directory=/howl/tors/foto/"
 schedule = watch_directory2,5,5,"load=/howl/tors/muzk/.down/*.torrent,d.set_directory=/howl/tors/muzk/"
 schedule = watch_directory3,5,8,"load=/howl/tors/othe/.down/*.torrent,d.set_directory=/howl/tors/othe/"
 schedule = watch_directory4,5,6,"load=/howl/tors/vide/.down/*.torrent,d.set_directory=/howl/tors/vide/"
 schedule = watch_directory5,5,8,"load=/howl/tors/book/.down/*.torrent,d.set_directory=/howl/tors/book/"
 
-#// other actions
-schedule = chmod,0,0,"execute=chmod,777,/dev/shm/.1009/rtorrent-xmlrpc.socket"
-system.method.set_key = event.download.finished,notify_stumpwm,"execute=/usr/local/bin/stumpbark,$d.get_base_filename="
+#// filter out evil:-suspicious ip ranges (these lists cover ~45K ranges ATM)
 ip_filter = .ipfilters/level1,.ipfilters/level2,.ipfilters/level3,.ipfilters/bogon,.ipfilters/dshield,.ipfilters/Microsoft
 schedule = filter,18:30:00,24:00:00,reload_ip_filter=
+
+#// miscellaneous
 schedule = filter_active,10,10,"view_filter = active,d.get_down_rate="
-#//schedule = filter_active,30,30,"view_filter = active,\"or={d.get_up_rate=,d.get_down_rate=}\""
-#//schedule = snub_leechers,120,120,"snub_leechers=10,5,1M"
-#//schedule = ban_slow_peers,120,120,"ban_slow_peers=5,2K,64K,5,128K,10,1M,30"
 schedule = tied_directory,5,60,start_tied=
 schedule = untied_directory,5,60,close_untied=
 schedule = low_diskspace,5,60,"close_low_diskspace=200M"
-check_hash = yes
+system.method.set_key = event.download.finished,notify_stumpwm,"execute=/usr/local/bin/stumpbark,$d.get_base_filename="
+
+#// no longer used [but possibly useful in the future]
+#//scgi_local = /dev/shm/.1009/rtorrent-xmlrpc.socket
+#//schedule = chmod,0,0,"execute=chmod,777,/dev/shm/.1009/rtorrent-xmlrpc.socket"

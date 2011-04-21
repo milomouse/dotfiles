@@ -2,7 +2,6 @@
 alias ls="/bin/ls -h --file-type --time-style='+%y-%m-%d %H%M%S' --color=auto --group-directories-first"
 alias la="ls -A"
 alias lb="ls -Ssr"
-alias lf="ls -Xd (-/DN)"
 alias lt="ls -tr"
 alias lm="lt -c"
 alias lx="ls -X"
@@ -13,8 +12,6 @@ alias llt="lls -tr"
 alias llm="llt -c"
 alias llx="lx -l"
 alias rd="/bin/rm -r"
-alias cl="/usr/bin/clear"
-alias e="bye"
 
 # useless quick views/edits:
 alias wika="${BROWSER:-/usr/bin/w3m} /usr/share/doc/arch-wiki/html/index.html"
@@ -26,7 +23,7 @@ alias xload="xrdb -load ${XDG_CONFIG_DIR:-${HOME}}/xorg/Xdefaults &>/dev/null"
 alias gh="cd ${H:-/howl}"
 
 # program masquing:
-alias sudo='command sudo '
+alias sudo='/usr/bin/sudo '
 alias svim="sudo ${EDITOR:-/usr/bin/vim}"
 alias info="/usr/bin/info --vi-keys"
 alias diff="/usr/bin/colordiff"
@@ -38,14 +35,14 @@ alias {rot,rtorrent}='/usr/bin/rtorrent -o http_capath=/etc/ssl/certs'
 alias startx="cd ~/ && /usr/bin/startx ${XDG_CONFIG_DIR:-${HOME}}/xorg/xinitrc -- -nolisten tcp -once -retro ; pushd -q +1"
 
 # system/media shortcuts:
-alias psu="print 'ELAPSETIME %CPU NI +?   LWPID - COMMAND';/bin/ps -U root,privoxy,15,http,daemon,nobody,unbound --deselect -C tmux,urxvt -H hoetime:10,%cpu:4,ni:2,stat:4,pid:5,rtprio:1,args"
-alias psr="print 'ELAPSETIME %CPU NI +?   LWPID - COMMAND';/bin/ps -u root -U root -H hoetime:10,%cpu:4,ni:2,stat:4,pid:5,rtprio:1,args"
-alias psa="print 'ELAPSETIME USER %CPU NI +?   LWPID - COMMAND';/bin/ps -H haxoetime:10,user:4,%cpu:4,ni:2,stat:4,pid:5,rtprio:1,args"
-alias pso="print 'ELAPSETIME USER %CPU NI +?   LWPID - COMMAND';/bin/ps -U root,h --deselect -u root,h -H hoetime:10,user:4,%cpu:4,ni:2,stat:4,pid:5,rtprio:1,args"
+alias psu="print 'ELAPSETIME  %CPU NI +?   LWPID - COMMAND';/bin/ps -U root,privoxy,15,http,daemon,nobody,unbound --deselect -C tmux,urxvt -H hoetime:10,%cpu:5,ni:2,stat:4,pid:5,rtprio:1,args"
+alias psr="print 'ELAPSETIME  %CPU NI +?   LWPID - COMMAND';/bin/ps -u root -U root -H hoetime:10,%cpu:5,ni:2,stat:4,pid:5,rtprio:1,args"
+alias psa="print 'ELAPSETIME USER  %CPU NI +?   LWPID - COMMAND';/bin/ps -H haxoetime:10,user:4,%cpu:5,ni:2,stat:4,pid:5,rtprio:1,args"
+alias pso="print 'ELAPSETIME USER  %CPU NI +?   LWPID - COMMAND';/bin/ps -U root,h --deselect -u root,h -H hoetime:10,user:4,%cpu:5,ni:2,stat:4,pid:5,rtprio:1,args"
 alias dfu="/bin/df -hTP -x debugfs"
 alias dii="/usr/bin/di -x debugfs -d h -Af sMTbuf"
 alias loadavg='print ${$(</proc/loadavg)[1,3]}'
-alias daemons="lt /var/run/daemons"
+alias daemons='lt /run/daemons'
 alias reboot='/bin/sync && sudo /sbin/reboot'
 alias {poweroff,pow}='/bin/sync && sudo /sbin/poweroff'
 alias mix2="/usr/local/bin/ossvol --speakers --quiet && /usr/local/bin/ossvol -a"

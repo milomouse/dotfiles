@@ -1,8 +1,28 @@
 [user]
-  name = milomouse
+  name = milomouse (Vincent Anonymouse)
   email = vincent@fea.st
+[diff]
+  tool = /usr/bin/vimdiff
 [color]
-  ui = auto
+  ui = true
+  pager = true
+  diff = auto
+  status = auto
+  branch = auto
+  interactive = auto
+[color "branch"]
+  current = cyan reverse
+  local = cyan
+  remote = blue
+[color "diff"]
+  meta = red
+  frag = magenta
+  new = green
+  old = blue
+[color "status"]
+  added = cyan
+  changed = magenta
+  untracked = blue
 [sendmail]
   smtpserver = /usr/bin/msmtp
   supressfrom = true
@@ -10,9 +30,13 @@
   thread = true
   compose = true
   confirm = auto
+[alias]
+  tree = log --graph --pretty=oneline --decorate
+  amend = commit --amend -C HEAD
+[core]
+  whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
+  editor = /usr/bin/vim
+  pager = /usr/bin/most
 [apply]
   whitespace = strip
-[core]
-  editor = /usr/bin/vim
-  pager = less
 

@@ -20,6 +20,8 @@ local lkv  = string.format("luakit/%s", luakit.version)
 local wkv  = string.format("WebKitGTK+/%d.%d.%d", luakit.webkit_major_version, luakit.webkit_minor_version, luakit.webkit_micro_version)
 local awkv = string.format("AppleWebKit/%s.%s+", luakit.webkit_user_agent_major_version, luakit.webkit_user_agent_minor_version)
 globals.useragent = string.format("Mozilla/5.0 (%s) %s %s %s", arch, awkv, wkv, lkv)
+--For those websites who fuck with user experiences or forbid access due to unrecognized user string:
+--globals.useragent = string.format("Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_5_6; en-us) AppleWebKit/528.16 (KHTML, like Gecko) Version/4.0 Safari/528.16", arch, awkv, wkv, lkv)
 
 -- Search common locations for a ca file which is used for ssl connection validation.
 local ca_files = {
@@ -49,13 +51,15 @@ soup.set_property("accept-policy", cookie_policy.no_third_party)
   character (%) may need to be escaped by placing another % before or after
   it to avoid collisions with lua's string.format characters.
   See: http://www.lua.org/manual/5.1/manual.html#pdf-string.format
+
   Personal Note:
-    most searches can be !pictures or !lisp when used with duckduckgo.
+    most searches can be !archlinux, !maps, (..) when used with duckduckgo.
     no need to define all of them here.
-    duckduckgo also provides \keyword to go to best result.
-    i had to define a few searches because ddg didn't hae them. --]]
+    duckduckgo also provides \keyword to go to best result (Lucky).
+    although, i have defined a few because ddg doesn't have them yet.
+--]]
 search_engines = {
-  d        = "https://duckduckgo.com/?kd=1&k1=-1&ke=-1&ka=s&kb=d&kf=fw&kh=1&kk=-1&ko=s&kp=1&kr=b&kt=n&kv=1&kw=n&kx=e&ky=-1&q=%s",
+  d        = "https://duckduckgo.com/?kd=1&k1=-1&ke=-1&ka=s&kb=d&kf=fw&kh=1&kk=-1&ko=s&kr=b&kt=n&kv=1&kw=n&kx=e&ky=-1&kp=1&q=%s",
   postrock = "http://www.postrockxchange.com/?s=%s",
   tiger    = "http://www.tigerdirect.com/applications/SearchTools/search.asp?keywords=%s",
   luakit   = "http://luakit.org/search/index/luakit?q=%s",

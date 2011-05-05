@@ -32,7 +32,7 @@ schedule = watch_directory4,5,6,"load=/howl/tors/vide/.down/*.torrent,d.set_dire
 schedule = watch_directory5,5,8,"load=/howl/tors/book/.down/*.torrent,d.set_directory=/howl/tors/book/"
 
 #// filter out evil:-suspicious ip ranges (these lists cover ~45K ranges ATM)
-ip_filter = .ipfilters/level1,.ipfilters/level2,.ipfilters/level3,.ipfilters/bogon,.ipfilters/dshield,.ipfilters/Microsoft
+ip_filter = /howl/conf/.ipfilters/level1,/howl/conf/.ipfilters/level2,/howl/conf/.ipfilters/level3,/howl/conf/.ipfilters/bogon,/howl/conf/.ipfilters/dshield,/howl/conf/.ipfilters/Microsoft
 schedule = filter,18:30:00,24:00:00,reload_ip_filter=
 
 #// miscellaneous

@@ -35,10 +35,10 @@ alias {rot,rtorrent}='/usr/bin/rtorrent -o http_capath=/etc/ssl/certs'
 alias startx="cd ~/ && /usr/bin/startx ${XDG_CONFIG_DIR:-${HOME}}/xorg/xinitrc -- -nolisten tcp -once -retro ; pushd -q +1"
 
 # system/media shortcuts:
-alias psu="print 'ELAPSETIME  %CPU NI +?   LWPID - COMMAND';/bin/ps -U root,privoxy,15,http,daemon,nobody,unbound --deselect -C tmux,urxvt -H hoetime:10,%cpu:5,ni:2,stat:4,pid:5,rtprio:1,args"
-alias psr="print 'ELAPSETIME  %CPU NI +?   LWPID - COMMAND';/bin/ps -u root -U root -H hoetime:10,%cpu:5,ni:2,stat:4,pid:5,rtprio:1,args"
-alias psa="print 'ELAPSETIME USER  %CPU NI +?   LWPID - COMMAND';/bin/ps -H haxoetime:10,user:4,%cpu:5,ni:2,stat:4,pid:5,rtprio:1,args"
-alias pso="print 'ELAPSETIME USER  %CPU NI +?   LWPID - COMMAND';/bin/ps -U root,h --deselect -u root,h -H hoetime:10,user:4,%cpu:5,ni:2,stat:4,pid:5,rtprio:1,args"
+alias psu="print 'ELAPSETIME  %CPU NI +?   LWPID # COMMAND';/bin/ps -U root,privoxy,15,http,daemon,nobody,unbound --deselect -C tmux,urxvt -H hoetime:10,%cpu:5,ni:2,stat:4,pid:5,rtprio:1,args"
+alias psr="print 'ELAPSETIME  %CPU NI +?   LWPID # COMMAND';/bin/ps -u root -U root -H hoetime:10,%cpu:5,ni:2,stat:4,pid:5,rtprio:1,args"
+alias psa="print 'ELAPSETIME USER  %CPU NI +?   LWPID # COMMAND';/bin/ps -H haxoetime:10,user:4,%cpu:5,ni:2,stat:4,pid:5,rtprio:1,args"
+alias pso="print 'ELAPSETIME USER  %CPU NI +?   LWPID # COMMAND';/bin/ps -U root,h --deselect -u root,h -H hoetime:10,user:4,%cpu:5,ni:2,stat:4,pid:5,rtprio:1,args"
 alias dfu="/bin/df -hTP -x debugfs"
 alias dii="/usr/bin/di -x debugfs -d h -Af sMTbuf"
 alias loadavg='print ${$(</proc/loadavg)[1,3]}'

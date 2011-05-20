@@ -97,7 +97,7 @@ Xcursor.size: 10
 !*color15: #dad3d3
 
 !! astromouse
-*background: #0c0c0c
+*background: #121212
 *foreground: #b5b5b5
 *color0:  #1c1c1c
 *color8:  #3d3a3a
@@ -115,6 +115,26 @@ Xcursor.size: 10
 *color14: #6ec2a8
 *color7:  #8d8d8d
 *color15: #dad3d3
+
+!! johanbev(?)
+!*background: #151515
+!*foreground: #9a9a9a
+!*color0:  #1f1f1f
+!*color8:  #808080
+!*color1:  #c14c2e
+!*color9:  #d92918
+!*color2:  #bdf271
+!*color10: #ffffa6
+!*color3:  #ff8939
+!*color11: #ffc051
+!*color4:  #5d6aa6
+!*color12: #d1d7f2
+!*color5:  #b52841
+!*color13: #d9042b
+!*color6:  #435d65
+!*color14: #6e98a4
+!*color7:  #cccccc
+!*color15: #cccccc
 
 !! various X stuff (yet to really mess with this..)
 XFontSel*sampleText.background:       TEXTBG

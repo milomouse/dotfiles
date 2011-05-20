@@ -8,42 +8,26 @@
                                         :NUMBER 0
                                         :X 0
                                         :Y 0
-                                        :WIDTH 800
-                                        :HEIGHT 254
-                                        :WINDOWS NIL
-                                        :CURRENT NIL)
+                                        :WIDTH 790
+                                        :HEIGHT 480
+                                        :WINDOWS (8388617)
+                                        :CURRENT 8388617)
                                      #S(FDUMP
                                         :NUMBER 1
-                                        :X 800
-                                        :Y 0
-                                        :WIDTH 800
-                                        :HEIGHT 254
-                                        :WINDOWS NIL
-                                        :CURRENT NIL))
-                                    (#S(FDUMP
-                                        :NUMBER 2
                                         :X 0
-                                        :Y 254
-                                        :WIDTH 800
-                                        :HEIGHT 253
-                                        :WINDOWS NIL
-                                        :CURRENT NIL)
-                                     #S(FDUMP
-                                        :NUMBER 4
-                                        :X 800
-                                        :Y 254
-                                        :WIDTH 800
-                                        :HEIGHT 253
+                                        :Y 480
+                                        :WIDTH 790
+                                        :HEIGHT 420
                                         :WINDOWS NIL
                                         :CURRENT NIL))
                                     #S(FDUMP
                                        :NUMBER 3
-                                       :X 0
-                                       :Y 507
-                                       :WIDTH 1600
-                                       :HEIGHT 393
-                                       :WINDOWS NIL
-                                       :CURRENT NIL)))
+                                       :X 790
+                                       :Y 0
+                                       :WIDTH 810
+                                       :HEIGHT 900
+                                       :WINDOWS (12582921 10485769)
+                                       :CURRENT 12582921)))
                             :CURRENT 3)
                          #S(GDUMP
                             :NUMBER 2
@@ -96,22 +80,14 @@
                          #S(GDUMP
                             :NUMBER 6
                             :NAME "6"
-                            :TREE ((#S(FDUMP
-                                       :NUMBER 0
-                                       :X 0
-                                       :Y 0
-                                       :WIDTH 1600
-                                       :HEIGHT 450
-                                       :WINDOWS NIL
-                                       :CURRENT NIL)
-                                    #S(FDUMP
-                                       :NUMBER 1
-                                       :X 0
-                                       :Y 450
-                                       :WIDTH 1600
-                                       :HEIGHT 450
-                                       :WINDOWS NIL
-                                       :CURRENT NIL)))
+                            :TREE (#S(FDUMP
+                                      :NUMBER 0
+                                      :X 0
+                                      :Y 0
+                                      :WIDTH 1600
+                                      :HEIGHT 900
+                                      :WINDOWS NIL
+                                      :CURRENT NIL))
                             :CURRENT 0))
                 :CURRENT 1))
    :CURRENT 0)

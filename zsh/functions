@@ -3,10 +3,8 @@ function zshaddhistory {
   local line cmd
   line=${1%%$'\n'} ; cmd=${line%% *}
   [[ ${#line} -ge 5
-      && ${cmd} != (history|fc|e|exit|cl|clear)
-      && ${cmd} != (daemons|go|startx|mpq)
+      && ${cmd} != (history|fc|mpq|srm|rms|rds)
       && ${cmd} != ([szx]edit|[zx]load|zhist|wika)
-      && ${cmd} != (sr|surfraw|srm|rms|rds)
   ]] && (( ! $argv[(I)*unrl*|*spar*|*losetup*|*aespipe*|*litika*|sudo rm*] ))
 }
 
@@ -81,22 +79,30 @@ function psi {
       '-P'|'-p')  ps -p $2 hoargs ;;     # by- pid
       '-S'|'-s')  ps -s $2 hopid,args ;; # by- session id
       '-T'|'-t')  ps -t $2 hopid,args ;; # by- tty
-      *)  print "unrecognized option. read: man ps (section: process selection by list)" ;; }
+      *)
+        << EOP
+(show process information by .. )
+psi -c ARG  | command name
+psi -g ARG  | group id
+psi -u ARG  | user id
+psi -p ARG  | pid
+psi -s ARG  | session id
+psi -t ARG  | tty
+EOP
+      ;; }
   else print "invalid selection. read: man ps (section: process selection by list)" ; fi
 }
 
 # native function for showing 256 colors, properly formatted:
 function 256co {
-#  if [[ ${TERM} != linux ]]; then
   for line in {0..15}; do for col in {0..15}; do
       local code=$(( $col * 16 + ${line} ))
       printf $'\e[38;05;%dm %03d' ${code} ${code}
     done
   print ; done
-#  fi
 }
 
-# quickly play video files:
+# function to quickly play video files:
 function mpq {
   setopt no_warncreateglobal
   [[ -z ${DISPLAY} && $(tty) = /dev/tty[1-3] ]] && _mopt=(-vo fbdev)
@@ -110,26 +116,23 @@ function mpq {
   setopt warncreateglobal
 }
 
-# un-smart function to quickly view word definitions:
+# function to quickly view word definitions:
 function sd {
-  local _ARG
-  [[ $(print - $#@) -ge 2 ]] && _ARG=${@:/$1} || _ARG=$1
   case $1 in
-    '-r'|'-ru') sdcv -u "en-ru-bars" ${_ARG} 2>/dev/null ;;
-    '-w'|'-wordnet') sdcv -u "WordNet" ${_ARG} 2>/dev/null ;;
-    '-t'|'-thesaurus') sdcv -u "English Thesaurus" ${_ARG} 2>/dev/null ;;
-    '-a'|'-all') sdcv ${_ARG} 2>/dev/null ;;
-    *) sdcv -u "WordNet" ${_ARG} 2>/dev/null
+    '-r'|'-ru') sdcv -u "en-ru-bars" ${@:/$1} 2>/dev/null ;;
+    '-w'|'-wordnet') sdcv -u "WordNet" ${@:/$1} 2>/dev/null ;;
+    '-t'|'-thesaurus') sdcv -u "English Thesaurus" ${@:/$1} 2>/dev/null ;;
+    '-a'|'-all') sdcv ${@:/$1} 2>/dev/null ;;
+    *) sdcv $@ 2>/dev/null
   esac
 }
 
 # un-smart function for my todo lists:
 function todo {
-  local _d=${H}/othe
   case $# {
-    0) command ls -1 ${_d}/.TODO_* ;;
-    1) command vim ${_d}/.TODO_$1 ;;
-    *) command vim ${_d}/.TODO_${@// /_}
+    0) command ls -1 ${H:-/howl}/othe/.TODO_* ;;
+    1) command vim ${H:-/howl}/othe/.TODO_$1 ;;
+    *) command vim ${H:-/howl}/othe/.TODO_${@// /_}
   }
 }
 
@@ -146,8 +149,8 @@ function zhist {
 
 # quirky tmux function:
 function tmux {
-  if [[ $1 == '--' ]]; then
-    command tmux ${@:/$1}
+  if [[ ${@[-2]} == '--' ]]; then
+    command tmux ${@%--}
   else
     case ${+DISPLAY} in
       0)  command tmux -S /tmp/.${UID}/tmux/default $@ ;;
@@ -159,11 +162,11 @@ function tmux {
 # one-liners/micro functions:
 function flashproc { for f (${$(file /proc/$(pidof luakit)/fd/*|gawk '/\/tmp\/Flash/ {print $1}')//:}){print - "$f"} }
 function lss { ls -- ${1:-.}/*(D.om) }
-function rc {[[ -n $1 ]] && sudo /etc/rc.d/$1 ${@:/$1}}
-function alv {<${${$(command find ${H:-/howl}/othe/archive/installed_*)}[${1:--1}]}|w3m -o pagerline=1000 -o confirm_qq=0}
-function mkcd {command mkdir -p "$@" && cd "$@"}
-function pubip {curl http://www.whatismyip.com/automation/n09230945.asp }
-function newmail { print - ${(Fw)#$(find /howl/mail/FastMail/*/new -type f)} }
-function qdep {pacman-color -Q $@ $(pacman-color -Qi $@|grep Depends|cut -d: -f2-|sed -E 's|>\S+\>||g')}
-function timec {while sleep 1 ; do printf '\r%s ' "$(date +'%T %Y-%m-%d')" ; done}
-function dropcache {sync && command su -s /bin/zsh -c 'echo 1 > /proc/sys/vm/drop_caches && echo 2 > /proc/sys/vm/drop_caches' root}
+function rc { [[ -n $1 ]] && sudo /etc/rc.d/$1 ${@:/$1} }
+function alv { <${${$(command find ${H:-/howl}/othe/archive/installed_*)}[${1:--1}]}|w3m -o pagerline=1000 -o confirm_qq=0 }
+function mkcd { command mkdir -p "$@" && cd "$@" }
+function pubip { curl -m 30 http://www.whatismyip.com/automation/n09230945.asp }
+function newmail { print - ${(Fw)#$(find /howl/mail/*/*/new -type f)} }
+function qdep { pacman-color -Q $@ $(pacman-color -Qi $@|grep Depends|cut -d: -f2-|sed -E 's|>\S+\>||g') }
+function timec { print "$(date +'%T %Y-%m-%d')" ; while sleep 1 ; do printf '\r%s ' "$(date +'%T %Y-%m-%d')" ; done }
+function dropcache { sync && command su -s /bin/zsh -c 'echo 1 > /proc/sys/vm/drop_caches && echo 2 > /proc/sys/vm/drop_caches' root }

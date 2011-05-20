@@ -227,6 +227,12 @@ window.init_funcs = {
             warn("E: window.lua: invalid window size: %q", size)
         end
     end,
+
+    set_window_icon = function (w)
+        local path = (luakit.dev_paths and os.exists("./extras/luakit.png")) or
+            os.exists("/usr/share/pixmaps/luakit.png")
+        if path then w.win.icon = path end
+    end,
 }
 
 -- Helper functions which operate on the window widgets or structure.
@@ -356,12 +362,6 @@ window.methods = {
                 i.position = pos - move
             end
         end
-    end,
-
-    -- Wrapper around luakit.set_selection that shows a notification
-    set_selection = function (w, text, selection)
-        luakit.set_selection(text, selection or "primary")
-        w:notify("Yanked: " .. text)
     end,
 
     -- Shows a notification until the next keypress of the user.

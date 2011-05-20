@@ -133,7 +133,7 @@ unsetopt octalzeroes
 unsetopt typesetsilent
 unsetopt verbose
 unsetopt xtrace
-# 10 -> shell emlation:
+# 10 -> shell emulation:
 unsetopt bashrematch
   setopt bsdecho
 unsetopt cshjunkiehistory

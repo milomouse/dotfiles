@@ -161,9 +161,14 @@ add_binds("normal", {
     -- Yanking
     buf("^yy$",                     function (w)
                                         local uri = string.gsub(w:get_current().uri or "", " ", "%%20")
-                                        w:set_selection(uri)
+                                        luakit.set_selection(uri)
+                                        w:notify("Yanked uri: " .. uri)
                                     end),
-    buf("^yt$",                     function (w) w:set_selection(w.win.title) end),
+
+    buf("^yt$",                     function (w)
+                                        luakit.set_selection(w.win.title)
+                                        w:notify("Yanked title: " .. w.win.title)
+                                    end),
 
     -- External
     key({},          "V",           function (w) local uri = (w:get_current() or {}).uri if uri then
@@ -179,7 +184,7 @@ add_binds("normal", {
     buf("^O$",                      function (w, c) w:enter_cmd(":open "    .. (w:get_current().uri or "")) end),
     buf("^T$",                      function (w, c) w:enter_cmd(":tabopen " .. (w:get_current().uri or "")) end),
     buf("^W$",                      function (w, c) w:enter_cmd(":winopen " .. (w:get_current().uri or "")) end),
-    buf("^,s$",                     function (w, c) w:enter_cmd(":open ddg ") end),
+    buf("^,s$",                     function (w, c) w:enter_cmd(":open d ") end),
 
     -- History
     key({},          "H",           function (w, m) w:back(m.count)    end),
@@ -190,24 +195,24 @@ add_binds("normal", {
     buf("^gP$",                     function (w, b, m) w:new_tab("chrome://history") end),
 
     -- Tab
+    key({"Control"}, "w",           function (w)       w:close_tab()       end),
     key({"Control"}, "Page_Up",     function (w)       w:prev_tab() end),
     key({"Control"}, "Page_Down",   function (w)       w:next_tab() end),
     key({"Control"}, "Tab",         function (w)       w:next_tab() end),
     key({"Shift","Control"}, "Tab", function (w)       w:prev_tab() end),
     buf("^gT$",                     function (w, b, m) w:prev_tab(m.count) end, {count=1}),
     buf("^gt$",                     function (w, b, m) if not w:goto_tab(m.count) then w:next_tab() end end, {count=0}),
-    buf("^gH$",                     function (w, b, m) for i=1,m.count do w:new_tab(homepage) end end, {count=1}),
-    buf("^gh$",                     function (w)       w:navigate(homepage) end),
     key({},          "<",           function (w, m)    w.tabs:reorder(w:get_current(), w.tabs:current() - m.count) end, {count=1}),
     key({},          ">",           function (w, m)    w.tabs:reorder(w:get_current(), (w.tabs:current() + m.count) % w.tabs:count()) end, {count=1}),
-    key({"Control"}, "w",           function (w)       w:close_tab()       end),
+    buf("^gH$",                     function (w, b, m) for i=1,m.count do w:new_tab(homepage) end end, {count=1}),
+    buf("^gh$",                     function (w)       w:navigate(homepage) end),
 
     -- Open tab from current tab history
     buf("^gy$",                     function (w) w:new_tab(w:get_current().history or "") end),
 
     key({},          "r",           function (w) w:reload() end),
     key({},          "R",           function (w) w:reload(true) end),
-    key({"Control"}, "c",           function (w) w:stop(true) end),
+    key({"Control"}, "c",           function (w) w:stop() end),
     key({},          "S",           function (w) w:stop() end),
 
     -- Config reloading

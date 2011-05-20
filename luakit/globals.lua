@@ -59,10 +59,11 @@ soup.set_property("accept-policy", cookie_policy.no_third_party)
     although, i have defined a few because ddg doesn't have them yet.
 --]]
 search_engines = {
-  d        = "https://duckduckgo.com/?kd=1&k1=-1&ke=-1&ka=s&kb=d&kf=fw&kh=1&kk=-1&ko=s&kr=b&kt=n&kv=1&kw=n&kx=e&ky=-1&kp=1&q=%s",
-  postrock = "http://www.postrockxchange.com/?s=%s",
-  tiger    = "http://www.tigerdirect.com/applications/SearchTools/search.asp?keywords=%s",
-  luakit   = "http://luakit.org/search/index/luakit?q=%s",
+  d          = "https://duckduckgo.com/?kd=1&k1=-1&ke=-1&ka=s&kb=d&kf=fw&kh=1&kk=-1&ko=s&kr=b&kt=n&kv=1&kw=n&kx=e&ky=-1&kp=1&q=%s",
+  postrock   = "http://www.postrockxchange.com/?s=%s",
+  tiger      = "http://www.tigerdirect.com/applications/SearchTools/search.asp?keywords=%s",
+  luakit     = "http://luakit.org/search/index/luakit?q=%s",
+  craigslist = "http://asheville.craigslist.org/search/?query=%s&catAbb=sss",
 }
 
 -- Set duckduckgo as fallback search engine
@@ -76,7 +77,7 @@ domain_props = {
     ["all"] = {
         ["enable-scripts"] = true,
         ["enable-plugins"] = false,
-        ["enable-private-browsing"] = true,
+        ["enable-private-browsing"] = false,
         --["user-stylesheet-uri"] = "file://" .. luakit.data_dir .. "/styles/everymouse.css",
     },
     ["bbs.archlinux.org"] = {
@@ -126,6 +127,10 @@ domain_props = {
     },
     ["google.com"] = {
         ["enable-scripts"] = false,
+        ["enable-private-browsing"] = true,
+    },
+    ["photobucket.com"] = {
+        ["enable-plugins"] = true,
     },
     ["s60.photobucket.com"] = {
         ["enable-plugins"] = true,
@@ -138,6 +143,7 @@ domain_props = {
     },
     ["yahoo.com"] = {
         ["enable-scripts"] = false,
+        ["enable-private-browsing"] = true,
     },
     ["imdb.com"] = {
         ["enable-scripts"] = false,

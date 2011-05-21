@@ -110,7 +110,7 @@ then run the command synchronously and collect the output."
 ;(set-focus-color     "mediumpurple2")
 (set-unfocus-color   "grey16")
 (set-border-color    "grey44")
-(set-win-bg-color    "grey4")
+(set-win-bg-color    "grey6")
 (setf *colors* (list "grey9"          ; 0 black
                      "palevioletred1" ; 1 red
                      "lightblue3"     ; 2 green

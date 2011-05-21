@@ -98,6 +98,7 @@ unset markers
   set pager_stop
   set pipe_decode
   set print_command = "/bin/false"
+  set query_command = "mutt_vc_query '%s'"
   set reverse_alias
   set reverse_name
   set sig_dashes
@@ -149,6 +150,7 @@ alternative_order text/plain text/enriched text/html
 bind index,pager \# noop
 bind index,pager \& noop
 bind index,pager i  noop
+bind index       t  noop
 bind index,pager q  noop
 bind index       z  noop
 bind attach,browser,pager x noop
@@ -185,6 +187,7 @@ macro index,pager \Cb ":set pipe_decode\n|urlview\n:unset pipe_decode\n" "extrac
 # - appearance / formatting:
 set folder_format = "%3C| %u:%g [%N] %f %*. %t %4s %F"
 set status_format = "───+ %f %m%?n? [+%n]?%?d? [-%d]?%?t? [*%t]? +%?p?───+ %p waiting to send +?─%>─[%P]──"
+set query_format  = "%3c %t %-40.40a %-25.25n  %># %?e?%e?"
 set alias_format  = "%4n %t %-20a %r"
 set date_format   = "%y-%m-%d %I:%M:%S %Z"
 set index_format  = "%3C| %-4c > %-19.19F  %s%*  %?X?[%X]? %Z|%2N| %d"

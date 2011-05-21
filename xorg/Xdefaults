@@ -1,6 +1,6 @@
 !! ${XDG_CONFIG_DIR:-$HOME/.config}/xorg/Xdefaults
 !! author: milomouse <vincent[at]fea.st>
-!! update: 2011-04-04
+!! update: 2011-05-20
 
 urxvt*termName: rxvt-256color
 urxvt*loginShell: true
@@ -97,7 +97,7 @@ Xcursor.size: 10
 !*color15: #dad3d3
 
 !! astromouse
-*background: #121212
+*background: #101010
 *foreground: #b5b5b5
 *color0:  #1c1c1c
 *color8:  #3d3a3a

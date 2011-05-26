@@ -181,7 +181,7 @@ macro index gh  "<change-folder>!<enter>" "go to Inbox"
 macro index h   "c?" "view folders"
 macro index \Cr "<tag-pattern>all<enter><tag-prefix><clear-flag>N<untag-pattern>all<enter>" "mark all as read"
 macro index P   "<pipe-message>cat > ~/" "save message as"
-macro index I   "<shell-escape>/usr/bin/offlineimap -c $XDG_CONFIG_DIR/.offlineimap/offlineimaprc -u Curses.Blinkenlights -o<enter>" "sync IMAP"
+macro index I   "<shell-escape>/usr/bin/offlineimap -c $XDG_CONFIG_DIR/.offlineimap/offlineimaprc -u blinkenlights -o<enter>" "sync IMAP"
 macro index,pager \Cb ":set pipe_decode\n|urlview\n:unset pipe_decode\n" "extract URLs out of a message"
 
 # - appearance / formatting:

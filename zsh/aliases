@@ -51,6 +51,6 @@ alias siteget="/usr/bin/wget --recursive --page-requisites --convert-links --htm
 
 # database/package management:
 alias upf="sudo /usr/bin/fc-cache -vr"
-alias upd="sudo /usr/bin/updatedb"
+alias upd="sudo /etc/cron.daily/updatedb"
 alias upm="sudo /usr/bin/mandb --quiet"
 alias pacman="sudo /usr/bin/pacman-color"

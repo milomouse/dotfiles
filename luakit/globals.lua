@@ -135,6 +135,9 @@ domain_props = {
     ["s60.photobucket.com"] = {
         ["enable-plugins"] = true,
     },
+    ["imgur.com"] = {
+        ["enable-plugins"] = true,
+    },
     ["youtube.com"] = {
         ["enable-plugins"] = true,
     },

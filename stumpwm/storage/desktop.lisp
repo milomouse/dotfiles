@@ -9,33 +9,33 @@
                                         :X 0
                                         :Y 0
                                         :WIDTH 790
-                                        :HEIGHT 480
-                                        :WINDOWS (12582921)
-                                        :CURRENT 12582921)
+                                        :HEIGHT 570
+                                        :WINDOWS (8388617)
+                                        :CURRENT 8388617)
                                      #S(FDUMP
                                         :NUMBER 1
                                         :X 0
-                                        :Y 480
+                                        :Y 570
                                         :WIDTH 790
-                                        :HEIGHT 420
-                                        :WINDOWS (8388617)
-                                        :CURRENT 8388617))
+                                        :HEIGHT 330
+                                        :WINDOWS NIL
+                                        :CURRENT NIL))
                                     (#S(FDUMP
                                         :NUMBER 3
                                         :X 790
                                         :Y 0
                                         :WIDTH 810
-                                        :HEIGHT 180
-                                        :WINDOWS (14680073)
-                                        :CURRENT 14680073)
+                                        :HEIGHT 230
+                                        :WINDOWS NIL
+                                        :CURRENT NIL)
                                      #S(FDUMP
                                         :NUMBER 2
                                         :X 790
-                                        :Y 180
+                                        :Y 230
                                         :WIDTH 810
-                                        :HEIGHT 720
-                                        :WINDOWS (18874377)
-                                        :CURRENT 18874377))))
+                                        :HEIGHT 670
+                                        :WINDOWS (10485769)
+                                        :CURRENT 10485769))))
                             :CURRENT 0)
                          #S(GDUMP
                             :NUMBER 2
@@ -58,8 +58,8 @@
                                       :Y 0
                                       :WIDTH 1600
                                       :HEIGHT 900
-                                      :WINDOWS (10485795)
-                                      :CURRENT 10485795))
+                                      :WINDOWS NIL
+                                      :CURRENT NIL))
                             :CURRENT 0)
                          #S(GDUMP
                             :NUMBER 4

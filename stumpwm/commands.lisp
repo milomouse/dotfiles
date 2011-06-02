@@ -148,7 +148,13 @@ window with Master and designate this as the new Master."
   else
     urxvt -e tmux -S /tmp/.${UID}/tmux/xorg new-session
   fi"))
-    ;urxvt -e tmux -S /tmp/.${UID}/tmux/xorg attach-session -t $(print ${$(tmux -S /tmp/.${UID}/tmux/xorg list-session|grep -v attached)[1]//:})
+
+;; [with *shell-program* "/bin/zsh"] look for detached 'tmux [socket] rtorrent' session and attach, else nothing.
+(defcommand tmux-attach-rtorrent () () "Find detached rtorrent session and attach, else not running so do nothing."
+  (run-shell-command
+  "if [[ -n ${$(tmux -S /tmp/.${UID}/tmux/rtorrent list-session|grep -v attached)[1]//:} ]]; then
+    urxvt -e tmux -S /tmp/.${UID}/tmux/rtorrent attach-session -t ${$(tmux -S /tmp/.${UID}/tmux/rtorrent list-session|grep -v attached)[1]//:}
+  fi"))
 
 ;; reassign original commands to *-forget
 (defcommand quit-forget () () "Quit StumpWM without remembering current state."

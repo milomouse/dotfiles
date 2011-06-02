@@ -7,7 +7,7 @@ done
 # prompt line:
 [[ ${TERM} =~ screen ]] && precmd() { print -Pn "\e]2;%2d\a" } || RPROMPT='%F{white}%~%f'
 PS1='%F{magenta}%# %f'
-PS2='%F{blue}%# %f'
+PS2='  '
 PS3='%B%F{white}?# %b%f%F{red}%# %f'
 PS4='%B%F{white}%_ %b%f%F{magenta}%# %f%B%F{white}+%N:%i %b%f%F{magenta}%# %f'
 
@@ -55,19 +55,19 @@ if [[ ${TERM} == linux ]] || [[ ${TERM} =~ screen && ${+DISPLAY} == 0 ]]; then
     echo -en "\e]P78d8d8d" ; echo -en "\e]PFdad3d3"
 fi
 
-# Fish-style syntax-highlighting for ZSH (by nicoulaj@github):
+# Fish-style syntax highlighting for ZSH (by nicoulaj@github):
 if [[ -f ${ZDOTDIR}/scripts/zsh-syntax-highlighting.zsh ]]; then
   . ${ZDOTDIR}/scripts/zsh-syntax-highlighting.zsh
 
   # override some colors:
   ZSH_HIGHLIGHT_STYLES[default]='none'
   ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red,standout'
-  ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=magenta'
-  ZSH_HIGHLIGHT_STYLES[alias]='fg=magenta'
-  ZSH_HIGHLIGHT_STYLES[builtin]='fg=blue'
+  ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=cyan'
+  ZSH_HIGHLIGHT_STYLES[alias]='fg=magenta,bold'
+  ZSH_HIGHLIGHT_STYLES[builtin]='fg=magenta'
   ZSH_HIGHLIGHT_STYLES[function]='fg=magenta,bold'
-  ZSH_HIGHLIGHT_STYLES[command]='fg=cyan'
-  ZSH_HIGHLIGHT_STYLES[hashed-command]='fg=cyan,standout'
+  ZSH_HIGHLIGHT_STYLES[command]='fg=blue'
+  ZSH_HIGHLIGHT_STYLES[hashed-command]='fg=blue,standout'
   ZSH_HIGHLIGHT_STYLES[path]='fg=blue,bold'
   ZSH_HIGHLIGHT_STYLES[globbing]='fg=blue'
   ZSH_HIGHLIGHT_STYLES[history-expansion]='fg=blue'
@@ -82,7 +82,12 @@ if [[ -f ${ZDOTDIR}/scripts/zsh-syntax-highlighting.zsh ]]; then
     'fg=blue,bold'    # Style for first level of imbrication
     'fg=green,bold'   # Style for second level of imbrication
     'fg=magenta,bold' # etc... Put as many styles as you wish, or leave
-    'fg=red,bold'  # empty to disable brackets matching.
-    'fg=cyan,bold'
+    'fg=cyan,bold'    # empty to disable brackets matching.
+    'fg=white,bold'
+    'fg=blue'
+    'fg=green'
+    'fg=magenta'
+    'fg=cyan'
+    'fg=white'
   )
 fi

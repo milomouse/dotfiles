@@ -28,7 +28,6 @@
 # vim: ft=zsh sw=2 ts=2 et
 # -------------------------------------------------------------------------------------------------
 
-setopt nowarncreateglobal
 
 # -------------------------------------------------------------------------------------------------
 # Core highlighting update system
@@ -53,6 +52,7 @@ typeset -a zsh_highlight_predicates; zsh_highlight_predicates=()
 typeset -a zsh_highlight_caches; zsh_highlight_caches=()
 
 _zsh_highlight-zle-buffer() {
+  setopt localoptions nowarncreateglobal
   if (( PENDING )); then
     return
   fi
@@ -181,7 +181,7 @@ _zsh_highlight_highlight_string() {
 
 # Core syntax highlighting.
 _zsh_main-highlight() {
-  setopt localoptions extendedglob bareglobqual
+  setopt localoptions extendedglob bareglobqual nowarncreateglobal
   local start_pos=0 end_pos highlight_glob=true new_expression=true arg style
   region_highlight=()
   for arg in ${(z)BUFFER}; do

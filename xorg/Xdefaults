@@ -1,6 +1,6 @@
 !! ${XDG_CONFIG_DIR:-$HOME/.config}/xorg/Xdefaults
 !! author: milomouse <vincent[at]fea.st>
-!! update: 2011-05-20
+!! update: 2011-06-02
 
 urxvt*termName: rxvt-256color
 urxvt*loginShell: true
@@ -36,7 +36,7 @@ Xcursor.size: 10
 !!! 0:black 1:red     2:green 3:yellow
 !!! 4:blue  5:magenta 6:cyan  7:white
 
-!! candymouse:
+!! cottonmouse (dark | faded)
 !*background: #090909
 !*foreground: #a9a6af
 !*color0:  #090909
@@ -56,27 +56,7 @@ Xcursor.size: 10
 !*color7:  #8d8d8d
 !*color15: #9d9d9d
 
-!! cottonmouse
-!*background: #090909
-!*foreground: #a9a6af
-!*color0:  #050505
-!*color8:  #171717
-!*color1:  #9c8093
-!*color9:  #dfa6bb
-!*color2:  #799c99
-!*color10: #85afa9
-!*color3:  #b0ad90
-!*color11: #c4c497
-!*color4:  #3f4f60
-!*color12: #98a7b6
-!*color5:  #a488d9
-!*color13: #b7a7bc
-!*color6:  #8d9fa6
-!*color14: #b8ddea
-!*color7:  #665c64
-!*color15: #787a76
-
-!! jessicamouse
+!! jessicamouse (bold | vibrant)
 !*background: #0c0c0c
 !*foreground: #b5b5b5
 !*color0:  #1c1c1c
@@ -96,13 +76,13 @@ Xcursor.size: 10
 !*color7:  #8d8d8d
 !*color15: #dad3d3
 
-!! astromouse
+!! astromouse (colorful | mellow)
 *background: #101010
 *foreground: #b5b5b5
 *color0:  #1c1c1c
 *color8:  #3d3a3a
-*color1:  #d74b73
-*color9:  #b94062
+*color1:  #d770af
+*color9:  #d28abf
 *color2 : #9acc79
 *color10: #8fb676
 *color3:  #d0d26b
@@ -110,31 +90,11 @@ Xcursor.size: 10
 *color4 : #77b6c5
 *color12: #8fa7b9
 *color5:  #a488d9
-*color13: #8888a1
+*color13: #bd89de
 *color6:  #7fcab3
 *color14: #6ec2a8
 *color7:  #8d8d8d
 *color15: #dad3d3
-
-!! johanbev(?)
-!*background: #151515
-!*foreground: #9a9a9a
-!*color0:  #1f1f1f
-!*color8:  #808080
-!*color1:  #c14c2e
-!*color9:  #d92918
-!*color2:  #bdf271
-!*color10: #ffffa6
-!*color3:  #ff8939
-!*color11: #ffc051
-!*color4:  #5d6aa6
-!*color12: #d1d7f2
-!*color5:  #b52841
-!*color13: #d9042b
-!*color6:  #435d65
-!*color14: #6e98a4
-!*color7:  #cccccc
-!*color15: #cccccc
 
 !! various X stuff (yet to really mess with this..)
 XFontSel*sampleText.background:       TEXTBG

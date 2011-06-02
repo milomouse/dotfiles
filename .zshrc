@@ -6,7 +6,7 @@ done
 
 # prompt line:
 [[ ${TERM} =~ screen ]] && precmd() { print -Pn "\e]2;%2d\a" } || RPROMPT='%F{white}%~%f'
-PS1='%F{magenta}%# %f'
+PS1='%B%F{cyan}%#%f%b '
 PS2='  '
 PS3='%B%F{white}?# %b%f%F{red}%# %f'
 PS4='%B%F{white}%_ %b%f%F{magenta}%# %f%B%F{white}+%N:%i %b%f%F{magenta}%# %f'
@@ -61,21 +61,21 @@ if [[ -f ${ZDOTDIR}/scripts/zsh-syntax-highlighting.zsh ]]; then
 
   # override some colors:
   ZSH_HIGHLIGHT_STYLES[default]='none'
-  ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red,standout'
-  ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=cyan'
-  ZSH_HIGHLIGHT_STYLES[alias]='fg=magenta,bold'
-  ZSH_HIGHLIGHT_STYLES[builtin]='fg=magenta'
-  ZSH_HIGHLIGHT_STYLES[function]='fg=magenta,bold'
-  ZSH_HIGHLIGHT_STYLES[command]='fg=blue'
-  ZSH_HIGHLIGHT_STYLES[hashed-command]='fg=blue,standout'
-  ZSH_HIGHLIGHT_STYLES[path]='fg=blue,bold'
-  ZSH_HIGHLIGHT_STYLES[globbing]='fg=blue'
-  ZSH_HIGHLIGHT_STYLES[history-expansion]='fg=blue'
-  ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='fg=red,bold'
-  ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=red,bold'
-  ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]='fg=cyan'
-  ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]='fg=cyan'
-  ZSH_HIGHLIGHT_STYLES[assign]='fg=red'
+  ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red,bold,underline'
+  ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=green'
+  ZSH_HIGHLIGHT_STYLES[alias]='fg=magenta'
+  ZSH_HIGHLIGHT_STYLES[builtin]='fg=magenta,bold'
+  ZSH_HIGHLIGHT_STYLES[function]='fg=magenta'
+  ZSH_HIGHLIGHT_STYLES[command]='fg=magenta,bold'
+  ZSH_HIGHLIGHT_STYLES[hashed-command]='fg=red,bold,standout'
+  ZSH_HIGHLIGHT_STYLES[path]='fg=white,underline'
+  ZSH_HIGHLIGHT_STYLES[globbing]='fg=white,bold,underline'
+  ZSH_HIGHLIGHT_STYLES[history-expansion]='fg=black,bold,standout'
+  ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='fg=blue'
+  ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=blue'
+  ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]='fg=red,bold'
+  ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]='fg=red'
+  ZSH_HIGHLIGHT_STYLES[assign]='underline'
 
   # override colors for matching brackets:
   ZSH_HIGHLIGHT_MATCHING_BRACKETS_STYLES=(

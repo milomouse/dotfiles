@@ -21,6 +21,15 @@ function zshaddhistory {
 #  done
 #}
 
+# attach rtorrent from daemon mode to view/edit torrents:
+function rot {
+  if [[ ${TERM} =~ screen ]]; then
+    print "Aborting, please avoid nesting sessions.."
+  else
+    /usr/bin/tmux -S /tmp/.${UID}/tmux/rtorrent attach-session
+  fi
+}
+
 # check ownership of given argument, as determined by pacman:
 function owns {
   if [[ -n $(for each in ${PATH//:\\\n}; do

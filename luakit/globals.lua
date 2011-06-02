@@ -129,6 +129,12 @@ domain_props = {
         ["enable-scripts"] = false,
         ["enable-private-browsing"] = true,
     },
+    ["syfy.com"] = {
+        ["enable-plugins"] = true,
+    },
+    ["video.syfy.com"] = {
+        ["enable-plugins"] = true,
+    },
     ["photobucket.com"] = {
         ["enable-plugins"] = true,
     },

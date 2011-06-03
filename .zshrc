@@ -31,18 +31,6 @@ zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' force-list always
 [[ -a $(whence -p pacman-color) ]] && compdef _pacman pacman-color=pacman
 
-# keybindings:
-bindkey "^[[2~" overwrite-mode
-bindkey "^[[3~" delete-char
-bindkey "^[[5~" up-line-or-search 
-bindkey "^[[6~" down-line-or-search 
-bindkey "^[[1~" beginning-of-line
-bindkey "^[[7~" beginning-of-line
-bindkey "^[[4~" end-of-line
-bindkey "^[[8~" end-of-line
-bindkey "^?" backward-delete-char
-bindkey '^R' history-incremental-search-backward
-
 # framebuffer colors:
 if [[ ${TERM} == linux ]] || [[ ${TERM} =~ screen && ${+DISPLAY} == 0 ]]; then
     echo -en "\e]P0000000" ; echo -en "\e]P83d3a3a"
@@ -55,9 +43,9 @@ if [[ ${TERM} == linux ]] || [[ ${TERM} =~ screen && ${+DISPLAY} == 0 ]]; then
     echo -en "\e]P78d8d8d" ; echo -en "\e]PFdad3d3"
 fi
 
-# Fish-style syntax highlighting for ZSH (by nicoulaj@github):
+# Fish-like syntax highlighting for ZSH (by nicoulaj@github):
 if [[ -f ${ZDOTDIR}/scripts/zsh-syntax-highlighting.zsh ]]; then
-  . ${ZDOTDIR}/scripts/zsh-syntax-highlighting.zsh
+  . ${ZDOTDIR}/scripts/zsh-syntax-highlighting.zsh || print 'could not source SYNTAX'
 
   # override some colors:
   ZSH_HIGHLIGHT_STYLES[default]='none'
@@ -75,7 +63,7 @@ if [[ -f ${ZDOTDIR}/scripts/zsh-syntax-highlighting.zsh ]]; then
   ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=blue'
   ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]='fg=red,bold'
   ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]='fg=red'
-  ZSH_HIGHLIGHT_STYLES[assign]='underline'
+  ZSH_HIGHLIGHT_STYLES[assign]='fg=green,bold'
   ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=cyan,bold'
   ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=cyan'
 
@@ -93,3 +81,20 @@ if [[ -f ${ZDOTDIR}/scripts/zsh-syntax-highlighting.zsh ]]; then
     'fg=white'
   )
 fi
+
+# Fish-like history sub-string search:
+if [[ -f ${ZDOTDIR}/scripts/history-substring-search.plugin.zsh ]]; then
+  . ${ZDOTDIR}/scripts/history-substring-search.plugin.zsh || print 'could not source HISTORY'
+fi
+
+# keybindings (defined AFTER scripts):
+bindkey "^[[2~" overwrite-mode
+bindkey "^[[3~" delete-char
+bindkey "^[[5~" up-line-or-search 
+bindkey "^[[6~" down-line-or-search 
+bindkey "^[[1~" beginning-of-line
+bindkey "^[[7~" beginning-of-line
+bindkey "^[[4~" end-of-line
+bindkey "^[[8~" end-of-line
+bindkey "^?" backward-delete-char
+bindkey '^R' history-incremental-search-backward

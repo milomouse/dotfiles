@@ -76,6 +76,8 @@ if [[ -f ${ZDOTDIR}/scripts/zsh-syntax-highlighting.zsh ]]; then
   ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]='fg=red,bold'
   ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]='fg=red'
   ZSH_HIGHLIGHT_STYLES[assign]='underline'
+  ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=cyan,bold'
+  ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=cyan'
 
   # override colors for matching brackets:
   ZSH_HIGHLIGHT_MATCHING_BRACKETS_STYLES=(

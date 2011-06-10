@@ -83,8 +83,8 @@ if [[ -f ${ZDOTDIR}/scripts/zsh-syntax-highlighting.zsh ]]; then
 fi
 
 # Fish-like history sub-string search:
-if [[ -f ${ZDOTDIR}/scripts/history-substring-search.plugin.zsh ]]; then
-  . ${ZDOTDIR}/scripts/history-substring-search.plugin.zsh || print 'could not source HISTORY'
+if [[ -f ${ZDOTDIR}/scripts/history-substring-search.zsh ]]; then
+  . ${ZDOTDIR}/scripts/history-substring-search.zsh || print 'could not source HISTORY'
 fi
 
 # keybindings (defined AFTER scripts):

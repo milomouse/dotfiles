@@ -88,7 +88,9 @@ function psi {
       '-P'|'-p')  ps -p $2 hoargs ;;     # by- pid
       '-S'|'-s')  ps -s $2 hopid,args ;; # by- session id
       '-T'|'-t')  ps -t $2 hopid,args ;; # by- tty
-      *)
+      *) print "invalid selection. read: man ps (section: process selection by list)"
+    }
+  else
         << EOP
 (show process information by .. )
 psi -c ARG  | command name
@@ -98,8 +100,7 @@ psi -p ARG  | pid
 psi -s ARG  | session id
 psi -t ARG  | tty
 EOP
-      ;; }
-  else print "invalid selection. read: man ps (section: process selection by list)" ; fi
+  fi
 }
 
 # native function for showing 256 colors, properly formatted:

@@ -52,7 +52,7 @@ typeset -a zsh_highlight_predicates; zsh_highlight_predicates=()
 typeset -a zsh_highlight_caches; zsh_highlight_caches=()
 
 _zsh_highlight-zle-buffer() {
-  setopt localoptions nowarncreateglobal
+  setopt nowarncreateglobal
   if (( PENDING )); then
     return
   fi

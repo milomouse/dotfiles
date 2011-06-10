@@ -6,11 +6,9 @@ reset all
 push V
 
 # - intrinsic locations:
-  set folder           = /howl/mail
   set mbox_type        = Maildir
+  set folder           = /howl/mail
   set spoolfile        = "+FastMail/inbox"
-  set record           = "+FastMail/sent"
-  set postponed        = "+FastMail/drafts"
   set certificate_file = $XDG_CONFIG_DIR/mutt/certs
   set header_cache     = $XDG_CONFIG_DIR/mutt/cache/headers
   set message_cachedir = $XDG_CONFIG_DIR/mutt/cache/bodies
@@ -23,20 +21,6 @@ source /etc/Muttrc.gpg.dist
 source $XDG_CONFIG_DIR/mutt/colors.muttrc
 source $XDG_CONFIG_DIR/mutt/scoring
 folder-hook FastMail/* source $XDG_CONFIG_DIR/mutt/fastmail.muttrc
-
-# - watch-folders and subscriptions:
-mailboxes +FastMail/inbox
-mailboxes +FastMail/forums
-mailboxes +FastMail/filesystems
-mailboxes +FastMail/arch-dev
-mailboxes +FastMail/browsers
-mailboxes +FastMail/stumpwm
-mailboxes +FastMail/storage
-mailboxes +FastMail/spam
-mailboxes +FastMail/sent
-mailboxes +FastMail/drafts
-mailboxes +FastMail/trash
-subscribe arch-announce arch-dev-public arch-general
 
 # - core settings:
   set ssl_force_tls
@@ -111,7 +95,7 @@ unset markers
   set abort_nosubject = ask-yes
 unset autoedit
 unset askbcc
-  set askcc
+unset askcc
   set attribution = "On %d, %n wrote:"
 unset confirmappend
   set confirmcreate

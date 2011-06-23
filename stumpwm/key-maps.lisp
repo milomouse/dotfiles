@@ -64,6 +64,7 @@
 (defvar *echo-map*
   (let ((m (make-sparse-keymap)))
     (labels ((dk (m k c) (define-key m k c)))
+    (dk m (kbd "b")   "echo-battery")
     (dk m (kbd "c")   "echo-colors-brief")
     (dk m (kbd "d")   "echo-date")
     (dk m (kbd "f")   "echo-free-mem")

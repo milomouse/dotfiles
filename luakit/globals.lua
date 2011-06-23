@@ -75,8 +75,8 @@ search_engines.default = search_engines.d
 -- See http://webkitgtk.org/reference/webkitgtk-WebKitWebSettings.html
 domain_props = {
     ["all"] = {
-        ["enable-scripts"] = true,
-        ["enable-plugins"] = false,
+        ["noscript.enable-scripts"] = true,
+        ["noscript.enable-plugins"] = false,
         ["enable-private-browsing"] = false,
         --["user-stylesheet-uri"] = "file://" .. luakit.data_dir .. "/styles/everymouse.css",
     },
@@ -93,18 +93,18 @@ domain_props = {
         --["user-stylesheet-uri"] = "file://" .. luakit.data_dir .. "/styles/archmouse.css",
     },
     ["pixlr.com"] = {
-        ["enable-plugins"] = true,
+        ["noscript.enable_plugins"] = true,
         ["enable-private-browsing"] = false,
     },
     ["github.com"] = {
-        ["enable-plugins"] = true,
+        ["noscript.enable_plugins"] = true,
         ["enable-private-browsing"] = false,
     },
     ["en.wikipedia.org"] = {
         ["enable-private-browsing"] = false,
     },
     ["amazon.com"] = {
-        ["enable-plugins"] = true,
+        ["noscript.enable_plugins"] = true,
         ["enable-private-browsing"] = false,
     },
     ["newegg.com"] = {
@@ -114,62 +114,62 @@ domain_props = {
         ["enable-private-browsing"] = false,
     },
     ["ebay.com"] = {
-        ["enable-plugins"] = true,
+        ["noscript.enable_plugins"] = true,
         ["enable-private-browsing"] = false,
     },
     ["shop.ebay.com"] = {
-        ["enable-plugins"] = true,
+        ["noscript.enable_plugins"] = true,
         ["enable-private-browsing"] = false,
     },
     ["my.ebay.com"] = {
-        ["enable-plugins"] = true,
+        ["noscript.enable_plugins"] = true,
         ["enable-private-browsing"] = false,
     },
     ["google.com"] = {
-        ["enable-scripts"] = false,
+        ["noscript.enable_scripts"] = false,
         ["enable-private-browsing"] = true,
     },
     ["syfy.com"] = {
-        ["enable-plugins"] = true,
+        ["noscript.enable_plugins"] = true,
     },
     ["video.syfy.com"] = {
-        ["enable-plugins"] = true,
+        ["noscript.enable_plugins"] = true,
     },
     ["photobucket.com"] = {
-        ["enable-plugins"] = true,
+        ["noscript.enable_plugins"] = true,
     },
     ["s60.photobucket.com"] = {
-        ["enable-plugins"] = true,
+        ["noscript.enable_plugins"] = true,
     },
     ["imgur.com"] = {
-        ["enable-plugins"] = true,
+        ["noscript.enable_plugins"] = true,
     },
     ["youtube.com"] = {
-        ["enable-plugins"] = true,
+        ["noscript.enable_plugins"] = true,
     },
     ["dailymotion.com"] = {
-        ["enable-plugins"] = true,
+        ["noscript.enable_plugins"] = true,
     },
     ["yahoo.com"] = {
-        ["enable-scripts"] = false,
+        ["noscript.enable_scripts"] = false,
         ["enable-private-browsing"] = true,
     },
     ["imdb.com"] = {
-        ["enable-scripts"] = false,
+        ["noscript.enable_scripts"] = false,
     },
     ["kickasstorrents.com"] = {
-        ["enable-plugins"] = true,
+        ["noscript.enable_plugins"] = true,
     },
     ["last.fm"] = {
-        ["enable-plugins"] = true,
+        ["noscript.enable_plugins"] = true,
         ["enable-private-browsing"] = false,
     },
     ["pandora.com"] = {
-        ["enable-plugins"] = true,
+        ["noscript.enable_plugins"] = true,
         ["enable-private-browsing"] = false,
     },
     ["nationstates.net"] = {
-        ["enable-plugins"] = true,
+        ["noscript.enable_plugins"] = true,
         ["enable-private-browsing"] = false,
     },
 }

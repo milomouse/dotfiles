@@ -52,6 +52,7 @@ HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='bg=red,fg=white,bold'
 HISTORY_SUBSTRING_SEARCH_GLOBBING_FLAGS='i' # see "Globbing Flags" in zshexpn(1)
 
 history-substring-search-begin() {
+  setopt nowarncreateglobal
   # continue using the previous "$history_substring_search_result" by default,
   # unless the current query was cleared or a new/different query was entered
   if [[ -z $BUFFER || $BUFFER != $history_substring_search_result ]]; then
@@ -118,6 +119,7 @@ history-substring-search-end() {
 }
 
 history-substring-search-backward() {
+  setopt nowarncreateglobal
   history-substring-search-begin
 
   # check if the UP arrow was pressed to move cursor in multi-line buffer:
@@ -160,6 +162,7 @@ history-substring-search-backward() {
 }
 
 history-substring-search-forward() {
+  setopt nowarncreateglobal
   history-substring-search-begin
 
   # check if the DOWN arrow was pressed to move cursor in multi-line buffer:

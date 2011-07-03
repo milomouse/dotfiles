@@ -25,15 +25,15 @@
                                         :X 790
                                         :Y 0
                                         :WIDTH 810
-                                        :HEIGHT 270
+                                        :HEIGHT 280
                                         :WINDOWS NIL
                                         :CURRENT NIL)
                                      #S(FDUMP
                                         :NUMBER 2
                                         :X 790
-                                        :Y 270
+                                        :Y 280
                                         :WIDTH 810
-                                        :HEIGHT 630
+                                        :HEIGHT 620
                                         :WINDOWS NIL
                                         :CURRENT NIL))))
                             :CURRENT 0)
@@ -97,5 +97,5 @@
                                       :WINDOWS NIL
                                       :CURRENT NIL))
                             :CURRENT 0))
-                :CURRENT 1))
+                :CURRENT 2))
    :CURRENT 0)

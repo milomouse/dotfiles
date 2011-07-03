@@ -179,6 +179,7 @@
     (dk m (kbd "C-9")    "select-window-by-number 9")
     (dk m (kbd "C-0")    "select-window-by-number 0")
     ;; <special-char bindings>
+    (dk m (kbd "s-quoteleft") "scratchpad")
     (dk m (kbd "s-!")    "gmove 1")
     (dk m (kbd "s-@")    "gmove 2")
     (dk m (kbd "s-#")    "gmove 3")
@@ -280,7 +281,6 @@
     (dk m (kbd "s-F10")   "restore-from-datadir desktop")
     (dk m (kbd "s-F11")   "restore-from-datadir screen")
     (dk m (kbd "s-F12")   "restore-from-datadir group")
-    (dk m (kbd "s-quoteleft") "scratchpad")
    M)))
 
 ;; EOF

@@ -19,6 +19,7 @@ font=DejaVuSerif
 ffactor=1
 unicode=yes
 utf8=yes
+slang=eng,en,und,un,rus,ru
 subfont-encoding=unicode
 subfont-osd-scale=2.6
 subfont-autoscale=2
@@ -40,7 +41,6 @@ double=no
 
 [protocol.dvd]
 profile-desc="profile for dvd:// streams"
-slang=eng,en,und,un,rus,ru,ita,it
 af=volume=20:0,volnorm=2
 vf=pp=ha:164:7:y/va:y/dr:y/tn:3:5:7:y,unsharp=l5x5:0.01:c5x5:-0.02
 

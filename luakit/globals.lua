@@ -59,7 +59,7 @@ soup.set_property("accept-policy", cookie_policy.no_third_party)
     although, i have defined a few because ddg doesn't have them yet.
 --]]
 search_engines = {
-  d          = "https://duckduckgo.com/?kd=1&k1=-1&ke=-1&ka=s&kb=d&kf=fw&kh=1&kk=-1&ko=s&kr=b&kt=n&kv=1&kw=n&kx=e&ky=-1&kp=1&q=%s",
+  ddg        = "https://duckduckgo.com/?kd=1&k1=-1&ke=-1&ka=s&kb=d&kf=fw&kh=1&kk=-1&ko=s&kr=b&kt=n&kv=1&kw=n&kx=e&ky=-1&kp=1&q=%s",
   postrock   = "http://www.postrockxchange.com/?s=%s",
   tiger      = "http://www.tigerdirect.com/applications/SearchTools/search.asp?keywords=%s",
   luakit     = "http://luakit.org/search/index/luakit?q=%s",
@@ -67,110 +67,25 @@ search_engines = {
 }
 
 -- Set duckduckgo as fallback search engine
-search_engines.default = search_engines.d
+search_engines.default = search_engines.ddg
 -- Use this instead to disable auto-searching
 --search_engines.default = "%s"
 
--- Per-domain webview properties
--- See http://webkitgtk.org/reference/webkitgtk-WebKitWebSettings.html
+--[[
+  Per-domain webview properties
+   See http://webkitgtk.org/reference/webkitgtk-WebKitWebSettings.html
+
+  Personal Note:
+    Using "noscript.lua" plugin to manage SCRIPTS & PLUGINS (en|dis)abling.
+    This is much more dynamic than statically defining each domain here.
+--]]
 domain_props = {
     ["all"] = {
-        ["noscript.enable-scripts"] = true,
-        ["noscript.enable-plugins"] = false,
         ["enable-private-browsing"] = false,
         --["user-stylesheet-uri"] = "file://" .. luakit.data_dir .. "/styles/everymouse.css",
     },
-    ["bbs.archlinux.org"] = {
-        ["enable-private-browsing"] = false,
-        --["user-stylesheet-uri"] = "file://" .. luakit.data_dir .. "/styles/archmouse.css",
-    },
-    ["bugs.archlinux.org"] = {
-        ["enable-private-browsing"] = false,
-        --["user-stylesheet-uri"] = "file://" .. luakit.data_dir .. "/styles/archmouse.css",
-    },
-    ["aur.archlinux.org"] = {
-        ["enable-private-browsing"] = false,
-        --["user-stylesheet-uri"] = "file://" .. luakit.data_dir .. "/styles/archmouse.css",
-    },
-    ["pixlr.com"] = {
-        ["noscript.enable_plugins"] = true,
-        ["enable-private-browsing"] = false,
-    },
-    ["github.com"] = {
-        ["noscript.enable_plugins"] = true,
-        ["enable-private-browsing"] = false,
-    },
-    ["en.wikipedia.org"] = {
-        ["enable-private-browsing"] = false,
-    },
-    ["amazon.com"] = {
-        ["noscript.enable_plugins"] = true,
-        ["enable-private-browsing"] = false,
-    },
-    ["newegg.com"] = {
-        ["enable-private-browsing"] = false,
-    },
-    ["tigerdirect.com"] = {
-        ["enable-private-browsing"] = false,
-    },
-    ["ebay.com"] = {
-        ["noscript.enable_plugins"] = true,
-        ["enable-private-browsing"] = false,
-    },
-    ["shop.ebay.com"] = {
-        ["noscript.enable_plugins"] = true,
-        ["enable-private-browsing"] = false,
-    },
-    ["my.ebay.com"] = {
-        ["noscript.enable_plugins"] = true,
-        ["enable-private-browsing"] = false,
-    },
     ["google.com"] = {
-        ["noscript.enable_scripts"] = false,
         ["enable-private-browsing"] = true,
-    },
-    ["syfy.com"] = {
-        ["noscript.enable_plugins"] = true,
-    },
-    ["video.syfy.com"] = {
-        ["noscript.enable_plugins"] = true,
-    },
-    ["photobucket.com"] = {
-        ["noscript.enable_plugins"] = true,
-    },
-    ["s60.photobucket.com"] = {
-        ["noscript.enable_plugins"] = true,
-    },
-    ["imgur.com"] = {
-        ["noscript.enable_plugins"] = true,
-    },
-    ["youtube.com"] = {
-        ["noscript.enable_plugins"] = true,
-    },
-    ["dailymotion.com"] = {
-        ["noscript.enable_plugins"] = true,
-    },
-    ["yahoo.com"] = {
-        ["noscript.enable_scripts"] = false,
-        ["enable-private-browsing"] = true,
-    },
-    ["imdb.com"] = {
-        ["noscript.enable_scripts"] = false,
-    },
-    ["kickasstorrents.com"] = {
-        ["noscript.enable_plugins"] = true,
-    },
-    ["last.fm"] = {
-        ["noscript.enable_plugins"] = true,
-        ["enable-private-browsing"] = false,
-    },
-    ["pandora.com"] = {
-        ["noscript.enable_plugins"] = true,
-        ["enable-private-browsing"] = false,
-    },
-    ["nationstates.net"] = {
-        ["noscript.enable_plugins"] = true,
-        ["enable-private-browsing"] = false,
     },
 }
 

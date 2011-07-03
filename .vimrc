@@ -103,7 +103,6 @@ let c_no_tab_space_error = 1
 let java_space_errors = 1
 let python_space_errors = 1
 let ruby_space_errors = 1
-let space_no_jump = 1
 
 " [un-]Mappings
 map <Up> <NOP>

@@ -2,16 +2,13 @@
 !! author: milomouse <vincent[at]fea.st>
 !! update: 2011-06-02
 
+!! settings:
 urxvt*termName: rxvt-256color
 urxvt*loginShell: true
 urxvt*font: -misc-fixed-medium-r-semicondensed-*-12-110-75-75-c-60-koi8-r
 urxvt*boldFont: -misc-fixed-medium-r-semicondensed-*-12-110-75-75-c-60-koi8-r
 urxvt*italicFont: -misc-fixed-medium-r-semicondensed-*-12-110-75-75-c-60-koi8-r
 urxvt*boldItalicFont: -misc-fixed-medium-r-semicondensed-*-12-110-75-75-c-60-koi8-r
-!urxvt*font: -misc-fixed-medium-r-normal-*-10-100-75-75-c-60-koi8-r
-!urxvt*boldFont: -misc-fixed-medium-r-normal-*-10-100-75-75-c-60-koi8-r
-!urxvt*italicFont: -misc-fixed-medium-r-normal-*-10-100-75-75-c-60-koi8-r
-!urxvt*boldItalicFont: -misc-fixed-medium-r-normal-*-10-100-75-75-c-60-koi8-r
 !urxvt*font: -schumacher-clean-medium-r-normal-*-12-120-75-75-c-60-koi8-r
 !urxvt*boldFont: -schumacher-clean-medium-r-normal-*-12-120-75-75-c-60-koi8-r
 !urxvt*italicFont: -schumacher-clean-medium-r-normal-*-12-120-75-75-c-60-koi8-r
@@ -33,6 +30,15 @@ urxvt*cursorColor: #a488d9
 Xcursor.theme: whiteglass
 Xcursor.size: 10
 
+!! extensions:
+urxvt*perl-ext: default,url-select
+urxvt*keysym.M-u: perl:url-select:select_next
+urxvt*urlLauncher: /usr/bin/luakit
+urxvt*underlineURLs: true
+
+!! colorschemes:
+
+!!! LEGEND:
 !!! 0:black 1:red     2:green 3:yellow
 !!! 4:blue  5:magenta 6:cyan  7:white
 

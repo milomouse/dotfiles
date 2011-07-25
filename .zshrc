@@ -44,8 +44,8 @@ if [[ ${TERM} == linux ]] || [[ ${TERM} =~ screen && ${+DISPLAY} == 0 ]]; then
 fi
 
 # Fish-like syntax highlighting for ZSH (by nicoulaj@github):
-if [[ -f ${ZDOTDIR}/scripts/zsh-syntax-highlighting.zsh ]]; then
-  . ${ZDOTDIR}/scripts/zsh-syntax-highlighting.zsh || print 'could not source SYNTAX'
+if [[ -f /usr/share/zsh/plugins/zsh-syntax-highlight/zsh-syntax-highlighting.zsh ]]; then
+  . /usr/share/zsh/plugins/zsh-syntax-highlight/zsh-syntax-highlighting.zsh || print 'could not source SYNTAX'
 
   # override some colors:
   ZSH_HIGHLIGHT_STYLES[default]='none'
@@ -83,8 +83,8 @@ if [[ -f ${ZDOTDIR}/scripts/zsh-syntax-highlighting.zsh ]]; then
 fi
 
 # Fish-like history sub-string search:
-if [[ -f ${ZDOTDIR}/scripts/history-substring-search.zsh ]]; then
-  . ${ZDOTDIR}/scripts/history-substring-search.zsh || print 'could not source HISTORY'
+if [[ -f /usr/share/zsh/plugins/zsh-history-substring-search/history-substring-search.zsh ]]; then
+  . /usr/share/zsh/plugins/zsh-history-substring-search/history-substring-search.zsh || print 'could not source HISTORY'
 fi
 
 # keybindings (defined AFTER scripts):

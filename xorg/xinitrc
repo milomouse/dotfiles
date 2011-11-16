@@ -1,34 +1,31 @@
 #!/bin/zsh
-## resources:
+# resources:
 /usr/bin/xrdb -load ${XDG_CONFIG_DIR:-$HOME}/xorg/Xdefaults
 /usr/bin/xsetroot -cursor_name left_ptr &
 
 ## keyboard:
-#/usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/dvausler.xmodmap
-/usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/dvausler-mod.xmodmap
-#/usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/dvausler-oldnum.xmodmap
-#/usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/dvausler-programmmer.xmodmap
-#/usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/arensito.xmodmap
-#/usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/arensito-mod.xmodmap
-#/usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/arensito-mod-programmer.xmodmap
-#/usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/klausler2.xmodmap
-#/usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/klausler2-mod.xmodmap
-#/usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/klausler2-mod-programmer.xmodmap
-#/usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/capewell-dvorak.xmodmap
-#/usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/capewell-dvorak-mod.xmodmap
-#/usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/capewell-dvorak-mod-programmer.xmodmap
-/usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/personal.xmodmap
+#/usr/bin/xmodmap /howl/conf/keymaps/dvausler.xmodmap
+#/usr/bin/xmodmap /howl/conf/keymaps/dvausler-mod.xmodmap
+#/usr/bin/xmodmap /howl/conf/keymaps/dvausler-oldnum.xmodmap
+#/usr/bin/xmodmap /howl/conf/keymaps/dvausler-programmmer.xmodmap
+#/usr/bin/xmodmap /howl/conf/keymaps/arensito.xmodmap
+#/usr/bin/xmodmap /howl/conf/keymaps/arensito-mod.xmodmap
+#/usr/bin/xmodmap /howl/conf/keymaps/arensito-mod-programmer.xmodmap
+#/usr/bin/xmodmap /howl/conf/keymaps/klausler2.xmodmap
+#/usr/bin/xmodmap /howl/conf/keymaps/klausler2-mod.xmodmap
+#/usr/bin/xmodmap /howl/conf/keymaps/klausler2-mod-programmer.xmodmap
+#/usr/bin/xmodmap /howl/conf/keymaps/capewell-dvorak.xmodmap
+#/usr/bin/xmodmap /howl/conf/keymaps/capewell-dvorak-mod.xmodmap
+#/usr/bin/xmodmap /howl/conf/keymaps/capewell-dvorak-mod-programmer.xmodmap
+/usr/bin/xmodmap /howl/conf/keymaps/personal.xmodmap
 
-## mouse/touchpad:
-# this must be checked on startup because script uses file for coordinates.
+# mouse/synclient:
 BANISHFILE="/dev/shm/.1009/banishmouse"
-[[ ! -f $BANISHFILE ]] || rm -f $BANISHFILE
+[[ -f $BANISHFILE ]] && rm -f $BANISHFILE
 /usr/local/bin/banishmouse
 
-## wallpaper:
-# high-def deep space astronaut (- Sergei: I see no God up here)
+# wallpaper:
 /usr/bin/display -window root -resize 1600x900! ${XDG_PICTURES_DIR:-${H:-/howl}/foto}/wall/wallpaper-31278.png
 
-## window-manager:
-# StumpWM - by far the most programmable, hackable window-manager there is!
+# window-manager:
 exec /usr/bin/stumpwm &>>${XDG_CONFIG_DIR:-$HOME}/stumpwm/storage/log.lisp

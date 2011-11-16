@@ -43,9 +43,9 @@ if [[ ${TERM} == linux ]] || [[ ${TERM} =~ screen && ${+DISPLAY} == 0 ]]; then
     echo -en "\e]P78d8d8d" ; echo -en "\e]PFdad3d3"
 fi
 
-# Fish-like syntax highlighting for ZSH (by nicoulaj@github):
+# Fish-like syntax highlighting for ZSH:
 if [[ -f /usr/share/zsh/plugins/zsh-syntax-highlight/zsh-syntax-highlighting.zsh ]]; then
-  . /usr/share/zsh/plugins/zsh-syntax-highlight/zsh-syntax-highlighting.zsh || print 'could not source SYNTAX'
+  . /usr/share/zsh/plugins/zsh-syntax-highlight/zsh-syntax-highlighting.zsh
 
   # override some colors:
   ZSH_HIGHLIGHT_STYLES[default]='none'
@@ -82,9 +82,13 @@ if [[ -f /usr/share/zsh/plugins/zsh-syntax-highlight/zsh-syntax-highlighting.zsh
   )
 fi
 
-# Fish-like history sub-string search:
+# Fish-like history sub-string search for ZSH (load AFTER syntax):
 if [[ -f /usr/share/zsh/plugins/zsh-history-substring-search/history-substring-search.zsh ]]; then
-  . /usr/share/zsh/plugins/zsh-history-substring-search/history-substring-search.zsh || print 'could not source HISTORY'
+  . /usr/share/zsh/plugins/zsh-history-substring-search/history-substring-search.zsh
+
+  HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='bg=blue,fg=black,bold'
+  HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='bg=red,fg=black'
+  HISTORY_SUBSTRING_SEARCH_GLOBBING_FLAGS='i'
 fi
 
 # keybindings (defined AFTER scripts):

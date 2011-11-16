@@ -355,7 +355,7 @@ current frame into 2 frames, one on top of the other." (remember-group) (split-f
 (defcommand echo-oss-headphones () () "" (run-shell-command "ossvol --headphones --quiet") (echo-oss-vol))
 (defcommand echo-mail () () "" (echo-string (current-screen) (run-shell-command "print - @fea.st: ${#$(find /howl/mail/FastMail/*/new -type f)}" t)))
 (defcommand echo-wlan () () "" (echo-string (current-screen) (run-shell-command "iwconfig wlan0" t)))
-(defcommand echo-free-hdd () () "" (echo-string (current-screen) (run-shell-command "di -x debugfs,tmpfs -d h -Af SMTufI" t)))
+(defcommand echo-free-hdd () () "" (echo-string (current-screen) (run-shell-command "di -x debugfs,tmpfs -d h -f SMTufI" t)))
 (defcommand echo-free-mem () () "" (echo-string (current-screen) (run-shell-command "print '^B^6/free^1* used^5* base^n';free -m|awk 'NR==2 {print $4,$3,$2}'" t)))
 (defcommand echo-battery () () "" (echo-string (current-screen) (run-shell-command "acpi -tf;repeat 36; do printf '='; done;print;ibam --percentbattery" t)))
 (defcommand echo-loadavg () () "" (echo-string (current-screen) (run-shell-command "print ${$(</proc/loadavg)[1,3]}" t)))

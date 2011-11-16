@@ -15,11 +15,12 @@ globals = {
 }
 
 -- Make useragent
-local arch = string.match(({luakit.spawn_sync("uname -sm")})[2], "([^\n]*)")
-local lkv  = string.format("luakit/%s", luakit.version)
-local wkv  = string.format("WebKitGTK+/%d.%d.%d", luakit.webkit_major_version, luakit.webkit_minor_version, luakit.webkit_micro_version)
-local awkv = string.format("AppleWebKit/%s.%s+", luakit.webkit_user_agent_major_version, luakit.webkit_user_agent_minor_version)
-globals.useragent = string.format("Mozilla/5.0 (%s) %s %s %s", arch, awkv, wkv, lkv)
+local _, arch = luakit.spawn_sync("uname -sm")
+-- Only use the luakit version if in date format (reduces identifiability)
+local lkv = string.match(luakit.version, "^(%d+.%d+.%d+)")
+globals.useragent = string.format("Mozilla/5.0 (%s) AppleWebKit/%s+ (KHTML, like Gecko) WebKitGTK+/%s luakit%s",
+    string.sub(arch, 1, -2), luakit.webkit_user_agent_version,
+    luakit.webkit_version, (lkv and ("/" .. lkv)) or "")
 --For those websites who fuck with user experiences or forbid access due to unrecognized user string:
 --globals.useragent = string.format("Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_5_6; en-us) AppleWebKit/528.16 (KHTML, like Gecko) Version/4.0 Safari/528.16", arch, awkv, wkv, lkv)
 
@@ -33,17 +34,17 @@ local ca_files = {
 -- Use the first ca-file found
 for _, ca_file in ipairs(ca_files) do
     if os.exists(ca_file) then
-        soup.set_property("ssl-ca-file", ca_file)
+        soup.ssl_ca_file = ca_file
         break
     end
 end
 
 -- Change to stop navigation sites with invalid or expired ssl certificates
-soup.set_property("ssl-strict", false)
+soup.ssl_strict = false
 
 -- Set cookie acceptance policy
 cookie_policy = { always = 0, never = 1, no_third_party = 2 }
-soup.set_property("accept-policy", cookie_policy.no_third_party)
+soup.accept_policy = cookie_policy.no_third_party
 
 --[[
   List of search engines. Each item must contain a single %s which is

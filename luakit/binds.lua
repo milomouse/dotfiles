@@ -106,8 +106,8 @@ add_binds("normal", {
     -- Scrolling
     key({},          "j",           function (w) w:scroll{ y = more    } end),
     key({},          "k",           function (w) w:scroll{ y = less    } end),
-    key({"Control"}, "J",           function (w) w:scroll{ y = "+1.0p" } end),
-    key({"Control"}, "K",           function (w) w:scroll{ y = "-1.0p" } end),
+    key({},          "J",           function (w) w:scroll{ y = "+1.0p" } end),
+    key({},          "K",           function (w) w:scroll{ y = "-1.0p" } end),
     key({},          "h",           function (w) w:scroll{ x = less    } end),
     key({},          "l",           function (w) w:scroll{ x = more    } end),
     key({},          "^",           function (w) w:scroll{ x = "0%"    } end),

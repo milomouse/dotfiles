@@ -133,6 +133,9 @@ require "follow_selected"
 require "go_input"
 require "go_next_prev"
 require "go_up"
+-- Change hinting style
+local s = follow.styles
+follow.style = s.upper(s.sort(s.reverse(s.charset("asdfqwerzxcv"))))
 
 -----------------------------
 -- End user script loading --

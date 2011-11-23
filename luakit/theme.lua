@@ -9,8 +9,6 @@ local theme = {}
 -- or, optionally, modify the file yourself
 theme.sbar_l_ebox_bg  = "#887b8b"
 theme.sbar_r_ebox_bg  = "#191919"
-theme.sbar_ebox_bg    = "#191919"
-theme.sbar_sep_bg     = "#191919"
 -- end of CUSTOM <<
 
 -- Default settings
@@ -19,12 +17,14 @@ theme.fg   = "#191919"
 theme.bg   = "#eeeeee"
 
 -- General colors
+theme.sbar_bg    = "#191919"
 theme.success_fg = "#d680c5"
---theme.loaded_fg = "#98a7b2"
+theme.loaded_fg = "#98a7b2"
 theme.sbar_loaded_fg = "#232323"
 theme.sbar_loaded_bg = "#eeeeee"
 theme.error_fg = "#39d3c9"
 theme.error_bg = "#232323"
+theme.scroll_sbar_fg = "#191919"
 
 -- Warning colors
 theme.warning_fg = "#c5bb5f"
@@ -76,6 +76,21 @@ theme.loading_bg      = "#898989"
 -- Trusted/untrusted ssl colors
 theme.trust_fg        = "#98a7b2"
 theme.notrust_fg      = "#d680c5"
+
+-- URL Hints
+theme.focus_bg        = "#00ff00";
+theme.normal_bg       = "#ffff99";
+theme.opacity         = 0.3;
+theme.border          = "1px dotted #000000";
+theme.frame_border    = "2px solid #880000";
+theme.tick_frame_bg   = "#880000";
+theme.tick_fg         = "#ffffff";
+theme.tick_bg         = "#000088";
+theme.tick_border     = "2px dashed #000000";
+theme.tick_opacity    = 0.4;
+theme.tick_font       = "11px monospace bold";
+theme.vert_offset     = 0;
+theme.horiz_offset    = -10;
 
 return theme
 -- vim: et:sw=4:ts=8:sts=4:tw=80

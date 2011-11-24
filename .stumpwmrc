@@ -2,13 +2,12 @@
 ;; ${XDG_CONFIG_DIR:-/howl/conf}/.stumpwmrc                                 ;;
 ;;--------------------------------------------------------------------------;;
 ;; author: milomouse <vincent[at]fea.st>                                    ;;
-;; update: 2011-07-02 21:41:01                                              ;;
 ;;--------------------------------------------------------------------------;;
 ;; versions used atoc:                                                      ;;
-;; |  sbcl              -> 1.0.49-1                                         ;;
+;; |  sbcl              -> 1.0.53-1                                         ;;
 ;; |  clx               -> 0.7.4-2                                          ;;
 ;; |  cl-ppcre          -> 2.0.3-2                                          ;;
-;; |  stumpwm-git       -> 20110702-1                                       ;;
+;; |  stumpwm-git       -> 20111115-1                                       ;;
 ;;-TODO/CHANGELOG:----------------------------------------------------------;;
 ;; >>>-: create a 'dedicate' and 'catchall' window-rule (remember * *)      ;;
 ;; >>--: create a 'dedicate' and 'catchall' hook for changing focus color   ;;

@@ -61,10 +61,10 @@ require "cookies"
 -- and blacklist at "$XDG_CONFIG_HOME/luakit/cookie.blacklist".
 -- Each domain must be on it's own line and you may use "*" as a
 -- wildcard character (I.e. "*google.com")
---require "cookie_blocking"
+require "cookie_blocking"
 
 -- Block all cookies by default (unless whitelisted)
---cookies.default_allow = false
+cookies.default_allow = false
 
 -- Add uzbl-like form filling
 require "formfiller"
@@ -94,7 +94,7 @@ require "bookmarks"
 require "downloads"
 require "downloads_chrome"
 
-download.default_dir = "/howl/down"
+downloads.default_dir = "/howl/down"
 
 -- Add vimperator-like link hinting & following
 -- (depends on downloads)
@@ -104,6 +104,8 @@ require "follow"
 -- modify the following:
 --local s = follow.styles
 --follow.style = s.sort(s.reverse(s.charset("asdfqwerzxcv"))) -- I'm a lefty
+local s = follow.styles
+follow.style = s.upper(s.sort(s.reverse(s.charset("asdfqwerzxcv"))))
 
 -- Add command history
 require "cmdhist"
@@ -125,7 +127,7 @@ require "completion"
 -- `,ts` to toggle scripts, `,tp` to toggle plugins, `,tr` to reset.
 -- Remove all "enable_scripts" & "enable_plugins" lines from your
 -- domain_props table (in config/globals.lua) as this module will conflict.
---require "noscript"
+require "noscript"
 enable_scripts = false
 enable_plugins = false
 
@@ -133,9 +135,6 @@ require "follow_selected"
 require "go_input"
 require "go_next_prev"
 require "go_up"
--- Change hinting style
-local s = follow.styles
-follow.style = s.upper(s.sort(s.reverse(s.charset("asdfqwerzxcv"))))
 
 -----------------------------
 -- End user script loading --

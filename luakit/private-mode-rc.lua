@@ -98,7 +98,6 @@ require "go_up"
 
 -- Add NoScript capability (updated)
 require "noscript"
-
 enable_scripts = false
 enable_plugins = false
 

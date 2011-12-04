@@ -1,6 +1,6 @@
 !! ${XDG_CONFIG_DIR:-$HOME/.config}/xorg/Xdefaults
 !! author: milomouse <vincent[at]fea.st>
-!! update: 2011-06-02
+!! update: 2011-12-04
 
 !! settings:
 urxvt*termName: rxvt-256color
@@ -102,17 +102,17 @@ urxvt*underlineURLs: true
 *color7:  #8d8d8d
 *color15: #dad3d3
 
-!! various X stuff (yet to really mess with this..)
+!! various X stuff
 XFontSel*sampleText.background:       TEXTBG
 XFontSel*menu*showUnselectable:       false
 XFontSel*MenuButton.shadowWidth:      0
 XFontSel*Toggle*ToggleStyle:          check
 XFontSel*MenuButton*Justify:          left
-XFontSel*MenuButton*MenuButtonStyle:  select    
+XFontSel*MenuButton*MenuButtonStyle:  select
 
 .xfontsel.pane.commandBox.quitButton.background:  #252525
 .xfontsel.pane.commandBox.quitButton.foreground:  snow
-.xfontsel.pane.commandBox.ownButton.background:   orange3
+.xfontsel.pane.commandBox.ownButton.background:   purple
 .xfontsel.pane.commandBox.ownButton.foreground:   snow
 .xfontsel.pane.commandBox.countLabel.background:  snow
 .xfontsel.pane.viewPort.sampleText.background:    #252525
@@ -145,7 +145,7 @@ XFontSel*MenuButton*MenuButtonStyle:  select
 .xfontsel.pane.fieldBox.field12.foreground:       snow
 .xfontsel.pane.fieldBox.field13.background:       #252525
 .xfontsel.pane.fieldBox.field13.foreground:       snow
-.xfontsel.pane.fieldBox*foreground:               #000000
+.xfontsel.pane.fieldBox*foreground:               #999999
 .xfontsel.pane.fieldBox.MenuButton.borderWidth:   1
 .xfontsel.pane.fieldBox.MenuButton.internalHeight:1
 .xfontsel.pane.fieldBox.MenuButton.internalWidth: 2

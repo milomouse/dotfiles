@@ -94,6 +94,7 @@
     (dk m (kbd "B") "exec display -window root -resize 1600x900! /howl/foto/wall/wallpaper-31278.png")
     (dk m (kbd "C-b") "exec display -window root -resize 1600x900! /howl/foto/wall/1366x768_dizorb_landscape_study_hd_wallpaper.png")
     (dk m (kbd "d") "exec xmodmap /howl/conf/keymaps/dvausler-mod.xmodmap")
+    (dk m (kbd "g") "exec gimp -s --stack-trace-mode=never")
     (dk m (kbd "h") "exec urxvt -e htop")
     (dk m (kbd "l") "ror_luakit")
     (dk m (kbd "m") "ror_mutt")

@@ -98,6 +98,7 @@
     (dk m (kbd "h") "exec urxvt -e htop")
     (dk m (kbd "l") "ror_luakit")
     (dk m (kbd "m") "ror_mutt")
+    (dk m (kbd "M") "echo-oss-volmute")
     (dk m (kbd "p") "exec pysol --nosound")
     (dk m (kbd "q") "exec xmodmap /howl/conf/keymaps/qwerty.xmodmap")
     (dk m (kbd "s") "exec urxvt -e nsudoku 12")

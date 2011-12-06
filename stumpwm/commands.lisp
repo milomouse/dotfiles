@@ -350,7 +350,7 @@ current frame into 2 frames, one on top of the other." (remember-group) (split-f
 (defcommand echo-oss-vol () () "" (echo-string (current-screen) (run-shell-command "ossvol -a" t)))
 (defcommand echo-oss-volup () () "" (run-shell-command "ossvol -i 1") (echo-oss-vol))
 (defcommand echo-oss-voldown () () "" (run-shell-command "ossvol -d 1") (echo-oss-vol))
-(defcommand echo-oss-volmute () () "" (run-shell-command "ossvol -m") (echo-oss-vol))
+(defcommand echo-oss-volmute () () "" (run-shell-command "ossvol -m") (run-shell-command "sleep 1s") (echo-oss-vol))
 (defcommand echo-oss-speakers () () "" (echo-string (current-screen) (run-shell-command "ossvol --speakers --quiet" t)) (echo-oss-vol))
 (defcommand echo-oss-headphones () () "" (run-shell-command "ossvol --headphones --quiet") (echo-oss-vol))
 (defcommand echo-mail () () "" (echo-string (current-screen) (run-shell-command "print - @fea.st: ${#$(find /howl/mail/FastMail/*/new -type f)}" t)))

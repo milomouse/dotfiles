@@ -43,6 +43,9 @@ if [[ ${TERM} == linux ]] || [[ ${TERM} =~ screen && ${+DISPLAY} == 0 ]]; then
     echo -en "\e]P78d8d8d" ; echo -en "\e]PFdad3d3"
 fi
 
+# source custom colors:
+eval $(dircolors -b ${HOME}/.dir_colors)
+
 # Fish-like syntax highlighting for ZSH:
 if [[ -f /usr/share/zsh/plugins/zsh-syntax-highlight/zsh-syntax-highlighting.zsh ]]; then
   . /usr/share/zsh/plugins/zsh-syntax-highlight/zsh-syntax-highlighting.zsh

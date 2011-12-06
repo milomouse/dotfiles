@@ -1,0 +1,256 @@
+# ----------------------------------------
+# file: $HOME/.dir_colors
+# author: jason ryan http:/jasonwryan.com
+# vim:fenc=utf-8:nu:ai:si:et:ts=4:sw=4:
+# ----------------------------------------
+#
+# Based on: https://github.com/trapd00r/LS_COLORS/blob/master/LS_COLORS
+
+# COLOR needs one of these arguments: 'tty' colorizes output to ttys, but not
+# pipes. 'all' adds color characters to all output. 'none' shuts colorization
+# off.
+COLOR all
+
+# Extra command line options for ls go here.
+# Basically these ones are:
+#  -F = show '/' for dirs, '*' for executables, etc.
+#  -T 0 = don't trust tab spacing when formatting ls output.
+# -b = better support for special characters
+OPTIONS -F -b -T 0
+
+# EIGHTBIT, followed by '1' for on, '0' for off. (8-bit output)
+EIGHTBIT 1
+
+# Below are the color init strings for the basic file types. A color init
+# string consists of one or more of the following numeric codes:
+# Attribute codes: 
+# 00=none 01=bold 04=underscore 05=blink 07=reverse 08=concealed
+# Text color codes:
+# 30=black 31=red 32=green 33=yellow 34=blue 35=magenta 36=cyan 37=white
+# Background color codes:
+# 40=black 41=red 42=green 43=yellow 44=blue 45=magenta 46=cyan 47=white
+ 
+NORMAL         00         # global default, although everything should be something.
+FILE           00         # normal file
+DIR            00;34      # directory
+LINK           35         # symbolic link
+FIFO           40;33      # pipe
+SOCK           01;35      # socket
+BLK            40;33;01   # block device driver
+CHR            40;33;01   # character device driver
+ORPHAN         01;30
+#EXEC          01;31 
+
+
+.cmd           01;32 # executables (bright green)
+.exe           01;32
+.com           01;32
+.btm           01;32
+.bat           01;32
+
+.tar           00;33 # archives or compressed (bright yellow)
+.tgz           00;33
+.zip           00;33
+.gz            00;33
+.bz2           00;33
+.tar.xz        00;33
+.tar.gz        00;33
+.tgz           00;33
+.xz            00;33
+
+.jpg           00;36 # image formats (cyan)
+.gif           00;36
+.bmp           00;36
+.xbm           00;36
+.xpm           00;36
+.tif           00;36
+.tga           00;36
+.png           00;36
+.jpeg          00;36
+.tiff          00;36
+.xcf           00;36
+.xcf.gz        00;36
+.blend         00;36
+.pcx           00;36
+.ppm           00;36
+
+.mp3           00;32 # media (green)
+.fla           00;32
+.mid           00;32
+.wav           00;32
+.au            00;32
+.nes           00;31
+.smc           00;31
+.fig           00;31
+.sfc           00;31
+.smc.gz        00;31
+.fig.gz        00;31
+.sfc.gz        00;31
+
+.mpg           01;35 # (magenta)
+.mpeg          01;35
+.avi           01;35
+.mov           01;35
+.fli           01;35
+.flc           01;35
+.flv           01;35
+
+# all of the rest
+.PL            00;36
+.asm           00;36
+.apvlvrc       00;36
+.asoundrc      00;36
+.awk           00;36
+.bash          00;31
+.bashrc        00;31
+.bash_history  00;31
+.bash_profile  00;31
+.bak           01;31
+.c             00;36
+.cfg           00;36
+.coffee        00;36
+.conf          00;36
+.cpp           00;36
+.cs            00;36
+.css           00;36
+.csv           00;36
+.deb	       00;36
+.diff          01;33 
+.dir_colors    01;33
+.enc           00;36
+.eps           00;36
+.etx           00;36
+.ex            00;36
+.example       00;36
+.fehbg         00;36
+.fonts         00;36
+.git           00;36
+.gitignore     00;36
+.hgrc          01;34
+.hgignore      01;34
+.go            01;34
+.h             01;34
+.hs            01;34
+.htm           01;34
+.html          01;34
+.htoprc        01;34
+.info          01;34
+.ini           01;34
+.java          01;34
+.jhtm          01;34
+.js            01;34
+.jsm           01;34
+.jsm           01;34
+.json          01;34
+.jsp           01;34
+.lisp          01;34
+.lesshst       01;34
+.log           01;34
+.lua           01;32
+.map           01;32
+.markdown      01;32
+.md            01;32
+.mf            01;32
+.mfasl         01;32
+.mi            01;32
+.mkd           01;32
+.msmtprc       01;32
+.mtx           01;32
+.muttrc        01;32
+.nfo           01;32
+.netrc         01;31
+.offlineimaprc 01;32
+.pacnew        01;31
+.patch         01;31
+.pc            00;31
+.pfa           00;31
+.php           00;31
+.pid           00;31
+.pl            00;31
+.pm            00;31
+.pod           00;31
+.py            00;31
+.rc            00;31
+.rb            00;31
+.rdf           00;31
+.ru            00;31
+.sed           00;31
+.sfv           00;31
+.sh            00;31
+.sh*           00;31
+.signature     00;31
+.sty           01;35
+.sug           01;35
+.t             01;35
+.tcl           01;35
+.tdy           01;35
+.tex           01;35
+.textile       01;35
+.tfm           01;35
+.tfnt          01;35
+.theme         01;35
+.viminfo       01;35
+.xml           01;35
+.yml           01;35
+.zsh           01;35
+.txt           01;35
+.ttytterrc     01;35
+.urlview       01;35
+.vim           01;35
+.vimrc         01;35
+.xinitrc       01;31 
+.Xauthority    01;31
+.Xmodmap       00;31
+.Xresources    01;33
+
+# Below, there should be one TERM entry for each termtype that is colorizable
+TERM Eterm
+TERM ansi
+TERM color-xterm
+TERM con132x25
+TERM con132x30
+TERM con132x43
+TERM con132x60
+TERM con80x25
+TERM con80x28
+TERM con80x30
+TERM con80x43
+TERM con80x50
+TERM con80x60
+TERM cons25
+TERM console
+TERM cygwin
+TERM dtterm
+TERM eterm-color
+TERM gnome
+TERM gnome-256color
+TERM jfbterm
+TERM konsole
+TERM kterm
+TERM linux
+TERM linux-c
+TERM mach-color
+TERM mlterm
+TERM putty
+TERM rxvt
+TERM rxvt-256color
+TERM rxvt-cygwin
+TERM rxvt-cygwin-native
+TERM rxvt-unicode
+TERM rxvt-unicode-256color
+TERM rxvt-unicode256
+TERM screen
+TERM screen-256color
+TERM screen-256color-bce
+TERM screen-bce
+TERM screen-w
+TERM screen.rxvt
+TERM screen.linux
+TERM terminator
+TERM vt100
+TERM xterm
+TERM xterm-16color
+TERM xterm-256color
+TERM xterm-88color
+TERM xterm-color
+TERM xterm-debian 

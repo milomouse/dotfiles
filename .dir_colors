@@ -1,24 +1,16 @@
-# ----------------------------------------
-# file: $HOME/.dir_colors
-# author: jason ryan http:/jasonwryan.com
-# vim:fenc=utf-8:nu:ai:si:et:ts=4:sw=4:
-# ----------------------------------------
-#
-# Based on: https://github.com/trapd00r/LS_COLORS/blob/master/LS_COLORS
+## ${XDG_CONFIG_DIR:-${HOME}}/.dir_colors
+# author: milomouse <vincent[at]fea.st>
+# update: 2011-12-06
+# credit: jason ryan http:/jasonwryan.com
+##
 
-# COLOR needs one of these arguments: 'tty' colorizes output to ttys, but not
-# pipes. 'all' adds color characters to all output. 'none' shuts colorization
-# off.
+# color (tty, all, none):
 COLOR all
 
-# Extra command line options for ls go here.
-# Basically these ones are:
-#  -F = show '/' for dirs, '*' for executables, etc.
-#  -T 0 = don't trust tab spacing when formatting ls output.
-# -b = better support for special characters
+# extra ls options:
 OPTIONS -F -b -T 0
 
-# EIGHTBIT, followed by '1' for on, '0' for off. (8-bit output)
+# eightbit (1=on, 0=off)
 EIGHTBIT 1
 
 # Below are the color init strings for the basic file types. A color init
@@ -29,94 +21,158 @@ EIGHTBIT 1
 # 30=black 31=red 32=green 33=yellow 34=blue 35=magenta 36=cyan 37=white
 # Background color codes:
 # 40=black 41=red 42=green 43=yellow 44=blue 45=magenta 46=cyan 47=white
- 
-NORMAL         00         # global default, although everything should be something.
-FILE           00         # normal file
-DIR            00;34      # directory
-LINK           35         # symbolic link
-FIFO           40;33      # pipe
-SOCK           01;35      # socket
-BLK            40;33;01   # block device driver
-CHR            40;33;01   # character device driver
+
+NORMAL         00
+FILE           00
+DIR            00;34
+LINK           00;35
+FIFO           01;33
+SOCK           00;35
+BLK            40;31;01
+CHR            40;37
 ORPHAN         01;30
-#EXEC          01;31 
+#EXEC          01;31
 
-
-.cmd           01;32 # executables (bright green)
-.exe           01;32
-.com           01;32
-.btm           01;32
-.bat           01;32
-
-.tar           00;33 # archives or compressed (bright yellow)
-.tgz           00;33
+# executables:
+.cmd           01;37
+.exe           01;37
+.com           01;37
+.btm           01;37
+.bat           01;37
+.iso           00;33
+# archives:
+.deb           01;33
+.tar           01;33
+.tgz           01;33
+.gz            01;33
+.bz2           01;33
+.tar.xz        01;33
+.tar.gz        01;33
+.tgz           01;33
+.xz            01;33
+.lzma          01;33
+.lzo           01;33
+.lzop          01;33
+.rar           00;33
+.ace           00;33
 .zip           00;33
-.gz            00;33
-.bz2           00;33
-.tar.xz        00;33
-.tar.gz        00;33
-.tgz           00;33
-.xz            00;33
-
-.jpg           00;36 # image formats (cyan)
-.gif           00;36
-.bmp           00;36
-.xbm           00;36
-.xpm           00;36
-.tif           00;36
-.tga           00;36
+# images:
+.gif           01;34
 .png           00;36
+.jpg           00;36
 .jpeg          00;36
-.tiff          00;36
-.xcf           00;36
-.xcf.gz        00;36
-.blend         00;36
-.pcx           00;36
-.ppm           00;36
-
-.mp3           00;32 # media (green)
-.fla           00;32
-.mid           00;32
-.wav           00;32
-.au            00;32
-.nes           00;31
-.smc           00;31
-.fig           00;31
-.sfc           00;31
-.smc.gz        00;31
-.fig.gz        00;31
-.sfc.gz        00;31
-
-.mpg           01;35 # (magenta)
+.bmp           01;36
+.xbm           01;36
+.xpm           01;36
+.tif           01;36
+.tga           01;36
+.tiff          01;36
+.xcf           01;36
+.xcf.gz        01;36
+.blend         01;36
+.pcx           01;36
+.ppm           01;36
+# audio:
+.ogg           00;32
+.ogm           00;32
+.flac          00;32
+.ape           00;32
+.ac3           00;32
+.dts           00;32
+.aiff          00;32
+.aiffc         00;32
+.aac           00;32
+.mp3           01;32
+.fla           01;32
+.mid           01;32
+.wav           01;32
+.au            01;32
+.nes           01;32
+.smc           01;32
+.fig           01;32
+.sfc           01;32
+.webm          01;32
+.smc.gz        01;32
+.fig.gz        01;32
+.sfc.gz        01;32
+# video:
+.mkv           00;35
+.ogv           00;35
+.mp4           00;35
+.m4v           00;35
+.mpg           01;35
 .mpeg          01;35
 .avi           01;35
 .mov           01;35
 .fli           01;35
 .flc           01;35
 .flv           01;35
-
-# all of the rest
-.PL            00;36
-.asm           00;36
-.apvlvrc       00;36
-.asoundrc      00;36
+.swf           01;35
+# documents:
+.doc           01;37
+.docx          01;37
+.dif           01;37
+.word          01;37
+.excel         01;37
+.xls           01;37
+.xlt           01;37
+.pxl           01;37
+.slk           01;37
+.csv           01;37
+.rtf           01;37
+.pdb           01;37
+.psw           01;37
+.ppt           01;37
+.pps           01;37
+.pot           01;37
+.potm          01;37
+.pptx          01;37
+.ppsx          01;37
+.pdf           00;37
+.ps            00;37
+.txt           00;37
+.odt           00;37
+.odg           00;37
+.ods           00;37
+.ots           00;37
+.fodt          00;37
+.ott           00;37
+.uot           00;37
+.ssi           00;37
+.sti           00;37
+.ssx           00;37
+.sxc           00;37
+.sxd           00;37
+.sxw           00;37
+.stw           00;37
+.txt           00;37
+.tex           00;37
+.odp           00;37
+.otp           00;37
+# everything else:
+.ackrc         01;31
+.asm           01;35
+.apvlvrc       01;31
+.asoundrc      00;31
+*autostart     01;31
 .awk           00;36
 .bash          00;31
 .bashrc        00;31
-.bash_history  00;31
 .bash_profile  00;31
 .bak           01;31
-.c             00;36
+.bzr           00;36
+.c             00;35
 .cfg           00;36
 .coffee        00;36
 .conf          00;36
-.cpp           00;36
-.cs            00;36
-.css           00;36
-.csv           00;36
-.deb	       00;36
-.diff          01;33 
-.dir_colors    01;33
+.cpp           01;35
+.cs            01;35
+.css           01;35
+.csv           01;35
+.def           00;35
+.diff          01;33
+.dir_colors    01;34
+.dirs          01;34
 .enc           00;36
 .eps           00;36
 .etx           00;36
@@ -125,85 +181,88 @@ ORPHAN         01;30
 .fehbg         00;36
 .fonts         00;36
 .git           00;36
+.gitconfig     00;36
 .gitignore     00;36
-.hgrc          01;34
+.glivrc        01;30
+.gtk-bookmarks 01;30
+.gtkrc         01;30
+.gtkrc-2.0     01;30
 .hgignore      01;34
-.go            01;34
-.h             01;34
-.hs            01;34
-.htm           01;34
-.html          01;34
-.htoprc        01;34
-.info          01;34
-.ini           01;34
-.java          01;34
-.jhtm          01;34
-.js            01;34
-.jsm           01;34
-.jsm           01;34
-.json          01;34
-.jsp           01;34
-.lisp          01;34
-.lesshst       01;34
-.log           01;34
-.lua           01;32
+.go            00;35
+.h             00;35
+.hgrc          01;31
+.hs            01;35
+.htm           01;35
+.html          01;35
+.htoprc        01;31
+.info          01;37
+.ini           01;37
+.irbrc         00;31
+.java          01;35
+.jhtm          01;35
+.js            01;35
+.jsm           01;35
+.jsm           01;35
+.json          01;35
+.jsp           01;35
+.lisp          00;35
+.lesshst       00;37
+.log           01;37
+.lua           00;35
+.mailcap       01;31
 .map           01;32
 .markdown      01;32
-.md            01;32
-.mf            01;32
-.mfasl         01;32
-.mi            01;32
+.mostrc        01;31
 .mkd           01;32
-.msmtprc       01;32
-.mtx           01;32
-.muttrc        01;32
-.nfo           01;32
-.netrc         01;31
-.offlineimaprc 01;32
-.pacnew        01;31
-.patch         01;31
-.pc            00;31
-.pfa           00;31
-.php           00;31
-.pid           00;31
+.msmtprc       01;31
+.muttrc        01;31
+.nfo           01;37
+.netrc         00;31
+.offlineimaprc 01;31
+.opt           00;36
+.pacnew        01;33
+.patch         01;33
+.pc            00;36
+.php           00;35
+.pid           00;33
 .pl            00;31
-.pm            00;31
-.pod           00;31
-.py            00;31
-.rc            00;31
-.rb            00;31
-.rdf           00;31
-.ru            00;31
-.sed           00;31
-.sfv           00;31
-.sh            00;31
-.sh*           00;31
-.signature     00;31
-.sty           01;35
-.sug           01;35
+.pod           01;32
+.py            00;35
+.ratpoisonrc   01;31
+.rb            00;35
+.rc            01;31
+.rtf           00;37
+.recently-used 01;30
+.rnd           00;33
+.sbclrc        00;31
+.sed           01;35
+.sh            01;35
+.signature     01;33
+.stumpwmrc     01;31
 .t             01;35
 .tcl           01;35
 .tdy           01;35
-.tex           01;35
 .textile       01;35
-.tfm           01;35
-.tfnt          01;35
-.theme         01;35
-.viminfo       01;35
+.theme         00;37
+.viminfo       00;37
 .xml           01;35
 .yml           01;35
+.zcompdump     01;37
 .zsh           01;35
-.txt           01;35
-.ttytterrc     01;35
-.urlview       01;35
+.zshrc         00;31
+.ttytterrc     00;31
+.urlview       01;34
 .vim           01;35
-.vimrc         01;35
-.xinitrc       01;31 
+.vimrc         01;31
+.xinitrc       01;31
+*xinitrc       01;31
 .Xauthority    01;31
-.Xmodmap       00;31
+.Xdefaults     01;31
+*Xdefaults     01;31
+.Xmodmap       01;31
 .Xresources    01;33
 
-# Below, there should be one TERM entry for each termtype that is colorizable
+# below, there should be one TERM entry for each termtype that is colorizable
 TERM Eterm
 TERM ansi
 TERM color-xterm
@@ -253,4 +312,4 @@ TERM xterm-16color
 TERM xterm-256color
 TERM xterm-88color
 TERM xterm-color
-TERM xterm-debian 
+TERM xterm-debian

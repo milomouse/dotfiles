@@ -110,8 +110,6 @@ add_binds("normal", {
     key({},          "K",           function (w) w:scroll{ y = "-1.0p" } end),
     key({},          "h",           function (w) w:scroll{ x = less    } end),
     key({},          "l",           function (w) w:scroll{ x = more    } end),
-    key({},          "^",           function (w) w:scroll{ x = "0%"    } end),
-    key({},          "$",           function (w) w:scroll{ x = "100%"  } end),
     key({"Control"}, "e",           function (w) w:scroll{ y = more    } end),
     key({"Control"}, "y",           function (w) w:scroll{ y = less    } end),
     key({"Control"}, "d",           function (w) w:scroll{ y = "+0.5p" } end),
@@ -133,10 +131,9 @@ add_binds("normal", {
     key({},          "Page_Up",     function (w) w:scroll{ y = "-1.0p" } end),
     key({},          "Home",        function (w) w:scroll{ y = "0%"    } end),
     key({},          "End",         function (w) w:scroll{ y = "100%"  } end),
+    key({},          "0",           function (w) w:scroll{ x = "0%"    } end),
+    key({},          "^",           function (w) w:scroll{ x = "0%"    } end),
     key({},          "$",           function (w) w:scroll{ x = "100%"  } end),
-    key({},          "0",           function (w, m)
-                                        if not m.count then w:scroll{ y = "0%" } else return false end
-                                    end),
 
     -- Zooming
     key({},          "+",           function (w, m)    w:zoom_in(zoom_step  * m.count)       end, {count=1}),

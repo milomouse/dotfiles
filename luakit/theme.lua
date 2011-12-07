@@ -17,13 +17,13 @@ theme.fg   = "#191919"
 theme.bg   = "#eeeeee"
 
 -- General colors
-theme.sbar_bg    = "#191919"
-theme.success_fg = "#d680c5"
-theme.loaded_fg = "#98a7b2"
+theme.sbar_bg        = "#191919"
+theme.success_fg     = "#d680c5"
+theme.loaded_fg      = "#98a7b2"
 theme.sbar_loaded_fg = "#232323"
 theme.sbar_loaded_bg = "#eeeeee"
-theme.error_fg = "#39d3c9"
-theme.error_bg = "#232323"
+theme.error_fg       = "#39d3c9"
+theme.error_bg       = "#232323"
 theme.scroll_sbar_fg = "#191919"
 
 -- Warning colors
@@ -65,11 +65,11 @@ theme.ibar_bg         = "#ccc8bf"
 
 -- Tab label
 theme.tab_fg          = "#72727d"
-theme.tab_bg          = "#232323"
-theme.tab_ntheme      = "#957f8f"
+theme.tab_bg          = "#333333"
+theme.tab_ntheme      = "#8d8d8d"
 theme.selected_fg     = "#343434"
 theme.selected_bg     = "#fefefe"
-theme.selected_ntheme = "#b638b7"
+theme.selected_ntheme = "#77b6c5"
 theme.loading_fg      = "#98a7b2"
 theme.loading_bg      = "#898989"
 

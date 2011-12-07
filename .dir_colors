@@ -265,6 +265,7 @@ ORPHAN         01;30
 .Xdefaults     01;31
 *Xdefaults     01;31
 .Xmodmap       01;31
+.xmodmap       01;31
 .Xresources    01;33
 
 # below, there should be one TERM entry for each termtype that is colorizable

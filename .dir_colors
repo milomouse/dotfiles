@@ -165,6 +165,7 @@ ORPHAN         01;30
 .cfg           00;36
 .coffee        00;36
 .conf          00;36
+*COPYING       01;37
 .cpp           01;35
 .cs            01;35
 .css           01;35
@@ -189,7 +190,7 @@ ORPHAN         01;30
 .gtkrc-2.0     01;30
 .hgignore      01;34
 .go            00;35
-.h             00;35
+.h             01;34
 .hgrc          01;31
 .hs            01;35
 .htm           01;35
@@ -210,6 +211,7 @@ ORPHAN         01;30
 .log           01;37
 .lua           00;35
 .mailcap       01;31
+*Makefile      00;31
 .map           01;32
 .markdown      01;32
 .mostrc        01;31
@@ -218,6 +220,7 @@ ORPHAN         01;30
 .muttrc        01;31
 .nfo           01;37
 .netrc         00;31
+.o             00;34
 .offlineimaprc 01;31
 .opt           00;36
 .pacnew        01;33
@@ -231,6 +234,7 @@ ORPHAN         01;30
 .ratpoisonrc   01;31
 .rb            00;35
 .rc            01;31
+*README        01;37
 .rtf           00;37
 .recently-used 01;30
 .rnd           00;33
@@ -238,8 +242,9 @@ ORPHAN         01;30
 .sed           01;35
 .sh            01;35
 .signature     01;33
+.spec          00;37
 .stumpwmrc     01;31
-.t             01;35
+.t             01;37
 .tcl           01;35
 .tdy           01;35
 .textile       01;35

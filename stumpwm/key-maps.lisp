@@ -101,6 +101,7 @@
     (dk m (kbd "M") "echo-oss-volmute")
     (dk m (kbd "p") "exec pysol --nosound")
     (dk m (kbd "q") "exec xmodmap /howl/conf/keymaps/qwerty.xmodmap")
+    (dk m (kbd "r") "exec urxvt -e ranger /howl")
     (dk m (kbd "s") "exec urxvt -e nsudoku 12")
     (dk m (kbd "x") "exec xskat -opt /howl/conf/xorg/xskat.opt -list /howl/conf/xorg/xskat.lst")
     (dk m (kbd "ESC") "abort")

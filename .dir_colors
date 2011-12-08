@@ -1,7 +1,7 @@
 ## ${XDG_CONFIG_DIR:-${HOME}}/.dir_colors
 # author: milomouse <vincent[at]fea.st>
-# update: 2011-12-06
-# credit: jason ryan http:/jasonwryan.com
+# update: 2011-12-07
+# credit: jason ryan http://jasonwryan.com
 ##
 
 # color (tty, all, none):

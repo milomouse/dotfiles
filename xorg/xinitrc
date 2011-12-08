@@ -6,6 +6,9 @@
 ## keyboard:
 #/usr/bin/xmodmap /howl/conf/keymaps/dvausler.xmodmap
 #/usr/bin/xmodmap /howl/conf/keymaps/dvausler-mod.xmodmap
+#/usr/bin/xmodmap /howl/conf/keymaps/dvausler-mod2.xmodmap
+#/usr/bin/xmodmap /howl/conf/keymaps/dvausler-mod3.xmodmap
+#/usr/bin/xmodmap /howl/conf/keymaps/dvausler-mod4.xmodmap
 #/usr/bin/xmodmap /howl/conf/keymaps/dvausler-oldnum.xmodmap
 #/usr/bin/xmodmap /howl/conf/keymaps/dvausler-programmmer.xmodmap
 #/usr/bin/xmodmap /howl/conf/keymaps/arensito.xmodmap
@@ -14,9 +17,6 @@
 #/usr/bin/xmodmap /howl/conf/keymaps/klausler2.xmodmap
 #/usr/bin/xmodmap /howl/conf/keymaps/klausler2-mod.xmodmap
 #/usr/bin/xmodmap /howl/conf/keymaps/klausler2-mod-programmer.xmodmap
-#/usr/bin/xmodmap /howl/conf/keymaps/capewell-dvorak.xmodmap
-#/usr/bin/xmodmap /howl/conf/keymaps/capewell-dvorak-mod.xmodmap
-#/usr/bin/xmodmap /howl/conf/keymaps/capewell-dvorak-mod-programmer.xmodmap
 /usr/bin/xmodmap /howl/conf/keymaps/personal.xmodmap
 
 # mouse/synclient:

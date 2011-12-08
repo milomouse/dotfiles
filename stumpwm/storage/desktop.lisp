@@ -8,35 +8,43 @@
                                         :NUMBER 0
                                         :X 0
                                         :Y 0
-                                        :WIDTH 800
-                                        :HEIGHT 600
+                                        :WIDTH 790
+                                        :HEIGHT 345
+                                        :WINDOWS NIL
+                                        :CURRENT NIL)
+                                     #S(FDUMP
+                                        :NUMBER 4
+                                        :X 0
+                                        :Y 345
+                                        :WIDTH 790
+                                        :HEIGHT 345
                                         :WINDOWS NIL
                                         :CURRENT NIL)
                                      #S(FDUMP
                                         :NUMBER 1
                                         :X 0
-                                        :Y 600
-                                        :WIDTH 800
-                                        :HEIGHT 300
+                                        :Y 690
+                                        :WIDTH 790
+                                        :HEIGHT 210
                                         :WINDOWS NIL
                                         :CURRENT NIL))
                                     (#S(FDUMP
                                         :NUMBER 2
-                                        :X 800
+                                        :X 790
                                         :Y 0
-                                        :WIDTH 800
-                                        :HEIGHT 440
+                                        :WIDTH 810
+                                        :HEIGHT 320
                                         :WINDOWS NIL
                                         :CURRENT NIL)
                                      #S(FDUMP
                                         :NUMBER 3
-                                        :X 800
-                                        :Y 440
-                                        :WIDTH 800
-                                        :HEIGHT 460
+                                        :X 790
+                                        :Y 320
+                                        :WIDTH 810
+                                        :HEIGHT 580
                                         :WINDOWS NIL
                                         :CURRENT NIL))))
-                            :CURRENT 0)
+                            :CURRENT 1)
                          #S(GDUMP
                             :NUMBER 2
                             :NAME "2"
@@ -52,15 +60,23 @@
                          #S(GDUMP
                             :NUMBER 3
                             :NAME "3"
-                            :TREE (#S(FDUMP
-                                      :NUMBER 0
-                                      :X 0
-                                      :Y 0
-                                      :WIDTH 1600
-                                      :HEIGHT 900
-                                      :WINDOWS NIL
-                                      :CURRENT NIL))
-                            :CURRENT 0)
+                            :TREE ((#S(FDUMP
+                                       :NUMBER 0
+                                       :X 0
+                                       :Y 0
+                                       :WIDTH 1600
+                                       :HEIGHT 640
+                                       :WINDOWS NIL
+                                       :CURRENT NIL)
+                                    #S(FDUMP
+                                       :NUMBER 1
+                                       :X 0
+                                       :Y 640
+                                       :WIDTH 1600
+                                       :HEIGHT 260
+                                       :WINDOWS NIL
+                                       :CURRENT NIL)))
+                            :CURRENT 1)
                          #S(GDUMP
                             :NUMBER 4
                             :NAME "4"

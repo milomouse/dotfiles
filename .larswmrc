@@ -20,13 +20,13 @@ larswm.desktops: 7
 !
 ! Virtual desktop names:
 !
-larswm.?.0.dtname: [A------]
-larswm.?.1.dtname: [-B-----]
-larswm.?.2.dtname: [--C----]
-larswm.?.3.dtname: [---D---]
-larswm.?.4.dtname: [----E--]
-larswm.?.5.dtname: [-----F-]
-larswm.?.6.dtname: [------G]
+larswm.?.0.dtname: [H------]
+larswm.?.1.dtname: [-A-----]
+larswm.?.2.dtname: [--L----]
+larswm.?.3.dtname: [---C---]
+larswm.?.4.dtname: [----Y--]
+larswm.?.5.dtname: [-----O-]
+larswm.?.6.dtname: [------N]
 !
 ! Resize windows when tiling? (If not, move to and stack in right track)
 !

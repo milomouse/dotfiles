@@ -253,6 +253,7 @@ ORPHAN         01;30
 .xml           01;35
 .yml           01;35
 .zcompdump     01;37
+.zwc           01;35
 .zsh           01;35
 .zshrc         00;31
 .ttytterrc     00;31

@@ -7,7 +7,7 @@
 ;; |  sbcl             -> 1.0.54-1                                          ;;
 ;; |  clx              -> 0.7.4-2                                           ;;
 ;; |  cl-ppcre         -> 2.0.3-2                                           ;;
-;; |  stumpwm          -> 0.9.7-80-gb1271a9 Compiled On Sun Dec 04 13:31:53 ;;
+;; |  stumpwm          -> 0.9.7-80-gb1271a9 Compiled On Thu Dec 08 10:46:16 ;;
 ;;-TODO/CHANGELOG:----------------------------------------------------------;;
 ;; >>>-: create a 'dedicate' and 'catchall' window-rule (remember * *)      ;;
 ;; >>--: create a 'dedicate' and 'catchall' hook for changing focus color   ;;

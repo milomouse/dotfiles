@@ -78,6 +78,17 @@ function mvf {
   fi
 }
 
+# update fonts:
+function upf {
+  cd /usr/share/fonts/local
+  sudo /usr/bin/fc-cache -vr
+  sudo mkfontdir
+  sudo mkfontscale
+  xset +fp '/usr/share/fonts/local'
+  xset fp rehash
+  pushd -q +1
+}
+
 # show ps information with simple output for scripts, quick views, etc:
 function psi {
   if [[ ${#${@:/$0}} -ge 2 ]]; then

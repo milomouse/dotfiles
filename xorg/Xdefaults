@@ -9,6 +9,7 @@ urxvt*loginShell: true
 !urxvt*boldFont: -misc-fixed-medium-r-semicondensed-*-12-110-75-75-c-60-koi8-r
 !urxvt*italicFont: -misc-fixed-medium-r-semicondensed-*-12-110-75-75-c-60-koi8-r
 !urxvt*boldItalicFont: -misc-fixed-medium-r-semicondensed-*-12-110-75-75-c-60-koi8-r
+! fork of 6x12 Fixed Semicondensed to emphasize numeric 0's as opposed to alphabetic O's:
 urxvt*font: -misc-fixedzero-medium-r-semicondensed-*-12-110-75-75-c-60-iso10646-1
 urxvt*boldFont: -misc-fixedzero-medium-r-semicondensed-*-12-110-75-75-c-60-iso10646-1
 urxvt*italicFont: -misc-fixedzero-medium-r-semicondensed-*-12-110-75-75-c-60-iso10646-1

@@ -102,7 +102,7 @@ then run the command synchronously and collect the output."
 (set-msg-border-width 1)
 
 ;; fonts/colors.
-(set-font "-misc-fixed-medium-r-semicondensed-*-12-110-75-75-c-60-koi8-r")
+(set-font "-misc-fixedzero-medium-r-semicondensed-*-12-110-75-75-c-60-iso10646-1")
 (set-fg-color        "grey64")
 (set-bg-color        "grey14")
 (set-focus-color     "grey60")

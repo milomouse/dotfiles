@@ -12,7 +12,7 @@ larswm.background: #101010
 !
 ! Status bar font:
 !
-larswm.font: -misc-fixed-medium-r-semicondensed-*-12-110-75-75-c-60-koi8-r
+larswm.font: -misc-fixedzero-medium-r-semicondensed-*-12-110-75-75-c-60-iso10646-1
 !
 ! Number of virtual desktops per physical screen: (1 - 16)
 !

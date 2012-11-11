@@ -3,43 +3,51 @@ function zshaddhistory {
   local line cmd
   line=${1%%$'\n'} ; cmd=${line%% *}
   [[ ${#line} -ge 5
-      && ${cmd} != (history|fc|mpq|srm|rms|rds)
+      && ${cmd} != (history|fc|srm|rms|rds|mpq)
       && ${cmd} != ([szx]edit|[zx]load|zhist|wika)
-  ]] && (( ! $argv[(I)*unrl*|*spar*|*losetup*|*aespipe*|*litika*|sudo rm*] ))
+  ]] && (( ! $argv[(I)*unrl*|*spar*|*losetup*|*aespipe*|sudo rm*] ))
 }
 
-## test arguments and [if valid] prepend file:// to local requests:
-#function {jumanji,vimprobable} {
-#  setopt no_warncreateglobal
-#  for i in {1..999}; do # this will break when arguments run out
-#    if [[ ${+i} == 1 && ${(P)i} != ${(P)$(($i - 1))} ]]; then
-#      if [[ -f $PWD/${(P)i} ]]; then __urls=(${__urls} file://$PWD/${(P)i})
-#      elif [[ -f ${(P)i} ]]; then __urls=(${__urls} file://${(P)i})
-#      else __urls=(${__urls} ${(P)i}) ; fi
-#    else if [[ ${+__urls} == 1 ]]; then
-#        command $0 ${__urls} 2>/dev/null ; unset __urls ; break ; fi ; fi
-#  done
-#}
-
-# attach rtorrent from daemon mode to view/edit torrents:
-function rot {
-  if [[ ${TERM} =~ screen ]]; then
-    print "Aborting, please avoid nesting sessions.."
-  else
-    /usr/bin/tmux -S /tmp/.${UID}/tmux/rtorrent attach-session
-  fi
+# show running daemons; list and higlight according to
+# (@daemon !daemon daemon) and non-"/etc/rc.conf" daemon:
+function daemons {
+  local rc d dtime
+  rc=${(s. .)${${${(M)${(f)"$(</etc/rc.conf)"}:#DAEMONS=*}##DAEMONS*=[= \(]}%\)}}
+  for d in /run/daemons/*; do
+    dtime=${(F)${${${(@f)"$(ls -tgr --time-style='+[[%m-%d|%H%M:%S]^' $d)"/\^*\// }[2,$]}#*\[}}
+    d=${d/*\/};i=${${(s. .)${(M)${rc}#*${d}}}[-1]}
+    if [[ $d == $i || ${d[-1]} == $i ]]; then
+      print "\033[1;32m[\033[0;32mrc\033[0;37m| \033[1;32m]\033[1;31m${${${dtime/$d/\033[0;34m${d}\033[0m}/|/\033[0;37m|\033[0;31m}/\]/\033[1;31m\]}"
+    elif [[ "@${d}" == $i ]]; then
+      print "\033[1;32m[\033[0;32mrc\033[0;37m|\033[0;35m@\033[1;32m]\033[1;31m${${${dtime/$d/\033[0;35m${d}\033[0m}/|/\033[0;37m|\033[0;31m}/\]/\033[1;31m\]}"
+    elif [[ "!${d}" == $i ]]; then
+      print "\033[1;32m[\033[0;32mrc\033[0;37m|\033[0;33m!\033[1;32m]\033[1;31m${${${dtime/$d/\033[43;30m${d}\033[0m}/|/\033[0;37m|\033[0;31m}/\]/\033[1;31m\]}"
+    else
+      print "\033[1;32m[\033[1;37mUSER\033[1;32m]\033[1;31m${${${dtime/$d/\033[1;37m${d}\033[0m}/|/\033[0;37m|\033[0;31m}/\]/\033[1;31m\]}"
+    fi
+  done
 }
 
 # check ownership of given argument, as determined by pacman:
 function owns {
-  if [[ -n $(for each in ${PATH//:\\\n}; do
-             find ${each}/$1 2>/dev/null ; done) ]]
-  then pacman -Qo $(which -p $1)
-  else pacman -Qo $1 ; fi
+  if [[ -a $1 ]]; then pacman -Qo $1
+  elif [[ -a $(whence $1) ]]; then whence -a $1 | pacman -Qo -
+## FIRST: do $(whence -caw $1); then proceed for COMMAND elif NONE else SHELLSTUFF
+#
+#  elif [[ -a ${$(whence -ca $1)[-1]} ]]; then
+#    command find $(whence -ca $1) 2>/dev/null | while read i; do
+#      if [[ -a $i ]]; then
+#        printf "\033[0;31m $(pacman -Qqo $i)\033[0m owns "
+#        command ls -lgo --color=always $i
+#      fi
+#    done
+  else print ${$(whence -w $1)/none/does not exist}
+  fi
 }
 
 # jump to previous directory by integer or reg-exp, also list dirs,
 # else jump to last visited directory if no argument supplied:
+# UPDATE: try to remember to use ZSH directory stack instead... ( cd [-|+]^Tab )
 function back {
   if [[ $# == 1 ]]; then
     case $1 {
@@ -60,7 +68,7 @@ function up {
   done
 }
 
-# copy and follow file to new dir:
+# copy and follow file(s) to new dir:
 function cpf {
   if [[ -d $*[-1] ]]; then
     cp $* && cd $*[-1]
@@ -69,7 +77,7 @@ function cpf {
   fi
 }
 
-# move and follow file to new dir:
+# move and follow file(s) to new dir:
 function mvf {
   if [[ -d $*[-1] ]]; then
     mv $* && cd $*[-1]
@@ -123,51 +131,6 @@ function 256co {
   print ; done
 }
 
-# function to quickly play video files:
-function mpq {
-  setopt no_warncreateglobal
-  [[ -z ${DISPLAY} && $(tty) = /dev/tty[1-3] ]] && _mopt=(-vo fbdev)
-  case $1 {
-    'm') local _vol=${$(command ossmix|grep outvol)[-2]}
-         command ossmix vmix0-outvol 25 &>/dev/null
-         command mplayer ${_mopt} -volume 100 -fs -really-quiet -msglevel all=0 ${@:/$1} &>/dev/null
-         command ossmix vmix0-outvol ${_vol} &>/dev/null ;;
-    *)   command mplayer ${_mopt} -volume 100 -really-quiet -msglevel all=0 ${@} &>/dev/null
-  }
-  setopt warncreateglobal
-}
-
-# function to quickly view word definitions:
-function sd {
-  case $1 in
-    '-r'|'-ru') sdcv -u "en-ru-bars" ${@:/$1} 2>/dev/null ;;
-    '-w'|'-wordnet') sdcv -u "WordNet" ${@:/$1} 2>/dev/null ;;
-    '-t'|'-thesaurus') sdcv -u "English Thesaurus" ${@:/$1} 2>/dev/null ;;
-    '-a'|'-all') sdcv ${@:/$1} 2>/dev/null ;;
-    *) sdcv $@ 2>/dev/null
-  esac
-}
-
-# un-smart function for my todo lists:
-function todo {
-  case $# {
-    0) command ls -1 ${H:-/howl}/othe/.TODO_* ;;
-    1) command vim ${H:-/howl}/othe/.TODO_$1 ;;
-    *) command vim ${H:-/howl}/othe/.TODO_${@// /_}
-  }
-}
-
-# un-smart function for viewing/editing history file (still use 'fc/history'):
-function zhist {
-  if [[ $# == 1 ]]; then
-    case $1 {
-      e)  ${EDITOR:-/usr/bin/vim} ${ZDOTDIR:-${HOME}/zsh}/.history ;;
-      a)  <${ZDOTDIR:-${HOME}/zsh}/.history | less ;;
-      *)  <${ZDOTDIR:-${HOME}/zsh}/.history|grep -i $1
-    }
-  fi
-}
-
 # quirky tmux function:
 function tmux {
   if [[ ${@[-2]} == '--' ]]; then
@@ -180,14 +143,136 @@ function tmux {
   fi
 }
 
+# attach rtorrent from daemon mode to view/edit torrents:
+function rot {
+  if [[ ${TERM} =~ screen ]]; then
+    print "Aborting, please avoid nesting sessions."
+  else
+    /usr/bin/tmux -S /tmp/.${UID}/tmux/rtorrent attach-session
+  fi
+}
+
+# function to quickly play video files:
+function mpq {
+  setopt no_warncreateglobal
+  [[ -z ${DISPLAY} && $(tty) = /dev/tty[1-3] ]] && _mopt=(-vo fbdev)
+  [[ -n $1 ]] && : || { print - "-m = movie, -r = random (*genre*|list), -help" }
+  case $1 {
+    'm'|'-m'|'r'|'-r')
+       local _vol=${$(command ossmix|grep outvol)[-2]}
+       if [[ $1 == [mM] || $1 == '-m' ]]; then
+         command ossmix vmix0-outvol 25 &>/dev/null
+         command mplayer ${_mopt} -volume 100 -fs -really-quiet -msglevel all=0 ${@:/$1} &>/dev/null ; \
+         command ossmix vmix0-outvol ${_vol} &>/dev/null
+       else
+         if [[ -n $2 ]]; then
+           if [[ $2 == list || $2 == help ]]; then
+             if [[ -n $3 ]]; then
+               ls ${XDG_VIDEOS_DIR:-/howl/vide}/film/$3
+             else
+               ls ${XDG_VIDEOS_DIR:-/howl/vide}/film
+             fi
+           else
+             vide=$(find ${XDG_VIDEOS_DIR:-/howl/vide}/film/$2 -type f 2>/dev/null | sort -R | tail -n 1)
+             if [[ -f ${vide} ]]; then
+               print - ${vide} ; sleep 1s
+               command ossmix vmix0-outvol 25 &>/dev/null
+               command mplayer ${_mopt} -volume 100 -fs -really-quiet -msglevel all=0 ${vide} &>/dev/null ; \
+               command ossmix vmix0-outvol ${_vol} &>/dev/null
+             else
+               print "no such file or movie genre directory, aborting."
+             fi
+           fi
+         else
+           vide=$(find ${XDG_VIDEOS_DIR:-/howl/vide}/film/ -type f 2>/dev/null | sort -R | tail -n 1)
+           if [[ -f ${vide} ]]; then
+             print - ${vide} ; sleep 1s
+             command ossmix vmix0-outvol 25 &>/dev/null
+             command mplayer ${_mopt} -volume 100 -fs -really-quiet -msglevel all=0 ${vide} &>/dev/null ; \
+             command ossmix vmix0-outvol ${_vol} &>/dev/null
+           else
+             print "no such file or movie genre directory, aborting."
+           fi
+         fi
+       fi
+       command ossmix vmix0-outvol ${_vol} &>/dev/null ;;
+    '-h'|'help'|'-help'|'--help') print - "-m = movie, -r = random (*genre*|list), -help" ;;
+    *) command mplayer ${_mopt} -volume 100 -really-quiet -msglevel all=0 ${@} &>/dev/null
+  }
+  setopt warncreateglobal
+}
+
+# function to quickly view word definitions:
+function sd {
+  case $1 in
+    '-r'|'-ru') sdcv --utf8-output -u "en-ru-bars" ${@:/$1} 2>/dev/null ;;
+    '-w'|'-wordnet') sdcv --utf8-output -u "WordNet" ${@:/$1} 2>/dev/null ;;
+    '-t'|'-thesaurus') sdcv --utf8-output -u "English Thesaurus" ${@:/$1} 2>/dev/null ;;
+    '-a'|'-all') sdcv --utf8-output ${@:/$1} 2>/dev/null ;;
+    *) sdcv --utf8-output $@ 2>/dev/null
+  esac
+}
+
+# un-smart function for my todo lists:
+function todo {
+  case $# {
+    0) print -C 1 ${$(ls -1 ${H:-/howl}/othe/.TODO_*)/*_} ;;
+    1) command vim ${H:-/howl}/othe/.TODO_$1 ;;
+    *) command vim ${H:-/howl}/othe/.TODO_${@// /_}
+  }
+}
+
+# un-smart function for viewing/editing history file (still use 'fc/history'):
+function zhist {
+  if [[ $# -ge 1 ]]; then
+    case $1 {
+      '-a'|'-all') <${ZDOTDIR:-${HOME}/zsh}/.history | ${PAGER:-less} ;;
+      '-e'|'--edit') ${EDITOR:-/usr/bin/vim} ${ZDOTDIR:-${HOME}/zsh}/.history ;;
+      '-f'|'--find') [[ -n $2 ]] && <${ZDOTDIR:-${HOME}/zsh}/.history|grep -i "${${@:/$1}// /\|}" ;;
+    }
+  else
+    print - "options: -e (edit), -f (find), -a (all)"
+  fi
+}
+
+## test arguments and [if valid] prepend file:// to local requests:
+#function {jumanji,vimprobable} {
+#  setopt no_warncreateglobal
+#  for i in {1..999}; do # this will break when arguments run out
+#    if [[ ${+i} == 1 && ${(P)i} != ${(P)$(($i - 1))} ]]; then
+#      if [[ -f $PWD/${(P)i} ]]; then __urls=(${__urls} file://$PWD/${(P)i})
+#      elif [[ -f ${(P)i} ]]; then __urls=(${__urls} file://${(P)i})
+#      else __urls=(${__urls} ${(P)i}) ; fi
+#    else if [[ ${+__urls} == 1 ]]; then
+#        command $0 ${__urls} 2>/dev/null ; unset __urls ; break ; fi ; fi
+#  done
+#}
+
+# quickly view the Linux kernel tainting information:
+function iftainted() {
+  case $(</proc/sys/kernel/tainted) {
+    1) print "1: A module with a non-GPL license has been loaded, this includes modules with no license." ;;
+    2) print "2: A module was force loaded by insmod -f" ;;
+    4) print "4: Unsafe SMP processors: SMP with CPUs not designed for SMP." ;;
+    8) print "8: A module was forcibly unloaded from the system by rmmod -f." ;;
+    16) print "16: A hardware machine check error occurred on the system." ;;
+    32) print "32: A bad page was discovered on the system." ;;
+    64) print "64: The user has asked that the system be marked tainted." ;;
+    128) print "128: The system has died." ;;
+    256) print "256: The ACPI DSDT has been overridden with one supplied by the user instead of using the one provided by the hardware." ;;
+    512) print "512: A kernel warning has occurred." ;;
+    1024) print "1024: A module from drivers/staging was loaded." ;;
+    *) print "Kernel does not appear to be tainted, or unknown." ;;
+  }
+}
+
 # one-liners/micro functions:
-function flashproc { for f (${$(file /proc/$(pidof luakit)/fd/*|gawk '/\/tmp\/Flash/ {print $1}')//:}){print - "$f"} }
-function lss { ls -- ${1:-.}/*(D.om) }
+function flashproc { for f (${$(file /proc/$(pidof luakit)/fd/*|gawk '/\/tmp\/Flash/ { print $1}')//:}){ print - "$f" }}
 function rc { [[ -n $1 ]] && sudo /etc/rc.d/$1 ${@:/$1} }
-function alv { <${${$(command find ${H:-/howl}/othe/archive/installed_*)}[${1:--1}]}|w3m -o pagerline=1000 -o confirm_qq=0 }
+#function alv { <${${$(command find ${H:-/howl}/othe/archive/installed_*)}[${1:--1}]}|w3m -o pagerline=1000 -o confirm_qq=0 }
 function mkcd { command mkdir -p "$@" && cd "$@" }
 function pubip { curl -m 30 http://automation.whatismyip.com/n09230945.asp }
 function newmail { print - ${(Fw)#$(find /howl/mail/*/*/new -type f)} }
 function qdep { pacman-color -Q $@ $(pacman-color -Qi $@|grep Depends|cut -d: -f2-|sed -E 's|>\S+\>||g') }
 function timec { print "$(date +'%T %Y-%m-%d')" ; while sleep 1 ; do printf '\r%s ' "$(date +'%T %Y-%m-%d')" ; done }
-function dropcache { sync && command su -s /bin/zsh -c 'echo 1 > /proc/sys/vm/drop_caches && echo 2 > /proc/sys/vm/drop_caches' root }
+function dropcache { sync && command su -s /bin/zsh -c 'echo 3 > /proc/sys/vm/drop_caches' root }

@@ -103,7 +103,7 @@ require "follow"
 -- To use a custom character set for the follow hint labels un-comment and
 -- modify the following:
 --local s = follow.styles
---follow.style = s.sort(s.reverse(s.charset("asdfqwerzxcv"))) -- I'm a lefty
+--follow.style = s.sort(s.reverse(s.charset("asdfqwerzxcv")))
 local s = follow.styles
 follow.style = s.upper(s.sort(s.reverse(s.charset("asdfqwerzxcv"))))
 

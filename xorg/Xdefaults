@@ -1,15 +1,15 @@
 !! ${XDG_CONFIG_DIR:-$HOME/.config}/xorg/Xdefaults
 !! author: milomouse <vincent[at]fea.st>
-!! update: 2011-12-10
+!! update: 2012-01-31
 
-!! settings:
+!! urxvt settings:
 urxvt*termName: rxvt-256color
 urxvt*loginShell: true
 !urxvt*font: -misc-fixed-medium-r-semicondensed-*-12-110-75-75-c-60-koi8-r
 !urxvt*boldFont: -misc-fixed-medium-r-semicondensed-*-12-110-75-75-c-60-koi8-r
 !urxvt*italicFont: -misc-fixed-medium-r-semicondensed-*-12-110-75-75-c-60-koi8-r
 !urxvt*boldItalicFont: -misc-fixed-medium-r-semicondensed-*-12-110-75-75-c-60-koi8-r
-! fork of 6x12 Fixed Semicondensed to emphasize numeric 0's as opposed to alphabetic O's:
+!! ===> fork of 6x12 Fixed SemiCondensed; emphasize numeric 0's as opposed to alphabetic O's:
 urxvt*font: -misc-fixedzero-medium-r-semicondensed-*-12-110-75-75-c-60-iso10646-1
 urxvt*boldFont: -misc-fixedzero-medium-r-semicondensed-*-12-110-75-75-c-60-iso10646-1
 urxvt*italicFont: -misc-fixedzero-medium-r-semicondensed-*-12-110-75-75-c-60-iso10646-1
@@ -28,8 +28,6 @@ urxvt*transparent: false
 urxvt*shading: 4
 urxvt*fading: 16
 urxvt*cursorColor: #a488d9
-Xcursor.theme: whiteglass
-Xcursor.size: 10
 
 !! extensions:
 urxvt*perl-ext: default,url-select
@@ -90,20 +88,40 @@ urxvt*underlineURLs: true
 *color8:  #3d3a3a
 *color1:  #d770af
 *color9:  #d28abf
-*color2 : #9acc79
-*color10: #8fb676
+*color2:  #78a45c
+*color10: #9acc79
 *color3:  #d0d26b
 *color11: #c8bc45
-*color4 : #77b6c5
+*color4:  #77b6c5
 *color12: #8fa7b9
 *color5:  #a488d9
 *color13: #bd89de
-*color6:  #7fcab3
+*color6:  #7ac0af
 *color14: #6ec2a8
 *color7:  #8d8d8d
 *color15: #dad3d3
 
+!! cloud (xcolors.net)
+!*color0:  #222827
+!*color8:  #5D6F74
+!*color1:  #D5A8E3
+!*color9:  #CD749C
+!*color2:  #9C75DD
+!*color10: #63B0B0
+!*color3:  #9898AE
+!*color11: #C0C0DD
+!*color4:  #654A96
+!*color12: #5786BC
+!*color5:  #625566
+!*color13: #3F3442
+!*color6:  #A9D1DF
+!*color14: #849DA2
+!*color7:  #E6EBE5
+!*color15: #D9D6CF
+
 !! various X stuff
+Xcursor.theme: whiteglass
+Xcursor.size: 10
 XFontSel*sampleText.background:       TEXTBG
 XFontSel*menu*showUnselectable:       false
 XFontSel*MenuButton.shadowWidth:      0

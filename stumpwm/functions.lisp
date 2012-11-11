@@ -90,11 +90,12 @@ will only display valid files anyway."
     (if show-indicator (show-frame-outline group))))
 
 (defun split-frame-in-dir (group dir)
+"Split frame in a specified direction."
   (let ((f (tile-group-current-frame group)))
     (if (split-frame group dir)
-        (progn
-          (update-decoration (frame-window f)))
-        (message "Canot split smaller than minimum size."))))
+        (progn ())
+       ;   (update-decoration (frame-window f)))
+        (message "Cannot split smaller than minimum size."))))
 
 (defun run-shell-command-output (command)
 "Run a shell command and display results (may hang if used wrong)."
@@ -122,11 +123,11 @@ will only display valid files anyway."
              (let* ((arg-line (make-argument-line :string input :start 0))
                     (cmd (argument-pop arg-line)))
                (let ((*interactivep* interactivep))
-		 (call-interactively cmd arg-line)))))
+      (call-interactively cmd arg-line)))))
     (multiple-value-bind (result error-p)
       ;; <original quote=
       ;; this fancy footwork lets us grab the backtrace from where the error actually happened.>
-      (restart-case (handler-bind 
+      (restart-case (handler-bind
           ((error (lambda (c)
                     (invoke-restart 'eval-command-error
                           (format nil "^B^0*{{ ^9*~a ^0*}} ^n~A~a" 
@@ -158,7 +159,7 @@ will only display valid files anyway."
       (dk m (kbd "ESC") "abort-iresize")
     M)))) (update-resize-map)
 
-;; incomplete, was just testing alsa out..
+;; incomplete, was just testing ALSA out.. still using OSS
 ;(defcommand amixer-control (channel arg)
 ;  (let ((variance (run-shell-command (concatenate 'string
 ;      "print ${$(amixer sget " channel ")[-2,-1]//(\[|\]|.*dB|-)}"))))

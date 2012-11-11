@@ -4,7 +4,7 @@
 # Option values are case insensitive.
 
 # Start in full screen mode
-full-screen   = False
+full-screen   = True
 
 # Maximize small images
 maximize      = False
@@ -16,7 +16,7 @@ scale-down    = True
 menu          = False
 
 # Display info about the image
-info          = True
+info          = False
 
 # Display scrollbars
 scrollbars    = False
@@ -25,7 +25,7 @@ scrollbars    = False
 zoom-pointer  = False
 
 # Alpha checks in the background
-alpha-checks  = True
+alpha-checks  = False
 
 # Dithering
 dither        = False
@@ -64,7 +64,7 @@ confirm_quit  = False
 save_quit     = True
 
 # Enable transitions
-transitions   = True
+transitions   = False
 
 # Recursive directory traversal
 recursive     = False
@@ -76,7 +76,7 @@ keep_transfo  = False
 opengl-errors = False
 
 # Enable OpenGL filtering
-filtering     = True
+filtering     = False
 
 # Maximum framerate
 fps           = 100
@@ -103,7 +103,7 @@ notice-time   = 500
 trans-time    = 500
 
 # Initial image position
-initial_pos   = 0
+initial_pos   = 5
 
 # background: red channel
 bg_col_red    = 0
@@ -154,30 +154,30 @@ action_command = display -window root -resize 1366x768! %f
 ; (gtk_accel_path "<GLiv>/Commands/Action on every image/Set Wallpaper (aspect)" "")
 ; (gtk_accel_path "<GLiv>/Options/Hide the cursor" "d")
 ; (gtk_accel_path "<GLiv>/Commands/Toggle floating windows" "w")
-(gtk_accel_path "<GLiv>/Transformations/Undo" "<Control>u")
+(gtk_accel_path "<GLiv>/Transformations/Undo" "<Primary>u")
 ; (gtk_accel_path "<GLiv>/Options/Options..." "t")
 ; (gtk_accel_path "<GLiv>/Transformations/Set position/Center" "")
 ; (gtk_accel_path "<GLiv>/Commands/Reload the current image" "")
 ; (gtk_accel_path "<GLiv>/Options/Toggle Scrollbars" "s")
 (gtk_accel_path "<GLiv>/Commands/Load first image" "braceleft")
-(gtk_accel_path "<GLiv>/Transformations/Rotation/Rotate -0.1 deg" "<Control>l")
+(gtk_accel_path "<GLiv>/Transformations/Rotation/Rotate -0.1 deg" "<Primary>l")
 ; (gtk_accel_path "<GLiv>/File/Open..." "o")
-(gtk_accel_path "<GLiv>/Transformations/Redo" "<Control>r")
+(gtk_accel_path "<GLiv>/Transformations/Redo" "<Primary>r")
 ; (gtk_accel_path "<GLiv>/Options/Toggle Status Bar" "i")
 (gtk_accel_path "<GLiv>/Options/Toggle Menu Bar" "m")
 ; (gtk_accel_path "<GLiv>/File/Quit" "q")
 (gtk_accel_path "<GLiv>/Help/Controls..." "")
-(gtk_accel_path "<GLiv>/Transformations/Rotation/Rotate -90 deg" "<Control>j")
+(gtk_accel_path "<GLiv>/Transformations/Rotation/Rotate -90 deg" "<Primary>j")
 (gtk_accel_path "<GLiv>/Commands/Load the Nth image..." "slash")
 ; (gtk_accel_path "<GLiv>/Transformations/Reset" "r")
 ; (gtk_accel_path "<GLiv>/Help/About..." "")
 (gtk_accel_path "<GLiv>/Transformations/Move/Move down" "j")
 (gtk_accel_path "<GLiv>/Transformations/Image fit window" "f")
 ; (gtk_accel_path "<GLiv>/Options/Set this window as server" "")
-(gtk_accel_path "<GLiv>/Transformations/Rotation/Rotate +90 deg" "<Control>k")
+(gtk_accel_path "<GLiv>/Transformations/Rotation/Rotate +90 deg" "<Primary>k")
 (gtk_accel_path "<GLiv>/Transformations/Move/Move right" "l")
-(gtk_accel_path "<GLiv>/Transformations/Vertical flip" "<Control>y")
-(gtk_accel_path "<GLiv>/Transformations/Horizontal flip" "<Control>x")
+(gtk_accel_path "<GLiv>/Transformations/Vertical flip" "<Primary>y")
+(gtk_accel_path "<GLiv>/Transformations/Horizontal flip" "<Primary>x")
 (gtk_accel_path "<GLiv>/Transformations/Scale down large image" "")
 ; (gtk_accel_path "<GLiv>/Commands/Action on every image/Set Wallpaper (original)" "")
 ; (gtk_accel_path "<GLiv>/" "")
@@ -198,9 +198,9 @@ action_command = display -window root -resize 1366x768! %f
 ; (gtk_accel_path "<GLiv>/Transformations/Set position/Top left" "Home")
 (gtk_accel_path "<GLiv>/Transformations/Move/Move left" "h")
 ; (gtk_accel_path "<GLiv>/Commands/Shuffle images list" "")
-(gtk_accel_path "<GLiv>/Transformations/Clear history" "<Control>c")
+(gtk_accel_path "<GLiv>/Transformations/Clear history" "<Primary>c")
 ; (gtk_accel_path "<GLiv>/Commands/Start the slide show" "Pause")
-(gtk_accel_path "<GLiv>/Transformations/Maximize small image" "<Control>m")
+(gtk_accel_path "<GLiv>/Transformations/Maximize small image" "<Primary>m")
 ; (gtk_accel_path "<GLiv>/Commands/Sort images list" "")
 ; (gtk_accel_path "<GLiv>/Commands/Action on every image/Open in Gimp" "")
 ; (gtk_accel_path "<GLiv>/Commands/Rebuild images menus" "")
@@ -209,5 +209,5 @@ action_command = display -window root -resize 1366x768! %f
 ; (gtk_accel_path "<GLiv>/Commands/Edit actions..." "")
 ; (gtk_accel_path "<GLiv>/Transformations/Zoom out" "minus")
 ; (gtk_accel_path "<GLiv>/Transformations/Fit width" "")
-(gtk_accel_path "<GLiv>/Transformations/Rotation/Rotate +0.1 deg" "<Control>h")
+(gtk_accel_path "<GLiv>/Transformations/Rotation/Rotate +0.1 deg" "<Primary>h")
 ; (gtk_accel_path "<GLiv>/Transformations/Set position/Bottom right" "")

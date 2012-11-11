@@ -57,7 +57,7 @@ if &t_Co > 255
   hi SpecialKey     term=none cterm=none ctermfg=151  ctermbg=none
   hi Statement      term=none cterm=none ctermfg=103  ctermbg=none
   hi StatusLine     term=none cterm=none ctermfg=234  ctermbg=59
-  hi StatusLineNC   term=none cterm=none ctermfg=103  ctermbg=234
+  hi StatusLineNC   term=none cterm=none ctermfg=237  ctermbg=234
   hi StorageClass   term=none cterm=none ctermfg=249  ctermbg=none
   hi String         term=none cterm=none ctermfg=7    ctermbg=none
   hi Structure      term=none cterm=none ctermfg=229  ctermbg=none
@@ -72,7 +72,7 @@ if &t_Co > 255
   hi WarningMsg     term=none cterm=none ctermfg=15   ctermbg=none
   hi WildMenu       term=none cterm=none ctermfg=194  ctermbg=none
 else " for linux console (update this for non-256 colors)
-  hi Normal 	      ctermfg=7    ctermbg=234
+  hi Normal         ctermfg=7    ctermbg=234
   hi Boolean        ctermfg=9    ctermbg=none
   hi Character      ctermfg=9    ctermbg=none
   hi Comment        ctermfg=5    ctermbg=none

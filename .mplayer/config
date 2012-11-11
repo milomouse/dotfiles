@@ -10,7 +10,6 @@ ao=oss,sdl
 volstep=2
 softvol-max=160
 vo=xv,gl2,gl_nosw,gl,sdl
-#autoq=100
 spuaa=4
 spugauss=0.7
 spualign=2
@@ -34,17 +33,32 @@ nomouseinput=yes
 ## profiles:
 #################################################
 [vo.fbdev]
-profile-desc="profile for framebuffer vo"
+profile-desc="profile for vo framebuffer"
 vf=scale=1600:900
 framedrop=yes
 double=no
 
+[vo.xv]
+profile-desc="profile for vo xv"
+vf=screenshot
+
 [protocol.dvd]
 profile-desc="profile for dvd:// streams"
-af=volume=20:0,volnorm=2
-vf=pp=ha:164:7:y/va:y/dr:y/tn:3:5:7:y,unsharp=l5x5:0.01:c5x5:-0.02
+dvd-device=/dev/dvd
+af=volume=5:0,volnorm=2
+vf=pp=h1:y/v1:y/dr:c/tn:2:4:6:n,hqdn3d=3:1:5:0.6,unsharp=l5x5:0.04:c5x5:-0.05
+#vf=pp=ha:164:7:y/va:y/dr:y/tn:3:5:7:y,unsharp=l5x5:0.01:c5x5:-0.02
 
 [protocol.dvdnav]
 profile-desc="profile for dvdnav:// streams"
 profile=protocol.dvd
 nocache=yes
+
+[protocol.cdda]
+profile-desc="profile for cdda:// streams"
+cdrom-device=/dev/cdrom
+#af=hrtf
+
+[protocol.cddb]
+profile-desc="profile for cddb:// streams"
+profile=protocol.cdda

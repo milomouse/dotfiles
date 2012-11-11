@@ -1,6 +1,8 @@
 -- Global variables for luakit
 globals = {
-    homepage            = "https://bbs.archlinux.org/search.php?action=show_new",
+   -- homepage            = "https://bbs.archlinux.org/search.php?action=show_new",
+   -- homepage            = "https://duckduckgo.com/?kd=1&k1=-1&ke=-1&ka=s&kb=d&kf=fw&kh=1&kk=-1&ko=s&kr=b&kt=n&kv=1&kw=n&kx=e&ky=-1&kp=1&q=",
+    homepage            = "https://archlinux.org/",
     scroll_step         = 40,
     zoom_step           = 0.1,
     max_cmd_history     = 100,
@@ -11,7 +13,7 @@ globals = {
  -- Disables loading of hostnames from /etc/hosts (for large host files)
     load_etc_hosts      = false,
  -- Disables checking if a filepath exists in search_open function
-    check_filepath      = false,
+    check_filepath      = true,
 }
 
 -- Make useragent

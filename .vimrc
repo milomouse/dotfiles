@@ -1,6 +1,6 @@
 " ${XDG_CONFIG_HOME:-${HOME}}/.vimrc
 " author: milomouse <vincent[at]fea.st>
-" update: 2011-07-03
+" update: 2012-09-29
 
 " ViM + ZSH + UTF-8
 set nocompatible
@@ -65,12 +65,12 @@ set viminfo='20,<50,s10,h,n~/.vim/viminfo
 
 " Filetypes
 set grepprg=grep\ -nH\ $*
+autocmd BufNewFile,BufRead /etc/iptables/* set ft=iptables
 autocmd BufNewFile,BufRead ~H/rite/mine/* set ft=txt | set wrap | set spell
 autocmd BufNewFile,BufRead ~H/mail/*  set ft=mail | set textwidth=72 | set spell
 autocmd BufNewFile,BufRead Xdefaults  set ft=xdefaults
 autocmd BufNewFile,BufRead .larswmrc  set ft=xdefaults
 autocmd BufNewFile,BufRead .stumpwmrc set ft=lisp
-autocmd BufNewFile,BufRead ~/stumpwm/storage/* set ft=lisp
 autocmd BufNewFile,BufRead ~/zsh/*    set ft=zsh
 autocmd BufNewFile,BufRead .TODO_*    set ft=conf
 autocmd BufReadPost *

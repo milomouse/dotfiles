@@ -20,7 +20,9 @@
 ;; restored from *data-dir*/create file.
 ;; TIP: if the :restore flag is set then group dump is restored even for an
 ;; existing group using *data-dir*/restore file.
-;; frame raise lock (lock AND raise == jumpto)
+
+;; (define-frame-preference "WORKSPACE#"
+;;   (frame(number) | raise(boolean) | lock(boolean) [lock AND raise == jumpto]))
 
 ;; internet related workspace:
 (define-frame-preference "3"

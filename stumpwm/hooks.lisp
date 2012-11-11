@@ -3,8 +3,9 @@
 ;; *data-dir*/../hooks.lisp              ;;
 ;;-----------------------------------------
 
-;; show local windows in frame when focusing on it. unfortunately the echo
-;; command is cropped when focused frame overlaps part of it's output.
+;; show local windows in frame when focusing on it.
+;; unfortunately the echo command is cropped when
+;; focused frame overlaps part of it's output.
 ;(defun local-list (from-frame to-frame)
 ;  (run-commands "echo-frame-windows"))
 ;add-hook *focus-frame-hook* 'local-list)

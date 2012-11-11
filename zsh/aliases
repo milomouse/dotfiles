@@ -13,7 +13,7 @@ alias llm="llt -c"
 alias llx="lx -l"
 alias rd="/bin/rm -r"
 
-# useless quick views/edits:
+# trivial quick views/edits:
 alias wika="${BROWSER:-/usr/bin/w3m} /usr/share/doc/arch-wiki/html/index.html"
 alias sedit="${EDITOR:-/usr/bin/vim} -p ${HOME}/.stumpwmrc ${XDG_CONFIG_DIR:-${HOME}}/stumpwm/{functions,macros,commands,hooks,key-maps}.lisp"
 alias zedit="${EDITOR:-/usr/bin/vim} -p ${HOME}/{.zshrc,zsh/{functions,aliases,exports,options,.zlogin},.dir_colors}"
@@ -25,30 +25,28 @@ alias gh="cd ${H:-/howl}"
 # program masquing:
 alias sudo='/usr/bin/sudo '
 alias svim="sudo ${EDITOR:-/usr/bin/vim}"
-alias info="/usr/bin/info --vi-keys"
-alias diff="/usr/bin/colordiff"
-alias grep="/bin/grep --color=auto"
-alias mutt="/usr/bin/mutt -F ${XDG_CONFIG_DIR:-${HOME}}/mutt/muttrc"
-alias xskat="/usr/bin/xskat -opt ${XDG_CONFIG_DIR:-${HOME}}/xorg/xskat.opt -list ${XDG_CONFIG_DIR:-${HOME}}/xorg/xskat.lst"
-alias offlineimap="/usr/bin/offlineimap -c ${XDG_CONFIG_DIR:-${HOME}}/.offlineimap/offlineimaprc"
-alias rtorrent="/usr/bin/rtorrent -o http_capath=/etc/ssl/certs"
+alias info="info --vi-keys"
+alias diff="colordiff"
+alias grep="grep --color=auto"
+alias mutt="mutt -F ${XDG_CONFIG_DIR:-${HOME}}/mutt/muttrc"
+alias xskat="xskat -opt ${XDG_CONFIG_DIR:-${HOME}}/xorg/xskat.opt -list ${XDG_CONFIG_DIR:-${HOME}}/xorg/xskat.lst"
+alias offlineimap="offlineimap -c ${XDG_CONFIG_DIR:-${HOME}}/.offlineimap/offlineimaprc"
+alias rtorrent="rtorrent -o http_capath=/etc/ssl/certs"
 alias startx="cd ~/ && /usr/bin/startx ${XDG_CONFIG_DIR:-${HOME}}/xorg/xinitrc -- -nolisten tcp -once -retro ; pushd -q +1"
 
 # system/media shortcuts:
-alias psu="print 'ELAPSETIME  %CPU NI +?   LWPID # COMMAND';/bin/ps -U root,privoxy,15,http,daemon,nobody,unbound --deselect -C tmux,urxvt -H hoetime:10,%cpu:5,ni:2,stat:4,pid:5,rtprio:1,args"
-alias psr="print 'ELAPSETIME  %CPU NI +?   LWPID # COMMAND';/bin/ps -u root -U root -H hoetime:10,%cpu:5,ni:2,stat:4,pid:5,rtprio:1,args"
-alias psa="print 'ELAPSETIME USER  %CPU NI +?   LWPID # COMMAND';/bin/ps -H haxoetime:10,user:4,%cpu:5,ni:2,stat:4,pid:5,rtprio:1,args"
-alias pso="print 'ELAPSETIME USER  %CPU NI +?   LWPID # COMMAND';/bin/ps -U root,h --deselect -u root,h -H hoetime:10,user:4,%cpu:5,ni:2,stat:4,pid:5,rtprio:1,args"
-alias dfu="/bin/df -hTP -x debugfs"
+alias psu="ps --deselect -U root -C tmux,urxvt -lFj f"
+alias psr="ps -U root -lFj f"
+alias psa="ps fax -lFj"
+alias dfu="df -hTP -x debugfs"
 alias loadavg='print ${$(</proc/loadavg)[1,3]}'
-alias daemons='lt /run/daemons'
 alias reboot='/bin/sync && sudo /sbin/reboot'
 alias {poweroff,pow}='/bin/sync && sudo /sbin/poweroff'
 alias mix2="/usr/local/bin/ossvol --speakers --quiet && /usr/local/bin/ossvol -a"
-alias mix3="/usr/local/bin/ossvol --headphones --quiet && /usr/local/bin/ossvol -a"
-alias siteget="/usr/bin/wget --recursive --page-requisites --convert-links --html-extension --no-parent --random-wait --limit-rate=20K -U Mozilla -l" #depth, then url
+alias mix3="/usr/local/bin/ossvol recall --headphones --quiet && /usr/local/bin/ossvol -a"
+alias siteget="wget --recursive --page-requisites --convert-links --html-extension --no-parent --random-wait -U Mozilla -l" #depth, then url
 
 # database/package management:
 alias upd="sudo /etc/cron.daily/updatedb"
 alias upm="sudo /usr/bin/mandb --quiet"
-alias pacman="sudo /usr/bin/pacman-color"
+alias pacman="/usr/bin/pacman-color"

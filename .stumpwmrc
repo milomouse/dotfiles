@@ -12,7 +12,7 @@
 ;; >>>-: create a 'dedicate' and 'catchall' window-rule (remember * *)      ;;
 ;; >>--: create a 'dedicate' and 'catchall' hook for changing focus color   ;;
 ;; >>--: have mifo(mplayer-daemon) prompts use filename completion          ;;
-;; >---: better resize; if neighbour {above} then -ARG else +ARG, etc.      ;;
+;; >---: better resize; if neighbour {above} then +ARG else -ARG, etc.      ;;
 ;; >>>-: show frame-indicator for 'resize' only if no window in frame       ;;
 ;; >>>>? command for dedicating current win/frame as the Master win/frame   ;;
 ;; >---: better command for Master; remember Master thru re{loadrc,start}   ;;
@@ -101,32 +101,31 @@ then run the command synchronously and collect the output."
       *float-window-title-height* 1)
 (set-msg-border-width 1)
 
-;; fonts/colors.
+;; fonts/colors. (custom font; full unicode "Fixed" with emphasized numeric 0's <> alphabetic O's)
 (set-font "-misc-fixedzero-medium-r-semicondensed-*-12-110-75-75-c-60-iso10646-1")
+;(set-font "-misc-fixed-medium-r-semicondensed-*-12-110-75-75-c-60-koi8-r")
 (set-fg-color        "grey64")
 (set-bg-color        "grey14")
-(set-focus-color     "grey60")
-;(set-focus-color     "mediumpurple2")
+(set-focus-color     "thistle4")
 (set-unfocus-color   "grey16")
 (set-border-color    "grey44")
 (set-win-bg-color    "grey6")
 (setf *colors* (list "grey9"          ; 0 black
-                     "palevioletred1" ; 1 red
-                     "lightblue3"     ; 2 green
-                     "bisque3"        ; 3 yellow
+                     "deeppink"       ; 1 red
+                     "chartreuse3"    ; 2 green
+                     "gold1"          ; 3 yellow
                      "steelblue3"     ; 4 blue
-                     "slateblue1"     ; 5 magenta
-                     "aquamarine4"    ; 6 cyan
+                     "mediumpurple4"  ; 5 magenta
+                     "cyan3"          ; 6 cyan
                      "honeydew4"      ; 7 white
                      "thistle4"       ; 8 user
                      "lightskyblue4")); 9 user
 (update-color-map (current-screen))
 
-;; text formatting (no mode-line). shorten time-day-names, etc.
+;; text formatting (mode-line unused).
 (setf *startup-message*
-       "^B^1*together we ate the king^n:^B^5*and laughed ourselves to death^n"
-      *time-day-names* #("Mon" "Tue" "Wed" "Thu" "Fri" "Sat" "Sun")
-      *time-format-string-default* "^B^2*%T^9* %Y-%m-%d^**/^8*%A^n"
+       "^B^5*together we ate the king^7*|^B^4*and laughed ourselves to death^n"
+      *time-format-string-default* "^B^5*%b.%d^n ^7*|^n|^B^7*|^n ^B^4*%T^n ^B^7*|^n|^7*|^n ^B^5*%A^n"
       *group-format*    "^B^0*%t^7*%s^07|^n"
       *window-format*   "^B^87%s^9*%m^0*%16t^n"
       *screen-mode-line-format* nil
@@ -140,7 +139,7 @@ then run the command synchronously and collect the output."
       *resize-increment* 2
       *frame-number-map* "yhjukilop")
 
-;; mode-line and input.
+;; mode-line and input. (mode-line unused)
 (setf *mode-line-background-color* "grey5"
       *mode-line-border-color* "grey10"
       *mode-line-foreground-color* "azure4"
@@ -162,7 +161,8 @@ then run the command synchronously and collect the output."
 (make-groups-bg "2" "3" "4" "5" "6")
 (if (probe-file (data-dir-file "desktop.lisp"))
     (restore-from-file (data-dir-file "desktop.lisp")))
-(restore-window-placement-rules (data-dir-file "tile-rules.lisp"))
+(if (probe-file (data-dir-file "tile-rules.lisp"))
+    (restore-window-placement-rules (data-dir-file "tile-rules.lisp")))
 (cond ((string-equal (group-name (current-group)) *scratchpad-group-name*) (gother)))
 
 ;; display a random background image on root window.

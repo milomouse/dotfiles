@@ -6,7 +6,7 @@
 ;; create a scratchpad group if none exist and toggle between viewing current group and scratchpad group.
 ;; (idea from Ion3+ window-manager except scratchpad is a group and not a floating frame)
 ;; (also inspired by another users 'scratchpad' command set, although i found all the functions
-;;  and parameters to be wasteful, especially since it's created per screen anyway(?:[untested aspect]))
+;;  and parameters to be wasteful, especially since this creates it per screen anyway)
 (defcommand scratchpad () ()
 "Create a scratchpad group for current screen, if not found, and toggle between the scatchpad group
 and the current group upon reissue of the same command."
@@ -33,7 +33,7 @@ and the current group upon reissue of the same command."
           (rename-file o i)))
         (message "Cannot undo previous state. Nothing found for group ~A" (list (group-name group)))))))
 
-;; dump [current]-group (for current-screen), [current]-screen, desktop or window-placement-rules
+;; dump [current-]group (for current-screen), [current-]screen, desktop or window-placement-rules
 ;; to a dynamically named file in user defined *data-dir*.
 (defcommand dump-to-datadir (expr) (:rest)
 "Dump group (from current-screen), screen (current-screen), desktop or rules to file in data-dir.
@@ -53,7 +53,7 @@ Just specify what you want to dump and this will dynamically create and name fil
         ((string-equal expr 'desktop)
           (let* ((o (make-pathname :name "desktop" :type "lisp" :defaults *data-dir*)))
             (dump-desktop-to-file o) (message "~A dumped" expr)))
-        (t (message "dont know how to dump ~a" expr))))
+        (t (message "don't know how to dump ~a" expr))))
 
 ;; restore [current]-group (for current-screen), [current]-screen, desktop or window-placement-rules
 ;; from a previously created file (more correctly from DUMP-TO-DATADIR) in user defined *data-dir*.
@@ -289,7 +289,7 @@ remembering their previous positions, also hiding frame highlights."
           (frame-raise-window group l (frame-window l) nil)
           (when (frame-window l)
             (update-decoration (frame-window l)))))))
-        
+
 ;; remember states if not already in 'only' mode (e.g., one frame).
 (defcommand only () () "Delete all the frames but the current one and grow it
 to take up the entire head and remember previous states if entire head
@@ -340,28 +340,51 @@ current frame into 2 frames, one on top of the other." (remember-group) (split-f
 (defcommand echo-highcpu-rest () () "" (message-no-timeout (run-shell-command "ps -U root,h --deselect -C tmux,urxvt k -%cpu opid,nice,args:70,etime:10,%cpu,pmem | head -75" t)))
 (defcommand echo-mifo-stumpwm () () "" (echo-string (current-screen) (run-shell-command "mifo --stumpwm" t)))
 (defcommand echo-mifo-raw () () "" (echo-string (current-screen) (run-shell-command "mifo --raw" t)))
-(defcommand echo-mifo-current-list () () "" (echo-string (current-screen) (run-shell-command "mifo --show current|grep -A 7 -B 7 $(mifo --raw)|sed 's|'$(mifo --raw)'|^B^1*&^n|'" t)))
+(defcommand echo-mifo-current-list () () "" (echo-string (current-screen) (run-shell-command "mifo --show current|grep -m 1 -A 7 -B 7 $(mifo --raw)|sed 's|'$(mifo --raw)'|^B^4*&^n|'" t)))
 (defcommand echo-mifo-playlists () () "" (echo-string (current-screen) (run-shell-command "mifo --show" t)))
 (defcommand echo-mifo-fav-add () () "" (echo-string (current-screen) (run-shell-command "mifo --fav-add" t)))
 (defcommand echo-mifo-fav-del () () "" (echo-string (current-screen) (run-shell-command "mifo --fav-delete" t)))
-(defcommand echo-mifo-next () () "" (echo-string (current-screen) (run-shell-command "mifo --next ; sleep 1 ; mifo --stumpwm" t)))
-(defcommand echo-mifo-prev () () "" (echo-string (current-screen) (run-shell-command "mifo --prev ; sleep 1 ; mifo --stumpwm" t)))
-(defcommand echo-mifo-random () () "" (echo-string (current-screen) (run-shell-command "mifo -r ; sleep 1 ; mifo --stumpwm" t)))
-(defcommand echo-oss-vol () () "" (echo-string (current-screen) (run-shell-command "ossvol -a" t)))
-(defcommand echo-oss-volup () () "" (run-shell-command "ossvol -i 1") (echo-oss-vol))
-(defcommand echo-oss-voldown () () "" (run-shell-command "ossvol -d 1") (echo-oss-vol))
-(defcommand echo-oss-volmute () () "" (run-shell-command "ossvol -m") (run-shell-command "sleep 1s") (echo-oss-vol))
+(defcommand echo-mifo-next () () "" (echo-string (current-screen) (run-shell-command "mifo --next ; sleep 1s ; mifo --stumpwm" t)))
+(defcommand echo-mifo-prev () () "" (echo-string (current-screen) (run-shell-command "mifo --prev ; sleep 1s ; mifo --stumpwm" t)))
+(defcommand echo-mifo-random () () "" (echo-string (current-screen) (run-shell-command "mifo -r ; sleep 1s ; mifo --stumpwm" t)))
+(defcommand echo-oss-vol () () "" (echo-string (current-screen) (run-shell-command "print '^5M'${$(ossvol -a)/:/:^B}" t)))
+(defcommand echo-oss-volup () () "" (run-shell-command "ossvol -i 1 --quiet") (echo-oss-vol))
+(defcommand echo-oss-voldown () () "" (run-shell-command "ossvol -d 1 --quiet") (echo-oss-vol))
+(defcommand echo-oss-volmute () () "" (run-shell-command "ossvol -m --quiet") (run-shell-command "sleep 1s") (echo-oss-vol))
 (defcommand echo-oss-speakers () () "" (echo-string (current-screen) (run-shell-command "ossvol --speakers --quiet" t)) (echo-oss-vol))
 (defcommand echo-oss-headphones () () "" (run-shell-command "ossvol --headphones --quiet") (echo-oss-vol))
-(defcommand echo-mail () () "" (echo-string (current-screen) (run-shell-command "print - @fea.st: ${#$(find /howl/mail/FastMail/*/new -type f)}" t)))
-(defcommand echo-wlan () () "" (echo-string (current-screen) (run-shell-command "iwconfig wlan0" t)))
+(defcommand echo-mail () () "" (echo-string (current-screen) (run-shell-command "print - '^5:'@fea.st: '^B'${#$(find /howl/mail/FastMail/*/new -type f)}" t)))
+(defcommand echo-wlan () () "" (echo-string (current-screen) (run-shell-command "ifconfig;iwconfig" t)))
 (defcommand echo-free-hdd () () "" (echo-string (current-screen) (run-shell-command "df -hTP -x debugfs" t)))
-(defcommand echo-free-mem () () "" (echo-string (current-screen) (run-shell-command "print '^B^6/free^1* used^5* base^n';free -m|awk 'NR==2 {print $4,$3,$2}'" t)))
+(defcommand echo-free-mem () () "" (echo-string (current-screen) (run-shell-command "print '^B^3/free^1* used^5* base^n';free -m|awk 'NR==2 {print $4,$3,$2}'" t)))
 (defcommand echo-battery () () "" (echo-string (current-screen) (run-shell-command "acpi -tf;repeat 36; do printf '='; done;print;ibam --percentbattery" t)))
 (defcommand echo-loadavg () () "" (echo-string (current-screen) (run-shell-command "print ${$(</proc/loadavg)[1,3]}" t)))
 (defcommand echo-colors-brief () () "Output a brief list of currently defined colors." (echo-string (current-screen) (eval "
 BOLD ^B^0*black ^1*red ^2*green ^3*yellow ^4*blue ^5*magenta ^6*cyan ^7*white ^8*user ^9*user^n
 NONE ^0*black ^1*red ^2*green ^3*yellow ^4*blue ^5*magenta ^6*cyan ^7*white ^8*user ^9*user^n")))
+(defcommand echo-colors-full () () "Output a full list of currently defined colors." (echo-string (current-screen) (eval "
+BOLD ^B^0*black ^1*red ^2*green ^3*yellow ^4*blue ^5*magenta ^6*cyan ^7*white ^8*user ^9*user^n
+NONE ^0*black ^1*red ^2*green ^3*yellow ^4*blue ^5*magenta ^6*cyan ^7*white ^8*user ^9*user^n
+B->0 ^B^00black ^B^10red ^B^20green ^B^30yellow ^B^40blue ^B^50magenta ^B^60cyan ^B^70white ^B^80user ^B^90user^n
+N->0 ^00black ^10red ^20green ^30yellow ^40blue ^50magenta ^60cyan ^70white ^80user ^90user^n
+B->1 ^B^01black ^B^11red ^B^21green ^B^31yellow ^B^41blue ^B^51magenta ^B^61cyan ^B^71white ^B^81user ^B^91user^n
+N->1 ^01black ^11red ^21green ^31yellow ^41blue ^51magenta ^61cyan ^71white ^81user ^91user^n
+B->2 ^B^02black ^B^12red ^B^22green ^B^32yellow ^B^42blue ^B^52magenta ^B^62cyan ^B^72white ^B^82user ^B^92user^n
+N->2 ^02black ^12red ^22green ^32yellow ^42blue ^52magenta ^62cyan ^72white ^82user ^92user^n
+B->3 ^B^03black ^B^13red ^B^23green ^B^33yellow ^B^43blue ^B^53magenta ^B^63cyan ^B^73white ^B^83user ^B^93user^n
+N->3 ^03black ^13red ^23green ^33yellow ^43blue ^53magenta ^63cyan ^73white ^83user ^93user^n
+B->4 ^B^04black ^B^14red ^B^24green ^B^34yellow ^B^44blue ^B^54magenta ^B^64cyan ^B^74white ^B^84user ^B^94user^n
+N->4 ^04black ^14red ^24green ^34yellow ^44blue ^54magenta ^64cyan ^74white ^84user ^94user^n
+B->5 ^B^05black ^B^15red ^B^25green ^B^35yellow ^B^45blue ^B^55magenta ^B^65cyan ^B^75white ^B^85user ^B^95user^n
+N->5 ^05black ^15red ^25green ^35yellow ^45blue ^55magenta ^65cyan ^75white ^85user ^95user^n
+B->6 ^B^06black ^B^16red ^B^26green ^B^36yellow ^B^46blue ^B^56magenta ^B^66cyan ^B^76white ^B^86user ^B^96user^n
+N->6 ^06black ^16red ^26green ^36yellow ^46blue ^56magenta ^66cyan ^76white ^86user ^96user^n
+B->7 ^B^07black ^B^17red ^B^27green ^B^37yellow ^B^47blue ^B^57magenta ^B^67cyan ^B^77white ^B^87user ^B^97user^n
+N->7 ^07black ^17red ^27green ^37yellow ^47blue ^57magenta ^67cyan ^77white ^87user ^97user^n
+B->8 ^B^08black ^B^18red ^B^28green ^B^38yellow ^B^48blue ^B^58magenta ^B^68cyan ^B^78white ^B^88user ^B^98user^n
+N->8 ^08black ^18red ^28green ^38yellow ^48blue ^58magenta ^68cyan ^78white ^88user ^98user^n
+B->9 ^B^09black ^B^19red ^B^29green ^B^39yellow ^B^49blue ^B^59magenta ^B^69cyan ^B^79white ^B^89user ^B^99user^n
+N->9 ^09black ^19red ^29green ^39yellow ^49blue ^59magenta ^69cyan ^79white ^89user ^99user^n")))
 
 ;; sent output of command to echo-string (may hang if used wrong).
 (defcommand shell-command-output (command) ((:string "execute/output: "))
@@ -405,6 +428,8 @@ command's output. This may hang if used wrong."
   (run-shell-command (format nil "mifo --playlist ~a" filename))) ""
 (defcommand prompt-mifo-reload (filename) ((:rest "mifo.reload: ")) ""
   (run-shell-command (format nil "mifo --reload ~a" filename)))
+(defcommand prompt-mifo-seek (filename) ((:rest "mifo.seek: ")) ""
+  (run-shell-command (format nil "mifo --seek ~a" filename)))
 
 ;; evaluate string, with prettier color.
 (defcommand eval-line (cmd) ((:rest "eval: "))
@@ -417,8 +442,6 @@ command's output. This may hang if used wrong."
       (err "^B^5*~A" c))))
 
 ;; run or raise.
-;;(defcommand ror_firefox () () "" (setf *run-or-raise-all-groups* t) (run-or-raise "firefox" '(:instance "Navigator")))
-;;(defcommand ror_jumanji () () "" (setf *run-or-raise-all-groups* t) (run-or-raise "jumanji" '(:class "Jumanji")))
 (defcommand ror_luakit () () "" (setf *run-or-raise-all-groups* t) (run-or-raise "luakit" '(:class "luakit")))
 (defcommand ror_mutt () () "" (setf *run-or-raise-all-groups* t)
   (run-or-raise "urxvt -title '[urxvt] mutt' -e mutt -F ${XDG_CONFIG_DIR:-${HOME}}/mutt/muttrc" '(:title "\\[urxvt\\] mutt")))

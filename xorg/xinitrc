@@ -5,27 +5,16 @@
 
 ## keyboard:
 #/usr/bin/xmodmap /howl/conf/keymaps/dvausler.xmodmap
-#/usr/bin/xmodmap /howl/conf/keymaps/dvausler-mod.xmodmap
-#/usr/bin/xmodmap /howl/conf/keymaps/dvausler-mod2.xmodmap
-#/usr/bin/xmodmap /howl/conf/keymaps/dvausler-mod3.xmodmap
-#/usr/bin/xmodmap /howl/conf/keymaps/dvausler-mod4.xmodmap
-#/usr/bin/xmodmap /howl/conf/keymaps/dvausler-oldnum.xmodmap
-#/usr/bin/xmodmap /howl/conf/keymaps/dvausler-programmmer.xmodmap
-#/usr/bin/xmodmap /howl/conf/keymaps/arensito.xmodmap
-#/usr/bin/xmodmap /howl/conf/keymaps/arensito-mod.xmodmap
-#/usr/bin/xmodmap /howl/conf/keymaps/arensito-mod-programmer.xmodmap
-#/usr/bin/xmodmap /howl/conf/keymaps/klausler2.xmodmap
-#/usr/bin/xmodmap /howl/conf/keymaps/klausler2-mod.xmodmap
-#/usr/bin/xmodmap /howl/conf/keymaps/klausler2-mod-programmer.xmodmap
-/usr/bin/xmodmap /howl/conf/keymaps/personal.xmodmap
+/usr/bin/xmodmap /howl/conf/keymaps/overlay-mods.xmodmap
 
 # mouse/synclient:
-BANISHFILE="/dev/shm/.1009/banishmouse"
-[[ -f $BANISHFILE ]] && rm -f $BANISHFILE
-/usr/local/bin/banishmouse
+/usr/local/bin/zaprat --disable
 
 # wallpaper:
-/usr/bin/display -window root -resize 1600x900! ${XDG_PICTURES_DIR:-${H:-/howl}/foto}/wall/wallpaper-31278.png
+/usr/bin/display -window root -resize 1600x900! /howl/foto/wall/indian_by_aalexandrin-d3g7bej_2.jpg
+
+# seasonal snow!:
+/usr/bin/xsnow -nokeepsnow -notrees -nosanta 1>/dev/null &
 
 # window-manager:
 exec /usr/bin/stumpwm &>>${XDG_CONFIG_DIR:-$HOME}/stumpwm/storage/log.lisp

@@ -1,15 +1,15 @@
-! Dvausler (6)                    !
+! Dvausler (3)                    !
 !_________________________________!
 !                                 !
 !   ` 1 2 3 4 5 6  7 8 9 0 [ ]    !
-!    k s u ' y z  f g l p . / \   !
-!     o a e i b  r n h t , =      !
-!      q ; c w x  d m j v -       !
+!    k , u ' y j  f g l p . / \   !
+!     o a e i b  r n h t s x      !
+!      q ; c v z  w d m - =       !
 !                                 !
-!   ~ ! @ # $ % ^  & * ( ) { }    !
-!    K S U " Y Z  F G L P > ? |   !
-!     O A E I B  R N H T < +      !
-!      Q : C W X  D M J V _       !
+!   ~ ! @ # $ % ^  & * ( ) [ ]    !
+!    K < U " Y J  F G L P > ? |   !
+!     O A E I B  R N H T S X      !
+!      Q : C V Z  W D M _ +       !
 !_________________________________!
 !! xmodmap created by: milomouse !!
 
@@ -30,11 +30,11 @@ keycode 21 = bracketright braceright bracketright braceright
 
 ! top row
 keycode 24 = k K
-keycode 25 = s S
+keycode 25 = comma less
 keycode 26 = u U
 keycode 27 = apostrophe quotedbl
 keycode 28 = y Y
-keycode 29 = z Z
+keycode 29 = j J
 keycode 30 = f F
 keycode 31 = g G
 keycode 32 = l L
@@ -42,7 +42,6 @@ keycode 33 = p P
 keycode 34 = period greater
 keycode 35 = slash question
 keycode 51 = backslash bar
-
 ! middle row
 keycode 38 = o O
 keycode 39 = a A
@@ -53,18 +52,17 @@ keycode 43 = r R
 keycode 44 = n N
 keycode 45 = h H
 keycode 46 = t T
-keycode 47 = comma less
-keycode 48 = equal plus
-
+keycode 47 = s S
+keycode 48 = x X
 ! bottom row
 keycode 52 = q Q
 keycode 53 = semicolon colon
 keycode 54 = c C
-keycode 55 = w W
-keycode 56 = x X
-keycode 57 = d D
-keycode 58 = m M
-keycode 59 = j J
-keycode 60 = v V
-keycode 61 = minus underscore
+keycode 55 = v V
+keycode 56 = z Z
+keycode 57 = w W
+keycode 58 = d D
+keycode 59 = m M
+keycode 60 = minus underscore
+keycode 61 = equal plus
 

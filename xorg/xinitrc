@@ -5,6 +5,8 @@
 
 ## keyboard:
 #/usr/bin/xmodmap /howl/conf/keymaps/dvausler.xmodmap
+#/usr/bin/xmodmap /howl/conf/keymaps/arensito.xmodmap
+#/usr/bin/xmodmap /howl/conf/keymaps/klausler2.xmodmap
 /usr/bin/xmodmap /howl/conf/keymaps/overlay-mods.xmodmap
 
 # mouse/synclient:
@@ -12,9 +14,6 @@
 
 # wallpaper:
 /usr/bin/display -window root -resize 1600x900! /howl/foto/wall/indian_by_aalexandrin-d3g7bej_2.jpg
-
-# seasonal snow!:
-/usr/bin/xsnow -nokeepsnow -notrees -nosanta 1>/dev/null &
 
 # window-manager:
 exec /usr/bin/stumpwm &>>${XDG_CONFIG_DIR:-$HOME}/stumpwm/storage/log.lisp

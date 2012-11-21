@@ -38,7 +38,6 @@ alias startx="cd ~/ && /usr/bin/startx ${XDG_CONFIG_DIR:-${HOME}}/xorg/xinitrc -
 alias psu="ps --deselect -U root -C tmux,urxvt -lFj f"
 alias psr="ps -U root -lFj f"
 alias psa="ps fax -lFj"
-alias dfu="df -hTP -x debugfs"
 alias loadavg='print ${$(</proc/loadavg)[1,3]}'
 alias reboot='/bin/sync && sudo /sbin/reboot'
 alias {poweroff,pow}='/bin/sync && sudo /sbin/poweroff'

@@ -248,11 +248,17 @@ function zhist {
 #  done
 #}
 
+function dfu() {
+  local FSTYPES
+  FSTYPES=(nilfs2 btrfs ext2 ext3 ext4 jfs xfs zfs reiserfs reiser4 minix cramfs ubifs usbfs udf iso9660 ufs ntfs ntfs-3g fat vfat msdos fuse)
+  df -hTP -x devtmpfs -x tmpfs ; df -hTP $(for f in $FSTYPES; { print - " -x $f" })
+}
+
 # quickly view the Linux kernel tainting information:
 function iftainted() {
   case $(</proc/sys/kernel/tainted) {
     1) print "1: A module with a non-GPL license has been loaded, this includes modules with no license." ;;
-    2) print "2: A module was force loaded by insmod -f" ;;
+    2) print "2: A module was force loaded by insmod -f." ;;
     4) print "4: Unsafe SMP processors: SMP with CPUs not designed for SMP." ;;
     8) print "8: A module was forcibly unloaded from the system by rmmod -f." ;;
     16) print "16: A hardware machine check error occurred on the system." ;;

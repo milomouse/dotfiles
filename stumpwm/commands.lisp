@@ -30,7 +30,12 @@ and the current group upon reissue of the same command."
                     :type "bak" :defaults *undo-data-dir*)))
             (dump-group-to-file o)
           (restore-from-file i)
-          (rename-file o i)))
+          (rename-file o i)
+          (let ((f (tile-group-current-frame group)))
+            (progn
+              (when (frame-window f)
+                (update-decoration (frame-window f)))
+              (show-frame-indicator group)))))
         (message "Cannot undo previous state. Nothing found for group ~A" (list (group-name group)))))))
 
 ;; dump [current-]group (for current-screen), [current-]screen, desktop or window-placement-rules
@@ -365,26 +370,26 @@ NONE ^0*black ^1*red ^2*green ^3*yellow ^4*blue ^5*magenta ^6*cyan ^7*white ^8*u
 (defcommand echo-colors-full () () "Output a full list of currently defined colors." (echo-string (current-screen) (eval "
 BOLD ^B^0*black ^1*red ^2*green ^3*yellow ^4*blue ^5*magenta ^6*cyan ^7*white ^8*user ^9*user^n
 NONE ^0*black ^1*red ^2*green ^3*yellow ^4*blue ^5*magenta ^6*cyan ^7*white ^8*user ^9*user^n
-B->0 ^B^00black ^B^10red ^B^20green ^B^30yellow ^B^40blue ^B^50magenta ^B^60cyan ^B^70white ^B^80user ^B^90user^n
-N->0 ^00black ^10red ^20green ^30yellow ^40blue ^50magenta ^60cyan ^70white ^80user ^90user^n
-B->1 ^B^01black ^B^11red ^B^21green ^B^31yellow ^B^41blue ^B^51magenta ^B^61cyan ^B^71white ^B^81user ^B^91user^n
-N->1 ^01black ^11red ^21green ^31yellow ^41blue ^51magenta ^61cyan ^71white ^81user ^91user^n
-B->2 ^B^02black ^B^12red ^B^22green ^B^32yellow ^B^42blue ^B^52magenta ^B^62cyan ^B^72white ^B^82user ^B^92user^n
-N->2 ^02black ^12red ^22green ^32yellow ^42blue ^52magenta ^62cyan ^72white ^82user ^92user^n
-B->3 ^B^03black ^B^13red ^B^23green ^B^33yellow ^B^43blue ^B^53magenta ^B^63cyan ^B^73white ^B^83user ^B^93user^n
-N->3 ^03black ^13red ^23green ^33yellow ^43blue ^53magenta ^63cyan ^73white ^83user ^93user^n
-B->4 ^B^04black ^B^14red ^B^24green ^B^34yellow ^B^44blue ^B^54magenta ^B^64cyan ^B^74white ^B^84user ^B^94user^n
-N->4 ^04black ^14red ^24green ^34yellow ^44blue ^54magenta ^64cyan ^74white ^84user ^94user^n
-B->5 ^B^05black ^B^15red ^B^25green ^B^35yellow ^B^45blue ^B^55magenta ^B^65cyan ^B^75white ^B^85user ^B^95user^n
-N->5 ^05black ^15red ^25green ^35yellow ^45blue ^55magenta ^65cyan ^75white ^85user ^95user^n
-B->6 ^B^06black ^B^16red ^B^26green ^B^36yellow ^B^46blue ^B^56magenta ^B^66cyan ^B^76white ^B^86user ^B^96user^n
-N->6 ^06black ^16red ^26green ^36yellow ^46blue ^56magenta ^66cyan ^76white ^86user ^96user^n
-B->7 ^B^07black ^B^17red ^B^27green ^B^37yellow ^B^47blue ^B^57magenta ^B^67cyan ^B^77white ^B^87user ^B^97user^n
-N->7 ^07black ^17red ^27green ^37yellow ^47blue ^57magenta ^67cyan ^77white ^87user ^97user^n
-B->8 ^B^08black ^B^18red ^B^28green ^B^38yellow ^B^48blue ^B^58magenta ^B^68cyan ^B^78white ^B^88user ^B^98user^n
-N->8 ^08black ^18red ^28green ^38yellow ^48blue ^58magenta ^68cyan ^78white ^88user ^98user^n
-B->9 ^B^09black ^B^19red ^B^29green ^B^39yellow ^B^49blue ^B^59magenta ^B^69cyan ^B^79white ^B^89user ^B^99user^n
-N->9 ^09black ^19red ^29green ^39yellow ^49blue ^59magenta ^69cyan ^79white ^89user ^99user^n")))
+B->0 ^B^00black^n ^B^10red^n ^B^20green^n ^B^30yellow^n ^B^40blue^n ^B^50magenta^n ^B^60cyan^n ^B^70white^n ^B^80user^n ^B^90user^n
+N->0 ^00black^n ^10red^n ^20green^n ^30yellow^n ^40blue^n ^50magenta^n ^60cyan^n ^70white^n ^80user^n ^90user^n
+B->1 ^B^01black^n ^B^11red^n ^B^21green^n ^B^31yellow^n ^B^41blue^n ^B^51magenta^n ^B^61cyan^n ^B^71white^n ^B^81user^n ^B^91user^n
+N->1 ^01black^n ^11red^n ^21green^n ^31yellow^n ^41blue^n ^51magenta^n ^61cyan^n ^71white^n ^81user^n ^91user^n
+B->2 ^B^02black^n ^B^12red^n ^B^22green^n ^B^32yellow^n ^B^42blue^n ^B^52magenta^n ^B^62cyan^n ^B^72white^n ^B^82user^n ^B^92user^n
+N->2 ^02black^n ^12red^n ^22green^n ^32yellow^n ^42blue^n ^52magenta^n ^62cyan^n ^72white^n ^82user^n ^92user^n
+B->3 ^B^03black^n ^B^13red^n ^B^23green^n ^B^33yellow^n ^B^43blue^n ^B^53magenta^n ^B^63cyan^n ^B^73white^n ^B^83user^n ^B^93user^n
+N->3 ^03black^n ^13red^n ^23green^n ^33yellow^n ^43blue^n ^53magenta^n ^63cyan^n ^73white^n ^83user^n ^93user^n
+B->4 ^B^04black^n ^B^14red^n ^B^24green^n ^B^34yellow^n ^B^44blue^n ^B^54magenta^n ^B^64cyan^n ^B^74white^n ^B^84user^n ^B^94user^n
+N->4 ^04black^n ^14red^n ^24green^n ^34yellow^n ^44blue^n ^54magenta^n ^64cyan^n ^74white^n ^84user^n ^94user^n
+B->5 ^B^05black^n ^B^15red^n ^B^25green^n ^B^35yellow^n ^B^45blue^n ^B^55magenta^n ^B^65cyan^n ^B^75white^n ^B^85user^n ^B^95user^n
+N->5 ^05black^n ^15red^n ^25green^n ^35yellow^n ^45blue^n ^55magenta^n ^65cyan^n ^75white^n ^85user^n ^95user^n
+B->6 ^B^06black^n ^B^16red^n ^B^26green^n ^B^36yellow^n ^B^46blue^n ^B^56magenta^n ^B^66cyan^n ^B^76white^n ^B^86user^n ^B^96user^n
+N->6 ^06black^n ^16red^n ^26green^n ^36yellow^n ^46blue^n ^56magenta^n ^66cyan^n ^76white^n ^86user^n ^96user^n
+B->7 ^B^07black^n ^B^17red^n ^B^27green^n ^B^37yellow^n ^B^47blue^n ^B^57magenta^n ^B^67cyan^n ^B^77white^n ^B^87user^n ^B^97user^n
+N->7 ^07black^n ^17red^n ^27green^n ^37yellow^n ^47blue^n ^57magenta^n ^67cyan^n ^77white^n ^87user^n ^97user^n
+B->8 ^B^08black^n ^B^18red^n ^B^28green^n ^B^38yellow^n ^B^48blue^n ^B^58magenta^n ^B^68cyan^n ^B^78white^n ^B^88user^n ^B^98user^n
+N->8 ^08black^n ^18red^n ^28green^n ^38yellow^n ^48blue^n ^58magenta^n ^68cyan^n ^78white^n ^88user^n ^98user^n
+B->9 ^B^09black^n ^B^19red^n ^B^29green^n ^B^39yellow^n ^B^49blue^n ^B^59magenta^n ^B^69cyan^n ^B^79white^n ^B^89user^n ^B^99user^n
+N->9 ^09black^n ^19red^n ^29green^n ^39yellow^n ^49blue^n ^59magenta^n ^69cyan^n ^79white^n ^89user^n ^99user^n")))
 
 ;; sent output of command to echo-string (may hang if used wrong).
 (defcommand shell-command-output (command) ((:string "execute/output: "))

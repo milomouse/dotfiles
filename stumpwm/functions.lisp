@@ -89,12 +89,13 @@ will only display valid files anyway."
     (if w (focus-window w) (no-focus group (frame-window last)))
     (if show-indicator (show-frame-outline group))))
 
-(defun split-frame-in-dir (group dir)
-"Split frame in a specified direction."
+(defun split-frame-in-dir (group dir &optional (ratio 1/2))
   (let ((f (tile-group-current-frame group)))
-    (if (split-frame group dir)
-        (progn ())
-       ;   (update-decoration (frame-window f)))
+    (if (split-frame group dir ratio)
+        (progn
+          (when (frame-window f)
+            (update-decoration (frame-window f)))
+          (show-frame-indicator group))
         (message "Cannot split smaller than minimum size."))))
 
 (defun run-shell-command-output (command)

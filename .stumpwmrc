@@ -4,7 +4,7 @@
 ;; author: milomouse <vincent[at]fea.st>                                    ;;
 ;;--------------------------------------------------------------------------;;
 ;; versions used atoc:                                                      ;;
-;; |  sbcl             -> 1.0.54-1                                          ;;
+;; |  sbcl             -> 1.1.1-2                                           ;;
 ;; |  clx              -> 0.7.4-2                                           ;;
 ;; |  cl-ppcre         -> 2.0.3-2                                           ;;
 ;; |  stumpwm          -> 0.9.7-80-gb1271a9 Compiled On Thu Dec 08 10:46:16 ;;

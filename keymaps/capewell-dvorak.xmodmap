@@ -1,18 +1,15 @@
 ! Capewell-Dvorak (C-Dvorak)
-!
 !__________________________________
 !
-!
 !    ` 1 2 3 4 5 6 7 8 9 0 [ ]
-!     ' , . p y q f g r k / =
+!     ' , . p y q f g r k / = \
 !      o a e i u d h t n s -
 !       z x c v j l m w b ;
 !
 !    ~ ! @ # $ % ^ & * ( ) { }
-!     " < > P Y Q F G R K ? +
+!     " < > P Y Q F G R K ? + |
 !      O A E I U D H T N S _
 !       Z X C V J L M W B :
-!
 !__________________________________
 !! xmodmap created by: milomouse !!
 

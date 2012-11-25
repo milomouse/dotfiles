@@ -148,17 +148,17 @@ window with Master and designate this as the new Master."
 ;; (useful for StumpWM crashes, as tmux windows survive crashes and this command brings them back)
 (defcommand tmux-attach-else-new () () "Find detached tmux session and attach, else create new session."
   (run-shell-command
-  "if [[ -n ${$(tmux -S /tmp/.${UID}/tmux/xorg list-session|grep -v attached)[1]//:} ]]; then
-    urxvt -e tmux -S /tmp/.${UID}/tmux/xorg attach-session -t ${$(tmux -S /tmp/.${UID}/tmux/xorg list-session|grep -v attached)[1]//:}
+  "if [[ -n ${$(tmux -S /tmp/user-keep/${USER}/tmux/xorg list-session|grep -v attached)[1]//:} ]]; then
+    urxvt -e tmux -S /tmp/user-keep/${USER}/tmux/xorg attach-session -t ${$(tmux -S /tmp/user-keep/${USER}/tmux/xorg list-session|grep -v attached)[1]//:}
   else
-    urxvt -e tmux -S /tmp/.${UID}/tmux/xorg new-session
+    urxvt -e tmux -S /tmp/user-keep/${USER}/tmux/xorg new-session
   fi"))
 
 ;; [with *shell-program* "/bin/zsh"] look for detached 'tmux [socket] rtorrent' session and attach, else nothing.
 (defcommand tmux-attach-rtorrent () () "Find detached rtorrent session and attach, else not running so do nothing."
   (run-shell-command
-  "if [[ -n ${$(tmux -S /tmp/.${UID}/tmux/rtorrent list-session|grep -v attached)[1]//:} ]]; then
-    urxvt -e tmux -S /tmp/.${UID}/tmux/rtorrent attach-session -t ${$(tmux -S /tmp/.${UID}/tmux/rtorrent list-session|grep -v attached)[1]//:}
+  "if [[ -n ${$(tmux -S /tmp/user-keep/${USER}/tmux/rtorrent list-session|grep -v attached)[1]//:} ]]; then
+    urxvt -e tmux -S /tmp/user-keep/${USER}/tmux/rtorrent attach-session -t ${$(tmux -S /tmp/user-keep/${USER}/tmux/rtorrent list-session|grep -v attached)[1]//:}
   fi"))
 
 ;; reassign original commands to *-forget
@@ -352,12 +352,7 @@ current frame into 2 frames, one on top of the other." (remember-group) (split-f
 (defcommand echo-mifo-next () () "" (echo-string (current-screen) (run-shell-command "mifo --next ; sleep 1s ; mifo --stumpwm" t)))
 (defcommand echo-mifo-prev () () "" (echo-string (current-screen) (run-shell-command "mifo --prev ; sleep 1s ; mifo --stumpwm" t)))
 (defcommand echo-mifo-random () () "" (echo-string (current-screen) (run-shell-command "mifo -r ; sleep 1s ; mifo --stumpwm" t)))
-(defcommand echo-oss-vol () () "" (echo-string (current-screen) (run-shell-command "print '^5M'${$(ossvol -a)/:/:^B}" t)))
-(defcommand echo-oss-volup () () "" (run-shell-command "ossvol -i 1 --quiet") (echo-oss-vol))
-(defcommand echo-oss-voldown () () "" (run-shell-command "ossvol -d 1 --quiet") (echo-oss-vol))
-(defcommand echo-oss-volmute () () "" (run-shell-command "ossvol -m --quiet") (run-shell-command "sleep 1s") (echo-oss-vol))
-(defcommand echo-oss-speakers () () "" (echo-string (current-screen) (run-shell-command "ossvol --speakers --quiet" t)) (echo-oss-vol))
-(defcommand echo-oss-headphones () () "" (run-shell-command "ossvol --headphones --quiet") (echo-oss-vol))
+(defcommand echo-volume () () "" (echo-string (current-screen) (run-shell-command "amixer sget Master" t)))
 (defcommand echo-mail () () "" (echo-string (current-screen) (run-shell-command "print - '^5:'@fea.st: '^B'${#$(find /howl/mail/FastMail/*/new -type f)}" t)))
 (defcommand echo-wlan () () "" (echo-string (current-screen) (run-shell-command "ifconfig;iwconfig" t)))
 (defcommand echo-free-hdd () () "" (echo-string (current-screen) (run-shell-command "df -hTP -x debugfs" t)))

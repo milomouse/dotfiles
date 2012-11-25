@@ -1,7 +1,7 @@
-(("4" 0 T NIL :CLASS "Gimp" :INSTANCE "gimp" :TITLE NIL :ROLE "gimp-file-open")
+(("3" 0 T T :CLASS "Firefox" :INSTANCE "Navigator" :TITLE NIL :ROLE "browser")
+ ("4" 0 T NIL :CLASS "Gimp" :INSTANCE "gimp" :TITLE NIL :ROLE "gimp-file-open")
  ("3" 0 T T :CLASS "luakit" :INSTANCE "luakit" :TITLE NIL :ROLE NIL)
- ("3" 0 T T :CLASS "Minefield" :INSTANCE "Navigator" :TITLE NIL :ROLE
-  "browser")
+ ("3" 0 T T :CLASS "FIrefox" :INSTANCE "Navigator" :TITLE NIL :ROLE "browser")
  ("4" 0 T T :CLASS "Gimp" :INSTANCE "gimp" :TITLE NIL :ROLE "gimp-startup")
  ("4" 0 T T :CLASS "Gimp" :INSTANCE "gimp" :TITLE NIL :ROLE
   "gimp-image-window")

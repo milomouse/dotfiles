@@ -1,19 +1,16 @@
-! Klausler's Evolved Layout (2)
-!
-!__________________________________
-!
-!
-!    ` 1 2 3 4 5 6 7 8 9 0 - =
-!     k , u y p w l m f c [ ]
-!      o a e i d r n t h s /
-!       q . ' ; z x v g b j
-!
-!    ~ ! @ # $ % ^ & * ( ) _ +
-!     K < U Y P W L M F C { }
-!      O A E I D R N T H S ?
-!       Q > " : Z X V G B J
-!
-!__________________________________
+! Klausler's Evolved Layout (2)   !
+!_________________________________!
+!                                 !
+!    ` 1 2 3 4 5 6 7 8 9 0 - =    !
+!     k , u y p w l m f c [ ] \   !
+!      o a e i d r n t h s /      !
+!       q . ' ; z x v g b j       !
+!                                 !
+!    ~ ! @ # $ % ^ & * ( ) _ +    !
+!     K < U Y P W L M F C { } |   !
+!      O A E I D R N T H S ?      !
+!       Q > " : Z X V G B J       !
+!_________________________________!
 !! xmodmap created by: milomouse !!
 
 ! number row

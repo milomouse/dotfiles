@@ -8,25 +8,26 @@ function zshaddhistory {
   ]] && (( ! $argv[(I)*unrl*|*spar*|*losetup*|*aespipe*|sudo rm*] ))
 }
 
+# NOTICE: does not work on pure 'systemd' system.. may update for 'systemd' later.
 # show running daemons; list and higlight according to
 # (@daemon !daemon daemon) and non-"/etc/rc.conf" daemon:
-function daemons {
-  local rc d dtime
-  rc=${(s. .)${${${(M)${(f)"$(</etc/rc.conf)"}:#DAEMONS=*}##DAEMONS*=[= \(]}%\)}}
-  for d in /run/daemons/*; do
-    dtime=${(F)${${${(@f)"$(ls -tgr --time-style='+[[%m-%d|%H%M:%S]^' $d)"/\^*\// }[2,$]}#*\[}}
-    d=${d/*\/};i=${${(s. .)${(M)${rc}#*${d}}}[-1]}
-    if [[ $d == $i || ${d[-1]} == $i ]]; then
-      print "\033[1;32m[\033[0;32mrc\033[0;37m| \033[1;32m]\033[1;31m${${${dtime/$d/\033[0;34m${d}\033[0m}/|/\033[0;37m|\033[0;31m}/\]/\033[1;31m\]}"
-    elif [[ "@${d}" == $i ]]; then
-      print "\033[1;32m[\033[0;32mrc\033[0;37m|\033[0;35m@\033[1;32m]\033[1;31m${${${dtime/$d/\033[0;35m${d}\033[0m}/|/\033[0;37m|\033[0;31m}/\]/\033[1;31m\]}"
-    elif [[ "!${d}" == $i ]]; then
-      print "\033[1;32m[\033[0;32mrc\033[0;37m|\033[0;33m!\033[1;32m]\033[1;31m${${${dtime/$d/\033[43;30m${d}\033[0m}/|/\033[0;37m|\033[0;31m}/\]/\033[1;31m\]}"
-    else
-      print "\033[1;32m[\033[1;37mUSER\033[1;32m]\033[1;31m${${${dtime/$d/\033[1;37m${d}\033[0m}/|/\033[0;37m|\033[0;31m}/\]/\033[1;31m\]}"
-    fi
-  done
-}
+#function daemons {
+#  local rc d dtime
+#  rc=${(s. .)${${${(M)${(f)"$(</etc/rc.conf)"}:#DAEMONS=*}##DAEMONS*=[= \(]}%\)}}
+#  for d in /run/daemons/*; do
+#    dtime=${(F)${${${(@f)"$(ls -tgr --time-style='+[[%m-%d|%H%M:%S]^' $d)"/\^*\// }[2,$]}#*\[}}
+#    d=${d/*\/};i=${${(s. .)${(M)${rc}#*${d}}}[-1]}
+#    if [[ $d == $i || ${d[-1]} == $i ]]; then
+#      print "\033[1;32m[\033[0;32mrc\033[0;37m| \033[1;32m]\033[1;31m${${${dtime/$d/\033[0;34m${d}\033[0m}/|/\033[0;37m|\033[0;31m}/\]/\033[1;31m\]}"
+#    elif [[ "@${d}" == $i ]]; then
+#      print "\033[1;32m[\033[0;32mrc\033[0;37m|\033[0;35m@\033[1;32m]\033[1;31m${${${dtime/$d/\033[0;35m${d}\033[0m}/|/\033[0;37m|\033[0;31m}/\]/\033[1;31m\]}"
+#    elif [[ "!${d}" == $i ]]; then
+#      print "\033[1;32m[\033[0;32mrc\033[0;37m|\033[0;33m!\033[1;32m]\033[1;31m${${${dtime/$d/\033[43;30m${d}\033[0m}/|/\033[0;37m|\033[0;31m}/\]/\033[1;31m\]}"
+#    else
+#      print "\033[1;32m[\033[1;37mUSER\033[1;32m]\033[1;31m${${${dtime/$d/\033[1;37m${d}\033[0m}/|/\033[0;37m|\033[0;31m}/\]/\033[1;31m\]}"
+#    fi
+#  done
+#}
 
 # check ownership of given argument, as determined by pacman:
 function owns {
@@ -137,8 +138,8 @@ function tmux {
     command tmux ${@%--}
   else
     case ${+DISPLAY} in
-      0)  command tmux -S /tmp/.${UID}/tmux/default $@ ;;
-      1)  command tmux -S /tmp/.${UID}/tmux/xorg $@ ;;
+      0)  command tmux -S /tmp/user-keep/${USER}/tmux/default $@ ;;
+      1)  command tmux -S /tmp/user-keep/${USER}/tmux/xorg $@ ;;
     esac
   fi
 }
@@ -148,7 +149,7 @@ function rot {
   if [[ ${TERM} =~ screen ]]; then
     print "Aborting, please avoid nesting sessions."
   else
-    /usr/bin/tmux -S /tmp/.${UID}/tmux/rtorrent attach-session
+    /usr/bin/tmux -S /tmp/user-keep/${USER}/tmux/rtorrent attach-session
   fi
 }
 
@@ -206,6 +207,10 @@ function mpq {
 function sd {
   case $1 in
     '-r'|'-ru') sdcv --utf8-output -u "en-ru-bars" ${@:/$1} 2>/dev/null ;;
+    '-re'|'-ruen') sdcv --utf8-output -u "dictd_www.mova.org_korolew_ruen" ${@:/$1} 2>/dev/null ;;
+    '-er'|'-enru') sdcv --utf8-output -u "dictd_www.mova.org_korolew_enru" ${@:/$1} 2>/dev/null ;;
+    '-qr'|'-qer') sdcv --utf8-output -u "quick_english-russian" ${@:/$1} 2>/dev/null ;;
+    '-rq'|'-qre') sdcv --utf8-output -u "quick_russian-english" ${@:/$1} 2>/dev/null ;;
     '-w'|'-wordnet') sdcv --utf8-output -u "WordNet" ${@:/$1} 2>/dev/null ;;
     '-t'|'-thesaurus') sdcv --utf8-output -u "English Thesaurus" ${@:/$1} 2>/dev/null ;;
     '-a'|'-all') sdcv --utf8-output ${@:/$1} 2>/dev/null ;;
@@ -251,7 +256,7 @@ function zhist {
 function dfu() {
   local FSTYPES
   FSTYPES=(nilfs2 btrfs ext2 ext3 ext4 jfs xfs zfs reiserfs reiser4 minix cramfs ubifs usbfs udf iso9660 ufs ntfs ntfs-3g fat vfat msdos fuse)
-  df -hTP -x devtmpfs -x tmpfs ; df -hTP $(for f in $FSTYPES; { print - " -x $f" })
+  df -hTP -x rootfs -x devtmpfs -x tmpfs ; df -hTP $(for f in $FSTYPES; { print - " -x $f" })
 }
 
 # quickly view the Linux kernel tainting information:

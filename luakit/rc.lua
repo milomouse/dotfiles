@@ -2,12 +2,15 @@
 -- luakit configuration file, more information at http://luakit.org/ --
 -----------------------------------------------------------------------
 
+require "lfs"
+
 if unique then
     unique.new("org.luakit")
     -- Check for a running luakit instance
     if unique.is_running() then
         if uris[1] then
             for _, uri in ipairs(uris) do
+                if lfs.attributes(uri) then uri = os.abspath(uri) end
                 unique.send_message("tabopen " .. uri)
             end
         else
@@ -53,6 +56,8 @@ require "binds"
 -- Optional user script loading --
 ----------------------------------
 
+require "webinspector"
+
 -- Add sqlite3 cookiejar
 require "cookies"
 
@@ -89,6 +94,7 @@ require "userscripts"
 
 -- Add bookmarks support
 require "bookmarks"
+require "bookmarks_chrome"
 
 -- Add download support
 require "downloads"
@@ -96,16 +102,21 @@ require "downloads_chrome"
 
 downloads.default_dir = "/howl/down"
 
+-- Example using xdg-open for opening downloads / showing download folders
+--downloads.add_signal("open-file", function (file, mime)
+--    luakit.spawn(string.format("xdg-open %q", file))
+--    return true
+--end)
+
 -- Add vimperator-like link hinting & following
--- (depends on downloads)
 require "follow"
 
--- To use a custom character set for the follow hint labels un-comment and
--- modify the following:
---local s = follow.styles
---follow.style = s.sort(s.reverse(s.charset("asdfqwerzxcv")))
-local s = follow.styles
-follow.style = s.upper(s.sort(s.reverse(s.charset("asdfqwerzxcv"))))
+-- Use a custom charater set for hint labels
+local s = follow.label_styles
+follow.label_maker = s.sort(s.reverse(s.charset("asdfqwerzxcv")))
+
+-- Match only hint labels
+--follow.pattern_maker = follow.pattern_styles.match_label
 
 -- Add command history
 require "cmdhist"
@@ -119,6 +130,8 @@ require "taborder"
 -- Save web history
 require "history"
 require "history_chrome"
+
+require "introspector"
 
 -- Add command completion
 require "completion"
@@ -170,4 +183,3 @@ if unique then
 end
 
 -- vim: et:sw=4:ts=8:sts=4:tw=80
-

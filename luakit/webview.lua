@@ -189,21 +189,16 @@ webview.init_funcs = {
     end,
 
     -- Action to take on window open request.
-    window_decision = function (view, w)
-        -- 'link' contains the download link
-        -- 'reason' contains the reason of the request (i.e. "link-clicked")
-        -- return TRUE to handle the request by yourself or FALSE to proceed
-        -- with default behaviour
-        view:add_signal("new-window-decision", function (v, uri, reason)
-            info("New window decision: %s (%s)", uri, reason)
-            if reason == "link-clicked" then
-                window.new({uri})
-            else
-                w:new_tab(uri)
-            end
-            return true
-        end)
-    end,
+    --window_decision = function (view, w)
+    --    view:add_signal("new-window-decision", function (v, uri, reason)
+    --        if reason == "link-clicked" then
+    --            window.new({uri})
+    --        else
+    --            w:new_tab(uri)
+    --        end
+    --        return true
+    --    end)
+    --end,
 
     create_webview = function (view, w)
         -- Return a newly created webview in a new tab
@@ -214,19 +209,19 @@ webview.init_funcs = {
 
     -- Creates context menu popup from table (and nested tables).
     -- Use `true` for menu separators.
-    -- populate_popup = function (view, w)
-    --     view:add_signal("populate-popup", function (v)
-    --         return {
-    --             true,
-    --             { "_Toggle Source", function () w:toggle_source() end },
-    --             { "_Zoom", {
-    --                 { "Zoom _In",    function () w:zoom_in()  end },
-    --                 { "Zoom _Out",   function () w:zoom_out() end },
-    --                 true,
-    --                 { "Zoom _Reset", function () w:zoom_set() end }, }, },
-    --         }
-    --     end)
-    -- end,
+    --populate_popup = function (view, w)
+    --    view:add_signal("populate-popup", function (v)
+    --        return {
+    --            true,
+    --            { "_Toggle Source", function () w:toggle_source() end },
+    --            { "_Zoom", {
+    --                { "Zoom _In",    function () w:zoom_in()  end },
+    --                { "Zoom _Out",   function () w:zoom_out() end },
+    --                true,
+    --                { "Zoom _Reset", function () w:zoom_set() end }, }, },
+    --        }
+    --    end)
+    --end,
 
     -- Action to take on resource request.
     resource_request_decision = function (view, w)
@@ -243,8 +238,6 @@ webview.init_funcs = {
 -- as the first argument. All methods must take `view` & `w` as the first two
 -- arguments.
 webview.methods = {
-    stop   = function (view) view:stop() end,
-
     -- Reload with or without ignoring cache
     reload = function (view, w, bypass_cache)
         if bypass_cache then
@@ -252,28 +245,6 @@ webview.methods = {
         else
             view:reload()
         end
-    end,
-
-    -- Evaluate javascript code and return string result
-    -- The frame argument can be any of the following:
-    -- * true to evaluate on the focused frame
-    -- * false or nothing to evaluate on the main frame
-    -- * a frame object to evaluate on the given frame
-    eval_js = function (view, w, script, file, frame)
-        return view:eval_js(script, file or "(inline)", frame)
-    end,
-
-    -- Evaluate javascript code from file and return string result
-    -- The frame argument can be any of the following:
-    -- * true to evaluate on the focused frame
-    -- * false or nothing to evaluate on the main frame
-    -- * a frame object to evaluate on the given frame
-    eval_js_from_file = function (view, w, file, frame)
-        local fh, err = io.open(file)
-        if not fh then return error(err) end
-        local script = fh:read("*a")
-        fh:close()
-        return view:eval_js(script, file, frame)
     end,
 
     -- Toggle source view
@@ -314,44 +285,33 @@ webview.methods = {
     end,
 }
 
-webview.scroll_parse_funcs = {
-    -- Abs "100px"
-    ["^(%d+)px$"] = function (_, _, px) return px end,
-
-    -- Rel "+/-100px"
-    ["^([-+]%d+)px$"] = function (s, axis, px) return s[axis] + px end,
-
-    -- Abs "10%"
-    ["^(%d+)%%$"] = function (s, axis, pc)
-        return math.ceil(s[axis.."max"] * (pc / 100))
-    end,
-
-    -- Rel "+/-10%"
-    ["^([-+]%d+)%%$"] = function (s, axis, pc)
-        return s[axis] + math.ceil(s[axis.."max"] * (pc / 100))
-    end,
-
-    -- Abs "10p" (pages)
-    ["^(%d+%.?%d*)p$"] = function (s, axis, p)
-        return math.ceil(s[axis.."page_size"] * p)
-    end,
-
-    -- Rel "+10p" (pages)
-    ["^([-+]%d+%.?%d*)p$"] = function (s, axis, p)
-        return s[axis] + math.ceil(s[axis.."page_size"] * p)
-    end,
-}
-
 function webview.methods.scroll(view, w, new)
-    local scroll = view.scroll
-    for axis, val in pairs{ x = new.x, y = new.y } do
-        if type(val) == "number" then
-            scroll[axis] = val
-        else
-            for pat, func in pairs(webview.scroll_parse_funcs) do
-                local n = string.match(val, pat)
-                if n then scroll[axis] = func(scroll, axis, tonumber(n)) end
+    local s = view.scroll
+    for _, axis in ipairs{ "x", "y" } do
+        -- Relative px movement
+        if rawget(new, axis.."rel") then
+            s[axis] = s[axis] + new[axis.."rel"]
+
+        -- Relative page movement
+        elseif rawget(new, axis .. "pagerel") then
+            s[axis] = s[axis] + math.ceil(s[axis.."page_size"] * new[axis.."pagerel"])
+
+        -- Absolute px movement
+        elseif rawget(new, axis) then
+            local n = new[axis]
+            if n == -1 then
+                s[axis] = s[axis.."max"]
+            else
+                s[axis] = n
             end
+
+        -- Absolute page movement
+        elseif rawget(new, axis.."page") then
+            s[axis] = math.ceil(s[axis.."page_size"] * new[axis.."page"])
+
+        -- Absolute percent movement
+        elseif rawget(new, axis .. "pct") then
+            s[axis] = math.ceil(s[axis.."max"] * (new[axis.."pct"]/100))
         end
     end
 end
@@ -360,6 +320,7 @@ function webview.new(w)
     local view = widget{type = "webview"}
 
     view.show_scrollbars = false
+    view.enforce_96_dpi = false
 
     -- Call webview init functions
     for k, func in pairs(webview.init_funcs) do
@@ -385,42 +346,5 @@ table.insert(window.indexes, 1, function (w, k)
         return function (_, ...) return func(view, w, ...) end
     end
 end)
-
--- CUSTOM:
-
--- html5 for youtube
---[[
-webview.init_funcs.youtube_appender = function (view, w)
-    view:add_signal("navigation-request", function (v, uri)
-        if string.match(uri, "youtube%.com/watch%?v=") and not string.match(uri, "&html5=1") then
-            v.uri = uri .. "&html5=1"
-            return false
-        end
-    end)
-end
---]]
-
--- https for AUR website
-webview.init_funcs.https_enforcer = function (view, w)
-    view:add_signal("navigation-request", function (v, uri)
-        if string.match(uri, "aur.archlinux.org") and not string.match(uri, "^https://") then
-          v.uri = string.gsub(uri, "^http", "https")
-          return false
-        end
-    end)
-end
-
--- mailto using 'mutt'
---[[
-webview.init_funcs.mailto_hook = function (view, w)
-    view:add_signal("navigation-request", function (v, uri)
-      if string.match(uri, "^mailto:") then
-          local cmd = string.format("%s %q", "urxvt -e mutt -F /howl/conf/mutt/muttrc", uri)
-          luakit.spawn(cmd)
-          return false
-      end
-    end)
-end
---]]
 
 -- vim: et:sw=4:ts=8:sts=4:tw=80

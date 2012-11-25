@@ -5,8 +5,6 @@
 local theme = {}
 
 -- >> start of CUSTOM
--- only usable with milomouse's window.lua
--- or, optionally, modify the file yourself
 theme.sbar_l_ebox_bg  = "#887b8b"
 theme.sbar_r_ebox_bg  = "#191919"
 -- end of CUSTOM <<

@@ -59,8 +59,8 @@ set noerrorbells
 set history=100
 set nomodeline
 set backup
-set backupdir=/tmp/.1009/vim/backups,.
-set directory=/tmp/.1009/vim/swapfiles,.
+set backupdir=/tmp/user-keep/h/vim/backups,.
+set directory=/tmp/user-keep/h/vim/swapfiles,.
 set viminfo='20,<50,s10,h,n~/.vim/viminfo
 
 " Filetypes

@@ -86,8 +86,8 @@ if [[ -f /usr/share/zsh/plugins/zsh-syntax-highlight/zsh-syntax-highlighting.zsh
 fi
 
 # Fish-like history sub-string search for ZSH (load AFTER syntax):
-if [[ -f /usr/share/zsh/plugins/zsh-history-substring-search/history-substring-search.zsh ]]; then
-  . /usr/share/zsh/plugins/zsh-history-substring-search/history-substring-search.zsh
+if [[ -f /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh ]]; then
+  . /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 
   HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='bg=blue,fg=black,bold'
   HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='bg=red,fg=black'

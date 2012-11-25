@@ -6,7 +6,7 @@ prefer-ipv4=yes
 monitoraspect=16:9
 framedrop=no
 double=yes
-ao=oss,sdl
+ao=pulse,alsa,sdl
 volstep=2
 softvol-max=160
 vo=xv,gl2,gl_nosw,gl,sdl
@@ -25,7 +25,6 @@ subfont-autoscale=2
 subfont-text-scale=3.6
 subfont-outline=1.0
 subfont-blur=1.4
-menu-startup=no
 mouse-movements=no
 nomouseinput=yes
 
@@ -33,20 +32,16 @@ nomouseinput=yes
 ## profiles:
 #################################################
 [vo.fbdev]
-profile-desc="profile for vo framebuffer"
+profile-desc="profile for framebuffer vo"
 vf=scale=1600:900
 framedrop=yes
 double=no
-
-[vo.xv]
-profile-desc="profile for vo xv"
-vf=screenshot
 
 [protocol.dvd]
 profile-desc="profile for dvd:// streams"
 dvd-device=/dev/dvd
 af=volume=5:0,volnorm=2
-vf=pp=h1:y/v1:y/dr:c/tn:2:4:6:n,hqdn3d=3:1:5:0.6,unsharp=l5x5:0.04:c5x5:-0.05
+#pp=h1:y/v1:y/dr:c/tn:2:4:6:n,hqdn3d=3:1:5:0.6,unsharp=l5x5:0.04:c5x5:-0.05
 #vf=pp=ha:164:7:y/va:y/dr:y/tn:3:5:7:y,unsharp=l5x5:0.01:c5x5:-0.02
 
 [protocol.dvdnav]

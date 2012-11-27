@@ -1,3 +1,30 @@
+# disable 'cope' (colored output) for current shell login:
+# cope is re-sourced in .zlogin when a new shell login is initiated.
+# this function is useful for compiles and interactive shell reads
+# where 'cope' creates unresponsive keysyms, e.g. kernel {n,menu}config
+function copesh() {
+  case $1 in
+    enable)
+      if [[ ${#PATH#/usr/share/perl5/vendor_perl/auto/share/dist/Cope:} == ${#PATH} ]]; then
+        export PATH="/usr/share/perl5/vendor_perl/auto/share/dist/Cope:${PATH}"
+      fi ;;
+    disable)
+      if [[ ${#PATH#/usr/share/perl5/vendor_perl/auto/share/dist/Cope:} != ${#PATH} ]]; then
+        export PATH=${PATH#/usr/share/perl5/vendor_perl/auto/share/dist/Cope:}
+      fi ;;
+    toggle|*)
+      print "usage: enable or disable (cope's colored output)"
+      printf "no option passed, toggling now.. "
+      if [[ ${#PATH#/usr/share/perl5/vendor_perl/auto/share/dist/Cope:} == ${#PATH} ]]; then
+        print '[enable]'
+        export PATH="/usr/share/perl5/vendor_perl/auto/share/dist/Cope:${PATH}"
+      else
+        print '[disable]'
+        export PATH=${PATH#/usr/share/perl5/vendor_perl/auto/share/dist/Cope:}
+      fi ;;
+  esac
+}
+
 # use history, but skip certain cmds/args from being written:
 function zshaddhistory {
   local line cmd

@@ -350,16 +350,6 @@ add_binds("normal", {
     key({"Control"}, "i", "Go forward in the browser history.",
         function (w, m) w:forward(m.count) end),
 
-    buf("^gp$", "Open history in current tab.",
-        function(w)
-            w:navigate("luakit://history")
-        end),
-
-    buf("^gP$", "Open history in a new tab.",
-        function(w)
-            w:new_tab("luakit://history")
-        end),
-
     -- Tab
     key({"Control"}, "Page_Up", "Go to previous tab.",
         function (w) w:prev_tab() end),

@@ -5,8 +5,6 @@
 
 ## keyboard:
 #/usr/bin/xmodmap /howl/conf/keymaps/dvausler.xmodmap
-#/usr/bin/xmodmap /howl/conf/keymaps/arensito.xmodmap
-#/usr/bin/xmodmap /howl/conf/keymaps/klausler2.xmodmap
 /usr/bin/xmodmap /howl/conf/keymaps/overlay-mods.xmodmap
 
 # mouse/synclient:

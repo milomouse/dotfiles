@@ -263,8 +263,8 @@
     (dk m (kbd "s-C-Return")        "exec urxvt")
     (dk m (kbd "s-M-Return")        "tmux-attach-rtorrent")
     (dk m (kbd "s-SunPrint_Screen") "exec import -window root ${XDG_PICTURES_DIR:-${H:-/howl}/foto}/shot/$(date +%Y_%m_%d-%H%M%S).png")
-    (dk m (kbd "C-M-Delete")        "exec alock -bg image:file=${XDG_PICTURES_DIR:-${H:-/howl}/foto}/wall/beheading.png -cursor glyph -auth pam >&/dev/null")
-    (dk m (kbd "C-s-Delete")        "exec alock -bg image:file=${XDG_PICTURES_DIR:-${H:-/howl}/foto}/wall/beheading.png -cursor glyph -auth pam >&/dev/null")
+    (dk m (kbd "C-M-Delete")        "exec xlock -mode slip -font fixed -grabmouse -sound -fg purple")
+    (dk m (kbd "C-s-Delete")        "exec xlock -mode slip -font fixed -grabmouse -sound -fg purple")
     ;; <alphabetic bindings>
     (dk m (kbd "s-a")    *echo-map*)
     (dk m (kbd "s-b")    "refresh")

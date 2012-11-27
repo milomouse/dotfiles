@@ -66,8 +66,8 @@
                                       :Y 0
                                       :WIDTH 1600
                                       :HEIGHT 900
-                                      :WINDOWS NIL
-                                      :CURRENT NIL))
+                                      :WINDOWS (10485793)
+                                      :CURRENT 10485793))
                             :CURRENT 0)
                          #S(GDUMP
                             :NUMBER 4
@@ -121,5 +121,5 @@
                                       :WINDOWS NIL
                                       :CURRENT NIL))
                             :CURRENT 0))
-                :CURRENT 1))
+                :CURRENT 3))
    :CURRENT 0)

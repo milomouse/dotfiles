@@ -1,41 +1,55 @@
 ## $XDG_CONFIG_HOME/.mplayer/config
 #################################################
-## global defaults:
+## global defaults: (mplayer2)
 #################################################
-prefer-ipv4=yes
-monitoraspect=16:9
-framedrop=no
-double=yes
+## AUDIO:
 ao=pulse,alsa,sdl
+afm=faad,libmad,libvorbis,liba52,hwac3,libdca,ffmpeg,speex,mpg123
 volstep=2
 softvol-max=160
-vo=xv,gl2,gl_nosw,gl,sdl
+gapless-audio=yes
+## VIDEO:
+vo=xv,gl3,gl_nosw,gl,sdl
+fstype=netwm,layer,fullscreen,stays_on_top,above
+monitoraspect=16:9
+fixed-vo=no
+framedrop=no
+double=yes
+## SUB/OSD:
+slang=eng,en,und,un,rus,ru
+ass=yes
 spuaa=4
 spugauss=0.7
 spualign=2
-subpos=96
 font=DejaVuSerif
-ffactor=1
-unicode=yes
 utf8=yes
-slang=eng,en,und,un,rus,ru
+unicode=yes
 subfont-encoding=unicode
-subfont-osd-scale=2.6
-subfont-autoscale=2
+subfont-osd-scale=3.1
+subfont-autoscale=3
 subfont-text-scale=3.6
 subfont-outline=1.0
 subfont-blur=1.4
+subpos=96
+ffactor=1
+osd-duration=3000
+osd-fractions=0
+## NETWORK:
+prefer-ipv4=yes
+ipv4-only-proxy=yes
+## MISC:
 mouse-movements=no
 nomouseinput=yes
 
 #################################################
 ## profiles:
 #################################################
-[vo.fbdev]
-profile-desc="profile for framebuffer vo"
-vf=scale=1600:900
-framedrop=yes
-double=no
+## WHERE DID fbdev GO ??!!
+#[vo.fbdev]
+#profile-desc="profile for framebuffer vo"
+#vf=scale=1600:900
+#framedrop=yes
+#double=no
 
 [protocol.dvd]
 profile-desc="profile for dvd:// streams"

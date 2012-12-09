@@ -32,11 +32,12 @@ set maxundos 50
 rudeness 12
 escape s-semicolon
 
-bind a exec ossrat -a
-bind b exec synap
-bind c exec urxvt -e tmux
+#bind a exec ossrat -a
+#bind b exec synap
+bind b redisplay
+bind B exec xrefresh
+bind c exec urxvt -e tmux -S /tmp/user-keep/h/tmux/xorg
 bind C exec urxvt
-bind d time
 bind e exec
 bind f fselect
 bind g exec luakit >&/dev/null
@@ -44,28 +45,28 @@ bind h select -
 bind H exec ratpoison -c "select -" -c "only"
 bind i vsplit
 bind j hsplit
-bind k delete
-bind K kill
-bind l windows
+bind l lastmsg
 bind m exec ratpoison -c "exec urxvt -e man $(ratpoison -c "prompt Manpage:")"
 bind n curframe
 bind o only
 #bind p exec urxvt -e ncmpcpp
-bind q remove
 bind r resize
 bind s swap
-bind t title
+bind t time
+bind T title
 bind u undo
 bind v version
-bind w redisplay
+bind w windows
 bind x info
 bind y redo
-bind z lastmsg
+bind z remove
+bind Z delete
 bind Escape abort
 bind minus dedicate 0
 bind equal dedicate 1
 bind Print exec import -window root /howl/foto/shot/$(date +%Y_%m_%d-%H%M).png 
 bind Delete exec alock -bg image:file=/howl/foto/wall/beheading.png -cursor glyph -auth pam >&/dev/null
+bind Backspace kill
 
 definekey top s-n next
 definekey top s-p prev

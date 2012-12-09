@@ -1,9 +1,4 @@
 command clear
-#if [[ $(pulseaudio --check; print $?) != 0 ]]; then
-#  sudo systemctl start dbus &>/dev/null
-#  pulseaudio -D
-#  amixer sset Master 0,
-#fi
 if [[ ${#PATH/local} != ${#PATH} ]] { PATH=${PATH}:/usr/local/sbin:/usr/local/bin }
 PATH="/usr/share/perl5/vendor_perl/auto/share/dist/Cope:${PATH}"
 if [[ ${TERM} == linux || ${TERM} =~ rxvt || ${TERM} =~ screen && ${+DISPLAY} == 1 ]] { cd ${H:-/howl} }

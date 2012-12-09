@@ -15,7 +15,7 @@ alias rd="/bin/rm -r"
 
 # trivial quick views/edits:
 alias wika="${BROWSER:-/usr/bin/w3m} /usr/share/doc/arch-wiki/html/index.html"
-alias sedit="${EDITOR:-/usr/bin/vim} -p ${HOME}/.stumpwmrc ${XDG_CONFIG_DIR:-${HOME}}/stumpwm/{functions,macros,commands,hooks,key-maps}.lisp"
+alias sedit="${EDITOR:-/usr/bin/vim} -p ${HOME}/.stumpwmrc ${XDG_CONFIG_DIR:-${HOME}}/stumpwm/{{functions,macros,commands,hooks,key-maps}.lisp,dzen4stumpwm.zsh}"
 alias zedit="${EDITOR:-/usr/bin/vim} -p ${HOME}/{.zshrc,zsh/{functions,aliases,exports,options,.zlogin},.dir_colors}"
 alias xedit="${EDITOR:-/usr/bin/vim} -p ${XDG_CONFIG_DIR:-${HOME}}/xorg/{xinitrc,Xdefaults}"
 alias zload=". ${HOME}/.zshrc"
@@ -29,22 +29,19 @@ alias info="info --vi-keys"
 alias diff="colordiff"
 alias grep="grep --color=auto"
 alias mutt="mutt -F ${XDG_CONFIG_DIR:-${HOME}}/mutt/muttrc"
+alias sxiv="sxiv -b"
 alias xskat="xskat -opt ${XDG_CONFIG_DIR:-${HOME}}/xorg/xskat.opt -list ${XDG_CONFIG_DIR:-${HOME}}/xorg/xskat.lst"
 alias offlineimap="offlineimap -c ${XDG_CONFIG_DIR:-${HOME}}/.offlineimap/offlineimaprc"
 alias rtorrent="rtorrent -o http_capath=/etc/ssl/certs"
 alias startx="cd ~/ && /usr/bin/startx ${XDG_CONFIG_DIR:-${HOME}}/xorg/xinitrc -- -nolisten tcp -once -retro ; pushd -q +1"
 
 # system/media shortcuts:
-alias psu="ps --deselect -U root -C tmux,urxvt -lFj f"
-alias psr="ps -U root -lFj f"
-alias psa="ps fax -lFj"
+alias psu="ps --deselect -U root -C tmux,urxvt -j f"
+alias psr="ps -U root -j f"
+alias psa="ps fax -j"
 alias loadavg='print ${$(</proc/loadavg)[1,3]}'
-#alias reboot='/bin/sync && sudo /sbin/reboot'
-#alias {poweroff,pow}='/bin/sync && sudo /sbin/poweroff'
 alias reboot='/bin/sync && sudo /usr/bin/systemctl reboot'
 alias {poweroff,pow}='/bin/sync && sudo /usr/bin/systemctl poweroff'
-alias mix2="/usr/local/bin/ossvol --speakers --quiet && /usr/local/bin/ossvol -a"
-alias mix3="/usr/local/bin/ossvol recall --headphones --quiet && /usr/local/bin/ossvol -a"
 alias siteget="wget --recursive --page-requisites --convert-links --html-extension --no-parent --random-wait -U Mozilla -l" #depth, then url
 alias daemons="systemctl list-units -t service --no-pager --no-legend | grep active | grep -v systemd | grep -v exited | awk '{ print $1 }'"
 

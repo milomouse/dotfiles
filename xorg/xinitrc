@@ -11,7 +11,7 @@
 /usr/local/bin/zaprat --disable
 
 # wallpaper:
-/usr/bin/display -window root -resize 1600x900! /howl/foto/wall/indian_by_aalexandrin-d3g7bej_2.jpg
+/usr/bin/display -window root -resize 1600x900! /howl/foto/wall/wallpaper-249719.png
 
 # window-manager:
 exec /usr/bin/stumpwm &>>${XDG_CONFIG_DIR:-$HOME}/stumpwm/storage/log.lisp

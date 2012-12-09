@@ -6,19 +6,15 @@
 --         serverninja -> too many thanks to mention (format/ideas, etc.)    --
 --         pbrisbin    -> scratchpad 'NSP' ws hiding, and "versions" idea    --
 -------------------------------------------------------------------------------
--- versions used atoc (on ArchLinux):                                        --
--- |  ghc                           -> 7.0.2-2                               --
--- |  haskell-haskeline             -> 0.6.3.2-2.1                           --
--- |  haskell-mtl                   -> 2.0.1.0-2                             --
--- |  haskell-parsec                -> 3.1.1-2                               --
--- |  haskell-stm                   -> 2.2.0.1-2                             --
--- |  haskell-terminfo              -> 0.3.1.3-4.1                           --
--- |  haskell-utf8-string           -> 0.3.6-7.1                             --
--- |  haskell-x11                   -> 1.5.0.0-7.2                           --
--- |  haskell-x11-xft               -> 0.3-19.2                              --
--- |  xmonad-darcs                  -> 20110331-1                            --
--- |  xmonad-contrib-darcs          -> 20110331-1                            --
--- |  dzen2 (svn)                   -> 271-1                                 --
+-- versions used ATOC:                                                       --
+-- |  ghc                           -> 7.6.1                                 --
+-- |  haskell-mtl                   -> 2.1.2                                 --
+-- |  haskell-utf8-string           -> 0.3.7                                 --
+-- |  haskell-x11                   -> 1.6.0.2                               --
+-- |  haskell-x11-xft               -> 0.3.1                                 --
+-- |  xmonad                        -> 0.10                                  --
+-- |  xmonad-contrib                -> 0.10                                  --
+-- |  dzen2[-xft-xpm-xinerama](svn) -> 271-1                                 --
 -------------------------------------------------------------------------------
 
 {-# LANGUAGE NoMonomorphismRestriction #-}
@@ -151,7 +147,8 @@ colorNormalBorder   = colorDarkWhite
 colorFocusedBorder  = colorMagenta
 
 -- <font>
-barFont = "-misc-fixed-medium-r-semicondensed-*-12-110-75-75-c-60-koi8-r"
+--barFont = "-misc-fixed-medium-r-semicondensed-*-12-110-75-75-c-60-koi8-r"
+barFont = "-misc-fixedzero-medium-r-semicondensed-*-12-110-75-75-c-60-iso10646-1"
 
 -- <tab-bar configuration>
 myTabTheme =
@@ -213,7 +210,9 @@ myGSConfig colorizer = (buildDefaultGSConfig myColorizer)
 -- <scratchpad>
 manageScratchPad :: ManageHook
 manageScratchPad = scratchpadManageHook (W.RationalRect (1/6) (1/4) (2/3) (2/5))
-scratchPad = scratchpadSpawnActionCustom "urxvt -name scratchpad +sb -fn '-misc-fixed-medium-r-semicondensed-*-12-110-75-75-c-60-koi8-r' -fb '-misc-fixed-medium-r-semicondensed-*-12-110-75-75-c-60-koi8-r' -fi '-misc-fixed-medium-r-semicondensed-*-12-110-75-75-c-60-koi8-r' -tn 'rxvt-256color' -cr '#a488d9' -e tmux -S /tmp/.${UID}/tmux/sp"
+--scratchPad = scratchpadSpawnActionCustom "urxvt -name scratchpad +sb -fn '-misc-fixed-medium-r-semicondensed-*-12-110-75-75-c-60-koi8-r' -fb '-misc-fixed-medium-r-semicondensed-*-12-110-75-75-c-60-koi8-r' -fi '-misc-fixed-medium-r-semicondensed-*-12-110-75-75-c-60-koi8-r' -tn 'rxvt-256color' -cr '#a488d9' -e tmux -S /tmp/user-keep/${USER}/tmux/xorg-sp"
+scratchPad = scratchpadSpawnActionCustom "urxvt -name scratchpad +sb -fn '-misc-fixedzero-medium-r-semicondensed-*-12-110-75-75-c-60-iso10646-1' -fb '-misc-fixedzero-medium-r-semicondensed-*-12-110-75-75-c-60-iso10646-1' -fi '-misc-fixedzero-medium-r-semicondensed-*-12-110-75-75-c-60-iso10646-1' -tn 'rxvt-256color' -cr '#a488d9' -e tmux -S /tmp/user-keep/${USER}/tmux/xorg-sp"
+
 
 -- end of UTILITY FUNCTIONS }}}
 
@@ -365,22 +364,22 @@ myKeyBindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask,                   xK_g         ), goToSelected $ myGSConfig myColorizer)
     , ((modMask .|. shiftMask,     xK_g         ), bringSelected $ myGSConfig myColorizer)
     -- <common programs>
-    , ((modMask,                   xK_Escape    ), safeSpawnProg "banishmouse")
+    , ((modMask,                   xK_Escape    ), safeSpawn "zaprat" ["--toggle"])
     , ((modMask,                   xK_Print     ), unsafeSpawn "import -window root /howl/foto/shot/$(date +%Y_%m_%d-%H%M%S).png")
-    , ((modMask .|. shiftMask,     xK_Delete    ), unsafeSpawn "alock -bg image:file=/howl/foto/wall/beheading.jpg -cursor glyph -auth pam >&/dev/null")
-    , ((modMask,                   xK_Return    ), unsafeSpawn "urxvt -e tmux -S /tmp/.${UID}/tmux/xorg")
+    , ((modMask .|. shiftMask,     xK_Delete    ), unsafeSpawn "xlock -mode slip -font fixed -grabmouse -sound -fg purple")
+    , ((modMask,                   xK_Return    ), unsafeSpawn "urxvt -e tmux -S /tmp/user-keep/${USER}/tmux/xorg")
     , ((modMask .|. shiftMask,     xK_Return    ), safeSpawnProg $ XMonad.terminal conf)
     , ((modMask,                   xK_grave     ), scratchPad)
     , ((modMask,                   xK_f         ), submap . M.fromList $ -- frequently used programs [sub-bindings]
                                 [ ((0, xK_l       ), runOrRaise "luakit" (className =? "luakit"))
-                                , ((0, xK_m       ), runInTerm "" "tmux -S /tmp/.${UID}/tmux/xorg new-session 'mutt -F $XDG_CONFIG_DIR/mutt/muttrc'")
-                                , ((0, xK_w       ), safeSpawnProg "wallie")
+                                , ((0, xK_m       ), runInTerm "" "tmux -S /tmp/user-keep/${USER}/tmux/xorg new-session 'mutt -F $XDG_CONFIG_DIR/mutt/muttrc'")
+                              --  , ((0, xK_w       ), safeSpawnProg "wallie")
                                 , ((0, xK_x       ), unsafeSpawn "xskat -opt $XDG_CONFIG_DIR/xorg/xskat.opt -list $XDG_CONFIG_DIR/xorg/xskat.lst")
                                 ])
     -- <function/media keys>
-    , ((0,                         0x1008ff13   ), unsafeSpawn "ossvol --increase 1 --quiet")
-    , ((0,                         0x1008ff11   ), unsafeSpawn "ossvol --decrease 1 --quiet")
-    , ((0,                         0x1008ff12   ), unsafeSpawn "ossvol --mute --quiet")
+    , ((0,                         0x1008ff13   ), unsafeSpawn "volpulse up")
+    , ((0,                         0x1008ff11   ), unsafeSpawn "volpuse down")
+    , ((0,                         0x1008ff12   ), unsafeSpawn "volpulse toggle")
     , ((modMask .|. shiftMask,     xK_e         ), safeSpawnProg "eject")
     , ((modMask .|. shiftMask,     xK_d         ), AL.launchApp myXPConfig "mifo --command")
     , ((modMask,                   xK_d         ), submap . M.fromList $ -- mplayer daemon [sub-bindings] (mplayer fifo script)
@@ -394,8 +393,8 @@ myKeyBindings conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
                                 , ((0, xK_j       ), unsafeSpawn "mifo --next dir")
                                 , ((0, xK_k       ), unsafeSpawn "mifo --prev dir")
                                 , ((0, xK_s       ), safeSpawn "mifo" ["--stop"])
-                                , ((0, xK_q       ), unsafeSpawn "sudo /etc/rc.d/mifo stop")
-                                , ((0 .|. shiftMask, xK_q ), unsafeSpawn "sudo /etc/rc.d/mifo kill")
+                                , ((0, xK_q       ), unsafeSpawn "systemctl --user stop mifo")
+                                , ((0 .|. shiftMask, xK_q ), unsafeSpawn "systemctl --user stop mifo")
                                 , ((0, xK_f       ), safeSpawn "mifo" ["--fullscreen"])
                                 , ((0 .|. shiftMask, xK_s ), AL.launchApp myXPConfig "mifo --save")
                                 , ((0, xK_a       ), AL.launchApp myXPConfig "mifo --load")

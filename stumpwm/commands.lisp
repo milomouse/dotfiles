@@ -145,7 +145,7 @@ window with Master and designate this as the new Master."
     (when (and win group) (exchange-windows (current-window) win) (master-make)))))
 
 ;; [with *shell-program* "/bin/zsh"] look for detached 'tmux [socket] xorg' session and attach, else create new.
-;; (useful for StumpWM crashes, as tmux windows survive crashes and this command brings them back)
+;; (also useful for StumpWM crashes, as tmux windows survive crashes and this command brings them back)
 (defcommand tmux-attach-else-new () () "Find detached tmux session and attach, else create new session."
   (run-shell-command
   "if [[ -n ${$(tmux -S /tmp/user-keep/${USER}/tmux/xorg list-session|grep -v attached)[1]//:} ]]; then
@@ -181,7 +181,7 @@ differs from RESTART, which restarts the unix process.
 Since the process isn't restarted, existing customizations remain
 after the restart." (throw :top-level :restart))
 
-(defcommand loadrc-forget () () "Reload the @file{~/.stumpwmrc} file without remember current state."
+(defcommand loadrc-forget () () "Reload the @file{~/.stumpwmrc} file without remembering current state."
   (handler-case
       (progn
         (with-restarts-menu (load-rc-file nil)))
@@ -294,6 +294,7 @@ remembering their previous positions, also hiding frame highlights."
           (frame-raise-window group l (frame-window l) nil)
           (when (frame-window l)
             (update-decoration (frame-window l)))))))
+
 
 ;; remember states if not already in 'only' mode (e.g., one frame).
 (defcommand only () () "Delete all the frames but the current one and grow it

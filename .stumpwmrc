@@ -3,7 +3,7 @@
 ;;--------------------------------------------------------------------------;;
 ;; author: milomouse <vincent[at]fea.st>                                    ;;
 ;;--------------------------------------------------------------------------;;
-;; versions used atoc:                                                      ;;
+;; versions used ATOC:                                                      ;;
 ;; |  sbcl             -> 1.1.1-2                                           ;;
 ;; |  clx              -> 0.7.4-2                                           ;;
 ;; |  cl-ppcre         -> 2.0.3-2                                           ;;
@@ -94,21 +94,28 @@ then run the command synchronously and collect the output."
 
 ;; borders.
 (setf *resize-hides-windows* T
-      *normal-border-width* 2
+      *normal-border-width* 3
       *maxsize-border-width* 2
       *transient-border-width* 2
       *float-window-border* 1
       *float-window-title-height* 1)
-(set-msg-border-width 1)
+(set-msg-border-width 3)
 
 ;; fonts/colors. (custom font; full unicode "Fixed" with emphasized numeric 0's <> alphabetic O's)
 (set-font "-misc-fixedzero-medium-r-semicondensed-*-12-110-75-75-c-60-iso10646-1")
 ;(set-font "-misc-fixed-medium-r-semicondensed-*-12-110-75-75-c-60-koi8-r")
 (set-fg-color        "grey64")
-(set-bg-color        "grey14")
-(set-focus-color     "thistle4")
-(set-unfocus-color   "grey16")
-(set-border-color    "grey44")
+;(set-bg-color        "grey14")
+(set-bg-color        "grey10")
+(set-focus-color     "grey22")
+;(set-focus-color     "thistle4")
+;(set-focus-color     "cyan3")
+;(set-focus-color     "cadetblue")
+;(set-focus-color     "orchid3")
+;(set-unfocus-color   "grey16")
+(set-unfocus-color   "grey10")
+;(set-border-color    "grey44")
+(set-border-color    "grey10")
 (set-win-bg-color    "grey6")
 (setf *colors* (list "grey9"          ; 0 black
                      "deeppink"       ; 1 red
@@ -134,19 +141,18 @@ then run the command synchronously and collect the output."
 ;; windows/frames. use more intuitive frame-numbers (with 'fselect').
 (setf *default-window-name* "null"
       *new-frame-action* :empty
-      *min-frame-width* 45
-      *min-frame-height* 45
+      *min-frame-width* 25
+      *min-frame-height* 25
       *resize-increment* 2
       *frame-number-map* "yhjukilop")
 
 ;; mode-line and input. (mode-line unused)
 (setf *mode-line-background-color* "grey5"
       *mode-line-border-color* "grey10"
-      *mode-line-foreground-color* "azure4"
-      *mode-line-border-width* 1
+      *mode-line-foreground-color* "azure4" *mode-line-border-width* 1
       *mode-line-pad-x* 1
       *mode-line-pad-y* 0
-      *mode-line-timeout* 300
+      *mode-line-timeout* 6000
       *mode-line-position* :top
       *input-history-ignore-duplicates* 0)
 
@@ -167,5 +173,12 @@ then run the command synchronously and collect the output."
 
 ;; display a random background image on root window.
 ;(display-random-bg)
+
+;; resize display head and [re]start 'dzen2'.
+;(resize-head 0 0 22 1600 878)
+;(if (probe-file (merge-pathnames (make-pathname :name "dzen4stumpwm" :type "zsh"
+;                :directory '(:relative "conf" "stumpwm")) *home-dir*))
+;    (run-shell-command "pkill -9 -g $(ps -C dzen2 hopgrp) &>/dev/null \
+;                        ; exec /bin/zsh -c \"source /howl/conf/stumpwm/dzen4stumpwm.zsh &\""))
 
 ;; EOF

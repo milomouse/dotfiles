@@ -7,6 +7,6 @@
              :Y 0
              :WIDTH 1600
              :HEIGHT 900
-             :WINDOWS (14680066)
-             :CURRENT 14680066))
+             :WINDOWS NIL
+             :CURRENT NIL))
    :CURRENT 0)

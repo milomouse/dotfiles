@@ -3,6 +3,25 @@
 ;; *data-dir*/../functions.lisp          ;;
 ;;-----------------------------------------
 
+;; for use with dzen2.
+;(defun update-fullscreen (window action)
+;  (let ((fullscreen-p (window-fullscreen window)))
+;    (case action
+;      (0                                ; _NET_WM_STATE_REMOVE
+;       (when fullscreen-p
+;         (progn (deactivate-fullscreen window)
+;         (resize-head 0 0 22 1600 878))))
+;      (1                                ; _NET_WM_STATE_ADD
+;       (unless fullscreen-p
+;         (progn (activate-fullscreen window)
+;         (resize-head 0 0 0 1600 900))))
+;      (2                                ; _NET_WM_STATE_TOGGLE
+;       (if fullscreen-p
+;           (progn (deactivate-fullscreen window)
+;           (resize-head 0 0 22 1600 878))
+;           (progn (activate-fullscreen window)
+;           (resize-head 0 0 0 1600 900)))))))
+
 (defun fmt-group-status (group)
   (let ((screen (group-screen group)))
     (cond ((eq group (screen-current-group screen))
@@ -161,6 +180,7 @@ will only display valid files anyway."
     M)))) (update-resize-map)
 
 ;; incomplete, was just testing ALSA out.. still using OSS
+;; (not anymore, will try to redo this and use ALSA/PulseAudio)
 ;(defcommand amixer-control (channel arg)
 ;  (let ((variance (run-shell-command (concatenate 'string
 ;      "print ${$(amixer sget " channel ")[-2,-1]//(\[|\]|.*dB|-)}"))))

@@ -1,10 +1,9 @@
-(("3" 0 T T :CLASS "Firefox" :INSTANCE "Navigator" :TITLE NIL :ROLE "browser")
- ("4" 0 T NIL :CLASS "Gimp" :INSTANCE "gimp" :TITLE NIL :ROLE "gimp-file-open")
- ("3" 0 T T :CLASS "luakit" :INSTANCE "luakit" :TITLE NIL :ROLE NIL)
- ("3" 0 T T :CLASS "FIrefox" :INSTANCE "Navigator" :TITLE NIL :ROLE "browser")
+(("3" 0 T T :CLASS "luakit" :INSTANCE "luakit" :TITLE NIL :ROLE NIL)
+ ("3" 0 T T :CLASS "Firefox" :INSTANCE "Navigator" :TITLE NIL :ROLE "browser")
  ("4" 0 T T :CLASS "Gimp" :INSTANCE "gimp" :TITLE NIL :ROLE "gimp-startup")
  ("4" 0 T T :CLASS "Gimp" :INSTANCE "gimp" :TITLE NIL :ROLE
   "gimp-image-window")
+ ("4" 0 T NIL :CLASS "Gimp" :INSTANCE "gimp" :TITLE NIL :ROLE "gimp-file-open")
  ("5" 0 T T :CLASS "libreoffice-startcenter" :INSTANCE
   "VCLSalFrame.DocumentWindow" :TITLE NIL :ROLE NIL)
  ("5" 0 T T :CLASS "libreoffice-writer" :INSTANCE "VCLSalFrame" :TITLE NIL
@@ -23,8 +22,4 @@
  ("6" 0 T T :CLASS "Pysol" :INSTANCE "pySol #2" :TITLE NIL :ROLE NIL)
  ("6" 0 T T :CLASS "xskat" :INSTANCE "xskat" :TITLE NIL :ROLE NIL)
  ("6" 0 T T :CLASS "XMahjongg" :INSTANCE "xmahjongg" :TITLE NIL :ROLE NIL)
- ("6" 0 T T :CLASS "Sudoku-savant" :INSTANCE "sudoku-savant" :TITLE NIL :ROLE
-  NIL)
- ("6" 0 T T :CLASS "Eboard" :INSTANCE "eboard" :TITLE NIL :ROLE NIL)
- ("6" 0 T T :CLASS "warmux" :INSTANCE "warmux" :TITLE NIL :ROLE NIL)
- ("6" 0 T T :CLASS "Ossxmix"))
+ ("6" 0 T T :CLASS "Pavucontrol" :INSTANCE "pavucontrol" :TITLE NIL :ROLE NIL))

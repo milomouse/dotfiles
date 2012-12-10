@@ -39,7 +39,7 @@ noproxy_netaddr 1
 no_proxy 
 ftp_proxy 
 https_proxy 
-http_proxy http://127.0.0.1:8118
+http_proxy http://127.0.0.1:3128
 use_proxy 1
 max_news 50
 nntpmode 

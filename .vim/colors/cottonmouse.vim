@@ -22,6 +22,7 @@ if ( &t_Co >= 255 || $TERM =~? "256color" )
   hi Constant       term=none cterm=none ctermfg=60   ctermbg=none
   hi Cursor         term=none cterm=none ctermfg=233  ctermbg=109
   hi CursorLine     term=none cterm=none ctermfg=none ctermbg=235
+  hi CursorLineNr   term=none cterm=none ctermfg=132  ctermbg=235
   hi CursorColumn   term=none cterm=none ctermfg=none ctermbg=235
   hi Debug          term=none cterm=none ctermfg=181  ctermbg=none
   hi Define         term=none cterm=none ctermfg=97   ctermbg=none

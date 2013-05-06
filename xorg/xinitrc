@@ -1,17 +1,16 @@
 #!/bin/zsh
 # resources:
 /usr/bin/xrdb -load ${XDG_CONFIG_DIR:-$HOME}/xorg/Xdefaults
-/usr/bin/xsetroot -cursor_name left_ptr &
 
 ## keyboard:
-#/usr/bin/xmodmap /howl/conf/keymaps/dvausler.xmodmap
-/usr/bin/xmodmap /howl/conf/keymaps/overlay-mods.xmodmap
+#/usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/dvausler.xmodmap
+/usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/overlay-mods.xmodmap
 
 # mouse/synclient:
 /usr/local/bin/zaprat --disable
 
 # wallpaper:
-/usr/bin/display -window root -resize 1600x900! /howl/foto/wall/wallpaper-249719.png
+/usr/bin/xsetroot -cursor_name left_ptr -solid "#222"
 
 # window-manager:
 exec /usr/bin/stumpwm &>>${XDG_CONFIG_DIR:-$HOME}/stumpwm/storage/log.lisp

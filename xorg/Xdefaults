@@ -1,4 +1,4 @@
-!! ${XDG_CONFIG_DIR:-$HOME/.config}/xorg/Xdefaults
+!! ${XDG_CONFIG_DIR}/xorg/Xdefaults
 !! author: milomouse <vincent[at]fea.st>
 !! update: 2012-01-31
 
@@ -9,7 +9,7 @@ urxvt*loginShell: true
 !urxvt*boldFont: -misc-fixed-medium-r-semicondensed-*-12-110-75-75-c-60-koi8-r
 !urxvt*italicFont: -misc-fixed-medium-r-semicondensed-*-12-110-75-75-c-60-koi8-r
 !urxvt*boldItalicFont: -misc-fixed-medium-r-semicondensed-*-12-110-75-75-c-60-koi8-r
-! fork of 6x12 Fixed SemiCondensed; emphasize numeric 0's as opposed to alphabetic O's:
+!! fork of 6x12 Fixed SemiCondensed; emphasize numeric 0's as opposed to alphabetic O's:
 urxvt*font: -misc-fixedzero-medium-r-semicondensed-*-12-110-75-75-c-60-iso10646-1
 urxvt*boldFont: -misc-fixedzero-medium-r-semicondensed-*-12-110-75-75-c-60-iso10646-1
 urxvt*italicFont: -misc-fixedzero-medium-r-semicondensed-*-12-110-75-75-c-60-iso10646-1
@@ -84,7 +84,7 @@ urxvt*underlineURLs: true
 !! astromouse (colorful | mellow)
 *background: #101010
 *foreground: #b5b5b5
-*color0:  #1c1c1c
+*color0:  #1a1a1a
 *color8:  #3d3a3a
 *color1:  #d770af
 *color9:  #d28abf
@@ -118,6 +118,26 @@ urxvt*underlineURLs: true
 !*color14: #849DA2
 !*color7:  #E6EBE5
 !*color15: #D9D6CF
+
+!! Jellybeans Terminal Colours
+!*background: #151515
+!*foreground: #888888
+!*color0: #1C1C1C
+!*color8: #404040
+!*color1: #B85335
+!*color9: #CF6A4C
+!*color2: #799D6A
+!*color10: #99AD6A
+!*color3: #FFB964
+!*color11: #FAD07A
+!*color4: #667899
+!*color12: #8197BF
+!*color5: #8787AF
+!*color13: #C6B6EE
+!*color6: #668799
+!*color14: #8FBFDC
+!*color7: #888888
+!*color15: #E8E8D3
 
 !! various X stuff
 Xcursor.theme: whiteglass

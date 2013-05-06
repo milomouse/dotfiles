@@ -1,0 +1,115 @@
+#!/bin/bash
+## /etc/xdg/herbstluftwm/autostart
+## milomouse <vincent [at] fea.st>
+
+function hc() {
+    herbstclient "$@"
+}
+
+hc emit_hook reload
+hc keyunbind --all
+hc unsetenv HCT
+
+
+## MOD KEY:
+Mod=Mod4
+
+
+## GLOBAL:
+hc set focus_stealing_prevention 0
+hc set focus_follows_mouse 0
+hc set raise_on_focus 0
+hc set raise_on_click 1
+hc set mouse_recenter_gap 0
+hc set default_frame_layout 2
+
+
+## TAGS/WORKSPACES:
+#+ create 6 tags, named 1 through 8:
+TAG_NAMES=( {1..8} )
+TAG_KEYS=( {1..8} 0 )
+hc rename default "${TAG_NAMES[0]}" || true
+for i in ${!TAG_NAMES[@]} ; do
+    hc add "${TAG_NAMES[$i]}"
+    key="${TAG_KEYS[$i]}"
+    if ! [ -z "$key" ] ; then
+        # bind key (focus|move) to MOD{-,-Shift-}tagname:
+        hc keybind "${Mod}-$key" use_index "$i"
+        hc keybind "${Mod}-Shift-$key" move_index "$i"
+    fi
+done
+
+
+## MAIN KEYBINDINGS:
+#+ keybindings are now designated by xchainkeys(1)
+#+ mouse: (will not use these.. but have them just in case)
+hc mouseunbind --all
+hc mousebind ${Mod}-Button1 move
+hc mousebind ${Mod}-Button2 resize
+hc mousebind ${Mod}-Button3 zoom
+
+
+## DEOCRATION:
+#+ colors:
+hc set frame_border_active_color '#101010'
+hc set frame_border_normal_color '#101010'
+hc set frame_bg_active_color '#101010'
+hc set frame_bg_normal_color '#151515'
+hc set window_border_active_color '#4f4155'
+hc set window_border_normal_color '#1c1c1c'
+hc set window_border_urgent_color '#4cdcd4'
+#+ borders/gaps:
+hc set always_show_frame 1
+hc set frame_bg_transparent 0
+hc set frame_border_width 1
+hc set window_border_width 4
+hc set window_border_inner_width 0
+hc set gapless_grid 1
+hc set frame_gap 1
+hc set window_gap -2
+hc set frame_padding 2
+hc set smart_window_surroundings 0
+hc set smart_frame_surroundings 1
+
+
+## RULES:
+#+ global focus:
+hc unrule -F
+hc rule focus=on
+#+ move to tag:
+hc rule class=luakit tag=5
+hc rule class=Firefox tag=5
+hc rule class=Gimp tag=6
+hc rule class=xskat tag=7
+hc rule instance~xmahjongg tag=7
+hc rule class=Pysol tag=7
+hc rule class=Pavucontrol tag=8
+#+ management:
+hc rule instance=gcolor2 pseudotile=on
+#hc rule class=Toplevel manage=off
+hc rule class=Toplevel pseudotile=on
+hc rule windowtype~'_NET_WM_WINDOW_TYPE_(DIALOG|UTILITY|SPLASH)' pseudotile=on
+hc rule windowtype~'_NET_WM_WINDOW_TYPE_(NOTIFICATION|DOCK)' manage=off
+hc rule windowtype~'_NET_WM_WINDOW_TYPE_(FULLSCREEN|FS)' fullscreen=on
+#hc rule class~'(.*[Rr]xvt.*|.*[Tt]erm|Konsole)' focus=on
+#hc rule windowtype='_NET_WM_WINDOW_TYPE_DIALOG' focus=on
+#hc rule windowtype~'_NET_WM_WINDOW_TYPE_(FULLSCREEN|FS)' fullscreen=on focus=on
+#hc rule class=mplayer2 focus=on
+
+
+## MISCELLANEOUS:
+hc unlock
+hc set tree_style '╾│ ├└╼─┐'
+# hc set_monitors 1280x1024+0+0 1280x1024+1280+0
+#hc set_monitors 1600x900
+# or simply:
+hc detect_monitors
+
+
+## PANEL:
+#panel=${XDG_CONFIG_HOME:-$HOME}/herbstluftwm/panel.sh
+#[ -x "$panel" ] || panel=/etc/xdg/herbstluftwm/panel.sh
+#for monitor in $(herbstclient list_monitors | cut -d: -f1) ; do
+#    # start it on each monitor
+#    $panel $monitor &
+#done

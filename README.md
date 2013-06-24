@@ -1,5 +1,5 @@
 Current Setup:
--
+--------------
 
 
 DISTRO = Gentoo (~amd64 nomultilib)

@@ -10,7 +10,12 @@ theme.sbar_r_ebox_bg  = "#191919"
 -- end of CUSTOM <<
 
 -- Default settings
-theme.font = "Fixed 9"
+theme.font = "monospace normal 8"
+--theme.font = "EnvyCodeR normal 9"
+--theme.font = "Inconsolata normal 10"
+--theme.font = "Liberation normal 8"
+--theme.font = "Bitstream normal 8"
+theme.font = "normal 8"
 theme.fg   = "#191919"
 theme.bg   = "#eeeeee"
 
@@ -74,21 +79,6 @@ theme.loading_bg      = "#898989"
 -- Trusted/untrusted ssl colors
 theme.trust_fg        = "#98a7b2"
 theme.notrust_fg      = "#d680c5"
-
--- URL Hints
-theme.focus_bg        = "#00ff00";
-theme.normal_bg       = "#ffff99";
-theme.opacity         = 0.3;
-theme.border          = "1px dotted #000000";
-theme.frame_border    = "2px solid #880000";
-theme.tick_frame_bg   = "#880000";
-theme.tick_fg         = "#ffffff";
-theme.tick_bg         = "#000088";
-theme.tick_border     = "2px dashed #000000";
-theme.tick_opacity    = 0.4;
-theme.tick_font       = "11px monospace bold";
-theme.vert_offset     = 0;
-theme.horiz_offset    = -10;
 
 return theme
 -- vim: et:sw=4:ts=8:sts=4:tw=80

@@ -113,10 +113,12 @@ require "follow"
 
 -- Use a custom charater set for hint labels
 local s = follow.label_styles
-follow.label_maker = s.sort(s.reverse(s.charset("asdfqwerzxcv")))
+--follow.label_maker = s.sort(s.reverse(s.charset("asdfqwerzxcv")))
+--follow.label_maker = s.sort(s.reverse(s.charset("hjklbnmyuiop")))
+follow.label_maker = s.sort(s.reverse(s.charset("jhfkldsaewqiop")))
 
 -- Match only hint labels
---follow.pattern_maker = follow.pattern_styles.match_label
+follow.pattern_maker = follow.pattern_styles.match_label
 
 -- Add command history
 require "cmdhist"
@@ -149,6 +151,11 @@ require "go_input"
 require "go_next_prev"
 require "go_up"
 
+-- Adblocking support.
+--require "adblock"
+--require "adblock_chrome"
+
+-- Personal modifications.
 require "mine"
 
 -----------------------------

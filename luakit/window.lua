@@ -484,7 +484,11 @@ window.methods = {
         local loaded = w.sbar.l.loaded
         if not w.view:loading() or p == 1 then
             loaded:hide()
+            w.sbar.ebox:hide()
+            w.sbar.hidden = true
         else
+            w.sbar.ebox:show()
+            w.sbar.hidden = false
             loaded:show()
             loaded.text = string.format("(%d%%)", p * 100)
         end
@@ -493,10 +497,10 @@ window.methods = {
     update_scroll = function (w)
         local scroll, label = w.view.scroll, w.sbar.l.scroll
         local y, max, text = scroll.y, scroll.ymax
-        if     max == 0   then text = "All"
-        elseif y   == 0   then text = " 0%"
+        if     max == 0   then text = "100%"
+        elseif y   == 0   then text = "  0%"
         elseif y   == max then text = "100%"
-        else text = string.format("%2d%%", (y / max) * 100)
+        else text = string.format(" %2d%%", (y / max) * 100)
         end
         if label.text ~= text then label.text = text end
     end,

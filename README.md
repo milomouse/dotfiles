@@ -23,3 +23,5 @@ MUSIC PLAYER = mifo (my mplayer daemon script)
 VIDEO PLAYER = mplayer2
 
 IMAGE VIEWER = sxiv
+
+WEB BROWSER = luakit

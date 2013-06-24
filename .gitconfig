@@ -36,7 +36,9 @@
 [core]
   whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
   editor = /usr/bin/vim
-  pager = /usr/bin/most
+  pager = /usr/bin/less
 [apply]
   whitespace = strip
 
+[push]
+	default = simple

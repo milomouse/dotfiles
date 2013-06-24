@@ -41,7 +41,8 @@ hc keybind $Mod-Shift-q quit
 hc keybind $Mod-Shift-r reload
 hc keybind $Mod-Return spawn urxvt -e tmux -S /tmp/user-keep/h/tmux/xorg
 hc keybind $Mod-Shift-Return spawn urxvt
-hc keybind $Mod-e spawn dmenu_run -p execute
+hc keybind $Mod-e spawn interrobang
+#hc keybind $Mod-e spawn dmenu_run -p execute
 hc keybind $Mod-Shift-e spawn hc-commander
 hc keybind $Mod-Escape spawn zaprat --toggle
 #+ tags
@@ -111,7 +112,7 @@ hc keybind $Mod-Shift-v spawn import -window root ${XDG_PICTURES_DIR:-${H:-/howl
 
 ## DEOCRATION:
 #+ colors:
-hc set frame_border_active_color '#101010'
+hc set frame_border_active_color '#161616'
 hc set frame_border_normal_color '#101010'
 hc set frame_bg_active_color '#202020'
 hc set frame_bg_normal_color '#191919'
@@ -120,24 +121,27 @@ hc set window_border_normal_color '#1c1c1c'
 hc set window_border_urgent_color '#4cdcd4'
 #+ borders/gaps:
 hc set always_show_frame 1
-hc set frame_bg_transparent 0
+hc set frame_bg_transparent 1
 hc set frame_border_width 2
 hc set window_border_width 4
 hc set window_border_inner_width 0
 hc set gapless_grid 1
-hc set frame_gap 0
+hc set frame_gap 5
 hc set window_gap -2
 hc set frame_padding 2
 hc set smart_window_surroundings 0
-hc set smart_frame_surroundings 1
+hc set smart_frame_surroundings 0
 
 ## RULES:
 #+ global focus:
 hc unrule -F
 hc rule focus=on
 #+ move to tag:
-hc rule class=luakit tag=5 focus=on
-hc rule class=Gimp tag=6
+hc rule class=luakit tag=5
+hc rule class=Gimp tag=6 fullscreen=on
+hc rule title="Open Image" pseudotile=on
+hc rule title="Save As" pseudotile=on
+hc rule title="Save file" pseudotile=on
 hc rule class=Pavucontrol tag=8
 #+ management:
 hc rule instance=gcolor2 pseudotile=on
@@ -156,12 +160,12 @@ hc unlock
 herbstclient set tree_style '╾│ ├└╼─┐'
 
 # hc set_monitors 1280x1024+0+0 1280x1024+1280+0
-# hc detect_monitors
+hc detect_monitors
 
 # find the panel
-#panel=~/.config/herbstluftwm/panel.sh
-#[ -x "$panel" ] || panel=/etc/xdg/herbstluftwm/panel.sh
-#for monitor in $(herbstclient list_monitors | cut -d: -f1) ; do
-#    # start it on each monitor
-#    $panel $monitor &
-#done
+#panel=~/herbstluftwm/dzen4hc.zsh
+panel=~/herbstluftwm/panel.sh
+[ -x "$panel" ] || panel=false
+for monitor in $(herbstclient list_monitors | cut -d: -f1) ; do
+    $panel $monitor &
+done

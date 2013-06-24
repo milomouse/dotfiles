@@ -8,14 +8,11 @@ function hc() {
 
 hc emit_hook reload
 hc keyunbind --all
+hc mouseunbind --all
 hc unsetenv HCT
 
-
-## MOD KEY:
-Mod=Mod4
-
-
 ## GLOBAL:
+Mod=Mod4
 hc set focus_stealing_prevention 0
 hc set focus_follows_mouse 0
 hc set raise_on_focus 0
@@ -23,70 +20,127 @@ hc set raise_on_click 1
 hc set mouse_recenter_gap 0
 hc set default_frame_layout 2
 
-
-## TAGS/WORKSPACES:
-#+ create 6 tags, named 1 through 8:
+# tags
 TAG_NAMES=( {1..8} )
 TAG_KEYS=( {1..8} 0 )
+
 hc rename default "${TAG_NAMES[0]}" || true
 for i in ${!TAG_NAMES[@]} ; do
     hc add "${TAG_NAMES[$i]}"
     key="${TAG_KEYS[$i]}"
     if ! [ -z "$key" ] ; then
         # bind key (focus|move) to MOD{-,-Shift-}tagname:
-        hc keybind "${Mod}-$key" use_index "$i"
-        hc keybind "${Mod}-Shift-$key" move_index "$i"
+        hc keybind "$Mod-$key" use_index "$i"
+        hc keybind "$Mod-Shift-$key" move_index "$i"
     fi
 done
 
-
-## MAIN KEYBINDINGS:
-#+ keybindings are now designated by xchainkeys(1)
-#+ mouse: (will not use these.. but have them just in case)
-hc mouseunbind --all
-hc mousebind ${Mod}-Button1 move
-hc mousebind ${Mod}-Button2 resize
-hc mousebind ${Mod}-Button3 zoom
-
+## KEYBINDINGS:
+#+ herbstluftwm session
+hc keybind $Mod-Shift-q quit
+hc keybind $Mod-Shift-r reload
+hc keybind $Mod-Return spawn urxvt -e tmux -S /tmp/user-keep/h/tmux/xorg
+hc keybind $Mod-Shift-Return spawn urxvt
+hc keybind $Mod-e spawn dmenu_run -p execute
+hc keybind $Mod-Shift-e spawn hc-commander
+hc keybind $Mod-Escape spawn zaprat --toggle
+#+ tags
+hc keybind $Mod-period use_index +1 --skip-visible
+hc keybind $Mod-Shift-period move_index +1 --skip-visible
+hc keybind $Mod-comma use_index -1 --skip-visible
+hc keybind $Mod-Shift-comma use_index -1 --skip-visible
+#+ layouts
+hc keybind $Mod-z remove
+hc keybind $Mod-minus split vertical 0.5
+hc keybind $Mod-equal split horizontal 0.5
+hc keybind $Mod-a set_layout max
+hc keybind $Mod-g cycle_layout 1 max vertical horizontal grid
+hc keybind $Mod-Shift-g cycle_layout -1 max vertical horizontal grid
+hc keybind $Mod-Shift-x rotate
+hc keybind $Mod-o fullscreen toggle
+hc keybind $Mod-f pseudotile toggle
+#+ resizing
+RESIZESTEP=0.01
+hc keybind $Mod-9 resize left +$RESIZESTEP
+hc keybind $Mod-0 resize right +$RESIZESTEP
+hc keybind $Mod-Shift-9 resize up +$RESIZESTEP
+hc keybind $Mod-Shift-0 resize down +$RESIZESTEP
+#+ focus
+hc keybind $Mod-Pause close
+hc keybind $Mod-y jumpto urgent
+hc keybind $Mod-Shift-y bring urgent
+hc keybind $Mod-Shift-n cycle_all --skip-invisible +1
+hc keybind $Mod-Shift-p cycle_all --skip-invisible -1
+hc keybind $Mod-space cycle +1
+hc keybind $Mod-Shift-space cycle -1
+hc keybind $Mod-h focus -e left
+hc keybind $Mod-j focus -e down
+hc keybind $Mod-k focus -e up
+hc keybind $Mod-l focus -e right
+hc keybind $Mod-Shift-h shift -e left
+hc keybind $Mod-Shift-j shift -e down
+hc keybind $Mod-Shift-k shift -e up
+hc keybind $Mod-Shift-l shift -e right
+hc keybind $Mod-Control-h focus -i left
+hc keybind $Mod-Control-j focus -i down
+hc keybind $Mod-Control-k focus -i up
+hc keybind $Mod-Control-l focus -i right
+hc keybind Mod4-Alt-h shift -i left
+hc keybind Mod4-Alt-j shift -i down
+hc keybind Mod4-Alt-k shift -i up
+hc keybind Mod4-Alt-l shift -i right
+#+ external
+hc keybind $Mod-t spawn mifo --toggle
+hc keybind $Mod-Shift-t spawn mifo --stop
+hc keybind $Mod-Shift-slash spawn mifo --random
+hc keybind $Mod-backslash chain , spawn mifo --repeat off , spawn mifo --repeat on
+hc keybind $Mod-Shift-backslash spawn mifo --repeat off
+hc keybind $Mod-bracketleft spawn mifo --prev
+hc keybind $Mod-bracketright spawn mifo --next
+hc keybind $Mod-s spawn mifo --seek 10
+hc keybind $Mod-Shift-s spawn mifo --seek -12
+hc keybind $Mod-i spawn pulsevol --increase
+hc keybind $Mod-Shift-i spawn pulsevol --increase 5
+hc keybind $Mod-d spawn pulsevol --decrease
+hc keybind $Mod-Shift-d spawn pulsevol --decrease 5
+hc keybind $Mod-m spawn pulsevol --mute
+hc keybind $Mod-Shift-m spawn pulsevol --mute on
+hc keybind $Mod-b spawn xrefresh
+hc keybind $Mod-Shift-w spawn luakit
+hc keybind $Mod-Shift-v spawn import -window root ${XDG_PICTURES_DIR:-${H:-/howl}/foto}/shot/$(date '+%Y_%m_%d-%H%M%S').png
 
 ## DEOCRATION:
 #+ colors:
 hc set frame_border_active_color '#101010'
 hc set frame_border_normal_color '#101010'
-hc set frame_bg_active_color '#101010'
-hc set frame_bg_normal_color '#151515'
+hc set frame_bg_active_color '#202020'
+hc set frame_bg_normal_color '#191919'
 hc set window_border_active_color '#4f4155'
 hc set window_border_normal_color '#1c1c1c'
 hc set window_border_urgent_color '#4cdcd4'
 #+ borders/gaps:
 hc set always_show_frame 1
 hc set frame_bg_transparent 0
-hc set frame_border_width 1
+hc set frame_border_width 2
 hc set window_border_width 4
 hc set window_border_inner_width 0
 hc set gapless_grid 1
-hc set frame_gap 1
+hc set frame_gap 0
 hc set window_gap -2
 hc set frame_padding 2
 hc set smart_window_surroundings 0
 hc set smart_frame_surroundings 1
-
 
 ## RULES:
 #+ global focus:
 hc unrule -F
 hc rule focus=on
 #+ move to tag:
-hc rule class=luakit tag=5
-hc rule class=Firefox tag=5
+hc rule class=luakit tag=5 focus=on
 hc rule class=Gimp tag=6
-hc rule class=xskat tag=7
-hc rule instance~xmahjongg tag=7
-hc rule class=Pysol tag=7
 hc rule class=Pavucontrol tag=8
 #+ management:
 hc rule instance=gcolor2 pseudotile=on
-#hc rule class=Toplevel manage=off
 hc rule class=Toplevel pseudotile=on
 hc rule windowtype~'_NET_WM_WINDOW_TYPE_(DIALOG|UTILITY|SPLASH)' pseudotile=on
 hc rule windowtype~'_NET_WM_WINDOW_TYPE_(NOTIFICATION|DOCK)' manage=off
@@ -96,18 +150,16 @@ hc rule windowtype~'_NET_WM_WINDOW_TYPE_(FULLSCREEN|FS)' fullscreen=on
 #hc rule windowtype~'_NET_WM_WINDOW_TYPE_(FULLSCREEN|FS)' fullscreen=on focus=on
 #hc rule class=mplayer2 focus=on
 
-
-## MISCELLANEOUS:
+# unlock, just to be sure
 hc unlock
-hc set tree_style '╾│ ├└╼─┐'
+
+herbstclient set tree_style '╾│ ├└╼─┐'
+
 # hc set_monitors 1280x1024+0+0 1280x1024+1280+0
-#hc set_monitors 1600x900
-# or simply:
-hc detect_monitors
+# hc detect_monitors
 
-
-## PANEL:
-#panel=${XDG_CONFIG_HOME:-$HOME}/herbstluftwm/panel.sh
+# find the panel
+#panel=~/.config/herbstluftwm/panel.sh
 #[ -x "$panel" ] || panel=/etc/xdg/herbstluftwm/panel.sh
 #for monitor in $(herbstclient list_monitors | cut -d: -f1) ; do
 #    # start it on each monitor

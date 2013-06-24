@@ -136,6 +136,8 @@ ORPHAN         01;30
 .MPG           01;35
 .mpeg          01;35
 .MPEG          01;35
+.wmv           01;35
+.WMV           01;35
 .avi           01;35
 .AVI           01;35
 .mov           01;35

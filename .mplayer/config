@@ -1,15 +1,14 @@
-## $XDG_CONFIG_HOME/.mplayer/config
+## ~/.mplayer/config
 #################################################
 ## global defaults: (mplayer2)
 #################################################
 ## AUDIO:
-ao=pulse,alsa,sdl
-afm=faad,libmad,libvorbis,liba52,hwac3,libdca,ffmpeg,speex,mpg123
-volstep=2
-softvol-max=160
+ao=pulse,alsa
+autosync=1
 gapless-audio=yes
+volstep=1
 ## VIDEO:
-vo=xv,gl3,gl_nosw,gl,sdl
+vo=xv,vdpau,gl3,gl,gl_nosw,x11
 fstype=netwm,layer,fullscreen,stays_on_top,above
 monitoraspect=16:9
 fixed-vo=no
@@ -22,8 +21,6 @@ spuaa=4
 spugauss=0.7
 spualign=2
 font=DejaVuSerif
-utf8=yes
-unicode=yes
 subfont-encoding=unicode
 subfont-osd-scale=3.1
 subfont-autoscale=3
@@ -40,16 +37,21 @@ ipv4-only-proxy=yes
 ## MISC:
 mouse-movements=no
 nomouseinput=yes
+#vf=screenshot
 
 #################################################
 ## profiles:
 #################################################
-## WHERE DID fbdev GO ??!!
+## 'fbdev' removed in favor of 'directfb'.. ugh!
 #[vo.fbdev]
 #profile-desc="profile for framebuffer vo"
 #vf=scale=1600:900
 #framedrop=yes
 #double=no
+
+[extension.mp3]
+profile-desc="profile for mp3 files"
+afm=libmad,ffmpeg,mpg123
 
 [protocol.dvd]
 profile-desc="profile for dvd:// streams"

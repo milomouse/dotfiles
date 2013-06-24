@@ -1,16 +1,16 @@
 #!/bin/zsh
 # resources:
+/usr/bin/xset +fp '/usr/share/fonts/local'
+/usr/bin/xset fp rehash
 /usr/bin/xrdb -load ${XDG_CONFIG_DIR:-$HOME}/xorg/Xdefaults
-
-## keyboard:
 #/usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/dvausler.xmodmap
 /usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/overlay-mods.xmodmap
 
-# mouse/synclient:
+# extras:
+/usr/bin/xsetroot -cursor_name left_ptr -solid '#151515'
 /usr/local/bin/zaprat --disable
-
-# wallpaper:
-/usr/bin/xsetroot -cursor_name left_ptr -solid "#222"
+#/usr/bin/sxhkd -c ${XDG_CONFIG_DIR:-$HOME}/bspwm/sxhkd.conf &
 
 # window-manager:
-exec /usr/bin/stumpwm &>>${XDG_CONFIG_DIR:-$HOME}/stumpwm/storage/log.lisp
+#exec /usr/bin/bspwm
+exec /usr/bin/herbstluftwm &>${XDG_CONFIG_DIR:-$HOME}/herbstluftwm/log

@@ -30,10 +30,10 @@ urxvt*fading: 16
 urxvt*cursorColor: #a488d9
 
 !! extensions:
-urxvt*perl-ext: default,url-select
-urxvt*keysym.M-u: perl:url-select:select_next
-urxvt*urlLauncher: /usr/bin/luakit
-urxvt*underlineURLs: true
+!urxvt*perl-ext: default,url-select
+!urxvt*keysym.M-u: perl:url-select:select_next
+!urxvt*urlLauncher: /usr/bin/luakit
+!urxvt*underlineURLs: true
 
 !! colorschemes:
 
@@ -100,6 +100,9 @@ urxvt*underlineURLs: true
 *color14: #6ec2a8
 *color7:  #8d8d8d
 *color15: #dad3d3
+*colorBD: #77b6c5
+*colorUL: #a488d9
+*colorIT: #d770af
 
 !! cloud (xcolors.net)
 !*color0:  #222827

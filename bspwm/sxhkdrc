@@ -102,9 +102,10 @@ super + Return
 super + shift + Return
     urxvt
 
-#+ spawn dmenu
+#+ spawn application launcher
 super + e
-    dmenu_run
+    interrobang
+    #dmenu_run
 
 #+ disable/enable/hide/unhide the mouse
 super + Escape

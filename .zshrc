@@ -1,12 +1,13 @@
+## ~/.zshrc
+
 # source external configuration files:
-ZDOTDIR="${HOME}/zsh"
-for i in ${ZDOTDIR}/{options,exports,aliases,functions}; do
-  . $i || { print - "$i: cannnot source file" && setopt warncreateglobal }
+for i in ${HOME}/zsh/zsh-{options,exports,aliases,functions}; do
+  . $i
 done
 
 # prompt line:
-[[ ${TERM} =~ screen ]] && precmd() { print -Pn "\e]2;%2d\a" } || RPROMPT='%F{white}%~%f'
-PS1='%B%F{cyan}%#%f%b '
+[[ ${TERM} =~ screen ]] && precmd() { print -Pn "\e]2;%2d\a" } #|| RPROMPT='%F{white}%~%f'
+PS1='%(1j.%B%F{black}%j .)%(0?..%B%F{red}%? )%B%F{cyan}%#%f%b '
 PS2='  '
 PS3='%B%F{white}?# %b%f%F{red}%# %f'
 PS4='%B%F{white}%_ %b%f%F{magenta}%# %f%B%F{white}+%N:%i %b%f%F{magenta}%# %f'
@@ -29,7 +30,7 @@ zstyle ':completion:*:*:kill:*' menu yes select
 zstyle ':completion:*:*:kill:*:processes' command 'ps haxopid:5,user:4,%cpu:4,ni:2,stat:3,etime:8,args'
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' force-list always
-[[ -a $(whence -p pacman-color) ]] && compdef _pacman pacman-color=pacman
+
 
 # framebuffer colors:
 if [[ ${TERM} == linux ]] || [[ ${TERM} =~ screen && ${+DISPLAY} == 0 ]]; then
@@ -47,8 +48,8 @@ fi
 eval $(dircolors -b ${HOME}/.dir_colors)
 
 # Fish-like syntax highlighting for ZSH:
-if [[ -f /usr/share/zsh/plugins/zsh-syntax-highlight/zsh-syntax-highlighting.zsh ]]; then
-  . /usr/share/zsh/plugins/zsh-syntax-highlight/zsh-syntax-highlighting.zsh
+if [[ -f ${HOME}/zsh/plugins/zsh-syntax-highlight/zsh-syntax-highlighting.zsh ]]; then
+  . ${HOME}/zsh/plugins/zsh-syntax-highlight/zsh-syntax-highlighting.zsh
 
   # override some colors:
   ZSH_HIGHLIGHT_STYLES[default]='none'
@@ -74,8 +75,8 @@ if [[ -f /usr/share/zsh/plugins/zsh-syntax-highlight/zsh-syntax-highlighting.zsh
   ZSH_HIGHLIGHT_MATCHING_BRACKETS_STYLES=(
     'fg=blue,bold'    # Style for first level of imbrication
     'fg=green,bold'   # Style for second level of imbrication
-    'fg=magenta,bold' # etc... Put as many styles as you wish, or leave
-    'fg=cyan,bold'    # empty to disable brackets matching.
+    'fg=magenta,bold' # etc... Put as many styles as you wish,
+    'fg=cyan,bold'    # or leave empty to disable brackets matching.
     'fg=white,bold'
     'fg=blue'
     'fg=green'
@@ -86,8 +87,8 @@ if [[ -f /usr/share/zsh/plugins/zsh-syntax-highlight/zsh-syntax-highlighting.zsh
 fi
 
 # Fish-like history sub-string search for ZSH (load AFTER syntax):
-if [[ -f /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh ]]; then
-  . /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+if [[ -f ${HOME}/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh ]]; then
+  . ${HOME}/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 
   HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='bg=blue,fg=black,bold'
   HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='bg=red,fg=black'
@@ -97,8 +98,8 @@ fi
 # keybindings (defined AFTER scripts):
 bindkey "^[[2~" overwrite-mode
 bindkey "^[[3~" delete-char
-bindkey "^[[5~" up-line-or-search 
-bindkey "^[[6~" down-line-or-search 
+bindkey "^[[5~" up-line-or-search
+bindkey "^[[6~" down-line-or-search
 bindkey "^[[1~" beginning-of-line
 bindkey "^[[7~" beginning-of-line
 bindkey "^[[4~" end-of-line

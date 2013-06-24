@@ -1,0 +1,49 @@
+#! /bin/sh
+
+## Initiate workspaces:
+FIRST_DESK=1
+REMAINING_DESKS="$(seq 2 9) 0"
+bspc rename Desktop01 $FIRST_DESK
+bspc add $REMAINING_DESKS
+
+## Remember previous session:
+if [ -e "$BSPWM_LAYOUT" ] ; then
+    bspc restore_layout "$BSPWM_LAYOUT"
+    rm "$BSPWM_LAYOUT"
+else
+    bspc adopt_orphans
+fi
+
+if [ -e "$BSPWM_HISTORY" ] ; then
+    bspc restore_history "$BSPWM_HISTORY"
+    rm "$BSPWM_HISTORY"
+fi
+
+## Rules:
+bspc rule sxiv floating
+bspc rule gcolor2 floating
+bspc rule gcolor3 floating
+bspc rule luakit 3 follow
+bspc rule Gimp 8 floating
+bspc rule pavucontrol 0 floating
+
+## Settings:
+#+ focus
+bspc set history_aware_focus true
+bspc set focus_by_distance   false
+#+ splitting
+bspc set split_ratio         0.52
+#+ decoration
+bspc set border_width        4
+bspc set window_gap          5
+bspc set borderless_monocle  true
+bspc set gapless_monocle     true
+#+ colors
+bspc set focused_border_color        "#6F7277"
+bspc set active_border_color         "#5C5955"
+bspc set normal_border_color         "#34322E"
+bspc set presel_border_color         "#F6F9FF"
+bspc set focused_locked_border_color "#9E73BA"
+bspc set active_locked_border_color  "#5C5955"
+bspc set normal_locked_border_color  "#34322E"
+bspc set urgent_border_color         "#F9A299"

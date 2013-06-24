@@ -1,0 +1,205 @@
+## ~/bspwm/sxhkdrc
+## milomouse
+
+########################
+## Internal (bspwm):  ##
+########################
+
+#+ quit bspwm
+super + shift + q
+    bspc quit
+
+#+ close focused window
+super + Delete
+    bspc close
+
+#+ kill focused window
+super + Pause
+    bspc kill
+
+#+ hide/unhide managed windows
+super + grave
+    bspc toggle_visibility
+
+#+ lock/unlock focused window
+super + x
+    bspc toggle_locked
+
+#+ balance frames
+super + t
+    bspc balance
+
+#+ float/unfloat, fullscreen/framed
+super + {f,o}
+    bspc toggle_{floating,fullscreen}
+
+#+ jump between last frame, swap, or view last desktop
+super + {Tab,shift + Tab,slash}
+    bspc {alternate,swap,alternate_desktop}
+
+#+ change focus or move window in direction
+super + {_,shift + }{h,j,k,l}
+    bspc {focus,shift} {left,down,up,right}
+
+#+ cycle all windows backward/forward
+super + {space,shift + space}
+    bspc cycle {next,prev}
+
+#+ rotate all windows completely/forward
+super + {v,shift + v}
+    bspc rotate {full_cycle,clockwise}
+
+#+ flip layout
+super + {g,shift + g}
+    bspc flip {vertical,horizontal}
+
+#+ circulate all windows forward/backward
+super + {c,shift + c}
+    bspc circulate {forward,backward}
+
+#+ cycle through desktops (free|occupied)
+super + {comma,period,shift + comma,shift + period}
+    bspc cycle_desktop {prev,next,prev --skip-free,next --skip-free}
+
+#+ manually split frame in direction
+super + {minus,shift + minus,shift + equal,equal}
+    bspc presel {left,down,up,right}
+
+#+ set common ratios for manual splitting
+super + ctrl + {8,9,0}
+    bspc ratio 0.{1,3,5}
+
+#+ cancel presel and switch back to automatic mode
+super + BackSpace
+    bspc cancel
+
+#+ enlarge window in direction
+super + ctrl + {h,j,k,l}
+    bspc push {left,down,up,right}
+
+#+ shrink window in direction
+super + ctrl + shift + {h,j,k,l}
+    bspc pull {right,up,down,left}
+
+#+ view desktop or send focused window to desktop
+super + {_,shift + ,ctrl + }{1-9,0}
+    bspc {use,send_to,send_to --follow} {1-9,0}
+
+
+########################
+## External:          ##
+########################
+
+#+ reload sxhkd config
+super + shift + r
+    pkill -USR1 -x sxhkd
+
+#+ spawn rxvt-unicode with tmux
+super + Return
+    urxvt -e tmux -S /tmp/user-keep/h/tmux/xorg
+
+#+ spawn rxvt-unicode
+super + shift + Return
+    urxvt
+
+#+ spawn dmenu
+super + e
+    dmenu_run
+
+#+ disable/enable/hide/unhide the mouse
+super + Escape
+    zaprat --toggle
+
+#+ refresh all windows
+super + b
+    xrefresh
+
+#+ save screenshot of current desktop
+super + y
+    import -window root /howl/foto/shot/$(date '+%Y_%m_%d-%H%M%S').png
+
+#+ mplayer daemon (toggle|stop)
+super + {d,shift + d}
+    mifo {--toggle,--stop}
+
+#+ mplayer daemon toggle
+XF86AudioPlay
+    mifo --toggle
+
+#+ mplayer daemon stop
+XF86AudioStop
+    mifo --stop
+
+#+ mplayer daemon (random)
+super + z
+    mifo --random
+
+#+ mplayer daemon repeat (on|off)
+super + {backslash,shift + backslash}
+    mifo {--repeat off ; mifo --repeat on,--repeat off}
+
+#+ mplayer daemon (prev|next)
+super + bracket{left,right}
+    mifo {--prev,--next}
+
+#+ mplayer daemon next
+XF86AudioNext
+    mifo --next
+
+#+ mplayer daemon prev
+XF86AudioPrev
+    mifo --prev
+
+#+ pulseaudio mute (toggle|on|off)
+super + {m,shift + m,ctrl + m}
+    pulsevol {--mute,--mute on,--mute off}
+
+#+ pulseaudio toggle
+XF86AudioMute
+    pulsevol --mute
+
+#+ pulseaudio raise volume by 5
+XF86AudioRaiseVolume
+    pulsevol --increase 5
+
+#+ pulseaudio lower volume by 5
+XF86AudioLowerVolume
+    pulsevol --decrease 5
+
+#+ mplayer daemon announce
+super + a
+    notify-send -u low 'Now playing...' "$(mifo -a "[%c/%C] %D:2: / %b")"
+
+#+ if found, focus on existing luakit instance
+super + w
+    /bin/sh -c "if [[ -n $(pidof luakit) ]] ; then bspc 'use 3' ; fi"
+
+#+ spawn luakit
+super + shift + w
+    luakit
+
+
+########################
+## Mouse:             ##
+########################
+#  i do not use these  #
+# but have them anyway #
+########################
+
+#+ focus window
+:button1
+    bspc grab_pointer focus
+
+#+ move/resize window
+super + button{1-3}
+    bspc grab_pointer {move,resize_side,resize_corner}
+
+#+ track pointer
+super + !button{1-3}
+    bspc track_pointer %i %i
+
+#+ ungrab pointer
+super + @button{1-3}
+    bspc ungrab_pointer
+
+# vim: set ft=sxhkdrc:

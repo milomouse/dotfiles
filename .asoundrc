@@ -1,0 +1,12 @@
+pcm.!default {
+  type pulse
+  #fallback "sysdefault"
+  #hint {
+  #  show on
+  #  description "Default to ALSA Output (current PulseAudio Sound Server)"
+}
+
+ctl.!default {
+  type pulse
+  #fallback "sysdefault"
+}

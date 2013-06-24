@@ -53,7 +53,7 @@ function i_ac_load {
 function i_mixer {
   VOLUME=${${$(pulsevol -a volume)/0:/${c_11}L:${c_XX}}/1:/${c_11}R:${c_XX}}
   MUTE="$(pulsevol -a mute)"
-  print "\(${c_07}\(${c_04}setf ${c_09}*pulseaudio* ${c_06}\'${c_03}\(${c_07}${VOLUME}${c_03}\) ${c_11}${${MUTE/no/:unmuted}/yes/:muted}${c_07})${c_XX}"
+  print "${c_07}\(${c_04}setf ${c_09}*pulseaudio* ${c_06}\'${c_03}\(${c_07}${VOLUME}${c_03}\) ${c_11}${${MUTE/no/:unmuted}/yes/:muted}${c_07})${c_XX}"
 }
 function i_date {
   print "${c_XX}\(${c_05}cons ${c_XX}\"${c_11}$(date "+%Y${c_00}.${c_XX}%m${c_00}.${c_XX}%d${c_02}/${c_09}%a${c_XX}\" \"${c_07}%H${c_08}%M"${c_XX}\")\)"

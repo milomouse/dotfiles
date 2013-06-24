@@ -1,6 +1,3 @@
-External repository for personal configuration / dot files.
--
-
 Current Setup:
 -
 
@@ -13,7 +10,7 @@ INIT = OpenRC
 
 UDEV = eudev
 
-SHELL = zsh
+SHELL = Zsh
 
 WINDOW MANAGER = herbstluftwm (sometimes using 'bspwm')
 

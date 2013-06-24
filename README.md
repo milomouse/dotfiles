@@ -4,7 +4,7 @@ Current Setup:
 
 DISTRO = Gentoo (~amd64 nomultilib)
 
-KERNEL = linux-3.8.11 (with RT patch and loop-AES)
+KERNEL = linux-3.8.11 (RT patch, deadline, loop-AES)
 
 INIT = OpenRC
 

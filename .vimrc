@@ -1,6 +1,14 @@
 " ${XDG_CONFIG_HOME:-${HOME}}/.vimrc
 " author: milomouse <vincent[at]fea.st>
-" update: 2012-09-29
+
+" Vundle core
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+Bundle 'gmarik/vundle'
+Bundle 'tpope/vim-pathogen'
+execute pathogen#infect()
+" Extra scripts
+"Bundle 'Lokaltog/vim-powerline'
 
 " ViM + ZSH + UTF-8
 set nocompatible
@@ -22,8 +30,8 @@ set statusline=[%n]\ %<%f%m%r\ %w\ %y\ \ <%{&fileformat}>%=[%o]\ %l,%c%V\/%L\ \ 
 "  set foldcolumn=0
 "endif
 
-" Settings
-set nocursorline
+" Global Settings
+set cursorline
 set nocursorcolumn
 set ignorecase
 set smartcase
@@ -66,13 +74,13 @@ set viminfo='20,<50,s10,h,n~/.vim/viminfo
 " Filetypes
 set grepprg=grep\ -nH\ $*
 autocmd BufNewFile,BufRead /etc/iptables/* set ft=iptables
-autocmd BufNewFile,BufRead ~H/rite/mine/* set ft=txt | set wrap | set spell
-autocmd BufNewFile,BufRead ~H/mail/*  set ft=mail | set textwidth=72 | set spell
+autocmd BufNewFile,BufRead ~H/rite/fiction/novel/draft set tw=80 sw=4 ts=4 sts=4 nosmartindent
+autocmd BufNewFile,BufRead ~H/rite/fiction/novel/manuscript set tw=80 sw=4 ts=4 sts=4 nosmartindent spell
+autocmd BufNewFile,BufRead ~H/mail/*  set ft=mail tw=72 spell
 autocmd BufNewFile,BufRead Xdefaults  set ft=xdefaults
 autocmd BufNewFile,BufRead .larswmrc  set ft=xdefaults
 autocmd BufNewFile,BufRead .stumpwmrc set ft=lisp
 autocmd BufNewFile,BufRead ~/zsh/*    set ft=zsh
-"autocmd BufNewFile,BufRead .TODO_*    set ft=conf
 autocmd BufReadPost *
   \ if line("'\"") > 0 && line("'\"") <= line("$") |
   \   exe "normal! 9`\"" |
@@ -83,7 +91,7 @@ autocmd FileType make   set noexpandtab shiftwidth=8
 autocmd FileType python set expandtab shiftwidth=2 tabstop=2
 autocmd FileType c      syn match matchName /\(#define\)\@<= .*/
 autocmd FileType cpp    syn match matchName /\(#define\)\@<= .*/
-autocmd FileType mail   set tw=64 autoindent expandtab formatoptions=tcqn
+autocmd FileType mail   set tw=72 autoindent expandtab formatoptions=tcqn
 autocmd FileType mail   set comments=nb:>
 autocmd FileType mail   set list listchars=tab:--,trail:·,precedes:«,extends:»
 autocmd FileType mail   vmap D d0[...]^[
@@ -119,3 +127,9 @@ nnoremap q? <Nop>
 
 " Workarounds
 autocmd BufWinLeave * call clearmatches() " Fix progressive memory leak on match when switching buffers
+set ttimeoutlen=10 " Powerline mode delay fix
+augroup FastEscape
+    autocmd!
+    au InsertEnter * set timeoutlen=0
+    au InsertLeave * set timeoutlen=1000
+augroup END

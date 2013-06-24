@@ -14,7 +14,7 @@ set zoom-step 5
 set page-padding 1
 set pages-per-row 1
 
-set font "fixed normal 9"
+#set font "fixed normal 9"
 set default-bg "#191919"
 set default-fg "#eeeeee"
 set inputbar-bg "#000000"

@@ -14,7 +14,7 @@ SHELL = Zsh
 
 EDITOR = ViM
 
-WINDOW MANAGER = herbstluftwm (sometimes using 'bspwm')
+WINDOW MANAGER = herbstluftwm  ||  bspwm
 
 TERMINAL EMULATOR = rxvt-unicode
 

@@ -1,38 +1,39 @@
-## $XDG_CONFIG_DIR/mutt/muttrc
-## milomouse <vincent[at]fea.st>
-# originally based off p.brisbin's but has changed a lot.
+############################################################
+## $XDG_CONFIG_DIR/mutt/muttrc                             #
+## author: milomouse                                       #
+## detail: originally based off p.brisbin's mutt config(s) #
+############################################################
 
 reset all
 push V
 
 # - intrinsic locations:
   set mbox_type        = Maildir
-  set folder           = /howl/mail
+  set folder           = $H/mail
   set spoolfile        = "+FastMail/INBOX"
   set certificate_file = $XDG_CONFIG_DIR/mutt/certs
   set header_cache     = $XDG_CONFIG_DIR/mutt/cache/headers
   set message_cachedir = $XDG_CONFIG_DIR/mutt/cache/bodies
   set mailcap_path     = $XDG_CONFIG_DIR/mutt/mailcap
   set signature        = $XDG_CONFIG_DIR/mutt/sig
-  set tmpdir           = $XDG_CONFIG_DIR/mutt/temp
+  set tmpdir           = /tmp/user-keep/${USER}
 
 # - source gpg, colors and accounts:
-source /etc/Muttrc.gpg.dist
+#source /etc/Muttrc.gpg.dist
 source $XDG_CONFIG_DIR/mutt/colors.muttrc
 source $XDG_CONFIG_DIR/mutt/scoring
 folder-hook FastMail/* source $XDG_CONFIG_DIR/mutt/fastmail.muttrc
 
-# - core settings:
+# - network settings:
   set ssl_force_tls
-unset ssl_use_sslv2
+#unset ssl_use_sslv2
   set ssl_use_sslv3
   set ssl_use_tlsv1
-  set ssl_usesystemcerts
+#  set ssl_usesystemcerts
   set ssl_verify_dates
   set ssl_verify_host
   set suspend
   set timeout = 3
-  set tmpdir = "/tmp/user-keep/${USER}"
 unset use_ipv6
 
 # - browsing mailboxes:
@@ -149,7 +150,7 @@ bind pager K          previous-undeleted
 bind pager J          next-undeleted
 bind pager l          view-attachments
 bind pager,index R    recall-message
-bind pager,index c    mail
+#bind pager,index C    mail
 bind index K          previous-unread
 bind index J          next-unread
 bind index l          display-message

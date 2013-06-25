@@ -31,7 +31,7 @@ c_12='^fg(#5f656b)'
 
 ## input functions $
 function i_newmail {
-  print - "\(${c_04}open ${c_XX}:unread ${c_06}\'${c_07}${(Fw)#$(find /howl/mail/*/*/new -type f)}${c_XX})"
+  print - "\(${c_04}open ${c_XX}:unread ${c_06}\'${c_07}$(print - ${(Fw)#$(find /howl/mail/*/*/new -type f)})${c_XX})"
 }
 function i_mifo {
   #m_a=${${${(M)${(@f)"$(<~/.mifo/log)"}:#Playing*}##Playing }[-1]%.}

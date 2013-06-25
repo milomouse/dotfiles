@@ -6,7 +6,6 @@ REMAINING_DESKS="$(seq 2 9) 0"
 bspc rename Desktop01 $FIRST_DESK
 bspc add $REMAINING_DESKS
 bspc pad LVDS 14 0 0 0
-${XDG_CONFIG_HOME:-$HOME}/bspwm/dzen4bspwm.zsh &
 
 ## Rules:
 bspc rule sxiv floating

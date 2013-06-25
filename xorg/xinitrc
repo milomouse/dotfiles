@@ -8,9 +8,11 @@
 
 # extras:
 /usr/bin/xsetroot -cursor_name left_ptr -solid '#151515'
+/usr/bin/display -window root -resize 1600x900! ${XDG_PICTURES_DIR:-${HOME}/foto}/wall/astrolithe.png
 /usr/local/bin/zaprat --disable
-#/usr/bin/sxhkd -c ${XDG_CONFIG_DIR:-$HOME}/bspwm/sxhkd.conf &
 
 # window-manager:
-#exec /usr/bin/bspwm
-exec /usr/bin/herbstluftwm &>${XDG_CONFIG_DIR:-$HOME}/herbstluftwm/log
+/usr/bin/sxhkd -c ${XDG_CONFIG_DIR:-$HOME}/bspwm/sxhkdrc &
+exec /howl/conf/bspwm/dzen4bspwm.zsh &
+exec /usr/bin/bspwm
+#exec /usr/bin/herbstluftwm &>${XDG_CONFIG_DIR:-$HOME}/herbstluftwm/log

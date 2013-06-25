@@ -12,9 +12,9 @@
 font    -misc-fixed-medium-r-semicondensed-*-12-110-75-75-c-60-koi8-r
 geometry	top
 #geometry	bottom
-#geometry	400x16+200+200
+geometry	1578x14+15+2
 foreground	#68B0E0
-background	#000000
+background	#1a1a1a
 #border		#FFFFFF
 bangchar	!
 #run_hook	%s
@@ -33,7 +33,7 @@ bangchar	!
 ## |           selected option as the command
 
 show		options
-options	#242424	#48E084	#484848	#64FFAA
+options	#202020 #715093 #68B0E0 #202020
 autocomp	1
 
 

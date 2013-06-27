@@ -9,7 +9,7 @@ push V
 
 # - intrinsic locations:
   set mbox_type        = Maildir
-  set folder           = $H/mail
+  set folder           = $H/mail/FastMail
   set spoolfile        = "+FastMail/INBOX"
   set certificate_file = $XDG_CONFIG_DIR/mutt/certs
   set header_cache     = $XDG_CONFIG_DIR/mutt/cache/headers

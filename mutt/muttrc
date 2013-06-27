@@ -9,7 +9,7 @@ push V
 
 # - intrinsic locations:
   set mbox_type        = Maildir
-  set folder           = $H/mail/FastMail
+  set folder           = $H/mail
   set spoolfile        = "+FastMail/INBOX"
   set certificate_file = $XDG_CONFIG_DIR/mutt/certs
   set header_cache     = $XDG_CONFIG_DIR/mutt/cache/headers
@@ -162,6 +162,7 @@ bind index,browser gg first-entry
 bind index,browser G  last-entry
 
 # - macros:
+macro index gh  "<change-folder>!<enter>" "go to INBOX"
 macro index h   "c?" "view folders"
 macro index \Cr "<tag-pattern>all<enter><tag-prefix><clear-flag>N<untag-pattern>all<enter>" "mark all as read"
 macro index P   "<pipe-message>cat > ~/" "save message as"

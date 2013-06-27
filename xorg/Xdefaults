@@ -14,7 +14,7 @@ urxvt*font: -misc-fixedzero-medium-r-semicondensed-*-12-110-75-75-c-60-iso10646-
 urxvt*boldFont: -misc-fixedzero-medium-r-semicondensed-*-12-110-75-75-c-60-iso10646-1
 urxvt*italicFont: -misc-fixedzero-medium-r-semicondensed-*-12-110-75-75-c-60-iso10646-1
 urxvt*boldItalicFont: -misc-fixedzero-medium-r-semicondensed-*-12-110-75-75-c-60-iso10646-1
-urxvt*colorIT: #707070
+!urxvt*colorIT: #707070
 urxvt*scrollBar: false
 urxvt*secondaryScroll: true
 urxvt*scrollTtyKeypress: true

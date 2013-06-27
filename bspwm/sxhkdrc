@@ -161,11 +161,11 @@ XF86AudioMute
 
 #+ pulseaudio raise volume by 5
 XF86AudioRaiseVolume
-    pulsevol --increase 5
+    pulsevol --increase 2
 
 #+ pulseaudio lower volume by 5
 XF86AudioLowerVolume
-    pulsevol --decrease 5
+    pulsevol --decrease 2
 
 #+ mplayer daemon announce
 super + a

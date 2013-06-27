@@ -190,6 +190,9 @@ add_binds("normal", {
     key({}, "^", "Scroll to the absolute left of the document.",
         function (w) w:scroll{ x =  0 } end),
 
+    key({}, "0", "Scroll to the absolute left of the document.",
+        function (w) w:scroll{ x =  0 } end),
+
     key({}, "$", "Scroll to the absolute right of the document.",
         function (w) w:scroll{ x = -1 } end),
 

@@ -487,8 +487,8 @@ window.methods = {
             w.sbar.ebox:hide()
             w.sbar.hidden = true
         else
-            w.sbar.ebox:show()
-            w.sbar.hidden = false
+            --w.sbar.ebox:show()
+            --w.sbar.hidden = false
             loaded:show()
             loaded.text = string.format("(%d%%)", p * 100)
         end

@@ -248,7 +248,7 @@ function iftainted() {
 function newmail {
   for mail in /howl/mail/FastMail/* ; do
     local _x
-    _x=${(Fw)#$(find ${mail} -type f)%/new/*}
+    _x=${(Fw)#$(find ${mail}/new -type f)%/new/*}
     if [[ ${_x} -ge 1 && ${mail:t} != "Sent Items" ]] {
       print "$mail:t:l = ${_x}"
     }

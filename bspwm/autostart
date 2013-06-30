@@ -25,7 +25,7 @@ bspc set split_ratio         0.53
 bspc set border_width        4
 bspc set window_gap          5
 bspc set borderless_monocle  true
-bspc set gapless_monocle     true
+bspc set gapless_monocle     false
 #+ colors
 bspc set focused_border_color         "#6F7277"
 bspc set active_border_color          "#5C5955"

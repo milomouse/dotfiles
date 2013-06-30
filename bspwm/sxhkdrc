@@ -29,6 +29,10 @@ super + x
 super + t
     bspc balance
 
+#+ cycle monocole
+super + m
+    bspc cycle_layout
+
 #+ float/unfloat, fullscreen/framed
 super + {f,o}
     bspc toggle_{floating,fullscreen}
@@ -152,7 +156,7 @@ XF86AudioPrev
     mifo --prev
 
 #+ pulseaudio mute (toggle|on|off)
-super + {m,shift + m,ctrl + m}
+super + {u,shift + u,ctrl + u}
     pulsevol {--mute,--mute on,--mute off}
 
 #+ pulseaudio toggle

@@ -9,6 +9,18 @@ function zshaddhistory {
   ]] && (( ! $argv[(I)*unrl*|*spar*|*losetup*|*aespipe*|sudo rm *|mpq q *] ))
 }
 
+# safely recompile and reload shell settings:
+function zload {
+  sudo . /etc/profile 2>/dev/null
+  . /etc/profile 2>/dev/null
+  autoload -U zrecompile
+  [[ -f ~/.zshrc ]] && zrecompile -p ~/.zshrc
+  [[ -f ~/.zcompdump ]] && zrecompile -p ~/.zcompdump
+  [[ -f ~/.zshrc.zwc.old ]] && rm -f ~/.zshrc.zwc.old
+  [[ -f ~/.zcompdump.zwc.old ]] && rm -f ~/.zcompdump.zwc.old
+  . ~/.zshrc
+}
+
 # NOTICE: only works on legacy initscripts system -- need to update this for OpenRC.
 # show running daemons; list and higlight according to
 # (@daemon !daemon daemon) and non-"/etc/rc.conf" daemon:
@@ -30,26 +42,9 @@ function zshaddhistory {
 #  done
 #}
 
-# check ownership of given argument, as determined by pacman:
-#function owns {
-#  if [[ -a $1 ]]; then pacman -Qo $1
-#  elif [[ -a $(whence $1) ]]; then whence -a $1 | pacman -Qo -
-### FIRST: do $(whence -caw $1); then proceed for COMMAND elif NONE else SHELLSTUFF
-##
-##  elif [[ -a ${$(whence -ca $1)[-1]} ]]; then
-##    command find $(whence -ca $1) 2>/dev/null | while read i; do
-##      if [[ -a $i ]]; then
-##        printf "\033[0;31m $(pacman -Qqo $i)\033[0m owns "
-##        command ls -lgo --color=always $i
-##      fi
-##    done
-#  else print ${$(whence -w $1)/none/does not exist}
-#  fi
-#}
-
 # jump to previous directory by integer or reg-exp, also list dirs,
 # else jump to last visited directory if no argument supplied:
-# UPDATE: try to remember to use ZSH directory stack instead... ( cd [-|+]^Tab )
+# NOTE: try to remember to use ZSH directory stack instead... ( cd [-|+]^Tab )
 function back {
   if [[ $# == 1 ]]; then
     case $1 {
@@ -165,9 +160,9 @@ function rot {
           /usr/bin/tmux -S /tmp/user-keep/${USER}/tmux/rtorrent attach-session
         fi
       ;;
-      start)
+      enable|start)
         /usr/bin/tmux -S /tmp/user-keep/${USER}/tmux/rtorrent new-session -d "/usr/bin/rtorrent -o http_capath=/etc/ssl/certs" ;;
-      stop)
+      disable|stop)
         /usr/bin/killall -w -s 2 /usr/bin/rtorrent ;;
       restart)
         /usr/bin/killall -w -s 2 /usr/bin/rtorrent &>/dev/null
@@ -177,20 +172,17 @@ function rot {
 }
 
 # function to quickly view word definitions:
-#function sd {
-#  case $1 in
-#    '-r'|'-ru') sdcv --utf8-output -u "en-ru-bars" ${@:/$1} 2>/dev/null ;;
-#    '-re'|'-ruen') sdcv --utf8-output -u "dictd_www.mova.org_korolew_ruen" ${@:/$1} 2>/dev/null ;;
-#    '-er'|'-enru') sdcv --utf8-output -u "dictd_www.mova.org_korolew_enru" ${@:/$1} 2>/dev/null ;;
-#    '-qr'|'-qer') sdcv --utf8-output -u "quick_english-russian" ${@:/$1} 2>/dev/null ;;
-#    '-rq'|'-qre') sdcv --utf8-output -u "quick_russian-english" ${@:/$1} 2>/dev/null ;;
-#    '-w'|'-wordnet') sdcv --utf8-output -u "WordNet" ${@:/$1} 2>/dev/null ;;
-#    '-t'|'-thesaurus') sdcv --utf8-output -u "English Thesaurus" ${@:/$1} 2>/dev/null ;;
-#    '-b'|'--both') sdcv --utf8-output -u "WordNet" -u "English Thesaurus" ${@:/$1} 2>/dev/null ;;
-#    '-a'|'-all') sdcv --utf8-output ${@:/$1} 2>/dev/null ;;
-#    *) sdcv --utf8-output $@ 2>/dev/null
-#  esac
-#}
+function sd {
+  case $1 in
+    '-ru') sdcv --utf8-output -u "dictd_www.freedict.de_eng-rus" ${@:/$1} 2>/dev/null ;;
+    '-re') sdcv --utf8-output -u "Full Russian-English" ${@:/$1} 2>/dev/null ;;
+    '-er') sdcv --utf8-output -u "Full English-Russian" ${@:/$1} 2>/dev/null ;;
+    '-t') sdcv --utf8-output -u "English Thesaurus" ${@:/$1} 2>/dev/null ;;
+    '-b') sdcv --utf8-output -u "WordNet" -u "English Thesaurus" ${@:/$1} 2>/dev/null ;;
+    '-a') sdcv --utf8-output ${@:/$1} 2>/dev/null ;;
+    *) sdcv --utf8-output -u "WordNet" ${@} 2>/dev/null ;;
+  esac
+}
 
 # un-smart function for my todo lists:
 function todo {
@@ -252,15 +244,17 @@ function iftainted() {
   }
 }
 
-function zload {
-  sudo . /etc/profile 2>/dev/null
-  . /etc/profile 2>/dev/null
-  autoload -U zrecompile
-  [[ -f ~/.zshrc ]] && zrecompile -p ~/.zshrc
-  [[ -f ~/.zcompdump ]] && zrecompile -p ~/.zcompdump
-  [[ -f ~/.zshrc.zwc.old ]] && rm -f ~/.zshrc.zwc.old
-  [[ -f ~/.zcompdump.zwc.old ]] && rm -f ~/.zcompdump.zwc.old
-  . ~/.zshrc
+# quickly view MailDir new count for each folder:
+function newmail {
+  for mail in /howl/mail/FastMail/* ; do
+    local _x
+    _x=${(Fw)#$(find ${mail} -type f)%/new/*}
+    if [[ ${_x} -ge 1 ]] {
+      print "$mail:t:l = ${_x}"
+    }
+    unset _x
+  done
+  unset mail
 }
 
 # one-liners/micro functions:
@@ -268,7 +262,6 @@ function flashproc { for f (${$(file /proc/$(pidof luakit)/fd/*|gawk '/\/tmp\/Fl
 #function rc { [[ -n $1 ]] && sudo /etc/rc.d/$1 ${@:/$1} } ## USING 'systemd' NOW
 function mkcd { command mkdir -p "$@" && cd "$@" }
 function pubip { curl -m 30 http://automation.whatismyip.com/n09230945.asp }
-function newmail { print - ${(Fw)#$(find /howl/mail/*/*/new -type f)} }
 function qdep { pacman-color -Q $@ $(pacman-color -Qi $@|grep Depends|cut -d: -f2-|sed -E 's|>\S+\>||g') }
 function timec { print "$(date +'%T %Y-%m-%d')" ; while sleep .2 ; do printf '\r%s ' "$(date +'%T %Y-%m-%d')" ; done }
 function dropcache { sync && command su -s /bin/zsh -c 'echo 3 > /proc/sys/vm/drop_caches' root }

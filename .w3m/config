@@ -22,9 +22,9 @@ auto_detect 2
 document_charset UTF-8
 display_charset UTF-8
 cookie_avoid_wrong_number_of_dots 
-cookie_accept_domains archlinux.org,bbs.archlinux.org,fastmail.fm,deviantart.com,akiba-online.com,wikipedia.org
-cookie_reject_domains google.com,google.ca,encrypted.google.com,yahoo.com
-accept_bad_cookie 2
+cookie_accept_domains 
+cookie_reject_domains 
+accept_bad_cookie 0
 accept_cookie 1
 show_cookie 1
 use_cookie 1
@@ -32,45 +32,42 @@ ssl_ca_file
 ssl_ca_path 
 ssl_key_file 
 ssl_cert_file 
-ssl_verify_server 1
+ssl_verify_server 0
 ssl_forbid_method 
 no_cache 1
 noproxy_netaddr 1
 no_proxy 
 ftp_proxy 
 https_proxy 
-http_proxy http://127.0.0.1:3128
-use_proxy 1
-max_news 50
-nntpmode 
-nntpserver 
+http_proxy 
+use_proxy 0
 dns_order 0
 meta_refresh 0
 follow_redirection 10
 default_url 0
 retry_http 1
 argv_is_url 0
-accept_media text/html, text/*;q=0.5, image/*
+accept_media text/html, text/*;q=0.5, image/*, application/*
 accept_encoding gzip, compress, bzip, bzip2, deflate
 accept_language en;q=1.0
-no_referer 1
+no_referer 0
 user_agent 
-pre_form_file ~/w3m/pre_form
+pre_form_file ~/.w3m/pre_form
 ftppass_hostnamegen 1
 ftppasswd 
 disable_secret_security_check 0
-passwd_file ~/w3m/passwd
+passwd_file ~/.w3m/passwd
 use_lessopen 0
 bgextviewer 1
 extbrowser3 
-extbrowser2 /usr/bin/nohup firefox
-extbrowser /usr/bin/nohup luakit
-mailer /usr/bin/mutt
+extbrowser2 
+extbrowser /usr/bin/xdg-open
+mailer 
 mailto_options 1
 editor /usr/bin/vim
-urimethodmap ~/w3m/urimethodmap, /etc/w3m/urimethodmap
-mailcap ~/mutt/mailcap, /etc/w3m/mailcap
-mime_types ~/w3m/mime.types, /etc/mime.types
+urimethodmap ~/.w3m/urimethodmap, /etc/w3m/urimethodmap
+mailcap ~/.w3m/mailcap, /etc/w3m/mailcap
+mime_types ~/.mime.types, /etc/mime.types
 index_file 
 cgi_bin 
 personal_document_root 
@@ -80,8 +77,13 @@ preserve_timestamp 1
 auto_uncompress 0
 decode_cte 0
 clear_buffer 1
+fixed_wheel_scroll_count 5
+relative_wheel_scroll_ratio 30
+relative_wheel_scroll 0
+reverse_mouse 0
+use_mouse 0
 ignorecase_search 1
-wrap_search 0
+wrap_search 1
 mark_all_pages 0
 vi_prec_num 1
 emacs_like_lineedit 0
@@ -92,50 +94,43 @@ save_hist 1
 history 100
 use_history 1
 pagerline 10000
-visited_color cyan
+visited_color magenta
 visited_anchor 0
 active_color cyan
 active_style 0
 bg_color terminal
 mark_color cyan
-form_color magenta
-image_color blue
-anchor_color magenta
+form_color red
+image_color green
+anchor_color blue
 basic_color terminal
 color 1
 nextpage_topline 0
-label_topline 1
-show_srch_str 0
+label_topline 0
+show_srch_str 1
 show_lnum 0
 fold_line 0
-image_map_list 1
-imgdisplay w3mimgdisplay
-image_scale 100
-ext_image_viewer 0
-max_load_image 1
-auto_image 0
 pseudo_inlines 1
 display_image 0
-view_unseenobject 0
+view_unseenobject 1
 ignore_null_img_alt 1
 display_ins_del 1
-fold_textarea 1
+fold_textarea 0
 graphic_char 0
 alt_entity 1
 multicol 0
 dictcommand file:///$LIB/w3mdict.cgi
-use_dictcommand 1
+use_dictcommand 0
 dirlist_cmd file:///$LIB/dirlist.cgi
-ext_dirlist 0
+ext_dirlist 1
 display_lineinfo 1
 decode_url 1
 display_link_number 0
 display_link 1
 open_tab_dl_list 1
 open_tab_blank 0
-target_self 1
+target_self 0
 frame 0
-pixel_per_line 9
-pixel_per_char 6
+pixel_per_char 8
 indent_incr 4
 tabstop 8

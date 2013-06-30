@@ -249,7 +249,7 @@ function newmail {
   for mail in /howl/mail/FastMail/* ; do
     local _x
     _x=${(Fw)#$(find ${mail} -type f)%/new/*}
-    if [[ ${_x} -ge 1 ]] {
+    if [[ ${_x} -ge 1 && ${mail:t} != "Sent Items" ]] {
       print "$mail:t:l = ${_x}"
     }
     unset _x

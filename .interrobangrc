@@ -7,17 +7,14 @@
 ## | GENERAL OPTIONS
 ## |
 
-#font		fixed
-#font		-*-terminus-medium-r-normal--14-140-72-72-c-*-*-*
-font    -misc-fixed-medium-r-semicondensed-*-12-110-75-75-c-60-koi8-r
-geometry	top
-#geometry	bottom
-geometry	1578x14+15+2
-foreground	#68B0E0
-background	#1a1a1a
-#border		#FFFFFF
-bangchar	!
-#run_hook	%s
+font        -misc-fixed-medium-r-semicondensed-*-12-110-75-75-c-60-koi8-r
+geometry    top
+geometry    1578x14+15+2
+foreground  #68B0E0
+background  #1a1a1a
+#border #FFFFFF
+bangchar    !
+run_hook %s || (notify-send "interrobang" "command not found" ; interrobang)
 
 
 ## | SHOW OPTIONS IN THE BAR?

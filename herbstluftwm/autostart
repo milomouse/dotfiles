@@ -164,7 +164,7 @@ herbstclient set tree_style '╾│ ├└╼─┐'
 
 # find the panel
 panel=~/herbstluftwm/dzen4hc.zsh
-panel=~/herbstluftwm/panel.sh
+#panel=~/herbstluftwm/panel.sh
 [ -x "$panel" ] || panel=false
 for monitor in $(herbstclient list_monitors | cut -d: -f1) ; do
     $panel $monitor &

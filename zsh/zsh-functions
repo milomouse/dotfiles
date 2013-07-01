@@ -258,8 +258,7 @@ function newmail {
 }
 
 # one-liners/micro functions:
-function flashproc { for f (${$(file /proc/$(pidof luakit)/fd/*|gawk '/\/tmp\/Flash/ { print $1}')//:}){ print - "$f" }}
-#function rc { [[ -n $1 ]] && sudo /etc/rc.d/$1 ${@:/$1} } ## USING 'systemd' NOW
+#function flashproc { for f (${$(file /proc/$(pidof luakit)/fd/*|gawk '/\/tmp\/Flash/ { print $1}')//:}){ print - "$f" }}
 function mkcd { command mkdir -p "$@" && cd "$@" }
 function pubip { curl -m 30 http://automation.whatismyip.com/n09230945.asp }
 function qdep { pacman-color -Q $@ $(pacman-color -Qi $@|grep Depends|cut -d: -f2-|sed -E 's|>\S+\>||g') }

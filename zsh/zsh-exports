@@ -2,7 +2,8 @@
 
 # global environment exports:
 #export http_proxy=http://127.0.0.1:3128
-export BSPWM_SOCKET=/tmp/user-keep/h/bspwm-socket
+export BSPWM_SOCKET="/tmp/user-keep/h/bspwm-socket"
+export BSPWM_PANEL_FIFO="/tmp/user-keep/h/bspwm-fifo"
 export H="/howl"
 export XDG_CACHE_HOME="${HOME:-/howl/conf}/cache"
 export XDG_CONFIG_HOME="${HOME:-/howl/conf}"

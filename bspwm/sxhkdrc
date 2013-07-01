@@ -17,11 +17,11 @@ super + Delete
 super + Pause
     bspc kill
 
-#+ hide/unhide managed windows
+#+ (hide|unhide) managed windows
 super + grave
     bspc toggle_visibility
 
-#+ lock/unlock focused window
+#+ (lock|unlock) focused window
 super + x
     bspc toggle_locked
 
@@ -29,7 +29,7 @@ super + x
 super + t
     bspc balance
 
-#+ cycle monocole
+#+ cycle (monocole|tiled) layout
 super + m
     bspc cycle_layout
 
@@ -46,24 +46,28 @@ super + {_,shift + }{h,j,k,l}
     bspc {focus,shift} {left,down,up,right}
 
 #+ cycle all windows backward/forward
-super + {space,shift + space}
+super + {_,shift +} space
     bspc cycle {next,prev}
 
 #+ rotate all windows completely/forward
-super + {v,shift + v}
+super + {_,shift +} v
     bspc rotate {full_cycle,clockwise}
 
 #+ flip layout
-super + {g,shift + g}
+super + {_,shift +} g
     bspc flip {vertical,horizontal}
 
 #+ circulate all windows forward/backward
-super + {c,shift + c}
+super + {_,shift +} c
     bspc circulate {forward,backward}
 
-#+ cycle through desktops (free|occupied)
+#+ cycle to next/prev desktop, send focused client to next/prev desktop
 super + {comma,period,shift + comma,shift + period}
-    bspc cycle_desktop {prev,next,prev --skip-free,next --skip-free}
+    bspc {cycle_desktop prev,cycle_desktop next,drop_to prev,drop_to next}
+
+#+ cycle to next/prev unoccupied desktop
+super + {n,p}
+    bspc cycle_desktop {next,prev} --skip-free
 
 #+ manually split frame in direction
 super + {minus,shift + minus,shift + equal,equal}

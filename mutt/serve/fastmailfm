@@ -1,4 +1,4 @@
-## $XDG_CONFIG_DIR/mutt/server/fastmailfm
+## $XDG_CONFIG_DIR/mutt/serve/fastmailfm
 ## milomouse <vincent[at]fea.st>
 
 set from      = "vincent@fea.st"

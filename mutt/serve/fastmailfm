@@ -1,0 +1,29 @@
+## $XDG_CONFIG_DIR/mutt/fastmail.muttrc
+## milomouse <vincent[at]fea.st>
+
+color status green default
+
+set from      = "vincent@fea.st"
+set sendmail  = "/usr/sbin/sendmail -oem -oi"
+set spoolfile = "+FastMail/INBOX"
+set record    = "+FastMail/Sent\ Items"
+set postponed = "+FastMail/Drafts"
+
+# - watch-folders:
+mailboxes +FastMail/INBOX
+mailboxes +FastMail/Sent\ Items
+mailboxes +FastMail/Archive
+mailboxes +FastMail/Drafts
+mailboxes +FastMail/Trash
+mailboxes +FastMail/Junk\ Mail
+mailboxes +FastMail/Gentoo
+mailboxes +FastMail/ArchLinux
+mailboxes +FastMail/Kernel
+mailboxes +FastMail/Browsers
+mailboxes +FastMail/WManagers
+mailboxes +FastMail/Forums
+mailboxes +FastMail/Misc
+
+macro index E "<change-folder>+FastMail/Archive<enter><limit>~B " "search everything"
+macro index D "<save-message>+FastMail/Trash<enter>" 	           "move message to the trash"
+macro index S "<save-message>+FastMail/Junk\ Mail<enter>" 	      "mark message as spam"

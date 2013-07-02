@@ -1,7 +1,12 @@
 ############################################################
-## $XDG_CONFIG_DIR/mutt/muttrc                             #
+## $XDG_CONFIG_HOME/mutt/muttrc                            #
 ## author: milomouse                                       #
-## detail: originally based off p.brisbin's mutt config(s) #
+############################################################
+## detail:  *|                                             #
+##          *|  offlineimap     (receive; IMAP)            #
+##          *|  postfix         (send;    SMTP relay)      #
+##          *|  policyd-weight  (filter;  spam learning)   #
+##          *|  notmuch         (index;   wildcards)       #
 ############################################################
 
 reset all
@@ -11,25 +16,25 @@ push V
   set mbox_type        = Maildir
   set folder           = $H/mail
   set spoolfile        = "+FastMail/INBOX"
-  set certificate_file = $XDG_CONFIG_DIR/mutt/certs
-  set header_cache     = $XDG_CONFIG_DIR/mutt/cache/headers
-  set message_cachedir = $XDG_CONFIG_DIR/mutt/cache/bodies
-  set mailcap_path     = $XDG_CONFIG_DIR/mutt/mailcap
-  set signature        = $XDG_CONFIG_DIR/mutt/sig
+  set certificate_file = $XDG_CONFIG_HOME/mutt/certs
+  set header_cache     = $XDG_CONFIG_HOME/mutt/cache/headers
+  set message_cachedir = $XDG_CONFIG_HOME/mutt/cache/bodies
+  set mailcap_path     = $XDG_CONFIG_HOME/mutt/smimes
+  set signature        = $XDG_CONFIG_HOME/mutt/append
   set tmpdir           = /tmp/user-keep/${USER}
 
-# - source gpg, colors and accounts:
+# - source gpg, dspam, colors and accounts:
 #source /etc/Muttrc.gpg.dist
-source $XDG_CONFIG_DIR/mutt/colors.muttrc
-source $XDG_CONFIG_DIR/mutt/scoring
-folder-hook FastMail/* source $XDG_CONFIG_DIR/mutt/fastmail.muttrc
+source $XDG_CONFIG_HOME/mutt/crypto
+source $XDG_CONFIG_HOME/mutt/junked
+source $XDG_CONFIG_HOME/mutt/colors
+source $XDG_CONFIG_HOME/mutt/scores
+folder-hook FastMail/* source $XDG_CONFIG_HOME/mutt/serve/fastmailfm
 
 # - network settings:
   set ssl_force_tls
-#unset ssl_use_sslv2
   set ssl_use_sslv3
   set ssl_use_tlsv1
-#  set ssl_usesystemcerts
   set ssl_verify_dates
   set ssl_verify_host
   set suspend
@@ -44,6 +49,7 @@ unset check_mbox_size
   set collapse_unread
   set delete = ask-yes
   set duplicate_threads
+  set envelope_from = yes
   set help
 unset keep_flagged
   set mail_check = 0
@@ -64,10 +70,6 @@ unset status_on_top
 # - reading/viewing messages:
   set allow_8bit
 unset allow_ansi
-  set crypt_autopgp
-  set crypt_autosmime
-  set crypt_timestamp
-  set crypt_verify_sig = yes
   set digest_collapse
   set hide_thread_subject
 unset honor_disposition
@@ -83,7 +85,7 @@ unset markers
   set pager_stop
   set pipe_decode
   set print_command = "/bin/false"
-  set query_command = "mutt_vc_query '%s'"
+#  set query_command = "mutt_vc_query '%s'"
   set reverse_alias
   set reverse_name
   set sig_dashes
@@ -117,15 +119,15 @@ unset ignore_list_reply_to
 unset include_onlyfirst
   set postpone = yes
   set recall = ask-yes
-  set realname = "Vincent"
+  set realname = "Vincent ZaGara II"
   set reply_to
 unset sig_on_top
   set weed
 
 # - header information:
 ignore *
-unignore from: to: cc: date: subject:
-hdr_order from: to: cc: date: subject:
+unignore from: to: cc: date: subject: X-PGP-Key:
+hdr_order from: X-PGP-Key: to: cc: date: subject:
 
 # - order of preferred viewing formats:
 auto_view text/html
@@ -166,8 +168,12 @@ macro index gh  "<change-folder>!<enter>" "go to INBOX"
 macro index h   "c?" "view folders"
 macro index \Cr "<tag-pattern>all<enter><tag-prefix><clear-flag>N<untag-pattern>all<enter>" "mark all as read"
 macro index P   "<pipe-message>cat > ~/" "save message as"
-macro index I   "<shell-escape>/usr/bin/offlineimap -c $XDG_CONFIG_DIR/.offlineimap/offlineimaprc -u blinkenlights -o<enter>" "sync IMAP"
+macro index I   "<shell-escape>/usr/bin/offlineimap -c $XDG_CONFIG_HOME/.offlineimap/offlineimaprc -u blinkenlights -o<enter>" "sync IMAP"
 macro index,pager \Cb ":set pipe_decode\n|urlview\n:unset pipe_decode\n" "extract URLs out of a message"
+macro index f "<enter-command>unset wait_key<enter><shell-escape>notmuch-mutt --prompt search<enter><change-folder-readonly>`echo ${XDG_CACHE_HOME:-$HOME/cache}/notmuch/mutt/results`<enter>" \
+    "notmuch: search mail"
+macro index F "<enter-command>unset wait_key<enter><enter-command>unignore message-id<enter><pipe-message>notmuch-mutt thread<enter><change-folder-readonly>`echo ${XDG_CACHE_HOME:-$HOME/cache}/notmuch/mutt/results`<enter><enter-command>set wait_key<enter>" \
+    "search and reconstruct owning thread with notmuch"
 
 # - appearance / formatting:
 set folder_format = "%3C| %u:%g [%N] %f %*. %t %4s %F"

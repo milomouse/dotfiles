@@ -206,22 +206,9 @@ function zhist {
   fi
 }
 
-## test arguments and [if valid] prepend file:// to local requests:
-#function {jumanji,vimprobable} {
-#  setopt no_warncreateglobal
-#  for i in {1..999}; do # this will break when arguments run out
-#    if [[ ${+i} == 1 && ${(P)i} != ${(P)$(($i - 1))} ]]; then
-#      if [[ -f $PWD/${(P)i} ]]; then __urls=(${__urls} file://$PWD/${(P)i})
-#      elif [[ -f ${(P)i} ]]; then __urls=(${__urls} file://${(P)i})
-#      else __urls=(${__urls} ${(P)i}) ; fi
-#    else if [[ ${+__urls} == 1 ]]; then
-#        command $0 ${__urls} 2>/dev/null ; unset __urls ; break ; fi ; fi
-#  done
-#}
-
 function dfu() {
   local FSTYPES
-  FSTYPES=(nilfs2 btrfs ext2 ext3 ext4 jfs xfs zfs reiserfs reiser4 minix cramfs ubifs usbfs udf iso9660 ufs ntfs ntfs-3g fat vfat msdos fuse)
+  FSTYPES=(nilfs2 btrfs ext2 ext3 ext4 jfs xfs zfs reiserfs reiser4 minix ntfs ntfs-3g fat vfat fuse)
   df -hTP -x rootfs -x devtmpfs -x tmpfs -x none ; print
   df -hTP $(for f in $FSTYPES; { print - " -x $f" })
 }
@@ -258,11 +245,10 @@ function newmail {
 }
 
 # one-liners/micro functions:
-#function flashproc { for f (${$(file /proc/$(pidof luakit)/fd/*|gawk '/\/tmp\/Flash/ { print $1}')//:}){ print - "$f" }}
 function mkcd { command mkdir -p "$@" && cd "$@" }
-function pubip { curl -m 30 http://automation.whatismyip.com/n09230945.asp }
-function qdep { pacman-color -Q $@ $(pacman-color -Qi $@|grep Depends|cut -d: -f2-|sed -E 's|>\S+\>||g') }
 function timec { print "$(date +'%T %Y-%m-%d')" ; while sleep .2 ; do printf '\r%s ' "$(date +'%T %Y-%m-%d')" ; done }
 function dropcache { sync && command su -s /bin/zsh -c 'echo 3 > /proc/sys/vm/drop_caches' root }
+function flashproc { for f (${$(file /proc/$(pidof luakit)/fd/*|gawk '/\/tmp\/Flash/ { print $1}')//:}){ print - "$f" }}
 function snap { import -window root ${XDG_PICTURES_DIR:-/howl/foto}/shot/$(date +%Y_%m_%d-%H%M%S).png }
 function hc { herbstclient "$@" }
+function gipkg { _gipkg=(${${$(command ls -d /var/db/pkg/*/*)#/var/db/pkg/}%/}) ; print -C1 ${_gipkg} ; print "\nTotal Packages: ${#_gipkg}" ; unset _gipkg }

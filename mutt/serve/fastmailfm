@@ -8,8 +8,6 @@ set sendmail  = "/usr/sbin/sendmail -oem -oi"
 set spoolfile = "+FastMail/INBOX"
 set record    = "+FastMail/Sent\ Items"
 set postponed = "+FastMail/Drafts"
-set header
-my_hdr X-PGP-Key: http://public.vincent.fea.st/pubkey.asc
 
 # - watch-folders:
 mailboxes +FastMail/INBOX

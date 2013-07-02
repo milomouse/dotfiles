@@ -14,7 +14,7 @@
 # window-manager:
 export BSPWM_PANEL_FIFO="/tmp/user-keep/${USER}/bspwm-fifo"
 /usr/bin/sxhkd -c ${XDG_CONFIG_DIR:-$HOME}/bspwm/sxhkdrc &
-exec /howl/conf/bspwm/dzen4bspwm.zsh &
+exec /howl/conf/bspwm/dzen4bspwm.zsh &>/dev/null &
 [[ -p ${BSPWM_PANEL_FIFO} ]] && rm ${BSPWM_PANEL_FIFO}
 mkfifo ${BSPWM_PANEL_FIFO}
 exec /usr/bin/bspwm -s ${BSPWM_PANEL_FIFO}

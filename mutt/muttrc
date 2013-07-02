@@ -23,7 +23,7 @@ push V
   set signature        = $XDG_CONFIG_HOME/mutt/append
   set tmpdir           = /tmp/user-keep/${USER}
 
-# - source gpg, dspam, colors and accounts:
+# - source gpg, colors and accounts:
 #source /etc/Muttrc.gpg.dist
 source $XDG_CONFIG_HOME/mutt/crypto
 source $XDG_CONFIG_HOME/mutt/junked

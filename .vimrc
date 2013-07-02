@@ -85,7 +85,7 @@ autocmd BufReadPost *
   \ if line("'\"") > 0 && line("'\"") <= line("$") |
   \   exe "normal! 9`\"" |
   \ endif
-autocmd FileType html,xml,xsl set spell
+autocmd FileType html   set spell
 autocmd FileType c      set formatoptions+=ro
 autocmd FileType make   set noexpandtab shiftwidth=8
 autocmd FileType python set expandtab shiftwidth=2 tabstop=2

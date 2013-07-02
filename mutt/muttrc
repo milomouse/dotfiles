@@ -4,9 +4,9 @@
 ############################################################
 ## detail:  *|                                             #
 ##          *|  offlineimap     (receive; IMAP)            #
-##          *|  postfix         (send;    SMTP relay)      #
-##          *|  policyd-weight  (filter;  spam learning)   #
+##   [todo] *|  dspam           (filter;  spam learning)   #
 ##          *|  notmuch         (index;   wildcards)       #
+##          *|  postfix         (send;    SMTP relay)      #
 ############################################################
 
 reset all

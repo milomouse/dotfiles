@@ -1,6 +1,7 @@
-## $XDG_CONFIG_DIR/mutt/colors.muttrc
-## milomouse <vincent[at]fea.st>
-# originally based p.brisbin's color file.
+############################################################
+## $XDG_CONFIG_HOME/mutt/colors                            #
+## author: milomouse                                       #
+############################################################
 
 # set default
   color normal     white         default
@@ -31,6 +32,7 @@ uncolor index "~D"
 # set up the headers
   color header     blue          black   "^from:"
   color header     blue          black   "^to:"
+  color header     cyan          black   "^X-PGP-Key:"
   color header     magenta       black   "^cc:"
   color header     brightmagenta black   "^date:"
   color header     brightblue    black   "^subject:"

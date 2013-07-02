@@ -1,4 +1,7 @@
-## $XDG_CONFIG_HOME/mutt/crypto
+############################################################
+## $XDG_CONFIG_HOME/mutt/crypto                            #
+## author: milomouse                                       #
+############################################################
 
 # GnuPGP commands:
 set pgp_decode_command="gpg %?p?--passphrase-fd 0? --no-verbose --batch --output - %f"

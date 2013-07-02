@@ -1,5 +1,7 @@
-## $XDG_CONFIG_DIR/mutt/serve/fastmailfm
-## milomouse <vincent[at]fea.st>
+############################################################
+## $XDG_CONFIG_HOME/mutt/serve/fastmailfm                  #
+## author: milomouse                                       #
+############################################################
 
 set from      = "vincent@fea.st"
 set sendmail  = "/usr/sbin/sendmail -oem -oi"

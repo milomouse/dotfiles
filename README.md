@@ -14,15 +14,23 @@ SHELL = Zsh
 
 EDITOR = ViM
 
-WINDOW MANAGER = herbstluftwm  ||  bspwm
+MAIL SENDER = postfix
+
+MAIL RECEIVER = offlineimap
+
+MAIL INDEXER = notmuch
+
+MAIL READER = mutt
+
+MUSIC PLAYER = mifo (https://github.com/milomouse/mifo)
+
+VIDEO PLAYER = mplayer2
+
+WINDOW MANAGER = bspwm
 
 TERMINAL EMULATOR = rxvt-unicode
 
 TERMINAL MULTIPLEX = tmux
-
-MUSIC PLAYER = mifo (my mplayer daemon script)
-
-VIDEO PLAYER = mplayer2
 
 IMAGE VIEWER = sxiv
 

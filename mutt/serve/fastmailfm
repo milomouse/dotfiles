@@ -1,7 +1,5 @@
-## $XDG_CONFIG_DIR/mutt/fastmail.muttrc
+## $XDG_CONFIG_DIR/mutt/server/fastmailfm
 ## milomouse <vincent[at]fea.st>
-
-color status green default
 
 set from      = "vincent@fea.st"
 set sendmail  = "/usr/sbin/sendmail -oem -oi"

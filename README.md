@@ -14,24 +14,24 @@ SHELL = Zsh
 
 EDITOR = ViM
 
-MAIL SENDER = postfix
+MAIL SENDER = Postfix
 
-MAIL RECEIVER = offlineimap
+MAIL RECEIVER = OfflineIMAP
 
-MAIL INDEXER = notmuch
+MAIL INDEXER = Notmuch
 
-MAIL READER = mutt
+MAIL READER = Mutt
 
 MUSIC PLAYER = mifo (https://github.com/milomouse/mifo)
 
-VIDEO PLAYER = mplayer2
+VIDEO PLAYER = MPlayer2
 
 WINDOW MANAGER = bspwm
 
-TERMINAL EMULATOR = rxvt-unicode
+TERMINAL EMULATOR = Rxvt-unicode
 
-TERMINAL MULTIPLEX = tmux
+TERMINAL MULTIPLEX = Tmux
 
 IMAGE VIEWER = sxiv
 
-WEB BROWSER = luakit
+WEB BROWSER = Luakit

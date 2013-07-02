@@ -127,7 +127,7 @@ unset sig_on_top
 # - header information:
 ignore *
 unignore from: to: cc: date: subject: X-PGP-Key:
-hdr_order from: X-PGP-Key: to: cc: date: subject:
+hdr_order from: to: cc: X-PGP-Key: date: subject:
 
 # - order of preferred viewing formats:
 auto_view text/html

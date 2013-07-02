@@ -19,7 +19,7 @@ push V
   set certificate_file = $XDG_CONFIG_HOME/mutt/certs
   set header_cache     = $XDG_CONFIG_HOME/mutt/cache/headers
   set message_cachedir = $XDG_CONFIG_HOME/mutt/cache/bodies
-  set mailcap_path     = $XDG_CONFIG_HOME/mutt/smimes
+  set mailcap_path     = $XDG_CONFIG_HOME/mutt/mailcap
   set signature        = $XDG_CONFIG_HOME/mutt/append
   set tmpdir           = /tmp/user-keep/${USER}
 

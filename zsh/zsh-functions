@@ -206,6 +206,7 @@ function zhist {
   fi
 }
 
+# un-smart function for viewing sectioned partitions:
 function dfu() {
   local FSTYPES
   FSTYPES=(nilfs2 btrfs ext2 ext3 ext4 jfs xfs zfs reiserfs reiser4 minix ntfs ntfs-3g fat vfat fuse)
@@ -242,6 +243,12 @@ function newmail {
     unset _x
   done
   unset mail
+}
+
+# quickly view current CPU frequency and thermal readings:
+function cpuq {
+  cpupower frequency-info | while { read c } { if [[ $c:l =~ "cpu frequency" ]] { print - "Freq: ${${c#*is }%.}" };}
+  acpi -t | while { read a } { print - "Temp:${a#*,}" ; break }
 }
 
 # one-liners/micro functions:

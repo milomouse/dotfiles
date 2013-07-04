@@ -1,0 +1,31 @@
+[general]
+ui = blinkenlights
+accounts = FastMail
+
+[Account FastMail]
+localrepository = FastMail-Local
+remoterepository = FastMail-Remote
+maxconnections = 3
+status_backend = sqlite
+postsynchook = notmuch new
+
+[Repository FastMail-Local]
+type = Maildir
+localfolders = /howl/mail/FastMail
+nametrans = lambda folder: {'Spam': 'Junk Mail',
+                            'Sent': 'Sent Items',
+                            }.get(folder, folder)
+
+[Repository FastMail-Remote]
+type = IMAP
+ssl = yes
+sslcertfile = /etc/ssl/certs/ca-certificates.crt
+cert_fingerprint = ***
+remotehost = mail.messagingengine.com
+remoteport = 992
+remoteuser = ***
+remotepass = ***
+nametrans = lambda folder: {'Junk Mail': 'Spam',
+                            'Sent Items': 'Sent',
+                            }.get(folder, folder)
+

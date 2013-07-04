@@ -81,6 +81,7 @@ autocmd BufNewFile,BufRead Xdefaults  set ft=xdefaults
 autocmd BufNewFile,BufRead .larswmrc  set ft=xdefaults
 autocmd BufNewFile,BufRead .stumpwmrc set ft=lisp
 autocmd BufNewFile,BufRead ~/zsh/*    set ft=zsh
+autocmd BufNewFile,BufRead ~/mutt/*   set ft=muttrc
 autocmd BufReadPost *
   \ if line("'\"") > 0 && line("'\"") <= line("$") |
   \   exe "normal! 9`\"" |

@@ -13,15 +13,16 @@ reset all
 push V
 
 # - intrinsic locations:
-  set mbox_type        = Maildir
-  set folder           = $H/mail
-  set spoolfile        = "+FastMail/INBOX"
-  set certificate_file = $XDG_CONFIG_HOME/mutt/certs
-  set header_cache     = $XDG_CONFIG_HOME/mutt/cache/headers
-  set message_cachedir = $XDG_CONFIG_HOME/mutt/cache/bodies
-  set mailcap_path     = $XDG_CONFIG_HOME/mutt/mailcap
-  set signature        = $XDG_CONFIG_HOME/mutt/append
-  set tmpdir           = /tmp/user-keep/${USER}
+  set sendmail          = "/usr/sbin/sendmail -oem -oi"
+  set mbox_type         = Maildir
+  set folder            = $H/mail
+  set spoolfile         = "+FastMail/INBOX"
+  set certificate_file  = $XDG_CONFIG_HOME/mutt/certs
+  set header_cache      = $XDG_CONFIG_HOME/mutt/cache/headers
+  set message_cachedir  = $XDG_CONFIG_HOME/mutt/cache/bodies
+  set mailcap_path      = $XDG_CONFIG_HOME/mutt/mailcap
+  set signature         = $XDG_CONFIG_HOME/mutt/append
+  set tmpdir            = /tmp/user-keep/${USER}
 
 # - source gpg, colors and accounts:
 #source /etc/Muttrc.gpg.dist

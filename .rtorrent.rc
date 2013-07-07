@@ -3,6 +3,7 @@
 ##// milomouse
 
 #// connection
+bind = 127.0.0.1
 port_range = 49164-49164
 encryption = allow_incoming,try_outgoing,enable_retry
 peer_exchange = yes

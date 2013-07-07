@@ -178,7 +178,7 @@ function sd {
     '-re') sdcv --utf8-output -u "Full Russian-English" ${@:/$1} 2>/dev/null ;;
     '-er') sdcv --utf8-output -u "Full English-Russian" ${@:/$1} 2>/dev/null ;;
     '-t') sdcv --utf8-output -u "English Thesaurus" ${@:/$1} 2>/dev/null ;;
-    '-b') sdcv --utf8-output -u "WordNet" -u "English Thesaurus" ${@:/$1} 2>/dev/null ;;
+    '-w') sdcv --utf8-output -u "WordNet" -u "English Thesaurus" ${@:/$1} 2>/dev/null ;;
     '-a') sdcv --utf8-output ${@:/$1} 2>/dev/null ;;
     *) sdcv --utf8-output -u "WordNet" ${@} 2>/dev/null ;;
   esac

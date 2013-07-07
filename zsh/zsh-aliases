@@ -44,5 +44,6 @@ alias psu="ps --deselect -U root,postfix -C tmux,urxvt -j f"
 alias psr="ps -U root -j f"
 alias psa="ps fax -j"
 alias loadavg='print ${$(</proc/loadavg)[1,3]}'
+alias upd='sudo /etc/cron.daily/mlocate'
 #alias siteget="wget --recursive --page-requisites --convert-links --html-extension --no-parent --random-wait -U Mozilla -l" #depth, then url
 

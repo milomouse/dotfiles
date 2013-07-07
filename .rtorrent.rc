@@ -1,11 +1,11 @@
-##// ~/.rtorrent.rc [extended version]
+##// ~/.rtorrent.rc [0.9.2]
+##// vi_keybindings, canvas_patch
 ##// milomouse
 
 #// connection
 port_range = 49164-49164
 encryption = allow_incoming,try_outgoing,enable_retry
 peer_exchange = yes
-#//enable_trackers = yes
 tracker_numwant = 64
 use_udp_trackers = yes
 dht = auto
@@ -32,14 +32,13 @@ schedule = watch_directory4,5,6,"load=/howl/tors/vide/.down/*.torrent,d.set_dire
 schedule = watch_directory5,5,8,"load=/howl/tors/book/.down/*.torrent,d.set_directory=/howl/tors/book/"
 
 #// filter out evil:-suspicious ip ranges
-#//ipv4_filter.load = /howl/conf/.ipfilters/bt_level1,unwanted
-#//ipv4_filter.load = /howl/conf/.ipfilters/bt_level2,unwanted
-#//ipv4_filter.load = /howl/conf/.ipfilters/bt_level3,unwanted
-#//ipv4_filter.load = /howl/conf/.ipfilters/bt_bogon,unwanted
-#//ipv4_filter.load = /howl/conf/.ipfilters/bt_dshield,unwanted
-#//ipv4_filter.load = /howl/conf/.ipfilters/bt_Microsoft,unwanted
-#//print = "IPv4 filter lists loaded."
-#//schedule = filter,18:30:00,24:00:00,reload_ip_filter=
+#// (WHY THE FUCK DOES bt_level1 BLOCK ALMOST EVERYONE?!)
+#//ipv4_filter.load = /howl/conf/.ipfilters/blocklist,unwanted
+
+#// file priority
+file.prioritize_toc.set = 1
+file.prioritize_toc.first.set = {*.mkv,*.mp4,*.srt}
+file.prioritize_toc.last.set = {*.nfo,*.url.*.jpeg,*.jpg,*.png,*.gif}
 
 #// miscellaneous
 schedule = filter_active,10,10,"view_filter = active,d.get_down_rate="
@@ -52,6 +51,7 @@ system.method.set_key = event.download.finished,notify_send,"execute=/usr/bin/no
 active_fg_color = 5
 done_fg_color = 6
 
+#// web server
 #// no longer used [but possibly useful in the future]
 #//scgi_local = /dev/shm/.1009/rtorrent-xmlrpc.socket
 #//schedule = chmod,0,0,"execute=chmod,777,/dev/shm/.1009/rtorrent-xmlrpc.socket"

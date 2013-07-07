@@ -4,7 +4,6 @@
 ############################################################
 ## detail:  *|                                             #
 ##          *|  offlineimap     (receive; IMAP)            #
-##   [todo] *|  dspam           (filter;  spam learning)   #
 ##          *|  notmuch         (index;   wildcards)       #
 ##          *|  postfix         (send;    SMTP relay)      #
 ############################################################

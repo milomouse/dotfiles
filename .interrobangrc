@@ -3,62 +3,26 @@
 ## | Lines starting with a # are ignored as comments, but this file is
 ## | not processed by a shell interpreter.
 
+set font     = -misc-fixed-medium-r-semicondensed-*-12-110-75-75-c-60-koi8-r
+set geometry = 1578x14+15+2
+set border   = 0px #1a1a1a
+set colors   = #68D0E0 #1a1a1a #202020 #715093 #68B0E0 #202020
+set bangchar = !
+set run_hook = %s || (notify-send "interrobang" "command not found" ; interrobang)
 
-## | GENERAL OPTIONS
-## |
+set autocomp = 1
+set list = true
+set last = true
 
-font        -misc-fixed-medium-r-semicondensed-*-12-110-75-75-c-60-koi8-r
-geometry    top
-geometry    1578x14+15+2
-foreground  #68B0E0
-background  #1a1a1a
-#border #FFFFFF
-bangchar    !
-run_hook %s || (notify-send "interrobang" "command not found" ; interrobang)
+bang term		= urxvt -e %s
+bang web		= luakit %s
+bang pdf		= zathura %s
+bang man		= urxvt -e man %s
+bang calc		= echo "interrobang ignored \"%s\""
+bang ?			= echo "interrobang ignored \"%s\""
 
-
-## | SHOW OPTIONS IN THE BAR?
-## | options = colors: fg bg selfg selbg
-## | autocomp:
-## |     -1 = disabled (default)
-## |      0 = show options on startup, good for scripting menus
-## |      N = show options automatically when N or more characters
-## |              have been typed (N >= 1).
-## | Note: with autocomp >= 1, the completion options are only
-## |           displayed, but *not* filled in on the entry line
-## |           when you hit <enter> interrobang will use the currently
-## |           selected option as the command
-
-show		options
-options	#202020 #715093 #68B0E0 #202020
-autocomp	1
-
-
-# | BANGS & TAB COMPLETION
-# | The first listed bang is the default
-# | TAB(bangname) defines completion for that bang and must be *after*
-# |     the bang definition
-# | TAB() defines the default tab completion
-
-!term		urxvt -e %s
-!web		luakit %s
-!pdf		zathura %s
-!man		urxvt -e man %s
-!calc		echo "interrobang ignored \"%s\""
-!?			echo "interrobang ignored \"%s\""
-#!fav          %s
-#!net		<your network tool here>
-
-TAB()		compgen -P "%s" -cf %s
-# | Optional "complex" completer
-# |     adds spaces after commands and slashes after urls and escapes
-# |     parentheses and square brackets
-#TAB()		compgen -P "%s" -fc %s | sort -u | while read s; do s=${s/\(/\\(}; s=${s/\)/\\)}; s=${s/\[/\\[}; s=${s/\]/\\]}; [[ -d ${s##* } ]] && echo "$s/" || echo "$s "; done
-#TAB(term)	completion for terminal commands
-#TAB(pdf)	compgen -P "%s" -f ~/doc/pdfs/%s
-TAB(calc)	S1="%s%s"; S2="${S1/\!calc/}"; echo "!calc $(echo $S2 | bc -l)"
-TAB(?)      ignore="%s%s"; grep -o -E "^\![[:alnum:]]+" ~/.interrobangrc
-#TAB(fav)      pre="%s"; grep "%s" ~/.myprograms | while read match; do echo "${pre}${match}"; done
-#TAB(net)	<complete network names with available essids>
-
-
+tab default   = percontation "%s" %s | sort -u
+#tab default   = compgen -P "%s" -cf %s
+tab calc      = str="%s%s"; echo "!calc $(echo ${str#\!calc} | bc -l)"
+tab ?         = ignore="%s%s"; awk '/^bang/ {print $2;}' ~/.interrobangrc
+#tab logout    = echo -e "cancel\nshutdown\nsleep\nreboot\nlogout" | grep "^%s%s"

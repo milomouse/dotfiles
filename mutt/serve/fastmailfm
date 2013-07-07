@@ -24,6 +24,7 @@ mailboxes +FastMail/Browsers
 mailboxes +FastMail/WManagers
 mailboxes +FastMail/Forums
 mailboxes +FastMail/Misc
+mailboxes +FastMail/Machine
 
 macro index E "<change-folder>+FastMail/Archive<enter><limit>~B " "search everything"
 macro index D "<save-message>+FastMail/Trash<enter>" 	           "move message to the trash"

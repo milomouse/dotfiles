@@ -20,7 +20,7 @@ bspc rule pavucontrol floating
 bspc set history_aware_focus true
 bspc set focus_by_distance   false
 #+ splitting
-bspc set split_ratio         0.53
+bspc set split_ratio         0.50
 #+ decoration
 bspc set border_width        4
 bspc set window_gap          5

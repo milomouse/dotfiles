@@ -177,7 +177,7 @@ XF86AudioLowerVolume
 
 #+ mplayer daemon announce
 super + a
-    notify-send -u low 'Now playing...' "$(mifo -a "[%c/%C] %D:2: / %b")"
+    notify-send -u low 'Now playing...' "$(mifo -a "[%c/%C] %D:2: / %D / %b")"
 
 #+ if found, focus on existing luakit instance
 super + w

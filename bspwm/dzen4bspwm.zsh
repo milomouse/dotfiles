@@ -34,15 +34,10 @@ function i_newmail {
   print - "\(${c_04}open ${c_XX}:unread ${c_06}\'${c_07}$(print - ${(Fw)#$(find /howl/mail/*/*/new -type f)})${c_XX})"
 }
 function i_mifo {
-  #m_a=${${${(M)${(@f)"$(<~/.mifo/log)"}:#Playing*}##Playing }[-1]%.}
-  m_a=$(mifo -a)
-  #m_X="$(<~/.mifo/playlists/CURRENT)"
-  m_X="$(mifo -o)"
-  m_P=${(fw)#${(@F)"${m_X}"}%${m_a#/}*}
-  m_T="${${(fw)#${m_X}}// /_}"
-  [[ ${#${m_a/*\/}%.*} -gt 50 ]] && m_N="${${${${${m_a/*\/}%.*}//_/ }% }[1,50]}.." || m_N=${${${${m_a/*\/}%.*}//_/ }% }
-  printf "${c_XX}\(${c_12}#${c_06}\'${c_07}\(${c_09}load ${c_10}\(${c_05}mplayer ${c_11}:dir ${c_XX}\"${c_04}${${${m_a#*/*/*/*/}%/*/*}[1,25]//_/ }${c_XX}\" \
-${c_11}:name ${c_XX}\"${c_06}${m_N}${c_XX}\" ${c_11}:type ${c_XX}\"${c_01}${${${m_a/*\/}##*.}[1,4]}${c_XX}\"${c_10}\)${c_07}\)${c_04} / ${c_07}${m_P} ${c_10}${m_T}${c_XX}\)"
+  m_a=$(mifo -a %B)
+  [[ ${#${m_a}} -gt 50 ]] && m_N="${${m_a}[1,50]}.."
+  printf "$(mifo -a \"${c_XX}\(${c_12}#${c_06}\'${c_07}\(${c_09}load ${c_10}\(${c_05}mplayer ${c_11}:dir ${c_XX}\"${c_04}%D:2:${c_XX}\" \
+${c_11}:name ${c_XX}\"${c_06}${m_N:-%B}${c_XX}\" ${c_11}:type ${c_XX}\"${c_01}%e${c_XX}\"${c_10}\)${c_07}\)${c_04} / ${c_07}%c ${c_10}%C${c_XX}\))\""
 }
 function i_ac_load {
   BAT=${$(acpi -b)[-1]}

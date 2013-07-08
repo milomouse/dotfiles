@@ -34,9 +34,10 @@ function i_newmail {
   print - "\(${c_04}open ${c_XX}:unread ${c_06}\'${c_07}$(print - ${(Fw)#$(find /howl/mail/*/*/new -type f)})${c_XX})"
 }
 function i_mifo {
-  m_a=$(mifo -a %B)
-  [[ ${#${m_a}} -gt 50 ]] && m_N="${${m_a//_/ }[1,50]}.." || m_N="${m_a//_/ }"
-  printf "$(mifo -a \"${c_XX}\(${c_12}#${c_06}\'${c_07}\(${c_09}load ${c_10}\(${c_05}mplayer ${c_11}:dir ${c_XX}\"${c_04}%D:2:${c_XX}\" \
+  m_a=$(mifo -a "%D:2: _MIFO_ %B")
+  m_A=${${m_a/ _MIFO_*}//_/ }
+  [[ ${#${m_a/*_MIFO_ }} -gt 50 ]] && m_N="${${${m_a/*_MIFO_ }//_/ }[1,50]}.." || m_N="${${m_a/*_MIFO_ }//_/ }"
+  printf "$(mifo -a \"${c_XX}\(${c_12}#${c_06}\'${c_07}\(${c_09}load ${c_10}\(${c_05}mplayer ${c_11}:dir ${c_XX}\"${c_04}${m_A}${c_XX}\" \
 ${c_11}:name ${c_XX}\"${c_06}${m_N:-%B}${c_XX}\" ${c_11}:type ${c_XX}\"${c_01}%e${c_XX}\"${c_10}\)${c_07}\)${c_04} / ${c_07}%c ${c_10}%C${c_XX}\))\""
 }
 function i_ac_load {
@@ -48,7 +49,7 @@ function i_ac_load {
 function i_mixer {
   VOLUME=${${$(pulsevol -a volume)/0:/${c_11}L:${c_XX}}/1:/${c_11}R:${c_XX}}
   MUTE="$(pulsevol -a mute)"
-  print "${c_07}\(${c_04}setf ${c_09}*pulseaudio* ${c_06}\'${c_03}\(${c_07}${VOLUME}${c_03}\) ${c_11}${${MUTE/no/:unmuted}/yes/:muted}${c_07})${c_XX}"
+  print "${c_07}\(${c_04}setf ${c_09}*pulseaudio* ${c_06}\'${c_03}\(${c_07}${VOLUME}${c_03}\) ${c_11}${${MUTE/no/:NIL}/yes/:T}${c_07})${c_XX}"
 }
 function i_date {
   print "${c_XX}\(${c_05}cons ${c_XX}\"${c_11}$(date "+%Y${c_00}.${c_XX}%m${c_00}.${c_XX}%d${c_02}/${c_09}%a${c_XX}\" \"${c_07}%H${c_08}%M"${c_XX}\")\)"

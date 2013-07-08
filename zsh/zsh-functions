@@ -251,6 +251,20 @@ function cpuq {
   acpi -t | while { read a } { print - "Temp:${a#*,}" ; break }
 }
 
+# quickly check/initiate pulseaudio and mifo daemons:
+function mpx {
+  pulseaudio --check
+  if [[ $? != 0 ]] {
+    print - "initiate : pulseaudio"
+    pulseaudio --start --log-target=syslog --daemonize
+  } else { print - "running  : pulseaudio" }
+  mifo --instance quiet
+  if [[ $? != 0 ]] {
+    print - "initiate : mifo"
+    mifo --init
+  } else { print - "running  : mifo" }
+}
+
 # one-liners/micro functions:
 function mkcd { command mkdir -p "$@" && cd "$@" }
 function timec { print "$(date +'%T %Y-%m-%d')" ; while sleep .2 ; do printf '\r%s ' "$(date +'%T %Y-%m-%d')" ; done }

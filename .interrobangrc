@@ -8,7 +8,7 @@ set geometry = 1578x14+15+2
 set border   = 0px #1a1a1a
 set colors   = #68D0E0 #1a1a1a #202020 #715093 #68B0E0 #202020
 set bangchar = !
-set run_hook = %s || (notify-send "interrobang" "command not found" ; interrobang)
+set run_hook = %s || (notify-send "interrobang" "command not valid or exit non-zero")
 
 set autocomp = 1
 set list = true

@@ -35,7 +35,7 @@ function i_newmail {
 }
 function i_mifo {
   m_a=$(mifo -a %B)
-  [[ ${#${m_a}} -gt 50 ]] && m_N="${${m_a}[1,50]}.."
+  [[ ${#${m_a}} -gt 50 ]] && m_N="${${m_a//_/ }[1,50]}.." || m_N="${m_a//_/ }"
   printf "$(mifo -a \"${c_XX}\(${c_12}#${c_06}\'${c_07}\(${c_09}load ${c_10}\(${c_05}mplayer ${c_11}:dir ${c_XX}\"${c_04}%D:2:${c_XX}\" \
 ${c_11}:name ${c_XX}\"${c_06}${m_N:-%B}${c_XX}\" ${c_11}:type ${c_XX}\"${c_01}%e${c_XX}\"${c_10}\)${c_07}\)${c_04} / ${c_07}%c ${c_10}%C${c_XX}\))\""
 }

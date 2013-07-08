@@ -1,5 +1,5 @@
 #!/bin/zsh
-## ${XDG_CONFIG_HOME:-$HOME}/bspm/dzen4hc.zsh
+## ${XDG_CONFIG_HOME:-$HOME}/herbstluftwm/dzen4hc.zsh
 # dzen2 bar for herbstluftwm (spawned and killed from xinitrc)
 
 

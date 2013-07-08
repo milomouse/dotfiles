@@ -31,7 +31,6 @@ add_binds("normal", {
       luakit.spawn(cmd)
     end
   end),
---]]
   lousy.bind.key({}, "d", "Send hovered or current url to cclive.",
   function (w)
     local view = w.view
@@ -48,17 +47,17 @@ add_binds("normal", {
 webview.init_funcs.mailto_hook = function (view, w)
     view:add_signal("navigation-request", function (v, uri)
         if string.match(string.lower(uri), "^mailto:") then
-            luakit.spawn(string.format("%s %q", "urxvt -title mutt -e mutt", uri))
+            luakit.spawn(string.format("%s %q", "urxvt -title mutt -e mutt -F /howl/conf/mutt/muttrc", uri))
             return false
         end
     end)
 end
 
--- magnet (deluge-console):
+-- magnet:
 webview.init_funcs.magnet_hook = function (view, w)
     view:add_signal("navigation-request", function (v, uri)
         if string.match(string.lower(uri), "^magnet:") then
-            luakit.spawn(string.format("%s %q", "urxvt -title deluge -e deluge-console", uri))
+            luakit.spawn(string.format("%s %q", "urxvt -title transmission -e transmission-cli", uri))
             return false
         end
     end)

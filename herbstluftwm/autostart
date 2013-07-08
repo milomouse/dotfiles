@@ -159,13 +159,5 @@ hc unlock
 
 herbstclient set tree_style '╾│ ├└╼─┐'
 
-# hc set_monitors 1280x1024+0+0 1280x1024+1280+0
 #hc detect_monitors
-
-# find the panel
-panel=~/herbstluftwm/dzen4hc.zsh
-#panel=~/herbstluftwm/panel.sh
-[ -x "$panel" ] || panel=false
-for monitor in $(herbstclient list_monitors | cut -d: -f1) ; do
-    $panel $monitor &
-done
+hc set_monitors 1600x885+0+15

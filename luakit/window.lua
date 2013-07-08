@@ -483,9 +483,9 @@ window.methods = {
         local p = w.view.progress
         local loaded = w.sbar.l.loaded
         if not w.view:loading() or p == 1 then
-            loaded:hide()
-            w.sbar.ebox:hide()
-            w.sbar.hidden = true
+            loaded:show()
+            --w.sbar.ebox:hide()
+            w.sbar.hidden = false
         else
             --w.sbar.ebox:show()
             --w.sbar.hidden = false

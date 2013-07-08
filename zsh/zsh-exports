@@ -1,6 +1,7 @@
 ## ~/.zsh-exports
 
-# global environment exports:
+## global environment exports:
+## (Gentoo does some of this!)
 #export http_proxy=http://127.0.0.1:3128
 export BSPWM_SOCKET="/tmp/user-keep/h/bspwm-socket"
 export BSPWM_PANEL_FIFO="/tmp/user-keep/h/bspwm-fifo"
@@ -36,11 +37,11 @@ export BROWSER="/usr/bin/w3m"
 export SHELL="/bin/zsh"
 export GPG_TTY="$(tty)"
 export AWT_TOOLKIT="XToolKit"
-unset LC_ALL
-export LANG="en_US.utf8"
-export LANGUAGE="en_US.utf8"
-export LC_MESSAGES="C"
-export LC_TIME="en_DK.utf8"
+#unset LC_ALL
+#export LANG="en_US.utf8"
+#export LANGUAGE="en_US.utf8"
+#export LC_MESSAGES="C"
+#export LC_TIME="en_US.utf8"
 export LESSCHARSET="UTF-8"
 export LESSHISTFILE="${XDG_PUBLICSHARE_DIR}/less_history"
 export LESS_TERMCAP_mb=$'\E[01;31m'

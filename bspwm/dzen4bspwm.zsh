@@ -37,8 +37,9 @@ function i_mifo {
   m_a=$(mifo -a "%D:2: _MIFO_ %B")
   m_A=${${m_a/ _MIFO_*}//_/ }
   [[ ${#${m_a/*_MIFO_ }} -gt 50 ]] && m_N="${${${m_a/*_MIFO_ }//_/ }[1,50]}.." || m_N="${${m_a/*_MIFO_ }//_/ }"
-  printf "$(mifo -a \"${c_XX}\(${c_12}#${c_06}\'${c_07}\(${c_09}load ${c_10}\(${c_05}mplayer ${c_11}:dir ${c_XX}\"${c_04}${m_A}${c_XX}\" \
-${c_11}:name ${c_XX}\"${c_06}${m_N:-%B}${c_XX}\" ${c_11}:type ${c_XX}\"${c_01}%e${c_XX}\"${c_10}\)${c_07}\)${c_04} / ${c_07}%c ${c_10}%C${c_XX}\))\""
+  [[ ${#${m_A}} -gt 50 ]] && m_A="${${m_A}[1,50]}.."
+  printf "$(mifo -a ${c_XX}\(${c_12}#${c_06}\'${c_07}\(${c_09}load ${c_10}\(${c_05}mplayer ${c_11}:dir ${c_XX}\"${c_04}${m_A}${c_XX}\" \
+${c_11}:name ${c_XX}\"${c_06}${m_N:-%B}${c_XX}\" ${c_11}:type ${c_XX}\"${c_01}%e${c_XX}\"${c_10}\)${c_07}\)${c_04} / ${c_07}%c ${c_10}%C${c_XX}\))"
 }
 function i_ac_load {
   BAT=${$(acpi -b)[-1]}

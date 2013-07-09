@@ -265,11 +265,40 @@ function mpx {
   } else { print - "running  : mifo" }
 }
 
+# some lengthy Gentoo commands summed up for ease of use:
+function gent {
+  _c(){ sudo emerge --depclean -v --ask ; sudo emerge --clean -v --ask ; sudo eclean -C -d -t1w distfiles }
+  _f(){ sudo revdep-rebuild ; sudo emerge @preserved-rebuild -v --ask }
+  _u(){ sudo emerge --update --deep --with-bdeps=y --ask -v @world && sudo emerge --update --deep --with-bdeps=y --ask -v --newuse @world }
+  _s(){ sudo emerge --sync && sudo emerge --oneshot -v portage }
+  _p(){ _gp=(${${$(command ls -d /var/db/pkg/*/*)#/var/db/pkg/}%/}) ; print -C1 ${_gp} ; print "\nTotal Packages: ${#_gp}" ; unset _gp }
+  if [[ -z $1 ]] {
+    << EOG
+################## Gentoo Commands Summarized! ######
+# Commands:                                         #
+#                                                   #
+#   sync   =  "synchronize gentoo package database" #
+#   up     =  "update system with all dependencies" #
+#   clean  =  "clean up package files and database" #
+#   fix    =  "detect possible breakage and fix it" #
+#   full   =  "completely update and tend packages" #
+#   pkg    =  "display installed packages; tallied" #
+#                                                   #
+#####################################################
+EOG
+  } else {
+    case $1 {
+      sync) _s ;;
+      up) _u ;;
+      clean) _c ;;
+      fix) _f ;;
+      full) _s ; _u ; _f ; _c ;;
+      pkg) _p ;;
+      *) print - "invalid command: type  \`gent help'  for proper usage." ;;
+};};}
+
 # one-liners/micro functions:
 function mkcd { command mkdir -p "$@" && cd "$@" }
 function timec { print "$(date +'%T %Y-%m-%d')" ; while sleep .2 ; do printf '\r%s ' "$(date +'%T %Y-%m-%d')" ; done }
 function dropcache { sync && command su -s /bin/zsh -c 'echo 3 > /proc/sys/vm/drop_caches' root }
 function flashproc { for f (${$(file /proc/$(pidof luakit)/fd/*|gawk '/\/tmp\/Flash/ { print $1}')//:}){ print - "$f" }}
-function snap { import -window root ${XDG_PICTURES_DIR:-/howl/foto}/shot/$(date +%Y_%m_%d-%H%M%S).png }
-function hc { herbstclient "$@" }
-function gipkg { _gipkg=(${${$(command ls -d /var/db/pkg/*/*)#/var/db/pkg/}%/}) ; print -C1 ${_gipkg} ; print "\nTotal Packages: ${#_gipkg}" ; unset _gipkg }

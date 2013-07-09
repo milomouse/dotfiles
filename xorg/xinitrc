@@ -8,7 +8,7 @@
 
 ## EXTRAS:
 /usr/bin/xsetroot -cursor_name left_ptr -solid '#151515'
-/usr/bin/display -window root -resize 1600x900! ${XDG_PICTURES_DIR:-${HOME}/foto}/wall/astrolithe.png
+/usr/bin/display -window root -resize 1600x900! ${XDG_PICTURES_DIR:-${HOME}/foto}/wall/astrolithe2f.png
 /usr/local/bin/zaprat --disable
 
 ## WINDOW MANAGER:

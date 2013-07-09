@@ -27,11 +27,11 @@ bspc set window_gap          5
 bspc set borderless_monocle  true
 bspc set gapless_monocle     false
 #+ colors
-bspc set focused_border_color         "#6F7277"
+bspc set focused_border_color         "#BF63AA"
+bspc set normal_border_color          "#191919"
 bspc set active_border_color          "#5C5955"
-bspc set normal_border_color          "#34322E"
-bspc set focused_locked_border_color  "#D64C8A"
-bspc set active_locked_border_color   "#A363B2"
-bspc set normal_locked_border_color   "#4F3755"
-bspc set urgent_border_color          "#00C7D8"
+bspc set focused_locked_border_color  "#00C7D8"
+bspc set normal_locked_border_color   "#708D8F"
+bspc set active_locked_border_color   "#808C8D"
+bspc set urgent_border_color          "#93F388"
 bspc set presel_border_color          "#222222"

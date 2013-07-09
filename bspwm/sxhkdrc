@@ -37,9 +37,13 @@ super + m
 super + {f,o}
     bspc toggle_{floating,fullscreen}
 
-#+ jump between last frame, swap, or view last desktop
-super + {Tab,shift + Tab,slash}
-    bspc {alternate,swap,alternate_desktop}
+#+ jump between last frame, or view last desktop
+super + {Tab,slash}
+    bspc {alternate,alternate_desktop}
+
+#+ swap (follow|stay) current window with last focused window
+super + {_,shift +} s
+    bspc {swap,swap --keep-focus}
 
 #+ change focus or move window in direction
 super + {_,shift + }{h,j,k,l}

@@ -32,8 +32,8 @@ c_12='^fg(#5f656b)'
 ## input functions $
 function i_newmail {
   INBOX=$(print - ${(Fw)#$(find /howl/mail/*/INBOX/new -type f)})
-  OTHER=$(print - ${(Fw)#$(find /howl/mail/*/*/new -type f)})
-  print - "\(${c_04}open ${c_XX}:unread ${c_06}\'${c_07}${INBOX}${c_11}:${c_08}${OTHER}${c_XX})"
+  ALL=$(print - ${(Fw)#$(find /howl/mail/*/*/new -type f)})
+  print - "\(${c_04}open ${c_XX}:unread ${c_06}\'${c_07}${INBOX}${c_11}:${c_07}${ALL}${c_XX})"
 }
 function i_mifo {
   m_a=$(mifo -a "%D:2: _MIFO_ %B")

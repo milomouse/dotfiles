@@ -21,27 +21,6 @@ function zload {
   . ~/.zshrc
 }
 
-# NOTICE: only works on legacy initscripts system -- need to update this for OpenRC.
-# show running daemons; list and higlight according to
-# (@daemon !daemon daemon) and non-"/etc/rc.conf" daemon:
-#function daemons {
-#  local rc d dtime
-#  rc=${(s. .)${${${(M)${(f)"$(</etc/rc.conf)"}:#DAEMONS=*}##DAEMONS*=[= \(]}%\)}}
-#  for d in /run/daemons/*; do
-#    dtime=${(F)${${${(@f)"$(ls -tgr --time-style='+[[%m-%d|%H%M:%S]^' $d)"/\^*\// }[2,$]}#*\[}}
-#    d=${d/*\/};i=${${(s. .)${(M)${rc}#*${d}}}[-1]}
-#    if [[ $d == $i || ${d[-1]} == $i ]]; then
-#      print "\033[1;32m[\033[0;32mrc\033[0;37m| \033[1;32m]\033[1;31m${${${dtime/$d/\033[0;34m${d}\033[0m}/|/\033[0;37m|\033[0;31m}/\]/\033[1;31m\]}"
-#    elif [[ "@${d}" == $i ]]; then
-#      print "\033[1;32m[\033[0;32mrc\033[0;37m|\033[0;35m@\033[1;32m]\033[1;31m${${${dtime/$d/\033[0;35m${d}\033[0m}/|/\033[0;37m|\033[0;31m}/\]/\033[1;31m\]}"
-#    elif [[ "!${d}" == $i ]]; then
-#      print "\033[1;32m[\033[0;32mrc\033[0;37m|\033[0;33m!\033[1;32m]\033[1;31m${${${dtime/$d/\033[43;30m${d}\033[0m}/|/\033[0;37m|\033[0;31m}/\]/\033[1;31m\]}"
-#    else
-#      print "\033[1;32m[\033[1;37mUSER\033[1;32m]\033[1;31m${${${dtime/$d/\033[1;37m${d}\033[0m}/|/\033[0;37m|\033[0;31m}/\]/\033[1;31m\]}"
-#    fi
-#  done
-#}
-
 # jump to previous directory by integer or reg-exp, also list dirs,
 # else jump to last visited directory if no argument supplied:
 # NOTE: try to remember to use ZSH directory stack instead... ( cd [-|+]^Tab )
@@ -97,40 +76,6 @@ function upf {
   cd - &>/dev/null
 }
 
-# show ps information with simple output for scripts, quick views, etc:
-function psi {
-  if [[ ${#${@:/$0}} -ge 2 ]]; then
-    case $1 {
-      '-C'|'-c')  ps -C $2 hopid,args ;; # by- command name
-      '-G'|'-g')  ps -G $2 hopid,args ;; # by- real group id (RGID)/name
-      '-U'|'-u')  ps -U $2 hopid,args ;; # by- effective user ID (EUID)/name
-      '-P'|'-p')  ps -p $2 hoargs ;;     # by- pid
-      '-S'|'-s')  ps -s $2 hopid,args ;; # by- session id
-      '-T'|'-t')  ps -t $2 hopid,args ;; # by- tty
-      *) print "invalid selection. read: man ps (section: process selection by list)"
-    }
-  else
-        << EOP
-(show process information by .. )
-psi -c ARG  | command name
-psi -g ARG  | group id
-psi -u ARG  | user id
-psi -p ARG  | pid
-psi -s ARG  | session id
-psi -t ARG  | tty
-EOP
-  fi
-}
-
-# native function for showing 256 colors, properly formatted:
-#function 256co {
-#  for line in {0..15}; do for col in {0..15}; do
-#      local code=$(( $col * 16 + ${line} ))
-#      printf $'\e[38;05;%dm %03d' ${code} ${code}
-#    done
-#  print ; done
-#}
-
 # quirky tmux function:
 function tmux {
   if [[ ${@[-2]} == '--' ]]; then
@@ -171,7 +116,7 @@ function rot {
   fi
 }
 
-# function to quickly view word definitions:
+# function to quickly view StarDict word definitions:
 function sd {
   case $1 in
     '-ru') sdcv --utf8-output -u "dictd_www.freedict.de_eng-rus" ${@:/$1} 2>/dev/null ;;
@@ -214,7 +159,7 @@ function dfu() {
   df -hTP $(for f in $FSTYPES; { print - " -x $f" })
 }
 
-# quickly view the Linux kernel tainting information:
+# quickly view the Linux kernel 'if-tainted' information:
 function iftainted() {
   case $(</proc/sys/kernel/tainted) {
     1) print "1: A module with a non-GPL license has been loaded, this includes modules with no license." ;;

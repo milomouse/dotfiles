@@ -267,11 +267,6 @@ function mpx {
 
 # some lengthy Gentoo commands summed up for ease of use:
 function gent {
-  _c(){ sudo emerge --depclean -v --ask ; sudo emerge --clean -v --ask ; sudo eclean -C -d -t1w distfiles }
-  _f(){ sudo revdep-rebuild ; sudo emerge @preserved-rebuild -v --ask }
-  _u(){ sudo emerge --update --deep --with-bdeps=y --ask -v @world && sudo emerge --update --deep --with-bdeps=y --ask -v --newuse @world }
-  _s(){ sudo emerge --sync && sudo emerge --oneshot -v portage }
-  _p(){ _gp=(${${$(command ls -d /var/db/pkg/*/*)#/var/db/pkg/}%/}) ; print -C1 ${_gp} ; print "\nTotal Packages: ${#_gp}" ; unset _gp }
   if [[ -z $1 ]] {
     << EOG
 ################## Gentoo Commands Summarized! ######
@@ -287,15 +282,22 @@ function gent {
 #####################################################
 EOG
   } else {
+    _Gc(){ sudo emerge --depclean -v --ask ; sudo emerge --clean -v --ask ; sudo eclean -C -d -t1w distfiles }
+    _Gf(){ sudo revdep-rebuild ; sudo emerge @preserved-rebuild -v --ask }
+    _Gu(){ sudo emerge --update --deep --with-bdeps=y --ask -v @world && sudo emerge --update --deep --with-bdeps=y --ask -v --newuse @world }
+    _Gs(){ sudo emerge --sync && sudo emerge --oneshot -v portage }
+    _Gp(){ _gp=(${${$(command ls -d /var/db/pkg/*/*)#/var/db/pkg/}%/}) ; print -C1 ${_gp} ; print "\nTotal Packages: ${#_gp}" ; unset _gp }
     case $1 {
-      sync) _s ;;
-      up) _u ;;
-      clean) _c ;;
-      fix) _f ;;
-      full) _s ; _u ; _f ; _c ;;
-      pkg) _p ;;
+      sync) _Gs ;;
+      up) _Gu ;;
+      clean) _Gc ;;
+      fix) _Gf ;;
+      full) _Gs ; _Gu ; _Gf ; _Gc ;;
+      pkg) _Gp ;;
       *) print - "invalid command: type  \`gent help'  for proper usage." ;;
-};};}
+    }
+    unfunction _Gc _Gf _Gu _Gs _Gp
+};}
 
 # one-liners/micro functions:
 function mkcd { command mkdir -p "$@" && cd "$@" }

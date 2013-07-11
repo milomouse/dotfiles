@@ -36,8 +36,8 @@ function i_newmail {
   print - "\(${c_04}open ${c_XX}:unread ${c_06}\'${c_07}${INBOX}${c_11}:${c_07}${ALL}${c_XX})"
 }
 function i_mifo {
-  m_a=$(mifo -a "%D:2: _MIFO_ %B")
-  m_A=${${m_a/ _MIFO_*}//_/ }
+  m_a=$(mifo -a "%D:2: _MIFO_ %B") ; [[ ${#m_a} -eq 0 ]] && m_a="/"
+  m_A=${${m_a/ _MIFO_*}//_/ } ; [[ ${#m_A} -eq 0 ]] && m_A='<unknown>'
   [[ ${#${m_a/*_MIFO_ }} -gt 50 ]] && m_N="${${${m_a/*_MIFO_ }//_/ }[1,50]}.." || m_N="${${m_a/*_MIFO_ }//_/ }"
   [[ ${#${m_A}} -gt 50 ]] && m_A="${${m_A}[1,50]}.."
   printf "$(mifo -a ${c_XX}\(${c_12}#${c_06}\'${c_07}\(${c_09}load ${c_10}\(${c_05}mplayer ${c_11}:dir ${c_XX}\"${c_04}${m_A}${c_XX}\" \

@@ -1,5 +1,5 @@
 ## ~/bspwm/sxhkdrc
-## milomouse
+## BSPWM BRANCH = messages-rewrite
 
 ########################
 ## Internal (bspwm):  ##
@@ -11,91 +11,91 @@ super + shift + q
 
 #+ close focused window
 super + Delete
-    bspc close
+    bspc window --close
 
 #+ kill focused window
 super + Pause
-    bspc kill
+    bspc window --kill
 
 #+ (hide|unhide) managed windows
 super + grave
-    bspc toggle_visibility
+    bspc control --toggle-visibility
 
 #+ (lock|unlock) focused window
 super + x
-    bspc toggle_locked
+    bspc window --toggle locked
 
 #+ balance frames
-super + t
-    bspc balance
+super + b
+    bspc desktop --balance
 
 #+ cycle (monocole|tiled) layout
 super + m
-    bspc cycle_layout
+    bspc desktop --layout next
 
 #+ float/unfloat, fullscreen/framed
 super + {f,o}
-    bspc toggle_{floating,fullscreen}
+    bspc window --toggle {floating,fullscreen}
 
 #+ jump between last frame, or view last desktop
 super + {Tab,slash}
-    bspc {alternate,alternate_desktop}
-
-#+ swap (follow|stay) current window with last focused window
-super + {_,shift +} s
-    bspc {swap,swap --keep-focus}
+    bspc {window,desktop} --focus last
 
 #+ change focus or move window in direction
 super + {_,shift + }{h,j,k,l}
-    bspc {focus,shift} {left,down,up,right}
+    bspc window {--focus,--swap} {left,down,up,right}
 
 #+ cycle all windows backward/forward
 super + {_,shift +} space
-    bspc cycle {next,prev}
+    bspc window --focus {next,prev}
 
 #+ rotate all windows completely/forward
-super + {_,shift +} v
-    bspc rotate {full_cycle,clockwise}
+super + {_,shift +,control +} r
+    bspc desktop --rotate {90,180,270}
 
 #+ flip layout
-super + {_,shift +} g
-    bspc flip {vertical,horizontal}
+super + {_,shift +} v
+    bspc desktop --flip {vertical,horizontal}
 
 #+ circulate all windows forward/backward
 super + {_,shift +} c
-    bspc circulate {forward,backward}
+    bspc desktop --circulate {forward,backward}
 
-#+ cycle to next/prev desktop, send focused client to next/prev desktop
-super + {comma,period,shift + comma,shift + period}
-    bspc {cycle_desktop prev,cycle_desktop next,drop_to prev,drop_to next}
+#+ cycle to next/prev desktop
+super + {comma,period}
+    bspc desktop --focus {prev,next}
 
-#+ cycle to next/prev unoccupied desktop
+#+ cycle to next/prev desktop
+super + shift + {comma,period}
+    bspc window --to-desktop {prev,next}
+
+#+ cycle to next/prev occupied desktop
 super + {n,p}
-    bspc cycle_desktop {next,prev} --skip-free
+    bspc desktop --focus {next,prev}.occupied
 
 #+ manually split frame in direction
 super + {minus,shift + minus,shift + equal,equal}
-    bspc presel {left,down,up,right}
+    bspc window --presel {left,down,up,right}
 
 #+ set common ratios for manual splitting
 super + ctrl + {1-9}
-    bspc ratio 0.{1-9}
+    bspc window --ratio 0.{1-9}
 
 #+ cancel presel and switch back to automatic mode
 super + BackSpace
-    bspc cancel
+    bspc window --presel cancel
 
 #+ enlarge window in direction
 super + ctrl + {h,j,k,l}
-    bspc push {left,down,up,right}
+    bspc window --edge {left,down,up,right} push
 
 #+ shrink window in direction
 super + ctrl + shift + {h,j,k,l}
-    bspc pull {right,up,down,left}
+    bspc window --edge {right,up,down,left} pull
 
 #+ view desktop or send focused window to desktop
-super + {_,shift + ,ctrl + }{1-9,0}
-    bspc {use,send_to,send_to --follow} {1-9,0}
+super + {_,shift + ,}{1-9,0}
+    bspc {desktop --focus,window --to-desktop} {1-9,0}
 
 
 ########################
@@ -103,7 +103,7 @@ super + {_,shift + ,ctrl + }{1-9,0}
 ########################
 
 #+ reload sxhkd config
-super + shift + r
+super + shift + a
     pkill -USR1 -x sxhkd
 
 #+ spawn rxvt-unicode with tmux
@@ -124,15 +124,15 @@ super + Escape
     zaprat --toggle
 
 #+ refresh all windows
-super + b
+super + shift + b
     xrefresh
 
 #+ save screenshot of current desktop
-super + y
+super + shift + g
     import -window root /howl/foto/shot/$(date '+%Y_%m_%d-%H%M%S').png
 
 #+ mplayer daemon (toggle|stop)
-super + {d,shift + d}
+super + {_,shift +} d
     mifo {--toggle,--stop}
 
 #+ mplayer daemon toggle
@@ -179,17 +179,9 @@ XF86AudioRaiseVolume
 XF86AudioLowerVolume
     pulsevol --decrease 2
 
-#+ mplayer daemon announce
-super + a
-    notify-send -u low 'Now playing...' "$(mifo -a "[%c/%C] %D:2: / %D / %b")"
-
-#+ if found, focus on existing luakit instance
+#+ if found, focus on existing luakit instance, else exec luakit
 super + w
-    /bin/sh -c "if [[ -n $(pidof luakit) ]] ; then bspc 'use 3' ; fi"
-
-#+ spawn luakit
-super + shift + w
-    luakit
+    /bin/sh -c 'if [[ -n $(pidof luakit) ]] ; then if [[ "${$(bspc query -T | grep "T @")[1]}" != 3 ]] ; then bspc desktop --focus 3 ; fi ; else exec luakit ; fi'
 
 
 ########################
@@ -201,18 +193,14 @@ super + shift + w
 
 #+ focus window
 :button1
-    bspc grab_pointer focus
+    bspc pointer --grab focus
 
 #+ move/resize window
 super + button{1-3}
-    bspc grab_pointer {move,resize_side,resize_corner}
+    bspc pointer --grab {move,resize_side,resize_corner}
 
 #+ track pointer
 super + !button{1-3}
-    bspc track_pointer %i %i
-
-#+ ungrab pointer
-super + @button{1-3}
-    bspc ungrab_pointer
+    bspc pointer --track %i %i
 
 # vim: set ft=sxhkdrc:

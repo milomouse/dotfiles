@@ -1,37 +1,44 @@
 #! /bin/sh
+## BSPWM BRANCH = messages-rewrite
 
-## Initiate workspaces:
+########################
+## Initiate Desktops: ##
+########################
 FIRST_DESK=1
 REMAINING_DESKS="$(seq 2 9) 0"
-bspc rename Desktop01 $FIRST_DESK
-bspc add $REMAINING_DESKS
-bspc pad LVDS 14 0 0 0
+bspc desktop Desktop01 -n $FIRST_DESK
+bspc monitor --add-desktops $REMAINING_DESKS
+bspc monitor --pad 14 0 0 0
 
-## Rules:
-bspc rule sxiv floating
-bspc rule gcolor2 floating
-bspc rule luakit 3 follow
-bspc rule Gimp 8 floating
-bspc rule pavucontrol 0 follow
-bspc rule pavucontrol floating
+########################
+## Initiate Rules:    ##
+########################
+bspc rule --add sxiv --floating
+bspc rule --add gcolor2 --floating
+bspc rule --add luakit --desktop 3 --follow
+bspc rule --add Gimp --desktop 8 --floating
+bspc rule --add pavucontrol --desktop 0 --follow
+bspc rule --add pavucontrol --floating
 
-## Settings:
+########################
+## Initiate Settings: ##
+########################
 #+ focus
-bspc set history_aware_focus true
-bspc set focus_by_distance   false
+bspc config history_aware_focus true
+bspc config focus_by_distance   false
 #+ splitting
-bspc set split_ratio         0.50
+bspc config split_ratio         0.50
 #+ decoration
-bspc set border_width        4
-bspc set window_gap          5
-bspc set borderless_monocle  true
-bspc set gapless_monocle     false
+bspc config border_width        4
+bspc config window_gap          5
+bspc config borderless_monocle  true
+bspc config gapless_monocle     false
 #+ colors
-bspc set focused_border_color         "#BF63AA"
-bspc set normal_border_color          "#191919"
-bspc set active_border_color          "#5C5955"
-bspc set focused_locked_border_color  "#00C7D8"
-bspc set normal_locked_border_color   "#708D8F"
-bspc set active_locked_border_color   "#808C8D"
-bspc set urgent_border_color          "#93F388"
-bspc set presel_border_color          "#222222"
+bspc config focused_border_color         "#BF63AA"
+bspc config normal_border_color          "#191919"
+bspc config active_border_color          "#5C5955"
+bspc config focused_locked_border_color  "#00C7D8"
+bspc config normal_locked_border_color   "#708D8F"
+bspc config active_locked_border_color   "#808C8D"
+bspc config urgent_border_color          "#93F388"
+bspc config presel_border_color          "#222222"

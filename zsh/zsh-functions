@@ -221,7 +221,9 @@ function gent {
 #   up     =  "update system with all dependencies" #
 #   clean  =  "clean up package files and database" #
 #   fix    =  "detect possible breakage and fix it" #
+#   diff   =  "compare and edit new configurations" #
 #   full   =  "completely update and tend packages" #
+#   edit   =  "edit the gentoo configuration files" #
 #   pkg    =  "display installed packages; tallied" #
 #                                                   #
 #####################################################
@@ -232,16 +234,20 @@ EOG
     _Gu(){ sudo emerge --update --deep --with-bdeps=y --ask -v @world && sudo emerge --update --deep --with-bdeps=y --ask -v --newuse @world }
     _Gs(){ sudo emerge --sync && sudo emerge --oneshot -v portage }
     _Gp(){ _gp=(${${$(command ls -d /var/db/pkg/*/*)#/var/db/pkg/}%/}) ; print -C1 ${_gp} ; print "\nTotal Packages: ${#_gp}" ; unset _gp }
+    _Gd(){ sudo dispatch-conf }
+    _Ge(){ sudo vim -p /etc/portage/{package.use,package.accept_keywords,package.license,make.conf} }
     case $1 {
       sync) _Gs ;;
       up) _Gu ;;
       clean) _Gc ;;
       fix) _Gf ;;
-      full) _Gs ; _Gu ; _Gf ; _Gc ;;
+      diff) _Gd ;;
+      full) _Gs ; _Gu ; _Gc ; _Gf ;  _Gd ;;
+      edit) _Ge ;;
       pkg) _Gp ;;
       *) print - "invalid command: type  \`gent help'  for proper usage." ;;
     }
-    unfunction _Gc _Gf _Gu _Gs _Gp
+    unfunction _Gc _Gf _Gu _Gs _Gp _Gd _Ge
 };}
 
 # one-liners/micro functions:

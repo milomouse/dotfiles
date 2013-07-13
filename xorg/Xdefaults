@@ -9,11 +9,13 @@ urxvt*loginShell: true
 !urxvt*boldFont: -misc-fixed-medium-r-semicondensed-*-12-110-75-75-c-60-koi8-r
 !urxvt*italicFont: -misc-fixed-medium-r-semicondensed-*-12-110-75-75-c-60-koi8-r
 !urxvt*boldItalicFont: -misc-fixed-medium-r-semicondensed-*-12-110-75-75-c-60-koi8-r
+
 !! fork of 6x12 Fixed SemiCondensed; emphasize numeric 0's as opposed to alphabetic O's:
 urxvt*font: -misc-fixedzero-medium-r-semicondensed-*-12-110-75-75-c-60-iso10646-1
 urxvt*boldFont: -misc-fixedzero-medium-r-semicondensed-*-12-110-75-75-c-60-iso10646-1
 urxvt*italicFont: -misc-fixedzero-medium-r-semicondensed-*-12-110-75-75-c-60-iso10646-1
 urxvt*boldItalicFont: -misc-fixedzero-medium-r-semicondensed-*-12-110-75-75-c-60-iso10646-1
+
 !urxvt*colorIT: #707070
 urxvt*scrollBar: false
 urxvt*secondaryScroll: true
@@ -83,26 +85,26 @@ urxvt*cursorColor: #a488d9
 
 !! astromouse (colorful | mellow)
 *background: #101010
-*foreground: #b5b5b5
-*color0:  #1a1a1a
-*color8:  #3d3a3a
-*color1:  #d770af
-*color9:  #d28abf
-*color2:  #78a45c
-*color10: #9acc79
-*color3:  #d0d26b
-*color11: #c8bc45
-*color4:  #77b6c5
-*color12: #8fa7b9
-*color5:  #a488d9
-*color13: #bd89de
-*color6:  #7ac0af
-*color14: #6ec2a8
-*color7:  #8d8d8d
-*color15: #dad3d3
-*colorBD: #77b6c5
-*colorUL: #a488d9
-*colorIT: #d770af
+*foreground: #b2b2b2
+*color0:  #222222
+*color8:  #3D3A3A
+*color1:  #E492D1
+*color9:  #DA61B4
+*color2:  #87AF87
+*color10: #9ACC79
+*color3:  #D0D26B
+*color11: #C8BC45
+*color4:  #87AFD7
+*color12: #0093B5
+*color5:  #A07CD3
+*color13: #706594
+*color6:  #6CCEC0
+*color14: #5AECD7
+*color7:  #8D8D8D
+*color15: #DAD3D3
+*colorBD: #87AFD7
+*colorUL: #A07CD3
+*colorIT: #5AECD7
 
 !! cloud (xcolors.net)
 !*color0:  #222827

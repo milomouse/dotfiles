@@ -55,21 +55,21 @@ if [[ -f ${HOME}/zsh/plugins/zsh-syntax-highlight/zsh-syntax-highlighting.zsh ]]
   ZSH_HIGHLIGHT_STYLES[default]='none'
   ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red,bold,underline'
   ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=green'
-  ZSH_HIGHLIGHT_STYLES[alias]='fg=magenta'
+  ZSH_HIGHLIGHT_STYLES[alias]='fg=magenta,bold'
   ZSH_HIGHLIGHT_STYLES[builtin]='fg=magenta,bold'
-  ZSH_HIGHLIGHT_STYLES[function]='fg=magenta'
-  ZSH_HIGHLIGHT_STYLES[command]='fg=magenta,bold'
+  ZSH_HIGHLIGHT_STYLES[function]='fg=magenta,bold'
+  ZSH_HIGHLIGHT_STYLES[command]='fg=magenta'
   ZSH_HIGHLIGHT_STYLES[hashed-command]='fg=red,bold,standout'
   ZSH_HIGHLIGHT_STYLES[path]='fg=white,underline'
   ZSH_HIGHLIGHT_STYLES[globbing]='fg=white,bold'
-  ZSH_HIGHLIGHT_STYLES[history-expansion]='fg=green'
+  ZSH_HIGHLIGHT_STYLES[history-expansion]='fg=yellow'
   ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='fg=blue'
   ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=blue'
-  ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]='fg=red,bold'
-  ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]='fg=red'
-  ZSH_HIGHLIGHT_STYLES[assign]='fg=green,bold'
-  ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=cyan,bold'
-  ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=cyan'
+  ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]='fg=blue'
+  ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]='fg=blue'
+  ZSH_HIGHLIGHT_STYLES[assign]='fg=yellow,bold'
+  ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=red,bold'
+  ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=blue,bold'
 
   # override colors for matching brackets:
   ZSH_HIGHLIGHT_MATCHING_BRACKETS_STYLES=(
@@ -90,7 +90,7 @@ fi
 if [[ -f ${HOME}/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh ]]; then
   . ${HOME}/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 
-  HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='bg=blue,fg=black,bold'
+  HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='bg=white,fg=black,bold'
   HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='bg=red,fg=black'
   HISTORY_SUBSTRING_SEARCH_GLOBBING_FLAGS='i'
 fi

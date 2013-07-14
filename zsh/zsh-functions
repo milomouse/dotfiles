@@ -232,7 +232,10 @@ EOG
     _Gc(){ sudo emerge --depclean -v --ask ; sudo emerge --clean -v --ask ; sudo eclean -C -d -t1w distfiles }
     _Gf(){ sudo revdep-rebuild ; sudo emerge @preserved-rebuild -v --ask }
     _Gu(){ sudo emerge --update --deep --with-bdeps=y --ask -v @world && sudo emerge --update --deep --with-bdeps=y --ask -v --newuse @world }
-    _Gs(){ sudo emerge --sync && sudo emerge --oneshot -v portage }
+    _Gs(){
+      sudo emerge --sync && if [[ $(emerge -1p --quiet=y portage|grep '\[ebuild   R    \]' -c) -eq 1 ]] {
+        sudo emerge -1v portage
+    };}
     _Gp(){ _gp=(${${$(command ls -d /var/db/pkg/*/*)#/var/db/pkg/}%/}) ; print -C1 ${_gp} ; print "\nTotal Packages: ${#_gp}" ; unset _gp }
     _Gd(){ sudo dispatch-conf }
     _Ge(){ sudo vim -p /etc/portage/{package.use,package.accept_keywords,package.license,make.conf} }

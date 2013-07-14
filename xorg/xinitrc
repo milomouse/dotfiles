@@ -1,22 +1,28 @@
 #!/bin/zsh
-## RESOURCES:
+##############################################
+## locate: ${XDG_CONFIG_HOME}/xorg/xinitrc  ##
+## author: milomouse (github.com/milomouse) ##
+## detail: X.Org init configuration file    ##
+##############################################
+
+##+ RESOURCES:
 /usr/bin/xset +fp '/usr/share/fonts/local'
 /usr/bin/xset fp rehash
 /usr/bin/xrdb -load ${XDG_CONFIG_DIR:-$HOME}/xorg/Xdefaults
 #/usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/dvausler.xmodmap
 /usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/overlay-mods.xmodmap
 
-## EXTRAS:
+##+ EXTRAS:
 /usr/bin/xsetroot -cursor_name left_ptr -solid '#151515'
 /usr/bin/display -window root -resize 1600x900! ${XDG_PICTURES_DIR:-${HOME}/foto}/wall/astrolithe.png
 /usr/local/bin/zaprat --disable
 
-## WINDOW MANAGER:
-## \ herbstluftwm (window manager):
+##+ WINDOW MANAGER:
+## \ (hybrid manual tiling):
 #exec /howl/conf/herbstluftwm/dzen4hc.zsh &>/dev/null &
-#exec /usr/bin/herbstluftwm &>${XDG_CONFIG_DIR:-$HOME}/herbstluftwm/log
+#exec /usr/bin/herbstluftwm
 
-## \ bspwm (window manager):
+## \ (hybrid dynamic tiling):
 export BSPWM_PANEL_FIFO="/tmp/user-keep/${USER}/bspwm-fifo"
 /usr/bin/sxhkd -c ${XDG_CONFIG_DIR:-$HOME}/bspwm/sxhkdrc &
 exec /howl/conf/bspwm/dzen4bspwm.zsh &>/dev/null &

@@ -1,6 +1,8 @@
-!! ${XDG_CONFIG_DIR}/xorg/Xdefaults
-!! author: milomouse <vincent[at]fea.st>
-!! update: 2012-01-31
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!! locate: ${XDG_CONFIG_HOME}/xorg/Xdefaults !!
+!! author: milomouse (github.com/milomouse)  !!
+!! detail: X.Org session configuration file  !!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 !! urxvt settings:
 urxvt*termName: rxvt-256color
@@ -43,46 +45,6 @@ urxvt*cursorColor: #a488d9
 !!! 0:black 1:red     2:green 3:yellow
 !!! 4:blue  5:magenta 6:cyan  7:white
 
-!! cottonmouse (dark | faded)
-!*background: #090909
-!*foreground: #a9a6af
-!*color0:  #090909
-!*color8:  #171717
-!*color1:  #a28699
-!*color9:  #9c8093
-!*color2:  #799c99
-!*color10: #85afa9
-!*color3:  #b0ad90
-!*color11: #c4c497
-!*color4:  #87afd7
-!*color12: #98a7b6
-!*color5:  #a488d9
-!*color13: #9f8bab
-!*color6:  #6c7373
-!*color14: #a3babf
-!*color7:  #8d8d8d
-!*color15: #9d9d9d
-
-!! jessicamouse (bold | vibrant)
-!*background: #0c0c0c
-!*foreground: #b5b5b5
-!*color0:  #1c1c1c
-!*color8:  #3d3a3a
-!*color1:  #d74b73
-!*color9:  #b94062
-!*color2:  #799c99
-!*color10: #85afa9
-!*color3:  #c8bc45
-!*color11: #baa02c
-!*color4:  #76ace2
-!*color12: #a2c7e2
-!*color5:  #a488d9
-!*color13: #b8a2e2
-!*color6:  #508686
-!*color14: #569e9a
-!*color7:  #8d8d8d
-!*color15: #dad3d3
-
 !! astromouse (colorful | mellow)
 *background: #101010
 *foreground: #b2b2b2
@@ -105,44 +67,6 @@ urxvt*cursorColor: #a488d9
 *colorBD: #87AFD7
 *colorUL: #A07CD3
 *colorIT: #5AECD7
-
-!! cloud (xcolors.net)
-!*color0:  #222827
-!*color8:  #5D6F74
-!*color1:  #D5A8E3
-!*color9:  #CD749C
-!*color2:  #9C75DD
-!*color10: #63B0B0
-!*color3:  #9898AE
-!*color11: #C0C0DD
-!*color4:  #654A96
-!*color12: #5786BC
-!*color5:  #625566
-!*color13: #3F3442
-!*color6:  #A9D1DF
-!*color14: #849DA2
-!*color7:  #E6EBE5
-!*color15: #D9D6CF
-
-!! Jellybeans Terminal Colours
-!*background: #151515
-!*foreground: #888888
-!*color0: #1C1C1C
-!*color8: #404040
-!*color1: #B85335
-!*color9: #CF6A4C
-!*color2: #799D6A
-!*color10: #99AD6A
-!*color3: #FFB964
-!*color11: #FAD07A
-!*color4: #667899
-!*color12: #8197BF
-!*color5: #8787AF
-!*color13: #C6B6EE
-!*color6: #668799
-!*color14: #8FBFDC
-!*color7: #888888
-!*color15: #E8E8D3
 
 !! various X stuff
 Xcursor.theme: whiteglass

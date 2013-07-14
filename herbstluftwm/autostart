@@ -1,6 +1,9 @@
-#!/bin/bash
-## /etc/xdg/herbstluftwm/autostart
-## milomouse <vincent [at] fea.st>
+#! /bin/bash
+#######################################################
+## locate: ${XDG_CONFIG_HOME}/herbstluftwm/autostart ##
+## author: milomouse (github.com/milomouse)          ##
+## detail: startup configuration for `herbstluftwm'  ##
+#######################################################
 
 function hc() {
     herbstclient "$@"

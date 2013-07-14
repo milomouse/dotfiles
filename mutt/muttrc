@@ -62,7 +62,7 @@ unset narrow_tree
 unset read_only
   set save_empty
   set sort = threads
-  set sort_aux = reverse-last-date-received
+  set sort_aux = date
   set sort_browser = reverse-date
 unset sort_re
 unset status_on_top

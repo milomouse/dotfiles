@@ -16,9 +16,7 @@ EDITOR = ViM
 
 MAIL SENDER = Postfix
 
-MAIL RECEIVER = OfflineIMAP
-
-MAIL INDEXER = Notmuch
+MAIL RECEIVER = Postfix, OfflineIMAP
 
 MAIL READER = Mutt
 

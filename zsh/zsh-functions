@@ -219,13 +219,15 @@ function gent {
 #                                                   #
 #   sync   =  "synchronize gentoo package database" #
 #   up     =  "update system with all dependencies" #
-#   new    =  "update system + deps using --newuse" #
+#   new    =  "update system + deps; --newuse only" #
 #   clean  =  "clean up package files and database" #
+#                                                   #
 #   fix    =  "detect possible breakage and fix it" #
 #   diff   =  "compare and edit new configurations" #
-#   full   =  "completely update and tend packages" #
 #   edit   =  "edit the gentoo configuration files" #
 #   pkg    =  "display installed packages; tallied" #
+#                                                   #
+#   full   =  "completely update and tend packages" #
 #                                                   #
 #####################################################
 EOG

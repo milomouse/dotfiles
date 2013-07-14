@@ -60,6 +60,7 @@ hc keybind $Mod-Shift-g cycle_layout -1 max vertical horizontal grid
 hc keybind $Mod-Shift-x rotate
 hc keybind $Mod-o fullscreen toggle
 hc keybind $Mod-f pseudotile toggle
+hc keybind $Mod-slash use_previous
 #+ resizing
 RESIZESTEP=0.01
 hc keybind $Mod-9 resize left +$RESIZESTEP

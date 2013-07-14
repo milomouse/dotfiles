@@ -7,7 +7,7 @@
   color normal     white         default
 
 # main colors
-  color status     magenta       default
+  color status     brightmagenta default
   color indicator  black         magenta
   color tree       black         default
   color error      default       default

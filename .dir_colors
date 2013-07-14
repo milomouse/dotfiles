@@ -60,6 +60,8 @@ EXEC           01;36
 # images:
 .gif           01;34
 .GIF           01;34
+.svg           01;34
+.SVG           01;34
 .png           00;36
 .PNG           00;36
 .jpg           00;36

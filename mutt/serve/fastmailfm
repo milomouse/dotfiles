@@ -1,16 +1,9 @@
-############################################################
-## $XDG_CONFIG_HOME/mutt/serve/fastmailfm                  #
-## author: milomouse                                       #
-############################################################
-
 set from      = "vincent@fea.st"
 set spoolfile = "+FastMail/INBOX"
 set postponed = "+FastMail/Drafts"
 set record    = "+FastMail/Sent"
-## avoid duplicates (fastmail automatically saves sent email)
 unset record
 
-# - watch-folders:
 mailboxes +FastMail/INBOX
 mailboxes +FastMail/Sent
 mailboxes +FastMail/Archive

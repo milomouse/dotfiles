@@ -1,7 +1,3 @@
-############################################################
-## $XDG_CONFIG_HOME/mutt/mailcap                           #
-## author: milomouse                                       #
-############################################################
 text/html; /usr/bin/w3m -I %{charset} -T text/html %s; copiousoutput;
 image/*; /usr/bin/sxiv -b %s; test=test -n "$DISPLAY";
 video/*; /usr/bin/mplayer2 -really-quiet -msglevel all=0 %s 2>/dev/null; test=test -n "$DISPLAY";

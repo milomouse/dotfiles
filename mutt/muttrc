@@ -1,11 +1,11 @@
 ############################################################
-## $XDG_CONFIG_HOME/mutt/muttrc                            #
-## author: milomouse                                       #
+## locate: ${XDG_CONFIG_HOME}/mutt/muttrc                 ##
+## author: milomouse (github.com/milomouse)               ##
 ############################################################
-## detail:  *|                                             #
-##          *|  offlineimap     (receive; IMAP)            #
-##          *|  notmuch         (index;   wildcards)       #
-##          *|  postfix         (send;    SMTP relay)      #
+## detail:  *|                                            ##
+##          *|  offlineimap     (receive; IMAP)           ##
+##          *|  notmuch         (index;   wildcards)      ##
+##          *|  postfix         (send;    SMTP relay)     ##
 ############################################################
 
 reset all

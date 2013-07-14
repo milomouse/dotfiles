@@ -26,7 +26,7 @@ push V
 # - source gpg, colors and accounts:
 #source /etc/Muttrc.gpg.dist
 source $XDG_CONFIG_HOME/mutt/crypto
-source $XDG_CONFIG_HOME/mutt/junked
+#source $XDG_CONFIG_HOME/mutt/junked
 source $XDG_CONFIG_HOME/mutt/colors
 source $XDG_CONFIG_HOME/mutt/scores
 folder-hook FastMail/* source $XDG_CONFIG_HOME/mutt/serve/fastmailfm

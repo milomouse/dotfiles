@@ -38,9 +38,9 @@ no_cache 1
 noproxy_netaddr 1
 no_proxy 
 ftp_proxy 
-https_proxy 
-http_proxy 
-use_proxy 0
+https_proxy http://127.0.0.1:3128
+http_proxy http://127.0.0.1:3128
+use_proxy 1
 dns_order 0
 meta_refresh 0
 follow_redirection 10

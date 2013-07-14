@@ -24,7 +24,6 @@
   changed = magenta
   untracked = blue
 [sendmail]
-  smtpserver = /usr/bin/msmtp
   supressfrom = true
   chainreplyto = false
   thread = true
@@ -39,6 +38,5 @@
   pager = /usr/bin/less
 [apply]
   whitespace = strip
-
 [push]
-	default = simple
+  default = simple

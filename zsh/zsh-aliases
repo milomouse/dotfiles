@@ -17,9 +17,6 @@ alias gh="cd ${H:-/howl}"
 alias rd="rm -r"
 
 # trivial quick views/edits:
-alias wika="${BROWSER:-/usr/bin/w3m} /usr/share/doc/arch-wiki/html/index.html"
-alias sedit="${EDITOR:-/usr/bin/vim} -p ${HOME}/.stumpwmrc ${XDG_CONFIG_DIR:-${HOME}}/stumpwm/{{functions,macros,commands,hooks,key-maps}.lisp,dzen4stumpwm.zsh}"
-alias hedit="${EDITOR:-/usr/bin/vim} -p /etc/xdg/herbstluftwm/autostart ${XDG_CONFIG_DIR:-${HOME}}/xchainkeys/xck-herbstluftwm.conf"
 alias zedit="${EDITOR:-/usr/bin/vim} -p ${HOME}/{.zshrc,zsh/zsh-{functions,aliases,exports,options},.zlogin}"
 alias xedit="${EDITOR:-/usr/bin/vim} -p ${XDG_CONFIG_DIR:-${HOME}}/xorg/{xinitrc,Xdefaults}"
 alias xload="xrdb -load ${XDG_CONFIG_DIR:-${HOME}}/xorg/Xdefaults &>/dev/null"
@@ -35,8 +32,6 @@ alias calc="calc -d"
 alias sxiv="sxiv -b"
 alias xskat="xskat -opt ${XDG_CONFIG_DIR:-${HOME}}/xorg/xskat.opt -list ${XDG_CONFIG_DIR:-${HOME}}/xorg/xskat.lst"
 alias offlineimap="offlineimap -c ${XDG_CONFIG_DIR:-${HOME}}/.offlineimap/offlineimaprc"
-alias msmtp="msmtp -C ${XDG_CONFIG_DIR:-${HOME}}/msmtp/msmtprc"
-alias rtorrent="rtorrent -o http_capath=/etc/ssl/certs"
 alias startx="/usr/bin/xinit ${XDG_CONFIG_DIR:-${HOME}}/xorg/xinitrc -auth ${XDG_CONFIG_DIR:-${HOME}}/xorg/.serverauth.${RANDOM[1,4]} -nolisten tcp -once -retro"
 
 # system/media shortcuts:

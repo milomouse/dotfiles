@@ -1,7 +1,7 @@
 -- Global variables for luakit
 globals = {
-    homepage            = "about:blank",
-    --homepage            = "http://gentoo.org/",
+    --homepage            = "about:blank",
+    homepage            = "http://gentoo.org/",
     --homepage            = "http://luakit.org/",
     scroll_step         = 40,
     scroll_step_more    = 500,
@@ -9,8 +9,8 @@ globals = {
     zoom_step           = 0.1,
     max_cmd_history     = 100,
     max_srch_history    = 100,
- -- http_proxy          = "http://example.com:3128",
-    --http_proxy          = "127.0.0.1:8118",
+    -- (NOTE: use "require proxy" instead)
+    --http_proxy          = "127.0.0.1:3128",
     default_window_size = "800x600",
 
  -- Disables loading of hostnames from /etc/hosts (for large host files)
@@ -20,6 +20,7 @@ globals = {
 }
 
 -- Make useragent
+-- (NOTE: Using `squid' to obfuscate this.. so these will be ignored)
 local _, arch = luakit.spawn_sync("uname -sm")
 -- Only use the luakit version if in date format (reduces identifiability)
 local lkv = string.match(luakit.version, "^(%d+.%d+.%d+)")
@@ -28,6 +29,7 @@ globals.useragent = string.format("Mozilla/5.0 (%s) AppleWebKit/%s+ (KHTML, like
     luakit.webkit_version, (lkv and ("/" .. lkv)) or "")
 --For those websites who fuck with user experiences or forbid access due to unrecognized user string:
 --globals.useragent = string.format("Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_5_6; en-us) AppleWebKit/528.16 (KHTML, like Gecko) Version/4.0 Safari/528.16", arch, awkv, wkv, lkv)
+--globals.useragent = string.format("Mozilla/5.0 (compatible; MSIE 7.0; Windows NT 6.0; en-US)", arch, awkv, wkv, lkv)
 
 -- Search common locations for a ca file which is used for ssl connection validation.
 local ca_files = {
@@ -58,8 +60,8 @@ soup.accept_policy = cookie_policy.no_third_party
 -- See: http://www.lua.org/manual/5.1/manual.html#pdf-string.format
 search_engines = {
   duckduckgo = "https://duckduckgo.com/?q=%s",
-  github     = "https://github.com/search?q=%s",
   google     = "https://google.com/search?q=%s",
+  github     = "https://github.com/search?q=%s",
   imdb       = "http://www.imdb.com/find?s=all&q=%s",
   wikipedia  = "https://en.wikipedia.org/wiki/Special:Search?search=%s",
   postrock   = "http://www.postrockxchange.com/?s=%s",

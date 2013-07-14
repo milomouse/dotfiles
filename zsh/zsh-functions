@@ -266,3 +266,4 @@ function mkcd { command mkdir -p "$@" && cd "$@" }
 function timec { print "$(date +'%T %Y-%m-%d')" ; while sleep .2 ; do printf '\r%s ' "$(date +'%T %Y-%m-%d')" ; done }
 function dropcache { sync && command su -s /bin/zsh -c 'echo 3 > /proc/sys/vm/drop_caches' root }
 function flashproc { for f (${$(file /proc/$(pidof luakit)/fd/*|gawk '/\/tmp\/Flash/ { print $1}')//:}){ print - "$f" }}
+function hc { command herbstclient "$@" }

@@ -1,21 +1,22 @@
 #!/bin/zsh
-## ${XDG_CONFIG_HOME:-$HOME}/bspm/dzen4bspwm.zsh
-# NOTE: dzen2 bar for bspwm (spawned and killed from xinitrc)
-# NOTE: use Xdefaults for dzen2 colors
+####################################################
+## locate: ${XDG_CONFIG_HOME}/bspm/dzen4bspwm.zsh ##
+## author: milomouse (github.com/milomouse)       ##
+## detail: dzen2 statusbar for `bspwm'            ##
+####################################################
+## NOTE 1: spawned and killed from "xinitrc"      ##
+## NOTE 2: uses Xdefaults for dzen2 colors        ##
+####################################################
 
 
-## output variables $
+##+ OUTPUT VARIABLES:
 i_xdefaults="${XDG_CONFIG_HOME:-/howl/conf}/xorg/Xdefaults"
 o_dzen=$(whence -p dzen2)
 o_height='14'
 o_width='1590'
 o_x='5'
 o_y='2'
-#o_font='-artwiz-smoothansi-medium-r-normal-*-13-130-75-75-m-60-iso10646-1'
-#o_font='-artwiz-drift-medium-r-normal-*-10-100-75-75-n-60-iso10646-1'
-#o_font='-windows-montecarlo-medium-r-normal-*-11-110-72-72-c-60-microsoft-cp1252'
 o_font='-misc-fixed-medium-r-semicondensed-*-12-110-75-75-c-60-iso10646-1'
-#o_font='-misc-fixedzero-medium-r-semicondensed-*-12-110-75-75-c-60-iso10646-1'
 c_XX='^fg()'
 if [[ -s ${i_xdefaults} ]]; then
   <${i_xdefaults} | grep "^*" | while read c ; do
@@ -42,7 +43,7 @@ if [[ -s ${i_xdefaults} ]]; then
   done
 fi
 
-## input functions $
+##+ INPUT FUNCTIONS:
 function i_newmail {
   INBOX=$(print - ${(Fw)#$(find /howl/mail/*/INBOX/new -type f)})
   ALL=$(print - ${(Fw)#$(find /howl/mail/*/*/new -type f)})
@@ -73,7 +74,7 @@ function i_date {
 function o_right { print "$(i_ac_load) $(i_newmail) $(i_date)" }
 
 
-## runtime output $
+##+ RUNTIME OUTPUT:
 while true; do
   rwidth=$(( $(print ${#${"$(o_right | sed 's.\^[^(]*([^)]*)..g')"}}) * 6 + 12))
   #rwidth=$(( $(textwidth ${o_font} $(o_right)) * 10 ))

@@ -78,7 +78,7 @@ function o_right { print "$(i_ac_load) $(i_newmail) $(i_date)" }
 while true; do
   rwidth=$(( $(print ${#${"$(o_right | sed 's.\^[^(]*([^)]*)..g')"}}) * 6 + 12))
   #rwidth=$(( $(textwidth ${o_font} $(o_right)) * 10 ))
-  print "${c_XX} :herbstluft  ${c_XX}$(i_mifo)${c_XX} $(i_mixer)${c_XX}^pa($((1590 - $rwidth)))$(o_right)"
-  #print "${c_XX} :herbstluft  ${c_XX}$(i_programs)${c_XX} $(i_ac_load)${c_XX} $(i_mifo) $(i_date)"
+  print "${c_XX} :hlwm  ${c_XX}$(i_mifo)${c_XX} $(i_mixer)${c_XX}^pa($((1590 - $rwidth)))$(o_right)"
+  #print "${c_XX} :hlwm  ${c_XX}$(i_programs)${c_XX} $(i_ac_load)${c_XX} $(i_mifo) $(i_date)"
   sleep 1s
 done | ${o_dzen} -u -x ${o_x} -y ${o_y} -h ${o_height} -w ${o_width} -ta 'l' -bg ${o_bg} -fg ${o_fg} -fn ${o_font} &

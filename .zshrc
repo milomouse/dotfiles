@@ -1,4 +1,8 @@
-## ~/.zshrc
+###############################################
+## locate: ${XDG_CONFIG_HOME}/.zshrc         ##
+## author: milomouse (github.com/milomouse)  ##
+## detail: main configuration file for `zsh' ##
+###############################################
 
 # source external configuration files:
 for i in ${HOME}/zsh/zsh-{options,exports,aliases,functions}; do

@@ -1,4 +1,8 @@
-## ~/.zsh-aliases
+################################################
+## locate: ${XDG_CONFIG_HOME}/zsh/zsh-aliases ##
+## author: milomouse (github.com/milomouse)   ##
+## detail: configuration file for zsh aliases ##
+################################################
 
 # file management:
 alias ls="/bin/ls -h --file-type --time-style='+%y-%m-%d %H%M%S' --color=auto --group-directories-first"

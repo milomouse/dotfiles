@@ -1,4 +1,8 @@
-## ~/.zsh-options
+################################################
+## locate: ${XDG_CONFIG_HOME}/zsh/zsh-options ##
+## author: milomouse (github.com/milomouse)   ##
+## detail: configuration file for zsh options ##
+################################################
 
 # 01 -> changing directories:
   setopt autocd

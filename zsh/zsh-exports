@@ -1,4 +1,8 @@
-## ~/.zsh-exports
+################################################
+## locate: ${XDG_CONFIG_HOME}/zsh/zsh-exports ##
+## author: milomouse (github.com/milomouse)   ##
+## detail: configuration file for zsh exports ##
+################################################
 
 ## global environment exports:
 ## (Gentoo does some of this!)

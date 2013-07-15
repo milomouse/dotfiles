@@ -183,6 +183,10 @@ XF86AudioLowerVolume
 super + w
     /bin/sh -c 'if [[ -n $(pidof luakit) ]] ; then if [[ "${$(bspc query -T | grep "T @")[1]}" != 3 ]] ; then bspc desktop --focus 3 ; fi ; else exec luakit ; fi'
 
+#+ simple clipboard in/out synchronizer
+super + y
+    /howl/code/zsh/xclip-wrapper
+
 
 ########################
 ## Mouse:             ##

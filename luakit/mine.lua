@@ -1,5 +1,3 @@
--- mine.lua
-
 -- a few custom keybindings:
 add_binds("normal", {
   lousy.bind.key({}, "S", "Stop loading the current tab.",
@@ -21,26 +19,6 @@ add_binds("normal", {
     function(w)
       w:new_tab("luakit://history")
     end),
---[[
-  lousy.bind.key({}, "v", "Send hovered or current url to quvi/mplayer.",
-  function (w)
-    local view = w.view
-    local uri = view.hovered_uri or view.uri
-    if uri then
-      local cmd = string.format("quvi -f best %q --exec 'mplayer -prefer-ipv4 %%u'", uri)
-      luakit.spawn(cmd)
-    end
-  end),
-  lousy.bind.key({}, "d", "Send hovered or current url to cclive.",
-  function (w)
-    local view = w.view
-    local uri = view.hovered_uri or view.uri
-    if uri then
-      local cmd = string.format("cclive -b -s best -O %%u", uri)
-      luakit.spawn(cmd)
-    end
-  end),
---]]
 })
 
 -- mailto (mutt):

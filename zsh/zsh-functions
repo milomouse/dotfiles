@@ -212,12 +212,12 @@ EOG
     _Gn(){ sudo emerge --update --deep --with-bdeps=y --ask -v --newuse @world }
     _Gu(){ sudo emerge --update --deep --with-bdeps=y --ask -v @world && _Gn }
     _Gs(){
-      sudo emerge --sync && if [[ $(emerge -1p --quiet=y portage|grep '\[ebuild   R    \]' -c) -eq 1 ]] {
-        sudo emerge -1v portage
-    };}
+      sudo emerge --sync
+      [[ $(emerge -1p --quiet=y portage|grep '\[ebuild   R    \]' -c) == 1 ]] || sudo emerge -1v portage
+    }
     _Gp(){ _gp=(${${$(command ls -d /var/db/pkg/*/*)#/var/db/pkg/}%/}) ; print -C1 ${_gp} ; print "\nTotal Packages: ${#_gp}" ; unset _gp }
     _Gd(){ sudo dispatch-conf }
-    _Ge(){ sudo vim -p /etc/portage/{package.use,package.accept_keywords,package.license,make.conf} }
+    _Ge(){ sudo vim -p /etc/portage/{package.use,package.accept_keywords,package.unmask,package.license,make.conf} }
     case $1 {
       sync) _Gs ;;
       up) _Gu ;;

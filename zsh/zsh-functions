@@ -174,17 +174,26 @@ function cpuq {
 
 # quickly check/initiate pulseaudio and mifo daemons:
 function mpx {
-  pulseaudio --check
-  if [[ $? != 0 ]] {
-    print - "initiate : pulseaudio"
-    pulseaudio --start --log-target=syslog --daemonize
-  } else { print - "running  : pulseaudio" }
-  mifo --instance quiet
-  if [[ $? != 0 ]] {
-    print - "initiate : mifo"
-    mifo --init
-  } else { print - "running  : mifo" }
-}
+  case $1:l {
+    stop|disable)
+      print - "stopping : pulseaudio"
+      pulseaudio -k
+      print - "stopping : mifo"
+      mifo --quit
+    ;;
+    *)
+      pulseaudio --check
+      if [[ $? != 0 ]] {
+        print - "initiate : pulseaudio"
+        pulseaudio --start --log-target=syslog --daemonize
+      } else { print - "running  : pulseaudio" }
+      mifo --instance quiet
+      if [[ $? != 0 ]] {
+        print - "initiate : mifo"
+        mifo --init
+      } else { print - "running  : mifo" }
+    ;;
+};}
 
 # some lengthy Gentoo commands summed up for ease of use:
 function gent {

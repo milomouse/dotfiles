@@ -23,12 +23,9 @@ local escape = lousy.util.escape
 new_mode("buffers", {
     enter = function (w)
         hide_box = not w.sbar.ebox.visible
-        --local rows = {}
         local rows = {{"Title", "URI", title = true},}
         for _, view in ipairs(w.tabs.children) do
-            --table.insert(rows, {escape(view.uri), escape(view.title), v = view })
             table.insert(rows, {escape(view.title), escape(view.uri), v = view })
-            --table.insert(rows, 2, {escape(view.uri), escape(view.title), v = view })
         end
         w.menu:build(rows)
         local cur = w.tabs:current()

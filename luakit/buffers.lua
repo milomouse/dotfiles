@@ -11,8 +11,6 @@ local lousy = require "lousy"
 local add_binds, add_cmds = add_binds, add_cmds
 local new_mode, menu_binds = new_mode, menu_binds
 
-module("plugins.buffers")
-
 hide_box = false
 
 local cmd = lousy.bind.cmd

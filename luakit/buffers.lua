@@ -16,16 +16,19 @@ hide_box = false
 
 local cmd = lousy.bind.cmd
 add_cmds({
-    cmd("buffers", "Select tab to use from list.", function (w) w:set_mode("buffers") end),
+    cmd("buffers", "View or close opened tabs from list.", function (w) w:set_mode("buffers") end),
 })
 
 local escape = lousy.util.escape
 new_mode("buffers", {
     enter = function (w)
         hide_box = not w.sbar.ebox.visible
-        local rows = {}
+        --local rows = {}
+        local rows = {{"Title", "URI", title = true},}
         for _, view in ipairs(w.tabs.children) do
-            table.insert(rows, {escape(view.uri), escape(view.title), v = view })
+            --table.insert(rows, {escape(view.uri), escape(view.title), v = view })
+            table.insert(rows, {escape(view.title), escape(view.uri), v = view })
+            --table.insert(rows, 2, {escape(view.uri), escape(view.title), v = view })
         end
         w.menu:build(rows)
         local cur = w.tabs:current()

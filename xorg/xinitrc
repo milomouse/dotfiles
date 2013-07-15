@@ -1,4 +1,4 @@
-#!/bin/zsh
+#! /bin/zsh
 ##############################################
 ## locate: ${XDG_CONFIG_HOME}/xorg/xinitrc  ##
 ## author: milomouse (github.com/milomouse) ##
@@ -6,8 +6,6 @@
 ##############################################
 
 ##+ RESOURCES:
-/usr/bin/xset +fp '/usr/share/fonts/local'
-/usr/bin/xset fp rehash
 /usr/bin/xrdb -load ${XDG_CONFIG_DIR:-$HOME}/xorg/Xdefaults
 #/usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/dvausler.xmodmap
 /usr/bin/xmodmap ${XDG_CONFIG_DIR:-$HOME}/keymaps/overlay-mods.xmodmap

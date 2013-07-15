@@ -1,4 +1,4 @@
-#!/bin/zsh
+#! /bin/zsh
 ####################################################
 ## locate: ${XDG_CONFIG_HOME}/bspm/dzen4bspwm.zsh ##
 ## author: milomouse (github.com/milomouse)       ##
@@ -12,11 +12,13 @@
 ##+ OUTPUT VARIABLES:
 i_xdefaults="${XDG_CONFIG_HOME:-/howl/conf}/xorg/Xdefaults"
 o_dzen=$(whence -p dzen2)
-o_height='14'
+o_height='15'
 o_width='1590'
 o_x='5'
 o_y='2'
 o_font='-misc-fixed-medium-r-semicondensed-*-12-110-75-75-c-60-iso10646-1'
+#o_font='-lfp-gamow-medium-r-normal-*-7-70-75-75-c-70-iso10646-1'
+#o_font='-windows-proggycleanszcp-medium-r-normal-*-13-80-96-96-c-70-iso8859-1'
 c_XX='^fg()'
 if [[ -s ${i_xdefaults} ]]; then
   <${i_xdefaults} | grep "^*" | while read c ; do
@@ -60,7 +62,7 @@ ${c_07}:name ${c_XX}\"${c_09}${m_N:-%B}${c_XX}\" ${c_07}:type ${c_XX}\"${c_fg}%e
 function i_ac_load {
   BAT=${$(acpi -b)[-1]}
   BAT=${c_09}${${${${BAT// /}/:/ }/\%/${c_01}\%}%:*}
-  print "${c_XX}\(${c_04}= "${${${${${${${(s. .)$(</proc/loadavg)}[1]/0./${c_08}0.}/1./${c_XX}1.}/2./${c_07}2.}/3./${c_02}3.}/4./${c_01}4.}//./${c_12}.${c_XX}}"\
+  print "${c_XX}\(${c_04}= "${${${${${${${${(s. .)$(</proc/loadavg)}[1]/0./${c_08}0.}/1./${c_13}1.}/2./${c_05}2.}/3./${c_04}3.}/4./${c_03}4.}/5./${c_11}5.}//./${c_12}.${c_XX}}"\
  ${c_07}\(${c_05}rtl ${c_fg}\(${c_04}/ ${BAT}${c_fg}\)${c_07}\)${c_XX}\)"
 }
 function i_mixer {

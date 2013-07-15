@@ -7,16 +7,27 @@
 !! urxvt settings:
 urxvt*termName: rxvt-256color
 urxvt*loginShell: true
-!urxvt*font: -misc-fixed-medium-r-semicondensed-*-12-110-75-75-c-60-koi8-r
-!urxvt*boldFont: -misc-fixed-medium-r-semicondensed-*-12-110-75-75-c-60-koi8-r
-!urxvt*italicFont: -misc-fixed-medium-r-semicondensed-*-12-110-75-75-c-60-koi8-r
-!urxvt*boldItalicFont: -misc-fixed-medium-r-semicondensed-*-12-110-75-75-c-60-koi8-r
 
 !! fork of 6x12 Fixed SemiCondensed; emphasize numeric 0's as opposed to alphabetic O's:
 urxvt*font: -misc-fixedzero-medium-r-semicondensed-*-12-110-75-75-c-60-iso10646-1
 urxvt*boldFont: -misc-fixedzero-medium-r-semicondensed-*-12-110-75-75-c-60-iso10646-1
 urxvt*italicFont: -misc-fixedzero-medium-r-semicondensed-*-12-110-75-75-c-60-iso10646-1
 urxvt*boldItalicFont: -misc-fixedzero-medium-r-semicondensed-*-12-110-75-75-c-60-iso10646-1
+
+!urxvt*font: -misc-fixed-medium-r-semicondensed-*-12-110-75-75-c-60-koi8-r
+!urxvt*boldFont: -misc-fixed-medium-r-semicondensed-*-12-110-75-75-c-60-koi8-r
+!urxvt*italicFont: -misc-fixed-medium-r-semicondensed-*-12-110-75-75-c-60-koi8-r
+!urxvt*boldItalicFont: -misc-fixed-medium-r-semicondensed-*-12-110-75-75-c-60-koi8-r
+
+!urxvt*font: -windows-proggycleanszcp-medium-r-normal-*-13-80-96-96-c-70-iso8859-1
+!urxvt*boldFont: -windows-proggycleanszcp-medium-r-normal-*-13-80-96-96-c-70-iso8859-1
+!urxvt*italicFont: -windows-proggycleanszcp-medium-r-normal-*-13-80-96-96-c-70-iso8859-1
+!urxvt*boldItalicFont: -windows-proggycleanszcp-medium-r-normal-*-13-80-96-96-c-70-iso8859-1
+
+!urxvt*font: -lfp-gamow-medium-r-normal-*-7-70-75-75-c-70-iso10646-1
+!urxvt*boldFont: -lfp-gamow-medium-r-normal-*-7-70-75-75-c-70-iso10646-1
+!urxvt*italicFont: -lfp-gamow-medium-r-normal-*-7-70-75-75-c-70-iso10646-1
+!urxvt*boldItalicFont: -lfp-gamow-medium-r-normal-*-7-70-75-75-c-70-iso10646-1
 
 !urxvt*colorIT: #707070
 urxvt*scrollBar: false

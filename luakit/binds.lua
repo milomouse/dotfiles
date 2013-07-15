@@ -162,13 +162,6 @@ add_binds("normal", {
     key({}, "K", "Scroll document up, further",
         function (w) w:scroll{ yrel = -scroll_step_more } end),
 
---[[    key({"Control"}, "j", "Scroll document down, further",
-        function (w) w:scroll{ yrel = scroll_step_more } end),
-
-    key({"Control"}, "k", "Scroll document up, further",
-        function (w) w:scroll{ yrel = -scroll_step_more } end),
---]]
-
     key({}, "h", "Scroll document left.",
         function (w) w:scroll{ xrel = -scroll_step } end),
 
@@ -416,22 +409,6 @@ add_binds("normal", {
     key({}, "R", "Reload current tab (skipping cache).",
         function (w) w:reload(true) end),
 
-    key({"Control"}, "c", "Stop loading the current tab.",
-        function (w) w.view:stop() end),
-
-    key({"Control", "Shift"}, "R", "Restart luakit (reloading configs).",
-        function (w) w:restart() end),
-
-    -- Window
-    buf("^ZZ$", "Quit and save the session.",
-        function (w) w:save_session() w:close_win() end),
-
-    buf("^ZQ$", "Quit and don't save the session.",
-        function (w) w:close_win() end),
-
-    buf("^D$",  "Quit and don't save the session.",
-        function (w) w:close_win() end),
-
     -- Enter passthrough mode
     key({"Control"}, "z",
         "Enter `passthrough` mode, ignores all luakit keybindings.",
@@ -518,12 +495,6 @@ add_cmds({
     cmd("reload", "Reload page",
         function (w) w:reload() end),
 
-    cmd("restart", "Restart browser (reload config files).",
-        function (w) w:restart() end),
-
-    cmd("write", "Save current session.",
-        function (w) w:save_session() end),
-
     cmd("noh[lsearch]", "Clear search highlighting.",
         function (w) w:clear_search() end),
 
@@ -578,9 +549,6 @@ add_cmds({
 
     cmd({"viewsource", "vs"}, "View the source code of the current document.",
         function (w, a, o) w:toggle_source(not o.bang and true or nil) end),
-
-    cmd({"wqall", "wq"}, "Save the session and quit.",
-        function (w, a, o) w:save_session() w:close_win(o.bang) end),
 
     cmd("lua", "Evaluate Lua snippet.", function (w, a)
         if a then

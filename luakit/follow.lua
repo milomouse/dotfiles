@@ -315,7 +315,7 @@ stylesheet = [===[
 #luakit_follow_overlay .hint_overlay {
     display: block;
     position: absolute;
-    background-color: #a488d9;
+    background-color: #191919;
     border: 1px dotted #000;
     opacity: 0.3;
     z-index: 10001;
@@ -324,21 +324,21 @@ stylesheet = [===[
 #luakit_follow_overlay .hint_label {
     display: block;
     position: absolute;
-    background-color: #1c1c1c;
-    border: 1px dashed #000;
-    color: #fff;
-    font-size: 10px;
-    font-family: monospace, courier, sans-serif;
-    opacity: 0.4;
+    background-color: #191919;
+    border: 3px solid #191919;
+    color: #cccccc;
+    font-size: 12px;
+    font-family: fixed, monospace, courier, sans-serif;
+    opacity: 0.8;
     z-index: 10002;
 }
 
 #luakit_follow_overlay .hint_overlay_body {
-    background-color: #ff0000;
+    background-color: #191919;
 }
 
 #luakit_follow_overlay .hint_selected {
-    background-color: #00ff00 !important;
+    background-color: #0093B5 !important;
 }
 ]===]
 

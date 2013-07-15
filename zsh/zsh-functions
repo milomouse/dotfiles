@@ -92,34 +92,6 @@ function tmux {
   fi
 }
 
-# attach rtorrent from daemon mode to view/edit torrents:
-function rot {
-  if [[ -z $1 ]]; then
-    if [[ ${TERM} =~ screen ]]; then
-      print "Aborting, please avoid nesting sessions."
-    else
-      /usr/bin/tmux -S /tmp/user-keep/${USER}/tmux/rtorrent attach-session
-    fi
-  elif [[ -n $1 ]]; then
-    case $1:l {
-      attach)
-        if [[ ${TERM} =~ screen ]]; then
-          print "Aborting, please avoid nesting sessions."
-        else
-          /usr/bin/tmux -S /tmp/user-keep/${USER}/tmux/rtorrent attach-session
-        fi
-      ;;
-      enable|start)
-        /usr/bin/tmux -S /tmp/user-keep/${USER}/tmux/rtorrent new-session -d "/usr/bin/rtorrent -o http_capath=/etc/ssl/certs" ;;
-      disable|stop)
-        /usr/bin/killall -w -s 2 /usr/bin/rtorrent ;;
-      restart)
-        /usr/bin/killall -w -s 2 /usr/bin/rtorrent &>/dev/null
-        /usr/bin/tmux -S /tmp/user-keep/${USER}/tmux/rtorrent new-session -d "/usr/bin/rtorrent -o http_capath=/etc/ssl/certs" ;;
-    }
-  fi
-}
-
 # function to quickly view StarDict word definitions:
 function sd {
   case $1 in

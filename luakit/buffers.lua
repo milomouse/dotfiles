@@ -1,7 +1,8 @@
 ----------------------------------------------------------------
 -- Switch tabs using a menu widget                            --
 -- © 2012 Alexander Clare <alexander.clare@gmail.com>         --
--- © 2013 Vincent Anonymouse <milomouse@github.com>           --
+----------------------------------------------------------------
+-- Additional modifications provided by milomouse@github.com  --
 ----------------------------------------------------------------
 
 local ipairs = ipairs

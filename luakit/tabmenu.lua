@@ -2,6 +2,8 @@
 -- View current tabs in an interactive menu    --
 -- © 2013 Chris van Dijk <quigybo@hotmail.com> --
 -------------------------------------------------
+-- Modifications by milomouse@github.com       --
+-------------------------------------------------
 
 -- Add tabmenu command
 local cmd = lousy.bind.cmd
@@ -21,7 +23,7 @@ new_mode("tabmenu", {
             table.insert(rows, { " " .. i .. ":  " .. title, " " .. uri, index = i })
         end
         w.menu:build(rows)
-        w:notify("Use j/k to move, d delete, Return activate.", false)
+        w:notify("Use j/k to scroll, d delete, </> to move tab position, Return activate.", false)
     end,
 
     leave = function (w)
@@ -48,6 +50,25 @@ add_binds("tabmenu", lousy.util.table.join({
             w.tabs:switch(row.index)
         end
     end),
+
+    key({}, "<", "Move tab left.", function (w, m)
+        local row = w.menu:get()
+        if row and row.index then
+            w.tabs:reorder(w.view, w.tabs:current() - m.count)
+        end
+        w:set_mode()
+        w:set_mode("tabmenu")
+    end, {count=1}),
+
+    key({}, ">", "Move tab right.", function (w, m)
+        local row = w.menu:get()
+        if row and row.index then
+            w.tabs:reorder(w.view,
+                (w.tabs:current() + m.count) % w.tabs:current())
+        end
+        w:set_mode()
+        w:set_mode("tabmenu")
+    end, {count=1}),
 
     -- Exit menu
     key({}, "q", "Close menu.",

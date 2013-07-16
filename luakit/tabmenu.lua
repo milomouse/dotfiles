@@ -38,8 +38,9 @@ add_binds("tabmenu", lousy.util.table.join({
         local row = w.menu:get()
         if row and row.index then
             w:close_tab(w.tabs[row.index])
-            w:set_mode("tabmenu")
             w.menu:del()
+            w:set_mode("tabmenu")
+            w.menu:move_down()
         end
     end),
 
@@ -58,6 +59,7 @@ add_binds("tabmenu", lousy.util.table.join({
             w.tabs:reorder(w.view, w.tabs:current() - m.count)
         end
         w:set_mode("tabmenu")
+        w.menu:move_down()
     end, {count=1}),
 
     key({}, ">", "Move tab right.", function (w, m)
@@ -67,6 +69,7 @@ add_binds("tabmenu", lousy.util.table.join({
                 (w.tabs:current() + m.count) % w.tabs:current())
         end
         w:set_mode("tabmenu")
+        w.menu:move_down()
     end, {count=1}),
 
     -- Exit menu

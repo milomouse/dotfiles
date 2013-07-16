@@ -1,9 +1,9 @@
--------------------------------------------------
--- View current tabs in an interactive menu    --
--- © 2013 Chris van Dijk <quigybo@hotmail.com> --
--------------------------------------------------
--- Modifications by milomouse@github.com       --
--------------------------------------------------
+--------------------------------------------------------
+-- View current tabs in an interactive menu           --
+-- © 2013 Vincent ZaGara II <vincent@fea.st>          --
+-- © 2013 Chris van Dijk <quigybo@hotmail.com>        --
+-- © 2012 Alexander Clare <alexander.clare@gmail.com> --
+--------------------------------------------------------
 
 -- Add tabmenu command
 local cmd = lousy.bind.cmd

@@ -23,7 +23,7 @@ new_mode("tabmenu", {
             table.insert(rows, { " " .. i .. ":  " .. title, " " .. uri, index = i })
         end
         w.menu:build(rows)
-        w:notify("Use j/k to scroll, d delete, </> to move tab position, Return activate.", false)
+        w:notify("Use j/k to scroll, </> move tab positions, d delete, Return activate.", false)
     end,
 
     leave = function (w)

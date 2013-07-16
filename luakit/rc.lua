@@ -164,7 +164,7 @@ require "go_up"
 --require "adblock_chrome"
 
 -- Personal modifications.
-require "buffers"
+require "tabmenu"
 require "mine"
 
 -----------------------------

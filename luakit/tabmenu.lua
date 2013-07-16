@@ -23,6 +23,10 @@ new_mode("tabmenu", {
             table.insert(rows, { " " .. i .. ":  " .. title, " " .. uri, index = i })
         end
         w.menu:build(rows)
+        local cur = w.tabs:current()
+        local ind = 0
+        repeat w.menu:move_down(); ind = ind + 1 until ind == cur
+        w.sbar.ebox:show()
         w:notify("Use j/k to scroll, </> move tab positions, d delete, Return activate.", false)
     end,
 
@@ -40,7 +44,6 @@ add_binds("tabmenu", lousy.util.table.join({
             w:close_tab(w.tabs[row.index])
             w.menu:del()
             w:set_mode("tabmenu")
-            w.menu:move_down()
         end
     end),
 
@@ -59,17 +62,15 @@ add_binds("tabmenu", lousy.util.table.join({
             w.tabs:reorder(w.view, w.tabs:current() - m.count)
         end
         w:set_mode("tabmenu")
-        w.menu:move_down()
     end, {count=1}),
 
     key({}, ">", "Move tab right.", function (w, m)
         local row = w.menu:get()
         if row and row.index then
             w.tabs:reorder(w.view,
-                (w.tabs:current() + m.count) % w.tabs:current())
+                (w.tabs:current() + m.count) % w.tabs:count())
         end
         w:set_mode("tabmenu")
-        w.menu:move_down()
     end, {count=1}),
 
     -- Exit menu

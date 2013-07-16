@@ -38,6 +38,8 @@ add_binds("tabmenu", lousy.util.table.join({
         local row = w.menu:get()
         if row and row.index then
             w:close_tab(w.tabs[row.index])
+            w:set_mode()
+            w:set_mode("tabmenu")
             w.menu:del()
         end
     end),

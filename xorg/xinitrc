@@ -17,13 +17,13 @@
 
 ##+ WINDOW MANAGER:
 ## \ (hybrid manual tiling):
-#exec /howl/conf/herbstluftwm/dzen4hc.zsh &>/dev/null &
+#exec /howl/conf/herbstluftwm/dzen.zsh &>/dev/null &
 #exec /usr/bin/herbstluftwm
 
 ## \ (hybrid dynamic tiling):
 export BSPWM_PANEL_FIFO="/tmp/user-keep/${USER}/bspwm-fifo"
 /usr/bin/sxhkd -c ${XDG_CONFIG_HOME:-$HOME}/bspwm/sxhkdrc &
-exec /howl/conf/bspwm/dzen4bspwm.zsh &>/dev/null &
+exec /howl/conf/bspwm/dzen.zsh &>/dev/null &
 [[ -p ${BSPWM_PANEL_FIFO} ]] && rm ${BSPWM_PANEL_FIFO}
 mkfifo ${BSPWM_PANEL_FIFO}
 exec /usr/bin/bspwm -s ${BSPWM_PANEL_FIFO}

@@ -35,7 +35,7 @@ end
 webview.init_funcs.magnet_hook = function (view, w)
     view:add_signal("navigation-request", function (v, uri)
         if string.match(string.lower(uri), "^magnet:") then
-            luakit.spawn(string.format("%s %q", "urxvt -title transmission -e transmission-cli", uri))
+            luakit.spawn(string.format("%s %q", "urxvt -title transmission-remote-cli -e transmission-remote-cli", uri))
             return false
         end
     end)

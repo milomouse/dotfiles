@@ -16,9 +16,8 @@ o_height='15'
 o_width='1590'
 o_x='5'
 o_y='2'
-o_font='-misc-fixed-medium-r-semicondensed-*-12-110-75-75-c-60-iso10646-1'
-#o_font='-lfp-gamow-medium-r-normal-*-7-70-75-75-c-70-iso10646-1'
-#o_font='-windows-proggycleanszcp-medium-r-normal-*-13-80-96-96-c-70-iso8859-1'
+o_font='-misc-fixedzero-medium-r-semicondensed-*-12-110-75-75-c-60-iso10646-1'
+#o_font='-misc-fixed-medium-r-semicondensed-*-12-110-75-75-c-60-iso10646-1'
 c_XX='^fg()'
 if [[ -s ${i_xdefaults} ]]; then
   <${i_xdefaults} | grep "^*" | while read c ; do

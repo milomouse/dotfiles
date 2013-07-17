@@ -1,17 +1,18 @@
 #! /bin/zsh
-####################################################
-## locate: ${XDG_CONFIG_HOME}/bspm/dzen4bspwm.zsh ##
-## author: milomouse (github.com/milomouse)       ##
-## detail: dzen2 statusbar for `bspwm'            ##
-####################################################
-## NOTE 1: spawned and killed from "xinitrc"      ##
-## NOTE 2: uses Xdefaults for dzen2 colors        ##
-####################################################
+###############################################
+## locate: ${XDG_CONFIG_HOME}/bspm/dzen.zsh  ##
+## author: milomouse (github.com/milomouse)  ##
+## detail: dzen2 statusbar for `bspwm'       ##
+###############################################
+## NOTE 1: spawned and killed from "xinitrc" ##
+## NOTE 2: uses Xdefaults for dzen2 colors   ##
+###############################################
 
 
 ##+ OUTPUT VARIABLES:
 i_xdefaults="${XDG_CONFIG_HOME:-/howl/conf}/xorg/Xdefaults"
 o_dzen=$(whence -p dzen2)
+o_name="bspwm"
 o_height='15'
 o_width='1590'
 o_x='5'
@@ -78,8 +79,6 @@ function o_right { print "$(i_ac_load) $(i_newmail) $(i_date)" }
 ##+ RUNTIME OUTPUT:
 while true; do
   rwidth=$(( $(print ${#${"$(o_right | sed 's.\^[^(]*([^)]*)..g')"}}) * 6 + 12))
-  #rwidth=$(( $(textwidth ${o_font} $(o_right)) * 10 ))
-  print "${c_XX} :bspwm  ${c_XX}$(i_mifo)${c_XX} $(i_mixer)${c_XX}^pa($((1590 - $rwidth)))$(o_right)"
-  #print "${c_XX} :bspwm ${c_XX}$(i_programs)${c_XX} $(i_ac_load)${c_XX} $(i_mifo) $(i_date)"
+  print "${c_XX} :${o_name}  ${c_XX}$(i_mifo)${c_XX} $(i_mixer)${c_XX}^pa($((1590 - $rwidth)))$(o_right)"
   sleep 1s
 done | ${o_dzen} -u -x ${o_x} -y ${o_y} -h ${o_height} -w ${o_width} -ta 'l' -bg ${o_bg} -fg ${o_fg} -fn ${o_font} &

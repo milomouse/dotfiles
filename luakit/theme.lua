@@ -10,12 +10,10 @@ theme.sbar_r_ebox_bg  = "#191919"
 -- end of CUSTOM <<
 
 -- Default settings
-theme.font = "monospace normal 8"
---theme.font = "EnvyCodeR normal 9"
---theme.font = "Inconsolata normal 10"
+theme.font = "EnvyCodeR normal 10"
 --theme.font = "Liberation normal 8"
---theme.font = "Bitstream normal 8"
-theme.font = "normal 8"
+--theme.font = "monospace normal 8"
+--theme.font = "normal 8"
 theme.fg   = "#191919"
 theme.bg   = "#eeeeee"
 

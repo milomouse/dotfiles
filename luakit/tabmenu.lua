@@ -18,7 +18,7 @@ new_mode("tabmenu", {
         local rows = {{ "    Title", "URI", title = true }}
         local escape = lousy.util.escape
         for i, view in ipairs(w.tabs.children) do
-            local uri = escape(view.uri)
+            local uri = escape(view.uri or "")
             local title = escape(view.title or "")
             table.insert(rows, { " " .. i .. ":  " .. title, " " .. uri, index = i })
         end
@@ -82,7 +82,6 @@ add_binds("tabmenu", lousy.util.table.join({
 -- Add key binds.
 local buf = lousy.bind.buf
 add_binds("normal", {
-    key({},     "m",    function (w)
-        w:set_mode("tabmenu")
-    end),
+    key({}, "m",
+      function (w) w:set_mode("tabmenu") end),
 })

@@ -4,7 +4,7 @@ Current Setup:
 
 DISTRO = Gentoo (~amd64 nomultilib)
 
-KERNEL = linux 3.8.11 (RT_PREEMPT, loop-AES)
+KERNEL = linux 3.8.13 rt14 (RT_PREEMPT, loop-AES)
 
 INIT = OpenRC
 
@@ -26,7 +26,7 @@ VIDEO PLAYER = MPlayer2
 
 WINDOW MANAGER = bspwm
 
-TERMINAL EMULATOR = Rxvt-unicode
+TERMINAL EMULATOR = URxvt
 
 TERMINAL MULTIPLEX = Tmux
 

@@ -10,14 +10,15 @@ mailboxes +FastMail/Archive
 mailboxes +FastMail/Drafts
 mailboxes +FastMail/Trash
 mailboxes +FastMail/Spam
-mailboxes +FastMail/Gentoo
+mailboxes +FastMail/Machine
+mailboxes +FastMail/Newsletters
+mailboxes +FastMail/Forums
 mailboxes +FastMail/ArchLinux
+mailboxes +FastMail/Gentoo
 mailboxes +FastMail/Kernel
 mailboxes +FastMail/Browsers
 mailboxes +FastMail/WManagers
-mailboxes +FastMail/Forums
 mailboxes +FastMail/Misc
-mailboxes +FastMail/Machine
 
 macro index E "<change-folder>+FastMail/Archive<enter><limit>~B " "search everything"
 macro index D "<save-message>+FastMail/Trash<enter>" 	           "move message to the trash"

@@ -1,12 +1,12 @@
 #! /bin/zsh
-################################################
-## locate: ${XDG_CONFIG_HOME}/bspm/dzen.zsh   ##
-## author: milomouse (github.com/milomouse)   ##
-## detail: dzen2 statusbar for `herbstluftwm' ##
-################################################
-## NOTE 1: spawned and killed from "xinitrc"  ##
-## NOTE 2: uses Xdefaults for dzen2 colors    ##
-################################################
+#######################################################
+## locate: ${XDG_CONFIG_HOME}/herbstluftwm/dzen.zsh  ##
+## author: milomouse (github.com/milomouse)          ##
+## detail: dzen2 statusbar for `herbstluftwm'        ##
+#######################################################
+## NOTE 1: spawned and killed from "xinitrc"         ##
+## NOTE 2: uses Xdefaults for dzen2 colors           ##
+#######################################################
 
 
 ##+ OUTPUT VARIABLES:
@@ -62,7 +62,7 @@ ${c_07}:name ${c_XX}\"${c_09}${m_N:-%B}${c_XX}\" ${c_07}:type ${c_XX}\"${c_fg}%e
 function i_ac_load {
   BAT=${$(acpi -b)[-1]}
   BAT=${c_09}${${${${BAT// /}/:/ }/\%/${c_01}\%}%:*}
-  print "${c_XX}\(${c_04}= "${${${${${${${${(s. .)$(</proc/loadavg)}[1]/0./${c_08}0.}/1./${c_13}1.}/2./${c_05}2.}/3./${c_04}3.}/4./${c_03}4.}/5./${c_11}5.}//./${c_12}.${c_XX}}"\
+  print "${c_XX}\(${c_04}= "${${${${${${${${(s. .)$(</proc/loadavg)}[1]/0./${c_08}0.}/1./${c_07}1.}/2./${c_05}2.}/3./${c_04}3.}/4./${c_03}4.}/5./${c_11}5.}//./${c_12}.${c_XX}}"\
  ${c_07}\(${c_05}rtl ${c_fg}\(${c_04}/ ${BAT}${c_fg}\)${c_07}\)${c_XX}\)"
 }
 function i_mixer {

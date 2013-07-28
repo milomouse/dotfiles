@@ -4,7 +4,9 @@ Current Setup:
 
 DISTRO = Gentoo ( ~amd64 nomultilib )
 
-KERNEL = GNU/Linux 3.8.13 deadspace-14 ( RT_PREEMPT, loop-AES, GCC [K10] )
+UNAME = #1 PREEMPT RT Sun Jul 28 16:02:21 EDT 2013 x86_64 AuthenticAMD GNU/Linux
+
+KERNEL = 3.8.13-deadspace-14 ( RT_PREEMPT, loop-AES, GCC [K10] )
 
 INIT = OpenRC
 

@@ -4,9 +4,9 @@ Current Setup:
 
 + *DISTRO* = Gentoo ( ~amd64 nomultilib )
 
-+ *UNAME* = #2 PREEMPT RT Sun Jul 28 16:21:50 EDT 2013 x86_64 GNU/Linux
-
 + *KERNEL* = 3.8.13-deadspace-14 ( RT_PREEMPT, loop-AES, GCC [K10] )
+
++ *BUILD* = #2 PREEMPT RT Sun Jul 28 16:21:50 EDT 2013 x86_64 GNU/Linux
 
 + *INIT* = OpenRC
 

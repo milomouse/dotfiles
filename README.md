@@ -2,9 +2,9 @@ Current Setup:
 --------------
 
 
-DISTRO = Gentoo (~amd64 nomultilib)
+DISTRO = Gentoo ( ~amd64 nomultilib )
 
-KERNEL = linux 3.8.13 rt14 (RT_PREEMPT, loop-AES)
+KERNEL = GNU/Linux 3.8.13 deadspace-14 ( RT_PREEMPT, loop-AES, GCC [K10] )
 
 INIT = OpenRC
 
@@ -20,7 +20,7 @@ MAIL RECEIVER = Postfix, OfflineIMAP
 
 MAIL READER = Mutt
 
-MUSIC PLAYER = mifo (https://github.com/milomouse/mifo)
+MUSIC PLAYER = mifo ( https://github.com/milomouse/mifo )
 
 VIDEO PLAYER = MPlayer2
 

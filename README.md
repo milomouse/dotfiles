@@ -2,36 +2,36 @@ Current Setup:
 --------------
 
 
-*DISTRO* = Gentoo ( ~amd64 nomultilib )
++ *DISTRO* = Gentoo ( ~amd64 nomultilib )
 
-*UNAME* = #2 PREEMPT RT Sun Jul 28 16:21:50 EDT 2013 x86_64 GNU/Linux
++ *UNAME* = #2 PREEMPT RT Sun Jul 28 16:21:50 EDT 2013 x86_64 GNU/Linux
 
-*KERNEL* = 3.8.13-deadspace-14 ( RT_PREEMPT, loop-AES, GCC [K10] )
++ *KERNEL* = 3.8.13-deadspace-14 ( RT_PREEMPT, loop-AES, GCC [K10] )
 
-*INIT* = OpenRC
++ *INIT* = OpenRC
 
-*UDEV* = eudev
++ *UDEV* = eudev
 
-*SHELL* = Zsh
++ *SHELL* = Zsh
 
-*EDITOR* = ViM
++ *EDITOR* = ViM
 
-*MAIL SENDER* = Postfix
++ *MAIL SENDER* = Postfix
 
-*MAIL RECEIVER* = Postfix, OfflineIMAP
++ *MAIL RECEIVER* = Postfix, OfflineIMAP
 
-*MAIL READER* = Mutt
++ *MAIL READER* = Mutt
 
-*MUSIC PLAYER* = mifo ( https://github.com/milomouse/mifo )
++ *MUSIC PLAYER* = mifo ( https://github.com/milomouse/mifo )
 
-*VIDEO PLAYER* = MPlayer2
++ *VIDEO PLAYER* = MPlayer2
 
-*WINDOW MANAGER* = bspwm
++ *WINDOW MANAGER* = bspwm
 
-*TERMINAL EMULATOR* = URxvt
++ *TERMINAL EMULATOR* = URxvt
 
-*TERMINAL MULTIPLEX* = Tmux
++ *TERMINAL MULTIPLEX* = Tmux
 
-*IMAGE VIEWER* = sxiv
++ *IMAGE VIEWER* = sxiv
 
-*WEB BROWSER* = Luakit
++ *WEB BROWSER* = Luakit

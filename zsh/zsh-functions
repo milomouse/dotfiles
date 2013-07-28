@@ -10,7 +10,7 @@ function zshaddhistory {
   line=${1%%$'\n'} ; cmd=${line%% *}
   [[ ${#line} -ge 5
       && ${cmd} != (history|fc|[szx]edit|[zx]load|srm|wika)
-  ]] && (( ! $argv[(I)*unrl*|*spar*|*losetup*|*aespipe*|sudo rm *|mpq q *] ))
+  ]] && (( ! $argv[(I)*unrl*|*spar*|*losetup*|*aespipe*|sudo rm *|mpq q *|youtube-dl*] ))
 }
 
 # safely recompile and reload shell settings:
@@ -222,7 +222,7 @@ EOG
     _Gu(){ sudo emerge --update --deep --with-bdeps=y --ask -v @world && _Gn }
     _Gs(){
       sudo emerge --sync
-      [[ $(emerge -1p --quiet=y portage|grep '\[ebuild   R    \]' -c) == 1 ]] || sudo emerge -1v portage
+      [[ $(emerge -1p --quiet=y portage|grep -c "\[ebuild   R   \] ${${$(print - /var/db/pkg/sys-apps/portage-[0-9].*)#/*/*/*/}%/}") == 0 ]] && sudo emerge -1v portage
     }
     _Gp(){ _gp=(${${$(command ls -d /var/db/pkg/*/*)#/var/db/pkg/}%/}) ; print -C1 ${_gp} ; print "\nTotal Packages: ${#_gp}" ; unset _gp }
     _Gd(){ sudo dispatch-conf }

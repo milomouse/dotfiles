@@ -234,6 +234,7 @@ EXEC           01;36
 .diff          01;33
 .dir_colors    00;37
 .dirs          00;37
+.ebuild        00;35
 .enc           00;36
 .eps           00;36
 .etx           00;36

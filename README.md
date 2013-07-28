@@ -4,7 +4,9 @@ Current Setup:
 
 + *DISTRO* = Gentoo ( ~amd64 nomultilib )
 
-+ *KERNEL* = 3.8.13-deadspace-14 ( RT_PREEMPT, loop-AES, GCC [K10] )
++ *KERNEL* = 3.8.13 ( RT_PREEMPT, loop-AES, GCC [K10] )
+
++ *FLAVOR* = deadspace-14 ( [ebuild](https://github.com/milomouse/ebuilds/sys-kernel/deadspace-sources) )
 
 + *BUILD* = #2 PREEMPT RT Sun Jul 28 16:21:50 EDT 2013 x86_64 GNU/Linux
 
@@ -22,7 +24,7 @@ Current Setup:
 
 + *MAIL READER* = Mutt
 
-+ *MUSIC PLAYER* = mifo ( https://github.com/milomouse/mifo )
++ *MUSIC PLAYER* = mifo ( [ebuild](https://github.com/milomouse/ebuilds/media-sound/mifo) , [code](https://github.com/milomouse/mifo) )
 
 + *VIDEO PLAYER* = MPlayer2
 

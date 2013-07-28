@@ -28,7 +28,7 @@ Current Setup:
 
 + *VIDEO PLAYER* = MPlayer2
 
-+ *WINDOW MANAGER* = bspwm
++ *WINDOW MANAGER* = bspwm ( [ebuild](https://github.com/milomouse/ebuilds/tree/master/x11-wm/bspwm) )
 
 + *TERMINAL EMULATOR* = URxvt
 
@@ -36,4 +36,4 @@ Current Setup:
 
 + *IMAGE VIEWER* = sxiv
 
-+ *WEB BROWSER* = Luakit
++ *WEB BROWSER* = Luakit ( [ebuild](https://github.com/milomouse/ebuilds/tree/master/www-client/luakit) )

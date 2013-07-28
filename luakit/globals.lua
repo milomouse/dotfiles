@@ -59,19 +59,18 @@ soup.accept_policy = cookie_policy.no_third_party
 -- it to avoid collisions with lua's string.format characters.
 -- See: http://www.lua.org/manual/5.1/manual.html#pdf-string.format
 search_engines = {
-  duckduckgo = "https://duckduckgo.com/?q=%s",
+  ddg        = "https://duckduckgo.com/?q=%s",
   google     = "https://google.com/search?q=%s",
   github     = "https://github.com/search?q=%s",
   imdb       = "http://www.imdb.com/find?s=all&q=%s",
   wikipedia  = "https://en.wikipedia.org/wiki/Special:Search?search=%s",
   postrock   = "http://www.postrockxchange.com/?s=%s",
   tiger      = "http://www.tigerdirect.com/applications/SearchTools/search.asp?keywords=%s",
-  luakit     = "http://luakit.org/search/index/luakit?q=%s",
   craigslist = "http://asheville.craigslist.org/search/?query=%s&catAbb=sss",
 }
 
--- Set google as fallback search engine
-search_engines.default = search_engines.duckduckgo
+-- Set DuckDuckGo as fallback search engine
+search_engines.default = search_engines.ddg
 -- Use this instead to disable auto-searching
 --search_engines.default = "%s"
 
@@ -84,12 +83,10 @@ domain_props = { --[[
         enable_private_browsing = false,
         user_stylesheet_uri     = "",
     },
-    --]]
     ["youtube.com"] = {
         enable_scripts = true,
         enable_plugins = true,
     },
-    --[[
     ["bbs.archlinux.org"] = {
         user_stylesheet_uri     = "file://" .. luakit.data_dir .. "/styles/dark.css",
         enable_private_browsing = true,

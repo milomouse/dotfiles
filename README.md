@@ -6,7 +6,7 @@ Current Setup:
 
 + *KERNEL* = 3.8.13 ( RT_PREEMPT, loop-AES, GCC [K10] )
 
-+ *FLAVOR* = deadspace-14 ( [ebuild](https://github.com/milomouse/ebuilds/tree/master/sys-kernel/deadspace-sources) )
++ *SOURCES* = deadspace-14 ( [ebuild](https://github.com/milomouse/ebuilds/tree/master/sys-kernel/deadspace-sources) )
 
 + *BUILD* = #2 PREEMPT RT Sun Jul 28 16:21:50 EDT 2013 x86_64 GNU/Linux
 

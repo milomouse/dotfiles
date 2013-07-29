@@ -24,7 +24,7 @@ Current Setup:
 
 + *MAIL READER* = Mutt
 
-+ *MUSIC PLAYER* = mifo ( [ebuild](https://github.com/milomouse/ebuilds/tree/master/media-sound/mifo) , [code](https://github.com/milomouse/mifo) )
++ *AUDIO PLAYER* = mifo ( [ebuild](https://github.com/milomouse/ebuilds/tree/master/media-sound/mifo) , [code](https://github.com/milomouse/mifo) )
 
 + *VIDEO PLAYER* = MPlayer2
 

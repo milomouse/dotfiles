@@ -1,4 +1,56 @@
 //!javascript
+//<autoquvi___SCRIPT
+extensions.load("autoquvi", {
+//<autoquvi___CONFIG
+  // The quvi command
+  quvi      : "quvi",
+
+  // External player command
+  player    : "mplayer -fs %u",
+
+  // Whether to automatically play videos when quvi find a playable
+  // video
+  autoPlay  : false,
+
+  // Whether to choose the quality before quvi starts
+  chooseQuality : true,
+
+  // A shortcut that spawns quvi for the current website
+  shortcut  : ",dv",
+
+  // A command that spawns quvi for the current website 
+  command  : "autoquvi"
+
+//>autoquvi___CONFIG
+});
+//>autoquvi___SCRIPT
+//<contenthandler___SCRIPT
+extensions.load("contenthandler", {
+//<contenthandler___CONFIG
+  // The handler can either be a string or a function, if it is a string
+  // %u will be replaced with the uri of the request, if the handler is a
+  // function the first parameter of the function will be the uri and the
+  // function must return the command to execute.
+
+  // Handle requests based on filename extension
+  extension : {
+    "torrent" : "transmission-remote -a '%u'",
+    //"pdf" : "zathura '%u'"
+  },
+
+  // Handle requests based on URI scheme
+  uriScheme : {
+    "magnet" : "transmission-remote -a '%u'",
+    "mailto" : "dwb 'https://www.fastmail.fm/action/compose/?mailto=%u'"
+  },
+
+  // Handle requests based on MIME type
+  mimeType : {
+    //"application/pdf" : "zathura '%u'"
+  }
+//>contenthandler___CONFIG
+});
+//>contenthandler___SCRIPT
 //<formfiller___SCRIPT
 extensions.load("formfiller", {
 //<formfiller___CONFIG
@@ -12,7 +64,7 @@ scFillForm : "eff",
 formData : data.configDir + "/forms",
 
 // whether to use a gpg-encrypted file
-useGPG : false,
+useGPG : true,
 
 // your GPG key ID (leave empty to use a symmetric cipher)
 GPGKeyID : "",
@@ -35,79 +87,39 @@ keepFormdata : false
 //>formfiller___CONFIG
 });
 //>formfiller___SCRIPT
-//<speeddial___SCRIPT
-extensions.load("speeddial", {
-//<speeddial___CONFIG
-    // Shortcut for adding a site
-    add : "sda",
-    // Shortcut for showing the speedial site
-    show : "sds", 
-    // Command for adding a site
-    cmdAdd : null,
-    // Shortcut for showing the speedial site
-    cmdShow : null,
-    // Number of vertical items, if set to null there will be no limit for
-    // number of items
-    nVert : 3, 
-    // Number of horizontal items
-    nHorz : 3,
-    // Limit of number of items, <= 0 means no limit 
-    limit : 0,
-    // Whether to update snapshot images every time a bookmarked site is visited
-    autoUpdate : false,
-    // Cachedir where the template file and snapshots are saved
-    cachedir : system.getEnv("HOME") + "/.local/share/dwb/speeddial",
-    // Width of a snapshot image
-    snapshotWidth : 640, 
-    // Height of a snapshot image
-    snapshotHeight : 480
-//>speeddial___CONFIG
-});
-//>speeddial___SCRIPT
-//<userscripts___SCRIPT
-extensions.load("userscripts", {
-//<userscripts___CONFIG
-  // paths to userscripts, this extension will also load all scripts in 
-  // $XDG_CONFIG_HOME/dwb/greasemonkey, it will also load all scripts in
-  // $XDG_CONFIG_HOME/dwb/scripts but this is deprecated and will be
-  // disabled in future versions.
-  scripts : []
-//>userscripts___CONFIG
-});
-//>userscripts___SCRIPT
 //<perdomainsettings___SCRIPT
 extensions.load("perdomainsettings", {
 //<perdomainsettings___CONFIG
-// Only webkit builtin settings can be set, for a list of settings see 
+// Only webkit builtin settings can be set, for a list of settings see
 // http://webkitgtk.org/reference/webkitgtk/unstable/WebKitWebSettings.html
 // All settings can also be used in camelcase, otherwise they must be quoted.
-// 
-// The special domain suffix .tld matches all top level domains, e.g. 
-// example.tld matches example.com, example.co.uk, example.it ... 
+//
+// The special domain suffix .tld matches all top level domains, e.g.
+// example.tld matches example.com, example.co.uk, example.it ...
 //
 // Settings based on uri will override host based settings and host based
 // settings will override domain based settings. Settings for domains/hosts/uris
 // with without tld suffix will override settings for
-// domains/hosts/uris with tld suffix respectively, e.g. 
-//      "example.com" : { enableScripts : true }, 
-//      "example.tld" : { enableScripts : false } 
-// will enable scripts on example.com but not on example.co.uk, example.it, ... 
+// domains/hosts/uris with tld suffix respectively, e.g.
+//      "example.com" : { enableScripts : true },
+//      "example.tld" : { enableScripts : false }
+// will enable scripts on example.com but not on example.co.uk, example.it, ...
 
 
 // Settings applied based on the second level domain
 domains : {
-//      "example.com" : { "auto-load-images" : false }, 
-//      "google.tld" : { enableScripts : false, autoLoadImages : false }, 
+//      "example.com" : { "auto-load-images" : false },
+//      "google.tld" : { enableScripts : false, autoLoadImages : false },
 },
 
 //Settings applied based on the hostname
 hosts : {
-//    "www.example.com" : { autoLoadImages : true } 
+//    "www.example.com" : { autoLoadImages : true }
 },
 
 // Settings applied based on the uri
 uris : {
-//  "http://www.example.com/foo/" : { autoLoadImages : true } }, 
+//  "http://www.example.com/foo/" : { autoLoadImages : true } },
 },
 
 //>perdomainsettings___CONFIG
@@ -130,11 +142,22 @@ extensions.load("requestpolicy", {
     unblockAll : "erA",
 
     // reload current site after blocking / unblocking a request
-    autoreload : false, 
+    autoreload : false,
 
     // notify about blocked requests
-    notify : false
+    notify : true
 
     //>requestpolicy___CONFIG
 });
 //>requestpolicy___SCRIPT
+//<userscripts___SCRIPT
+extensions.load("userscripts", {
+//<userscripts___CONFIG
+  // paths to userscripts, this extension will also load all scripts in 
+  // $XDG_CONFIG_HOME/dwb/greasemonkey, it will also load all scripts in
+  // $XDG_CONFIG_HOME/dwb/scripts but this is deprecated and will be
+  // disabled in future versions.
+  scripts : []
+//>userscripts___CONFIG
+});
+//>userscripts___SCRIPT

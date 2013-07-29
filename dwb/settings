@@ -1,6 +1,6 @@
 [default]
 javascript-can-access-clipboard=false
-complete-userscripts=false
+complete-userscripts=true
 file-sync-interval=120
 download-gradient-end=#887b8b
 status-allowed-color=#a7afd7
@@ -112,7 +112,7 @@ cursive-font-family=serif
 default-encoding=
 error-color=#00cfff
 searchengine-submit-pattern=
-hint-opacity=0.80
+hint-opacity=0.90
 font-entry=fixedzero
 proxy-url=127.0.0.1:3128
 font=fixedzero
@@ -124,7 +124,7 @@ do-not-track=true
 progress-bar-empty-color=#222222
 default-width=800
 single-instance=true
-auto-completion=false
+auto-completion=true
 minimum-font-size=5
 font-completion=
 enable-spatial-navigation=false

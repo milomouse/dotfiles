@@ -1,5 +1,5 @@
 [global]
-    font = "FixedZero 12"
+    font = "Fixed 8"
     alignment = left
 
     # The format of the message. Possible variables are:

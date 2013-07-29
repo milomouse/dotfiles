@@ -21,6 +21,7 @@ bspc rule -a gcolor2 --floating
 bspc rule -a sxiv --floating
 bspc rule -a xfontsel --floating
 bspc rule -a pavucontrol -d 0 --follow --floating
+bspc rule -a dwb -d 3
 bspc rule -a firefox -d 3
 bspc rule -a jumanji -d 3
 bspc rule -a luakit -d 3

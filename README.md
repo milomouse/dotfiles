@@ -20,7 +20,7 @@ Current Setup:
 
 + *MAIL SENDER* = Postfix
 
-+ *MAIL RECEIVER* = Postfix, OfflineIMAP
++ *MAIL RECEIVER* = Postfix , OfflineIMAP
 
 + *MAIL READER* = Mutt
 
@@ -36,4 +36,4 @@ Current Setup:
 
 + *IMAGE VIEWER* = sxiv
 
-+ *WEB BROWSER* = Luakit ( [ebuild](https://github.com/milomouse/ebuilds/tree/master/www-client/luakit) )
++ *WEB BROWSER* = dwb

@@ -1,9 +1,9 @@
 #! /bin/zsh
-################################################
-## locate: ${XDG_CONFIG_HOME}/bspwm/autostart ##
-## author: milomouse (github.com/milomouse)   ##
-## detail: startup configuration for `bspwm'  ##
-################################################
+###############################################
+## locate: ${XDG_CONFIG_HOME}/bspwm/bspwmrc  ##
+## author: milomouse (github.com/milomouse)  ##
+## detail: startup configuration for `bspwm' ##
+###############################################
 
 ########################
 ## Initiate Desktops: ##

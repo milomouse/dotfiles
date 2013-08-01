@@ -226,7 +226,7 @@ EOG
     }
     _Gp(){ _gp=(${${$(command ls -d /var/db/pkg/*/*)#/var/db/pkg/}%/}) ; print -C1 ${_gp} ; print "\nTotal Packages: ${#_gp}" ; unset _gp }
     _Gd(){ sudo dispatch-conf }
-    _Ge(){ sudo vim -p /etc/portage/{package.use,package.accept_keywords,package.unmask,package.license,make.conf} }
+    _Ge(){ sudo vim -p /etc/portage/{package{.use,.accept_keywords,.unmask,.mask,.license},make.conf} }
     case $1 {
       sync) _Gs ;;
       up) _Gu ;;
@@ -234,7 +234,13 @@ EOG
       clean) _Gc ;;
       fix) _Gf ;;
       diff) _Gd ;;
-      full) _Gs ; _Gu ; _Gc ; _Gf ;  _Gd ;;
+      full)
+        _Gs
+        [[ $? == 0 ]] && _Gu
+        [[ $? == 0 ]] && _Gc
+        [[ $? == 0 ]] && _Gf
+        [[ $? == 0 ]] && _Gd
+      ;;
       edit) _Ge ;;
       pkg) _Gp ;;
       *) print - "invalid command: type  \`gent help'  for proper usage." ;;

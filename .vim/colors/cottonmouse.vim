@@ -2,7 +2,7 @@
 " Author:       milomouse <vincent[at]fea.st>
 " Maintainer:   milomouse <vincent[at]fea.st>
 " Created:      2010-xx-xx
-" Last Change:  2013-05-06
+" Last Change:  2013-08-01
 " Colorful yet muted
 " Designed for 256-color console
 
@@ -59,7 +59,7 @@ if ( &t_Co >= 255 || $TERM =~? "256color" )
   hi SpecialChar    term=none cterm=none ctermfg=108  ctermbg=none
   hi SpecialComment term=none cterm=none ctermfg=108  ctermbg=none
   hi Special        term=none cterm=none ctermfg=140  ctermbg=none
-  hi SpecialKey     term=none cterm=none ctermfg=151  ctermbg=none
+  hi SpecialKey     term=none cterm=none ctermfg=236  ctermbg=none
   hi Statement      term=none cterm=none ctermfg=139  ctermbg=none
   hi StatusLine     term=none cterm=none ctermfg=234  ctermbg=240
   hi StatusLineNC   term=none cterm=none ctermfg=239  ctermbg=235

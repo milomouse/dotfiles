@@ -15,14 +15,15 @@ function zshaddhistory {
 
 # safely recompile and reload shell settings:
 function zload {
-  sudo . /etc/profile 2>/dev/null
-  . /etc/profile 2>/dev/null
+  sudo env-update &>/dev/null
+  sudo source /etc/profile &>/dev/null
+  source /etc/profile &>/dev/null
   autoload -U zrecompile
   [[ -f ~/.zshrc ]] && zrecompile -p ~/.zshrc
   [[ -f ~/.zcompdump ]] && zrecompile -p ~/.zcompdump
   [[ -f ~/.zshrc.zwc.old ]] && rm -f ~/.zshrc.zwc.old
   [[ -f ~/.zcompdump.zwc.old ]] && rm -f ~/.zcompdump.zwc.old
-  . ~/.zshrc
+  source ~/.zshrc
 }
 
 # jump to previous directory by integer or reg-exp, also list dirs,
@@ -212,6 +213,7 @@ function gent {
 #  pkg    =  "display installed packages; tallied"  #
 #                                                   #
 #  full   =  "completely update and tend packages"  #
+#  most   =  "^^^^^^^^^^ without syncing db first"  #
 #                                                   #
 #####################################################
 EOG
@@ -234,12 +236,12 @@ EOG
       clean) _Gc ;;
       fix) _Gf ;;
       diff) _Gd ;;
-      full)
-        _Gs
-        [[ $? == 0 ]] && _Gu
-        [[ $? == 0 ]] && _Gc
-        [[ $? == 0 ]] && _Gf
-        [[ $? == 0 ]] && _Gd
+      full|most)
+        [[ $1 == full ]] && _Gs
+        _Gu
+        _Gc
+        _Gf
+        _Gd
       ;;
       edit) _Ge ;;
       pkg) _Gp ;;

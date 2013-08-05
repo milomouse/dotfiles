@@ -37,3 +37,6 @@ Current Setup:
 + *IMAGE VIEWER* = sxiv
 
 + *WEB BROWSER* = dwb
+
++ *PROXY* = Squid ( transparent, anonymous, content-blocking )
+

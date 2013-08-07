@@ -45,6 +45,10 @@ super + {Tab,slash}
 super + {_,shift + }{h,j,k,l}
     bspc window {--focus,--swap} {left,down,up,right}
 
+#+ transplant window
+super + t
+    bspc window --to-window last.manul
+
 #+ cycle all windows backward/forward
 super + {_,shift +} space
     bspc window --focus {next,prev}

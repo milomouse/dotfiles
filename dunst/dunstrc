@@ -60,12 +60,12 @@
     timeout = 5
 
 [urgency_normal]
-    background = "#6ed0ff"
-    foreground = "#222222"
+    background = "#161616"
+    foreground = "#cccccc"
     timeout = 10
 
 [urgency_critical]
-    background = "#5effe5"
+    background = "#fb579e"
     foreground = "#444444"
     timeout = 0
 

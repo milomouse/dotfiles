@@ -5,25 +5,26 @@
 ## detail: dzen2 statusbar for `bspwm'       ##
 ###############################################
 ## NOTE 1: spawned and killed from "xinitrc" ##
-## NOTE 2: uses Xdefaults for dzen2 colors   ##
+## NOTE 2: uses Xresources for dzen2 colors  ##
 ###############################################
 
 
 ##+ OUTPUT VARIABLES:
-i_xdefaults="${XDG_CONFIG_HOME:-/howl/conf}/xorg/Xdefaults"
+i_xresources="${XDG_CONFIG_HOME:-/howl/conf}/xorg/Xresources"
 o_dzen=$(whence -p dzen2)
 o_name="bspwm"
 o_height='15'
-o_width='1590'
-o_x='5'
+o_width='1592'
+o_x='4'
 o_y='2'
 o_font='-misc-fixedzero-medium-r-semicondensed-*-12-110-75-75-c-60-iso10646-1'
 #o_font='-misc-fixed-medium-r-semicondensed-*-12-110-75-75-c-60-iso10646-1'
 c_XX='^fg()'
-if [[ -s ${i_xdefaults} ]]; then
-  <${i_xdefaults} | grep "^*" | while read c ; do
+if [[ -s ${i_xresources} ]]; then
+  <${i_xresources} | grep "^*" | while read c ; do
   case "${${(s. .)c:l}[1]}" {
-    '*background:') o_bg=${${(s. .)c}[-1]} ; c_bg=^fg(${${(s. .)c}[-1]}) ;;
+#    '*background:') o_bg=${${(s. .)c}[-1]} ; c_bg=^fg(${${(s. .)c}[-1]}) ;;
+    '*background:') o_bg='#222222' ; c_bg=^fg(${o_bg}) ;;
     '*foreground:') o_fg=${${(s. .)c}[-1]} ; c_fg=^fg(${${(s. .)c}[-1]}) ;;
     '*color0:') c_00=^fg(${${(s. .)c}[-1]}) ;;  ## black
     '*color8:') c_08=^fg(${${(s. .)c}[-1]}) ;;  ## black,bold
@@ -61,7 +62,7 @@ ${c_07}:name ${c_XX}\"${c_09}${m_N:-%B}${c_XX}\" ${c_07}:type ${c_XX}\"${c_fg}%e
 }
 function i_ac_load {
   BAT=${$(acpi -b)[-1]}
-  BAT=${c_09}${${${${BAT// /}/:/ }/\%/${c_01}\%}%:*}
+  BAT=${c_01}${${${${BAT// /}/:/ }/\%/${c_09}\%}%:*}
   print "${c_XX}\(${c_04}= ${c_09}"${${${${${${${${(s. .)$(</proc/loadavg)}[1]/0./${c_08}0.}/1./${c_07}1.}/2./${c_05}2.}/3./${c_04}3.}/4./${c_03}4.}/5./${c_11}5.}//./${c_12}.${c_XX}}"\
  ${c_07}\(${c_05}rtl ${c_fg}\(${c_04}/ ${BAT}${c_fg}\)${c_07}\)${c_XX}\)"
 }
@@ -71,7 +72,7 @@ function i_mixer {
   print "${c_07}\(${c_04}setf ${c_05}*pulseaudio* ${c_06}\'${c_fg}\(${c_07}${VOLUME}${c_fg}\) ${c_07}${${MUTE/no/:NIL}/yes/:T}${c_07})${c_XX}"
 }
 function i_date {
-  print "${c_XX}\(${c_05}cons ${c_XX}\"${c_07}$(date "+%Y${c_08}.${c_XX}%m${c_08}.${c_XX}%d${c_02}/${c_04}%a${c_XX}\" \"${c_12}%H%M"${c_XX}\")\)"
+  print "${c_XX}\(${c_05}cons ${c_XX}\"${c_07}$(date "+%Y${c_08}.${c_XX}%m${c_08}.${c_XX}%d${c_02}/${c_12}%a${c_XX}\" \"${c_04}%H%M"${c_XX}\")\)"
 }
 function o_right { print "$(i_ac_load) $(i_newmail) $(i_date)" }
 

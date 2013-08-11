@@ -161,32 +161,3 @@ extensions.load("userscripts", {
 //>userscripts___CONFIG
 });
 //>userscripts___SCRIPT
-//<speeddial___SCRIPT
-extensions.load("speeddial", {
-//<speeddial___CONFIG
-    // Shortcut for adding a site
-    add : "sda",
-    // Shortcut for showing the speedial site
-    show : "sds", 
-    // Command for adding a site
-    cmdAdd : null,
-    // Shortcut for showing the speedial site
-    cmdShow : null,
-    // Number of vertical items, if set to null there will be no limit for
-    // number of items
-    nVert : 3, 
-    // Number of horizontal items
-    nHorz : 3,
-    // Limit of number of items, <= 0 means no limit 
-    limit : 0,
-    // Whether to update snapshot images every time a bookmarked site is visited
-    autoUpdate : false,
-    // Cachedir where the template file and snapshots are saved
-    cachedir : system.getEnv("HOME") + "/.local/share/dwb/speeddial",
-    // Width of a snapshot image
-    snapshotWidth : 640, 
-    // Height of a snapshot image
-    snapshotHeight : 480
-//>speeddial___CONFIG
-});
-//>speeddial___SCRIPT

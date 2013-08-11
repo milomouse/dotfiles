@@ -23,8 +23,6 @@ bspc rule -a xfontsel --floating
 bspc rule -a lxappearance --floating
 bspc rule -a pavucontrol -d 0 --follow --floating
 bspc rule -a dwb -d 3
-bspc rule -a firefox -d 3
-bspc rule -a jumanji -d 3
 bspc rule -a luakit -d 3
 bspc rule -a gimp -d 8 --floating
 
@@ -37,15 +35,15 @@ bspc config history_aware_focus true
 bspc config split_ratio         0.50
 ##+ decoration
 bspc config border_width        4
-bspc config window_gap          5
+bspc config window_gap          4
 bspc config borderless_monocle  true
 bspc config gapless_monocle     false
 ##+ colors
-bspc config focused_border_color         "#949494"
-bspc config normal_border_color          "#191919"
+bspc config focused_border_color         "#242424"
+bspc config normal_border_color          "#141414"
 bspc config active_border_color          "#5C5955"
 bspc config focused_locked_border_color  "#00C7D8"
 bspc config normal_locked_border_color   "#708D8F"
 bspc config active_locked_border_color   "#808C8D"
 bspc config urgent_border_color          "#93F388"
-bspc config presel_border_color          "#222222"
+bspc config presel_border_color          "#101010"

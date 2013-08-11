@@ -56,23 +56,23 @@ urxvt*cursorColor: #a488d9
 !!! 0:black 1:red     2:green 3:yellow
 !!! 4:blue  5:magenta 6:cyan  7:white
 
-!! astromouse (colorful | mellow)
+!! astromouse
 *background: #101010
 *foreground: #b2b2b2
 *color0:  #222222
 *color8:  #3D3A3A
-*color1:  #E492D1
-*color9:  #DA61B4
-*color2:  #87AF87
-*color10: #9ACC79
-*color3:  #D0D26B
-*color11: #C8BC45
-*color4:  #87AFD7
-*color12: #0093B5
-*color5:  #A07CD3
-*color13: #706594
-*color6:  #6CCEC0
-*color14: #5AECD7
+*color1:  #CC6290
+*color9:  #EC5396
+*color2:  #5D8659
+*color10: #82B57E
+*color3:  #B0A65F
+*color11: #D4C141
+*color4:  #68AFF7
+*color12: #138BCF
+*color5:  #AD73F9
+*color13: #6B3BAA
+*color6:  #6DB4B2
+*color14: #25E2DD
 *color7:  #8D8D8D
 *color15: #DAD3D3
 *colorBD: #87AFD7

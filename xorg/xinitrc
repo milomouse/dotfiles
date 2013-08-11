@@ -6,20 +6,17 @@
 ##############################################
 
 ##+ RESOURCES:
-/usr/bin/xrdb -load ${XDG_CONFIG_HOME:-$HOME}/xorg/Xdefaults
+/usr/bin/xrdb -load ${XDG_CONFIG_HOME:-$HOME}/xorg/Xresources
 #/usr/bin/xmodmap ${XDG_CONFIG_HOME:-$HOME}/keymaps/dvausler.xmodmap
 /usr/bin/xmodmap ${XDG_CONFIG_HOME:-$HOME}/keymaps/overlay-mods.xmodmap
 
 ##+ EXTRAS:
 /usr/bin/xsetroot -cursor_name left_ptr -solid '#151515'
-/usr/bin/display -window root -resize 1600x900! ${XDG_PICTURES_DIR:-$HOME/../foto}/wall/astrolithe.png
+#/usr/bin/display -window root -resize 1600x900! ${XDG_PICTURES_DIR:-$HOME/../foto}/wall/astrolithe.png
+/usr/bin/display -window root ${XDG_PICTURES_DIR:-$HOME/../foto}/asphault-0.png
 /usr/local/bin/zaprat --disable
 
 ##+ WINDOW MANAGER:
-## \ (hybrid manual tiling):
-#exec /howl/conf/herbstluftwm/dzen.zsh &>/dev/null &
-#exec /usr/bin/herbstluftwm
-
 ## \ (hybrid dynamic tiling):
 export BSPWM_PANEL_FIFO="/tmp/user-keep/${USER}/bspwm-fifo"
 /usr/bin/sxhkd -c ${XDG_CONFIG_HOME:-$HOME}/bspwm/sxhkdrc &

@@ -7,8 +7,6 @@
 ## global environment exports:
 ## (Gentoo does some of this!)
 #export http_proxy=http://127.0.0.1:3128
-export BSPWM_SOCKET="/tmp/user-keep/h/bspwm-socket"
-export BSPWM_PANEL_FIFO="/tmp/user-keep/h/bspwm-fifo"
 export H="/howl"
 export XDG_CACHE_HOME="${HOME:-/howl/conf}/cache"
 export XDG_CONFIG_HOME="${HOME:-/howl/conf}"
@@ -55,6 +53,12 @@ export LESS_TERMCAP_se=$'\E[0m'
 export LESS_TERMCAP_so=$'\E[00;47;30m'
 export LESS_TERMCAP_us=$'\E[00;34m'
 export LESS_TERMCAP_ue=$'\E[0m'
+
+## BSPWM:
+export BSPWM_SOCKET="${XDG_TEMPLATES_DIR}/bspwm-socket"
+export BSPWM_PANEL_FIFO="${XDG_TEMPLATES_DIR}/bspwm-fifo"
+export BSPWM_LOG_TREE="${XDG_TEMPLATES_DIR}/bspwm-tree"
+export BSPWM_LOG_HIST="${XDG_TEMPLATES_DIR}/bspwm-history"
 
 ## GTK3 Scrolling Hack:
 export GDK_CORE_DEVICE_EVENTS=1

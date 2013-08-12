@@ -17,8 +17,6 @@
 /usr/local/bin/zaprat --disable
 
 ##+ WINDOW MANAGER:
-## \ (hybrid dynamic tiling):
-export BSPWM_PANEL_FIFO="/tmp/user-keep/${USER}/bspwm-fifo"
 /usr/bin/sxhkd -c ${XDG_CONFIG_HOME:-$HOME}/bspwm/sxhkdrc &
 exec /howl/conf/bspwm/dzen.zsh &>/dev/null &
 [[ -p ${BSPWM_PANEL_FIFO} ]] && rm ${BSPWM_PANEL_FIFO}

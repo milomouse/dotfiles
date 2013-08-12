@@ -5,8 +5,11 @@
 ########################
 
 #+ quit bspwm
-super + shift + q
-    bspc quit
+super + {control,shift} + q
+    {bspc quit 1,\
+     bspc query --tree > "$BSPWM_TREE"; \
+        bspc query --history > "$BSPWM_HISTORY"; \
+        bspc quit}
 
 #+ close focused window
 super + Delete

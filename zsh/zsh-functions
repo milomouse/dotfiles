@@ -224,9 +224,15 @@ EOG
     _Gu(){ sudo emerge --update --deep --with-bdeps=y --ask -v @world && _Gn }
     _Gs(){
       sudo emerge --sync
-      [[ $(emerge -1p --quiet=y portage|grep -c "\[ebuild   R   \] ${${$(print - /var/db/pkg/sys-apps/portage-[0-9].*)#/*/*/*/}%/}") == 0 ]] && sudo emerge -1v portage
+      [[ "$(print ${$(emerge -1p --quiet=y portage)[-1]#*/portage-})" != "${${(s./.)$(print /var/db/pkg/sys-apps/portage-[0-9].*)#*portage-}# }" ]] && sudo emerge -1v portage
     }
-    _Gp(){ _gp=(${${$(command ls -d /var/db/pkg/*/*)#/var/db/pkg/}%/}) ; print -C1 ${_gp} ; print "\nTotal Packages: ${#_gp}" ; unset _gp }
+    _Gp(){
+      _p=(${${$(command ls -d /var/db/pkg/*/*)#/var/db/pkg/}%/})
+      [[ -z $1 ]] && _s="\n"
+      [[ $1:l == list || -z $1 ]] && print -C1 ${_p}
+      [[ $1:l == total || -z $1 ]] && print "${_s}Total Packages: ${#_p}"
+      unset _p _s
+    }
     _Gd(){ sudo dispatch-conf }
     _Ge(){ sudo vim -p /etc/portage/{package{.use,.accept_keywords,.unmask,.mask,.license},make.conf} }
     case $1 {
@@ -244,7 +250,7 @@ EOG
         _Gd
       ;;
       edit) _Ge ;;
-      pkg) _Gp ;;
+      pkg) _Gp $2 ;;
       *) print - "invalid command: type  \`gent help'  for proper usage." ;;
     }
     unfunction _Gc _Gf _Gu _Gs _Gp _Gd _Ge

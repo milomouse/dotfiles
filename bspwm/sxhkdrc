@@ -152,7 +152,7 @@ super + z
 
 #+ mplayer daemon repeat (on|off)
 super + {backslash,shift + backslash}
-    mifo {--repeat on;--repeat off, mifo --repeat on}
+    mifo {--repeat off ; mifo --repeat on, --repeat off}
 
 #+ mplayer daemon (prev|next)
 super + bracket{left,right}

@@ -5,7 +5,7 @@
 ########################
 
 #+ quit bspwm
-super + {control,shift} + q
+super + {shift,_} + q
     {bspc quit 1,\
      bspc query --tree > "$BSPWM_TREE"; \
         bspc query --history > "$BSPWM_HISTORY"; \

@@ -5,20 +5,21 @@
 ## detail: X.Org init configuration file    ##
 ##############################################
 
-##+ RESOURCES:
+## RESOURCES:
 /usr/bin/xrdb -load ${XDG_CONFIG_HOME:-$HOME}/xorg/Xresources
+
+## KEYBOARD:
 #/usr/bin/xmodmap ${XDG_CONFIG_HOME:-$HOME}/keymaps/dvausler.xmodmap
 /usr/bin/xmodmap ${XDG_CONFIG_HOME:-$HOME}/keymaps/overlay-mods.xmodmap
 
-##+ EXTRAS:
+## MOUSE:
 /usr/bin/xsetroot -cursor_name left_ptr -solid '#151515'
-#/usr/bin/display -window root -resize 1600x900! ${XDG_PICTURES_DIR:-$HOME/../foto}/wall/astrolithe.png
-/usr/bin/display -window root ${XDG_PICTURES_DIR:-$HOME/../foto}/asphault-0.png
 /usr/local/bin/zaprat --disable
 
-##+ WINDOW MANAGER:
+## BACKGROUND:
+/usr/bin/display -window root ${XDG_PICTURES_DIR:-$HOME/../foto}/asphault-0.png
+
+## WINDOW MANAGER:
 /usr/bin/sxhkd -c ${XDG_CONFIG_HOME:-$HOME}/bspwm/sxhkdrc &
 exec /howl/conf/bspwm/dzen.zsh &>/dev/null &
-[[ -p ${BSPWM_PANEL_FIFO} ]] && rm ${BSPWM_PANEL_FIFO}
-mkfifo ${BSPWM_PANEL_FIFO}
-exec /usr/bin/bspwm -s ${BSPWM_PANEL_FIFO}
+exec /howl/code/sh/wm

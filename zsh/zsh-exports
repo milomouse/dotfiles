@@ -57,8 +57,8 @@ export LESS_TERMCAP_ue=$'\E[0m'
 ## BSPWM:
 export BSPWM_SOCKET="${XDG_TEMPLATES_DIR}/bspwm-socket"
 export BSPWM_PANEL_FIFO="${XDG_TEMPLATES_DIR}/bspwm-fifo"
-export BSPWM_LOG_TREE="${XDG_TEMPLATES_DIR}/bspwm-tree"
-export BSPWM_LOG_HIST="${XDG_TEMPLATES_DIR}/bspwm-history"
+export BSPWM_TREE="${XDG_TEMPLATES_DIR}/bspwm-tree"
+export BSPWM_HISTORY="${XDG_TEMPLATES_DIR}/bspwm-history"
 
 ## GTK3 Scrolling Hack:
 export GDK_CORE_DEVICE_EVENTS=1

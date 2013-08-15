@@ -11,7 +11,7 @@ done
 
 # prompt line:
 [[ ${TERM} =~ screen ]] && precmd() { print -Pn "\e]2;%2d\a" } #|| RPROMPT='%F{white}%~%f'
-PS1='%(1j.%B%F{black}%j .)%(0?..%B%F{red}%? )%F{cyan}%#%f '
+PS1='%(1j.%B%F{black}%j .)%(0?..%B%F{red}%? )%F{green}%#%f '
 PS2='  '
 PS3='%B%F{white}?# %b%f%F{red}%# %f'
 PS4='%B%F{white}%_ %b%f%F{magenta}%# %f%B%F{white}+%N:%i %b%f%F{magenta}%# %f'

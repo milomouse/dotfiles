@@ -141,13 +141,9 @@ super + shift + g
 super + {_,shift +} d
     mifo {--toggle,--stop}
 
-#+ mplayer daemon toggle
-XF86AudioPlay
-    mifo --toggle
-
-#+ mplayer daemon stop
-XF86AudioStop
-    mifo --stop
+#+ mplayer daemon toggle, stop
+XF86Audio{Play,Stop}
+    mifo {--toggle,--stop}
 
 #+ mplayer daemon (random)
 super + z
@@ -161,13 +157,9 @@ super + {backslash,shift + backslash}
 super + bracket{left,right}
     mifo {--prev,--next}
 
-#+ mplayer daemon next
-XF86AudioNext
-    mifo --next
-
-#+ mplayer daemon prev
-XF86AudioPrev
-    mifo --prev
+#+ mplayer daemon next, prev
+XF86Audio{Next,Prev}
+    mifo {--next,--prev}
 
 #+ pulseaudio mute (toggle|on|off)
 super + {u,shift + u,ctrl + u}
@@ -202,7 +194,7 @@ super + y
 ########################
 
 #+ focus window
-:button1
+~button1
     bspc pointer --grab focus
 
 #+ move/resize window

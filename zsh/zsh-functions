@@ -10,7 +10,7 @@ function zshaddhistory {
   line=${1%%$'\n'} ; cmd=${line%% *}
   [[ ${#line} -ge 5
       && ${cmd} != (history|fc|[szx]edit|[zx]load|srm|wika)
-  ]] && (( ! $argv[(I)*unrl*|*spar*|*losetup*|*aespipe*|sudo rm *|mpq q *|youtube-dl*] ))
+  ]] && (( ! $argv[(I)*unrl*|*spar*|*losetup*|*aespipe*|sudo rm *|mpq q *] ))
 }
 
 # safely recompile and reload shell settings:

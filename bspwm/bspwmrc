@@ -12,7 +12,7 @@ INIT_DESK=1
 MAKE_DESK=( {2..9} 0 )
 bspc desktop Desktop01 -n $INIT_DESK
 bspc monitor -a $MAKE_DESK
-bspc monitor -p 14 0 0 0
+bspc config top_padding 14
 
 ########################
 ## Restore Session:   ##

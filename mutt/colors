@@ -50,16 +50,16 @@ uncolor index "~D"
   color body       brightblack   default "(^| )\\*[^ ]+\\*( |$)"
 
 # quote blocks
-  color quoted     green         default
-  color quoted1    yellow        default
-  color quoted2    green         default
-  color quoted3    yellow        default
-  color quoted4    green         default
-  color quoted5    yellow        default
-  color quoted6    green         default
-  color quoted7    yellow        default
-  color quoted8    green         default
-  color quoted9    yellow        default
+  color quoted     magenta       default
+  color quoted1    blue          default
+  color quoted2    magenta       default
+  color quoted3    blue          default
+  color quoted4    magenta       default
+  color quoted5    blue          default
+  color quoted6    magenta       default
+  color quoted7    blue          default
+  color quoted8    magenta       default
+  color quoted9    blue          default
 
 # gpg (from thayer)
   color body       green         default "^gpg: Good signature from"

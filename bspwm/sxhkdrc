@@ -100,8 +100,8 @@ super + ctrl + shift + {h,j,k,l}
     bspc window --edge {right,up,down,left} pull
 
 #+ view desktop or send focused window to desktop
-super + {_,shift + ,}{1-9,0}
-    bspc {desktop --focus,window --to-desktop} {1-9,0}
+super + {_,shift + }{1-9,0}
+    bspc {desktop --focus,window --to-desktop} ^{1-9,10}
 
 
 ########################
@@ -179,7 +179,7 @@ XF86AudioLowerVolume
 
 #+ if found, focus on existing dwb instance, else exec dwb
 super + w
-    /bin/sh -c 'if [[ -n $(pidof dwb) ]] ; then if [[ "${$(bspc query -T | grep "T @")[1]}" != 3 ]] ; then bspc desktop --focus 3 ; fi ; else exec dwb; fi'
+    /bin/sh -c 'if [[ -n $(pidof dwb) ]] ; then if [[ "${$(bspc query -T | grep "T @")[1]}" != 3 ]] ; then bspc desktop --focus ^3 ; fi ; else exec dwb; fi'
 
 #+ simple clipboard in/out synchronizer
 super + y

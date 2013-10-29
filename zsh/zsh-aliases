@@ -37,6 +37,7 @@ alias sxiv="sxiv -b"
 alias xskat="xskat -opt ${XDG_CONFIG_DIR:-${HOME}}/xorg/xskat.opt -list ${XDG_CONFIG_DIR:-${HOME}}/xorg/xskat.lst"
 alias offlineimap="offlineimap -c ${XDG_CONFIG_DIR:-${HOME}}/.offlineimap/offlineimaprc"
 alias tintin="tt++"
+alias remote="transmission-remote-cli"
 
 # system/media shortcuts:
 alias psu="ps --deselect -U root,postfix -C tmux,urxvt -j f"

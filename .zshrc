@@ -5,6 +5,7 @@
 ###############################################
 
 # source external configuration files:
+. /etc/profile &>/dev/null
 for i in ${HOME}/zsh/zsh-{options,exports,aliases,functions}; do
   . $i
 done

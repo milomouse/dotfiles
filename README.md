@@ -8,7 +8,7 @@ Current Setup:
 
 + *SOURCES* = deadspace ( [ebuild](https://github.com/milomouse/ebuilds/tree/master/sys-kernel/deadspace-sources) )
 
-+ *BUILD* = #1 SMP PREEMPT RT Sat Oct 5 22:25:02 EDT 2013 x86_64 AMD
++ *BUILD* = #1 SMP PREEMPT RT Mon Oct 28 21:26:23 EDT 2013 x86_64 AMD
 
 + *INIT* = OpenRC
 

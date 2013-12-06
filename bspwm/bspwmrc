@@ -35,6 +35,7 @@ bspc rule -a lxappearance --floating --center
 bspc rule -a pavucontrol -d ^10 --follow --floating --center
 bspc rule -a dwb -d ^3
 bspc rule -a luakit -d ^3
+bspc rule -a Firefox -d ^4
 bspc rule -a gimp -d ^8 --floating
 
 ########################

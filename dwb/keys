@@ -174,3 +174,4 @@ repeat= ..
 visual_mode= v
 reload_scripts=,rj
 dwb_custom_keys_submit=save custom
+hints_selector= 

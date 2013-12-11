@@ -160,3 +160,4 @@ block-insecure-content=false
 hint-offset-left=0
 tab-orientation=horizontal
 tab-width=100
+adblocker-element-hider=true

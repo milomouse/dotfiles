@@ -93,7 +93,7 @@ urxvt*cursorColor: #a488d9
 *colorIT: #5AECD7
 
 !! various X stuff
-Xcursor.theme: whiteglass
+Xcursor.theme: Vanilla-DMZ
 Xcursor.size: 10
 XFontSel*sampleText.background:       TEXTBG
 XFontSel*menu*showUnselectable:       false

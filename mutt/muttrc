@@ -181,6 +181,6 @@ set status_format = "───+ %f %m%?n? [+%n]?%?d? [-%d]?%?t? [*%t]? +%?p?─�
 set query_format  = "%3c %t %-40.40a %-25.25n  %># %?e?%e?"
 set alias_format  = "%4n %t %-20a %r"
 set date_format   = "%y-%m-%d %I:%M:%S %Z"
-set index_format  = "%3C| %-4c > %-19.19F  %s%*  %?X?[%X]? %Z|%2N| %d"
+set index_format  = "%3C| %-4c > %-19.19F  %s%*  %?X?[%X]? %Z| %d"
 set quote_regexp  = "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
 set reply_regexp  = "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"

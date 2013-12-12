@@ -143,8 +143,10 @@ hc set smart_frame_surroundings 0
 hc unrule -F
 hc rule focus=on
 #+ move to tag:
-hc rule class=luakit tag=5
-hc rule class=Gimp tag=6 fullscreen=on
+hc rule class=dwb tag=3
+hc rule class=luakit tag=3
+hc rule class=Firefox tag=5
+hc rule class=Gimp tag=7 fullscreen=on
 hc rule title="Open Image" pseudotile=on
 hc rule title="Save As" pseudotile=on
 hc rule title="Save file" pseudotile=on

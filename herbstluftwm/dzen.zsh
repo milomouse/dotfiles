@@ -5,12 +5,12 @@
 ## detail: dzen2 statusbar for `herbstluftwm'        ##
 #######################################################
 ## NOTE 1: spawned and killed from "xinitrc"         ##
-## NOTE 2: uses Xdefaults for dzen2 colors           ##
+## NOTE 2: uses Xresources for dzen2 colors           ##
 #######################################################
 
 
 ##+ OUTPUT VARIABLES:
-i_xdefaults="${XDG_CONFIG_HOME:-/howl/conf}/xorg/Xdefaults"
+i_xresources="${XDG_CONFIG_HOME:-/howl/conf}/xorg/Xresources"
 o_dzen=$(whence -p dzen2)
 o_name="hlwm"
 o_height='15'
@@ -20,10 +20,11 @@ o_y='2'
 o_font='-misc-fixedzero-medium-r-semicondensed-*-12-110-75-75-c-60-iso10646-1'
 #o_font='-misc-fixed-medium-r-semicondensed-*-12-110-75-75-c-60-iso10646-1'
 c_XX='^fg()'
-if [[ -s ${i_xdefaults} ]]; then
-  <${i_xdefaults} | grep "^*" | while read c ; do
+if [[ -s ${i_xresources} ]]; then
+  <${i_xresources} | grep "^*" | while read c ; do
   case "${${(s. .)c:l}[1]}" {
-    '*background:') o_bg=${${(s. .)c}[-1]} ; c_bg=^fg(${${(s. .)c}[-1]}) ;;
+    #'*background:') o_bg=${${(s. .)c}[-1]} ; c_bg=^fg(${${(s. .)c}[-1]}) ;;
+    '*background:') o_bg='#222222' ; c_bg=^fg(${o_bg}) ;;
     '*foreground:') o_fg=${${(s. .)c}[-1]} ; c_fg=^fg(${${(s. .)c}[-1]}) ;;
     '*color0:') c_00=^fg(${${(s. .)c}[-1]}) ;;  ## black
     '*color8:') c_08=^fg(${${(s. .)c}[-1]}) ;;  ## black,bold
@@ -60,9 +61,9 @@ function i_mifo {
 ${c_07}:name ${c_XX}\"${c_09}${m_N:-%B}${c_XX}\" ${c_07}:type ${c_XX}\"${c_fg}%e${c_XX}\"${c_fg}\)${c_15}\)${c_04} / ${c_02}%c ${c_10}%C${c_XX}\))"
 }
 function i_ac_load {
-  BAT=${$(acpi -b)[-1]}
-  BAT=${c_09}${${${${BAT// /}/:/ }/\%/${c_01}\%}%:*}
-  print "${c_XX}\(${c_04}= "${${${${${${${${(s. .)$(</proc/loadavg)}[1]/0./${c_08}0.}/1./${c_07}1.}/2./${c_05}2.}/3./${c_04}3.}/4./${c_03}4.}/5./${c_11}5.}//./${c_12}.${c_XX}}"\
+  BAT=${(M)$(acpi -b)#*%}
+  BAT=${c_01}${${${${BAT// /}/:/ }/\%/${c_09}\%}%:*}
+  print "${c_XX}\(${c_04}= ${c_09}"${${${${${${${${(s. .)$(</proc/loadavg)}[1]/0./${c_08}0.}/1./${c_07}1.}/2./${c_05}2.}/3./${c_04}3.}/4./${c_03}4.}/5./${c_11}5.}//./${c_12}.${c_XX}}"\
  ${c_07}\(${c_05}rtl ${c_fg}\(${c_04}/ ${BAT}${c_fg}\)${c_07}\)${c_XX}\)"
 }
 function i_mixer {

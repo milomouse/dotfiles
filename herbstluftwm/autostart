@@ -56,9 +56,9 @@ hc keybind $Mod-Shift-comma use_index -1 --skip-visible
 #+ layouts
 hc keybind $Mod-z remove
 hc keybind $Mod-minus split left 0.5
+hc keybind $Mod-Shift-minus split bottom 0.5
 hc keybind $Mod-equal split right 0.5
-hc keybind $Mod-Shift-minus split top 0.5
-hc keybind $Mod-Shift-equal split bottom 0.5
+hc keybind $Mod-Shift-equal split top 0.5
 hc keybind $Mod-a set_layout max
 hc keybind $Mod-g cycle_layout 1 max vertical horizontal grid
 hc keybind $Mod-Shift-g cycle_layout -1 max vertical horizontal grid

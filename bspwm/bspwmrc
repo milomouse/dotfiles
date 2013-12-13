@@ -10,7 +10,7 @@
 ########################
 bspc desktop ^1 -n I
 bspc monitor -a II III IV V VI VII VIII IX X
-bspc config top_padding 14
+bspc config top_padding 18
 
 ########################
 ## Restore Session:   ##
@@ -46,8 +46,8 @@ bspc config history_aware_focus true
 ##+ splitting
 bspc config split_ratio         0.50
 ##+ decoration
-bspc config border_width        4
-bspc config window_gap          4
+bspc config border_width        5
+bspc config window_gap          8
 bspc config borderless_monocle  true
 bspc config gapless_monocle     false
 ##+ colors

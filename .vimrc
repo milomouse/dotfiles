@@ -2,11 +2,11 @@
 " author: milomouse <vincent[at]fea.st>
 
 " Vundle core
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-Bundle 'gmarik/vundle'
-Bundle 'tpope/vim-pathogen'
-execute pathogen#infect()
+"set rtp+=~/.vim/bundle/vundle/
+"call vundle#rc()
+"Bundle 'gmarik/vundle'
+"Bundle 'tpope/vim-pathogen'
+"execute pathogen#infect()
 " Extra scripts
 "Bundle 'Lokaltog/vim-powerline'
 

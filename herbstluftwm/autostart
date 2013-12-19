@@ -52,7 +52,7 @@ hc keybind $Mod-Escape spawn zaprat --toggle
 hc keybind $Mod-period use_index +1 --skip-visible
 hc keybind $Mod-Shift-period move_index +1 --skip-visible
 hc keybind $Mod-comma use_index -1 --skip-visible
-hc keybind $Mod-Shift-comma use_index -1 --skip-visible
+hc keybind $Mod-Shift-comma move_index -1 --skip-visible
 #+ layouts
 hc keybind $Mod-z remove
 hc keybind $Mod-minus split left 0.5

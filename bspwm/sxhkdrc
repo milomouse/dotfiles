@@ -93,11 +93,11 @@ super + BackSpace
 
 #+ enlarge window in direction
 super + ctrl + {h,j,k,l}
-    bspc window --edge {left,down,up,right} push
+    bspc window --edge {left -10,down +10,up -10,right +10}
 
 #+ shrink window in direction
 super + ctrl + shift + {h,j,k,l}
-    bspc window --edge {right,up,down,left} pull
+    bspc window --edge {right -10,up +10,down -10,left +10}
 
 #+ view desktop or send focused window to desktop
 super + {_,shift + }{1-9,0}
@@ -109,7 +109,7 @@ super + {_,shift + }{1-9,0}
 ########################
 
 #+ reload sxhkd config
-super + shift + a
+super + shift + s
     pkill -USR1 -x sxhkd
 
 #+ spawn rxvt-unicode with tmux

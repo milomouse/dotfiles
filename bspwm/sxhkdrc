@@ -31,6 +31,10 @@ super + x
 super + b
     bspc desktop --balance
 
+#+ re-balance layout
+super + shift + b
+    bspc desktop -E && bspc window -s biggest
+
 #+ cycle (monocole|tiled) layout
 super + m
     bspc desktop --layout next
@@ -130,7 +134,7 @@ super + Escape
     zaprat --toggle
 
 #+ refresh all windows
-super + shift + b
+super + control + b
     xrefresh
 
 #+ save screenshot of current desktop

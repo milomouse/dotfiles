@@ -5,11 +5,11 @@
 ########################
 
 #+ quit bspwm
-super + {shift,_} + q
-    {bspc quit 1,\
-     bspc query --tree > "$BSPWM_TREE"; \
-        bspc query --history > "$BSPWM_HISTORY"; \
-        bspc quit}
+super + {_,shift} + q
+    {bspc query -T > "$BSPWM_TREE"; \
+        bspc query -H > "$BSPWM_HISTORY"; \
+            bspc quit,\
+     bspc quit 1}
 
 #+ close focused window
 super + Delete
@@ -33,7 +33,7 @@ super + b
 
 #+ re-balance layout
 super + shift + b
-    bspc desktop -E && bspc window -s biggest
+    bspc desktop --equalize && bspc window --swap biggest
 
 #+ cycle (monocole|tiled) layout
 super + m
@@ -183,7 +183,7 @@ XF86AudioLowerVolume
 
 #+ if found, focus on existing dwb instance, else exec dwb
 super + w
-    /bin/sh -c 'if [[ -n $(pidof dwb) ]] ; then if [[ "${$(bspc query -T | grep "T @")[1]}" != 3 ]] ; then bspc desktop --focus ^3 ; fi ; else exec dwb; fi'
+    /bin/sh -c 'if [[ -n $(pidof dwb) ]] ; then if [[ "${$(bspc query -T | grep "^  III")[-1]}" != "*" ]] ; then bspc desktop --focus III ; fi ; else exec dwb ; fi'
 
 #+ simple clipboard in/out synchronizer
 super + y
@@ -197,16 +197,16 @@ super + y
 # but have them anyway #
 ########################
 
-#+ focus window
 ~button1
     bspc pointer --grab focus
 
-#+ move/resize window
 super + button{1-3}
     bspc pointer --grab {move,resize_side,resize_corner}
 
-#+ track pointer
 super + !button{1-3}
     bspc pointer --track %i %i
+
+super + @button{1-3}
+    bspc pointer --ungrab
 
 # vim: set ft=sxhkdrc:

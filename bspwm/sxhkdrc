@@ -81,7 +81,7 @@ super + shift + {comma,period}
 
 #+ cycle to next/prev occupied desktop
 super + {n,p}
-    bspc desktop --focus {next,prev}.occupied
+    bspc desktop --focus {next,prev}.occupied || bspc desktop --focus ^1
 
 #+ manually split frame in direction
 super + {minus,shift + minus,shift + equal,equal}

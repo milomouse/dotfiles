@@ -1,4 +1,4 @@
-## ~/bspwm/sxhkdrc
+## ${XDG_CONFIG_HOME}/bspwm/sxhkdrc
 
 ########################
 ## Internal (bspwm):  ##
@@ -32,7 +32,7 @@ super + b
     bspc desktop --balance
 
 #+ re-balance layout
-super + shift + b
+super + shift + m
     bspc desktop --equalize && bspc window --swap biggest
 
 #+ cycle (monocole|tiled) layout
@@ -127,17 +127,16 @@ super + shift + Return
 #+ spawn application launcher
 super + e
     interrobang
-    #dmenu_run
 
 #+ disable/enable/hide/unhide the mouse
 super + Escape
     zaprat --toggle
 
 #+ refresh all windows
-super + control + b
+super + shift + b
     xrefresh
 
-#+ save screenshot of current desktop
+#+ grab screenshot of current desktop
 super + shift + g
     import -window root /howl/foto/shot/$(date '+%Y_%m_%d-%H%M%S').png
 
@@ -154,7 +153,7 @@ super + z
     mifo --random
 
 #+ mplayer daemon repeat (on|off)
-super + {backslash,shift + backslash}
+super + {_,shift +} backslash
     mifo {--repeat off ; mifo --repeat on, --repeat off}
 
 #+ mplayer daemon (prev|next)
@@ -166,7 +165,7 @@ XF86Audio{Next,Prev}
     mifo {--next,--prev}
 
 #+ pulseaudio mute (toggle|on|off)
-super + {u,shift + u,ctrl + u}
+super + {_,shift +,ctrl +} u
     pulsevol {--mute,--mute on,--mute off}
 
 #+ pulseaudio toggle

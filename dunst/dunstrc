@@ -41,7 +41,7 @@
     sticky_history = no
     startup_notification = false
     dmenu = "/usr/bin/dmenu -p dunst:"
-    browser = "/usr/bin/luakit"
+    browser = "/usr/bin/dwb"
 
 
 [frame]
@@ -57,12 +57,12 @@
 [urgency_low]
     background = "#ddddff"
     foreground = "#222222"
-    timeout = 5
+    timeout = 3
 
 [urgency_normal]
     foreground = "#161616"
     background = "#cccccc"
-    timeout = 10
+    timeout = 3
 
 [urgency_critical]
     background = "#fb579e"

@@ -18,10 +18,16 @@
 
 ## BACKGROUND:
 /usr/bin/display -window root ${XDG_PICTURES_DIR:-$HOME/../foto}/asphault-0.png
+#/usr/bin/display -window root -resize 1600x900! ${XDG_PICTURES_DIR:-$HOME/../foto}/star/outer_space.jpg
 
 ## WINDOW MANAGER:
-/usr/bin/sxhkd -c ${XDG_CONFIG_HOME:-$HOME}/bspwm/sxhkdrc &
+#+ bspwm:
+#/usr/bin/tint2 -c ${XDG_CONFIG_HOME:-$HOME}/bspwm/tint2rc &>/dev/null &
 exec /howl/conf/bspwm/dzen.zsh &>/dev/null &
+/usr/bin/sxhkd -c ${XDG_CONFIG_HOME:-$HOME}/bspwm/sxhkdrc &>/dev/null &
 exec /howl/code/sh/wm
-#exec /howl/conf/herbstluftwm/dzen.zsh &>/dev/null &
+#+ herbstluftwm:
+#exec /howl/conf/herbstluftwm/dzen-upper.zsh &
+#exec /howl/conf/herbstluftwm/dzen-lower.zsh &
+#/usr/bin/sxhkd -c ${XDG_CONFIG_HOME:-$HOME}/herbstluftwm/sxhkdrc -t 3 &
 #exec /usr/bin/herbstluftwm -c ${XDG_CONFIG_HOME:-$HOME}/herbstluftwm/autostart

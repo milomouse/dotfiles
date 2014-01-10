@@ -22,8 +22,6 @@ checkuse() {
     if [[ "${tags[$1]}" != [.!]* ]]; then # tag is not unused
         herbstclient use "${tags[$1]:1}" # cutting off first char (.#:!)
         exit 0
-    else
-        exit 1
     fi
 }
 

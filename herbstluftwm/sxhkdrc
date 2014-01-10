@@ -1,0 +1,167 @@
+## ${XDG_CONFIG_HOME}/herbstluftwm/sxhkdrc
+
+###############################
+## Internal (herbstluftwm):  ##
+###############################
+
+#+ quit herbstluftwm
+super + {_,shift +} q
+    herbstclient {reload,quit}
+
+#+ close focused window
+super + Pause
+    herbstclient close
+
+#+ (lock|unlock) focused tag
+super + {_,shift +} x
+    herbstclient {lock,unlock}
+
+#+ rotate desktop layout
+super + shift + c
+    herbstclient rotate
+
+#+ cycle frame layout(s)
+super + {_,shift} + g
+    herbstclient cycle_layout {+,-}1 max vertical horizontal grid
+
+#+ choose frame layout(s)
+super + shift + t : {m,v,h,g}
+    herbstclient set_layout {max,vertical,horizontal,grid}
+
+#+ reset frame layout to max
+super + a
+    herbstclient set_layout max
+
+#+ float/unfloat, fullscreen
+super + {f,o}
+    herbstclient {pseudotile,fullscreen} toggle
+
+#+ jump between last desktop(s)
+super + slash
+    herbstclient use_previous
+
+#+ [external] change focus or move window in direction
+super + {_,shift +} {h,j,k,l}
+    herbstclient {focus,shift} -e {left,down,up,right}
+
+#+ [internal] change focus or move window in direction
+super + {control,alt} + {h,j,k,l}
+    herbstclient {focus,shift} -i {left,down,up,right}
+
+#+ change window focus next/previous
+super + {n,p}
+    herbstclient cycle {+,-}1
+
+#+ change frame focus next/previous
+super + shift + {n,p}
+    herbstclient cycle_frame {+,-}1
+
+#+ focus or pull urgent window
+super + {_,shift +} u
+    herbstclient {jumpto,bring} urgent
+
+#+ move focus to next/prev desktop occupied with client
+super + {_,shift +} space
+    /howl/conf/herbstluftwm/tagswitch.sh {next,prev}
+
+#+ move focus to next/prev desktop
+super + {period,comma}
+    herbstclient use_index {+,-}1 --skip-visible
+
+#+ move window to next/prev desktop
+super + shift + {period,comma}
+    herbstclient move_index {+,-}1 --skip-visible
+
+#+ manually split frame in direction
+super + {minus,shift + minus,shift + equal,equal}
+    herbstclient split {left,bottom,top,right} 0.5
+
+#+ resize window in direction
+super + r : {h,j,k,l}
+    herbstclient resize {left,down,up,right} +0.01
+
+#+ remove frame
+super + z
+    herbstclient remove
+
+########################
+## External:          ##
+########################
+
+#+ reload sxhkd config
+super + shift + s
+    pkill -USR1 -x sxhkd
+
+#+ spawn rxvt-unicode with tmux
+super + Return
+    urxvt -e tmux -S /tmp/user-keep/h/tmux/xorg
+
+#+ spawn rxvt-unicode
+super + shift + Return
+    urxvt
+
+#+ spawn application launcher
+super + e
+    interrobang
+
+#+ disable/enable/hide/unhide the mouse
+super + Escape
+    zaprat --toggle
+
+#+ refresh all windows
+super + b
+    xrefresh
+
+#+ mplayer daemon (toggle|stop)
+super + {_,shift +} d
+    mifo {--toggle,--stop}
+
+#+ mplayer daemon toggle, stop
+XF86Audio{Play,Stop}
+    mifo {--toggle,--stop}
+
+#+ mplayer daemon randomize
+super + BackSpace
+    mifo --random
+
+#+ mplayer daemon repeat (on|off)
+super + {_,shift +} backslash
+    mifo {--repeat off ; mifo --repeat on,--repeat off}
+
+#+ mplayer daemon (prev|next)
+super + bracket{left,right}
+    mifo {--prev,--next}
+
+#+ mplayer daemon next, prev
+XF86Audio{Next,Prev}
+    mifo {--next,--prev}
+
+#+ pulseaudio mute (toggle|on|off)
+super + {_,shift +,ctrl +} m
+    pulsevol {--mute,--mute on,--mute off}
+
+#+ pulseaudio toggle
+XF86AudioMute
+    pulsevol --mute
+
+#+ pulseaudio raise volume by 5
+XF86AudioRaiseVolume
+    pulsevol --increase 2
+
+#+ pulseaudio lower volume by 5
+XF86AudioLowerVolume
+    pulsevol --decrease 2
+
+#+ if found, focus on existing dwb instance, else exec dwb
+super + w
+    /bin/sh -c 'if [[ -n $(pidof dwb) ]] ; then if [[ ${(Q)$(herbstclient stack)[7]} != "III" ]] ; then herbstclient use III ; fi ; else exec dwb ; fi'
+
+#+ simple clipboard in/out synchronizer
+super + y
+    /howl/code/zsh/xclip-wrapper
+
+#+ yank screenshot of current desktop
+super + shift + y
+    import -window root /howl/foto/shot/$(date '+%Y_%m_%d-%H%M%S').png
+
+# vim: set ft=sxhkdrc:

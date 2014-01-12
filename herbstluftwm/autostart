@@ -4,34 +4,39 @@
 ## author: Vincent Z (github.com/milomouse)          ##
 ## detail: startup configuration for `herbstluftwm'  ##
 #######################################################
-## NOTE 1: keybindings are now handled by `sxhkd'    ##
+## NOTE 1: [most] keybindings are handled by `sxhkd' ##
 #######################################################
 
+function _hc() { ex=(${ex} , ${@}) }
 
 ## GLOBAL:
-#+ scheme:
+#// scheme:
 Mod=Mod4
-TAG_NAMES=( I II III IV V VI VII VIII IX X )
+TAG_NAMES=( Ⅰ Ⅱ Ⅲ ⅠV V VⅠ VⅡ VⅢ ⅠⅩ Ⅹ )
 TAG_BINDS=( {1..10} )
-#+ reset:
-herbstclient chain , emit_hook reload , keyunbind --all , mouseunbind --all, unsetenv HCT , rename default "${TAG_NAMES[1]}"
-#+ tags:
+#// reset:
+herbstclient chain , emit_hook reload , keyunbind --all , mouseunbind --all, unsetenv HCT
+herbstclient and , rename default "${TAG_NAMES[1]}" , set_layout max
+#// tags:
 for ((i=1; i<$((${TAG_BINDS[-1]}+1)); i++)) ; do
   if [[ $i -gt ${TAG_BINDS[1]} ]] { herbstclient add ${TAG_NAMES[$i]} }
   herbstclient keybind $Mod-${i[-1]} use ${TAG_NAMES[$i]}
   herbstclient keybind $Mod-Shift-${i[-1]} move ${TAG_NAMES[$i]}
 done
-function _hc() { ex=(${ex} , ${@}) }
+#// mouse:
+_hc mousebind $Mod-Button1 move
+_hc mousebind $Mod-Button2 zoom
+_hc mousebind $Mod-Button3 resize
 
 ## SETTINGS:
-#+ behavioral:
+#// behavioral:
 _hc set focus_stealing_prevention 0
 _hc set focus_follows_mouse 0
 _hc set raise_on_focus 0
 _hc set raise_on_click 1
 _hc set mouse_recenter_gap 0
 _hc set default_frame_layout 2
-#+ borders/gaps:
+#// borders/gaps:
 _hc set always_show_frame 1
 _hc set frame_bg_transparent 0
 _hc set frame_border_width 2
@@ -43,30 +48,30 @@ _hc set window_gap -2
 _hc set frame_padding 2
 _hc set smart_window_surroundings 0
 _hc set smart_frame_surroundings 0
-#+ colors:
+#// colors:
 _hc set frame_border_active_color '#161616'
 _hc set frame_border_normal_color '#101010'
 _hc set frame_bg_active_color '#202020'
 _hc set frame_bg_normal_color '#191919'
-_hc set window_border_active_color '#4f4155'
+_hc set window_border_active_color '#53475b'
 _hc set window_border_normal_color '#1c1c1c'
 _hc set window_border_urgent_color '#4cdcd4'
-#+ other:
+#// other:
 _hc set tree_style '╾│ ├└╼─┐'
 _hc unlock
 _hc detect_monitors
-_hc pad 0 105
+_hc pad 0 92
 
 ## RULES:
-#+ global focus:
+#// global focus:
 _hc unrule -F
 _hc rule focus=on
-#+ move to tag:
-_hc rule class=Dwb tag=III
+#// move to tag:
+_hc rule class=Dwb tag=Ⅲ
 _hc rule class=Firefox tag=V
-_hc rule class=Gimp tag=VII fullscreen=on
-_hc rule class=Pavucontrol tag=X
-#+ management:
+_hc rule class=Gimp tag=Vǁ fullscreen=on
+_hc rule class=Pavucontrol tag=Ⅹ
+#// management:
 _hc rule title="Open Image" pseudotile=on
 _hc rule title="Save As" pseudotile=on
 _hc rule title="Save file" pseudotile=on
@@ -78,7 +83,10 @@ _hc rule windowtype~'_NET_WM_WINDOW_TYPE_(NOTIFICATION|DOCK)' manage=off
 _hc rule windowtype~'_NET_WM_WINDOW_TYPE_(FULLSCREEN|FS)' fullscreen=on
 
 ## RUNTIME:
-#+ chain settings:
+#// external:
+_hc spawn ${XDG_CONFIG_HOME:-$HOME}/herbstluftwm/dzen-post.zsh
+_hc emit_hook complete
+#// execute chain:
 herbstclient chain ${ex}&
-#+ external:
-exec tint2 -c /howl/conf/herbstluftwm/tint2rc &
+if [[ -n $(pidof tint2) ]] { pkill -USR1 -x tint2 } else { tint2 -c ${XDG_CONFIG_HOME:-$HOME}/herbstluftwm/tint2rc & }
+

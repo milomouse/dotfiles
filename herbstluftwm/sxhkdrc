@@ -1,4 +1,10 @@
-## ${XDG_CONFIG_HOME}/herbstluftwm/sxhkdrc
+#####################################################
+## locate: ${XDG_CONFIG_HOME}/herbstluftwm/sxhkdrc ##
+## author: Vincent Z (github.com/milomouse)        ##
+## detail: keybinding(s) for `herbstluftwm'        ##
+#####################################################
+## NOTE 1: spawned and killed from "xinitrc"       ##
+#####################################################
 
 ###############################
 ## Internal (herbstluftwm):  ##
@@ -6,7 +12,7 @@
 
 #+ quit herbstluftwm
 super + {_,shift +} q
-    herbstclient {reload,quit}
+    herbstclient {reload,chain - emit_hook quit_panel - quit}
 
 #+ close focused window
 super + Pause
@@ -25,46 +31,42 @@ super + {_,shift} + g
     herbstclient cycle_layout {+,-}1 max vertical horizontal grid
 
 #+ choose frame layout(s)
-super + shift + t : {m,v,h,g}
+super + t : {m,v,h,g}
     herbstclient set_layout {max,vertical,horizontal,grid}
 
 #+ reset frame layout to max
 super + a
     herbstclient set_layout max
 
-#+ float/unfloat, fullscreen
-super + {f,o}
-    herbstclient {pseudotile,fullscreen} toggle
+#+ manually split frame at left or right
+super + {minus,equal}
+    herbstclient split {left,right} 0.5
 
-#+ jump between last desktop(s)
-super + slash
-    herbstclient use_previous
+#+ manually split frame at top or bottom
+super + shift + {minus,equal}
+    herbstclient split {top,bottom} 0.5
 
-#+ [external] change focus or move window in direction
+#+ resize window in direction
+super + r : {h,j,k,l}
+    herbstclient resize {left,down,up,right} +0.01
+
+#+ change focus or move window in direction
 super + {_,shift +} {h,j,k,l}
     herbstclient {focus,shift} -e {left,down,up,right}
 
-#+ [internal] change focus or move window in direction
-super + {control,alt} + {h,j,k,l}
-    herbstclient {focus,shift} -i {left,down,up,right}
+#+ shift window to edge of tag in direction
+super + control + {h,j,k,l}
+    herbstclient shift_edge -e {left,down,up,right}
 
 #+ change window focus next/previous
-super + {n,p}
+super + {_,shift +} space
     herbstclient cycle {+,-}1
 
-#+ change frame focus next/previous
-super + shift + {n,p}
-    herbstclient cycle_frame {+,-}1
-
-#+ focus or pull urgent window
-super + {_,shift +} u
-    herbstclient {jumpto,bring} urgent
-
-#+ move focus to next/prev desktop occupied with client
-super + {_,shift +} space
+#+ change focus to next/prev desktop occupied with client
+super + {n,p}
     /howl/conf/herbstluftwm/tagswitch.sh {next,prev}
 
-#+ move focus to next/prev desktop
+#+ change focus to next/prev desktop
 super + {period,comma}
     herbstclient use_index {+,-}1 --skip-visible
 
@@ -72,13 +74,17 @@ super + {period,comma}
 super + shift + {period,comma}
     herbstclient move_index {+,-}1 --skip-visible
 
-#+ manually split frame in direction
-super + {minus,shift + minus,shift + equal,equal}
-    herbstclient split {left,bottom,top,right} 0.5
+#+ change focus between last desktop(s)
+super + slash
+    herbstclient use_previous
 
-#+ resize window in direction
-super + r : {h,j,k,l}
-    herbstclient resize {left,down,up,right} +0.01
+#+ focus or pull urgent window
+super + {_,shift +} u
+    herbstclient {jumpto,bring} urgent
+
+#+ float/unfloat, fullscreen
+super + {f,o}
+    herbstclient {pseudotile,fullscreen} toggle
 
 #+ remove frame
 super + z
@@ -126,7 +132,7 @@ super + BackSpace
 
 #+ mplayer daemon repeat (on|off)
 super + {_,shift +} backslash
-    mifo {--repeat off ; mifo --repeat on,--repeat off}
+    mifo {--repeat off && mifo --repeat on,--repeat off}
 
 #+ mplayer daemon (prev|next)
 super + bracket{left,right}
@@ -154,7 +160,7 @@ XF86AudioLowerVolume
 
 #+ if found, focus on existing dwb instance, else exec dwb
 super + w
-    /bin/sh -c 'if [[ -n $(pidof dwb) ]] ; then if [[ ${(Q)$(herbstclient stack)[7]} != "III" ]] ; then herbstclient use III ; fi ; else exec dwb ; fi'
+    /bin/sh -c 'if [[ -n $(pidof dwb) ]] ; then if [[ ${(Q)$(herbstclient stack)[7]} != "Ⅲ" ]] ; then herbstclient use Ⅲ ; fi ; else exec dwb ; fi'
 
 #+ simple clipboard in/out synchronizer
 super + y

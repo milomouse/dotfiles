@@ -26,6 +26,6 @@
 #/usr/bin/sxhkd -c ${XDG_CONFIG_HOME:-$HOME}/bspwm/sxhkdrc &>/dev/null &
 #exec /howl/code/sh/wm
 #+ herbstluftwm:
-#exec ${XDG_CONFIG_HOME:-$HOME}/herbstluftwm/dzen-init.zsh &>/dev/null &
+exec ${XDG_CONFIG_HOME:-$HOME}/herbstluftwm/dzen-init.zsh &>/dev/null &
 /usr/bin/sxhkd -c ${XDG_CONFIG_HOME:-$HOME}/herbstluftwm/sxhkdrc &>/dev/null &
 exec /usr/bin/herbstluftwm -c ${XDG_CONFIG_HOME:-$HOME}/herbstluftwm/autostart &>/dev/null

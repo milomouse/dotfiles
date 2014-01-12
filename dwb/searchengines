@@ -10,8 +10,8 @@ dm http://www.dailymotion.com/?search=_dwb_search_submit_&hitmap=#hp-h-9&locale=
 im http://www.imdb.com/find?q=_dwb_search_submit_&s=all
 kt http://kickass.to/torrents/usearch/?q=_dwb_search_submit_
 pt https://thepiratebay.se/s/?q=_dwb_search_submit_&page=0&orderby=99
-fg http://forums.gentoo.org/search.php?mode=results?search_keywords=_dwb_search_submit_
-fa https://bbs.archlinux.org/search.php?action=search&keywords=_dwb_search_submit_&author=&search_in=0&sort_by=0&sort_dir=DESC&show_as=topics
+gf http://forums.gentoo.org/search.php?mode=results?search_keywords=_dwb_search_submit_
+af https://bbs.archlinux.org/search.php?action=search&keywords=_dwb_search_submit_&author=&search_in=0&sort_by=0&sort_dir=DESC&show_as=topics
 aw https://wiki.archlinux.org/index.php?title=Special:Search&search=_dwb_search_submit_
 gw https://wiki.gentoo.org/index.php?search=_dwb_search_submit_&title=Special:Search
 us http://userscripts.org/scripts/search?q=_dwb_search_submit_&submit=Search

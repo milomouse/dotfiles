@@ -74,8 +74,6 @@ urxvt*cursorColor: #a488d9
 *color5:  #AD73F9
 *color13: #6B3BAA
 !! cyan:
-!*color6:  #6DB4B2
-!*color14: #25E2DD
 !! ORANGE > CYAN
 !*color6:  #CEA877
 !*color14: #ECA953

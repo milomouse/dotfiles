@@ -11,7 +11,7 @@
 bspc monitor --reset-desktops I II III IV V VI VII VIII IX X
 for x ( III IV X ) { bspc desktop ${x} --layout monocle }
 bspc config top_padding 18
-for x ( left right bottom ) { bspc config ${x}_padding -8 }
+#for x ( left right bottom ) { bspc config ${x}_padding -8 }
 
 ########################
 ## Restore Session:   ##

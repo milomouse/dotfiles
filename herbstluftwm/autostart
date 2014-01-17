@@ -15,7 +15,7 @@ Mod=Mod4
 TAG_NAMES=( Ⅰ Ⅱ Ⅲ ⅠV V VⅠ VⅡ VⅢ ⅠⅩ Ⅹ )
 TAG_BINDS=( {1..10} )
 #// reset:
-herbstclient chain , emit_hook reload , keyunbind --all , mouseunbind --all, unsetenv HCT
+herbstclient chain , emit_hook reload , keyunbind --all , mouseunbind --all, unsetenv HCT , set default_frame_layout 2
 herbstclient and , rename default "${TAG_NAMES[1]}" , set_layout max
 #// tags:
 for ((i=1; i<$((${TAG_BINDS[-1]}+1)); i++)) ; do
@@ -35,7 +35,6 @@ _hc set focus_follows_mouse 0
 _hc set raise_on_focus 0
 _hc set raise_on_click 1
 _hc set mouse_recenter_gap 0
-_hc set default_frame_layout 2
 #// borders/gaps:
 _hc set always_show_frame 1
 _hc set frame_bg_transparent 0
@@ -68,7 +67,7 @@ _hc unrule -F
 _hc rule focus=on
 #// move to tag:
 _hc rule class=Dwb tag=Ⅲ
-_hc rule class=Firefox tag=V
+_hc rule class=Firefox tag=ⅠV
 _hc rule class=Gimp tag=Vǁ fullscreen=on
 _hc rule class=Pavucontrol tag=Ⅹ
 #// management:

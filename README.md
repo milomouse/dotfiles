@@ -4,11 +4,11 @@ Current Setup:
 
 + *DISTRO* = Gentoo ( ~amd64 nomultilib )
 
-+ *KERNEL* = GNU/Linux 3.10.25 ( RT_PREEMPT, loop-AES, GCC [K10] )
++ *KERNEL* = GNU/Linux 3.10.26 ( RT_PREEMPT, loop-AES, GCC [K10] )
 
 + *SOURCES* = deadspace ( [ebuild](https://github.com/milomouse/ebuilds/tree/master/sys-kernel/deadspace-sources) )
 
-+ *BUILD* = #1 SMP PREEMPT RT Sat Jan 4 13:56:13 EST 2014 x86_64 AMD
++ *BUILD* = #1 SMP PREEMPT RT Thu Jan 16 19:54:43 EST 2014 x86_64 AMD
 
 + *INIT* = OpenRC
 
@@ -28,7 +28,7 @@ Current Setup:
 
 + *VIDEO PLAYER* = MPlayer2
 
-+ *WINDOW MANAGER* = bspwm ( [ebuild](https://github.com/milomouse/ebuilds/tree/master/x11-wm/bspwm) )
++ *WINDOW MANAGER* = herbstluftwm
 
 + *TERMINAL EMULATOR* = URxvt
 

@@ -4,11 +4,11 @@ Current Setup:
 
 + *DISTRO* = Gentoo ( ~amd64 nomultilib )
 
-+ *KERNEL* = GNU/Linux 3.10.26 ( RT_PREEMPT, loop-AES, GCC [K10] )
++ *KERNEL* = GNU/Linux 3.10.27 ( RT_PREEMPT, loop-AES, GCC [K10] )
 
 + *SOURCES* = deadspace ( [ebuild](https://github.com/milomouse/ebuilds/tree/master/sys-kernel/deadspace-sources) )
 
-+ *BUILD* = #1 SMP PREEMPT RT Thu Jan 16 19:54:43 EST 2014 x86_64 AMD
++ *BUILD* = #1 SMP PREEMPT RT Sat Jan 18 18:22:09 EST 2014 x86_64 AMD
 
 + *INIT* = OpenRC
 

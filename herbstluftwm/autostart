@@ -68,7 +68,7 @@ _hc rule focus=on
 #// move to tag:
 _hc rule class=Dwb tag=Ⅲ
 _hc rule class=Firefox tag=ⅠV
-_hc rule class=Gimp tag=Vǁ fullscreen=on
+_hc rule class=Gimp tag=VⅢ pseudotile=on
 _hc rule class=Pavucontrol tag=Ⅹ
 #// management:
 _hc rule title="Open Image" pseudotile=on

@@ -13,7 +13,6 @@ mailboxes +FastMail/Spam
 mailboxes +FastMail/Machine
 mailboxes +FastMail/Newsletters
 mailboxes +FastMail/Forums
-mailboxes +FastMail/ArchLinux
 mailboxes +FastMail/Gentoo
 mailboxes +FastMail/Kernel
 mailboxes +FastMail/Browsers

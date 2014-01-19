@@ -15,12 +15,12 @@ super + {_,shift +} q
     herbstclient {reload,chain - emit_hook quit_panel - quit}
 
 #+ close focused window
-super + Pause
+super + control + Pause
     herbstclient close
 
-#+ (lock|unlock) focused tag
-super + {_,shift +} x
-    herbstclient {lock,unlock}
+#+ (lock|unlock) focused tag, with visual
+super + x ; {l,u}
+    herbstclient chain - set window_border_active_color {'#6db4b2' - lock_tag,'#53475b' - unlock_tag}
 
 #+ rotate desktop layout
 super + shift + c
@@ -31,7 +31,7 @@ super + {_,shift} + g
     herbstclient cycle_layout {+,-}1 max vertical horizontal grid
 
 #+ choose frame layout(s)
-super + t : {m,v,h,g}
+super + t ; {m,v,h,g}
     herbstclient set_layout {max,vertical,horizontal,grid}
 
 #+ reset frame layout to max
@@ -43,7 +43,7 @@ super + {minus,equal}
     herbstclient split {left,right} 0.5
 
 #+ manually split frame at top or bottom
-super + shift + {minus,equal}
+super + shift + {equal,minus}
     herbstclient split {top,bottom} 0.5
 
 #+ resize window in direction

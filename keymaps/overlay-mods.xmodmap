@@ -1,30 +1,23 @@
-! personal preferences !
-!!!!!!!!!!!!!!!!!!!!!!!!
-!
-! before....
-!
-! [tab]
-! [cplk]
-! [shift]
-! [ctrl][win][alt]
-!
-! after....
-!
-! [tab]
-! [ctrl]
-! [shift]
-! [ctrl][alt][win]
-!
-!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! ${XDG_CONFIG_HOME}/keymaps/overlay-mods.xmodmap !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! before:                                         !
+!     [ctrl][win][alt]  [space]  [alt][menu]      !
+!                                                 !
+! after:                                          !
+!     [ctrl][alt][win]  [space]  [win][alt]       !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 !! swap Alt_L with Super_L (my preferred window-manager Mod)
 !! this keeps Super_L closer to the thumb
-remove mod1 = Alt_L
-remove mod4 = Super_L
+remove Mod1 = Alt_L Alt_R
+remove Mod4 = Super_L
 keycode 133 = Alt_L
 keycode 64 = Super_L
-add mod1 = Alt_L
-add mod4 = Super_L
+keysym Menu = Alt_R
+keysym Alt_R = Super_L
+add Mod1 = Alt_L Alt_R
+add Mod4 = Super_L
 
 !! remove [useless] Caps_Lock action..
 !! clone Control_L into Caps_Lock instead

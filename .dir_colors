@@ -228,7 +228,7 @@ EXEC           01;36
 *COPYING       01;37
 .cpp           01;35
 .cs            01;35
-.css           01;35
+.css           00;35
 .csv           01;35
 .def           00;35
 .diff          01;33

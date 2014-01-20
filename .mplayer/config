@@ -8,8 +8,7 @@ autosync=1
 gapless-audio=yes
 volstep=1
 ## VIDEO:
-vo=vdpau,xv,gl3,gl,gl_nosw,x11
-vc=ffh264vdpau,ffmpeg12vdpau,ffodivxvdpau
+vo=xv,gl3,gl,gl_nosw,x11
 fstype=netwm,layer,fullscreen,stays_on_top,above
 monitoraspect=16:9
 fixed-vo=no

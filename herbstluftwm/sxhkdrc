@@ -23,7 +23,7 @@ super + x ; {l,u}
     herbstclient chain - set window_border_active_color {'#6db4b2' - lock_tag,'#53475b' - unlock_tag}
 
 #+ rotate desktop layout
-super + shift + c
+super + c
     herbstclient rotate
 
 #+ cycle frame layout(s)

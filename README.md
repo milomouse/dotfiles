@@ -40,3 +40,10 @@ Current Setup:
 
 + *PROXY* = Squid ( transparent, anonymous, content-blocking )
 
+
+Screenshots:
+--------------
+
+![ScreenShot1](share/screenshots/2014_01_12-1.png)
+![ScreenShot2](share/screenshots/2014_01_12-2.png)
+![ScreenShot3](share/screenshots/2014_01_12-3.png)

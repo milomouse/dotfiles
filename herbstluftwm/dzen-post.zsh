@@ -38,7 +38,7 @@ herbstclient --idle | while read i ; do
         *) tags=("${tags/$i/${c_07}${i#[[:graph:]]}${c_XX} }") ;;
       }
     }
-    print "${b_00}${c_07} Ϡ ${c_fg}ɦerbstluftwm ${sep} ${tags:-${c_08}$(repeat 12 { printf " · " })}${_XX}"
+    print "${b_00}${c_07} ɦerbstluftwm  ${sep}  ${tags:-${c_08}$(repeat 12 { printf " · " })}${_XX}"
   elif [[ $i =~ quit || $i =~ reload ]]; then
     kill $!
     exit

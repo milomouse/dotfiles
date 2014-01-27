@@ -1,3 +1,8 @@
+############################################################
+## $XDG_CONFIG_HOME/mutt/serve/fastmailfm                  #
+## author: milomouse                                       #
+############################################################
+
 set from      = "vincent@fea.st"
 set spoolfile = "+FastMail/INBOX"
 set postponed = "+FastMail/Drafts"

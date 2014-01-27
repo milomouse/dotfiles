@@ -40,8 +40,8 @@ function i_newmail {
   ALL=${(Fw)#$(find /howl/mail/*/*/new -type f)}
   print - "${c_XX}${b_08} ^bg(#333333)${c_07} ӎailbox ${c_08}${b_00}▒${_XX}\
 ${b_08} ^bg(#292929)${c_07} unread ${_XX}\
-^bg(#242424)${c_05} ${INBOX} ${_XX}\
-^bg(#292929)${c_13} ${ALL} ${_XX}"
+^bg(#242424)${c_13} ${INBOX} ${_XX}\
+^bg(#292929)^fg(#616161) ${ALL} ${_XX}"
 }
 
 function i_loadavg {
@@ -51,7 +51,7 @@ function i_loadavg {
 }
 
 function i_battery {
-  BAT=${${${${${${$(acpi -b)[3,4]//,}//\%/${c_07}% }/Full/${c_13} idle ${c_12}${b_08}}/Discharging/${c_09} down ${c_12}${b_08}}/Charging/${c_03} up ${c_12}${b_08}}/Unknown/${c_08} pending ${c_02}${b_08}}
+  BAT=${${${${${${$(acpi -b)[3,4]//,}//\%/${c_07}% }/Full/${c_08} idle ${c_12}${b_08}}/Discharging/${c_01} down ${c_12}${b_08}}/Charging/${c_03} up ${c_12}${b_08}}/Unknown/^fg(#616161) pending ${c_02}${b_08}}
   print - "${c_XX}${b_08} ${c_07}^bg(#333333) Ϧattery ${_XX}\
 ^bg(#292929)${BAT}${_XX}"
 }

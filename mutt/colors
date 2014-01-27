@@ -1,3 +1,8 @@
+############################################################
+## $XDG_CONFIG_HOME/mutt/colors                            #
+## author: milomouse                                       #
+############################################################
+
 # set default
   color normal     white         default
 

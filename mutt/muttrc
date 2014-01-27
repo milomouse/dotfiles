@@ -5,7 +5,7 @@
 ## detail:  *|                                            ##
 ##          *|  offlineimap     (receive; IMAP)           ##
 ##          *|  notmuch         (index;   wildcards)      ##
-##          *|  postfix         (send;    SMTP relay)     ##
+##          *|  postfix         (send;    SMTP, relay)    ##
 ############################################################
 
 reset all
@@ -24,11 +24,10 @@ push V
   set tmpdir            = /tmp/user-keep/${USER}
 
 # - source gpg, colors and accounts:
-#source /etc/Muttrc.gpg.dist
 source $XDG_CONFIG_HOME/mutt/crypto
-#source $XDG_CONFIG_HOME/mutt/junked
 source $XDG_CONFIG_HOME/mutt/colors
 #source $XDG_CONFIG_HOME/mutt/scores
+#source $XDG_CONFIG_HOME/mutt/junked
 folder-hook FastMail/* source $XDG_CONFIG_HOME/mutt/serve/fastmailfm
 
 # - network settings:
@@ -170,10 +169,20 @@ macro index \Cr "<tag-pattern>all<enter><tag-prefix><clear-flag>N<untag-pattern>
 macro index P   "<pipe-message>cat > ~/" "save message as"
 macro index I   "<shell-escape>/usr/bin/offlineimap -c $XDG_CONFIG_HOME/.offlineimap/offlineimaprc -u blinkenlights -o<enter>" "sync IMAP"
 macro index,pager \Cb ":set pipe_decode\n|urlview\n:unset pipe_decode\n" "extract URLs out of a message"
-macro index f "<enter-command>unset wait_key<enter><shell-escape>notmuch-mutt --prompt search<enter><change-folder-readonly>`echo ${XDG_CACHE_HOME:-$HOME/cache}/notmuch/mutt/results`<enter>" \
-    "notmuch: search mail"
 macro index F "<enter-command>unset wait_key<enter><enter-command>unignore message-id<enter><pipe-message>notmuch-mutt thread<enter><change-folder-readonly>`echo ${XDG_CACHE_HOME:-$HOME/cache}/notmuch/mutt/results`<enter><enter-command>set wait_key<enter>" \
     "search and reconstruct owning thread with notmuch"
+macro index f \
+"<enter-command>set my_old_pipe_decode=\$pipe_decode my_old_wait_key=\$wait_key nopipe_decode nowait_key<enter>\
+<shell-escape>notmuch-mutt -r --prompt search<enter>\
+<change-folder-readonly>`echo ${XDG_CACHE_HOME:-$HOME/.cache}/notmuch/mutt/results`<enter>\
+<enter-command>set pipe_decode=\$my_old_pipe_decode wait_key=\$my_old_wait_key<enter>" \
+      "notmuch: search mail"
+macro index S \
+"<enter-command>set my_old_pipe_decode=\$pipe_decode my_old_wait_key=\$wait_key nopipe_decode nowait_key<enter>\
+<pipe-message>notmuch-mutt -r thread<enter>\
+<change-folder-readonly>`echo ${XDG_CACHE_HOME:-$HOME/.cache}/notmuch/mutt/results`<enter>\
+<enter-command>set pipe_decode=\$my_old_pipe_decode wait_key=\$my_old_wait_key<enter>" \
+      "notmuch: reconstruct thread"
 
 # - appearance / formatting:
 set folder_format = "%3C| %u:%g [%N] %f %*. %t %4s %F"

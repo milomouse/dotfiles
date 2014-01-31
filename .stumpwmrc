@@ -4,7 +4,7 @@
 ;; author: milomouse <vincent[at]fea.st>                                    ;;
 ;;--------------------------------------------------------------------------;;
 ;; versions used ATOC:                                                      ;;
-;; |  sbcl             -> 1.1.14                                            ;;
+;; |  sbcl             -> 1.1.15                                            ;;
 ;; |  cl-clx           -> 0.7.4-r1                                          ;;
 ;; |  cl-ppcre         -> 1.2.16                                            ;;
 ;; |  stumpwm          -> 0.9.7 (git version)                               ;;
@@ -83,16 +83,12 @@
 (set-font "-misc-fixedzero-medium-r-semicondensed-*-12-110-75-75-c-60-iso10646-1")
 ;(set-font "-misc-fixed-medium-r-semicondensed-*-12-110-75-75-c-60-koi8-r")
 (set-fg-color        "grey64")
-;(set-bg-color        "grey14")
 (set-bg-color        "grey10")
 (set-focus-color     "grey22")
 ;(set-focus-color     "thistle4")
-;(set-focus-color     "cyan3")
 ;(set-focus-color     "cadetblue")
 ;(set-focus-color     "orchid3")
-;(set-unfocus-color   "grey16")
 (set-unfocus-color   "grey10")
-;(set-border-color    "grey44")
 (set-border-color    "grey10")
 (set-win-bg-color    "grey6")
 (setf *colors* (list "grey9"          ; 0 black

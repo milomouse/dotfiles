@@ -22,6 +22,7 @@ mailboxes +FastMail/Gentoo
 mailboxes +FastMail/Kernel
 mailboxes +FastMail/Browsers
 mailboxes +FastMail/WManagers
+mailboxes +FastMail/Programming
 mailboxes +FastMail/Misc
 
 macro index E "<change-folder>+FastMail/Archive<enter><limit>~B " "search everything"

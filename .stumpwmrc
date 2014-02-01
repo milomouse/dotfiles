@@ -9,13 +9,8 @@
 ;; |  cl-ppcre         -> 1.2.16                                            ;;
 ;; |  stumpwm          -> 0.9.7 (git version)                               ;;
 ;;-TODO/CHANGELOG:----------------------------------------------------------;;
-;; >>>-: create a 'dedicate' and 'catchall' window-rule (remember * *)      ;;
-;; >>--: create a 'dedicate' and 'catchall' hook for changing focus color   ;;
-;; >>--: have mifo(mplayer-daemon) prompts use filename completion          ;;
-;; >---: better resize; if neighbour {above} then +ARG else -ARG, etc.      ;;
 ;; >>>-: show frame-indicator for 'resize' only if no window in frame       ;;
 ;; >>>>? command for dedicating current win/frame as the Master win/frame   ;;
-;; >---: better command for Master; remember Master thru re{loadrc,start}   ;;
 ;; >>>>! command for swapping current window with the Master win/frame      ;;
 ;; >>>>! exchange two windows but keep focus in current frame               ;;
 ;; >>>>! dynamically dump group|screen|desktop|rules to *data-dir* by type  ;;
@@ -85,9 +80,6 @@
 (set-fg-color        "grey64")
 (set-bg-color        "grey10")
 (set-focus-color     "grey22")
-;(set-focus-color     "thistle4")
-;(set-focus-color     "cadetblue")
-;(set-focus-color     "orchid3")
 (set-unfocus-color   "grey10")
 (set-border-color    "grey10")
 (set-win-bg-color    "grey6")
@@ -144,11 +136,6 @@
 (if (probe-file (data-dir-file "tile-rules.lisp"))
     (restore-window-placement-rules (data-dir-file "tile-rules.lisp")))
 (cond ((string-equal (group-name (current-group)) *scratchpad-group-name*) (gother)))
-
-#|
-;; display a random background image on root window.
-(display-random-bg)
-|#
 
 ;; resize display head and [re]start 'dzen2'.
 (resize-head 0 0 22 1600 878)

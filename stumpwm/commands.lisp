@@ -148,9 +148,9 @@ keeping focus on current frame, unlike 'exchange-direction' where focus moves to
           (shift-windows-forward frames win)))
 
 ;; rework of original random-bg command, display random wallpaper on root window.
-(defcommand display-random-bg () () "Display a random background image on root window."
-  (run-shell-command
-    (concatenate 'string "display -window root -resize 1600x900! " (select-random-bg-image))))
+;(defcommand display-random-bg () () "Display a random background image on root window."
+;  (run-shell-command
+;    (concatenate 'string "display -window root -resize 1600x900! " (select-random-bg-image))))
 
 ;; designate master window/frame (should probably use current frame number, but less dynamic?)
 (defcommand (master-make tile-group) () () "Designate current window as Master."
@@ -465,7 +465,6 @@ command's output. This may hang if used wrong."
 
 ;; run or raise.
 (defcommand ror_dwb () () "" (setf *run-or-raise-all-groups* t) (run-or-raise "dwb" '(:class "Dwb")))
-(defcommand ror_firefox () () "" (setf *run-or-raise-all-groups* t) (run-or-raise "firefox" '(:class "Firefox")))
 (defcommand ror_mutt () () "" (setf *run-or-raise-all-groups* t)
   (run-or-raise "urxvt -title '[urxvt] mutt' -e mutt -F ${XDG_CONFIG_DIR:-${HOME}}/mutt/muttrc" '(:title "\\[urxvt\\] mutt")))
 

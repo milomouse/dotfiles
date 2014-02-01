@@ -47,8 +47,8 @@ super + shift + {equal,minus}
     herbstclient split {top,bottom} 0.5
 
 #+ resize window in direction
-super + r : {h,j,k,l}
-    herbstclient resize {left,down,up,right} +0.01
+super + r : {h,shift + h,j,shift + j,k,shift + k,l,shift + l}
+    herbstclient resize {left +,left -,down +,down -,up +,up -,right +,right -}0.01
 
 #+ change focus or move window in direction
 super + {_,shift +} {h,j,k,l}
@@ -150,13 +150,13 @@ super + {_,shift +,ctrl +} m
 XF86AudioMute
     pulsevol --mute
 
-#+ pulseaudio raise volume by 5
+#+ pulseaudio raise volume
 XF86AudioRaiseVolume
-    pulsevol --increase 2
+    pulsevol --increase 1
 
-#+ pulseaudio lower volume by 5
+#+ pulseaudio lower volume
 XF86AudioLowerVolume
-    pulsevol --decrease 2
+    pulsevol --decrease 1
 
 #+ if found, focus on existing dwb instance, else exec dwb
 super + w

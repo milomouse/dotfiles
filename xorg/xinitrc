@@ -17,18 +17,9 @@
 /usr/local/bin/zaprat --disable
 
 ## BACKGROUND:
-#/usr/bin/display -window root ${XDG_PICTURES_DIR:-$HOME/../foto}/asphault-0.png
 /usr/bin/display -window root -resize 1600x900! ${XDG_PICTURES_DIR:-$HOME/../foto}/star/outer_space.jpg
 
 ## WINDOW MANAGER:
-#+ stumpwm:
-#exec ${XDG_CONFIG_HOME:-$HOME}/stumpwm/dzen-init.zsh &>/dev/null &
-#exec /usr/bin/stumpwm
-#+ herbstluftwm:
 exec ${XDG_CONFIG_HOME:-$HOME}/herbstluftwm/dzen-init.zsh &>/dev/null &
-/usr/bin/sxhkd -c ${XDG_CONFIG_HOME:-$HOME}/herbstluftwm/sxhkdrc &>/dev/null &
+/usr/bin/sxhkd -c ${XDG_CONFIG_HOME:-$HOME}/herbstluftwm/sxhkdrc &
 exec /usr/bin/herbstluftwm -c ${XDG_CONFIG_HOME:-$HOME}/herbstluftwm/autostart &>/dev/null
-#+ bspwm:
-#exec /howl/conf/bspwm/dzen.zsh &>/dev/null &
-#/usr/bin/sxhkd -c ${XDG_CONFIG_HOME:-$HOME}/bspwm/sxhkdrc &>/dev/null &
-#exec /howl/code/sh/wm

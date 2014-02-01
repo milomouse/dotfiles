@@ -6,7 +6,7 @@
 set font      = -misc-fixed-medium-r-semicondensed-*-12-110-75-75-c-60-iso10646-1
 set geometry  = 1600x13-2+16
 set border    = 1px #161616
-set colors    = #63585F #222222 #555555 #303030 #CCCCCC #777777
+set colors    = #817B4D #222222 #555555 #303030 #CCCCCC #777777
 set bangchar  = !
 set run_hook  = %s || (notify-send "interrobang" "command not valid or exit non-zero")
 

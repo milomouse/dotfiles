@@ -22,7 +22,7 @@ bang firefox  = firefox %s
 bang pdf      = mupdf %s
 bang man      = urxvt -e man %s
 bang calc     = notify-send "$(echo '%s' | bc -l)"
-bang dic      = notify-send "$(sdcv --utf8-output -u WordNet '%s')"
+bang dic      = notify-send "$(sdcv -n --utf8-output -u WordNet '%s')"
 bang ?        = echo "interrobang ignored \"%s\""
 
 tab default   = percontation "%s" %s | sort -u

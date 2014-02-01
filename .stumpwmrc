@@ -130,7 +130,7 @@
 ;; restore data from previous exit (state StumpWM was last using),
 (clear-window-placement-rules)
 (setf (group-name (first (screen-groups (current-screen)))) "Ⅰ")
-(make-groups-bg "Ⅱ" "Ⅲ" "ⅠV" "V" "VⅠ" "VⅡ" "VⅢ" "ⅠⅩ" "Ⅹ" )
+(make-groups-bg "Ⅱ" "Ⅲ" "ⅠV" "V" "VⅠ")
 (if (probe-file (data-dir-file "desktop.lisp"))
     (restore-from-file (data-dir-file "desktop.lisp")))
 (if (probe-file (data-dir-file "tile-rules.lisp"))
@@ -139,9 +139,5 @@
 
 ;; resize display head and [re]start 'dzen2'.
 (resize-head 0 0 22 1600 878)
-;(if (probe-file (merge-pathnames (make-pathname :name "dzen-post" :type "zsh"
-;                :directory '(:relative "conf" "stumpwm")) *home-dir*))
-;    (run-shell-command "pkill -9 -g $(ps -C dzen2 hopgrp) &>/dev/null \
-;                        ; exec /bin/zsh -c \"source /howl/conf/stumpwm/dzen-post.zsh &\""))
 
 ;; EOF

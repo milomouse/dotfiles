@@ -31,7 +31,7 @@
   (0    nil   t     :class    "Firefox")
   (0    nil   t     :instance "Navigator"))
 
-(define-frame-preference "Ⅹ"
+(define-frame-preference "VⅠ"
   (0    t     t     :class "pavucontrol"))
 
 ;; EOF

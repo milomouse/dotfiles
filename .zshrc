@@ -39,7 +39,7 @@ zstyle ':completion:*:kill:*' force-list always
 
 # framebuffer colors:
 if [[ ${TERM} == linux ]] || [[ ${TERM} =~ screen && ${+DISPLAY} == 0 ]]; then
-    echo -en "\e]P0000000" ; echo -en "\e]P83d3a3a" # 0: black/default
+    echo -en "\e]P0000000" ; echo -en "\e]P8969696" # 0: black/default
     echo -en "\e]P1d770af" ; echo -en "\e]P9d28abf" # 1: red
     echo -en "\e]P278a45c" ; echo -en "\e]PA9acc79" # 2: green
     echo -en "\e]P3c8bc45" ; echo -en "\e]PBd0d26b" # 3: yellow
@@ -61,18 +61,18 @@ if [[ -f /usr/share/zsh/site-contrib/zsh-syntax-highlighting/zsh-syntax-highligh
 
   # override main colors:
   ZSH_HIGHLIGHT_STYLES[default]='none'
-  ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red,bold,underline'
-  ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=green'
+  ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red,bold'
+  ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=blue,bold'
   ZSH_HIGHLIGHT_STYLES[assign]='fg=yellow,bold'
-  ZSH_HIGHLIGHT_STYLES[alias]='fg=magenta,bold'
-  ZSH_HIGHLIGHT_STYLES[builtin]='fg=magenta,bold'
-  ZSH_HIGHLIGHT_STYLES[function]='fg=magenta,bold'
-  ZSH_HIGHLIGHT_STYLES[command]='fg=magenta'
+  ZSH_HIGHLIGHT_STYLES[alias]='fg=yellow'
+  ZSH_HIGHLIGHT_STYLES[function]='fg=yellow'
+  ZSH_HIGHLIGHT_STYLES[builtin]='fg=magenta'
+  ZSH_HIGHLIGHT_STYLES[command]='fg=magenta,bold'
   ZSH_HIGHLIGHT_STYLES[hashed-command]='fg=red,bold,standout'
   ZSH_HIGHLIGHT_STYLES[path]='fg=white,underline'
   ZSH_HIGHLIGHT_STYLES[path_prefix]='fg=white,underline'
-  ZSH_HIGHLIGHT_STYLES[path_approx]='fg=white,bold,underline'
-  ZSH_HIGHLIGHT_STYLES[globbing]='fg=white,bold'
+  ZSH_HIGHLIGHT_STYLES[path_approx]='fg=green,bold'
+  ZSH_HIGHLIGHT_STYLES[globbing]='fg=yellow,bold'
   ZSH_HIGHLIGHT_STYLES[history-expansion]='fg=yellow'
   ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='fg=blue'
   ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=blue'

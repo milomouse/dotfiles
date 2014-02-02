@@ -61,3 +61,5 @@ export BSPWM_HISTORY="${XDG_TEMPLATES_DIR}/bspwm.history"
 export BSPWM_STACK="${XDG_TEMPLATES_DIR}/bspwm.stack"
 ## SXHKD:
 export SXHKD_FIFO="${XDG_TEMPLATES_DIR}/sxhkd.fifo"
+## LOGTALK:
+export LOGTALKUSER="${XDG_CONFIG_HOME}/logtalk"

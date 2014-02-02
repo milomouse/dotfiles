@@ -20,7 +20,7 @@ super + control + Pause
 
 #+ (lock|unlock) focused tag, with visual
 super + x ; {l,u}
-    herbstclient chain - set window_border_active_color {'#6db4b2' - lock_tag,'#53475b' - unlock_tag}
+    herbstclient chain - set window_border_active_color {'#ab5278' - lock_tag,'#53475b' - unlock_tag}
 
 #+ rotate desktop layout
 super + c

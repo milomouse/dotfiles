@@ -53,51 +53,65 @@ fi
 eval $(dircolors -b ${HOME}/.dir_colors)
 
 # Fish-like syntax highlighting for ZSH:
-if [[ -f ${HOME}/zsh/plugins/zsh-syntax-highlight/zsh-syntax-highlighting.zsh ]]; then
-  . ${HOME}/zsh/plugins/zsh-syntax-highlight/zsh-syntax-highlighting.zsh
+if [[ -f /usr/share/zsh/site-contrib/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
+  . /usr/share/zsh/site-contrib/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-  # override some colors:
+  # activate highlighters:
+  ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
+
+  # override main colors:
   ZSH_HIGHLIGHT_STYLES[default]='none'
   ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red,bold,underline'
   ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=green'
+  ZSH_HIGHLIGHT_STYLES[assign]='fg=yellow,bold'
   ZSH_HIGHLIGHT_STYLES[alias]='fg=magenta,bold'
   ZSH_HIGHLIGHT_STYLES[builtin]='fg=magenta,bold'
   ZSH_HIGHLIGHT_STYLES[function]='fg=magenta,bold'
   ZSH_HIGHLIGHT_STYLES[command]='fg=magenta'
   ZSH_HIGHLIGHT_STYLES[hashed-command]='fg=red,bold,standout'
   ZSH_HIGHLIGHT_STYLES[path]='fg=white,underline'
+  ZSH_HIGHLIGHT_STYLES[path_prefix]='fg=white,underline'
+  ZSH_HIGHLIGHT_STYLES[path_approx]='fg=white,bold,underline'
   ZSH_HIGHLIGHT_STYLES[globbing]='fg=white,bold'
   ZSH_HIGHLIGHT_STYLES[history-expansion]='fg=yellow'
   ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='fg=blue'
   ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=blue'
   ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]='fg=blue'
   ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]='fg=blue'
-  ZSH_HIGHLIGHT_STYLES[assign]='fg=yellow,bold'
   ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=red,bold'
   ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=blue,bold'
 
-  # override colors for matching brackets:
-  ZSH_HIGHLIGHT_MATCHING_BRACKETS_STYLES=(
-    'fg=blue,bold'    # Style for first level of imbrication
-    'fg=green,bold'   # Style for second level of imbrication
-    'fg=magenta,bold' # etc... Put as many styles as you wish,
-    'fg=cyan,bold'    # or leave empty to disable brackets matching.
-    'fg=white,bold'
-    'fg=blue'
-    'fg=green'
-    'fg=magenta'
-    'fg=cyan'
-    'fg=white'
-  )
+  # override bracket colors:
+  ZSH_HIGHLIGHT_STYLES[bracket-error]='fg=red,bold,underline'
+  ZSH_HIGHLIGHT_STYLES[bracket-level-1]='fg=blue,bold'
+  ZSH_HIGHLIGHT_STYLES[bracket-level-3]='fg=yellow,bold'
+  ZSH_HIGHLIGHT_STYLES[bracket-level-2]='fg=magenta,bold'
+
+  # override pattern colors:
+  ZSH_HIGHLIGHT_PATTERNS+=('rm -[f,r] *' 'fg=red,bold,standout')
+  ZSH_HIGHLIGHT_PATTERNS+=('rm -[f,r][f,r] *' 'fg=red,bold,standout')
+  ZSH_HIGHLIGHT_PATTERNS+=('rd *' 'fg=magenta,bold,standout')
+  ZSH_HIGHLIGHT_PATTERNS+=('sudo dd *' 'fg=magenta,bold,standout')
+  ZSH_HIGHLIGHT_PATTERNS+=('sudo shred *' 'fg=magenta,bold,standout')
+
 fi
 
 # Fish-like history sub-string search for ZSH (load AFTER syntax):
-if [[ -f ${HOME}/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh ]]; then
-  . ${HOME}/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+if [[ -f /usr/share/zsh/site-contrib/zsh-history-substring-search/zsh-history-substring-search.zsh ]]; then
+  . /usr/share/zsh/site-contrib/zsh-history-substring-search/zsh-history-substring-search.zsh
 
   HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='bg=white,fg=black,bold'
   HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='bg=red,fg=black'
   HISTORY_SUBSTRING_SEARCH_GLOBBING_FLAGS='i'
+
+  # bind UP/DOWN in normal mode:
+  zmodload zsh/terminfo
+  bindkey "$terminfo[kcuu1]" history-substring-search-up
+  bindkey "$terminfo[kcud1]" history-substring-search-down
+
+  # bind K/J for VI mode:
+  bindkey -M vicmd 'k' history-substring-search-up
+  bindkey -M vicmd 'j' history-substring-search-down
 fi
 
 # keybindings (defined AFTER scripts):

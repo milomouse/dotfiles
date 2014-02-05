@@ -22,4 +22,4 @@
 ## WINDOW MANAGER:
 exec ${XDG_CONFIG_HOME:-$HOME}/herbstluftwm/dzen-init.zsh &>/dev/null &
 /usr/bin/sxhkd -c ${XDG_CONFIG_HOME:-$HOME}/herbstluftwm/sxhkdrc &
-exec /usr/bin/herbstluftwm -c ${XDG_CONFIG_HOME:-$HOME}/herbstluftwm/autostart &>/dev/null
+exec /usr/bin/herbstluftwm --locked -c ${XDG_CONFIG_HOME:-$HOME}/herbstluftwm/autostart &>/dev/null

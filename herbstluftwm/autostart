@@ -15,13 +15,11 @@ Mod=Mod4
 TAG_NAMES=( Ⅰ Ⅱ Ⅲ ⅠV V VⅠ VⅡ VⅢ ⅠⅩ Ⅹ )
 TAG_BINDS=( {1..10} )
 #// reset:
-herbstclient chain , emit_hook reload , keyunbind --all , mouseunbind --all, unsetenv HCT , set default_frame_layout 2
-herbstclient and , rename default "${TAG_NAMES[1]}" , set_layout max
+herbstclient chain , emit_hook reload , keyunbind --all , mouseunbind --all , unsetenv HCT , set default_frame_layout 2 , load default '(clients max:0)' , rename default "${TAG_NAMES[1]}"
 #// tags:
 for ((i=1; i<$((${TAG_BINDS[-1]}+1)); i++)) ; do
   if [[ $i -gt ${TAG_BINDS[1]} ]] { herbstclient add ${TAG_NAMES[$i]} }
-  herbstclient keybind $Mod-${i[-1]} use ${TAG_NAMES[$i]}
-  herbstclient keybind $Mod-Shift-${i[-1]} move ${TAG_NAMES[$i]}
+  herbstclient and , keybind $Mod-${i[-1]} use ${TAG_NAMES[$i]} , keybind $Mod-Shift-${i[-1]} move ${TAG_NAMES[$i]}
 done
 #// mouse:
 _hc mousebind $Mod-Button1 move

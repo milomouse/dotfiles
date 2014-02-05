@@ -31,7 +31,7 @@ super + {_,shift} + g
     herbstclient cycle_layout {+,-}1 max vertical horizontal grid
 
 #+ choose frame layout(s)
-super + a ; {m,v,h,g}
+super + shift + a ; {m,v,h,g}
     herbstclient set_layout {max,vertical,horizontal,grid}
 
 #+ reset frame layout to max

@@ -90,7 +90,6 @@ if [[ -f /usr/share/zsh/site-contrib/zsh-syntax-highlighting/zsh-syntax-highligh
   # override pattern colors:
   ZSH_HIGHLIGHT_PATTERNS+=('rm -[f,r] *' 'fg=red,bold,standout')
   ZSH_HIGHLIGHT_PATTERNS+=('rm -[f,r][f,r] *' 'fg=red,bold,standout')
-  ZSH_HIGHLIGHT_PATTERNS+=('rd *' 'fg=magenta,bold,standout')
   ZSH_HIGHLIGHT_PATTERNS+=('sudo dd *' 'fg=magenta,bold,standout')
   ZSH_HIGHLIGHT_PATTERNS+=('sudo shred *' 'fg=magenta,bold,standout')
 

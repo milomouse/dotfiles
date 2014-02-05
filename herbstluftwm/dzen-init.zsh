@@ -51,7 +51,7 @@ function i_loadavg {
 }
 
 function i_battery {
-  BAT=${${${${${${$(acpi -b)[3,4]//,}//\%/${c_07}% }/Full/${c_08} idle ${c_12}${b_08}}/Discharging/${c_01} down ${c_12}${b_08}}/Charging/${c_03} up ${c_12}${b_08}}/Unknown/^fg(#616161) pending ${c_02}${b_08}}
+  BAT=${${${${${${$(acpi -b)[3,4]//,}//\%/${c_07}% }/Full/${c_08} idle ${c_12}${b_08}}/Discharging/${c_01} down ${c_12}${b_08}}/Charging/${c_03} up ${c_12}${b_08}}/Unknown/^fg(#616161) pending ${c_12}${b_08}}
   print - "${c_XX}${b_08} ${c_07}^bg(#333333) Ϧattery ${_XX}\
 ^bg(#292929)${BAT}${_XX}"
 }

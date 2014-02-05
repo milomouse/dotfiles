@@ -72,9 +72,10 @@ _hc rule class=Pavucontrol tag=Ⅹ
 _hc rule title="Open Image" pseudotile=on
 _hc rule title="Save As" pseudotile=on
 _hc rule title="Save file" pseudotile=on
-_hc rule instance=gcolor2 pseudotile=on
-_hc rule class=tint2 manage=off focus=off
 _hc rule class=Toplevel pseudotile=on
+_hc rule instance=gcolor2 pseudotile=on
+_hc rule class=XFontSel pseudotile=on
+_hc rule class=tint2 manage=off focus=off
 _hc rule windowtype~'_NET_WM_WINDOW_TYPE_(DIALOG|UTILITY|SPLASH)' pseudotile=on
 _hc rule windowtype~'_NET_WM_WINDOW_TYPE_(NOTIFICATION|DOCK)' manage=off
 _hc rule windowtype~'_NET_WM_WINDOW_TYPE_(FULLSCREEN|FS)' fullscreen=on

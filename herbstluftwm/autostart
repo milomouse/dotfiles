@@ -64,9 +64,9 @@ _hc pad 0 92
 _hc unrule -F
 _hc rule focus=on
 #// move to tag:
-_hc rule class=Dwb tag=Ⅲ
-_hc rule class=Firefox tag=ⅠV
-_hc rule class=Gimp tag=VⅢ pseudotile=on
+_hc rule class=Firefox tag=VⅡ
+_hc rule class=Dwb tag=VⅢ
+_hc rule class=Gimp tag=ⅠX pseudotile=on
 _hc rule class=Pavucontrol tag=Ⅹ
 #// management:
 _hc rule title="Open Image" pseudotile=on

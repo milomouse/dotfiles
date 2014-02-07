@@ -164,7 +164,7 @@ XF86AudioLowerVolume
 
 #+ if found, focus on existing dwb instance, else exec dwb
 super + w
-    /bin/sh -c 'if [[ -n $(pidof dwb) ]] ; then if [[ ${(Q)$(herbstclient stack)[7]} != "Ⅲ" ]] ; then herbstclient use Ⅲ ; fi ; else exec dwb ; fi'
+    /bin/sh -c 'if [[ -n $(pidof dwb) ]] ; then if [[ ${(Q)$(herbstclient stack)[7]} != "VⅢ" ]] ; then herbstclient use VⅢ ; fi ; else exec dwb ; fi'
 
 #+ simple clipboard in/out synchronizer
 super + y

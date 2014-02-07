@@ -31,11 +31,11 @@ super + {_,shift} + g
     herbstclient cycle_layout {+,-}1 max vertical horizontal grid
 
 #+ choose frame layout(s)
-super + shift + a ; {m,v,h,g}
+super + shift + t ; {m,v,h,g}
     herbstclient set_layout {max,vertical,horizontal,grid}
 
 #+ reset frame layout to max
-super + a
+super + t
     herbstclient set_layout max
 
 #+ manually split frame at left or right
@@ -131,7 +131,7 @@ XF86Audio{Play,Stop}
     mifo {--toggle,--stop}
 
 #+ mplayer daemon randomize
-super + t
+super + shift + slash
     mifo --random
 
 #+ mplayer daemon repeat (on|off)

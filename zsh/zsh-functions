@@ -10,13 +10,12 @@ function zshaddhistory {
   line=${1%%$'\n'} ; cmd=${line%% *}
   [[ ${#line} -ge 5
       && ${cmd} != (history|fc|[szx]edit|[zx]load|srm|wika)
-  ]] && (( ! $argv[(I)*unrl*|*spar*|*losetup*|*aespipe*|sudo rm *|mpq *] ))
+  ]] && (( ! $argv[(I)*unrl/*|*spar/*|*losetup*|*aespipe*|sudo rm *] ))
 }
 
 # safely recompile and reload shell settings:
 function zload {
-  sudo env-update &>/dev/null
-  sudo source /etc/profile &>/dev/null
+  sudo /bin/sh -c "( env-update 1>/dev/null ; source /etc/profile 1>/dev/null )"
   source /etc/profile &>/dev/null
   autoload -U zrecompile
   [[ -f ~/.zshrc ]] && zrecompile -p ~/.zshrc
@@ -71,9 +70,7 @@ function mvf {
 function upf {
   cd /usr/share/fonts/local
   /usr/bin/fc-cache -vr
-  sudo /usr/bin/fc-cache -vr
-  sudo mkfontdir
-  sudo mkfontscale
+  sudo /bin/sh -c "( /usr/bin/fc-cache -vr ; mkfontdir ; mkfontscale )"
   if [[ ${+DISPLAY} == 1 ]]; then
     xset +fp '/usr/share/fonts/local'
     xset fp rehash
@@ -83,19 +80,55 @@ function upf {
 
 # quirky tmux function:
 function tmux {
-  if [[ ${@[-2]} == '--' ]]; then
-    command tmux ${@%--}
+  _d="/tmp/user-keep/${USER}/tmux/default"
+  _x="/tmp/user-keep/${USER}/tmux/xorg"
+
+  # usage: tmux [command] [[socket]]
+
+  if [[ -n $1 ]]; then
+    function fn_c { if [[ ${+DISPLAY} -eq 1 ]] { _S=${_x} } else { _S=${_d} } }
+    function fn_x { command tmux -uS ${_S} ${@} }
+    function fn_a {
+      command tmux -S ${_S} list-session | while { read i } {
+        if [[ "${i[-1]}" != ')' ]] { _A=T ; _T=${i/:*} ; break
+        };}
+        if [[ ${+_A} -eq 1 ]] { fn_x attach-session -t ${_T} } else { return 1 }
+        unset _A _T
+      }
+    case $1:l {
+      attach)
+        if [[ -n $2 ]] {
+          case $2:l {
+            xorg) _S=${_x} ;;
+            default) _S=${_d} ;;
+            -f|force) fn_c ; fn_x attach-session ;;
+          }
+          fn_a
+        } else { fn_c ; fn_a }
+      ;;
+      list)
+        if [[ -n $2 ]] {
+          case $2:l {
+            xorg) _S=${_x} ; fn_x list-sessions ;;
+            default) _S=${_d} ; fn_x list-sessions ;;
+          }
+        } else {
+          fn_c ; fn_x list-sessions
+        }
+      ;;
+      *) fn_c ; fn_x ${@} ;;
+    }
   else
-    case ${+DISPLAY} in
-      0)  command tmux -S /tmp/user-keep/${USER}/tmux/default $@ ;;
-      1)  command tmux -S /tmp/user-keep/${USER}/tmux/xorg $@ ;;
-    esac
+    case ${+DISPLAY} {
+      0) command tmux -uS ${_d} new-session ;;
+      1) command tmux -uS ${_x} new-session ;;
+    }
   fi
 }
 
 # function to quickly view StarDict word definitions:
 function sd {
-  case $1 in
+  case $1 {
     '-ru') sdcv --utf8-output -u "dictd_www.freedict.de_eng-rus" ${@:/$1} 2>/dev/null ;;
     '-re') sdcv --utf8-output -u "Full Russian-English" ${@:/$1} 2>/dev/null ;;
     '-er') sdcv --utf8-output -u "Full English-Russian" ${@:/$1} 2>/dev/null ;;
@@ -103,17 +136,20 @@ function sd {
     '-w') sdcv --utf8-output -u "WordNet" -u "English Thesaurus" ${@:/$1} 2>/dev/null ;;
     '-a') sdcv --utf8-output ${@:/$1} 2>/dev/null ;;
     *) sdcv --utf8-output -u "WordNet" ${@} 2>/dev/null ;;
-  esac
-}
+};}
 
 # un-smart function for my todo lists:
 function todo {
-  case $# {
-    0) ( setopt nonomatch ; print -C 1 ${$(ls -1 ${H:-/howl}/othe/.TODO_* 2>/dev/null)/*_} ) ;;
-    1) command vim ${H:-/howl}/othe/.TODO_$1 ;;
-    *) command vim ${H:-/howl}/othe/.TODO_${@// /_}
-  }
-}
+  if [[ -n $1 ]] {
+    setopt nonomatch
+    _x="/howl/othe/.TODO_${@// /_}"
+    ${EDITOR:-/usr/bin/vim} ${_x}
+    if [[ -f ${_x} ]] { ( command ls ${_x}*(f600) &>/dev/null ) || chmod -c 0600 ${_x} }
+    unset _x
+  } else {
+      setopt nonomatch
+      command ls /howl/othe/.TODO_* 2>/dev/null | while { read i } { [[ -n $i ]] && print "TODO: ${${i:t}/*_}" }
+};}
 
 # un-smart function for viewing/editing history file (still use 'fc/history'):
 function zhist {
@@ -151,19 +187,18 @@ function iftainted() {
     512) print "512: A kernel warning has occurred." ;;
     1024) print "1024: A module from drivers/staging was loaded." ;;
     *) print "Kernel does not appear to be tainted, or unknown." ;;
-  }
-}
+};}
 
 # quickly view MailDir new count for each folder:
 function newmail {
-  for mail in /howl/mail/FastMail/* ; do
+  for mail (/howl/mail/FastMail/*) {
     local _x
     _x=${(Fw)#$(find ${mail}/new -type f)%/new/*}
     if [[ ${_x} -ge 1 && ${mail:t} != "Sent Items" ]] {
       print "$mail:t:l = ${_x}"
     }
     unset _x
-  done
+  }
   unset mail
 }
 

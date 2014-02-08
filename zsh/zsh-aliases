@@ -21,7 +21,7 @@ alias gh="cd ${H:-/howl}"
 alias rd="rm -r"
 
 # trivial quick views/edits:
-alias zedit="${EDITOR:-/usr/bin/vim} -p ${HOME}/{.zshrc,zsh/zsh-{functions,aliases,exports,options},.zlogin}"
+alias zedit="${EDITOR:-/usr/bin/vim} -p ${HOME}/{.zshrc,zsh/zsh-{functions,aliases,options,exports}}"
 alias xedit="${EDITOR:-/usr/bin/vim} -p ${XDG_CONFIG_DIR:-${HOME}}/xorg/{xinitrc,Xresources}"
 alias xload="xrdb -load ${XDG_CONFIG_DIR:-${HOME}}/xorg/Xresources &>/dev/null"
 
@@ -35,7 +35,6 @@ alias mutt="mutt -F ${XDG_CONFIG_DIR:-${HOME}}/mutt/muttrc"
 alias calc="calc -d"
 alias xskat="xskat -opt ${XDG_CONFIG_DIR:-${HOME}}/xorg/xskat.opt -list ${XDG_CONFIG_DIR:-${HOME}}/xorg/xskat.lst"
 alias offlineimap="offlineimap -c ${XDG_CONFIG_DIR:-${HOME}}/.offlineimap/offlineimaprc"
-alias tintin="tt++"
 alias remote="transmission-remote-cli"
 
 # system/media shortcuts:

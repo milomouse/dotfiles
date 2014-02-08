@@ -27,8 +27,8 @@ super + c
     herbstclient rotate
 
 #+ cycle frame layout(s)
-super + {_,shift} + g
-    herbstclient cycle_layout {+,-}1 max vertical horizontal grid
+super + shift + g
+    herbstclient cycle_layout +1 max vertical horizontal grid
 
 #+ choose frame layout(s)
 super + shift + t ; {m,v,h,g}

@@ -17,7 +17,7 @@
 /usr/local/bin/zaprat --disable
 
 ## BACKGROUND:
-/usr/bin/display -window root -resize 1600x900! ${XDG_PICTURES_DIR:-$HOME/../foto}/star/outer_space.jpg
+/usr/bin/display -window root -resize 1600x900! ${XDG_PICTURES_DIR:-$HOME/../foto}/wall/astrolithe-void.png
 
 ## WINDOW MANAGER:
 exec ${XDG_CONFIG_HOME:-$HOME}/herbstluftwm/dzen-init.zsh &>/dev/null &

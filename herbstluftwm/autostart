@@ -37,36 +37,36 @@ _hc set mouse_recenter_gap 0
 _hc set always_show_frame 1
 _hc set frame_bg_transparent 0
 _hc set frame_border_width 2
-_hc set window_border_width 4
+_hc set window_border_width 5
 _hc set window_border_inner_width 0
 _hc set gapless_grid 1
-_hc set frame_gap 0
+_hc set frame_gap -2
 _hc set window_gap -2
 _hc set frame_padding 2
 _hc set smart_window_surroundings 0
 _hc set smart_frame_surroundings 0
 #// colors:
-_hc set frame_border_active_color '#161616'
+_hc set frame_border_active_color '#101010'
 _hc set frame_border_normal_color '#101010'
 _hc set frame_bg_active_color '#202020'
 _hc set frame_bg_normal_color '#191919'
-_hc set window_border_active_color '#53475b'
+_hc set window_border_active_color '#343434'
 _hc set window_border_normal_color '#1c1c1c'
 _hc set window_border_urgent_color '#4cdcd4'
 #// other:
 _hc set tree_style '╾│ ├└╼─┐'
 _hc unlock
 _hc detect_monitors
-_hc pad 0 92
+_hc pad 0 30 0 0 0
 
-## RULES:
+# RULES:
 #// global focus:
 _hc unrule -F
 _hc rule focus=on
 #// move to tag:
 _hc rule class=Firefox tag=VⅡ
 _hc rule class=Dwb tag=VⅢ
-_hc rule class=Gimp tag=ⅠX pseudotile=on
+_hc rule class=Gimp tag=ⅠⅩ
 _hc rule class=Pavucontrol tag=Ⅹ
 #// management:
 _hc rule title="Open Image" pseudotile=on
@@ -86,5 +86,4 @@ _hc spawn ${XDG_CONFIG_HOME:-$HOME}/herbstluftwm/dzen-post.zsh
 _hc emit_hook complete
 #// execute chain:
 herbstclient chain ${ex}&
-if [[ -n $(pidof tint2) ]] { pkill -USR1 -x tint2 } else { tint2 -c ${XDG_CONFIG_HOME:-$HOME}/herbstluftwm/tint2rc & }
 

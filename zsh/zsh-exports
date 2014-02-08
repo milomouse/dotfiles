@@ -6,7 +6,9 @@
 
 ## global environment exports:
 ## (Gentoo does some of this!)
-#export http_proxy=http://127.0.0.1:3128
+
+# directories:
+export BZR_HOME="${XDG_CONFIG_HOME}/bazaar"
 export H="/howl"
 export XDG_CACHE_HOME="${HOME:-/howl/conf}/cache"
 export XDG_CONFIG_HOME="${HOME:-/howl/conf}"
@@ -21,45 +23,43 @@ export XDG_PICTURES_DIR="${H}/foto"
 export XDG_PUBLICSHARE_DIR="/tmp/user-keep/${USER}"
 export XDG_TEMPLATES_DIR="/tmp/user-keep/${USER}"
 export XDG_VIDEOS_DIR="${H}/vide"
-export XAUTHORITY="${XDG_CONFIG_HOME}/xorg/.Xauthority"
+
+# files:
 export HISTFILE="${ZDOTDIR:-${XDG_CONFIG_HOME}/zsh}/.history"
-export HISTSIZE=1400
-export SAVEHIST=1000
-export DIRSTACKSIZE=20
-export SDCV_HISTSIZE=0
-export SDCV_PAGER="/usr/bin/less"
-#export PAGER="/usr/bin/most"
-#export MOST_SWITCHES="-c"
-#export MOST_EDITOR="${EDITOR}"
+export LESSHISTFILE="${XDG_PUBLICSHARE_DIR}/less_history"
+export SXHKD_FIFO="${XDG_TEMPLATES_DIR}/sxhkd.fifo"
+export XAUTHORITY="${XDG_CONFIG_HOME}/xorg/.Xauthority"
+
+# executables:
+export BROWSER="/usr/bin/w3m"
+export BZR_EDITOR="${EDITOR}"
 #export EDITOR="/usr/bin/vim"
 export FCEDIT="${EDITOR}"
-export BZR_EDITOR="${EDITOR}"
-export BZR_HOME="${XDG_CONFIG_HOME}/bazaar"
-export BROWSER="/usr/bin/w3m"
+export MANPAGER="/usr/bin/less -sM +Gg"
+export PAGER="/usr/bin/less"
+export SDCV_PAGER="/usr/bin/less"
 export SHELL="/bin/zsh"
-export GPG_TTY="$(tty)"
+
+# variables:
 export AWT_TOOLKIT="XToolKit"
-#unset LC_ALL
-#export LANG="en_US.utf8"
-#export LANGUAGE="en_US.utf8"
-#export LC_MESSAGES="C"
-#export LC_TIME="en_US.utf8"
+export DIRSTACKSIZE=20
+export GPG_TTY="$(tty)"
+export HISTSIZE=1400
+#export http_proxy=http://127.0.0.1:3128
 export LESSCHARSET="UTF-8"
-export LESSHISTFILE="${XDG_PUBLICSHARE_DIR}/less_history"
 export LESS_TERMCAP_mb=$'\E[01;31m'
 export LESS_TERMCAP_md=$'\E[00;35m'
 export LESS_TERMCAP_me=$'\E[0m'
 export LESS_TERMCAP_se=$'\E[0m'
 export LESS_TERMCAP_so=$'\E[00;47;30m'
-export LESS_TERMCAP_us=$'\E[00;34m'
 export LESS_TERMCAP_ue=$'\E[0m'
+export LESS_TERMCAP_us=$'\E[00;34m'
+export SAVEHIST=1000
+export SDCV_HISTSIZE=0
 
-## BSPWM:
-export BSPWM_SOCKET="${XDG_TEMPLATES_DIR}/bspwm.socket"
-export BSPWM_TREE="${XDG_TEMPLATES_DIR}/bspwm.tree"
-export BSPWM_HISTORY="${XDG_TEMPLATES_DIR}/bspwm.history"
-export BSPWM_STACK="${XDG_TEMPLATES_DIR}/bspwm.stack"
-## SXHKD:
-export SXHKD_FIFO="${XDG_TEMPLATES_DIR}/sxhkd.fifo"
-## LOGTALK:
-export LOGTALKUSER="${XDG_CONFIG_HOME}/logtalk"
+# language(s):
+#unset LC_ALL
+#export LANG="en_US.utf8"
+#export LANGUAGE="en_US.utf8"
+#export LC_MESSAGES="C"
+#export LC_TIME="en_US.utf8"

@@ -132,7 +132,7 @@ function zhist {
 function dfu() {
   local FSTYPES
   FSTYPES=(nilfs2 btrfs ext2 ext3 ext4 jfs xfs zfs reiserfs reiser4 minix ntfs ntfs-3g fat vfat fuse)
-  df -hTP -x rootfs -x devtmpfs -x tmpfs -x none ; print
+  df -hTP --total -x rootfs -x devtmpfs -x tmpfs -x none ; print
   df -hTP $(for f in $FSTYPES; { print - " -x $f" })
 }
 

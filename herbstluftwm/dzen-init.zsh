@@ -27,7 +27,7 @@ function i_mifo {
   m_A=${${m_:h:h:t}//_/ } ; [[ ${#m_A} -eq 0 ]] && m_A='<unknown>'
   m_D=${${m_:h:t}//_/ }   ; [[ ${#m_D} -eq 0 ]] && m_D='<unknown>'
 
-  T=62 ; t=${T} ; F="${m_B}${m_A}${m_D}"
+  T=60 ; t=${T} ; F="${m_B}${m_A}${m_D}"
   ac=${m_A[1,${T}]} ; dc=${m_D[1,${T}]} ; bc=${m_B[1,${T}]}
 
   # dynamically subtract total output until value <= ${T}

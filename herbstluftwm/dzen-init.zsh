@@ -101,6 +101,6 @@ while true ; do
   _rwide=$(( $(print - ${#${"$(right | sed 's.\^[^(]*([^)]*)..g')"}}) * 6 - 5))
   print - "$(left)^pa($((${_wide} - ${_rwide})))$(right)"
   sleep 1s
-done | dzen2 -p -x 335 -y 0 -h 16 -w ${_wide} -ta l -bg ${_bg} -fg ${_fg} \
+done | dzen2 -p -x 337 -y 0 -h 16 -w ${_wide} -ta l -bg ${_bg} -fg ${_fg} \
        -fn '-misc-fixedzero-medium-r-semicondensed-*-12-110-75-75-c-60-iso10646-1' \
        &>/dev/null || exit 5

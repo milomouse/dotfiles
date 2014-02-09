@@ -3,9 +3,9 @@
 
 # Cosmetics:
 set font      = -artwiz-fkp-medium-r-normal-*-16-160-75-75-m-80-iso10646-1
-set geometry  = 950x16+325+325
+set geometry  = 1000x16+300+28
 set border    = 14px #363636
-set colors    = #666666 #363636 #555555 #222222 #CCCCCC #777777
+set colors    = #666666 #363636 #363636 #464646 #363636 #666666
 
 # Behavior:
 set bangchar  = !

@@ -82,10 +82,21 @@ if [[ -f /usr/share/zsh/site-contrib/zsh-syntax-highlighting/zsh-syntax-highligh
   ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=blue,bold'
 
   # override bracket colors:
-  ZSH_HIGHLIGHT_STYLES[bracket-error]='fg=red,bold,underline'
-  ZSH_HIGHLIGHT_STYLES[bracket-level-1]='fg=blue,bold'
-  ZSH_HIGHLIGHT_STYLES[bracket-level-3]='fg=yellow,bold'
-  ZSH_HIGHLIGHT_STYLES[bracket-level-2]='fg=magenta,bold'
+  ZSH_HIGHLIGHT_STYLES[bracket-error]='fg=red,bold'
+  # uniform / less distracting:
+  ZSH_HIGHLIGHT_STYLES[bracket-level-1]='fg=magenta,bold'
+  ZSH_HIGHLIGHT_STYLES[bracket-level-2]='fg=magenta'
+  ZSH_HIGHLIGHT_STYLES[bracket-level-3]='fg=magenta,bold'
+  ZSH_HIGHLIGHT_STYLES[bracket-level-4]='fg=magenta'
+  ZSH_HIGHLIGHT_STYLES[bracket-level-5]='fg=magenta,bold'
+  ZSH_HIGHLIGHT_STYLES[bracket-level-6]='fg=magenta'
+  # colorful / distracting:
+  #ZSH_HIGHLIGHT_STYLES[bracket-level-1]='fg=magenta,bold'
+  #ZSH_HIGHLIGHT_STYLES[bracket-level-2]='fg=blue,bold'
+  #ZSH_HIGHLIGHT_STYLES[bracket-level-3]='fg=green,bold'
+  #ZSH_HIGHLIGHT_STYLES[bracket-level-4]='fg=magenta,bold'
+  #ZSH_HIGHLIGHT_STYLES[bracket-level-5]='fg=blue,bold'
+  #ZSH_HIGHLIGHT_STYLES[bracket-level-6]='fg=green,bold'
 
   # override pattern colors:
   ZSH_HIGHLIGHT_PATTERNS+=('rm -[f,r] *' 'fg=red,bold,standout')

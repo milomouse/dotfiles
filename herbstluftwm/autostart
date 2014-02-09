@@ -51,7 +51,7 @@ _hc set frame_border_normal_color '#101010'
 _hc set frame_bg_active_color '#202020'
 _hc set frame_bg_normal_color '#191919'
 _hc set window_border_active_color '#343434'
-_hc set window_border_normal_color '#1c1c1c'
+_hc set window_border_normal_color '#161616'
 _hc set window_border_urgent_color '#4cdcd4'
 #// other:
 _hc set tree_style '╾│ ├└╼─┐'
@@ -86,4 +86,3 @@ _hc spawn ${XDG_CONFIG_HOME:-$HOME}/herbstluftwm/dzen-post.zsh
 _hc emit_hook complete
 #// execute chain:
 herbstclient chain ${ex}&
-

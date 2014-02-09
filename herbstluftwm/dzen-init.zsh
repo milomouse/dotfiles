@@ -69,7 +69,7 @@ function i_mail {
 ^bg(#292929)^fg(#494949) $((${#ALL} - ${N:-0})) ${_XX}"
 }
 
-function i_loadavg {
+function i_load {
   LOAD=${${${${${${${${(s. .)$(</proc/loadavg)}[1]/0./${c_08}0.}/1./${c_07}1.}/2./${c_05}2.}/3./${c_04}3.}/4./${c_03}4.}/5./${c_11}5.}//./${c_13}.^fg(#616161)}
   print - "${c_XX}${b_08} ${c_07}^bg(#333333) ɭoadavg ${_XX}\
 ^bg(#292929)${c_01} ${LOAD} ${_XX}"
@@ -95,7 +95,7 @@ ${b_08} ${c_07}%H:%M ${_XX}"
 _font='-misc-fixedzero-medium-r-semicondensed-*-12-110-75-75-c-60-iso10646-1'
 _wide='1260'
 function left { print - "$(i_mifo) $(i_pvol)" }
-function right { print - "$(i_mail) $(i_loadavg) $(i_sbat) $(i_date)${_XX} "}
+function right { print - "$(i_mail) $(i_load) $(i_sbat) $(i_date)${_XX} "}
 
 while true ; do
   _rwide=$(( $(print - ${#${"$(right | sed 's.\^[^(]*([^)]*)..g')"}}) * 6 - 5))

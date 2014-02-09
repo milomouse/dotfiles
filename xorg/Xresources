@@ -40,8 +40,8 @@ urxvt*scrollTtyOutput: false
 urxvt*saveLines: 8192
 urxvt*borderLess: false
 urxvt*transparent: false
-urxvt*shading: 4
-urxvt*fading: 16
+urxvt*shading: 0
+urxvt*fading: 35
 urxvt*cursorColor: #a488d9
 
 !! extensions:
@@ -53,7 +53,7 @@ urxvt*cursorColor: #a488d9
 !! colorschemes:
 
 !! astromouse
-*background: #101010
+*background: #121212
 *foreground: #b2b2b2
 !! black:
 *color0:  #222222

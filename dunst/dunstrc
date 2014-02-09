@@ -1,5 +1,5 @@
 [global]
-    font = "FixedZero 8"
+    font = "fkp 16"
     alignment = left
 
     # The format of the message. Possible variables are:
@@ -11,7 +11,8 @@
     #   %p  progress value if set ([  0%] to [100%]) or nothing
     allow_markup = yes
     #format = "<b>%s %p</b>\n%b"
-    format = "%s\n<b>%b</b>"
+    #format = "%s\n<b>%b</b>"
+    format = "<i>%s</i>   <b>%b</b>"
     sort = yes
     idle_threshold = 0
 
@@ -26,13 +27,14 @@
     # right side of the screen.  Y is measured from the top and down respectevly.
     # The width can be negative. In this case the actual width is the
     # screen width minus the width defined in within the geometry option.
-    #geometry = "400x10-10+10"
-    geometry = "0x10-5+35"
-    indicate_hidden = true
-    word_wrap = yes
+    #geometry = "0x10-5+35"
+    geometry = "978x0+325+400"
+    #geometry = "1600x0+0+29"
+    indicate_hidden = false
+    word_wrap = no
     bounce_freq = 0
-    padding = 5
-    horizontal_padding = 5
+    padding = 10
+    horizontal_padding = 14
     separator_height = 2
     separator_color = frame
     line_height = 0
@@ -45,8 +47,8 @@
 
 
 [frame]
-    width = 3
-    color = "#222222"
+    width = 0
+    color = "#363636"
 
 [shortcuts]
     close = ctrl+space
@@ -54,18 +56,18 @@
     history = ctrl+slash
 
 [urgency_low]
-    background = "#ddddff"
-    foreground = "#222222"
+    background = "#363636"
+    foreground = "#666666"
     timeout = 3
 
 [urgency_normal]
-    foreground = "#161616"
-    background = "#cccccc"
-    timeout = 3
+    background = "#666666"
+    foreground = "#363636"
+    timeout = 5
 
 [urgency_critical]
-    background = "#fb579e"
-    foreground = "#444444"
+    background = "#363636"
+    foreground = "#EC5396"
     timeout = 0
 
 # Every section that isn't one of the above is interpreted as a rules

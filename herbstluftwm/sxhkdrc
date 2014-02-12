@@ -58,9 +58,9 @@ super + r : {h,shift + h,j,shift + j,k,shift + k,l,shift + l}
 super + {_,shift +} {h,j,k,l}
     herbstclient {focus,shift} -e {left,down,up,right}
 
-#+ shift window to edge of tag in direction
-super + control + {h,j,k,l}
-    herbstclient shift_edge -e {left,down,up,right}
+#+ change focus or move window to edge of tag in direction
+super + {control,alt} + {h,j,k,l}
+    herbstclient {focus,shift}_edge -e {left,down,up,right}
 
 #+ change window focus next/previous
 super + {_,shift +} space

@@ -37,8 +37,8 @@ set completion-group-bg \#101010
 set completion-group-fg \#eeeeee
 set completion-highlight-bg \#98a7b2
 set completion-highlight-fg \#232323
-set notification-error-bg \#d554dd
-set notification-error-fg \#eeeeee
+set notification-error-bg \#937295
+set notification-error-fg \#352636
 set notification-warning-bg \#98a7b6
 set notification-warning-fg \#000000
 set highlight-active-color \#d473f9

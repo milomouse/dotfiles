@@ -46,7 +46,6 @@ Currently:
 
 ![ScreenShot1](share/images/2014_02_09-1.png)
 ![ScreenShot2](share/images/2014_02_09-2.png)
-![ScreenShot3](share/images/2014_02_09-3.png)
 
 Previously:
 

@@ -12,7 +12,7 @@ set bangchar  = !
 set autocomp  = 1
 set list      = true
 set last      = true
-set margin    = -300
+set margin    = -30
 set run_hook  = %s || (notify-send "interrobang" "command not valid or exit non-zero")
 
 # !BANG syntax:

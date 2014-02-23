@@ -19,7 +19,6 @@ set run_hook  = %s || (notify-send "interrobang" "command not valid or exit non-
 bang term     = urxvt -e %s
 bang dwb      = dwb %s
 bang ff       = firefox %s
-bang firefox  = firefox %s
 bang pdf      = mupdf %s
 bang man      = urxvt -e man %s
 bang calc     = notify-send "$(echo '%s' | bc -l)"
@@ -29,7 +28,6 @@ bang ?        = echo "interrobang ignored \"%s\""
 # Tab completion for !BANG(s):
 tab default   = percontation "%s" %s | sort -u
 tab ff        = [[ -n $(xclip -selection primary -o) ]] && sel=primary || sel=clipboard ; echo "%s%s$(xclip -selection ${sel} -o)"
-tab firefox   = [[ -n $(xclip -selection primary -o) ]] && sel=primary || sel=clipboard ; echo "%s%s$(xclip -selection ${sel} -o)"
 tab dwb       = [[ -n $(xclip -selection primary -o) ]] && sel=primary || sel=clipboard ; echo "%s%s$(xclip -selection ${sel} -o)"
 tab calc      = str="%s%s"; echo "!calc $(echo ${str#\!calc} | bc -l)"
 tab ?         = ignore="%s%s"; awk '/^bang/ {print $2;}' ~/.interrobangrc

@@ -2,7 +2,7 @@
 " Author:       milomouse <vincent[at]fea.st>
 " Maintainer:   milomouse <vincent[at]fea.st>
 " Created:      2010-xx-xx
-" Last Change:  2013-08-01
+" Last Change:  2014-23-02
 " Colorful yet muted
 " Designed for 256-color console
 
@@ -33,7 +33,7 @@ if ( &t_Co >= 255 || $TERM =~? "256color" )
   hi DiffText       term=none cterm=none ctermfg=217  ctermbg=238
   hi Directory      term=none cterm=none ctermfg=188  ctermbg=none
   hi ErrorMsg       term=none cterm=none ctermfg=38   ctermbg=none
-  hi Error          term=none cterm=none ctermfg=108  ctermbg=234
+  hi Error          term=none cterm=none ctermfg=108  ctermbg=none
   hi Exception      term=none cterm=none ctermfg=249  ctermbg=none
   hi Float          term=none cterm=none ctermfg=251  ctermbg=none
   hi FoldColumn     term=none cterm=none ctermfg=97   ctermbg=235

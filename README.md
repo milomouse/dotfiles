@@ -22,6 +22,8 @@ Current Setup:
 
 + *MAIL RECEIVER* = Postfix , OfflineIMAP
 
++ *MAIL FILTER* = notmuch
+
 + *MAIL READER* = Mutt
 
 + *AUDIO PLAYER* = mifo ( [ebuild](https://github.com/milomouse/ebuilds/tree/master/media-sound/mifo) , [code](https://github.com/milomouse/mifo) )

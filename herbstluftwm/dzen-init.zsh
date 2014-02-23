@@ -48,7 +48,7 @@ $(mifo -a ${b_08} '^bg(#303030)'${c_12} ${m_A:-%D:2:} ${_XX}\
 }
 
 function i_pvol {
-  VOLUME="${${${$(pulsevol -a volume)#0:}/1:/${c_07}ʆ^fg(#666666)}:gs/%/^fg(#484848)&}"
+  VOLUME="${${$(pulsevol -a volume)/\//${c_07}ʆ^fg(#666666)}:gs/%/^fg(#484848)&}"
   MUTE="${${$(pulsevol -a mute)/yes/${c_01}}/no/${c_13}}•"
   print - "${c_XX}${b_08} ${c_07}^bg(#333333) ⩗olume ${_XX}\
 ^bg(#292929)^fg(#666666) ${VOLUME} ${_XX}\

@@ -81,7 +81,7 @@ function upf {
 # quirky tmux function:
 function tmux {
   _d="/tmp/user-keep/${USER}/tmux/default"
-  _x="/tmp/user-keep/${USER}/tmux/xorg"
+  _x="/tmp/user-keep/${USER}/tmux/xorg -2"
 
   # usage: tmux [command] [[socket]]
 

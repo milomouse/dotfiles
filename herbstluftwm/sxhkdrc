@@ -104,7 +104,7 @@ super + shift + s
 
 #+ spawn rxvt-unicode with tmux
 super + Return
-    urxvt -e tmux -S /tmp/user-keep/h/tmux/xorg
+    urxvt -e tmux -2S /tmp/user-keep/h/tmux/xorg
 
 #+ spawn rxvt-unicode
 super + shift + Return

@@ -80,6 +80,9 @@ urxvt*cursorColor: #a488d9
 !! PINK > CYAN
 *color6:  #CE77CA
 *color14: #FC68F7
+!! PURPLE > CYAN
+!*color6:  #6A4E6E
+!*color14: #966F9B
 !! white:
 *color7:  #8D8D8D
 *color15: #DAD3D3

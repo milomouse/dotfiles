@@ -62,10 +62,10 @@ urxvt*cursorColor: #a488d9
 *color1:  #CC6290
 *color9:  #EC5396
 !! green:
-*color2:  #6DB4B2
+*color2:  #669F9D
 *color10: #25E2DD
 !! yellow:
-*color3:  #B0A65F
+*color3:  #C0B772
 *color11: #D4C141
 !! blue:
 *color4:  #68AFF7
@@ -77,12 +77,9 @@ urxvt*cursorColor: #a488d9
 !! ORANGE > CYAN
 !*color6:  #CEA877
 !*color14: #ECA953
-!! PINK > CYAN
-*color6:  #CE77CA
-*color14: #FC68F7
 !! PURPLE > CYAN
-!*color6:  #6A4E6E
-!*color14: #966F9B
+*color6:  #6A4E6E
+*color14: #B161BA
 !! white:
 *color7:  #8D8D8D
 *color15: #DAD3D3

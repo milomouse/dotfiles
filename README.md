@@ -10,7 +10,7 @@ Current Setup:
 
 + *BUILD* = #1 SMP PREEMPT RT Sat Jan 18 18:22:09 EST 2014 x86_64 AMD
 
-+ *INIT* = OpenRC
++ *INIT* = OpenRC ( sysvinit )
 
 + *UDEV* = mdev
 

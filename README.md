@@ -12,7 +12,7 @@ Current Setup:
 
 + *INIT* = OpenRC
 
-+ *UDEV* = eudev
++ *UDEV* = mdev
 
 + *SHELL* = Zsh
 

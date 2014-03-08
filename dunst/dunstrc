@@ -28,7 +28,7 @@
     # The width can be negative. In this case the actual width is the
     # screen width minus the width defined in within the geometry option.
     #geometry = "0x10-5+35"
-    geometry = "978x0+325+400"
+    geometry = "978x0+325+225"
     #geometry = "1600x0+0+29"
     indicate_hidden = false
     word_wrap = no

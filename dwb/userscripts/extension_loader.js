@@ -1,29 +1,4 @@
 //!javascript
-//<autoquvi___SCRIPT
-extensions.load("autoquvi", {
-//<autoquvi___CONFIG
-  // The quvi command
-  quvi      : "quvi",
-
-  // External player command
-  player    : "mplayer -fs %u",
-
-  // Whether to automatically play videos when quvi find a playable
-  // video
-  autoPlay  : false,
-
-  // Whether to choose the quality before quvi starts
-  chooseQuality : true,
-
-  // A shortcut that spawns quvi for the current website
-  shortcut  : ",dv",
-
-  // A command that spawns quvi for the current website 
-  command  : "autoquvi"
-
-//>autoquvi___CONFIG
-});
-//>autoquvi___SCRIPT
 //<contenthandler___SCRIPT
 extensions.load("contenthandler", {
 //<contenthandler___CONFIG
@@ -35,7 +10,7 @@ extensions.load("contenthandler", {
   // Handle requests based on filename extension
   extension : {
     "torrent" : "transmission-remote -a '%u'",
-    //"pdf" : "zathura '%u'"
+    //"pdf" : "zathura '%u'" // Prefer to save
   },
 
   // Handle requests based on URI scheme
@@ -142,7 +117,7 @@ unblockCurrent : "erC",
 unblockAll : "erA",
 
 // reload current site after blocking / unblocking a request
-autoreload : false, 
+autoreload : false,
 
 // notify about blocked requests
 notify : true
@@ -161,3 +136,29 @@ extensions.load("userscripts", {
 //>userscripts___CONFIG
 });
 //>userscripts___SCRIPT
+//<navtools___SCRIPT
+extensions.load("navtools", {
+//<navtools___CONFIG
+// Shortcut for navigating to the next page
+forwardBind : "]]",
+
+// Shortcut for navigating to the previous page
+backBind : "[[",
+
+// Go up one directory, e.g. from http://www.example.com/foo/bar to 
+// http://www.example.com/foo
+updirBind : "gu", 
+
+// Go to top directory, e.g. from http://www.example.com/foo/bar to 
+// http://www.example.com
+topdirBind : "gU", 
+
+// Patterns to match against when searching for "next"-links
+nextPatterns : "next,more,>,\u2192,\xbb,\u226b,>>",
+
+// Patterns to match against when searching for "previous"-links
+previousPatterns : "prev,previous,back,<,\u2190,\xab,\u226a,<<"
+
+//>navtools___CONFIG
+});
+//>navtools___SCRIPT

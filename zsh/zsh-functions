@@ -81,7 +81,7 @@ function upf {
 # quirky tmux function:
 function tmux {
   _d="/tmp/user-keep/${USER}/tmux/default"
-  _x="/tmp/user-keep/${USER}/tmux/xorg -2"
+  _x="/tmp/user-keep/${USER}/tmux/xorg"
 
   # usage: tmux [command] [[socket]]
 
@@ -129,13 +129,8 @@ function tmux {
 # function to quickly view StarDict word definitions:
 function sd {
   case $1 {
-    '-ru') sdcv --utf8-output -u "dictd_www.freedict.de_eng-rus" ${@:/$1} 2>/dev/null ;;
-    '-re') sdcv --utf8-output -u "Full Russian-English" ${@:/$1} 2>/dev/null ;;
-    '-er') sdcv --utf8-output -u "Full English-Russian" ${@:/$1} 2>/dev/null ;;
-    '-t') sdcv --utf8-output -u "English Thesaurus" ${@:/$1} 2>/dev/null ;;
-    '-w') sdcv --utf8-output -u "WordNet" -u "English Thesaurus" ${@:/$1} 2>/dev/null ;;
-    '-a') sdcv --utf8-output ${@:/$1} 2>/dev/null ;;
-    *) sdcv --utf8-output -u "WordNet" ${@} 2>/dev/null ;;
+    '-t') sdcv --data-dir ${XDG_DATA_HOME}/stardict --utf8-output -u "Moby Thesaurus II" ${@:/$1} 2>/dev/null ;;
+    *) sdcv --data-dir ${XDG_DATA_HOME}/stardict --utf8-output -u "WordNet" ${@} 2>/dev/null ;;
 };}
 
 # un-smart function for my todo lists:
@@ -232,7 +227,7 @@ function mpx {
 };}
 
 # one-liners/micro functions:
-function startx { [[ ${+DISPLAY} -eq 1 ]] || /usr/bin/xinit ${XDG_CONFIG_DIR:-${HOME}}/xorg/xinitrc -auth ${XDG_CONFIG_DIR:-${HOME}}/xorg/.serverauth.${RANDOM[1,4]} -nolisten tcp -once -retro }
+function startx { [[ ${+DISPLAY} -eq 1 ]] || clear ; /usr/bin/xinit ${XDG_CONFIG_DIR:-$HOME}/xorg/xinitrc -auth ${XDG_CONFIG_DIR:-$HOME}/xorg/.serverauth.${RANDOM[1,4]} -nolisten tcp -once -retro &>!${XDG_CONFIR_DIR:-$HOME}/xorg/log }
 function mkcd { command mkdir -p "$@" && cd "$@" }
 function timec { print "$(date +'%T %Y-%m-%d')" ; while sleep .2 ; do printf '\r%s ' "$(date +'%T %Y-%m-%d')" ; done }
 function dropcache { sync && command su -s /bin/zsh -c 'echo 3 > /proc/sys/vm/drop_caches' root }

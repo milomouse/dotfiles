@@ -40,7 +40,7 @@ no_proxy
 ftp_proxy 
 https_proxy http://127.0.0.1:3128
 http_proxy http://127.0.0.1:3128
-use_proxy 1
+use_proxy 0
 dns_order 0
 meta_refresh 0
 follow_redirection 10

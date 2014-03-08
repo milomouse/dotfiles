@@ -10,7 +10,6 @@
 
 ## KEYBOARD:
 #/usr/bin/xmodmap ${XDG_CONFIG_HOME:-$HOME}/keymaps/dvausler.xmodmap
-/usr/bin/xmodmap ${XDG_CONFIG_HOME:-$HOME}/keymaps/overlay-mods.xmodmap
 
 ## MOUSE:
 /usr/bin/xsetroot -cursor_name left_ptr -solid '#151515'
@@ -22,4 +21,4 @@
 ## WINDOW MANAGER:
 exec ${XDG_CONFIG_HOME:-$HOME}/herbstluftwm/dzen-init.zsh &>/dev/null &
 /usr/bin/sxhkd -c ${XDG_CONFIG_HOME:-$HOME}/herbstluftwm/sxhkdrc &
-exec /usr/bin/herbstluftwm --locked -c ${XDG_CONFIG_HOME:-$HOME}/herbstluftwm/autostart &>/dev/null
+exec /usr/bin/herbstluftwm --locked -c ${XDG_CONFIG_HOME:-$HOME}/herbstluftwm/autostart

@@ -50,6 +50,10 @@ super + shift + {equal,minus}
 super + {_,shift +} BackSpace
     herbstclient split {explode,auto}
 
+#+ add or retract frame_gap
+super + control + {minus,equal}
+    herbstclient set frame_gap $(($(herbstclient get frame_gap) {-,+} 4))
+
 #+ resize window in direction
 super + r : {h,shift + h,j,shift + j,k,shift + k,l,shift + l}
     herbstclient resize {left +,left -,down +,down -,up +,up -,right +,right -}0.01

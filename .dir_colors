@@ -43,6 +43,7 @@ EXEC           01;32
 .exe           01;37
 .iso           00;33
 ##+ archives:
+.7z            01;33
 .deb           01;33
 .DEB           01;33
 .tar           01;33

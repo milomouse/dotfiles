@@ -161,3 +161,6 @@ hint-offset-left=0
 tab-orientation=horizontal
 tab-width=100
 adblocker-element-hider=false
+tabbar-height=0
+statusbar-height=0
+favicon-size=0

@@ -57,6 +57,6 @@ keycode  55 =            w             W            w             W
 keycode  56 =            x             X            x             X
 keycode  57 =            d             D            d             D
 keycode  58 =            m             M            m             M
-keycode  59 =            j             J            j          less
+keycode  59 =            j             J            j             J
 keycode  60 =            k             K            k             K
 keycode  61 =        minus    underscore        minus    underscore

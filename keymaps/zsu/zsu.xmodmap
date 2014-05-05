@@ -1,4 +1,3 @@
-!_________________________________________________________________!
 !                                                                 !
 !  LAYOUT:  ZSU                                                   !
 !  AUTHOR:  Vincent ZaGara II                                     !
@@ -9,9 +8,6 @@
 !    z s u ' y v f g l p . / \       Z S U " Y V F G L P > ? |    !
 !     o a e i b r n h t , =           O A E I B R N H T < +       !
 !      q ; c w x d m j k -             Q : C W X D M J K _        !
-!_________________________________________________________________!
-!                                                                 !
-!            xmodmap file created by Vincent ZaGara II            !
 !_________________________________________________________________!
 
 keycode  49 =        grave    asciitilde        grave    asciitilde

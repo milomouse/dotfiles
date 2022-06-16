@@ -1,7 +1,7 @@
-!                                                                 !
-!  LAYOUT:  ZSU                                                   !
-!  AUTHOR:  Vincent ZaGara II                                     !
-!  DETAIL:  http://zsu.vincent.fea.st                             !
+!"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""!
+! detail: keyboard layout file for `xmodmap'                      !
+! locate: $XDG_CONFIG_HOME/keymaps/zsu/zsu.xmodmap                !
+! source: github[dot]com/milomouse                                !
 !_________________________________________________________________!
 !                                                                 !
 !   ` 1 2 3 4 5 6 7 8 9 0 [ ]       ~ ! @ # $ % ^ & * ( ) { }     !

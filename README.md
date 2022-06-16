@@ -2,13 +2,13 @@ Current Setup:
 --------------
 
 
-+ *DEVICE* = Gigabyte Aero 17 HDR ( [link](https://www.gigabyte.com/Laptop/AERO-17-HDR--Intel-11th-Gen) )
++ *DEVICE* = Gigabyte Aero 17 HDR ( [info](https://www.gigabyte.com/Laptop/AERO-17-HDR--Intel-11th-Gen) )
 
 + *DISTRO* = Gentoo ( ~amd64 nomultilib )
 
 + *KERNEL* = GNU/Linux 5.17.1
 
-+ *SOURCES* = Zen ( [link](https://github.com/zen-kernel/zen-kernel) )
++ *SOURCES* = Zen ( [patchset](https://github.com/zen-kernel/zen-kernel) )
 
 + *INIT* = OpenRC ( sysvinit )
 
@@ -30,7 +30,7 @@ Current Setup:
 
 + *X READER* = mupdf
 
-+ *X WEB BROWSER* = Firefox ( Surfingkeys )
++ *X WEB BROWSER* = Firefox ( [Surfingkeys](https://github.com/brookhong/Surfingkeys) )
 
 
 Screenshots:

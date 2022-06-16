@@ -1,142 +1,39 @@
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!! locate: ${XDG_CONFIG_HOME}/xorg/Xdefaults !!
-!! author: milomouse (github.com/milomouse)  !!
-!! detail: X.Org session configuration file  !!
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!#############################################!
+!# locate: ${XDG_CONFIG_HOME}/xorg/Xdefaults #!
+!# author: Vincent (github.com/milomouse)    #!
+!# detail: X.Org and X terminal parameters   #!
+!#############################################!
 
-!! urxvt settings:
-urxvt*termName: rxvt-256color
-urxvt*loginShell: true
+*dpi: 192
+Xcursor.size: 48
 
-!! fork of 6x12 Fixed SemiCondensed; emphasize numeric 0's as opposed to alphabetic O's:
-urxvt*font: -misc-fixedzero-medium-r-semicondensed-*-12-110-75-75-c-60-iso10646-1
-urxvt*boldFont: -misc-fixedzero-medium-r-semicondensed-*-12-110-75-75-c-60-iso10646-1
-urxvt*italicFont: -misc-fixedzero-medium-r-semicondensed-*-12-110-75-75-c-60-iso10646-1
-urxvt*boldItalicFont: -misc-fixedzero-medium-r-semicondensed-*-12-110-75-75-c-60-iso10646-1
-
-!urxvt*font: -misc-fixed-medium-r-semicondensed-*-12-110-75-75-c-60-koi8-r
-!urxvt*boldFont: -misc-fixed-medium-r-semicondensed-*-12-110-75-75-c-60-koi8-r
-!urxvt*italicFont: -misc-fixed-medium-r-semicondensed-*-12-110-75-75-c-60-koi8-r
-!urxvt*boldItalicFont: -misc-fixed-medium-r-semicondensed-*-12-110-75-75-c-60-koi8-r
-
-!urxvt*font: -windows-proggycleanszcp-medium-r-normal-*-13-80-96-96-c-70-iso8859-1
-!urxvt*boldFont: -windows-proggycleanszcp-medium-r-normal-*-13-80-96-96-c-70-iso8859-1
-!urxvt*italicFont: -windows-proggycleanszcp-medium-r-normal-*-13-80-96-96-c-70-iso8859-1
-!urxvt*boldItalicFont: -windows-proggycleanszcp-medium-r-normal-*-13-80-96-96-c-70-iso8859-1
-
-!urxvt*font: -lfp-gamow-medium-r-normal-*-7-70-75-75-c-70-iso10646-1
-!urxvt*boldFont: -lfp-gamow-medium-r-normal-*-7-70-75-75-c-70-iso10646-1
-!urxvt*italicFont: -lfp-gamow-medium-r-normal-*-7-70-75-75-c-70-iso10646-1
-!urxvt*boldItalicFont: -lfp-gamow-medium-r-normal-*-7-70-75-75-c-70-iso10646-1
-
-!urxvt*colorIT: #707070
-urxvt*scrollBar: false
-urxvt*secondaryScroll: true
-urxvt*scrollTtyKeypress: true
-urxvt*scrollWithBuffer: true
-urxvt*scrollTtyOutput: false
-!urxvt*visualBell: true
-!urxvt*urgentOnBell :true
-urxvt*saveLines: 8192
-urxvt*borderLess: false
-urxvt*transparent: false
-urxvt*shading: 0
-urxvt*fading: 35
-urxvt*cursorColor: #a488d9
-
-!! extensions:
-!urxvt*perl-ext: default,url-select
-!urxvt*keysym.M-u: perl:url-select:select_next
-!urxvt*urlLauncher: /usr/bin/dwb
-!urxvt*underlineURLs: true
-
-!! colorschemes:
-
-!! astromouse
-*background: #121212
-*foreground: #b2b2b2
+!! NOTE: here for emulators that need it
+!! terminal colorscheme(s):
+!! scheme: candymouse
+*cursorColor: #E31763
+*background:  #121212
+*foreground:  #A9B1A6
 !! black:
-*color0:  #222222
-*color8:  #3D3A3A
+*color0:  #161616
+*color8:  #2D2E33
 !! red:
-*color1:  #CC6290
-*color9:  #EC5396
+*color1:  #E31763
+*color9:  #C2003B
 !! green:
-*color2:  #669F9D
-*color10: #25E2DD
+*color2:  #7DE1D3
+*color10: #27C8B1
 !! yellow:
-*color3:  #C0B772
-*color11: #D4C141
+*color3:  #EAE900
+*color11: #FFCB6B
 !! blue:
-*color4:  #68AFF7
-*color12: #138BCF
+*color4:  #009DFF
+*color12: #0047BB
 !! magenta:
-*color5:  #AD73F9
-*color13: #6B3BAA
+*color5:  #9798E5
+*color13: #6300FF
 !! cyan:
-!! ORANGE > CYAN
-!*color6:  #CEA877
-!*color14: #ECA953
-!! PURPLE > CYAN
-*color6:  #6A4E6E
-*color14: #B161BA
+*color6:  #A2ECE6
+*color14: #25C0C0
 !! white:
-*color7:  #8D8D8D
-*color15: #DAD3D3
-!! bold:
-*colorBD: #87AFD7
-!! underline:
-*colorUL: #A07CD3
-!! italics:
-*colorIT: #5AECD7
-
-!! various X stuff
-Xcursor.theme: Vanilla-DMZ
-Xcursor.size: 10
-XFontSel*sampleText.background:       TEXTBG
-XFontSel*menu*showUnselectable:       false
-XFontSel*MenuButton.shadowWidth:      0
-XFontSel*Toggle*ToggleStyle:          check
-XFontSel*MenuButton*Justify:          left
-XFontSel*MenuButton*MenuButtonStyle:  select
-
-.xfontsel.pane.commandBox.quitButton.background:  #252525
-.xfontsel.pane.commandBox.quitButton.foreground:  snow
-.xfontsel.pane.commandBox.ownButton.background:   purple
-.xfontsel.pane.commandBox.ownButton.foreground:   snow
-.xfontsel.pane.commandBox.countLabel.background:  snow
-.xfontsel.pane.viewPort.sampleText.background:    #252525
-.xfontsel.pane.viewPort.sampleText.foreground:    snow
-.xfontsel.pane.fieldBox.field0.background:        #252525
-.xfontsel.pane.fieldBox.field0.foreground:        snow
-.xfontsel.pane.fieldBox.field1.background:        #252525
-.xfontsel.pane.fieldBox.field1.foreground:        snow
-.xfontsel.pane.fieldBox.field2.background:        #252525
-.xfontsel.pane.fieldBox.field2.foreground:        snow
-.xfontsel.pane.fieldBox.field3.background:        #252525
-.xfontsel.pane.fieldBox.field3.foreground:        snow
-.xfontsel.pane.fieldBox.field4.background:        #252525
-.xfontsel.pane.fieldBox.field4.foreground:        snow
-.xfontsel.pane.fieldBox.field5.background:        #252525
-.xfontsel.pane.fieldBox.field5.foreground:        snow
-.xfontsel.pane.fieldBox.field6.background:        #252525
-.xfontsel.pane.fieldBox.field6.foreground:        snow
-.xfontsel.pane.fieldBox.field7.background:        #252525
-.xfontsel.pane.fieldBox.field7.foreground:        snow
-.xfontsel.pane.fieldBox.field8.background:        #252525
-.xfontsel.pane.fieldBox.field8.foreground:        snow
-.xfontsel.pane.fieldBox.field9.background:        #252525
-.xfontsel.pane.fieldBox.field9.foreground:        snow
-.xfontsel.pane.fieldBox.field10.background:       #252525
-.xfontsel.pane.fieldBox.field10.foreground:       snow
-.xfontsel.pane.fieldBox.field11.background:       #252525
-.xfontsel.pane.fieldBox.field11.foreground:       snow
-.xfontsel.pane.fieldBox.field12.background:       #252525
-.xfontsel.pane.fieldBox.field12.foreground:       snow
-.xfontsel.pane.fieldBox.field13.background:       #252525
-.xfontsel.pane.fieldBox.field13.foreground:       snow
-.xfontsel.pane.fieldBox*foreground:               #999999
-.xfontsel.pane.fieldBox.MenuButton.borderWidth:   1
-.xfontsel.pane.fieldBox.MenuButton.internalHeight:1
-.xfontsel.pane.fieldBox.MenuButton.internalWidth: 2
-.xfontsel.pane.fieldBox.MenuButton.shapeStyle:    rectangle
+*color7:  #A9B1A6
+*color15: #9E9DA5

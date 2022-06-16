@@ -37,6 +37,6 @@ Screenshots:
 --------------
 
 ![Empty](share/images/2022_06_14-184738.png)
-![Workload](share/images/1-8204dd2267.gif)
+![Workload](share/images/2022_06_16-125244.png)
 ![Firefox](share/images/2022_06_15-194726.png)
 ![Blender](share/images/2022_06_15-193858.png)

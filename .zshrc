@@ -1,27 +1,41 @@
-###############################################
-## locate: ${XDG_CONFIG_HOME}/.zshrc         ##
-## author: milomouse (github.com/milomouse)  ##
-## detail: main configuration file for `zsh' ##
-###############################################
+#######################################################
+## locate: ${XDG_CONFIG_HOME}/.zshrc                 ##
+## author: Vincent (github.com/milomouse)            ##
+## detail: main configuration file for `zsh'         ##
+#######################################################
 
 # source external configuration files:
-. /etc/profile &>/dev/null
-for i in ${HOME}/zsh/zsh-{options,exports,aliases,functions}; do
-  . $i
+for i in ${HOME}/zsh/zsh-{options,exports,aliases,functions} /usr/share/fzf/key-bindings.zsh ; do
+  if [[ -f $i ]] { source $i } else { print "Cannot find file: $i" }
 done
 
 # prompt line:
-[[ ${TERM} =~ screen ]] && precmd() { print -Pn "\e]2;%2d\a" } #|| RPROMPT='%F{white}%~%f'
-PS1='%(1j.%B%F{black}%j .)%(0?..%B%F{red}%? )%F{green}%#%f '
-PS2='%B%F{black}> %b%f'
+[[ ${TERM} =~ screen ]] && precmd() { print -Pn "\e]2;%2d\a" }
+function zle-keymap-select zle-line-init zle-line-finish
+{
+  if [[ $KEYMAP == (viins|main) ]] ; then
+    _VP1="{cyan}MOTHER%b%F{white}"
+    _VP2="{green}"
+  else
+    _VP1="{black}MOTHER%b%F{red}"
+    _VP2="{black}"
+  fi
+  zle reset-prompt
+  zle -R
+}
+PS1='%(1j.%B%F{black}%j .)%(0?..%B%F{red}%? )%B%F${_VP1}%#%b%f '
+PS2='%B%F${_VP2}> %b%f'
 PS3='%B%F{white}?# %b%f%F{red}%# %f'
 PS4='%B%F{white}%_ %b%f%F{magenta}%# %f%B%F{white}+%N:%i %b%f%F{magenta}%# %f'
+zle -N zle-line-init
+zle -N zle-line-finish
+zle -N zle-keymap-select
 
 # auto-completion:
 autoload -U compinit
 compinit
 _force_rehash() { (( CURRENT == 1 )) && rehash ; return 1 }
-zstyle ':completion:::::' completer _force_rehash _expand _complete _approximate 
+zstyle ':completion:::::' completer _force_rehash _expand _complete _approximate
 zstyle ':completion:*:descriptions' format "- %d -"
 zstyle ':completion:*:default' list-prompt '%S%M matches%s'
 zstyle ':completion:*:manuals' separate-sections true
@@ -36,25 +50,24 @@ zstyle ':completion:*:*:kill:*:processes' command 'ps haxopid:5,user:4,%cpu:4,ni
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' force-list always
 
-
 # framebuffer colors:
 if [[ ${TERM} == linux ]] || [[ ${TERM} =~ screen && ${+DISPLAY} == 0 ]]; then
-    echo -en "\e]P0000000" ; echo -en "\e]P8969696" # 0: black/default
-    echo -en "\e]P1d770af" ; echo -en "\e]P9d28abf" # 1: red
-    echo -en "\e]P278a45c" ; echo -en "\e]PA9acc79" # 2: green
-    echo -en "\e]P3c8bc45" ; echo -en "\e]PBd0d26b" # 3: yellow
-    echo -en "\e]P477b6c5" ; echo -en "\e]PC8fa7b9" # 4: blue
-    echo -en "\e]P5a488d9" ; echo -en "\e]PDbd89de" # 5: magenta
-    echo -en "\e]P67ac0af" ; echo -en "\e]PE6ec2a8" # 6: cyan
-    echo -en "\e]P78d8d8d" ; echo -en "\e]PFdad3d3" # 7: white
+  echo -en "\e]P0000000" ; echo -en "\e]P83D3A3A" # 0: black/default
+  echo -en "\e]P1E31763" ; echo -en "\e]P9C2003B" # 1: red
+  echo -en "\e]P27DE1D3" ; echo -en "\e]PA27C8B1" # 2: green
+  echo -en "\e]P3EAE900" ; echo -en "\e]PBBFC521" # 3: yellow
+  echo -en "\e]P46186B7" ; echo -en "\e]PC1D43B2" # 4: blue
+  echo -en "\e]P5A538FF" ; echo -en "\e]PD8600E2" # 5: magenta
+  echo -en "\e]P6BAE5DB" ; echo -en "\e]PE73B8A8" # 6: cyan
+  echo -en "\e]P79E9DA5" ; echo -en "\e]PFA9B1A6" # 7: white
 fi
 
 # source custom colors:
 eval $(dircolors -b ${HOME}/.dir_colors)
 
 # Fish-like syntax highlighting for ZSH:
-if [[ -f /usr/share/zsh/site-contrib/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
-  . /usr/share/zsh/site-contrib/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+if [[ -f $HOME/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
+  source $HOME/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
   # activate highlighters:
   ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
@@ -64,10 +77,10 @@ if [[ -f /usr/share/zsh/site-contrib/zsh-syntax-highlighting/zsh-syntax-highligh
   ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red,bold'
   ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=blue,bold'
   ZSH_HIGHLIGHT_STYLES[assign]='fg=yellow,bold'
-  ZSH_HIGHLIGHT_STYLES[alias]='fg=magenta'
-  ZSH_HIGHLIGHT_STYLES[function]='fg=magenta'
-  ZSH_HIGHLIGHT_STYLES[builtin]='fg=magenta,bold'
-  ZSH_HIGHLIGHT_STYLES[command]='fg=magenta,bold'
+  ZSH_HIGHLIGHT_STYLES[alias]='fg=white'
+  ZSH_HIGHLIGHT_STYLES[function]='fg=white'
+  ZSH_HIGHLIGHT_STYLES[builtin]='fg=magenta'
+  ZSH_HIGHLIGHT_STYLES[command]='fg=magenta'
   ZSH_HIGHLIGHT_STYLES[hashed-command]='fg=red,bold,standout'
   ZSH_HIGHLIGHT_STYLES[path]='fg=white,underline'
   ZSH_HIGHLIGHT_STYLES[path_prefix]='fg=white,underline'
@@ -83,33 +96,25 @@ if [[ -f /usr/share/zsh/site-contrib/zsh-syntax-highlighting/zsh-syntax-highligh
 
   # override bracket colors:
   ZSH_HIGHLIGHT_STYLES[bracket-error]='fg=red,bold'
-  # uniform / less distracting:
-  ZSH_HIGHLIGHT_STYLES[bracket-level-1]='fg=magenta,bold'
-  ZSH_HIGHLIGHT_STYLES[bracket-level-2]='fg=magenta'
-  ZSH_HIGHLIGHT_STYLES[bracket-level-3]='fg=magenta,bold'
-  ZSH_HIGHLIGHT_STYLES[bracket-level-4]='fg=magenta'
-  ZSH_HIGHLIGHT_STYLES[bracket-level-5]='fg=magenta,bold'
-  ZSH_HIGHLIGHT_STYLES[bracket-level-6]='fg=magenta'
-  # colorful / distracting:
-  #ZSH_HIGHLIGHT_STYLES[bracket-level-1]='fg=magenta,bold'
-  #ZSH_HIGHLIGHT_STYLES[bracket-level-2]='fg=blue,bold'
-  #ZSH_HIGHLIGHT_STYLES[bracket-level-3]='fg=green,bold'
-  #ZSH_HIGHLIGHT_STYLES[bracket-level-4]='fg=magenta,bold'
-  #ZSH_HIGHLIGHT_STYLES[bracket-level-5]='fg=blue,bold'
-  #ZSH_HIGHLIGHT_STYLES[bracket-level-6]='fg=green,bold'
+  ZSH_HIGHLIGHT_STYLES[bracket-level-1]='fg=green,bold'
+  ZSH_HIGHLIGHT_STYLES[bracket-level-2]='fg=white,bold'
+  ZSH_HIGHLIGHT_STYLES[bracket-level-3]='fg=blue,bold'
+  ZSH_HIGHLIGHT_STYLES[bracket-level-4]='fg=green,bold'
+  ZSH_HIGHLIGHT_STYLES[bracket-level-5]='fg=white,bold'
+  ZSH_HIGHLIGHT_STYLES[bracket-level-6]='fg=blue,bold'
 
-  # override pattern colors:
-  ZSH_HIGHLIGHT_PATTERNS+=('rm -[f,r] *' 'fg=red,bold,standout')
-  ZSH_HIGHLIGHT_PATTERNS+=('rm -[f,r][f,r] *' 'fg=red,bold,standout')
-  ZSH_HIGHLIGHT_PATTERNS+=('sudo dd *' 'fg=magenta,bold,standout')
-  ZSH_HIGHLIGHT_PATTERNS+=('sudo shred *' 'fg=magenta,bold,standout')
+  # override pattern decorations:
+  ZSH_HIGHLIGHT_PATTERNS+=('rm -[f,r] *' 'fg=black,bg=white,bold')
+  ZSH_HIGHLIGHT_PATTERNS+=('rm -[f,r][f,r] *' 'fg=black,bg=white,bold')
+  ZSH_HIGHLIGHT_PATTERNS+=('shred *' 'fg=black,bg=white,bold')
 
 fi
 
 # Fish-like history sub-string search for ZSH (load AFTER syntax):
-if [[ -f /usr/share/zsh/site-contrib/zsh-history-substring-search/zsh-history-substring-search.zsh ]]; then
-  . /usr/share/zsh/site-contrib/zsh-history-substring-search/zsh-history-substring-search.zsh
+if [[ -f $HOME/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh ]]; then
+  source $HOME/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 
+  # override main colors:
   HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='bg=white,fg=black,bold'
   HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='bg=red,fg=black'
   HISTORY_SUBSTRING_SEARCH_GLOBBING_FLAGS='i'
@@ -135,3 +140,5 @@ bindkey "^[[4~" end-of-line
 bindkey "^[[8~" end-of-line
 bindkey "^?" backward-delete-char
 bindkey '^R' history-incremental-search-backward
+bindkey -M vicmd '^U' vi-kill-line
+bindkey -M viins '^U' kill-whole-line

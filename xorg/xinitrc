@@ -17,7 +17,7 @@ zaprat --disable &
 
 ## DISPLAY:
 xsetroot -cursor_name left_ptr -solid '#101010' &
-display -window root -resize 3840x2160! ${XDG_PUBLICSHARE_DIR}/images/kali-ma-angelic.jpg &
+display -window root -resize 3840x2160! ${XDG_PUBLICSHARE_DIR}/images/kali-ma-pearl.jpg &
 
 ## WINDOW MANAGER:
 sxhkd -c ${XDG_CONFIG_HOME:-$HOME}/herbstluftwm/sxhkdrc &

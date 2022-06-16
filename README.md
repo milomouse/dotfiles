@@ -20,9 +20,9 @@ Current Setup:
 
 + *TERMINAL MULTIPLEX* = Tmux ( [link](https://github.com/tmux/tmux/wiki) )
 
-+ *WINDOW MANAGER* = herbstluftwm ( [link](https://herbstluftwm.org/) )
-
 + *TERMINAL EMULATOR* = st ( [link](https://st.suckless.org/) )
+
++ *WINDOW MANAGER* = herbstluftwm ( [link](https://herbstluftwm.org/) )
 
 + *IMAGE VIEWER* = sxiv ( [link](https://github.com/muennich/sxiv) )
 

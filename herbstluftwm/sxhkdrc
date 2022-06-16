@@ -1,181 +1,161 @@
-#####################################################
-## locate: ${XDG_CONFIG_HOME}/herbstluftwm/sxhkdrc ##
-## author: Vincent Z (github.com/milomouse)        ##
-## detail: keybinding(s) for `herbstluftwm'        ##
-#####################################################
-## NOTE 1: spawned and killed from "xinitrc"       ##
-#####################################################
+#######################################################
+## locate: ${XDG_CONFIG_HOME}/herbstluftwm/sxhkdrc   ##
+## author: Vincent (github.com/milomouse)            ##
+## detail: keybinding(s) for `herbstluftwm'          ##
+## notice: spawned and killed from "xinitrc" file    ##
+#######################################################
 
 ###############################
 ## Internal (herbstluftwm):  ##
 ###############################
 
 #+ quit herbstluftwm
-super + {_,shift +} q
+mod1 + {_,shift +} q
     herbstclient {reload,chain - emit_hook quit_panel - quit}
 
-#+ close focused window
-super + control + Pause
-    herbstclient close
-
-#+ (lock|unlock) focused tag, with visual
-super + x ; {l,u}
-    herbstclient chain - set window_border_active_color {'#ab5278' - lock_tag,'#53475b' - unlock_tag}
-
-#+ rotate desktop layout
-super + c
+#+ rotate tag layout
+mod1 + c
     herbstclient rotate
 
-#+ cycle frame layout(s)
-super + shift + g
-    herbstclient cycle_layout +1 max vertical horizontal grid
-
-#+ choose frame layout(s)
-super + shift + t ; {m,v,h,g}
-    herbstclient set_layout {max,vertical,horizontal,grid}
-
-#+ reset frame layout to max
-super + t
-    herbstclient set_layout max
+#+ cycle frame layout
+mod1 + {_,shift +} t
+    herbstclient cycle_layout {+,-}1 max grid horizontal vertical
 
 #+ manually split frame at left or right
-super + {minus,equal}
+mod1 + {minus,equal}
     herbstclient split {left,right} 0.5
 
 #+ manually split frame at top or bottom
-super + shift + {equal,minus}
+mod1 + shift + {equal,minus}
     herbstclient split {top,bottom} 0.5
 
 #+ automatically split, and/or shift window to new split (if available)
-super + {_,shift +} BackSpace
+mod1 + {_,shift +} BackSpace
     herbstclient split {explode,auto}
 
-#+ add or retract frame_gap
-super + control + {minus,equal}
-    herbstclient set frame_gap $(($(herbstclient get frame_gap) {-,+} 4))
-
-#+ resize window in direction
-super + r : {h,shift + h,j,shift + j,k,shift + k,l,shift + l}
-    herbstclient resize {left +,left -,down +,down -,up +,up -,right +,right -}0.01
-
-#+ change focus or move window in direction
-super + {_,shift +} {h,j,k,l}
-    herbstclient {focus,shift} -e {left,down,up,right}
-
-#+ change focus or move window to edge of tag in direction
-super + {control,alt} + {h,j,k,l}
-    herbstclient {focus,shift}_edge -e {left,down,up,right}
-
-#+ change window focus next/previous
-super + {_,shift +} space
+#+ shift window focus next/previous within a frame
+mod1 + {_,shift +} space
     herbstclient cycle {+,-}1
 
-#+ change focus to next/prev desktop occupied with client
-super + {n,p}
-    /howl/conf/herbstluftwm/tagswitch.sh {next,prev}
+#+ shift window focus next/previous within a tag
+mod1 + {_,shift +} i
+    herbstclient cycle_all --skip-invisible {-,+}1
 
-#+ change focus to next/prev desktop
-super + {period,comma}
-    herbstclient use_index {+,-}1 --skip-visible
+#+ resize window in direction
+mod1 + r : {h,shift + h,j,shift + j,k,shift + k,l,shift + l}
+    herbstclient resize {left +,left -,down +,down -,up +,up -,right +,right -}0.01
 
-#+ move window to next/prev desktop
-super + shift + {period,comma}
-    herbstclient move_index {+,-}1 --skip-visible
+#+ shift focus or window in frame direction
+mod1 + {_,shift +} {h,j,k,l}
+    herbstclient {focus,shift} -e {left,down,up,right}
 
-#+ change focus between last desktop(s)
-super + slash
+#+ shift focus to next/prev occupied tag
+mod1 + {n,p}
+    /home/mother/conf/herbstluftwm/scripts/tagswitch.sh {next,prev}
+
+#+ shift focus or window to next/prev tag
+mod1 + {_,shift +} {period,comma}
+    herbstclient {use,move}_index {+,-}1 --skip-visible
+
+#+ shift focus between last tag(s)
+mod1 + {Tab,slash}
     herbstclient use_previous
 
 #+ focus or pull urgent window
-super + {_,shift +} u
+mod1 + {_,shift +} u
     herbstclient {jumpto,bring} urgent
 
-#+ float/unfloat, fullscreen
-super + {f,o}
-    herbstclient {pseudotile,fullscreen} toggle
+#+ close focused window {and remove frame}
+mod1 + {shift,control} + End
+    herbstclient {close,close_and_remove}
 
-#+ remove frame
-super + z
+#+ remove/collapse frame
+mod1 + z
     herbstclient remove
+
+#+ fullscreen client toggle
+mod1 + o
+    herbstclient {fullscreen} toggle
+
+#+ pseudotile, float/unfloat client toggle
+mod1 + {_,shift +} f
+    herbstclient {pseudotile,floating} toggle
+
+#+ bindings for "ELECOM TrackBall HUGE" mouse function keys (10,11) [12 used as scroll modifier]
+{_,shift +} button10
+    /home/mother/conf/herbstluftwm/scripts/tagswitch.sh {next,prev}
+control + button10
+    herbstclient use_previous
+# button11
+#     herbstclient close_and_remove
+
 
 ########################
 ## External:          ##
 ########################
 
 #+ reload sxhkd config
-super + shift + s
+mod1 + shift + s
     pkill -USR1 -x sxhkd
 
-#+ spawn rxvt-unicode with tmux
-super + Return
-    urxvt -e tmux -2S /tmp/user-keep/h/tmux/xorg
+#+ spawn terminal with tmux
+mod1 + Return
+    st -e tmux
 
-#+ spawn rxvt-unicode
-super + shift + Return
-    urxvt
+#+ spawn terminal
+mod1 + shift + Return
+    st
 
-#+ spawn application launcher
-super + e
-    interrobang
+#+ application/window menu
+mod1 + {e,w}
+    rofi -show {run,window}
 
-#+ disable/enable/hide/unhide the mouse
-super + Escape
-    zaprat --toggle
+#+ games menu
+mod1 + g
+    /home/mother/conf/rofi/scripts/games.sh
 
-#+ refresh all windows
-super + b
+#+ if found focus on existing browser instance else execute
+mod1 + shift + w
+    /bin/zsh -c 'if [[ -n $(pidof firefox-bin) ]] ; then if [[ ${$(herbstclient stack)[7]} != "III" ]] ; then herbstclient use III ; fi ; else exec firefox-bin ; fi'
+
+#+ rotation of primary/clipboard selections
+mod1 + y
+    /usr/local/bin/clipswap
+
+#+ refresh screen
+mod1 + b
     xrefresh
 
-#+ mplayer daemon (toggle|stop)
-super + {_,shift +} d
-    mifo {--toggle,--stop}
+#+ image capture of current screen
+mod1 + control + i
+    import -window root /home/mother/foto/shot/$(date '+%Y_%m_%d-%H%M%S').png
 
-#+ mplayer daemon toggle, stop
-XF86Audio{Play,Stop}
-    mifo {--toggle,--stop}
+#+ custom script to disable/enable/hide/unhide the touchpad/mouse
+mod1 + grave
+    /usr/local/bin/zaprat --toggle
 
-#+ mplayer daemon randomize
-super + shift + slash
-    mifo --random
-
-#+ mplayer daemon repeat (on|off)
-super + {_,shift +} backslash
-    mifo {--repeat off && mifo --repeat on,--repeat off}
-
-#+ mplayer daemon (prev|next)
-super + bracket{left,right}
-    mifo {--prev,--next}
-
-#+ mplayer daemon next, prev
-XF86Audio{Next,Prev}
-    mifo {--next,--prev}
-
-#+ pulseaudio mute (toggle|on|off)
-super + {_,shift +,ctrl +} m
-    pulsevol {--mute,--mute on,--mute off}
-
-#+ pulseaudio toggle
+#+ mute/unmute pulseaudio volume within ALSA
 XF86AudioMute
-    pulsevol --mute
+    amixer -c 1 -q -D pulse sset Master toggle
 
-#+ pulseaudio raise volume
+#+ raise pulseaudio volume within ALSA
 XF86AudioRaiseVolume
-    pulsevol --increase 1
+    amixer -c 1 -q -D pulse sset Master 5%+
 
-#+ pulseaudio lower volume
+#+ lower pulseaudio volume within ALSA
 XF86AudioLowerVolume
-    pulsevol --decrease 1
+    amixer -c 1 -q -D pulse sset Master 5%-
 
-#+ if found, focus on existing dwb instance, else exec dwb
-super + w
-    /bin/sh -c 'if [[ -n $(pidof dwb) ]] ; then if [[ ${(Q)$(herbstclient stack)[7]} != "VⅢ" ]] ; then herbstclient use VⅢ ; fi ; else exec dwb ; fi'
+#+ suspend operating system to memory
+XF86Sleep
+    /bin/sh -c 'echo mem | doas tee /sys/power/state'
 
-#+ simple clipboard in/out synchronizer
-super + y
-    /howl/code/zsh/xclip-wrapper
+#+ acpi doesn't recognize brightness keys on new laptop
+mod1 + Next
+    doas /usr/local/bin/brightnessctl s 10%-
 
-#+ yank screenshot of current desktop
-super + shift + y
-    import -window root /howl/foto/shot/$(date '+%Y_%m_%d-%H%M%S').png
+#+ ...this is an undesirable workaround
+mod1 + Prior
+    doas /usr/local/bin/brightnessctl s 10%+
 
 # vim: set ft=sxhkdrc:

@@ -1,6 +1,5 @@
 [user]
   name = milomouse (Vincent Anonymouse)
-  email = vincent@fea.st
 [diff]
   tool = /usr/bin/vimdiff
 [color]
@@ -40,3 +39,7 @@
   whitespace = strip
 [push]
   default = simple
+[credential]
+  helper = cache
+[init]
+  defaultBranch = master

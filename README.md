@@ -2,35 +2,35 @@ Current Setup:
 --------------
 
 
-+ *DEVICE* = Gigabyte Aero 17 HDR ( [info](https://www.gigabyte.com/Laptop/AERO-17-HDR--Intel-11th-Gen) )
++ *DEVICE* = Gigabyte Aero 17 HDR ( [link](https://www.gigabyte.com/Laptop/AERO-17-HDR--Intel-11th-Gen) )
 
-+ *DISTRO* = Gentoo ( ~amd64 nomultilib )
++ *DISTRO* = Gentoo ( ~amd64 nomultilib ) ( [link](https://www.gentoo.org) )
 
-+ *KERNEL* = GNU/Linux 5.17.1
++ *KERNEL* = GNU/Linux 5.17.1 ( [link](https://kernel.org) )
 
-+ *SOURCES* = Zen ( [patchset](https://github.com/zen-kernel/zen-kernel) )
++ *SOURCES* = Zen ( [link](https://github.com/zen-kernel/zen-kernel) )
 
-+ *INIT* = OpenRC ( sysvinit )
++ *INIT* = OpenRC ( [link](https://github.com/OpenRC/openrc) )
 
-+ *UDEV* = mdevd ( libudev-zero )
++ *UDEV* = mdevd ( [link](https://skarnet.org/software/mdevd/) ) + libudev-zero ( [link](https://github.com/illiliti/libudev-zero) )
 
-+ *SHELL* = Zsh
++ *SHELL* = Zsh ( [link](https://www.zsh.org/) )
 
-+ *EDITOR* = ViM
++ *EDITOR* = ViM ( [link](https://www.vim.org/) )
 
-+ *TERMINAL MULTIPLEX* = Tmux
++ *TERMINAL MULTIPLEX* = Tmux ( [link](https://github.com/tmux/tmux/wiki) )
 
-+ *MEDIA PLAYER* = mpv
++ *WINDOW MANAGER* = herbstluftwm ( [link](https://herbstluftwm.org/) )
 
-+ *X WINDOW MANAGER* = herbstluftwm
++ *TERMINAL EMULATOR* = st ( [link](https://st.suckless.org/) )
 
-+ *X TERMINAL EMULATOR* = st
++ *IMAGE VIEWER* = sxiv ( [link](https://github.com/muennich/sxiv) )
 
-+ *X IMAGE VIEWER* = sxiv
++ *MEDIA PLAYER* = mpv ( [link](https://mpv.io/) )
 
-+ *X READER* = mupdf
++ *DOCUMENT READER* = mupdf ( [link](https://mupdf.com/) )
 
-+ *X WEB BROWSER* = Firefox ( [Surfingkeys](https://github.com/brookhong/Surfingkeys) )
++ *WEB BROWSER* = Firefox ( [link](https://www.mozilla.org/en-US/firefox/new/) ) + Surfingkeys ( [link](https://github.com/brookhong/Surfingkeys) )
 
 
 Screenshots:

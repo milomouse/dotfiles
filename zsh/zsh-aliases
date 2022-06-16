@@ -1,10 +1,10 @@
 ################################################
 ## locate: ${XDG_CONFIG_HOME}/zsh/zsh-aliases ##
-## author: milomouse (github.com/milomouse)   ##
 ## detail: configuration file for zsh aliases ##
 ################################################
 
 # file management:
+alias gh="cd /home/${USER}"
 alias ls="/bin/ls -h --file-type --time-style='+%y-%m-%d %H%M%S' --color=auto --group-directories-first"
 alias la="ls -A"
 alias lb="ls -Ssr"
@@ -17,31 +17,26 @@ alias llb="lls -Ssr"
 alias llt="lls -tr"
 alias llm="llt -c"
 alias llx="lx -l"
-alias gh="cd ${H:-/howl}"
-alias rd="rm -r"
 
 # trivial quick views/edits:
-alias zedit="${EDITOR:-/usr/bin/vim} -p ${HOME}/{.zshrc,zsh/zsh-{functions,aliases,options,exports}}"
-alias xedit="${EDITOR:-/usr/bin/vim} -p ${XDG_CONFIG_DIR:-${HOME}}/xorg/{xinitrc,Xresources}"
+alias zedit="${EDITOR:-/usr/bin/vim} ${HOME}/{.zshrc,zsh/zsh-{functions,aliases,options,exports}}"
 alias xload="xrdb -load ${XDG_CONFIG_DIR:-${HOME}}/xorg/Xresources &>/dev/null"
 
 # program masquing:
-alias sudo='/usr/bin/sudo '
-alias svim="sudo ${EDITOR:-/usr/bin/vim}"
-alias info="info --vi-keys"
 alias diff="colordiff"
+alias info="info --vi-keys"
 alias grep="grep --color=auto"
-alias mutt="mutt -F ${XDG_CONFIG_DIR:-${HOME}}/mutt/muttrc"
-alias calc="calc -d"
-alias xskat="xskat -opt ${XDG_CONFIG_DIR:-${HOME}}/xorg/xskat.opt -list ${XDG_CONFIG_DIR:-${HOME}}/xorg/xskat.lst"
-alias offlineimap="offlineimap -c ${XDG_CONFIG_DIR:-${HOME}}/.offlineimap/offlineimaprc"
-alias remote="transmission-remote-cli"
+alias mpq="mpv -really-quiet"
+alias mupdf="mupdf -I"
+alias sxiv="sxiv -a -g '3000x2000'"
+alias lynx="lynx -vikeys -tna -force_secure -accept_all_cookies -cookie_file='/tmp/lynx_cookies' -short_url -show_rate -telnet -lss='~/lynx/lynx.lss'"
+alias tsm="transmission-remote"
 
 # system/media shortcuts:
-alias psu="ps --deselect -U root,postfix -C tmux,urxvt -j f"
+alias psu="ps --deselect -U root -j f"
 alias psr="ps -U root -j f"
 alias psa="ps fax -j"
-alias loadavg='print ${$(</proc/loadavg)[1,3]}'
-alias upd='sudo /etc/cron.daily/mlocate'
-#alias siteget="wget --recursive --page-requisites --convert-links --html-extension --no-parent --random-wait -U Mozilla -l" #depth, then url
-
+alias psp="ps --no-headers -Leo user | sort | uniq --count"
+alias loadavg='print - ${$(</proc/loadavg)[1,3]}'
+alias vifi='vim $(fzf)'
+alias amr="alsamixer -V playback -c 1"

@@ -1,6 +1,5 @@
 ##################################################
 ## locate: ${XDG_CONFIG_HOME}/zsh/zsh-functions ##
-## author: milomouse (github.com/milomouse)     ##
 ## detail: configuration file for zsh functions ##
 ##################################################
 
@@ -9,13 +8,12 @@ function zshaddhistory {
   local line cmd
   line=${1%%$'\n'} ; cmd=${line%% *}
   [[ ${#line} -ge 5
-      && ${cmd} != (history|fc|[szx]edit|[zx]load|srm|wika)
-  ]] && (( ! $argv[(I)*unrl/*|*spar/*|*losetup*|*aespipe*|sudo rm *] ))
+      && ${cmd} != (history|fc|[zx]edit|[zx]load)
+  ]] && (( ! $argv[(I)mpq *] ))
 }
 
 # safely recompile and reload shell settings:
 function zload {
-  sudo /bin/sh -c "( env-update 1>/dev/null ; source /etc/profile 1>/dev/null )"
   source /etc/profile &>/dev/null
   autoload -U zrecompile
   [[ -f ~/.zshrc ]] && zrecompile -p ~/.zshrc
@@ -25,21 +23,8 @@ function zload {
   source ~/.zshrc
 }
 
-# jump to previous directory by integer or reg-exp, also list dirs,
-# else jump to last visited directory if no argument supplied:
-# NOTE: try to remember to use ZSH directory stack instead... ( cd [-|+]^Tab )
-function back {
-  if [[ $# == 1 ]]; then
-    case $1 {
-      <->)  pushd -q +$1 >& - ;;
-      --)   dirs -lpv|sed '2s|$| \[last\]|' ;;
-      *)    [[ -n $(dirs -lpv|grep -i $1|grep -v ${PWD}) ]] && \
-              pushd -q +${$(dirs -lpv|grep -i $1|grep -v ${PWD})[1]}
-    }
-  else pushd -q - >& - ; fi
-}
-
 # go up Nth amount of directories:
+# a bit quicker than ../../.. -- native alternatives?
 function up {
   local arg=${1:-1};
   while [ ${arg} -gt 0 ]; do
@@ -48,188 +33,8 @@ function up {
   done
 }
 
-# copy and follow file(s) to new dir:
-function cpf {
-  if [[ -d $*[-1] ]]; then
-    cp $* && cd $*[-1]
-  elif [[ -d ${*[-1]%/*} ]]; then
-    cp $* && cd ${*[-1]%/*}
-  fi
-}
-
-# move and follow file(s) to new dir:
-function mvf {
-  if [[ -d $*[-1] ]]; then
-    mv $* && cd $*[-1]
-  elif [[ -d ${*[-1]%/*} ]]; then
-    mv $* && cd ${*[-1]%/*}
-  fi
-}
-
-# update fonts:
-function upf {
-  cd /usr/share/fonts/local
-  /usr/bin/fc-cache -vr
-  sudo /bin/sh -c "( /usr/bin/fc-cache -vr ; mkfontdir ; mkfontscale )"
-  if [[ ${+DISPLAY} == 1 ]]; then
-    xset +fp '/usr/share/fonts/local'
-    xset fp rehash
-  fi
-  cd - &>/dev/null
-}
-
-# quirky tmux function:
-function tmux {
-  _d="/tmp/user-keep/${USER}/tmux/default"
-  _x="/tmp/user-keep/${USER}/tmux/xorg"
-
-  # usage: tmux [command] [[socket]]
-
-  if [[ -n $1 ]]; then
-    function fn_c { if [[ ${+DISPLAY} -eq 1 ]] { _S=${_x} } else { _S=${_d} } }
-    function fn_x { command tmux -uS ${_S} ${@} }
-    function fn_a {
-      command tmux -S ${_S} list-session | while { read i } {
-        if [[ "${i[-1]}" != ')' ]] { _A=T ; _T=${i/:*} ; break
-        };}
-        if [[ ${+_A} -eq 1 ]] { fn_x attach-session -t ${_T} } else { return 1 }
-        unset _A _T
-      }
-    case $1:l {
-      attach)
-        if [[ -n $2 ]] {
-          case $2:l {
-            xorg) _S=${_x} ;;
-            default) _S=${_d} ;;
-            -f|force) fn_c ; fn_x attach-session ;;
-          }
-          fn_a
-        } else { fn_c ; fn_a }
-      ;;
-      list)
-        if [[ -n $2 ]] {
-          case $2:l {
-            xorg) _S=${_x} ; fn_x list-sessions ;;
-            default) _S=${_d} ; fn_x list-sessions ;;
-          }
-        } else {
-          fn_c ; fn_x list-sessions
-        }
-      ;;
-      *) fn_c ; fn_x ${@} ;;
-    }
-  else
-    case ${+DISPLAY} {
-      0) command tmux -uS ${_d} new-session ;;
-      1) command tmux -uS ${_x} new-session ;;
-    }
-  fi
-}
-
-# function to quickly view StarDict word definitions:
-function sd {
-  case $1 {
-    '-t') sdcv --data-dir ${XDG_DATA_HOME}/stardict --utf8-output -u "Moby Thesaurus II" ${@:/$1} 2>/dev/null ;;
-    *) sdcv --data-dir ${XDG_DATA_HOME}/stardict --utf8-output -u "WordNet" ${@} 2>/dev/null ;;
-};}
-
-# un-smart function for my todo lists:
-function todo {
-  if [[ -n $1 ]] {
-    setopt nonomatch
-    _x="/howl/othe/.TODO_${@// /_}"
-    ${EDITOR:-/usr/bin/vim} ${_x}
-    if [[ -f ${_x} ]] { ( command ls ${_x}*(f600) &>/dev/null ) || chmod -c 0600 ${_x} }
-    unset _x
-  } else {
-      setopt nonomatch
-      command ls /howl/othe/.TODO_* 2>/dev/null | while { read i } { [[ -n $i ]] && print "TODO: ${${i:t}/*_}" }
-};}
-
-# un-smart function for viewing/editing history file (still use 'fc/history'):
-function zhist {
-  if [[ $# -ge 1 ]]; then
-    case $1 {
-      '-a'|'-all') <${ZDOTDIR:-${HOME}/zsh}/.history | ${PAGER:-less} ;;
-      '-e'|'--edit') ${EDITOR:-/usr/bin/vim} ${ZDOTDIR:-${HOME}/zsh}/.history ;;
-      '-f'|'--find') [[ -n $2 ]] && <${ZDOTDIR:-${HOME}/zsh}/.history|grep -i "${${@:/$1}// /\|}" ;;
-    }
-  else
-    print - "options: -e (edit), -f (find), -a (all)"
-  fi
-}
-
-# un-smart function for viewing sectioned partitions:
-function dfu() {
-  local FSTYPES
-  FSTYPES=(nilfs2 btrfs ext2 ext3 ext4 jfs xfs zfs reiserfs reiser4 minix ntfs ntfs-3g fat vfat fuse)
-  df -hTP --total -x rootfs -x devtmpfs -x tmpfs -x none ; print
-  df -hTP $(for f in $FSTYPES; { print - " -x $f" })
-}
-
-# quickly view the Linux kernel 'if-tainted' information:
-function iftainted() {
-  case $(</proc/sys/kernel/tainted) {
-    1) print "1: A module with a non-GPL license has been loaded, this includes modules with no license." ;;
-    2) print "2: A module was force loaded by insmod -f." ;;
-    4) print "4: Unsafe SMP processors: SMP with CPUs not designed for SMP." ;;
-    8) print "8: A module was forcibly unloaded from the system by rmmod -f." ;;
-    16) print "16: A hardware machine check error occurred on the system." ;;
-    32) print "32: A bad page was discovered on the system." ;;
-    64) print "64: The user has asked that the system be marked tainted." ;;
-    128) print "128: The system has died." ;;
-    256) print "256: The ACPI DSDT has been overridden with one supplied by the user instead of using the one provided by the hardware." ;;
-    512) print "512: A kernel warning has occurred." ;;
-    1024) print "1024: A module from drivers/staging was loaded." ;;
-    *) print "Kernel does not appear to be tainted, or unknown." ;;
-};}
-
-# quickly view MailDir new count for each folder:
-function newmail {
-  for mail (/howl/mail/FastMail/*) {
-    local _x
-    _x=${(Fw)#$(find ${mail}/new -type f)%/new/*}
-    if [[ ${_x} -ge 1 && ${mail:t} != "Sent Items" ]] {
-      print "$mail:t:l = ${_x}"
-    }
-    unset _x
-  }
-  unset mail
-}
-
-# quickly view current CPU frequency and thermal readings:
-function cpuq {
-  cpupower frequency-info | while { read c } { if [[ $c:l =~ "cpu frequency" ]] { print - "Freq: ${${c#*is }%.}" };}
-  acpi -t | while { read a } { print - "Temp:${a#*,}" ; break }
-}
-
-# quickly check/initiate pulseaudio and mifo daemons:
-function mpx {
-  case $1:l {
-    stop|disable)
-      print - "stopping : pulseaudio"
-      pulseaudio -k
-      print - "stopping : mifo"
-      mifo --quit
-    ;;
-    *)
-      pulseaudio --check
-      if [[ $? != 0 ]] {
-        print - "initiate : pulseaudio"
-        pulseaudio --start --log-target=syslog --daemonize
-      } else { print - "running  : pulseaudio" }
-      mifo --instance quiet
-      if [[ $? != 0 ]] {
-        print - "initiate : mifo"
-        mifo --init
-      } else { print - "running  : mifo" }
-    ;;
-};}
-
 # one-liners/micro functions:
-function startx { [[ ${+DISPLAY} -eq 1 ]] || clear ; /usr/bin/xinit ${XDG_CONFIG_DIR:-$HOME}/xorg/xinitrc -auth ${XDG_CONFIG_DIR:-$HOME}/xorg/.serverauth.${RANDOM[1,4]} -nolisten tcp -once -retro &>!${XDG_CONFIR_DIR:-$HOME}/xorg/log }
+function startx { [[ ${+DISPLAY} -eq 1 ]] || { cd && /usr/bin/xinit ${XDG_CONFIG_DIR:-$HOME}/xorg/xinitrc -auth ${XDG_CONFIG_DIR:-$HOME}/xorg/.serverauth.${RANDOM[1,4]} -nolisten tcp -once -retro -- vt7 &>!${XDG_CONFIR_DIR:-$HOME}/xorg/log } }
 function mkcd { command mkdir -p "$@" && cd "$@" }
-function timec { print "$(date +'%T %Y-%m-%d')" ; while sleep .2 ; do printf '\r%s ' "$(date +'%T %Y-%m-%d')" ; done }
-function dropcache { sync && command su -s /bin/zsh -c 'echo 3 > /proc/sys/vm/drop_caches' root }
-function flashproc { for f (${$(file /proc/$(pidof dwb)/fd/*|gawk '/\/tmp\/Flash/ { print $1}')//:}){ print - "$f" }}
 function hc { command herbstclient "$@" }
+function dropcache { sync && command echo 1 | doas tee /proc/sys/vm/drop_caches }

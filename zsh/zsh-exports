@@ -1,50 +1,57 @@
 ################################################
 ## locate: ${XDG_CONFIG_HOME}/zsh/zsh-exports ##
-## author: milomouse (github.com/milomouse)   ##
 ## detail: configuration file for zsh exports ##
 ################################################
 
 ## global environment exports:
 ## (Gentoo does some of this!)
 
-# directories:
-export BZR_HOME="${XDG_CONFIG_HOME}/bazaar"
-export H="/howl"
-export XDG_CACHE_HOME="${HOME:-/howl/conf}/cache"
-export XDG_CONFIG_HOME="${HOME:-/howl/conf}"
+# directories: (HOME = /home/$USER/conf)
+export H="/home/${USER}"
+export XDG_CACHE_HOME="${HOME}/cache"
+export XDG_CONFIG_HOME="${HOME}"
 export XDG_CONFIG_DIR="${XDG_CONFIG_HOME}"
 export XDG_CONFIG_DIRS="/etc/xdg:${XDG_CONFIG_HOME}"
-export XDG_DATA_HOME="${XDG_CONFIG_HOME}/share"
-export XDG_DESKTOP_DIR="/tmp/user-keep/${USER}"
-export XDG_DOCUMENTS_DIR="${H}/rite"
+export XDG_DATA_HOME="${XDG_CONFIG_HOME}/data"
+export XDG_DESKTOP_DIR="${H}/desk"
+export XDG_DOCUMENTS_DIR="${H}/code/general"
 export XDG_DOWNLOAD_DIR="${H}/down"
 export XDG_MUSIC_DIR="${H}/muzk"
 export XDG_PICTURES_DIR="${H}/foto"
-export XDG_PUBLICSHARE_DIR="/tmp/user-keep/${USER}"
-export XDG_TEMPLATES_DIR="/tmp/user-keep/${USER}"
+export XDG_PUBLICSHARE_DIR="${XDG_CONFIG_HOME}/share"
+export XDG_RUNTIME_DIR="/tmp/runtime-${UID}"
+export XDG_TEMPLATES_DIR="${XDG_DATA_HOME}/templates"
 export XDG_VIDEOS_DIR="${H}/vide"
+export GOPATH="${H}/code/go"
+export PYTHONUSERBASE="${H}/code/python/pip_modules"
+export PYTHONPATH="${PYTHONUSERBASE}/lib"
+export PATH="${XDG_CONFIG_HOME}/.cargo/bin:${PATH}"
+path+="${H}/code/python/pip_modules/bin"
+path+="${H}/code/nodejs/pkg/bin"
+#path+="./node_modules/.bin"
 
 # files:
 export HISTFILE="${ZDOTDIR:-${XDG_CONFIG_HOME}/zsh}/.history"
-export LESSHISTFILE="${XDG_PUBLICSHARE_DIR}/less_history"
-export SXHKD_FIFO="${XDG_TEMPLATES_DIR}/sxhkd.fifo"
 export XAUTHORITY="${XDG_CONFIG_HOME}/xorg/.Xauthority"
 
 # executables:
-export BROWSER="/usr/bin/w3m"
-export BZR_EDITOR="${EDITOR}"
-#export EDITOR="/usr/bin/vim"
+export BROWSER="/usr/bin/lynx"
+export EDITOR="/usr/bin/vim"
 export FCEDIT="${EDITOR}"
 export MANPAGER="/usr/bin/less -sM +Gg"
 export PAGER="/usr/bin/less"
-export SDCV_PAGER="/usr/bin/less"
 export SHELL="/bin/zsh"
+export SCIPY_PIL_IMAGE_VIEWER="/usr/bin/sxiv -ab"
+export FZF_DEFAULT_COMMAND="/usr/local/bin/fd -t f -HLIE \{'node_modules','*~','.git','svn','.hg'\}"
+export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
+export FZF_DEFAULT_OPTS='--color=fg:#444444,bg:-1,hl:#655969,fg+:#AF00D7,bg+:#1C1C1C,hl+:#875FAF
+--color=info:#949494,prompt:#8D8D8D,pointer:#138BCF,marker:#FF009A,spinner:#B2B2B2,header:#FF009A'
 
 # variables:
-export AWT_TOOLKIT="XToolKit"
+export HISTSIZE=2000
+export SAVEHIST=2000
 export DIRSTACKSIZE=20
-export GPG_TTY="$(tty)"
-export HISTSIZE=1400
+#export GPG_TTY="$(tty)"
 #export http_proxy=http://127.0.0.1:3128
 export LESSCHARSET="UTF-8"
 export LESS_TERMCAP_mb=$'\E[01;31m'
@@ -54,12 +61,19 @@ export LESS_TERMCAP_se=$'\E[0m'
 export LESS_TERMCAP_so=$'\E[00;47;30m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[00;34m'
-export SAVEHIST=1000
-export SDCV_HISTSIZE=0
+export GREP_COLORS="mt=01;32:sl=00;35"
+export CALIBRE_USE_DARK_PALETTE=1
+export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on'
 
-# language(s):
-#unset LC_ALL
-#export LANG="en_US.utf8"
-#export LANGUAGE="en_US.utf8"
-#export LC_MESSAGES="C"
-#export LC_TIME="en_US.utf8"
+# 4K scaling:
+export GDK_SCALE=2.5
+export GDK_DPI_SCALE=0.5
+export QT_AUTO_SCREEN_SET_FACTOR=0
+export QT_SCALE_FACTOR=2.5
+export QT_FONT_DPI=96
+export __GL_SYNC_TO_VBLANK=1
+
+# fallback:
+#if [[ ${+TERMINAL} == 0 ]] ; then
+#  export TERMINAL=st
+#fi

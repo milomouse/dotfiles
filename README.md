@@ -2,54 +2,41 @@ Current Setup:
 --------------
 
 
++ *DEVICE* = Gigabyte Aero 17 HDR ( [link](https://www.gigabyte.com/Laptop/AERO-17-HDR--Intel-11th-Gen) )
+
 + *DISTRO* = Gentoo ( ~amd64 nomultilib )
 
-+ *KERNEL* = GNU/Linux 3.10.32 ( RT_PREEMPT, loop-AES, GCC [K10] )
++ *KERNEL* = GNU/Linux 5.17.1
 
-+ *SOURCES* = deadspace ( [ebuild](https://github.com/milomouse/ebuilds/tree/master/sys-kernel/deadspace-sources) )
-
-+ *BUILD* = #1 SMP PREEMPT RT Thu Feb 27 17:23:34 EST 2014 x86_64 AMD
++ *SOURCES* = Zen ( [link](https://github.com/zen-kernel/zen-kernel) )
 
 + *INIT* = OpenRC ( sysvinit )
 
-+ *UDEV* = mdev
++ *UDEV* = mdevd ( libudev-zero )
 
 + *SHELL* = Zsh
 
 + *EDITOR* = ViM
 
-+ *MAIL SENDER* = Postfix
-
-+ *MAIL RECEIVER* = Postfix , OfflineIMAP
-
-+ *MAIL FILTER* = notmuch
-
-+ *MAIL READER* = Mutt
-
-+ *AUDIO PLAYER* = mifo ( [ebuild](https://github.com/milomouse/ebuilds/tree/master/media-sound/mifo) , [code](https://github.com/milomouse/mifo) )
-
-+ *VIDEO PLAYER* = MPlayer2
-
-+ *WINDOW MANAGER* = herbstluftwm
-
-+ *TERMINAL EMULATOR* = URxvt
-
 + *TERMINAL MULTIPLEX* = Tmux
 
-+ *IMAGE VIEWER* = sxiv
++ *MEDIA PLAYER* = mpv
 
-+ *WEB BROWSER* = dwb
++ *X WINDOW MANAGER* = herbstluftwm
+
++ *X TERMINAL EMULATOR* = st
+
++ *X IMAGE VIEWER* = sxiv
+
++ *X READER* = mupdf
+
++ *X WEB BROWSER* = Firefox ( Surfingkeys )
 
 
 Screenshots:
 --------------
 
-Currently:
-
-![ScreenShot1](share/images/2014_02_09-1.png)
-![ScreenShot2](share/images/2014_02_09-2.png)
-
-Previously:
-
-![ScreenShotPrior1](share/images/2014_01_12-1.png)
-![ScreenShotPrior2](share/images/2014_01_12-2.png)
+![Empty](share/images/2022_06_14-184738.png)
+![Workload](share/images/1-8204dd2267.gif)
+![Firefox](share/images/2022_06_15-194726.png)
+![Blender](share/images/2022_06_14-193858.png)

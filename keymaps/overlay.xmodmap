@@ -1,0 +1,9 @@
+!! simply swap keycodes for Super_L and Alt_L
+!! order is important, apparently..
+keycode 133 = Alt_L
+keycode  64 = Super_L
+!keycode 108 = Alt_R
+!remove Mod1 = Alt_L
+!remove Mod4 = Super_L
+!add    Mod1 = Super_L
+!add    Mod4 = Alt_L

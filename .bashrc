@@ -1,8 +1,4 @@
-# Fuck bash.
+## rarely use `bash' so this remains a skeleton file.
 source ~/zsh/zsh-exports
-source ~/zsh/zsh-aliases
-export HISTFILE=/tmp/user-keep/${USER}/bash_history
-complete -cf sudo
-[[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && \
-  source /usr/share/bash-completion/bash_completion
+export HISTFILE=/tmp/${USER}-bash_history
 PS1='\u [\w]\$ '

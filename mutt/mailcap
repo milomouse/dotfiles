@@ -1,5 +1,0 @@
-text/html; /usr/bin/w3m -I %{charset} -T text/html %s; copiousoutput;
-image/*; /usr/bin/sxiv -b %s; test=test -n "$DISPLAY";
-video/*; /usr/bin/mplayer2 -really-quiet -msglevel all=0 %s 2>/dev/null; test=test -n "$DISPLAY";
-application/pdf; /usr/bin/mupdf %s; test=test -n "$DISPLAY";
-application/gpg; /usr/bin/gpg --decrypt %s; copiousoutput;

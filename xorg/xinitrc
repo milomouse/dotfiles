@@ -1,24 +1,24 @@
 #! /bin/zsh
 ##############################################
 ## locate: ${XDG_CONFIG_HOME}/xorg/xinitrc  ##
-## author: milomouse (github.com/milomouse) ##
+## author: Vincent (github.com/milomouse)   ##
 ## detail: X.Org init configuration file    ##
 ##############################################
 
 ## RESOURCES:
-/usr/bin/xrdb -load ${XDG_CONFIG_HOME:-$HOME}/xorg/Xresources
+xrandr --setprovidersoutputsource modesetting NVIDIA-0
+xrandr --auto
+xrdb -load ${XDG_CONFIG_HOME:-$HOME}/xorg/Xresources &
 
-## KEYBOARD:
-#/usr/bin/xmodmap ${XDG_CONFIG_HOME:-$HOME}/keymaps/dvausler.xmodmap
+## INPUT:
+# xmodmap ${XDG_CONFIG_HOME:-$HOME}/keymaps/zsu.xmodmap &
+xmodmap ${XDG_CONFIG_HOME:-$HOME}/keymaps/overlay.xmodmap &
+zaprat --disable &
 
-## MOUSE:
-/usr/bin/xsetroot -cursor_name left_ptr -solid '#151515'
-/usr/local/bin/zaprat --disable
-
-## BACKGROUND:
-/usr/bin/display -window root -resize 1600x900! ${XDG_DATA_HOME:-~/share}/images/astrolithe-void.jpg
+## DISPLAY:
+xsetroot -cursor_name left_ptr -solid '#101010' &
+display -window root -resize 3840x2160! ${XDG_PUBLICSHARE_DIR}/images/kali-ma-angelic.jpg &
 
 ## WINDOW MANAGER:
-exec ${XDG_CONFIG_HOME:-$HOME}/herbstluftwm/dzen-init.zsh &>/dev/null &
-/usr/bin/sxhkd -c ${XDG_CONFIG_HOME:-$HOME}/herbstluftwm/sxhkdrc &
-exec /usr/bin/herbstluftwm --locked -c ${XDG_CONFIG_HOME:-$HOME}/herbstluftwm/autostart
+sxhkd -c ${XDG_CONFIG_HOME:-$HOME}/herbstluftwm/sxhkdrc &
+exec herbstluftwm --locked -c ${XDG_CONFIG_HOME:-$HOME}/herbstluftwm/autostart

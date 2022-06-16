@@ -18,8 +18,10 @@
 
 # Changes herbstluftwm tags
 
+# EDIT: Removed '!' (urgent window flag) from `checkuse' unused tag check.
+
 checkuse() {
-    if [[ "${tags[$1]}" != [.!]* ]]; then # tag is not unused
+    if [[ "${tags[$1]}" != [.]* ]]; then # tag is not unused
         herbstclient use "${tags[$1]:1}" # cutting off first char (.#:!)
         exit 0
     fi

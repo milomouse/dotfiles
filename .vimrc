@@ -27,7 +27,7 @@ call plug#begin('~/.vim/plugged')
 call plug#end()
 
 "" Airline specific settings
-let g:airline_theme = 'ratbyte'
+let g:airline_theme = 'candymouse'
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#wordcount#enabled = 1
 let g:airline#extensions#tabline#enabled = 1

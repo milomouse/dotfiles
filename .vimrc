@@ -14,12 +14,10 @@ let g:polyglot_disabled = ['markdown.plugin']
 "" [ https://github.com/junegunn/vim-plug > ~/.vim/autoload/plug.vim ]
 call plug#begin('~/.vim/plugged')
     Plug 'vim-airline/vim-airline'
-    Plug 'vim-airline/vim-airline-themes'
     Plug 'lambdalisue/fern.vim'
     Plug 'lambdalisue/fern-hijack.vim'
     Plug 'hrsh7th/fern-mapping-collapse-or-leave.vim'
 "    Plug 'Konfekt/FastFold'
-"    Plug 'tmhedberg/SimpylFold'
     Plug 'sheerun/vim-polyglot'
     Plug 'plasticboy/vim-markdown'
     Plug 'tomtom/tcomment_vim'

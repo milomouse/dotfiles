@@ -114,10 +114,6 @@ mod1 + {e,w}
 mod1 + g
     /home/mother/conf/rofi/scripts/games.sh
 
-#+ if found focus on existing browser instance else execute
-mod1 + shift + w
-    /bin/zsh -c 'if [[ -n $(pidof firefox-bin) ]] ; then if [[ ${$(herbstclient stack)[7]} != "III" ]] ; then herbstclient use III ; fi ; else exec firefox-bin ; fi'
-
 #+ rotation of primary/clipboard selections
 mod1 + y
     /usr/local/bin/clipswap

@@ -1,5 +1,5 @@
 #!/bin/bash
-CONFIG="${XDG_CONFIG_DIR}/rofi/menu-game.rasi"
+CONFIG="${XDG_CONFIG_DIR}/rofi/game-menu.rasi"
 MAP="${XDG_CONFIG_DIR}/rofi/menus/games"
 
 cat "$MAP" \

@@ -35,14 +35,14 @@ export HISTFILE="${ZDOTDIR:-${XDG_CONFIG_HOME}/zsh}/.history"
 export XAUTHORITY="${XDG_CONFIG_HOME}/xorg/.Xauthority"
 
 # executables:
-export BROWSER="/usr/bin/lynx"
-export EDITOR="/usr/bin/vim"
+export BROWSER="lynx"
+export EDITOR="vim"
 export FCEDIT="${EDITOR}"
-export MANPAGER="/usr/bin/less -sM +Gg"
-export PAGER="/usr/bin/less"
+export MANPAGER="less -sM +Gg"
+export PAGER="less"
 export SHELL="/bin/zsh"
-export SCIPY_PIL_IMAGE_VIEWER="/usr/bin/sxiv -ab"
-export FZF_DEFAULT_COMMAND="/usr/local/bin/fd -t f -HLIE \{'node_modules','*~','.git','svn','.hg'\}"
+export SCIPY_PIL_IMAGE_VIEWER="sxiv -ab"
+export FZF_DEFAULT_COMMAND="fd -t f -HLIE \{'node_modules','pip_modules','*~','.git','svn','.hg'\}"
 export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
 export FZF_DEFAULT_OPTS='--color=fg:#444444,bg:-1,hl:#655969,fg+:#AF00D7,bg+:#1C1C1C,hl+:#875FAF
 --color=info:#949494,prompt:#8D8D8D,pointer:#138BCF,marker:#FF009A,spinner:#B2B2B2,header:#FF009A'

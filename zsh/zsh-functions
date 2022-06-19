@@ -24,7 +24,7 @@ function zload {
 }
 
 # go up Nth amount of directories:
-# a bit quicker than ../../.. -- native alternatives?
+# a bit quicker than ../../.. (better zsh alternatives?)
 function up {
   local arg=${1:-1};
   while [ ${arg} -gt 0 ]; do
@@ -34,7 +34,6 @@ function up {
 }
 
 # one-liners/micro functions:
-function startx { [[ ${+DISPLAY} -eq 1 ]] || { cd && /usr/bin/xinit ${XDG_CONFIG_DIR:-$HOME}/xorg/xinitrc -auth ${XDG_CONFIG_DIR:-$HOME}/xorg/.serverauth.${RANDOM[1,4]} -nolisten tcp -once -retro -- vt7 &>!${XDG_CONFIR_DIR:-$HOME}/xorg/log } }
-function mkcd { command mkdir -p "$@" && cd "$@" }
-function hc { command herbstclient "$@" }
 function dropcache { sync && command echo 1 | doas tee /proc/sys/vm/drop_caches }
+function mkcd { command mkdir -p "$@" && cd "$@" }
+function startx { [[ ${+DISPLAY} -eq 1 ]] || { cd && /usr/bin/xinit ${XDG_CONFIG_DIR:-$HOME}/xorg/xinitrc -auth ${XDG_CONFIG_DIR:-$HOME}/xorg/.serverauth.${RANDOM[1,4]} -nolisten tcp -once -retro -- vt7 &>!${XDG_CONFIR_DIR:-$HOME}/xorg/log } }

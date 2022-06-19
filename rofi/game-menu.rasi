@@ -60,7 +60,7 @@ listview {
     text-color:                     @fg;
     padding:                        0px;
     columns:                        1;
-    lines:                          13;
+    lines:                          12;
     spacing:                        10px;
     cycle:                          true;
     dynamic:                        true;

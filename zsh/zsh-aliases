@@ -28,11 +28,10 @@ alias grep="grep --color=auto"
 alias lynx="lynx -vikeys -tna -force_secure -accept_all_cookies -cookie_file='/tmp/lynx_cookies' -short_url -show_rate -telnet -lss='~/lynx/lynx.lss'"
 alias mpq="mpv -really-quiet"
 alias mupdf="mupdf -Y 2 -I"
-alias sxiv="sxiv -a -g '3000x2000'"
+alias sxiv="sxiv -s f -a -g '3000x2000'"
 alias tsm="transmission-remote"
 
 # system/media shortcuts:
-alias amr="alsamixer -V playback -c 0"
 alias loadavg='print - ${$(</proc/loadavg)[1,3]}'
 alias psa="ps fax -j"
 alias psc="ps --no-headers -Leo user | sort | uniq --count"

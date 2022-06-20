@@ -111,6 +111,7 @@ hc rule class~'(.*[gG]imp)' tag=VI
 hc rule class~'(.*[iI]nkscape)' tag=VI
 hc rule class~'(.*[pP]ure[rR]ef)' tag=VI
 hc rule class~'(.*[sS]xiv)' pseudotile=on
+hc rule class~'(.*[pP]qiv)' pseudotile=on
 hc rule class~'(.*[yY]ad)' floating=on
 hc rule title="Open File" floating=on
 hc rule title="Open Image" pseudotile=on

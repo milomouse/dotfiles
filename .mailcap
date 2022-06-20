@@ -1,2 +1,2 @@
-image/*; sxiv -ab %s; test=test -n "$DISPLAY"; edit=krita %s
+image/*; pqiv -t %s 2>/dev/null; test=test -n "$DISPLAY"; edit=krita %s
 application/pdf; mupdf %s

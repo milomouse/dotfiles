@@ -1,0 +1,44 @@
+[options]
+scale-images-up=1
+
+[keybindings]
+f { send_keys(#1); }
+<numbersign>1 { toggle_info_box(); command(herbstclient pseudotile off); toggle_fullscreen(1); bind_key(f { send_keys(#2\); }); }
+<numbersign>2 { toggle_fullscreen(2); command(herbstclient pseudotile on); reset_scale_level(); toggle_info_box(); bind_key(f { send_keys(#1\); }); }
+0 { toggle_scale_mode(1); }
+w { toggle_scale_mode(3); reset_scale_level(); }
+g { goto_file_byindex(0); }
+G { goto_file_byindex(-1); }
+j { shift_y(-10); }
+k { shift_y(10); }
+h { shift_x(10); }
+l { shift_x(-10); }
+J { shift_y(-100); }
+K { shift_y(100); }
+H { shift_x(100); }
+L { shift_x(-100); }
+z { reset_scale_level(); }
+x { toggle_background_pattern(0); }
+V { flip_horizontally(); }
+b { goto_file_relative(-1); }
+<minus> { set_scale_level_relative(0.9); }
+<underscore> { set_scale_level_relative(0.7); }
+<equal> { set_scale_level_relative(1.1); }
+<plus> { set_scale_level_relative(1.3); }
+<Escape> { nop(); }
+<Control>h { rotate_left(); }
+<Control>l { rotate_right(); }
+<Control>f { jump_dialog(); }
+@MONTAGE {
+  G { goto_file_byindex(-1); }
+  g { goto_file_byindex(0); }
+  q { montage_mode_return_cancel(); }
+  j { montage_mode_shift_y(1); }
+  k { montage_mode_shift_y(-1); }
+  h { montage_mode_shift_x(-1); }
+  l { montage_mode_shift_x(1); }
+  <Escape> { nop(); }
+  <Control>f { montage_mode_follow(asdfghjkl); }
+  <minus> { set_thumbnail_size(128,128) }
+  <plus> { set_thumbnail_size(256,256) }
+}

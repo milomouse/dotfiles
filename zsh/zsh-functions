@@ -36,5 +36,5 @@ function up {
 # one-liners/micro functions:
 function dropcache { sync && print 1 | doas tee /proc/sys/vm/drop_caches }
 function mkcd { command mkdir -p "${@}" && cd "$@" }
-function pqiv { command pqiv -t "${@}" 2>/dev/null }
-function startx { [[ ${+DISPLAY} -eq 1 ]] || { cd && /usr/bin/xinit ${XDG_CONFIG_DIR:-$HOME}/xorg/xinitrc -auth ${XDG_CONFIG_DIR:-$HOME}/xorg/.serverauth.${RANDOM[1,4]} -nolisten tcp -once -retro -- vt7 &>!${XDG_CONFIR_DIR:-$HOME}/xorg/log } }
+function pqiv { command pqiv "${@}" 2>/dev/null }
+function startx { [[ ${+DISPLAY} -eq 1 ]] || { cd && /usr/bin/xinit ${XDG_CONFIG_DIR:-$HOME}/xorg/xinitrc -nolisten tcp -once -retro -- vt7 &>!/var/tmp/logs/xorg/runtime.log } }

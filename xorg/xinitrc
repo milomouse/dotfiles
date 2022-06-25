@@ -6,13 +6,14 @@
 ##############################################
 
 ## RESOURCES:
-xrandr --setprovidersoutputsource modesetting NVIDIA-0
+# xrandr --setprovideroutputsource modesetting NVIDIA-0
 xrandr --auto
 xrdb -load ${XDG_CONFIG_HOME:-$HOME}/xorg/Xresources &
 
 ## INPUT:
 # xmodmap ${XDG_CONFIG_HOME:-$HOME}/keymaps/zsu.xmodmap &
 xmodmap ${XDG_CONFIG_HOME:-$HOME}/keymaps/overlay.xmodmap &
+xbindkeys -f ${XDG_CONFIG_HOME:-$HOME}/keymaps/xbindkeys &
 zaprat --disable &
 
 ## DISPLAY:

@@ -196,6 +196,8 @@ let ruby_space_errors = 1
 map gn :bnext<CR>
 map gp :bprevious<CR>
 map gd :bdelete <CR>
+map gb <C-^>
+map gl :buffers<CR>:buffer<Space>
 map <Up> <NOP>
 map <Down> <NOP>
 map <Left> <NOP>

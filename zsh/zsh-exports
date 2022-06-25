@@ -30,10 +30,6 @@ path+="${H}/code/python/pip_modules/bin"
 path+="${H}/code/nodejs/pkg/bin"
 #path+="./node_modules/.bin"
 
-# files:
-export HISTFILE="${ZDOTDIR:-${XDG_CONFIG_HOME}/zsh}/.history"
-export XAUTHORITY="${XDG_CONFIG_HOME}/xorg/.Xauthority"
-
 # executables:
 export BROWSER="lynx"
 export EDITOR="vim"
@@ -48,6 +44,7 @@ export FZF_DEFAULT_OPTS='--color=fg:#444444,bg:-1,hl:#655969,fg+:#AF00D7,bg+:#1C
 --color=info:#949494,prompt:#8D8D8D,pointer:#138BCF,marker:#FF009A,spinner:#B2B2B2,header:#FF009A'
 
 # variables:
+export HISTFILE="${ZDOTDIR:-${XDG_CONFIG_HOME}/zsh}/.history"
 export HISTSIZE=2000
 export SAVEHIST=2000
 export DIRSTACKSIZE=20
@@ -65,7 +62,7 @@ export GREP_COLORS="mt=01;32:sl=00;35"
 export CALIBRE_USE_DARK_PALETTE=1
 export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on'
 
-# 4K scaling:
+# 4K gui scaling:
 export GDK_SCALE=2.5
 export GDK_DPI_SCALE=0.5
 export QT_AUTO_SCREEN_SET_FACTOR=0

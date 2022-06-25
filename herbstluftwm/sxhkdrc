@@ -122,6 +122,10 @@ mod1 + y
 mod1 + b
     xrefresh
 
+#+ rebind buttons on "Huion HS64" tablet
+mod1 + t
+    /home/mother/code/sh/wacom.sh
+
 #+ image capture of current screen
 mod1 + control + i
     import -window root /home/mother/foto/shot/$(date '+%Y_%m_%d-%H%M%S').png
@@ -129,6 +133,14 @@ mod1 + control + i
 #+ custom script to disable/enable/hide/unhide the touchpad/mouse
 mod1 + grave
     /usr/local/bin/zaprat --toggle
+
+#+ kernel doesn't recognize brightness keys on the "Gigabyte Aero 17 HDR XD"
+mod1 + Next
+    doas /usr/local/bin/brightnessctl s 10%-
+
+#+ so, this is an undesirable yet necessary workaround
+mod1 + Prior
+    doas /usr/local/bin/brightnessctl s 10%+
 
 #+ mute/unmute pulseaudio volume within ALSA
 XF86AudioMute
@@ -145,13 +157,5 @@ XF86AudioLowerVolume
 #+ suspend operating system to memory
 XF86Sleep
     /bin/sh -c 'echo mem | doas tee /sys/power/state'
-
-#+ acpi doesn't recognize brightness keys on new laptop
-mod1 + Next
-    doas /usr/local/bin/brightnessctl s 10%-
-
-#+ ...this is an undesirable workaround
-mod1 + Prior
-    doas /usr/local/bin/brightnessctl s 10%+
 
 # vim: set ft=sxhkdrc:

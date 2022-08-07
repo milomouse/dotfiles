@@ -6,7 +6,7 @@ Current Setup:
 
 + *DISTRO* = Gentoo ( ~amd64 nomultilib ) ( [link](https://www.gentoo.org) )
 
-+ *KERNEL* = GNU/Linux 5.18.3 ( [link](https://kernel.org) )
++ *KERNEL* = GNU/Linux 5.18.16 ( [link](https://kernel.org) )
 
 + *SOURCES* = Zen ( [link](https://github.com/zen-kernel/zen-kernel) )
 

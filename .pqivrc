@@ -1,5 +1,6 @@
 [options]
 scale-images-up=1
+scale-mode-screen-fraction=0.9
 
 [keybindings]
 f { send_keys(#1); }

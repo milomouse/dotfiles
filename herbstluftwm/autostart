@@ -83,11 +83,12 @@ hc rule class="Dialog" pseudotile=on
 hc rule class="sun-awt-X11-XFramePeer" pseudotile=on
 hc rule class="Nvidia-settings" floating=on
 hc rule class="calibre" tag=II
+hc rule class="obs" tag=II
 hc rule class="forge-view-Main" tag=IV
-hc rule class="retroarch" tag=IV
+hc rule class="mednafen" tag=IV
+hc rule class='ru-turikhay-tlauncher-bootstrap-Bootstrap' tag=IV pseudotile=on
+hc rule class="AppRun.wrapped" tag=IV
 hc rule class="duckstation-nogui" tag=IV
-hc rule class="PPSSPPSDL" tag=IV
-hc rule class="KSP.x86_64" tag=IV
 hc rule class="Deep Sky Derelicts.x86_64" tag=IV
 hc rule class="Rise of Industry" tag=IV
 hc rule class="Space Haven" tag=IV
@@ -96,13 +97,15 @@ hc rule class~'(.*[sS]potify)' tag=II
 hc rule class~'(.*[dD]iscord)' tag=II
 hc rule class~'(.*[fF]irefox)' tag=III
 hc rule class~'(.*[nN]avigator)' tag=III
-hc rule class~'(.*[fF]actorio)' tag=IV
+hc rule class~'(.*[mM]ednaffe)' tag=IV
+hc rule class~'(.*[pP]csx2)' tag=IV
+hc rule class~'(.*[uU]rn-[gG]tk)' tag=IV manage=on floating=off pseudotile=off
 hc rule class~'(.*[eE]u4)' tag=IV
-hc rule class~'(.*[cC]k2)' tag=IV
 hc rule class~'(.*[cC]k3)' tag=IV
 hc rule class~'(.*[sS]tellaris)' tag=IV
 hc rule class~'(.*[iI]mperator)' tag=IV
 hc rule class~'(.*[oO]ffworld)' tag=IV
+hc rule class~'(.*[fF]actorio)' tag=IV
 hc rule class~'(.*[rR]im[wW]orld[lL]inux)' tag=IV
 hc rule class~'(.*[bB]lender)' tag=V
 hc rule class~'(.*[sS]ubstance-[pP]ainter)' tag=VI
@@ -111,7 +114,6 @@ hc rule class~'(.*[kK]rita)' tag=VI
 hc rule class~'(.*[gG]imp)' tag=VI
 hc rule class~'(.*[iI]nkscape)' tag=VI
 hc rule class~'(.*[pP]ure[rR]ef)' tag=VI
-hc rule class~'(.*[sS]xiv)' pseudotile=on
 hc rule class~'(.*[pP]qiv)' pseudotile=on
 hc rule class~'(.*[yY]ad)' floating=on
 hc rule title="Open File" floating=on

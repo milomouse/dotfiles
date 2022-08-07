@@ -25,6 +25,7 @@ alias xload="xrdb -load ${XDG_CONFIG_DIR:-${HOME}}/xorg/Xresources &>/dev/null"
 alias zedit="${EDITOR:-/usr/bin/vim} ${HOME}/{.zshrc,zsh/zsh-{functions,aliases,options,exports}}"
 
 # program masquing:
+alias df="df -hTP"
 alias diff="colordiff"
 alias grep="grep --color=auto"
 alias lynx="lynx -vikeys -tna -force_secure -accept_all_cookies -cookie_file='/tmp/lynx_cookies' -short_url -show_rate -telnet -lss='~/lynx/lynx.lss'"

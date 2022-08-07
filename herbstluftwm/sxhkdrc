@@ -81,12 +81,12 @@ mod1 + o
 mod1 + {_,shift +} f
     herbstclient {pseudotile,floating} toggle
 
-#+ bindings for "ELECOM TrackBall HUGE" mouse function keys (10,11) [12 used as scroll modifier]
-{_,shift +} button10
+#+ "ELECOM TrackBall HUGE" [mouse] extra function keys [10,11] (12 used as scroll modifier)
+{_,shift} + button10
     /home/mother/conf/herbstluftwm/scripts/tagswitch.sh {next,prev}
 control + button10
     herbstclient use_previous
-# button11
+# button11 (will probably leave this unbound to use exclusively for app shortcuts)
 #     herbstclient close_and_remove
 
 
@@ -114,6 +114,10 @@ mod1 + {e,w}
 mod1 + g
     /home/mother/conf/rofi/scripts/games.sh
 
+#+ speedrun emulator menu
+mod1 + shift + e
+    /home/mother/conf/rofi/scripts/emulators.sh
+
 #+ rotation of primary/clipboard selections
 mod1 + y
     /usr/local/bin/clipswap
@@ -123,7 +127,7 @@ mod1 + b
     xrefresh
 
 #+ rebind buttons on "Huion HS64" tablet
-mod1 + t
+mod1 + x
     /home/mother/code/sh/wacom.sh
 
 #+ image capture of current screen

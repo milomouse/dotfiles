@@ -24,4 +24,5 @@
 --restrict-filenames
 
 # preferred formats with safe fallbacks
---format "bv[height>=720]+ba[acodec=opus]/bv[height>=720]+ba[ext=webm]/bv[height>=720]+ba/best"
+# --format "bv[height>=720]+ba[acodec=opus]/bv[height>=720]+ba[ext=webm]/bv[height>=720]+ba/best"
+--format "bv[height<=720]+ba[acodec=opus]/bv[height<=720]+ba[ext=webm]/bv[height<=720]+ba/best"

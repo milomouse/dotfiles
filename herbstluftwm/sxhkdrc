@@ -1,6 +1,5 @@
 #######################################################
 ## locate: ${XDG_CONFIG_HOME}/herbstluftwm/sxhkdrc   ##
-## author: Vincent (github.com/milomouse)            ##
 ## detail: keybinding(s) for `herbstluftwm'          ##
 ## notice: spawned and killed from "xinitrc" file    ##
 #######################################################
@@ -21,13 +20,13 @@ mod1 + c
 mod1 + {_,shift +} t
     herbstclient cycle_layout {+,-}1 max grid horizontal vertical
 
-#+ manually split frame at left or right
-mod1 + {minus,equal}
-    herbstclient split {left,right} 0.5
+#+ manually split frame horizontally
+mod1 + {_,shift +} minus
+    herbstclient split {bottom,top} 0.5
 
-#+ manually split frame at top or bottom
-mod1 + shift + {equal,minus}
-    herbstclient split {top,bottom} 0.5
+#+ manually split frame vertically
+mod1 + {_,shift +} equal
+    herbstclient split {right,left} 0.5
 
 #+ automatically split, and/or shift window to new split (if available)
 mod1 + {_,shift +} BackSpace
@@ -84,11 +83,8 @@ mod1 + {_,shift +} f
 #+ "ELECOM TrackBall HUGE" [mouse] extra function keys [10,11] (12 used as scroll modifier)
 {_,shift} + button10
     /home/mother/conf/herbstluftwm/scripts/tagswitch.sh {next,prev}
-control + button10
+button11
     herbstclient use_previous
-# button11 (will probably leave this unbound to use exclusively for app shortcuts)
-#     herbstclient close_and_remove
-
 
 ########################
 ## External:          ##
@@ -114,10 +110,6 @@ mod1 + {e,w}
 mod1 + g
     /home/mother/conf/rofi/scripts/games.sh
 
-#+ speedrun emulator menu
-mod1 + shift + e
-    /home/mother/conf/rofi/scripts/emulators.sh
-
 #+ rotation of primary/clipboard selections
 mod1 + y
     /usr/local/bin/clipswap
@@ -125,10 +117,6 @@ mod1 + y
 #+ refresh screen
 mod1 + b
     xrefresh
-
-#+ rebind buttons on "Huion HS64" tablet
-mod1 + x
-    /home/mother/code/sh/wacom.sh
 
 #+ image capture of current screen
 mod1 + control + i
@@ -138,25 +126,25 @@ mod1 + control + i
 mod1 + grave
     /usr/local/bin/zaprat --toggle
 
-#+ kernel doesn't recognize brightness keys on the "Gigabyte Aero 17 HDR XD"
+#+ kernel currently doesn't recognize brightness keycodes on the "Gigabyte Aero 17 HDR XD"
 mod1 + Next
-    doas /usr/local/bin/brightnessctl s 10%-
+    doas /usr/local/bin/brightnessctl -d intel_backlight s 10%-
 
-#+ so, this is an undesirable yet necessary workaround
+#+ ^.. so, this is an undesirable yet necessary workaround
 mod1 + Prior
-    doas /usr/local/bin/brightnessctl s 10%+
+    doas /usr/local/bin/brightnessctl -d intel_backlight s 10%+
 
 #+ mute/unmute pulseaudio volume within ALSA
 XF86AudioMute
-    amixer -c 1 -q -D pulse sset Master toggle
+    amixer -c 0 -q -D pulse sset Master toggle
 
 #+ raise pulseaudio volume within ALSA
 XF86AudioRaiseVolume
-    amixer -c 1 -q -D pulse sset Master 5%+
+    amixer -c 0 -q -D pulse sset Master 5%+
 
 #+ lower pulseaudio volume within ALSA
 XF86AudioLowerVolume
-    amixer -c 1 -q -D pulse sset Master 5%-
+    amixer -c 0 -q -D pulse sset Master 5%-
 
 #+ suspend operating system to memory
 XF86Sleep

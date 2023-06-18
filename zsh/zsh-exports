@@ -25,10 +25,11 @@ export XDG_VIDEOS_DIR="${H}/vide"
 export GOPATH="${H}/code/go"
 export PYTHONUSERBASE="${H}/code/python/pip_modules"
 export PYTHONPATH="${PYTHONUSERBASE}/lib"
-export PATH="${XDG_CONFIG_HOME}/.cargo/bin:${PATH}"
+export PATH="${PATH}:${XDG_CONFIG_HOME}/.cargo/bin"
 path+="${H}/code/python/pip_modules/bin"
 path+="${H}/code/nodejs/pkg/bin"
 #path+="./node_modules/.bin"
+export CUDA_PATH=/opt/cuda
 
 # executables:
 export BROWSER="lynx"
@@ -63,10 +64,10 @@ export CALIBRE_USE_DARK_PALETTE=1
 export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on'
 
 # 4K gui scaling:
-export GDK_SCALE=2.5
+export GDK_SCALE=2.0
 export GDK_DPI_SCALE=0.5
 export QT_AUTO_SCREEN_SET_FACTOR=0
-export QT_SCALE_FACTOR=2.5
+export QT_SCALE_FACTOR=2.0
 export QT_FONT_DPI=96
 export __GL_SYNC_TO_VBLANK=1
 

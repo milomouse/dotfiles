@@ -3,7 +3,6 @@
 " Maintainer:   Vincent (github.com/milomouse)
 " Created:      2010-xx-xx
 " Last Change:  2022-06-15
-" TODO: go through and revamp colors to match terminal theme
 " Colorful yet mild
 " Designed exclusively for 256-color console
 

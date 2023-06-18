@@ -2,7 +2,7 @@
 # /home/mother/conf/.nvidia-settings-rc
 #
 # Configuration file for nvidia-settings - the NVIDIA Settings utility
-# Generated on Sun Jun  5 10:39:45 2022
+# Generated on Fri Dec 16 18:00:24 2022
 #
 
 # ConfigProperties:
@@ -47,3 +47,4 @@ Timer = Memory_Used_(GPU_0),Yes,3000
 [DPY:DP-1]/ColorSpace=0
 [DPY:DP-1]/ColorRange=0
 [DPY:DP-1]/SynchronousPaletteUpdates=0
+[GPU:0]/GPUPowerMizerMode=2

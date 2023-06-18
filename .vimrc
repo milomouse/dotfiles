@@ -1,30 +1,25 @@
-"#####################################################"
-"# locate: ${XDG_CONFIG_HOME}/.tmux.conf             #"
-"# author: Vincent (github.com/milomouse)            #"
-"# detail: configuration file for `vim'              #"
-"#####################################################"
+"""""""""""""""""""""""""""""""""""""""""""
+""" locate: ${XDG_CONFIG_HOME}/.vimrc
+""" author: Vincent (github.com/milomouse)
+""" detail: configuration file for `vim'
+"""""""""""""""""""""""""""""""""""""""""""
 
-"" Disable plugin file(s) per-language from Polyglot
-"" [still allows Polyglot filetype detection while using own syntax-highlighting]
-"" [if you want more support for a language, disable and install specific plugin]
-"" [prefer Polyglot for languages where you only want syntax/indentation support]
-let g:polyglot_disabled = ['markdown.plugin']
-
-"" Load plugins via `Plug' package manager for ViM
-"" [ https://github.com/junegunn/vim-plug > ~/.vim/autoload/plug.vim ]
+""" Load plugins via `Plug' package manager for ViM
+""" [ https://github.com/junegunn/vim-plug > ~/.vim/autoload/plug.vim ]
 call plug#begin('~/.vim/plugged')
     Plug 'vim-airline/vim-airline'
     Plug 'lambdalisue/fern.vim'
     Plug 'lambdalisue/fern-hijack.vim'
     Plug 'hrsh7th/fern-mapping-collapse-or-leave.vim'
-"    Plug 'Konfekt/FastFold'
-    Plug 'sheerun/vim-polyglot'
+    " Plug 'Konfekt/FastFold'
     Plug 'plasticboy/vim-markdown'
     Plug 'tomtom/tcomment_vim'
     Plug 'pbogut/fzf-mru.vim'
 call plug#end()
 
-"" Airline specific settings
+""" Airline specific settings
+" let g:airline_theme = 'peaksea'
+" let g:airline_theme = 'monochrome'
 let g:airline_theme = 'candymouse'
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#wordcount#enabled = 1
@@ -58,7 +53,7 @@ let g:airline_mode_map = {
 :autocmd!
 :autocmd VimEnter * :AirlineRefresh
 
-"" Other plugin specific settings
+""" Other plugin specific settings
 let g:fzf_mru_no_sort = 0
 let g:fzf_mru_relative = 0
 autocmd FileType fzf tnoremap <buffer> <Esc> <Esc>
@@ -67,7 +62,7 @@ map <C-i> :FZF /home<CR>
 map <C-p> :FZFMru<CR>
 map <C-n> :Fern . -wait<CR>
 
-"" Core ViM settings
+""" Core ViM settings
 set nocompatible
 set hidden
 set shell=zsh
@@ -79,7 +74,7 @@ set fileformats=unix,dos,mac
 syntax enable
 colorscheme candymouse
 
-"" Miscellaneous
+""" Miscellaneous
 set number
 set cursorline
 set nocursorcolumn
@@ -113,29 +108,29 @@ set shortmess=aTItoOc
 set statusline=▒[%n]\ %<%F%m%r\ %w\ %=%y\ <%{&fileformat}>\ --%p%%--\ %l:%c\ %L\ ▒
 set laststatus=2
 set history=1000
-"set noswapfile
+" set noswapfile
 set backup
 set backupskip+=/tmp/*,/var/tmp/*,/srv/vide/*
 set backupdir=~/.vim/backups//,/tmp/vim-backups//
 set directory=~/.vim/swapfiles//,/tmp/vim-swapfiles//
 set viminfo='20,<50,s10,h,n~/.vim/viminfo
 
-"" Wild/File Globbing
+""" Wild/File Globbing
 set wildmode=list:longest,full
 set wildignore+=*.aux,*.out,*.toc,*.eot,*.otf,*.ttf,*.woff,*.swp,.DS_Store,._*,*.lock,*~
 set wildignore+=*.o,*.obj,*.exe,*.dll,*.jar,*.pyc,*.rbc,*.class,*.so
 set wildignore+=*.avi,*.m4a,*.mp3,*.oga,*.ogg,*.opus,*.wav,*.webm,*.mp4,*.flac,*.mkv
 set wildignore+=*.ai,*.bmp,*.gif,*.ico,*.svg,*.jpg,*.jpeg,*.png,*.psd,*.webp,*.xcf
-set wildignore+=*.doc,*.docx,*.pdf,*.cbz,*.cbr,*.epub,*.lit,*.mobi,*.azw
+set wildignore+=*.doc,*.docx,*.pdf,*.cbz,*.cbr,*.epub,*.lit,*.mobi,*.azw,*.fb2
 set wildignore+=*.zip,*.rar,*.7z,*.tar.gz,*.tar.bz2,*.tar.xz
 set wildignore+=*/vendor/gems/*,*/vendor/cache/*,*/.bundle/*,*.gem,*.marko.js,*.min.*,*-min.*
 set wildignore=*/.git/*,*/.hg/*,*/.svn/*,*/build/*,*/node_modules/*,=npm-debug.log,.sass-cache
 
-"" FileType/Indentation
+" FileType/Indentation
 filetype on
 filetype indent off
 filetype plugin indent off
-"" [set default indentation fallback for undefined languages, using spaces only]
+""" [set default indentation fallback for undefined languages, using spaces only]
 set expandtab
 set shiftwidth=2
 set softtabstop=2
@@ -145,12 +140,9 @@ autocmd BufReadPost *
     \ if line("'\"") > 0 && line("'\"") <= line("$") |
     \   exe "normal! 9`\"" |
     \ endif
-"" [per FileType local buffer settings]
-autocmd FileType mail     setlocal tw=75 autoindent formatoptions=tcqn spell comments=nb:>
-autocmd FileType mail     vmap D d0[...]^[
-autocmd FileType mail     silent normal /--\s*$^M0^[gg/^$^Mj
+""" [per FileType local buffer settings]
 autocmd FileType markdown setlocal conceallevel=2
-"" [style guide]
+""" [style guide]
 autocmd FileType c,cpp    setlocal expandtab shiftwidth=4 softtabstop=4 tabstop& formatoptions+=ro cindent
 autocmd FileType c,cpp    syn match matchName /\(#define\)\@<= .*/
 autocmd FileType crystal  setlocal expandtab shiftwidth=2 softtabstop=2 tabstop&
@@ -170,15 +162,15 @@ autocmd FileType r        setlocal expandtab shiftwidth=2 softtabstop=2 tabstop&
 autocmd FileType ruby     setlocal expandtab shiftwidth=2 softtabstop=2 tabstop&
 autocmd FileType sh,zsh   setlocal expandtab shiftwidth=2 softtabstop=2 tabstop&
 autocmd FileType vim      setlocal expandtab shiftwidth=2 softtabstop=2 tabstop&
-"" [unregistered Filename/Extension; assign Syntax]
+""" [unregistered Filename/Extension; assign Syntax]
 autocmd BufNewFile,BufRead vifmrc set syntax=vim
 autocmd BufNewFile,BufRead .pentadactylrc set syntax=vim
 autocmd BufNewFile,BufRead *.zsh set syntax=zsh
 autocmd BufNewFile,BufRead *.rasi set syntax=config
-"" [unregistered Filename/Extension; assign FileType]
-"autocmd BufNewFile,BufRead *.twig set filetype=html
+""" [unregistered Filename/Extension; assign FileType]
+" autocmd BufNewFile,BufRead *.twig set filetype=html
 
-"" Allowance/Highlight options per language
+""" Allowance/Highlight options per language
 let c_space_errors = 1
 let c_no_trail_space_error = 1
 let c_no_tab_space_error = 1
@@ -192,7 +184,7 @@ let java_space_errors = 1
 let python_space_errors = 1
 let ruby_space_errors = 1
 
-"" Mappings
+""" Mappings
 map gn :bnext<CR>
 map gp :bprevious<CR>
 map gd :bdelete <CR>
@@ -209,15 +201,15 @@ nnoremap q: <Nop>
 nnoremap q/ <Nop>
 nnoremap q? <Nop>
 
-"" Netrw (prefer Fern plugin but setting defaults anyway)
+""" Netrw (prefer the Fern plugin)
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
 let g:netrw_winsize = '30'
 
-"" Performance
+""" Performance
 autocmd BufWinLeave * call clearmatches()
 set lazyredraw
-"" [(default is 4000ms/4s) leads to noticeable delays]
+""" [default is 4000ms/4s which leads to noticeable delays]
 set updatetime=300
 set ttimeoutlen=10
 augroup FastEscape

@@ -84,7 +84,8 @@ hc rule class="sun-awt-X11-XFramePeer" pseudotile=on
 hc rule class="Nvidia-settings" floating=on
 hc rule class="calibre" tag=II
 hc rule class="obs" tag=II
-hc rule class="forge-view-Main" tag=IV
+hc rule class="forge-view-Main" tag=II
+hc rule class="molok" tag=IV manage=on floating=off
 hc rule class="mednafen" tag=IV
 hc rule class='ru-turikhay-tlauncher-bootstrap-Bootstrap' tag=IV pseudotile=on
 hc rule class="AppRun.wrapped" tag=IV
@@ -97,9 +98,10 @@ hc rule class~'(.*[sS]potify)' tag=II
 hc rule class~'(.*[dD]iscord)' tag=II
 hc rule class~'(.*[fF]irefox)' tag=III
 hc rule class~'(.*[nN]avigator)' tag=III
+hc rule class~'(.*[cC]hromium-bin-browser-chromium)' tag=III
 hc rule class~'(.*[mM]ednaffe)' tag=IV
-hc rule class~'(.*[pP]csx2)' tag=IV
-hc rule class~'(.*[uU]rn-[gG]tk)' tag=IV manage=on floating=off pseudotile=off
+hc rule class~'(.*[pP]csx2)' tag=IV pseudotile=on
+hc rule class~'(.*[uU]rn-[gG]tk)' tag=IV manage=on floating=off
 hc rule class~'(.*[eE]u4)' tag=IV
 hc rule class~'(.*[cC]k3)' tag=IV
 hc rule class~'(.*[sS]tellaris)' tag=IV

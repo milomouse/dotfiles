@@ -1,8 +1,8 @@
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" locate: ${XDG_CONFIG_HOME}/.vim/autoload/airline/themes/candymouse.vim "
-" author: Vincent (github.com/milomouse)                                 "
-" detail: ViM Airline plugin theme file                                  "
-"________________________________________________________________________"
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" locate: ${XDG_CONFIG_HOME}/.vim/autoload/airline/themes/candymouse.vim
+""" author: Vincent (github.com/milomouse)
+""" detail: ViM Airline plugin theme file
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 scriptencoding utf-8
 

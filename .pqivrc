@@ -1,4 +1,5 @@
 [options]
+background-pattern=white
 scale-images-up=1
 scale-mode-screen-fraction=0.9
 

@@ -40,7 +40,5 @@
   whitespace = strip
 [push]
   default = simple
-[credential]
-  helper = cache
 [init]
   defaultBranch = master

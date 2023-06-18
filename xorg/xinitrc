@@ -1,25 +1,42 @@
 #! /bin/zsh
 ##############################################
 ## locate: ${XDG_CONFIG_HOME}/xorg/xinitrc  ##
-## author: Vincent (github.com/milomouse)   ##
 ## detail: X.Org init configuration file    ##
 ##############################################
 
-## RESOURCES:
-# xrandr --setprovideroutputsource modesetting NVIDIA-0
+#### RESOURCES:
+### [setup is found in "/etc/X11/xorg.d/" as "20-nvidia-only.conf" and "70-monitor.conf"]
+### [use dedicated graphic card for display back-end instead of the integrated card]
+### [this creates a "PRIME Display" controlled via xRANDR]
+### [every graphical program ran through this display automatically uses the GPU]
 xrandr --auto
+#xrandr --setprovideroutputsource modesetting NVIDIA-0
+#xrandr --output eDP-1-1 --primary --mode 3840x2160
+### [load terminal settings if applicable]
 xrdb -load ${XDG_CONFIG_HOME:-$HOME}/xorg/Xresources &
 
-## INPUT:
-# xmodmap ${XDG_CONFIG_HOME:-$HOME}/keymaps/zsu.xmodmap &
-xmodmap ${XDG_CONFIG_HOME:-$HOME}/keymaps/overlay.xmodmap &
-xbindkeys -f ${XDG_CONFIG_HOME:-$HOME}/keymaps/xbindkeys &
-zaprat --disable &
 
-## DISPLAY:
+#### INPUT:
+### [swap Super_L and Alt_L]
+xmodmap ${XDG_CONFIG_HOME:-$HOME}/keymaps/overlay.xmodmap &
+### [this one doesn't seem to work in all programs]
+#setxkbmap -option altwin:swap_alt_win
+### [disable touchpad and hide mouse on startup]
+zaprat --disable &
+### [rebind buttons on Huion tablet]
+/home/mother/code/sh/wacom.sh &
+
+
+#### DISPLAY:
+### [set default cursor shape/color]
 xsetroot -cursor_name left_ptr -solid '#101010' &
+### [set root window background]
 display -window root -resize 3840x2160! ${XDG_PUBLICSHARE_DIR}/images/kali-ma-pearl.jpg &
 
-## WINDOW MANAGER:
+
+#### WINDOW MANAGER:
+### [custom keybindings for use with herbstluftwm]
 sxhkd -c ${XDG_CONFIG_HOME:-$HOME}/herbstluftwm/sxhkdrc &
+### [launch window manager]
 exec herbstluftwm --locked -c ${XDG_CONFIG_HOME:-$HOME}/herbstluftwm/autostart
+#exec dbus-launch --autolaunch=$(cat /var/lib/dbus/machine-id) herbstluftwm --locked -c ${XDG_CONFIG_HOME:-$HOME}/herbstluftwm/autostart

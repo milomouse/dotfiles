@@ -1,4 +1,13 @@
-!! simply swap keycodes for Super_L and Alt_L
-!! order is important, apparently..
+remove Control = Control_R
+remove Mod1 = Alt_R
+keycode 108 = Control_R
+keycode 105 = Alt_R
+add Control = Control_R
+add Mod1 = Alt_R
+
+remove Mod1 = Alt_L
+remove Mod4 = Super_L
 keycode 133 = Alt_L
 keycode  64 = Super_L
+add Mod1 = Alt_L
+add Mod4 = Super_L

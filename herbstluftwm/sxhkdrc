@@ -9,75 +9,75 @@
 ###############################
 
 #+ quit herbstluftwm
-mod1 + {_,shift +} q
+mod4 + {_,shift +} q
     herbstclient {reload,chain - emit_hook quit_panel - quit}
 
 #+ rotate tag layout
-mod1 + c
+mod4 + c
     herbstclient rotate
 
 #+ cycle frame layout
-mod1 + {_,shift +} t
+mod4 + {_,shift +} t
     herbstclient cycle_layout {+,-}1 max grid horizontal vertical
 
 #+ manually split frame horizontally
-mod1 + {_,shift +} minus
+mod4 + {_,shift +} minus
     herbstclient split {bottom,top} 0.5
 
 #+ manually split frame vertically
-mod1 + {_,shift +} equal
+mod4 + {_,shift +} equal
     herbstclient split {right,left} 0.5
 
 #+ automatically split, and/or shift window to new split (if available)
-mod1 + {_,shift +} BackSpace
+mod4 + {_,shift +} BackSpace
     herbstclient split {explode,auto}
 
 #+ shift window focus next/previous within a frame
-mod1 + {_,shift +} space
+mod4 + {_,shift +} space
     herbstclient cycle {+,-}1
 
 #+ shift window focus next/previous within a tag
-mod1 + {_,shift +} i
+mod4 + {_,shift +} i
     herbstclient cycle_all --skip-invisible {-,+}1
 
 #+ resize window in direction
-mod1 + r : {h,shift + h,j,shift + j,k,shift + k,l,shift + l}
+mod4 + r : {h,shift + h,j,shift + j,k,shift + k,l,shift + l}
     herbstclient resize {left +,left -,down +,down -,up +,up -,right +,right -}0.01
 
 #+ shift focus or window in frame direction
-mod1 + {_,shift +} {h,j,k,l}
+mod4 + {_,shift +} {h,j,k,l}
     herbstclient {focus,shift} -e {left,down,up,right}
 
 #+ shift focus to next/prev occupied tag
-mod1 + {n,p}
+mod4 + {n,p}
     /home/mother/conf/herbstluftwm/scripts/tagswitch.sh {next,prev}
 
 #+ shift focus or window to next/prev tag
-mod1 + {_,shift +} {period,comma}
+mod4 + {_,shift +} {period,comma}
     herbstclient {use,move}_index {+,-}1 --skip-visible
 
 #+ shift focus between last tag(s)
-mod1 + {Tab,slash}
+mod4 + {Tab,slash}
     herbstclient use_previous
 
 #+ focus or pull urgent window
-mod1 + {_,shift +} u
+mod4 + {_,shift +} u
     herbstclient {jumpto,bring} urgent
 
 #+ close focused window {and remove frame}
-mod1 + {shift,control} + End
+mod4 + {shift,control} + End
     herbstclient {close,close_and_remove}
 
 #+ remove/collapse frame
-mod1 + z
+mod4 + z
     herbstclient remove
 
 #+ fullscreen client toggle
-mod1 + o
+mod4 + o
     herbstclient {fullscreen} toggle
 
 #+ pseudotile, float/unfloat client toggle
-mod1 + {_,shift +} f
+mod4 + {_,shift +} f
     herbstclient {pseudotile,floating} toggle
 
 #+ "ELECOM TrackBall HUGE" [mouse] extra function keys [10,11] (12 used as scroll modifier)
@@ -91,47 +91,47 @@ button11
 ########################
 
 #+ reload sxhkd config
-mod1 + shift + s
+mod4 + shift + s
     pkill -USR1 -x sxhkd
 
 #+ spawn terminal with tmux
-mod1 + Return
+mod4 + Return
     st -e tmux
 
 #+ spawn terminal
-mod1 + shift + Return
+mod4 + shift + Return
     st
 
 #+ application/window menu
-mod1 + {e,w}
+mod4 + {e,w}
     rofi -show {run,window}
 
 #+ games menu
-mod1 + g
+mod4 + g
     /home/mother/conf/rofi/scripts/games.sh
 
 #+ rotation of primary/clipboard selections
-mod1 + y
+mod4 + y
     /usr/local/bin/clipswap
 
 #+ refresh screen
-mod1 + b
+mod4 + b
     xrefresh
 
 #+ image capture of current screen
-mod1 + control + i
+mod4 + control + i
     import -window root /home/mother/foto/shot/$(date '+%Y_%m_%d-%H%M%S').png
 
 #+ custom script to disable/enable/hide/unhide the touchpad/mouse
-mod1 + grave
+mod4 + grave
     /usr/local/bin/zaprat --toggle
 
-#+ kernel currently doesn't recognize brightness keycodes on the "Gigabyte Aero 17 HDR XD"
-mod1 + Next
+#+ brightness down (bindings for laptop and external keyboard)
+{mod4 + Next,XF86MonBrightnessDown}
     doas /usr/local/bin/brightnessctl -d intel_backlight s 10%-
 
-#+ ^.. so, this is an undesirable yet necessary workaround
-mod1 + Prior
+#+ brightness up (bindings for laptop and external keyboard)
+{mod4 + Prior,XF86MonBrightnessUp}
     doas /usr/local/bin/brightnessctl -d intel_backlight s 10%+
 
 #+ mute/unmute pulseaudio volume within ALSA
@@ -149,5 +149,17 @@ XF86AudioLowerVolume
 #+ suspend operating system to memory
 XF86Sleep
     /bin/sh -c 'echo mem | doas tee /sys/power/state'
+
+#+ remotely control music player
+XF86AudioPlay
+    playerctl --player spotify play-pause
+
+#+ remotely control music player
+XF86AudioPrev
+    playerctl --player spotify previous
+
+#+ remotely control music player
+XF86AudioNext
+    playerctl --player spotify next
 
 # vim: set ft=sxhkdrc:

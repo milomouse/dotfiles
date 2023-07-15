@@ -12,7 +12,7 @@ hc() {
 hc emit_hook reload
 hc keyunbind --all
 
-Mod=Mod1
+Mod=Mod4
 
 tag_names=( I II III IV V VI )
 tag_keys=( {1..6} )

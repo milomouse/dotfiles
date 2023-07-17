@@ -160,11 +160,12 @@ autocmd FileType nim      setlocal expandtab shiftwidth=2 softtabstop=2 tabstop&
 autocmd FileType python   setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=4
 autocmd FileType r        setlocal expandtab shiftwidth=2 softtabstop=2 tabstop&
 autocmd FileType ruby     setlocal expandtab shiftwidth=2 softtabstop=2 tabstop&
-autocmd FileType sh,zsh   setlocal expandtab shiftwidth=2 softtabstop=2 tabstop&
+autocmd FileType sh       setlocal expandtab shiftwidth=4 softtabstop=4 tabstop&
+autocmd FileType txt      setlocal expandtab shiftwidth=2 softtabstop=2 tabstop& textwidth=105 nospell
 autocmd FileType vim      setlocal expandtab shiftwidth=2 softtabstop=2 tabstop&
+autocmd FileType zsh      setlocal expandtab shiftwidth=2 softtabstop=2 tabstop&
 """ [unregistered Filename/Extension; assign Syntax]
 autocmd BufNewFile,BufRead vifmrc set syntax=vim
-autocmd BufNewFile,BufRead .pentadactylrc set syntax=vim
 autocmd BufNewFile,BufRead *.zsh set syntax=zsh
 autocmd BufNewFile,BufRead *.rasi set syntax=config
 """ [unregistered Filename/Extension; assign FileType]

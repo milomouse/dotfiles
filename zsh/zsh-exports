@@ -32,7 +32,7 @@ path+="${H}/code/nodejs/pkg/bin"
 export CUDA_PATH=/opt/cuda
 
 # executables:
-export BROWSER="lynx"
+export BROWSER="firefox-bin"
 export EDITOR="vim"
 export FCEDIT="${EDITOR}"
 export MANPAGER="less -sM +Gg"

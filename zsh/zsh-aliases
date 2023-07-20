@@ -34,6 +34,7 @@ alias mpq="mpv -really-quiet"
 alias mupdf="mupdf -Y 2 -I"
 alias sxiv="sxiv -s f -ab -g '3000x2000'"
 alias tsm="transmission-remote"
+alias krita="krita --nosplash"
 
 # system/media shortcuts:
 alias loadavg='print - ${$(</proc/loadavg)[1,3]}'

@@ -1,2 +1,4 @@
 [Shortcuts]
-reset_canvas_rotation=Ctrl+`
+file_quit=Ctrl+Alt+Shift+Q
+windows_next=Alt+]
+windows_previous=Alt+[

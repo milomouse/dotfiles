@@ -1,4 +1,4 @@
 [Shortcuts]
 file_quit=Ctrl+Alt+Shift+Q
-windows_next=]
-windows_previous=[
+windows_next=Alt+]
+windows_previous=Alt+[

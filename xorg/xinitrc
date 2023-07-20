@@ -31,7 +31,7 @@ zaprat --disable &
 ### [set default cursor shape/color]
 xsetroot -cursor_name left_ptr -solid '#101010' &
 ### [set root window background]
-display -window root -resize 3840x2160! ${XDG_PUBLICSHARE_DIR}/images/Akira.jpg &
+display -window root -resize 3840x2160! ${XDG_PUBLICSHARE_DIR}/images/tomie-transformed.jpg &
 
 
 #### WINDOW MANAGER:

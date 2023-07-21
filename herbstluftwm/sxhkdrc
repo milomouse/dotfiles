@@ -65,7 +65,7 @@ mod4 + {_,shift +} u
     herbstclient {jumpto,bring} urgent
 
 #+ close focused window {and remove frame}
-mod4 + {shift,control} + End
+mod4 + {shift,control} + Delete
     herbstclient {close,close_and_remove}
 
 #+ remove/collapse frame
@@ -147,7 +147,7 @@ XF86AudioLowerVolume
     amixer -c 0 -q -D pulse sset Master 5%-
 
 #+ suspend operating system to memory
-XF86Sleep
+{XF86Sleep,mod4 + control + End}
     /bin/sh -c 'echo mem | doas tee /sys/power/state'
 
 #+ remotely control music player

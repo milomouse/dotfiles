@@ -95,7 +95,7 @@ mod4 + shift + s
     pkill -USR1 -x sxhkd
 
 #+ spawn terminal with tmux
-mod4 + Return
+mod4 + {Return,KP_Enter}
     st -e tmux
 
 #+ spawn terminal

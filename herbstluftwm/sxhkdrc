@@ -99,7 +99,7 @@ mod4 + {Return,KP_Enter}
     st -e tmux
 
 #+ spawn terminal
-mod4 + shift + Return
+mod4 + shift + {Return,KP_Enter}
     st
 
 #+ application/window menu

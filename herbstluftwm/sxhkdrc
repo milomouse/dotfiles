@@ -22,11 +22,11 @@ mod4 + {_,shift +} t
 
 #+ manually split frame horizontally
 mod4 + {_,shift +} minus
-    herbstclient split {bottom,top} 0.5
+    herbstclient split {bottom,top} 0.7
 
 #+ manually split frame vertically
 mod4 + {_,shift +} equal
-    herbstclient split {right,left} 0.5
+    herbstclient split {right,left} 0.7
 
 #+ automatically split, and/or shift window to new split (if available)
 mod4 + {_,shift +} BackSpace

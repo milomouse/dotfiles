@@ -1,13 +1,13 @@
 AntialiasSelectionOutline=false
 ArtColorSel.ColorSpace=1
 ArtColorSel.InversedSaturation=false
-ArtColorSel.Light=0.16470588235294117
+ArtColorSel.Light=0.1568627450980392
 ArtColorSel.LightPieces=11
 ArtColorSel.NumRings=7
 ArtColorSel.RingPieces=12
-ArtColorSel.SelColorH=0.6944444444444444
-ArtColorSel.SelColorS=0.1428549629968719
-ArtColorSel.SelColorX=0.16470588235294117
+ArtColorSel.SelColorH=0.029416666666666667
+ArtColorSel.SelColorS=0.42499427786678873
+ArtColorSel.SelColorX=0.1568627450980392
 ArtColorSel.defaultHueSteps=12
 ArtColorSel.defaultSaturationSteps=7
 ArtColorSel.defaultValueScaleSteps=11
@@ -23,15 +23,15 @@ BackgroundColorForNewImage=192,194,193
 BackgroundOpacityForNewImage=255
 BackgroundStyleForNewImage=0
 CanvasOnlyActive=false
-CanvasSize/ConstrainProportions=false
-CanvasSize/KeepAspectRatio=false
+CanvasSize/ConstrainProportions=true
+CanvasSize/KeepAspectRatio=true
 ColorManagement/UseSystemMonitorProfile=true
 ConvertToImageColorSpaceOnImport=false
 CreateBackupFile=true
 CurrentWorkspace=Big_Paint
-ExportConfiguration-image/jpeg=<!DOCTYPE params>\n<params>\n <param name="baseline" type="internal">true</param>\n <param name="exif" type="internal">true</param>\n <param name="filters" type="string"><![CDATA[]]></param>\n <param name="forceSRGB" type="internal">false</param>\n <param name="iptc" type="internal">true</param>\n <param name="optimize" type="internal">true</param>\n <param name="progressive" type="internal">false</param>\n <param name="quality" type="internal">0</param>\n <param name="saveProfile" type="internal">true</param>\n <param name="smoothing" type="internal">0</param>\n <param name="storeAuthor" type="internal">false</param>\n <param name="storeMetaData" type="internal">false</param>\n <param name="subsampling" type="internal">0</param>\n <param name="transparencyFillcolor" type="color"><![CDATA[<!DOCTYPE color>\n<color>\n <RGB space="sRGB-elle-V2-g10.icc" r="1" b="1" g="1"/>\n</color>\n]]></param>\n <param name="xmp" type="internal">true</param>\n</params>\n
-ExportConfiguration-image/png=<!DOCTYPE params>\n<params>\n <param name="alpha" type="internal">true</param>\n <param name="compression" type="internal">1</param>\n <param name="downsample" type="internal">false</param>\n <param name="forceSRGB" type="internal">true</param>\n <param name="indexed" type="internal">false</param>\n <param name="interlaced" type="internal">false</param>\n <param name="saveAsHDR" type="internal">false</param>\n <param name="saveSRGBProfile" type="internal">false</param>\n <param name="storeAuthor" type="internal">false</param>\n <param name="storeMetaData" type="internal">false</param>\n <param name="transparencyFillcolor" type="color"><![CDATA[<!DOCTYPE color>\n<color>\n <RGB b="1" r="1" g="1" space="sRGB-elle-V2-g10.icc"/>\n</color>\n]]></param>\n</params>\n
-FilterSelector/LastUsedFilter=gradientmap
+ExportConfiguration-image/jpeg=<!DOCTYPE params>\n<params>\n <param name="baseline" type="internal">true</param>\n <param name="exif" type="internal">true</param>\n <param name="filters" type="string"><![CDATA[]]></param>\n <param name="forceSRGB" type="internal">false</param>\n <param name="iptc" type="internal">true</param>\n <param name="optimize" type="internal">true</param>\n <param name="progressive" type="internal">false</param>\n <param name="quality" type="internal">100</param>\n <param name="saveProfile" type="internal">true</param>\n <param name="smoothing" type="internal">0</param>\n <param name="storeAuthor" type="internal">false</param>\n <param name="storeMetaData" type="internal">false</param>\n <param name="subsampling" type="internal">0</param>\n <param name="transparencyFillcolor" type="color"><![CDATA[<!DOCTYPE color>\n<color>\n <RGB b="1" r="1" space="sRGB-elle-V2-g10.icc" g="1"/>\n</color>\n]]></param>\n <param name="xmp" type="internal">true</param>\n</params>\n
+ExportConfiguration-image/png=<!DOCTYPE params>\n<params>\n <param type="internal" name="alpha">true</param>\n <param type="internal" name="compression">1</param>\n <param type="internal" name="downsample">false</param>\n <param type="internal" name="forceSRGB">true</param>\n <param type="internal" name="indexed">false</param>\n <param type="internal" name="interlaced">false</param>\n <param type="internal" name="saveAsHDR">false</param>\n <param type="internal" name="saveSRGBProfile">false</param>\n <param type="internal" name="storeAuthor">false</param>\n <param type="internal" name="storeMetaData">false</param>\n <param type="color" name="transparencyFillcolor"><![CDATA[<!DOCTYPE color>\n<color>\n <RGB space="sRGB-elle-V2-g10.icc" b="1" r="1" g="1"/>\n</color>\n]]></param>\n</params>\n
+FilterSelector/LastUsedFilter=perchannel
 GamutMasks.viewMode=0
 KineticScrollingEnabled=true
 KineticScrollingGesture=2
@@ -47,10 +47,10 @@ Krita/Ocio/OcioConfigPath=
 Krita/Ocio/OcioLockColorVisualRepresentation=false
 Krita/Ocio/OcioLutPath=
 Krita/Ocio/UseOcio=false
-LastBackGroundColor=<!DOCTYPE LastBackGroundColor>\n<LastBackGroundColor>\n <RGB b="1" g="1" r="1" space="sRGB-elle-V2-srgbtrc.icc"/>\n</LastBackGroundColor>\n
-LastForeGroundColor=<!DOCTYPE LastForeGroundColor>\n<LastForeGroundColor>\n <RGB b="0.164705887436867" g="0.141176477074623" r="0.14509804546833" space="sRGB-elle-V2-srgbtrc.icc"/>\n</LastForeGroundColor>\n
-LastPreset=b) Basic-1
-LastPreset_-1=b) Basic-1
+LastBackGroundColor=<!DOCTYPE LastBackGroundColor>\n<LastBackGroundColor>\n <RGB space="sRGB built-in" r="0" b="0" g="0"/>\n</LastBackGroundColor>\n
+LastForeGroundColor=<!DOCTYPE LastForeGroundColor>\n<LastForeGroundColor>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="0.156862750649452" b="0.0901960805058479" g="0.10196078568697"/>\n</LastForeGroundColor>\n
+LastPreset=k) Blender Blur
+LastPreset_-1=k) Blender Blur
 LineSmoothingDelayDistance=50
 LineSmoothingDistance=50
 LineSmoothingFinishStabilizedCurve=true
@@ -65,6 +65,7 @@ OpenGLFilterMode=3
 ResourceCacheDbDirectory=/home/mother/conf/data/krita
 ResourceDirectory=/home/mother/conf/data/krita
 ShowEraserOutlineWhilePainting=true
+ShowGlobalSelection=true
 ShowOutlineWhilePainting=true
 ShowRootLayer=false
 SmoothZooming=false
@@ -125,7 +126,7 @@ eraserCursorMaincColor=128,255,128
 eraserCursorStyle=9
 eraserOutlineStyle=2
 favoritePresetsTag=★ My Favorites
-filterdialog/geometry=\x01\xd9\xd0\xcb\x00\x03\x00\x00\x00\x00\x03\xa8\x00\x00\x00\x9d\x00\x00\x05\xde\x00\x00\x02\x93\x00\x00\x03\xad\x00\x00\x00\xa2\x00\x00\x05\xd9\x00\x00\x02\x8e\x00\x00\x00\x00\x00\x00\x00\x00\x07\x80\x00\x00\x03\xad\x00\x00\x00\xa2\x00\x00\x05\xd9\x00\x00\x02\x8e
+filterdialog/geometry=\x01\xd9\xd0\xcb\x00\x03\x00\x00\x00\x00\x05@\x00\x00\x01\xd6\x00\x00\x07v\x00\x00\x03\xcc\x00\x00\x05E\x00\x00\x01\xdb\x00\x00\x07q\x00\x00\x03\xc7\x00\x00\x00\x00\x00\x00\x00\x00\x07\x80\x00\x00\x05E\x00\x00\x01\xdb\x00\x00\x07q\x00\x00\x03\xc7
 filterdialog/rememberlastpreset=false
 forceAlwaysFullSizedEraserOutline=false
 forceAlwaysFullSizedOutline=false
@@ -155,9 +156,9 @@ hideScrollbarsFullScreen=true
 hideStatusbarFullScreen=true
 hideTitleBarFullscreen=false
 hideToolbarFullscreen=true
-imageHeightDef=6000
+imageHeightDef=1575
 imageResolutionDef=300
-imageWidthDef=4800
+imageWidthDef=2800
 imagesizedlg_imsizeunit=px
 imagesizedlg_printSizeSeparatly=false
 imagesizedlg_ratioLock=true
@@ -174,7 +175,7 @@ logviewer_enabled=false
 maxAllowedSpeedValue=30
 maxSwapSize=4096
 maximumBrushSize=1000
-mdiBackgroundColorXML=<!DOCTYPE color>\n<color channeldepth="U16">\n <RGB g="0.0130006866529584" space="sRGB-elle-V2-g10.icc" r="0.0130006866529584" b="0.0167849250137806"/>\n</color>\n
+mdiBackgroundColorXML=<!DOCTYPE color>\n<color channeldepth="U16">\n <RGB b="0.0167849250137806" r="0.0130006866529584" space="sRGB-elle-V2-g10.icc" g="0.0130006866529584"/>\n</color>\n
 mdiBackgroundImage=
 mdi_viewmode=0
 memoryHardLimitPercent=60
@@ -247,7 +248,7 @@ popuppalette/useDynamicSlotCount=true
 popuppalette/usevisualcolorselector=true
 presetChooserViewMode=0
 presetIconSize=41
-presethistory=b) Basic-2 Opacity,c1) Pencil H Sketch - deevad 23.01,c6) Thin Brush Pointy - deevad 23.01,d) Block Brush Glazing - deevad 23.01,d) Ink-7 Brush Rough,d) Ink-4 Pen Rough,d) Ink-2 Fineliner,d) Ink-1 Precision,b) Basic-5 Size,b) Basic-1
+presethistory=d) Ink-7 Brush Rough,d) Ink-4 Pen Rough,d) Ink-2 Fineliner,d) Ink-1 Precision,b) Basic-5 Size,b) Basic-1,v) Distort Grow,v) Distort Shrink,v) Sketching-3 Leaky,k) Blender Blur
 renderIntent=0
 rulersTrackMouse=true
 saveSessionOnQuit=false
@@ -297,9 +298,9 @@ Choose the resource library to import=/home/mother/down/KRITA
 DontUseNativeFileDialog=true
 ExportShortcuts=/home/mother/conf/data/krita
 ImportShortcuts=/home/mother/conf/data/krita
-OpenDocument=/home/mother/3dfx/references/ai_generated_art/manga_monochromatic/mc
+OpenDocument=/home/mother/down
 OpenReferenceImage=/home/mother/3dfx/references/ai_generated_art/manga_monochromatic/mc
-SaveAs=/home/mother/3dfx/projects/TEST_woman_001
+SaveAs=/home/mother/down
 SaveCustomShortcuts=/home/mother/conf/data/krita/shortcuts
 
 [GenericGradientEditor]
@@ -397,34 +398,34 @@ ko_geometry=AdnQywADAAAAAAAAAAAAIwAAB38AAAQ4AAAABQAAACgAAAd6AAAEMwAAAAAAAAAAB4AA
 [MainWindow][DockWidget AnimationCurvesDocker]
 DockArea=2
 Locked=false
-height=448
-width=1329
+height=480
+width=640
 xPosition=0
-yPosition=32
+yPosition=0
 
 [MainWindow][DockWidget ArrangeDocker]
 DockArea=2
 Locked=false
-height=464
-width=640
+height=264
+width=222
 xPosition=0
-yPosition=16
+yPosition=0
 
 [MainWindow][DockWidget ArtisticColorSelector]
 DockArea=2
 Locked=false
-height=434
-width=632
-xPosition=1
-yPosition=17
+height=284
+width=334
+xPosition=0
+yPosition=0
 
 [MainWindow][DockWidget ChannelDocker]
 DockArea=2
 Locked=false
-height=464
-width=640
+height=30
+width=100
 xPosition=0
-yPosition=16
+yPosition=0
 
 [MainWindow][DockWidget ColorSelectorNg]
 DockArea=2
@@ -437,34 +438,34 @@ yPosition=16
 [MainWindow][DockWidget CompositionDocker]
 DockArea=2
 Locked=false
-height=464
-width=640
+height=300
+width=400
 xPosition=0
-yPosition=16
+yPosition=0
 
 [MainWindow][DockWidget DigitalMixer]
 DockArea=1
 Locked=false
-height=464
-width=640
+height=30
+width=100
 xPosition=0
-yPosition=16
+yPosition=0
 
 [MainWindow][DockWidget GamutMask]
 DockArea=2
 Locked=false
-height=464
-width=640
+height=322
+width=363
 xPosition=0
-yPosition=16
+yPosition=0
 
 [MainWindow][DockWidget GridDocker]
 DockArea=2
 Locked=false
-height=282
-width=256
-xPosition=1
-yPosition=17
+height=527
+width=258
+xPosition=0
+yPosition=0
 
 [MainWindow][DockWidget HistogramDocker]
 DockArea=2
@@ -493,26 +494,26 @@ yPosition=16
 [MainWindow][DockWidget LogDocker]
 DockArea=2
 Locked=false
-height=464
-width=640
+height=260
+width=400
 xPosition=0
-yPosition=16
+yPosition=0
 
 [MainWindow][DockWidget LutDocker]
 DockArea=2
 Locked=false
-height=464
-width=640
+height=328
+width=357
 xPosition=0
-yPosition=16
+yPosition=0
 
 [MainWindow][DockWidget OnionSkinsDocker]
 DockArea=8
 Locked=false
-height=355
-width=571
+height=282
+width=336
 xPosition=0
-yPosition=16
+yPosition=0
 
 [MainWindow][DockWidget OverviewDocker]
 DockArea=2
@@ -525,18 +526,18 @@ yPosition=16
 [MainWindow][DockWidget PaletteDocker]
 DockArea=1
 Locked=false
-height=464
-width=640
+height=422
+width=647
 xPosition=0
-yPosition=16
+yPosition=0
 
 [MainWindow][DockWidget PatternDocker]
 DockArea=2
 Locked=false
-height=464
-width=640
+height=301
+width=256
 xPosition=0
-yPosition=16
+yPosition=0
 
 [MainWindow][DockWidget PresetDocker]
 DockArea=1
@@ -549,18 +550,18 @@ yPosition=16
 [MainWindow][DockWidget PresetHistory]
 DockArea=2
 Locked=false
-height=464
-width=640
+height=30
+width=100
 xPosition=0
-yPosition=16
+yPosition=0
 
 [MainWindow][DockWidget RecorderDocker]
 DockArea=2
 Locked=false
-height=464
-width=640
+height=369
+width=277
 xPosition=0
-yPosition=16
+yPosition=0
 
 [MainWindow][DockWidget SmallColorSelector]
 DockArea=2
@@ -573,26 +574,26 @@ yPosition=16
 [MainWindow][DockWidget Snapshot]
 DockArea=2
 Locked=false
-height=464
-width=640
+height=30
+width=100
 xPosition=0
-yPosition=16
+yPosition=0
 
 [MainWindow][DockWidget SpecificColorSelector]
 DockArea=1
 Locked=false
-height=464
-width=640
+height=207
+width=268
 xPosition=0
-yPosition=16
+yPosition=0
 
 [MainWindow][DockWidget StoryboardDocker]
 DockArea=2
 Locked=false
-height=464
-width=640
+height=561
+width=604
 xPosition=0
-yPosition=16
+yPosition=0
 
 [MainWindow][DockWidget SvgSymbolCollectionDocker]
 DockArea=2
@@ -605,18 +606,18 @@ yPosition=16
 [MainWindow][DockWidget TasksetDocker]
 DockArea=2
 Locked=false
-height=464
-width=640
+height=300
+width=400
 xPosition=0
-yPosition=16
+yPosition=0
 
 [MainWindow][DockWidget TimelineDocker]
 DockArea=8
 Locked=false
-height=448
-width=882
+height=50
+width=100
 xPosition=0
-yPosition=32
+yPosition=0
 
 [MainWindow][DockWidget ToolBox]
 DockArea=1
@@ -629,10 +630,10 @@ yPosition=16
 [MainWindow][DockWidget TouchDocker]
 DockArea=2
 Locked=false
-height=464
-width=640
+height=0
+width=0
 xPosition=0
-yPosition=16
+yPosition=0
 
 [MainWindow][DockWidget comics_project_manager_docker]
 DockArea=2
@@ -670,37 +671,47 @@ yPosition=16
 pinControls=false
 
 [RecentFiles]
-File1[$e]=$HOME/share/images/kali-ma.jpg
-File10[$e]=/home/mother/foto/fandom/movies/solaris/solaris_tumblr_peter_jojaio.jpg
-File11[$e]=/home/mother/3dfx/projects/TEST_woman_001/TEST_woman_001.kra
-File12[$e]=/home/mother/foto/fandom/comics/witchblade/wp3832367-witchblade-wallpaper.jpg
-File2[$e]=/home/mother/foto/fandom/movies/solaris/solaris_x.png
-File3[$e]=/home/mother/foto/fandom/movies/solaris/solaris_hari_00.png
-File4[$e]=/home/mother/foto/fandom/movies/solaris/MV5BMDJhMTk0NzYtMjZmMC00Y2MzLTk0ZWUtNzYwMzBlYjI2NDkxXkEyXkFqcGdeQXVyNjg3MTIwODI@._V1_FMjpg_UX1133_.jpg
-File5[$e]=/home/mother/foto/fandom/movies/solaris/MV5BOTM4OGUzN2ItN2M3OS00N2RlLWE4ZWItMGRhNWIwZDQzNTU2XkEyXkFqcGdeQXVyOTc5MDI5NjE@._V1_.jpg
-File6[$e]=/home/mother/down/event-horizon-01-upscaled.png
-File7[$e]=/home/mother/3dfx/projects/STUDY_hua_sanchuan/1989-瑶池赴会.kra
-File8[$e]=/home/mother/foto/fandom/movies/solaris/MV5BNmIxYzE4ZTEtNjBiNS00YzRjLWE5MDYtMTg2YjNiZDM3MzYwXkEyXkFqcGdeQXVyODY5Njk4Njc@._V1_.jpg
-File9[$e]=/home/mother/3dfx/references/finding_my_style/asian_art/hua_sanchuan/1989-瑶池赴会.webp
-Name1=kali-ma.jpg
-Name10=solaris_tumblr_peter_jojaio.jpg
-Name11=TEST_woman_001.kra
-Name12=wp3832367-witchblade-wallpaper.jpg
-Name2=solaris_x.png
-Name3=solaris_hari_00.png
-Name4=MV5BMDJhMTk0NzYtMjZmMC00Y2MzLTk0ZWUtNzYwMzBlYjI2NDkxXkEyXkFqcGdeQXVyNjg3MTIwODI@._V1_FMjpg_UX1133_.jpg
-Name5=MV5BOTM4OGUzN2ItN2M3OS00N2RlLWE4ZWItMGRhNWIwZDQzNTU2XkEyXkFqcGdeQXVyOTc5MDI5NjE@._V1_.jpg
-Name6=event-horizon-01-upscaled.png
-Name7=1989-瑶池赴会.kra
-Name8=MV5BNmIxYzE4ZTEtNjBiNS00YzRjLWE5MDYtMTg2YjNiZDM3MzYwXkEyXkFqcGdeQXVyODY5Njk4Njc@._V1_.jpg
-Name9=1989-瑶池赴会.webp
+File1[$e]=/home/mother/foto/fandom/movies/solaris/solaris_x.png
+File10[$e]=/home/mother/foto/fandom/comics/witchblade/wp3832367-witchblade-wallpaper.jpg
+File11[$e]=/home/mother/down/101924-transformed-x4.jpg
+File12[$e]=/home/mother/down/101924-transformed.jpg
+File13[$e]=/home/mother/down/solaris-jojaio.png
+File14[$e]=/home/mother/3dfx/projects/TEST_woman_001/TEST_woman_001.kra
+File15[$e]=/home/mother/foto/fandom/movies/solaris/solaris-poster-landscape-big.png
+File16[$e]=$HOME/share/images/tomie-transformed.jpg
+File17[$e]=/home/mother/down/parasite_eve_fanart_by_edhaderievell_dehn19m-transformed.jpeg
+File2[$e]=/home/mother/foto/fandom/movies/solaris/solaris_hari_00.png
+File3[$e]=/home/mother/foto/fandom/movies/solaris/MV5BMDJhMTk0NzYtMjZmMC00Y2MzLTk0ZWUtNzYwMzBlYjI2NDkxXkEyXkFqcGdeQXVyNjg3MTIwODI@._V1_FMjpg_UX1133_.jpg
+File4[$e]=/home/mother/foto/fandom/movies/solaris/MV5BOTM4OGUzN2ItN2M3OS00N2RlLWE4ZWItMGRhNWIwZDQzNTU2XkEyXkFqcGdeQXVyOTc5MDI5NjE@._V1_.jpg
+File5[$e]=/home/mother/down/event-horizon-01-upscaled.png
+File6[$e]=/home/mother/3dfx/projects/STUDY_hua_sanchuan/1989-瑶池赴会.kra
+File7[$e]=/home/mother/foto/fandom/movies/solaris/MV5BNmIxYzE4ZTEtNjBiNS00YzRjLWE5MDYtMTg2YjNiZDM3MzYwXkEyXkFqcGdeQXVyODY5Njk4Njc@._V1_.jpg
+File8[$e]=/home/mother/3dfx/references/finding_my_style/asian_art/hua_sanchuan/1989-瑶池赴会.webp
+File9[$e]=/home/mother/foto/fandom/movies/solaris/solaris_tumblr_peter_jojaio.jpg
+Name1=solaris_x.png
+Name10=wp3832367-witchblade-wallpaper.jpg
+Name11=101924-transformed-x4.jpg
+Name12=101924-transformed.jpg
+Name13=solaris-jojaio.png
+Name14=TEST_woman_001.kra
+Name15=solaris-poster-landscape-big.png
+Name16=tomie-transformed.jpg
+Name17=parasite_eve_fanart_by_edhaderievell_dehn19m-transformed.jpeg
+Name2=solaris_hari_00.png
+Name3=MV5BMDJhMTk0NzYtMjZmMC00Y2MzLTk0ZWUtNzYwMzBlYjI2NDkxXkEyXkFqcGdeQXVyNjg3MTIwODI@._V1_FMjpg_UX1133_.jpg
+Name4=MV5BOTM4OGUzN2ItN2M3OS00N2RlLWE4ZWItMGRhNWIwZDQzNTU2XkEyXkFqcGdeQXVyOTc5MDI5NjE@._V1_.jpg
+Name5=event-horizon-01-upscaled.png
+Name6=1989-瑶池赴会.kra
+Name7=MV5BNmIxYzE4ZTEtNjBiNS00YzRjLWE5MDYtMTg2YjNiZDM3MzYwXkEyXkFqcGdeQXVyODY5Njk4Njc@._V1_.jpg
+Name8=1989-瑶池赴会.webp
+Name9=solaris_tumblr_peter_jojaio.jpg
 maxRecentFileItems=100
 
 [SelectedTags]
 brushes=All
 gamutmasks=All
 gradients=All
-paintoppresets=★ My Favorites
+paintoppresets=Digital
 palettes=All
 patterns=All
 tasksets=All
@@ -736,7 +747,7 @@ useCustomColorForBackground=false
 Last Used=<!DOCTYPE params>\n<params version="1"/>\n
 
 [colorbalance_filter_bookmarks]
-Last Used=<!DOCTYPE params>\n<params version="0">\n <param type="internal" name="cyan_red_highlights">0</param>\n <param type="internal" name="cyan_red_midtones">-14</param>\n <param type="internal" name="cyan_red_shadows">0</param>\n <param type="internal" name="magenta_green_highlights">0</param>\n <param type="internal" name="magenta_green_midtones">1</param>\n <param type="internal" name="magenta_green_shadows">0</param>\n <param type="internal" name="preserve_luminosity">true</param>\n <param type="internal" name="yellow_blue_highlights">0</param>\n <param type="internal" name="yellow_blue_midtones">88</param>\n <param type="internal" name="yellow_blue_shadows">0</param>\n</params>\n
+Last Used=<!DOCTYPE params>\n<params version="0">\n <param name="cyan_red_highlights" type="internal">0</param>\n <param name="cyan_red_midtones" type="internal">0</param>\n <param name="cyan_red_shadows" type="internal">-60</param>\n <param name="magenta_green_highlights" type="internal">0</param>\n <param name="magenta_green_midtones" type="internal">-40</param>\n <param name="magenta_green_shadows" type="internal">0</param>\n <param name="preserve_luminosity" type="internal">true</param>\n <param name="yellow_blue_highlights" type="internal">0</param>\n <param name="yellow_blue_midtones" type="internal">0</param>\n <param name="yellow_blue_shadows" type="internal">3</param>\n</params>\n
 
 [crashprevention]
 CreatingCanvas=false

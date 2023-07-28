@@ -110,10 +110,6 @@ mod4 + {e,w}
 mod4 + g
     /home/mother/conf/rofi/scripts/games.sh
 
-#+ rotation of primary/clipboard selections
-mod4 + y
-    /usr/local/bin/clipswap
-
 #+ refresh screen
 mod4 + b
     xrefresh
@@ -125,6 +121,10 @@ mod4 + control + i
 #+ custom script to disable/enable/hide/unhide the touchpad/mouse
 mod4 + grave
     /usr/local/bin/zaprat --toggle
+
+#+ rotation of primary/clipboard selections
+mod4 + Print
+    /usr/local/bin/clipswap
 
 #+ brightness down (bindings for laptop and external keyboard)
 {mod4 + Next,XF86MonBrightnessDown}

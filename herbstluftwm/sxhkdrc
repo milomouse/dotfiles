@@ -83,8 +83,8 @@ mod4 + {_,shift +} f
 #+ "ELECOM TrackBall HUGE" [mouse] extra function keys [10,11] (12 used as scroll modifier)
 {_,shift} + button10
     /home/mother/conf/herbstluftwm/scripts/tagswitch.sh {next,prev}
-button11
-    herbstclient use_previous
+{_,shift} + button11
+    herbstclient cycle {+,-}1
 
 ########################
 ## External:          ##

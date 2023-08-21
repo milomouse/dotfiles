@@ -147,7 +147,7 @@ XF86AudioLowerVolume
     amixer -c 0 -q -D pulse sset Master 5%-
 
 #+ suspend operating system to memory
-{XF86Sleep,mod4 + control + End}
+{XF86Sleep,mod4 + control + shift + End}
     /bin/sh -c 'echo mem | doas tee /sys/power/state'
 
 #+ remotely control music player

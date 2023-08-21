@@ -84,8 +84,8 @@ hc rule class="sun-awt-X11-XFramePeer" pseudotile=on
 hc rule class="Nvidia-settings" floating=on
 hc rule class="calibre" tag=II
 hc rule class="obs" tag=II
-hc rule class="forge-view-Main" tag=II
 hc rule class="AppRun.wrapped" tag=IV
+hc rule class="forge-view-Main" tag=IV pseudotile=off floating=off
 hc rule class="duckstation-nogui" tag=IV
 hc rule class~'(.*[dD]iscord)' tag=III
 hc rule class~'(.*[sS]potify)' tag=III

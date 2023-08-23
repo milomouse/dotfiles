@@ -76,9 +76,9 @@ mod4 + z
 mod4 + o
     herbstclient {fullscreen} toggle
 
-#+ pseudotile, float/unfloat client toggle
-mod4 + {_,shift +} f
-    herbstclient {pseudotile,floating} toggle
+#+ pseudotile, float client, float tag
+mod4 + {_,shift,control +} f
+    herbstclient {pseudotile,attr clients.focus.floating,floating} toggle
 
 #+ "ELECOM TrackBall HUGE" [mouse] extra function keys [10,11] (12 used as scroll modifier)
 {_,shift} + button10

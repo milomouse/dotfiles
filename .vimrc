@@ -161,7 +161,7 @@ autocmd FileType python   setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=
 autocmd FileType r        setlocal expandtab shiftwidth=2 softtabstop=2 tabstop&
 autocmd FileType ruby     setlocal expandtab shiftwidth=2 softtabstop=2 tabstop&
 autocmd FileType sh       setlocal expandtab shiftwidth=4 softtabstop=4 tabstop&
-autocmd FileType txt      setlocal expandtab shiftwidth=2 softtabstop=2 tabstop& textwidth=105 nospell
+autocmd FileType txt      setlocal expandtab shiftwidth=2 softtabstop=2 tabstop& nospell
 autocmd FileType vim      setlocal expandtab shiftwidth=2 softtabstop=2 tabstop&
 autocmd FileType zsh      setlocal expandtab shiftwidth=2 softtabstop=2 tabstop&
 """ [unregistered Filename/Extension; assign Syntax]

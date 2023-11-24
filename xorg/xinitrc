@@ -4,39 +4,33 @@
 ## detail: X.Org init configuration file    ##
 ##############################################
 
-#### RESOURCES:
-### [setup is found in "/etc/X11/xorg.d/" as "20-nvidia-only.conf" and "70-monitor.conf"]
-### [use dedicated graphic card for display back-end instead of the integrated card]
-### [this creates a "PRIME Display" controlled via xRANDR]
-### [every graphical program ran through this display automatically uses the GPU]
-xrandr --auto
-#xrandr --setprovideroutputsource modesetting NVIDIA-0
-#xrandr --output eDP-1-1 --primary --mode 3840x2160
-### [load terminal settings if applicable]
+# setup laptop+monitor to exclusively use nvidia (X11 config required)
+xrandr --setprovideroutputsource modesetting NVIDIA-0
+xrandr --output eDP-1-1 --primary --mode 3840x2160
+xrandr --output DP-0 --auto --mode 3840x2160 --right-of eDP-1-1
+
+# load custom Xresources for applications that use it
 xrdb -load ${XDG_CONFIG_HOME:-$HOME}/xorg/Xresources &
 
-
-#### INPUT:
-### [swap Super_L and Alt_L]
+# swap a few modifier keys around
 xmodmap ${XDG_CONFIG_HOME:-$HOME}/keymaps/overlay.xmodmap &
-### [this one doesn't seem to work in all programs]
-#setxkbmap -option altwin:swap_alt_win
-### [disable touchpad and hide mouse on startup]
-zaprat --disable &
-### [rebind buttons on Huion tablet]
+
+# disable laptop touchpad
+xinput --disable 'ETPS/2 Elantech Touchpad'
+
+# rebind shortcut buttons on graphic tablet
 /home/mother/code/sh/wacom.sh &
 
-
-#### DISPLAY:
-### [set default cursor shape/color]
+# set default cursor shape/color
 xsetroot -cursor_name left_ptr -solid '#101010' &
-### [set root window background]
+
+# set root window background
 display -window root -resize 3840x2160! ${XDG_PUBLICSHARE_DIR}/images/tomie-transformed.jpg &
+#display -window root ${XDG_PUBLICSHARE_DIR}/images/tomie-transformed.jpg &
 
-
-#### WINDOW MANAGER:
-### [custom keybindings for use with herbstluftwm]
+# custom keybindings for use with herbstluftwm
 sxhkd -c ${XDG_CONFIG_HOME:-$HOME}/herbstluftwm/sxhkdrc &
-### [launch window manager]
+
+# launch window manager
 exec herbstluftwm --locked -c ${XDG_CONFIG_HOME:-$HOME}/herbstluftwm/autostart
 #exec dbus-launch --autolaunch=$(cat /var/lib/dbus/machine-id) herbstluftwm --locked -c ${XDG_CONFIG_HOME:-$HOME}/herbstluftwm/autostart

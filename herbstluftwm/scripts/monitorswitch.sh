@@ -1,37 +1,28 @@
 #! /bin/bash
-tag="X"
-tagnum="0"
+# quick and dirty script to toggle between monitors
+# also has a sanity check for switching to a monitor during herbstluftwm's autostart
 
-tags=( $(herbstclient tag_status) )
-
-checkuse() {
-    if [[ "${tags[$1]}" == [-]* ]] ; then
-        herbstclient use "${tags[$1]:1}" # cutting off first char (.#:!)
-        exit 0
+if [[ "$1" == toggle ]]; then
+    for i in $(herbstclient tag_status); do
+        # check for a focused tag on a different monitor
+        if [[ ${i:0:1} == "-" ]] ; then
+            herbstclient use "${i:1}"
+            exit 0
+        fi
+    done
+elif [[ "$1" == switch ]]; then
+    if [[ -n $2 ]]; then
+        # if we are not focused on specified monitor then switch to it
+        if [[ $(herbstclient list_monitors | grep FOCUS | cut -d ':' -f1) != $2 ]]; then
+            herbstclient focus_monitor "$2"
+            exit 0
+        fi
+        # otherwise do nothing (useful for herbstluftwm restarts)
+    else
+        echo "you must specify which monitor to focus"
+        exit 1
     fi
-}
-
-# get names of active tags
-for ((i=0; i<="${#tags[@]}"; i++)); do
-    [[ "${tags[i]}" == "#"* ]] && activetag="$i"
-done
-
-# if $tag not focused, focus it
-if [[ ${activetag} != ${tagnum} ]]; then
-    herbstclient use $tag
-    exit 0
 else
-    # otherwise, cycle through tags to find last used tag and exit
-    for ((i="$((activetag-1))"; i>=0; i--)) do
-        checkuse "$i"
-    done
-    for ((i=${#tags[@]}-1; i>$((activetag-1)); i--)) do
-        checkuse "$i"
-    done
-    for ((i="$((activetag+1))"; i<"${#tags[@]}"; i++)); do
-        checkuse "$i"
-    done
-    for ((i=0; i<"$activetag"; i++)); do
-        checkuse "$i"
-    done
+    echo "usage: $0 [switch <monitor>] || [toggle]"
+    exit 0
 fi

@@ -56,6 +56,10 @@ mod4 + r : {h,shift + h,j,shift + j,k,shift + k,l,shift + l}
 mod4 + {_,shift +} {h,j,k,l}
     herbstclient {focus,shift} -e {left,down,up,right}
 
+#+ shift window to monitor
+mod4 + control + {h,j,k,l}
+    herbstclient shift_to_monitor {-l,-d,-u,-r}
+
 #+ shift focus to next/prev occupied tag
 mod4 + {n,p}
     /home/mother/conf/herbstluftwm/scripts/tagswitch.sh {next,prev}
@@ -68,9 +72,9 @@ mod4 + {_,shift +} {period,comma}
 mod4 + slash
     herbstclient use_previous
 
-#+ shift focus between second monitor
+#+ shift focus between monitors
 mod4 + Tab
-    /home/mother/conf/herbstluftwm/scripts/monitorswitch.sh
+    /home/mother/conf/herbstluftwm/scripts/monitorswitch.sh toggle
 
 #+ minimize or restore minimized client
 mod4 + {_,shift +} grave

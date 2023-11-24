@@ -6,13 +6,13 @@ Current Setup:
 
 + *DISTRO* = Gentoo ( ~amd64 nomultilib ) ( [link](https://www.gentoo.org) )
 
-+ *KERNEL* = GNU/Linux 6.3.9 ( [link](https://kernel.org) )
++ *KERNEL* = GNU/Linux 6.5.9 ( [link](https://kernel.org) )
 
 + *SOURCES* = Zen ( [link](https://github.com/zen-kernel/zen-kernel) )
 
 + *INIT* = OpenRC ( [link](https://github.com/OpenRC/openrc) )
 
-+ *UDEV* = mdevd ( [link](https://skarnet.org/software/mdevd/) ) + libudev-zero ( [link](https://github.com/illiliti/libudev-zero) )
++ *UDEV* = mdevd ( [link](https://github.com/skarnet/mdevd) ) + libudev-zero ( [link](https://github.com/illiliti/libudev-zero) )
 
 + *SHELL* = Zsh ( [link](https://www.zsh.org/) )
 

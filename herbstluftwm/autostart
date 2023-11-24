@@ -5,21 +5,27 @@
 ## detail: startup file for `herbstluftwm'           ##
 #######################################################
 
+# function shortcut
 hc() {
   herbstclient "$@"
 }
 
+# reload and reset
 hc emit_hook reload
 hc keyunbind --all
 
+# modifier key
 Mod=Mod4
 
-tag_names=( I II III IV V VI )
-tag_keys=( {1..6} )
+# define tags and associated keys
+tag_names=( X I II III IV V VI )
+tag_keys=( 0 {1..6} )
 
+# frame layout
 hc set default_frame_layout 2
 hc set_layout max
 
+# tags setup and keybinds
 hc rename default "${tag_names[0]}" || true
 for i in ${!tag_names[@]} ; do
   hc add "${tag_names[$i]}"
@@ -30,11 +36,13 @@ for i in ${!tag_names[@]} ; do
   fi
 done
 
+# mouse bindings
 hc mouseunbind
 hc mousebind $Mod-B1 move
 hc mousebind $Mod-B2 resize
 hc mousebind $Mod-B3 zoom
 
+# theme attributes
 hc attr theme.tiling.reset 1
 hc attr theme.floating.reset 1
 hc attr theme.floating.border_width 10
@@ -53,16 +61,18 @@ hc attr theme.normal.color '#202020'
 hc attr theme.urgent.color '#FF009A'
 hc attr theme.background_color '#101010'
 
-hc set tree_style '·│ ├└+─┐'
-hc set always_show_frame 1
+# theme settings
+hc set show_frame_decorations if_multiple
 hc set frame_bg_transparent 1
 hc set frame_bg_active_color '#616161'
 hc set frame_bg_normal_color '#101010'
-hc set frame_border_active_color '#282C35'
+#hc set frame_border_active_color '#282C35'
+#hc set frame_border_active_color '#999999'
+hc set frame_border_active_color '#616161'
 hc set frame_border_normal_color '#1E1E21'
 hc set frame_border_inner_color '#080808'
 hc set frame_border_inner_width 0
-hc set frame_border_width 0
+hc set frame_border_width 1
 hc set frame_gap 0
 hc set frame_padding 0
 hc set frame_transparent_width 0
@@ -70,9 +80,11 @@ hc set mouse_recenter_gap 0
 hc set smart_frame_surroundings 0
 hc set smart_window_surroundings 0
 hc set window_gap 0
-hc set window_border_active_color '#2d2e33'
-hc set window_border_normal_color '#1E1E21'
-hc set window_border_urgent_color '#FF009A'
+#hc set window_border_active_color '#616161'
+hc set window_border_active_color '#999999'
+hc set window_border_normal_color '#2d2e33'
+#hc set window_border_active_color '#2d2e33'
+#hc set window_border_normal_color '#1E1E21'
 
 hc unrule -F
 hc rule focus=on
@@ -87,27 +99,26 @@ hc rule class="obs" tag=II
 hc rule class="AppRun.wrapped" tag=IV
 hc rule class="forge-view-Main" tag=IV pseudotile=off floating=off
 hc rule class="duckstation-nogui" tag=IV
-hc rule class~'(.*[dD]iscord)' tag=III
-hc rule class~'(.*[sS]potify)' tag=III
 hc rule class~'(.*[fF]irefox)' tag=III
 hc rule class~'(.*[nN]avigator)' tag=III
 hc rule class~'(.*[cC]hromium-bin-browser-chromium)' tag=III
 hc rule class~'(.*[pP]csx2)' tag=IV pseudotile=on
 hc rule class~'(.*[eE]u4)' tag=IV
-hc rule class~'(.*[cC]k3)' tag=IV
 hc rule class~'(.*[sS]tellaris)' tag=IV
 hc rule class~'(.*[fF]actorio)' tag=IV
 hc rule class~'(.*[rR]im[wW]orld[lL]inux)' tag=IV
-hc rule class~'(.*[bB]lender)' tag=V
-hc rule class~'(.*[sS]ubstance-[pP]ainter)' tag=VI
-hc rule class~'(.*[mM]y[pP]aint)' tag=VI
-hc rule class~'(.*[kK]rita)' tag=VI
-hc rule class~'(.*[gG]imp)' tag=VI
-hc rule class~'(.*[iI]nkscape)' tag=VI
-hc rule class~'(.*[pP]ure[rR]ef)' tag=VI
+hc rule class~'(.*[bB]lender)' tag=VI
+hc rule class~'(.*[sS]ubstance-[pP]ainter)' tag=V
+hc rule class~'(.*[mM]y[pP]aint)' tag=V
+hc rule class~'(.*[kK]rita)' tag=V
+hc rule class~'(.*[gG]imp)' tag=V
+hc rule class~'(.*[iI]nkscape)' tag=V
 hc rule class~'(.*[pP]qiv)' pseudotile=on
 hc rule class~'(.*[yY]ad)' floating=on
-hc rule class~'(.*[pP]cmanfm)' pseudotile=on
+hc rule class~'(.*[pP]cmanfm)' floating=on
+hc rule class~'(.*[pP]ure[rR]ef)' tag=X
+hc rule class~'(.*[dD]iscord)' tag=X fullscreen=on
+hc rule class~'(.*[sS]potify)' tag=X fullscreen=on
 hc rule title="Open File" floating=on
 hc rule title="Open Image" pseudotile=on
 hc rule title="Save As" pseudotile=on
@@ -117,8 +128,24 @@ hc rule windowtype='_NET_WM_WINDOW_TYPE_DIALOG' focus=on
 hc rule windowtype~'_NET_WM_WINDOW_TYPE_(DIALOG|UTILITY|SPLASH)' pseudotile=on
 hc rule windowtype~'_NET_WM_WINDOW_TYPE_(NOTIFICATION|DOCK|DESKTOP)' manage=off
 
+# reset monitors_locked uint
 hc unlock
 
+# various settings
+hc set tree_style '·│ ├└+─┐'
+
+# create monitors and lock first [0] tag (this is used on first monitor)
+hc set_monitors 3840x2160+0+0 3840x2160+3840+0
+hc lock_tag 0
+#hc focus -e right
+#hc use_previous
+
+# second monitor uses all tags except the first [0]
+# make sure we cannot cycle between monitors unless we explicitly select the tags
+hc set swap_monitors_to_get_tag = false
+hc set focus_crosses_monitor_boundaries = false
+
+# panel
 polybar-msg cmd quit 2>&1
 > /var/tmp/polybar.log
-polybar 2>&1 | tee -a /var/tmp/polybar.log & disown
+polybar -c ${XDG_CONFIG_HOME}/polybar/config.ini main 2>&1 | tee -a /var/tmp/polybar.log & disown

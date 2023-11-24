@@ -137,13 +137,16 @@ hc set tree_style '·│ ├└+─┐'
 # create monitors and lock first [0] tag (this is used on first monitor)
 hc set_monitors 3840x2160+0+0 3840x2160+3840+0
 hc lock_tag 0
-#hc focus -e right
-#hc use_previous
 
 # second monitor uses all tags except the first [0]
 # make sure we cannot cycle between monitors unless we explicitly select the tags
-hc set swap_monitors_to_get_tag = false
-hc set focus_crosses_monitor_boundaries = false
+hc set swap_monitors_to_get_tag false
+hc set focus_crosses_monitor_boundaries false
+
+# custom script to switch between monitors
+# if we just used focus_monitor this would happen every restart
+# instead the script uses sanity checks and has toggle functionality
+${XDG_CONFIG_HOME}/herbstluftwm/scripts/monitorswitch.sh switch 1
 
 # panel
 polybar-msg cmd quit 2>&1

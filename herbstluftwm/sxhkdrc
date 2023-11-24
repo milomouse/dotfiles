@@ -24,9 +24,17 @@ mod4 + {_,shift +} t
 mod4 + {_,shift +} minus
     herbstclient split {bottom,top} 0.7
 
+#+ manually split frame horizontally
+mod4 + control + {_,shift +} minus
+    herbstclient split {bottom,top} 0.3
+
 #+ manually split frame vertically
 mod4 + {_,shift +} equal
     herbstclient split {right,left} 0.7
+
+#+ manually split frame vertically
+mod4 + control + {_,shift +} equal
+    herbstclient split {right,left} 0.3
 
 #+ automatically split, and/or shift window to new split (if available)
 mod4 + {_,shift +} BackSpace
@@ -57,8 +65,16 @@ mod4 + {_,shift +} {period,comma}
     herbstclient {use,move}_index {+,-}1 --skip-visible
 
 #+ shift focus between last tag(s)
-mod4 + {Tab,slash}
+mod4 + slash
     herbstclient use_previous
+
+#+ shift focus between second monitor
+mod4 + Tab
+    /home/mother/conf/herbstluftwm/scripts/monitorswitch.sh
+
+#+ minimize or restore minimized client
+mod4 + {_,shift +} grave
+    herbstclient {set_attr clients.focus.minimized true,jumpto last-minimized}
 
 #+ focus or pull urgent window
 mod4 + {_,shift +} u
@@ -119,10 +135,6 @@ mod4 + b
 #+ image capture of current screen
 mod4 + control + i
     import -window root /home/mother/foto/shot/$(date '+%Y_%m_%d-%H%M%S').png
-
-#+ custom script to disable/enable/hide/unhide the touchpad/mouse
-mod4 + grave
-    /usr/local/bin/zaprat --toggle
 
 #+ rotation of primary/clipboard selections
 mod4 + Print

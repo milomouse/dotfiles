@@ -7,21 +7,25 @@
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
-# 
+#
 # tagswitch is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with tagswitch  If not, see <http://www.gnu.org/licenses/>.
 
 # Changes herbstluftwm tags
 
 # EDIT: Removed '!' (urgent window flag) from `checkuse' unused tag check.
+# EDIT: Ugly edit to skip ${skiptag} (used for monitor with "lock_tag" active).
+
+skiptag="X"
+skipnum="0"
 
 checkuse() {
-    if [[ "${tags[$1]}" != [.]* ]]; then # tag is not unused
+    if [[ "${tags[$1]}" != [.]* ]] && [[ "${tags[$1]}" != *${skiptag} ]]; then # tag has open client(s) and is NOT tag "X"
         herbstclient use "${tags[$1]:1}" # cutting off first char (.#:!)
         exit 0
     fi
@@ -33,6 +37,11 @@ tags=( $(herbstclient tag_status) )
 for ((i=0; i<="${#tags[@]}"; i++)); do
     [[ "${tags[i]}" == "#"* ]] && activetag="$i"
 done
+
+if [[ ${activetag} = ${skipnum} ]]; then
+    herbstclient focus -e right
+    exit 0
+fi
 
 if [[ "$1" == next ]]; then # next active tag
     for ((i="$((activetag+1))"; i<"${#tags[@]}"; i++)); do

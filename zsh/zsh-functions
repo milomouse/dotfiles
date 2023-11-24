@@ -37,4 +37,5 @@ function up {
 function dropcache { sync && print 1 | doas tee /proc/sys/vm/drop_caches }
 function mkcd { command mkdir -p "${@}" && cd "$@" }
 function pqiv { command pqiv "${@}" 2>/dev/null }
-function startx { [[ ${+DISPLAY} -eq 1 ]] || { cd && /usr/bin/xinit ${XDG_CONFIG_DIR:-$HOME}/xorg/xinitrc -nolisten tcp -once -retro -- vt7 &>!/var/tmp/logs/xorg/runtime.log } }
+function stablediff { cd ${H}/3dfx/stable-diffusion-webui && ./webui.sh }
+function startx { [[ ${+DISPLAY} -eq 1 ]] || { cd && /usr/bin/xinit ${XDG_CONFIG_DIR:-$HOME}/xorg/xinitrc -nolisten tcp -once -retro -- vt7 &>!/var/tmp/user/logs/xorg/runtime.log } }

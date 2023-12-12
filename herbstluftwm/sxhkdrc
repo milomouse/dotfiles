@@ -76,6 +76,10 @@ mod4 + slash
 mod4 + Tab
     /home/mother/conf/herbstluftwm/scripts/monitorswitch.sh toggle
 
+#+ shift window between monitors [placeholder]
+mod4 + shift + Tab
+    herbstclient move_index 0
+
 #+ minimize or restore minimized client
 mod4 + {_,shift +} grave
     herbstclient {set_attr clients.focus.minimized true,jumpto last-minimized}

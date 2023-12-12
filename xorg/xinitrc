@@ -7,7 +7,8 @@
 # setup laptop+monitor to exclusively use nvidia (X11 config required)
 xrandr --setprovideroutputsource modesetting NVIDIA-0
 xrandr --output eDP-1-1 --primary --mode 3840x2160
-xrandr --output DP-0 --auto --mode 3840x2160 --right-of eDP-1-1
+#xrandr --output DP-0 --auto --mode 3840x2160 --right-of eDP-1-1
+xrandr --output HDMI-0 --auto --mode 3840x2160 --right-of eDP-1-1
 
 # load custom Xresources for applications that use it
 xrdb -load ${XDG_CONFIG_HOME:-$HOME}/xorg/Xresources &

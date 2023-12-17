@@ -2,11 +2,9 @@ Current Setup:
 --------------
 
 
-+ *DEVICE* = Gigabyte Aero 17 HDR ( [link](https://www.gigabyte.com/Laptop/AERO-17-HDR--Intel-11th-Gen) )
-
 + *DISTRO* = Gentoo ( ~amd64 nomultilib ) ( [link](https://www.gentoo.org) )
 
-+ *KERNEL* = GNU/Linux 6.5.9 ( [link](https://kernel.org) )
++ *KERNEL* = GNU/Linux 6.6.3 ( [link](https://kernel.org) )
 
 + *SOURCES* = Zen ( [link](https://github.com/zen-kernel/zen-kernel) )
 
@@ -30,7 +28,7 @@ Current Setup:
 
 + *DOCUMENT READER* = mupdf ( [link](https://mupdf.com/) )
 
-+ *WEB BROWSER* = Firefox ( [link](https://www.mozilla.org/en-US/firefox/new/) ) + Surfingkeys ( [link](https://github.com/brookhong/Surfingkeys) )
++ *WEB BROWSER* = Vieb ( [link](https://github.com/Jelmerro/Vieb) )
 
 
 Screenshots:

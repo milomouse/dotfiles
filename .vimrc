@@ -4,20 +4,27 @@
 """ detail: configuration file for `vim'
 """""""""""""""""""""""""""""""""""""""""""
 
-""" Load plugins via `Plug' package manager for ViM
+""" Load plugins via `Plug' for ViM
 """ [ https://github.com/junegunn/vim-plug > ~/.vim/autoload/plug.vim ]
 call plug#begin('~/.vim/plugged')
+    " visuals
     Plug 'vim-airline/vim-airline'
+    " directory|file navigation
     Plug 'lambdalisue/fern.vim'
     Plug 'lambdalisue/fern-hijack.vim'
     Plug 'hrsh7th/fern-mapping-collapse-or-leave.vim'
-    " Plug 'Konfekt/FastFold'
-    Plug 'plasticboy/vim-markdown'
+    " directory|file fuzzy find
+    Plug 'junegunn/fzf.vim'
+    " extra shortcuts
     Plug 'tomtom/tcomment_vim'
-    Plug 'pbogut/fzf-mru.vim'
+    " LSP framework
+    Plug 'prabirshrestha/vim-lsp'
+    Plug 'mattn/vim-lsp-settings'
+    Plug 'prabirshrestha/asyncomplete.vim'
+    Plug 'prabirshrestha/asyncomplete-lsp.vim'
 call plug#end()
 
-""" Airline specific settings
+""" Airline settings
 " let g:airline_theme = 'peaksea'
 " let g:airline_theme = 'monochrome'
 let g:airline_theme = 'candymouse'
@@ -32,6 +39,7 @@ let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = ''
 let g:airline#extensions#tabline#right_sep = ''
 let g:airline#extensions#tabline#right_sep_alt = ''
+let g:airline#extensions#fzf#enabled = 1
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
 let g:airline_section_z = airline#section#create(['--%1p%%-- ',
@@ -53,13 +61,19 @@ let g:airline_mode_map = {
 :autocmd!
 :autocmd VimEnter * :AirlineRefresh
 
-""" Other plugin specific settings
-let g:fzf_mru_no_sort = 0
-let g:fzf_mru_relative = 0
+""" LSP settings
+let g:lsp_settings_servers_dir = '/home/mother/conf/.vim/servers'
+" let g:asyncomplete_auto_popup = 0
+let g:asyncomplete_popup_delay = 200
+nnoremap <leader>dq :call lsp#disable()
+nnoremap <leader>de :call lsp#enable()
+
+""" FZF settings
 autocmd FileType fzf tnoremap <buffer> <Esc> <Esc>
 map <C-o> :FZF<CR>
-map <C-i> :FZF /home<CR>
-map <C-p> :FZFMru<CR>
+map <C-b> :Buffers<CR>
+
+""" Fern settings
 map <C-n> :Fern . -wait<CR>
 
 """ Core ViM settings
@@ -186,11 +200,11 @@ let python_space_errors = 1
 let ruby_space_errors = 1
 
 """ Mappings
+map <C-t> :terminal<CR>
 map gn :bnext<CR>
 map gp :bprevious<CR>
 map gd :bdelete <CR>
 map gb <C-^>
-map gl :buffers<CR>:buffer<Space>
 map <Up> <NOP>
 map <Down> <NOP>
 map <Left> <NOP>
@@ -201,8 +215,9 @@ inoremap # X<BS>#
 nnoremap q: <Nop>
 nnoremap q/ <Nop>
 nnoremap q? <Nop>
+nnoremap <leader>rc :source $MYVIMRC<cr><Bar>:AirlineRefresh<cr>
 
-""" Netrw (prefer the Fern plugin)
+""" Netrw (prefer `Fern' plugin)
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
 let g:netrw_winsize = '30'

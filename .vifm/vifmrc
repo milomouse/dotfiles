@@ -112,10 +112,10 @@ fileviewer *.[1-8] man ./%c | col -b
 
 " Images
 filextype *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm,*.webp,
-        \ {View in pqiv}
-        \ pqiv -t --low-memory %f 2>/dev/null&,
         \ {View in sxiv}
         \ sxiv -abp %f &,
+        \ {View in }
+        \ pqiv -t --low-memory %f 2>/dev/null&,
 fileviewer *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm,*.webp,
         \ magick identify %f 2> /dev/null
 

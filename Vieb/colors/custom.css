@@ -1,0 +1,31 @@
+:root {
+  --bg: #121212;
+  --fg: #dddacb;
+  --mode-normal-fg: #dddacb;
+  --mode-normal-bg: none;
+  --mode-insert-fg: #9798e5;
+  --mode-insert-bg: none;
+  --mode-explore-fg: #009dff;
+  --mode-explore-bg: none;
+  --mode-search-fg: #27c8b1;
+  --mode-search-bg: none;
+  --mode-pointer-fg: #bae5bd;
+  --mode-pointer-bg: none;
+  --mode-visual-fg: #eae900;
+  --mode-visual-bg: none;
+  --mode-command-fg: #e31763;
+  --mode-command-bg: none;
+  --tab-muted: #dddacb;
+  --tab-audio: #7de1d3;
+  --tab-background: #2d2e33;
+  --tab-suspended: #121212;
+}
+
+body {font: 12px "InputMonoCondensed", monospace;}
+
+#logo {display: none;}
+#mode {font: 12px "InputMonoCondensed", monospace;font-weight: bold;height: 2em;text-transform: uppercase;}
+#mode-container {font: 10px "InputMonoCondensed", monospace;font-weight: bold;text-transform: uppercase;position: relative;text-align: center;height: 1.8em;width: 10ch;overflow: hidden;white-space: nowrap;}
+#navbar {font: 12px "InputMonoCondensed", monospace;height: 2em;background-color: #222;}
+#tabs {font: 12px "InputMonoCondensed", monospace;height: 1.8em;}
+#tabs .favicon {display: none;}

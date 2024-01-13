@@ -4,7 +4,7 @@
 !# detail: X.Org and X terminal parameters   #!
 !#############################################!
 
-*dpi: 163
+#*dpi: 163
 Xcursor.size: 48
 
 !! NOTE: here for emulators that need it

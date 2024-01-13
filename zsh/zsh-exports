@@ -19,21 +19,18 @@ export XDG_DOWNLOAD_DIR="${H}/down"
 export XDG_MUSIC_DIR="${H}/muzk"
 export XDG_PICTURES_DIR="${H}/foto"
 export XDG_PUBLICSHARE_DIR="${XDG_CONFIG_HOME}/share"
-export XDG_RUNTIME_DIR="/tmp/runtime-${UID}"
+export XDG_RUNTIME_DIR="/var/tmp/runtime-${UID}"
 export XDG_TEMPLATES_DIR="${XDG_DATA_HOME}/templates"
 export XDG_VIDEOS_DIR="${H}/vide"
+export CUDA_PATH="/opt/cuda"
 export GOPATH="${H}/code/go"
 export PYTHONUSERBASE="${H}/code/python/pip_modules"
 export PYTHONPATH="${PYTHONUSERBASE}/lib"
-export PATH="${PATH}:${XDG_CONFIG_HOME}/.cargo/bin"
+path+="${PATH}:${XDG_CONFIG_HOME}/.cargo/bin"
 path+="${H}/code/python/pip_modules/bin"
-path+="${H}/code/nodejs/pkg/bin"
-#path+="./node_modules/.bin"
-export CUDA_PATH=/opt/cuda
 
 # executables:
-#export BROWSER="firefox-bin --new-tab"
-export EDITOR="vim"
+export EDITOR="nvim"
 export FCEDIT="${EDITOR}"
 export MANPAGER="less -sM +Gg"
 export PAGER="less"
@@ -49,8 +46,6 @@ export HISTFILE="${ZDOTDIR:-${XDG_CONFIG_HOME}/zsh}/.history"
 export HISTSIZE=6000
 export SAVEHIST=6000
 export DIRSTACKSIZE=20
-#export GPG_TTY="$(tty)"
-#export http_proxy=http://127.0.0.1:3128
 export LESSCHARSET="UTF-8"
 export LESS_TERMCAP_mb=$'\E[01;31m'
 export LESS_TERMCAP_md=$'\E[00;35m'
@@ -62,16 +57,7 @@ export LESS_TERMCAP_us=$'\E[00;34m'
 export GREP_COLORS="mt=01;32:sl=00;35"
 export CALIBRE_USE_DARK_PALETTE=1
 export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on'
-
-# 4K/HiDPI gui scaling:
-#export GDK_SCALE=1.5
-#export GDK_DPI_SCALE=1.0
-#export QT_AUTO_SCREEN_SET_FACTOR=0
-#export QT_SCALE_FACTOR=1.5
-#export QT_FONT_DPI=256
 export __GL_SYNC_TO_VBLANK=1
 
-# fallback:
-#if [[ ${+TERMINAL} == 0 ]] ; then
-#  export TERMINAL=st
-#fi
+# fix kitty->tmux->neovim undercurl support [see also ~/tmux.conf]:
+export TERM="tmux-256color"

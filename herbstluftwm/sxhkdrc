@@ -22,7 +22,7 @@ mod4 + {_,shift +} t
 
 #+ manually split frame horizontally
 mod4 + {_,shift +} minus
-    herbstclient split {bottom,top} 0.7
+    herbstclient split {bottom,top} 0.5
 
 #+ manually split frame horizontally
 mod4 + control + {_,shift +} minus
@@ -30,7 +30,7 @@ mod4 + control + {_,shift +} minus
 
 #+ manually split frame vertically
 mod4 + {_,shift +} equal
-    herbstclient split {right,left} 0.7
+    herbstclient split {right,left} 0.5
 
 #+ manually split frame vertically
 mod4 + control + {_,shift +} equal
@@ -64,21 +64,21 @@ mod4 + control + {h,j,k,l}
 mod4 + {n,p}
     /home/mother/conf/herbstluftwm/scripts/tagswitch.sh {next,prev}
 
+# #+ shift focus between monitors
+# mod4 + Tab
+#     /home/mother/conf/herbstluftwm/scripts/monitorswitch.sh toggle
+
+# #+ shift window between monitors [placeholder]
+# mod4 + shift + Tab
+#     herbstclient move_index 0
+
 #+ shift focus or window to next/prev tag
 mod4 + {_,shift +} {period,comma}
     herbstclient {use,move}_index {+,-}1 --skip-visible
 
 #+ shift focus between last tag(s)
-mod4 + slash
-    herbstclient use_previous
-
-#+ shift focus between monitors
 mod4 + Tab
-    /home/mother/conf/herbstluftwm/scripts/monitorswitch.sh toggle
-
-#+ shift window between monitors [placeholder]
-mod4 + shift + Tab
-    herbstclient move_index 0
+    herbstclient use_previous
 
 #+ minimize or restore minimized client
 mod4 + {_,shift +} grave
@@ -89,7 +89,7 @@ mod4 + {_,shift +} u
     herbstclient {jumpto,bring} urgent
 
 #+ close focused window {and remove frame}
-mod4 + {shift,control} + Delete
+mod4 + {control,shift} + Delete
     herbstclient {close,close_and_remove}
 
 #+ remove/collapse frame
@@ -122,11 +122,11 @@ mod4 + shift + s
 
 #+ spawn terminal with tmux
 mod4 + {Return,KP_Enter}
-    st -e tmux
+    kitty -e tmux
 
 #+ spawn terminal
 mod4 + shift + {Return,KP_Enter}
-    st
+    kitty
 
 #+ application/window menu
 mod4 + {e,w}
@@ -136,37 +136,33 @@ mod4 + {e,w}
 mod4 + g
     /home/mother/conf/rofi/scripts/games.sh
 
-#+ refresh screen
-mod4 + b
-    xrefresh
-
 #+ image capture of current screen
 mod4 + control + i
     import -window root /home/mother/foto/shot/$(date '+%Y_%m_%d-%H%M%S').png
 
 #+ rotation of primary/clipboard selections
 mod4 + Print
-    /usr/local/bin/clipswap
+    /usr/local/bin/clipswap.sh
 
-#+ brightness down (bindings for laptop and external keyboard)
-{mod4 + Next,XF86MonBrightnessDown}
-    doas /usr/local/bin/brightnessctl -d intel_backlight s 10%-
+#+ brightness down (override monitor)
+XF86MonBrightnessDown
+    doas /usr/local/bin/ddci-ctrl.zsh -d
 
-#+ brightness up (bindings for laptop and external keyboard)
-{mod4 + Prior,XF86MonBrightnessUp}
-    doas /usr/local/bin/brightnessctl -d intel_backlight s 10%+
+#+ brightness up (override monitor)
+XF86MonBrightnessUp
+    doas /usr/local/bin/ddci-ctrl.zsh -i
 
 #+ mute/unmute pulseaudio volume within ALSA
 XF86AudioMute
-    amixer -c 0 -q -D pulse sset Master toggle
+    amixer -c 1 -q -D pulse sset Master toggle
 
 #+ raise pulseaudio volume within ALSA
 XF86AudioRaiseVolume
-    amixer -c 0 -q -D pulse sset Master 5%+
+    amixer -c 1 -q -D pulse sset Master 5%+
 
 #+ lower pulseaudio volume within ALSA
 XF86AudioLowerVolume
-    amixer -c 0 -q -D pulse sset Master 5%-
+    amixer -c 1 -q -D pulse sset Master 5%-
 
 #+ suspend operating system to memory
 {XF86Sleep,mod4 + control + shift + End}

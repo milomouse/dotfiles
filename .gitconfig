@@ -1,8 +1,8 @@
 [user]
-  name = milomouse (Vincent Anonymouse)
+  name = milomouse (Vincent)
   email = ixsolaris86@gmail.com
 [diff]
-  tool = /usr/bin/vimdiff
+  tool = colordiff
 [color]
   ui = true
   pager = true
@@ -34,8 +34,8 @@
   amend = commit --amend -C HEAD
 [core]
   whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
-  editor = /usr/bin/vim
-  pager = /usr/bin/less
+  editor = nvim
+  pager = less
 [apply]
   whitespace = strip
 [push]

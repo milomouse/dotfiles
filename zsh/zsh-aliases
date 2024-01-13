@@ -22,7 +22,7 @@ alias llf="lf -l"
 
 # trivial quick views/edits:
 alias xload="xrdb -load ${XDG_CONFIG_DIR:-${HOME}}/xorg/Xresources &>/dev/null"
-alias zedit="${EDITOR:-/usr/bin/vim} ${HOME}/{.zshrc,zsh/zsh-{functions,aliases,options,exports}}"
+alias zedit="${EDITOR:-/usr/bin/nvim} ${HOME}/{.zshrc,zsh/zsh-{functions,aliases,options,exports}}"
 
 # program masquing:
 alias bc="bc -q"

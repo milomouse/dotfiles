@@ -28,7 +28,7 @@ Current Setup:
 
 + *DOCUMENT READER* = mupdf ( [link](https://mupdf.com/) )
 
-+ *WEB BROWSER* = Firefox ( [link](https://www.mozilla.org/en-US/firefox/new/) )
++ *WEB BROWSER* = Firefox ( [link](https://www.mozilla.org/en-US/firefox/new/) ) + Surfingkeys ( [link](https://github.com/brookhong/Surfingkeys) )
 
 
 Screenshots:

@@ -24,7 +24,7 @@ function zload {
 }
 
 # go up Nth amount of directories:
-# a bit quicker than ../../.. (better zsh alternatives?)
+# a bit quicker than ../../.. (are there better built-in zsh alternatives?)
 function up {
   local arg=${1:-1};
   while [ ${arg} -gt 0 ]; do
@@ -37,5 +37,5 @@ function up {
 function dropcache { sync && print 1 | doas tee /proc/sys/vm/drop_caches }
 function mkcd { command mkdir -p "${@}" && cd "$@" }
 function pqiv { command pqiv "${@}" 2>/dev/null }
-function stablediff { cd ${H}/3dfx/stable-diffusion-webui && ./webui.sh }
-function startx { [[ ${+DISPLAY} -eq 1 ]] || { cd && /usr/bin/xinit ${XDG_CONFIG_DIR:-$HOME}/xorg/xinitrc -nolisten tcp -once -retro -- vt7 &>!/var/tmp/user/logs/xorg/runtime.log } }
+function startx { [[ ${+DISPLAY} -eq 1 ]] || { cd && /usr/bin/xinit ${XDG_CONFIG_DIR:-$HOME}/xorg/xinitrc -nolisten tcp -once -retro -- vt${$(tty)/*tty} &>!/var/tmp/logs/${USER}/xorg/runtime.log } }
+# function startx { [[ ${+DISPLAY} -eq 1 ]] || { cd && /usr/bin/xinit ${XDG_CONFIG_DIR:-$HOME}/xorg/xinitrc -nolisten tcp -once -retro -- vt${$(tty)/*tty} &>!/var/tmp/logs/$(whoami)/xorg/runtime.log } }

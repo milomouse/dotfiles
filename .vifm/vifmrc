@@ -8,7 +8,7 @@ colorscheme candymouse
 
 set findprg=fd\ %A\ -HIt\ f
 "set grepprg=ag\ --line-numbers\ %i\ %a\ %s
-set vicmd=vim
+set vicmd=nvim
 set vimhelp
 set nowrap
 set notrash
@@ -53,12 +53,12 @@ set vifminfo=dhistory,savedirs,chistory,state,tui,shistory,
 " %m run the command in a menu window
 
 command! df df -h %m 2> /dev/null
-command! diff vim -d %f %F
+command! diff nvim -d %f %F
 command! zip zip -r %f.zip %f
 command! run !! ./%f
 command! make !!make %a
 command! mkcd :mkdir %a | cd %a
-command! vgrep vim "+grep %a"
+command! vgrep nvim "+grep %a"
 command! reload :write | restart
 
 " ------------------------------------------------------------------------------

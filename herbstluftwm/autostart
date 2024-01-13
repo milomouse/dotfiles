@@ -18,8 +18,8 @@ hc keyunbind --all
 Mod=Mod4
 
 # define tags and associated keys
-tag_names=( X I II III IV V VI )
-tag_keys=( 0 {1..6} )
+tag_names=( I II III IV V VI )
+tag_keys=( {1..6} )
 
 # frame layout
 hc set default_frame_layout 2
@@ -66,9 +66,7 @@ hc set show_frame_decorations if_multiple
 hc set frame_bg_transparent 1
 hc set frame_bg_active_color '#616161'
 hc set frame_bg_normal_color '#101010'
-#hc set frame_border_active_color '#282C35'
-#hc set frame_border_active_color '#999999'
-hc set frame_border_active_color '#616161'
+hc set frame_border_active_color '#444444'
 hc set frame_border_normal_color '#1E1E21'
 hc set frame_border_inner_color '#080808'
 hc set frame_border_inner_width 0
@@ -80,11 +78,9 @@ hc set mouse_recenter_gap 0
 hc set smart_frame_surroundings 0
 hc set smart_window_surroundings 0
 hc set window_gap 0
-#hc set window_border_active_color '#616161'
-hc set window_border_active_color '#999999'
-hc set window_border_normal_color '#2d2e33'
-#hc set window_border_active_color '#2d2e33'
-#hc set window_border_normal_color '#1E1E21'
+# hc set window_border_active_color '#2D2E33'
+hc set window_border_active_color '#313238'
+hc set window_border_normal_color '#26272B'
 
 # reset monitors_locked uint
 hc unlock
@@ -94,23 +90,23 @@ hc set tree_style '·│ ├└+─┐'
 
 # create monitors and lock first [0] tag (this is used on first monitor)
 #hc set_monitors 3840x2160+0+0 3840x2160+3840+0
-hc detect_monitors
-hc lock_tag 0
+#hc detect_monitors
+#hc lock_tag 0
 
 # second monitor uses all tags except the first [0]
 # make sure we cannot cycle between monitors unless we explicitly select the tags
-hc set swap_monitors_to_get_tag false
-hc set focus_crosses_monitor_boundaries false
+#hc set swap_monitors_to_get_tag false
+#hc set focus_crosses_monitor_boundaries false
 
 # custom script to switch between monitors
 # if we just used focus_monitor this would happen every restart
 # instead the script uses sanity checks and has toggle functionality
-${XDG_CONFIG_HOME}/herbstluftwm/scripts/monitorswitch.sh switch 1
+#${XDG_CONFIG_HOME}/herbstluftwm/scripts/monitorswitch.sh switch 1
 
 # panel
 polybar-msg cmd quit 2>&1
-> /var/tmp/polybar.log
-polybar -c ${XDG_CONFIG_HOME}/polybar/config.ini main 2>&1 | tee -a /var/tmp/user/logs/polybar.log & disown
+> /var/tmp/logs/${USER}/polybar.log
+polybar -c ${XDG_CONFIG_HOME}/polybar/config.ini main 2>&1 | tee -a /var/tmp/logs/${USER}/polybar.log & disown
 
 # rules
 hc unrule -F
@@ -126,6 +122,10 @@ hc rule class="obs" tag=II
 hc rule class="AppRun.wrapped" tag=IV
 hc rule class="forge-view-Main" tag=IV pseudotile=off floating=off
 hc rule class="duckstation-nogui" tag=IV
+hc rule class="retroarch" tag=IV
+hc rule class="Godot" tag=IV
+hc rule class~'(.*[dD]iscord)' tag=II
+hc rule class~'(.*[sS]potify)' tag=II
 hc rule class~'(.*[fF]irefox)' tag=III
 hc rule class~'(.*[nN]avigator)' tag=III
 hc rule class~'(.*[cC]hromium-bin-browser-chromium)' tag=III
@@ -144,8 +144,6 @@ hc rule class~'(.*[pP]qiv)' pseudotile=on
 hc rule class~'(.*[yY]ad)' floating=on
 hc rule class~'(.*[pP]cmanfm)' floating=on
 hc rule class~'(.*[pP]ure[rR]ef)' tag=X fullscreen=on
-hc rule class~'(.*[dD]iscord)' tag=X fullscreen=on
-hc rule class~'(.*[sS]potify)' tag=X fullscreen=on
 hc rule title="Open File" floating=on
 hc rule title="Open Image" pseudotile=on
 hc rule title="Save As" pseudotile=on

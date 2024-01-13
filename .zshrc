@@ -14,22 +14,25 @@ done
 function zle-keymap-select zle-line-init zle-line-finish
 {
   if [[ $KEYMAP == (viins|main) ]] ; then
-    _VP1="{cyan}MOTHER%b%F{white}"
-    _VP2="{green}"
+    _VP1="{magenta}MOTHER%b%F{white}"
+    _VP2="{magenta}"
   else
-    _VP1="{black}MOTHER%b%F{red}"
+    _VP1="{black}MOTHER%b%F{cyan}"
     _VP2="{black}"
   fi
   zle reset-prompt
   zle -R
 }
-PS1='%(1j.%B%F{black}%j .)%(0?..%B%F{red}%? )%B%F${_VP1}%#%b%f '
+PS1='%(1j.%b%F{white}%j .)%(0?..%B%F{red}%? )%B%F${_VP1}%#%b%f '
 PS2='%B%F${_VP2}> %b%f'
 PS3='%B%F{white}?# %b%f%F{red}%# %f'
 PS4='%B%F{white}%_ %b%f%F{magenta}%# %f%B%F{white}+%N:%i %b%f%F{magenta}%# %f'
 zle -N zle-line-init
 zle -N zle-line-finish
 zle -N zle-keymap-select
+
+# set title to current directory
+precmd () {print -Pn "\e]0;%~\a"}
 
 # auto-completion:
 autoload -U compinit
@@ -54,12 +57,12 @@ zstyle ':completion:*:kill:*' force-list always
 if [[ ${TERM} == linux ]] || [[ ${TERM} =~ screen && ${+DISPLAY} == 0 ]]; then
   echo -en "\e]P0000000" ; echo -en "\e]P83D3A3A" # 0: black/default
   echo -en "\e]P1E31763" ; echo -en "\e]P9C2003B" # 1: red
-  echo -en "\e]P27DE1D3" ; echo -en "\e]PA27C8B1" # 2: green
-  echo -en "\e]P3EAE900" ; echo -en "\e]PBBFC521" # 3: yellow
-  echo -en "\e]P46186B7" ; echo -en "\e]PC1D43B2" # 4: blue
-  echo -en "\e]P5A538FF" ; echo -en "\e]PD8600E2" # 5: magenta
-  echo -en "\e]P6BAE5DB" ; echo -en "\e]PE73B8A8" # 6: cyan
-  echo -en "\e]P79E9DA5" ; echo -en "\e]PFA9B1A6" # 7: white
+  echo -en "\e]P200CC6C" ; echo -en "\e]PA008C6C" # 2: green
+  echo -en "\e]P3EAE900" ; echo -en "\e]PBFFCB6B" # 3: yellow
+  echo -en "\e]P4009DFF" ; echo -en "\e]PC0047BB" # 4: blue
+  echo -en "\e]P54F4FAF" ; echo -en "\e]PD6300FF" # 5: magenta
+  echo -en "\e]P600CCCC" ; echo -en "\e]PE00AFAF" # 6: cyan
+  echo -en "\e]P7A9B1A6" ; echo -en "\e]PF9E9DA5" # 7: white
 fi
 
 # source custom colors:
@@ -81,7 +84,7 @@ if [[ -f $HOME/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]
   ZSH_HIGHLIGHT_STYLES[function]='fg=white'
   ZSH_HIGHLIGHT_STYLES[builtin]='fg=magenta'
   ZSH_HIGHLIGHT_STYLES[command]='fg=magenta'
-  ZSH_HIGHLIGHT_STYLES[hashed-command]='fg=red,bold,standout'
+  ZSH_HIGHLIGHT_STYLES[hashed-command]='fg=red,bold'
   ZSH_HIGHLIGHT_STYLES[path]='fg=white,underline'
   ZSH_HIGHLIGHT_STYLES[path_prefix]='fg=white,underline'
   ZSH_HIGHLIGHT_STYLES[path_approx]='fg=green,bold'
@@ -115,7 +118,7 @@ if [[ -f $HOME/zsh/plugins/zsh-history-substring-search/zsh-history-substring-se
   source $HOME/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 
   # override main colors:
-  HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='bg=white,fg=black,bold'
+  HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='fg=cyan,bold'
   HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='bg=red,fg=black'
   HISTORY_SUBSTRING_SEARCH_GLOBBING_FLAGS='i'
 

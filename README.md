@@ -4,7 +4,7 @@ Current Setup:
 
 + *DISTRO* = Gentoo ( ~amd64 nomultilib ) ( [link](https://www.gentoo.org) )
 
-+ *KERNEL* = GNU/Linux 6.6.3 ( [link](https://kernel.org) )
++ *KERNEL* = GNU/Linux 6.6.8 ( [link](https://kernel.org) )
 
 + *SOURCES* = Zen ( [link](https://github.com/zen-kernel/zen-kernel) )
 
@@ -14,21 +14,21 @@ Current Setup:
 
 + *SHELL* = Zsh ( [link](https://www.zsh.org/) )
 
-+ *EDITOR* = ViM ( [link](https://www.vim.org/) )
++ *EDITOR* = Neovim ( [link](https://neovim.io/) )
 
 + *TERMINAL MULTIPLEX* = Tmux ( [link](https://github.com/tmux/tmux/wiki) )
 
-+ *TERMINAL EMULATOR* = st ( [link](https://st.suckless.org/) )
++ *TERMINAL EMULATOR* = kitty ( [link](https://sw.kovidgoyal.net/kitty/) )
 
 + *WINDOW MANAGER* = herbstluftwm ( [link](https://herbstluftwm.org/) )
 
-+ *IMAGE VIEWER* = pqiv ( [link](https://github.com/phillipberndt/pqiv) )
++ *IMAGE VIEWER* = sxiv ( [link](https://github.com/xyb3rt/sxiv) )
 
 + *MEDIA PLAYER* = mpv ( [link](https://mpv.io/) )
 
 + *DOCUMENT READER* = mupdf ( [link](https://mupdf.com/) )
 
-+ *WEB BROWSER* = Vieb ( [link](https://github.com/Jelmerro/Vieb) )
++ *WEB BROWSER* = Firefox ( [link](https://www.mozilla.org/en-US/firefox/new/) )
 
 
 Screenshots:

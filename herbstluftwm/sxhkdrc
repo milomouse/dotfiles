@@ -144,14 +144,6 @@ mod4 + control + i
 mod4 + Print
     /usr/local/bin/clipswap.sh
 
-#+ brightness down (override monitor)
-XF86MonBrightnessDown
-    doas /usr/local/bin/ddci-ctrl.zsh -d
-
-#+ brightness up (override monitor)
-XF86MonBrightnessUp
-    doas /usr/local/bin/ddci-ctrl.zsh -i
-
 #+ mute/unmute pulseaudio volume within ALSA
 XF86AudioMute
     amixer -c 1 -q -D pulse sset Master toggle

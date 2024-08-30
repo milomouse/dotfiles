@@ -13,6 +13,9 @@ xsetroot -cursor_name left_ptr -solid '#101010' &
 # set root window background
 display -window root -resize 3840x2160! ${XDG_PUBLICSHARE_DIR}/images/tomie-transformed.jpg &
 
+# set volume to a safe level
+amixer -c 1 -q -D pulse sset Master 40% &
+
 # rebind shortcut buttons on graphic tablet
 ${H}/code/sh/wacom.sh &
 

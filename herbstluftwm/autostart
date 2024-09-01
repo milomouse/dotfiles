@@ -78,7 +78,6 @@ hc set mouse_recenter_gap 0
 hc set smart_frame_surroundings 0
 hc set smart_window_surroundings 0
 hc set window_gap 0
-# hc set window_border_active_color '#2D2E33'
 hc set window_border_active_color '#313238'
 hc set window_border_normal_color '#26272B'
 
@@ -142,7 +141,6 @@ hc rule class~'(.*[gG]imp)' tag=V
 hc rule class~'(.*[iI]nkscape)' tag=V
 hc rule class~'(.*[pP]qiv)' pseudotile=on
 hc rule class~'(.*[yY]ad)' floating=on
-hc rule class~'(.*[pP]cmanfm)' floating=on
 hc rule class~'(.*[pP]ure[rR]ef)' tag=X fullscreen=on
 hc rule title="Open File" floating=on
 hc rule title="Open Image" pseudotile=on

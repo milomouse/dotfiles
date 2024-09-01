@@ -24,7 +24,7 @@ Current Setup:
 
 + *WINDOW MANAGER* = herbstluftwm ( [link](https://herbstluftwm.org/) )
 
-+ *IMAGE VIEWER* = sxiv ( [link](https://github.com/xyb3rt/sxiv) )
++ *IMAGE VIEWER* = sxiv ( [link](https://github.com/xyb3rt/sxiv) ) + pqiv ( [link](https://github.com/phillipberndt/pqiv) )
 
 + *MEDIA PLAYER* = mpv ( [link](https://mpv.io/) )
 

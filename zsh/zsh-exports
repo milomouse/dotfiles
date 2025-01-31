@@ -6,8 +6,10 @@
 ## global environment exports:
 ## (Gentoo does some of this!)
 
-# directories: (HOME = /home/$USER/conf)
+# directories [general]: (NOTE: $HOME = /home/$USER/conf)
 export H="/home/${USER}"
+
+# directories [XDG]:
 export XDG_CACHE_HOME="${HOME}/cache"
 export XDG_CONFIG_HOME="${HOME}"
 export XDG_CONFIG_DIR="${XDG_CONFIG_HOME}"
@@ -22,12 +24,15 @@ export XDG_PUBLICSHARE_DIR="${XDG_CONFIG_HOME}/share"
 export XDG_RUNTIME_DIR="/var/tmp/runtime-${UID}"
 export XDG_TEMPLATES_DIR="${XDG_DATA_HOME}/templates"
 export XDG_VIDEOS_DIR="${H}/vide"
+
+# directories [software]:
 export CUDA_PATH="/opt/cuda"
 export GOPATH="${H}/code/go"
 export PYTHONUSERBASE="${H}/code/python/pip_modules"
 export PYTHONPATH="${PYTHONUSERBASE}/lib"
-path+="${PATH}:${XDG_CONFIG_HOME}/.cargo/bin"
-path+="${H}/code/python/pip_modules/bin"
+path+="${PYTHONUSERBASE}/bin"
+path+="${XDG_CONFIG_HOME}/.cargo/bin"
+path+="${XDG_CONFIG_HOME}/.lmstudio/bin"
 
 # executables:
 export EDITOR="nvim"
@@ -36,12 +41,13 @@ export MANPAGER="less -sM +Gg"
 export PAGER="less"
 export SHELL="/bin/zsh"
 export SCIPY_PIL_IMAGE_VIEWER="sxiv -ab"
-export FZF_DEFAULT_COMMAND="fd -t f -HLIE \{'node_modules','pip_modules','*~','.git','svn','.hg'\}"
+export FZF_DEFAULT_COMMAND="fd -t f -HLIE \{'**/go/pkg/**','**/node_modules/**','**/pip_modules/**','*~','*.git/**','**/.git/**','**/.github/**','**/svn/**','*.hg/**','**/.hg/**','**/spar/**'\}"
 export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
 export FZF_DEFAULT_OPTS='--color=fg:#444444,bg:-1,hl:#655969,fg+:#AF00D7,bg+:#1C1C1C,hl+:#875FAF
 --color=info:#949494,prompt:#8D8D8D,pointer:#138BCF,marker:#FF009A,spinner:#B2B2B2,header:#FF009A'
 
 # variables:
+export XINITRC="${XDG_CONFIG_DIR}/xorg/xinitrc"
 export HISTFILE="${ZDOTDIR:-${XDG_CONFIG_HOME}/zsh}/.history"
 export HISTSIZE=6000
 export SAVEHIST=6000
@@ -59,5 +65,15 @@ export CALIBRE_USE_DARK_PALETTE=1
 export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dsun.java2d.xrender=true -Dsun.java2d.uiScale=2'
 export __GL_SYNC_TO_VBLANK=1
 
+# custom RG configuration file
+export RIPGREP_CONFIG_PATH="${XDG_CONFIG_HOME}/.ripgreprc"
+
 # fix kitty->tmux->neovim undercurl support [see also ~/tmux.conf]:
 export TERM="tmux-256color"
+
+# bat theme for syntax highlighting
+export BAT_THEME="base16"
+# export BAT_THEME="GitHub"
+
+# fix QT application scaling
+# export QT_SCALE_FACTOR=1.0

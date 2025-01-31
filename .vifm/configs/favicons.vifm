@@ -1,0 +1,98 @@
+" ------------------------------------------------------------------------------
+" locate: ${XDG_CONFIG_HOME}/.vifm/configs/favicons.vifm
+" detail: nerd font icons within 'vifm'
+" ------------------------------------------------------------------------------
+" credit: https://github.com/cirala/vifm_devicons
+" notice: edited to add more extensions while cleaning up a bit (WIP)
+" ------------------------------------------------------------------------------
+
+" Filetypes/Directories
+set classify='  :dir:/,  :exe:,  :reg:,  :link:,?  :?:,  ::../::'
+
+" Language Oriented
+set classify+='󰪛  ::*.asm::'
+set classify+='  ::*.c++,,*.cpp,,*.cxx,,*.h::'
+set classify+='  ::*.cc,,*.c::'
+set classify+='  ::*.clj,,*.cljc,,*.cljs,,*.cljr,,*.cljd,,*.edn::'
+set classify+='  ::*.d::'
+set classify+='  ::*.dart::'
+set classify+='  ::*.erl,,*.hrl::'
+set classify+='  ::*.f#,,*.fs,,*.fsi,,*.fsscript,,*.fsx::'
+set classify+='  ::*.go::'
+set classify+='  ::*.hs,,*.lhs::'
+set classify+='  ::*.java,,*.jar::'
+set classify+='  ::*.scala::'
+set classify+='  ::*.jl::'
+set classify+='  ::*.lua::'
+set classify+='  ::*.markdown,,*.md::'
+set classify+='λ  ::*.ml,,*.mli::'
+set classify+='  ::*.nim::'
+set classify+='  ::*.odin::'
+set classify+='  ::*.pl,,*.pm,,*.t::'
+set classify+='  ::*.py,,*.pyc,,*.pyd,,*.pyo::'
+set classify+='  ::*.R,,*.r::'
+set classify+='  ::*.rb::'
+set classify+='  ::*.rlib,,*.rs::'
+set classify+='  ::*.zig::'
+set classify+='  ::*.fish,,*.sh,,*.bash,,*.zsh::'
+
+" Web Specific
+set classify+='  ::*.rss::'
+set classify+='  ::*.ejs,,*.htm,,*.html,,*.slim,,*.xml,,*.xbel::'
+set classify+='  ::*.css::'
+set classify+='  ::*.styl::'
+set classify+='  ::*.scss::'
+set classify+='  ::*.js::'
+set classify+='  ::*.ts::'
+set classify+='  ::*.jsx::'
+set classify+='  ::*.coffee::'
+set classify+='  ::*.mustasche::'
+set classify+='  ::*.php::'
+set classify+='  ::*.twig::'
+set classify+='  ::*.xul::'
+
+" Multimedia
+set classify+='󰂫  ::*.blend::'
+set classify+='  ::*.kra::'
+set classify+='  ::*.xcf::'
+set classify+='  ::*.ai::'
+set classify+='  ::*.psb,,*.psd::'
+set classify+='󰰚  ::*.pur::'
+set classify+='  ::*.hdr,,*.pbr::'
+set classify+='󰯕  ::*.exif::'
+set classify+='  ::*.qoi,,*.exr,,*.pic,,*.ppm,,*.pgm,,*.pbm,,*.bmp,,*.gif,,*.ico,,*.xmp,,*.jpeg,,*.jpg,,*.png,,*.svg,,*.svgz,,*.tga,,*.tiff,,*.xmb,,*.xpm,,*.xspf,,*.xwd,,*.cr2,,*.dng,,*.3fr,,*.ari,,*.arw,,*.bay,,*.crw,,*.cr3,,*.cap,,*.data,,*.dcs,,*.dcr,,*.drf,,*.eip,,*.erf,,*.fff,,*.gpr,,*.iiq,,*.k25,,*.kdc,,*.mdc,,*.mef,,*.mos,,*.mrw,,*.obm,,*.orf,,*.pef,,*.ptx,,*.pxn,,*.r3d,,*.raf,,*.raw,,*.rwl,,*.rw2,,*.rwz,,*.sr2,,*.srf,,*.srw,,*.tif,,*.x3f,,*.webp,,*.avif,,*.jxl::'
+set classify+='  ::*.avi,,*.flv,,*.mkv,,*.mov,,*.mp4,,*.mpeg,,*.mpg,,*.webm,,*.av1::'
+set classify+='󰝚  ::*.qoa,,*.aac,,*.anx,,*.asf,,*.au,,*.axa,,*.flac,,*.m2a,,*.m4a,,*.mid,,*.midi,,*.mp3,,*.mpc,,*.opus,,*.oga,,*.ogg,,*.ogx,,*.ra,,*.ram,,*.rm,,*.spx,,*.wav,,*.wma,,*.ac3::'
+set classify+='  ::*.ttf,,*.otf,,*.woff,,*.woff2,,*.eot::'
+
+" Archives/Documents/DBs
+set classify+='  ::*.7z,,*.apk,,*.bz2,,*.cab,,*.cpio,,*.deb,,*.gem,,*.gz,,*.gzip,,*.lh,,*.lzh,,*.lzma,,*.rar,,*.rpm,,*.tar,,*.tgz,,*.xz,,*.zip,,*.zst::'
+set classify+='  ::*.epub,,*.pdf,,*.fb2,,*.djvu::'
+set classify+='  ::*.cbr,,*.cbz::'
+set classify+='  ::*.doc,,*.docx,,*.adoc::'
+set classify+='  ::*.pptx,,*.ppt::'
+set classify+='  ::*.xls,,*.xlsmx::'
+set classify+='  ::*.db,,*.dump,,*.sql::'
+
+" Configuration/Unique/Other
+set classify+='  ::*.json::'
+set classify+='󰘦  ::*.json_*::'
+set classify+='  ::*.less,,*.bat,,*.conf,,*.ini,,*.rc,,*.yml,,*.yaml,,*.toml,,*.cfg,,*.prefs::'
+set classify+='  ::.zshrc,,.zlogin,,zsh-aliases,,zsh-exports,,zsh-functions,,zsh-options,,user-dirs.dirs,,mimeapps.list,,sxhkdrc,,.asoundrc,,.clang-format,,.dir_colors,,.mailcap,,.npmrc,,.pqivrc,,.ripgreprc,,kritarc,,kritadisplayrc,,.Xdefaults,,.Xresources,,.bashprofile,,.bash_profile,,.bashrc,,.dmrc,,.d_store,,.fasd,,.gitconfig,,.gitignore,,.jack-settings,,.mime.types,,.nvidia-settings-rc,,.pam_environment,,.profile,,.recently-used,,.selected_editor,,.xinitpurc,,.zprofile,,.yarnc,,.snclirc,,.tmux.conf,,.urlview,,.config,,.ini,,.user-dirs.dirs,,.mimeapps.list,,.offlineimaprc,,.msmtprc,,config::'
+set classify+='  ::.zcompdump.zwc,,.zcompdump,,.zshrc.zwc,,.Xauthority::'
+set classify+='  ::.vim,,.vimrc,,.gvimrc,,.vifm::'
+set classify+='󰂠  ::.hushlogin::'
+set classify+='  ::.wget-hsts,,.history,,.bash_history::'
+set classify+='  ::*.xmodmap,,*.xbindkeysrc,,xbindkeys::'
+set classify+='  ::*.log::'
+set classify+='  ::favicons.*::'
+set classify+='  ::README,,readme::'
+set classify+='  ::gruntfile.coffee,,gruntfile.js,,gruntfile.ls::'
+set classify+='  ::gulpfile.coffee,,gulpfile.js,,gulpfile.ls::'
+set classify+='  ::react.jsx::'
+set classify+='  ::license,,copyright,,copying,,LICENSE,,COPYRIGHT,,COPYING::'
+set classify+='  ::*.gpg,,*.asc,,*.kbx,,*.key,,*.rev::'
+set classify+='  ::*.diff,,*.sum,,*.md5,,*.sha512::'
+set classify+='  ::*.o,,*.out,,*.dat,,*.bin::'
+set classify+='  ::*.sln,,*.suo::'
+set classify+='  ::*.exe::'

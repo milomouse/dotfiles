@@ -7,6 +7,19 @@ configuration {
     fullscreen:                     false;
     hide-scrollbar:                 true;
     sidebar-mode:                   false;
+
+    kb-remove-to-eol: "";
+    kb-remove-to-sol: "";
+    kb-remove-char-back: "BackSpace,Shift+BackSpace";
+    kb-accept-entry: "Control+m,Return,KP_Enter";
+    kb-mode-next: "Shift+Right,Control+Tab,Control+l";
+    kb-mode-previous: "Shift+Left,Control+ISO_Left_Tab,Control+h";
+    kb-mode-complete: "";
+    kb-row-up: "Up,Control+p,Control+k";
+    kb-row-down: "Down,Control+n,Control+j";
+    kb-row-tab: "";
+    kb-element-next: "Tab";
+    kb-element-prev: "ISO_Left_Tab";
 }
 
 @import "colors.rasi"
@@ -15,7 +28,7 @@ window {
     transparency:                   "real";
     background-color:               @bg;
     text-color:                     @fg;
-    border:                         8px;
+    border:                         13px;
     border-color:                   @se;
     border-radius:                  0px;
     width:                          1600px;

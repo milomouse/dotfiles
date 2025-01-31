@@ -22,6 +22,9 @@ return require('packer').startup(function(use)
     -- LSP framework
     use 'neovim/nvim-lspconfig'
 
+    -- LSP completion menu symbols
+    use 'onsails/lspkind.nvim'
+
     -- statusbar/tabline customization
     use { 'nvim-lualine/lualine.nvim', requires = { 'nvim-tree/nvim-web-devicons' } }
 

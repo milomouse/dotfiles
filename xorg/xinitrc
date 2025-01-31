@@ -4,24 +4,33 @@
 ## detail: X.Org init configuration file    ##
 ##############################################
 
+# since we cannot apply scaling to second monitor within Xorg configuration, apply it via 'xrandr'
+# also taking into account the new resolution of scaled monitor (do not use left-of when scaling!)
+# NOTE: Xorg configured for the same setup, except without the scaling
+xrandr \
+    --output DP-4 --mode 2560x1440 --scale 1.4x1.4 --rotate left \
+    --output DP-2 --mode 3840x2160 --pos 2016x0 --primary
+
 # load custom Xresources for applications that use it
 xrdb -load ${XDG_CONFIG_HOME}/xorg/Xresources &
 
-# set default cursor shape/color
+# set default cursor shape and background color
 xsetroot -cursor_name left_ptr -solid '#101010' &
 
-# set root window background
-display -window root -resize 3840x2160! ${XDG_PUBLICSHARE_DIR}/images/tomie-transformed.jpg &
+# set root window background images
+xsetbg \
+    -zoom 205% -clip 320,55,2016,3584 -at 0,0 /home/mother/foto/fandom/movies/solaris/solaris_peter_jojaio.jpg \
+    -gamma 0.7 -at 2016,0 /home/mother/foto/fandom/movies/solaris/solaris_peter_jojaio-4k-edit.jpg &
 
 # set volume to a safe level
-amixer -c 1 -q -D pulse sset Master 40% &
+amixer -c 1 -q -D pulse sset Master 50% &
 
-# rebind shortcut buttons on graphic tablet
+# custom script to check if drawing tablet is connected, rebinding shortcut buttons if so
 ${H}/code/sh/wacom.sh &
 
-# custom keybindings for use with herbstluftwm
+# custom keybindings for use with 'herbstluftwm'
 sxhkd -c ${XDG_CONFIG_HOME}/herbstluftwm/sxhkdrc &
 
 # launch window manager
 exec herbstluftwm --locked -c ${XDG_CONFIG_HOME}/herbstluftwm/autostart
-#exec dbus-launch --autolaunch=$(cat /var/lib/dbus/machine-id) herbstluftwm --locked -c ${XDG_CONFIG_HOME}/herbstluftwm/autostart
+# exec dbus-launch --autolaunch=$(cat /var/lib/dbus/machine-id) herbstluftwm --locked -c ${XDG_CONFIG_HOME}/herbstluftwm/autostart

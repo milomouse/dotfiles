@@ -3,34 +3,60 @@
 " author: Vincent (github.com/milomouse)
 " detail: colorscheme for vifm
 " ------------------------------------------------------------------------------
-" inherit; don't force hardcoded colors (0-255).
-" better for all tty regardless of X or console.
-" ------------------------------------------------------------------------------
 
 highlight clear
 
-highlight AuxWin      ctermfg=default ctermbg=default cterm=none
-highlight Border      ctermfg=default ctermbg=black   cterm=none
-highlight BrokenLink  ctermfg=black   ctermbg=default cterm=none,underline
-highlight CmdLine     ctermfg=white   ctermbg=default cterm=none
-highlight CmpMismatch ctermfg=white   ctermbg=red     cterm=bold
-highlight CurrLine    ctermfg=black   ctermbg=white   cterm=bold
-highlight Device      ctermfg=red     ctermbg=default cterm=bold,reverse
-highlight Directory   ctermfg=blue    ctermbg=default cterm=bold
-highlight Fifo        ctermfg=yellow  ctermbg=default cterm=bold
-highlight ErrorMsg    ctermfg=red     ctermbg=default cterm=none
-highlight Executable  ctermfg=green   ctermbg=default cterm=bold
-highlight JobLine     ctermfg=black   ctermbg=white   cterm=bold,reverse
-highlight Link        ctermfg=red     ctermbg=default cterm=underline
-highlight OtherLine   ctermfg=white   ctermbg=black   cterm=bold
-highlight OtherWin    ctermfg=default ctermbg=default cterm=bold
-highlight Selected    ctermfg=cyan    ctermbg=default cterm=bold,standout
-highlight Socket      ctermfg=cyan    ctermbg=default cterm=bold
-highlight StatusLine  ctermfg=black   ctermbg=white   cterm=bold
-highlight SuggestBox  ctermfg=default ctermbg=default cterm=bold
-highlight TabLine     ctermfg=white   ctermbg=black   cterm=none
-highlight TabLineSel  ctermfg=black   ctermbg=white   cterm=none
-highlight TopLine     ctermfg=black   ctermbg=white   cterm=none
-highlight TopLineSel  ctermfg=black   ctermbg=white   cterm=bold
-highlight WildMenu    ctermfg=white   ctermbg=default cterm=underline,reverse
-highlight Win         ctermfg=magenta ctermbg=default cterm=bold
+" UPDATED: 256 version
+highlight AuxWin      ctermfg=233   ctermbg=240     cterm=none
+highlight Border      ctermfg=240   ctermbg=234     cterm=none
+highlight BrokenLink  ctermfg=235   ctermbg=232     cterm=none,underline
+highlight CmdLine     ctermfg=240   ctermbg=233     cterm=none
+highlight CmpMismatch ctermfg=240   ctermbg=56      cterm=bold
+highlight CurrLine    ctermfg=233   ctermbg=240     cterm=bold
+highlight Device      ctermfg=125   ctermbg=233     cterm=bold,reverse
+highlight Directory   ctermfg=39    ctermbg=233     cterm=bold
+highlight Fifo        ctermfg=220   ctermbg=233     cterm=bold
+highlight ErrorMsg    ctermfg=161   ctermbg=233     cterm=none
+highlight Executable  ctermfg=80    ctermbg=233     cterm=bold
+highlight JobLine     ctermfg=35    ctermbg=233     cterm=bold,reverse
+highlight Link        ctermfg=162   ctermbg=233     cterm=underline
+highlight OtherLine   ctermfg=none  ctermbg=234     cterm=bold
+highlight OtherWin    ctermfg=238   ctermbg=233     cterm=bold
+highlight Selected    ctermfg=99    ctermbg=233     cterm=bold,standout
+highlight Socket      ctermfg=143   ctermbg=233     cterm=bold
+highlight StatusLine  ctermfg=233   ctermbg=240     cterm=bold
+highlight SuggestBox  ctermfg=233   ctermbg=238     cterm=bold
+highlight TabLine     ctermfg=238   ctermbg=234     cterm=none
+highlight TabLineSel  ctermfg=233   ctermbg=240     cterm=none
+highlight TopLine     ctermfg=233   ctermbg=240     cterm=none
+highlight TopLineSel  ctermfg=233   ctermbg=240     cterm=bold
+highlight WildMenu    ctermfg=233   ctermbg=238     cterm=underline,reverse
+highlight Win         ctermfg=61    ctermbg=233     cterm=bold
+
+
+" ORIGINAL: non-256 version (inherited)
+" highlight AuxWin      ctermfg=default ctermbg=default cterm=none
+" highlight Border      ctermfg=default ctermbg=black   cterm=none
+" highlight BrokenLink  ctermfg=black   ctermbg=default cterm=none,underline
+" highlight CmdLine     ctermfg=white   ctermbg=default cterm=none
+" highlight CmpMismatch ctermfg=white   ctermbg=red     cterm=bold
+" highlight CurrLine    ctermfg=black   ctermbg=white   cterm=bold
+" highlight Device      ctermfg=red     ctermbg=default cterm=bold,reverse
+" highlight Directory   ctermfg=blue    ctermbg=default cterm=bold
+" highlight Fifo        ctermfg=yellow  ctermbg=default cterm=bold
+" highlight ErrorMsg    ctermfg=red     ctermbg=default cterm=none
+" highlight Executable  ctermfg=green   ctermbg=default cterm=bold
+" highlight JobLine     ctermfg=black   ctermbg=white   cterm=bold,reverse
+" highlight Link        ctermfg=red     ctermbg=default cterm=underline
+" highlight OtherLine   ctermfg=white   ctermbg=black   cterm=bold
+" highlight OtherWin    ctermfg=default ctermbg=default cterm=bold
+" highlight Selected    ctermfg=cyan    ctermbg=default cterm=bold,standout
+" highlight Socket      ctermfg=cyan    ctermbg=default cterm=bold
+" highlight StatusLine  ctermfg=black   ctermbg=white   cterm=bold
+" highlight SuggestBox  ctermfg=default ctermbg=default cterm=bold
+" highlight TabLine     ctermfg=white   ctermbg=black   cterm=none
+" highlight TabLineSel  ctermfg=black   ctermbg=white   cterm=none
+" highlight TopLine     ctermfg=black   ctermbg=white   cterm=none
+" highlight TopLineSel  ctermfg=black   ctermbg=white   cterm=bold
+" highlight WildMenu    ctermfg=white   ctermbg=default cterm=underline,reverse
+" highlight Win         ctermfg=magenta ctermbg=default cterm=bold

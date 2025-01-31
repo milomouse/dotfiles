@@ -49,8 +49,8 @@ local function save_profiles(threshold)
 end
 
 time([[Luarocks path setup]], true)
-local package_path_str = "/home/mother/conf/cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?.lua;/home/mother/conf/cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?/init.lua;/home/mother/conf/cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?.lua;/home/mother/conf/cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?/init.lua"
-local install_cpath_pattern = "/home/mother/conf/cache/nvim/packer_hererocks/2.1.0-beta3/lib/lua/5.1/?.so"
+local package_path_str = "/home/mother/conf/cache/nvim/packer_hererocks/2.1.1731601260/share/lua/5.1/?.lua;/home/mother/conf/cache/nvim/packer_hererocks/2.1.1731601260/share/lua/5.1/?/init.lua;/home/mother/conf/cache/nvim/packer_hererocks/2.1.1731601260/lib/luarocks/rocks-5.1/?.lua;/home/mother/conf/cache/nvim/packer_hererocks/2.1.1731601260/lib/luarocks/rocks-5.1/?/init.lua"
+local install_cpath_pattern = "/home/mother/conf/cache/nvim/packer_hererocks/2.1.1731601260/lib/lua/5.1/?.so"
 if not string.find(package.path, package_path_str, 1, true) then
   package.path = package.path .. ';' .. package_path_str
 end
@@ -74,30 +74,55 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
+  ["fzf.vim"] = {
+    loaded = true,
+    path = "/home/mother/conf/data/nvim/site/pack/packer/start/fzf.vim",
+    url = "https://github.com/junegunn/fzf.vim"
+  },
+  ["lualine.nvim"] = {
+    loaded = true,
+    path = "/home/mother/conf/data/nvim/site/pack/packer/start/lualine.nvim",
+    url = "https://github.com/nvim-lualine/lualine.nvim"
+  },
+  ["nvim-lspconfig"] = {
+    loaded = true,
+    path = "/home/mother/conf/data/nvim/site/pack/packer/start/nvim-lspconfig",
+    url = "https://github.com/neovim/nvim-lspconfig"
+  },
+  ["nvim-web-devicons"] = {
+    loaded = true,
+    path = "/home/mother/conf/data/nvim/site/pack/packer/start/nvim-web-devicons",
+    url = "https://github.com/nvim-tree/nvim-web-devicons"
+  },
   ["packer.nvim"] = {
     loaded = true,
     path = "/home/mother/conf/data/nvim/site/pack/packer/start/packer.nvim",
     url = "https://github.com/wbthomason/packer.nvim"
   },
-  ["split-term.vim"] = {
+  ["pear-tree"] = {
     loaded = true,
-    path = "/home/mother/conf/data/nvim/site/pack/packer/start/split-term.vim",
-    url = "https://github.com/vimlab/split-term.vim"
+    path = "/home/mother/conf/data/nvim/site/pack/packer/start/pear-tree",
+    url = "https://github.com/tmsvg/pear-tree"
   },
   tcomment_vim = {
     loaded = true,
     path = "/home/mother/conf/data/nvim/site/pack/packer/start/tcomment_vim",
     url = "https://github.com/tomtom/tcomment_vim"
   },
-  ["vim-airline"] = {
+  ["vifm.vim"] = {
     loaded = true,
-    path = "/home/mother/conf/data/nvim/site/pack/packer/start/vim-airline",
-    url = "https://github.com/vim-airline/vim-airline"
+    path = "/home/mother/conf/data/nvim/site/pack/packer/start/vifm.vim",
+    url = "https://github.com/vifm/vifm.vim"
   },
-  ["vim-devicons"] = {
+  ["vim-flog"] = {
     loaded = true,
-    path = "/home/mother/conf/data/nvim/site/pack/packer/start/vim-devicons",
-    url = "https://github.com/ryanoasis/vim-devicons"
+    path = "/home/mother/conf/data/nvim/site/pack/packer/start/vim-flog",
+    url = "https://github.com/rbong/vim-flog"
+  },
+  ["vim-fugitive"] = {
+    loaded = true,
+    path = "/home/mother/conf/data/nvim/site/pack/packer/start/vim-fugitive",
+    url = "https://github.com/tpope/vim-fugitive"
   }
 }
 

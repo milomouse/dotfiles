@@ -9,7 +9,7 @@ function zshaddhistory {
   line=${1%%$'\n'} ; cmd=${line%% *}
   [[ ${#line} -ge 5
       && ${cmd} != (history|fc|[zx]edit|[zx]load)
-  ]] && (( ! $argv[(I)mpq *] ))
+  ]] && (( ! $argv[(I)*spar*] ))
 }
 
 # safely recompile and reload shell settings:
@@ -34,8 +34,8 @@ function up {
 }
 
 # one-liners/micro functions:
+function comfy { cd ${H}/code/bin/ComfyUI && python -m venv $PYTHONUSERBASE && . $PYTHONUSERBASE/bin/activate && python main.py ; deactivate }
 function dropcache { sync && print 1 | doas tee /proc/sys/vm/drop_caches }
 function mkcd { command mkdir -p "${@}" && cd "$@" }
-function pqiv { command pqiv "${@}" 2>/dev/null }
-function startx { [[ ${+DISPLAY} -eq 1 ]] || { cd && /usr/bin/xinit ${XDG_CONFIG_DIR:-$HOME}/xorg/xinitrc -nolisten tcp -once -retro -- vt${$(tty)/*tty} &>!/var/tmp/logs/${USER}/xorg/runtime.log } }
-# function startx { [[ ${+DISPLAY} -eq 1 ]] || { cd && /usr/bin/xinit ${XDG_CONFIG_DIR:-$HOME}/xorg/xinitrc -nolisten tcp -once -retro -- vt${$(tty)/*tty} &>!/var/tmp/logs/$(whoami)/xorg/runtime.log } }
+function pqiv { command pqiv -n "${@}" 2>/dev/null }
+function startx { [[ ${+DISPLAY} -eq 1 ]] || { cd && /usr/bin/xinit ${XINITRC} -nolisten tcp -once -retro -- vt${$(tty)/*tty} &>!/var/tmp/logs/${USER}/xorg/runtime.log } }

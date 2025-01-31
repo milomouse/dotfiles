@@ -2,7 +2,7 @@
 # /home/mother/conf/.nvidia-settings-rc
 #
 # Configuration file for nvidia-settings - the NVIDIA Settings utility
-# Generated on Thu Nov 16 17:58:32 2023
+# Generated on Fri Jan 31 06:45:05 2025
 #
 
 # ConfigProperties:
@@ -12,9 +12,9 @@ DisplayStatusBar = Yes
 SliderTextEntries = Yes
 IncludeDisplayNameInConfigFile = No
 UpdateRulesOnProfileNameChange = Yes
-Timer = Memory_Used_(GPU_0),Yes,3000
-Timer = Thermal_Monitor_(GPU_0),Yes,1000
 Timer = PowerMizer_Monitor_(GPU_0),Yes,1000
+Timer = Thermal_Monitor_(GPU_0),Yes,1000
+Timer = Memory_Used_(GPU_0),Yes,3000
 
 # Attributes:
 
@@ -29,25 +29,9 @@ Timer = PowerMizer_Monitor_(GPU_0),Yes,1000
 0/OpenGLImageSettings=1
 0/FSAAAppEnhanced=0
 0/ShowGraphicsVisualIndicator=0
-[DPY:HDMI-0]/Dithering=0
-[DPY:HDMI-0]/DitheringMode=0
-[DPY:HDMI-0]/DitheringDepth=0
-[DPY:HDMI-0]/ColorSpace=0
-[DPY:HDMI-0]/ColorRange=0
-[DPY:HDMI-0]/SynchronousPaletteUpdates=0
-[DPY:DP-0]/RedBrightness=0.000000
-[DPY:DP-0]/GreenBrightness=0.000000
-[DPY:DP-0]/BlueBrightness=0.000000
-[DPY:DP-0]/RedContrast=0.000000
-[DPY:DP-0]/GreenContrast=0.000000
-[DPY:DP-0]/BlueContrast=0.000000
-[DPY:DP-0]/RedGamma=1.000000
-[DPY:DP-0]/GreenGamma=1.000000
-[DPY:DP-0]/BlueGamma=1.000000
 [DPY:DP-0]/Dithering=0
 [DPY:DP-0]/DitheringMode=0
 [DPY:DP-0]/DitheringDepth=0
-[DPY:DP-0]/DigitalVibrance=0
 [DPY:DP-0]/ColorSpace=0
 [DPY:DP-0]/ColorRange=0
 [DPY:DP-0]/SynchronousPaletteUpdates=0
@@ -57,4 +41,54 @@ Timer = PowerMizer_Monitor_(GPU_0),Yes,1000
 [DPY:DP-1]/ColorSpace=0
 [DPY:DP-1]/ColorRange=0
 [DPY:DP-1]/SynchronousPaletteUpdates=0
+[DPY:DP-2]/RedBrightness=0.000000
+[DPY:DP-2]/GreenBrightness=0.000000
+[DPY:DP-2]/BlueBrightness=0.000000
+[DPY:DP-2]/RedContrast=0.000000
+[DPY:DP-2]/GreenContrast=0.000000
+[DPY:DP-2]/BlueContrast=0.000000
+[DPY:DP-2]/RedGamma=1.000000
+[DPY:DP-2]/GreenGamma=1.000000
+[DPY:DP-2]/BlueGamma=1.000000
+[DPY:DP-2]/Dithering=0
+[DPY:DP-2]/DitheringMode=0
+[DPY:DP-2]/DitheringDepth=0
+[DPY:DP-2]/DigitalVibrance=0
+[DPY:DP-2]/ColorSpace=0
+[DPY:DP-2]/ColorRange=0
+[DPY:DP-2]/SynchronousPaletteUpdates=0
+[DPY:DP-3]/Dithering=0
+[DPY:DP-3]/DitheringMode=0
+[DPY:DP-3]/DitheringDepth=0
+[DPY:DP-3]/ColorSpace=0
+[DPY:DP-3]/ColorRange=0
+[DPY:DP-3]/SynchronousPaletteUpdates=0
+[DPY:HDMI-0]/Dithering=0
+[DPY:HDMI-0]/DitheringMode=0
+[DPY:HDMI-0]/DitheringDepth=0
+[DPY:HDMI-0]/ColorSpace=0
+[DPY:HDMI-0]/ColorRange=0
+[DPY:HDMI-0]/SynchronousPaletteUpdates=0
+[DPY:DP-4]/RedBrightness=0.000000
+[DPY:DP-4]/GreenBrightness=0.000000
+[DPY:DP-4]/BlueBrightness=0.000000
+[DPY:DP-4]/RedContrast=0.000000
+[DPY:DP-4]/GreenContrast=0.000000
+[DPY:DP-4]/BlueContrast=0.000000
+[DPY:DP-4]/RedGamma=1.000000
+[DPY:DP-4]/GreenGamma=1.000000
+[DPY:DP-4]/BlueGamma=1.000000
+[DPY:DP-4]/Dithering=0
+[DPY:DP-4]/DitheringMode=0
+[DPY:DP-4]/DitheringDepth=0
+[DPY:DP-4]/DigitalVibrance=0
+[DPY:DP-4]/ColorSpace=0
+[DPY:DP-4]/ColorRange=0
+[DPY:DP-4]/SynchronousPaletteUpdates=0
+[DPY:DP-5]/Dithering=0
+[DPY:DP-5]/DitheringMode=0
+[DPY:DP-5]/DitheringDepth=0
+[DPY:DP-5]/ColorSpace=0
+[DPY:DP-5]/ColorRange=0
+[DPY:DP-5]/SynchronousPaletteUpdates=0
 [GPU:0]/GPUPowerMizerMode=2

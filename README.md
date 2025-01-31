@@ -1,9 +1,6 @@
 Current Setup:
 --------------
 
-
-+ *PC BUILD* = View on PCPartPicker ( [link](https://pcpartpicker.com/user/islewolf/saved/#view=8NDrGX) )
-
 + *DISTRO* = Gentoo ( ~amd64 nomultilib llvm ) ( [link](https://www.gentoo.org) )
 
 + *KERNEL* = GNU/Linux 6.12.10 ( [link](https://kernel.org) )
@@ -24,7 +21,7 @@ Current Setup:
 
 + *TERMINAL EMULATOR* = kitty ( [link](https://sw.kovidgoyal.net/kitty/) )
 
-+ *WINDOW MANAGER* = herbstluftwm ( [link](https://herbstluftwm.org/) )
++ *FILE EXPLORER* = vifm ( [link](https://vifm.info) )
 
 + *IMAGE VIEWER* = sxiv ( [link](https://github.com/xyb3rt/sxiv) ) + pqiv ( [link](https://github.com/phillipberndt/pqiv) )
 
@@ -33,6 +30,8 @@ Current Setup:
 + *DOCUMENT READER* = mupdf ( [link](https://mupdf.com/) )
 
 + *WEB BROWSER* = Firefox ( [link](https://www.mozilla.org/en-US/firefox/new/) ) + Surfingkeys ( [link](https://github.com/brookhong/Surfingkeys) )
+
++ *WINDOW MANAGER* = herbstluftwm ( [link](https://herbstluftwm.org/) )
 
 
 Screenshots:

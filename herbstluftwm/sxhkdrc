@@ -18,7 +18,7 @@ mod4 + c
 
 #+ cycle frame layout
 mod4 + {_,shift +} t
-    herbstclient cycle_layout {+,-}1 max grid horizontal vertical
+    herbstclient cycle_layout {+,-}1 max vertical horizontal grid
 
 #+ manually split frame horizontally
 mod4 + {_,shift +} minus
@@ -35,6 +35,10 @@ mod4 + {_,shift +} equal
 #+ manually split frame vertically
 mod4 + control + {_,shift +} equal
     herbstclient split {right,left} 0.3
+
+#+ manually split frame horizontally (to preferred size for vertical monitor)
+mod4 + mod1 + minus
+    herbstclient split bottom 0.61
 
 #+ automatically split, and/or shift window to new split (if available)
 mod4 + {_,shift +} BackSpace
@@ -62,35 +66,28 @@ mod4 + control + {h,j,k,l}
 
 #+ shift focus to next/prev occupied tag
 mod4 + {n,p}
-    /home/mother/conf/herbstluftwm/scripts/tagswitch.sh {next,prev}
+    /home/mother/conf/herbstluftwm/scripts/switch-tag.sh {next,prev}
 
-# #+ shift focus between monitors
-# mod4 + Tab
-#     /home/mother/conf/herbstluftwm/scripts/monitorswitch.sh toggle
-
-# #+ shift window between monitors [placeholder]
-# mod4 + shift + Tab
-#     herbstclient move_index 0
+#+ shift focus or window between second monitor
+#+ TODO: write a custom script for automated movement between monitors
+mod4 + {_,shift} Tab
+    {/home/mother/conf/herbstluftwm/scripts/switch-monitor.sh toggle,herbstclient move X}
 
 #+ shift focus or window to next/prev tag
 mod4 + {_,shift +} {period,comma}
     herbstclient {use,move}_index {+,-}1 --skip-visible
 
-#+ shift focus between last tag(s)
-mod4 + Tab
-    herbstclient use_previous
-
 #+ minimize or restore minimized client
-mod4 + {_,shift +} grave
+mod4 + {grave,slash}
     herbstclient {set_attr clients.focus.minimized true,jumpto last-minimized}
 
 #+ focus or pull urgent window
 mod4 + {_,shift +} u
     herbstclient {jumpto,bring} urgent
 
-#+ close focused window {and remove frame}
+#+ close focused window (with backup/alternative command)
 mod4 + {control,shift} + Delete
-    herbstclient {close,close_and_remove}
+    {herbstclient close,wmctrl -c :ACTIVE:}
 
 #+ remove/collapse frame
 mod4 + z
@@ -106,7 +103,7 @@ mod4 + {_,shift,control +} f
 
 #+ "ELECOM TrackBall HUGE" [mouse] extra function keys [10,11] (12 used as scroll modifier)
 {_,shift} + button10
-    /home/mother/conf/herbstluftwm/scripts/tagswitch.sh {next,prev}
+    /home/mother/conf/herbstluftwm/scripts/switch-tag.sh {next,prev}
 control + button10
     herbstclient use_previous
 {_,shift} + button11
@@ -144,21 +141,29 @@ mod4 + control + i
 mod4 + Print
     /usr/local/bin/clipswap.sh
 
-#+ mute/unmute pulseaudio volume within ALSA
-XF86AudioMute
-    amixer -c 1 -q -D pulse sset Master toggle
+# #+ raise brightness via I2C
+# XF86MonBrightnessUp
+#     ddccontrol -r 0x10 -W +20 dev:/dev/i2c-2 &>/dev/null
+#
+# #+ lower brightness via I2C
+# XF86MonBrightnessDown
+#     ddccontrol -r 0x10 -W -20 dev:/dev/i2c-2 &>/dev/null
 
-#+ raise pulseaudio volume within ALSA
+#+ raise pulseaudio volume via ALSA
 XF86AudioRaiseVolume
     amixer -c 1 -q -D pulse sset Master 5%+
 
-#+ lower pulseaudio volume within ALSA
+#+ lower pulseaudio volume via ALSA
 XF86AudioLowerVolume
     amixer -c 1 -q -D pulse sset Master 5%-
 
-#+ suspend operating system to memory
+#+ mute/unmute pulseaudio volume via ALSA
+XF86AudioMute
+    amixer -c 1 -q -D pulse sset Master toggle
+
+#+ suspend system to memory
 {XF86Sleep,mod4 + control + shift + End}
-    /bin/sh -c 'echo mem | doas tee /sys/power/state'
+    /bin/sh -c 'echo freeze | doas tee /sys/power/state'
 
 #+ remotely control music player
 XF86AudioPlay

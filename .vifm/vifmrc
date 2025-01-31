@@ -4,41 +4,50 @@
 " detail: main vifm configuration file
 " ------------------------------------------------------------------------------
 
+" Preferred theme
 colorscheme candymouse
 
-set findprg=fd\ %A\ -HIt\ f
-"set grepprg=ag\ --line-numbers\ %i\ %a\ %s
+" Use vifm file operations instead of external utilities
+set syscalls
+
+" Change default programs
 set vicmd=nvim
-set vimhelp
+set findprg='fd %A -HIt f'
+set grepprg='rg --line-number --smart-case %i %a %s'
+"set grepprg='ag --line-numbers %i\ %a\ %s'
+
+" Basic settings
 set nowrap
 set notrash
 set norunexec
 set nofollowlinks
-set sortnumbers
 set noiec
 set nolsview
 set nomillerview
-set ignorecase
-set smartcase
 set nohlsearch
 set noincsearch
+
+set dotfiles
+set sortnumbers
+set ignorecase
+set smartcase
 set undolevels=100
 set history=100
+set vimhelp
 set scrolloff=4
 set wildmenu
 set wildstyle=popup
 set timefmt=%Y-%m-%d\ %H:%M
+set suggestoptions=normal,visual,view,otherpane,keys,marks,registers
+
 set statusline=" %A%= %10u:%-7g %15s %20d "
 " set statusline=" Hint: %z%= %A %10u:%-7g %15s %20d "
-set suggestoptions=normal,visual,view,otherpane,keys,marks,registers
+
 set vifminfo=dhistory,savedirs,chistory,state,tui,shistory,
     \phistory,fhistory,dirstack,registers,bookmarks,bmarks
 
-" ------------------------------------------------------------------------------
 
-" :mark mark /full/directory/path [filename]
-"mark b /home/mother/code/bin/
-"mark h /home/mother
+" ------------------------------------------------------------------------------
 
 " :com[mand][!] command_name action
 " The following macros can be used in a command
@@ -52,27 +61,36 @@ set vifminfo=dhistory,savedirs,chistory,state,tui,shistory,
 " %D the other window directory name.
 " %m run the command in a menu window
 
-command! df df -h %m 2> /dev/null
-command! diff nvim -d %f %F
-command! zip zip -r %f.zip %f
-command! run !! ./%f
-command! make !!make %a
+command! reload :write | restart
 command! mkcd :mkdir %a | cd %a
 command! vgrep nvim "+grep %a"
-command! reload :write | restart
+command! diff nvim -d %f %F
+command! df df -h %m 2> /dev/null
+command! zip zip -r %f.zip %f
+command! run !! ./%f
+"command! make !!make %a
 
 " ------------------------------------------------------------------------------
+
+
+" Default fileviewer (overrides can be defined later)
+fileviewer *[^/],.*[^/] env -uCOLORTERM bat --color always --wrap never --pager never %c --style=changes
 
 " PDF
 filextype *.pdf
         \ {View in mupdf}
         \ mupdf -Y 2 -I %c,
-fileviewer *.pdf pdftotext -nopgbrk %c -
+" fileviewer *.pdf pdftotext -nopgbrk %c -
 
-" Other
+" Various Documents
 filextype *.ps,*.eps,*.ps.gz,*.djvu,*.cbz
         \ {View in mupdf}
         \ mupdf -Y 2 -I %f,
+
+" Office files
+"filextype *.odt,*.doc,*.docx,*.xls,*.xlsx,*.odp,*.pptx libreoffice %f &
+"fileviewer *.doc catdoc %c
+"fileviewer *.docx, docx2txt.pl %f -
 
 " Audio
 filetype *.wav,*.mp3,*.flac,*.m4a,*.wma,*.ape,*.ac3,*.og[agx],*.spx,*.opus
@@ -193,20 +211,15 @@ filetype *.7z
        \ FUSE_MOUNT|fuse-7z %SOURCE_FILE %DESTINATION_DIR,
 fileviewer *.7z 7z l %c
 
-" Office files
-"filextype *.odt,*.doc,*.docx,*.xls,*.xlsx,*.odp,*.pptx libreoffice %f &
-"fileviewer *.doc catdoc %c
-"fileviewer *.docx, docx2txt.pl %f -
-
 " Program Specific
-fileviewer *.json,*.jl,*.rst,*.pl,
-    \ cat %f
+" fileviewer *.json,*.jl,*.rst,*.pl,
+"     \ bat %c -p
 
 " " Visualize various files
 " fileviewer *.vifm,vifmrc,vifminfo,xinitrc,Xresources,
 "     \autostart,sxhkdrc,*.dck,*.xmodmap,
 "     \zsh-options,zsh-aliases,zsh-functions,zsh-exports,
-"     \ cat %f
+"     \ bat %c -p
 
 " Obscure various files
 fileviewer *.gpg,*.kbx,*.key,*.rev,.Xauthority,*.log,*.*~,
@@ -215,13 +228,11 @@ fileviewer *.gpg,*.kbx,*.key,*.rev,.Xauthority,*.log,*.*~,
 " Directory
 fileviewer */, tree %f
 
-" Open all other files with default system programs (you can also remove all
+" Open all other files with default system programs (you can also remove allk
 " :file[x]type commands above to ensure they don't interfere with system-wide
 " settings).  By default all unknown files are opened with 'vi[x]cmd'.
 " Use a custom ~/.vifm/scripts/ zsh file to display non-handled files.
-"filetype * xdg-open
-"fileviewer *, file -b %f
-fileviewer *, vifm_fileview.zsh %f
+filetype * xdg-open
 
 " ------------------------------------------------------------------------------
 
@@ -241,6 +252,12 @@ nnoremap S :sort<cr>
 nnoremap w :view<cr>
 vnoremap w :view<cr>gv
 
+" Change directory of current pane to directory of inactive pane
+nnoremap W :cd %D<cr>
+
+" Change directory to last used one
+nnoremap B :cd -<cr>
+
 " Yank current directory path into the clipboard
 nnoremap yd :!echo %d | xclip -selection primary -i %i<cr>:echo expand('%"d') "yanked to primary"<cr>
 nnoremap yD :!echo %d | xclip -selection clipboard -i %i<cr>:echo expand('%"d') "yanked to clipboard"<cr>
@@ -249,22 +266,18 @@ nnoremap yD :!echo %d | xclip -selection clipboard -i %i<cr>:echo expand('%"d') 
 nnoremap yf :!echo %c:p | xclip -selection primary -i %i<cr>:echo expand('%"c:p') "yanked to primary"<cr>
 nnoremap yF :!echo %c:p | xclip -selection clipboard -i %i<cr>:echo expand('%"c:p') "yanked to clipboard"<cr>
 
-" Start shell in current directory
-nnoremap ,s :shell<cr>
+" Start shell in current directory (in current window while minimizing vifm)
+nnoremap o :shell<cr>
 
-" Open console in current directory
-nnoremap ,t :!st &<cr>
+" Open shell in current directory (in a new window)
+nnoremap O :!kitty &<cr>
 
 " Open editor to edit vifmrc and apply settings after returning to vifm
-nnoremap ,c :write | edit $MYVIFMRC | restart<cr>
-
-" Toggle wrap setting on ,w key
-nnoremap ,w :set wrap!<cr>
+" MYVIFMRC is export variable within shell configuration (zsh/zsh-exports)
+nnoremap E :write | edit $MYVIFMRC | restart<cr>
 
 " Directory bindings
 nnoremap gh :cd /home/mother/<cr>
-"nnoremap gu :cd ../<cr>
-"nnoremap - :cd -<cr>
 nnoremap J 5j
 nnoremap K 5k
 
@@ -284,8 +297,11 @@ nnoremap b :redraw<cr>
 " Add additional place to look for executables
 "let $PATH=$HOME.'/home/mother/code/bin:'.$PATH
 
-if !has('win')
-    set slowfs=curlftpfs
-endif
+"if !has('win')
+"    set slowfs=curlftpfs
+"endif
+
+" nerd icons
+source $XDG_CONFIG_HOME/.vifm/configs/favicons.vifm
 
 " vim: filetype=vifm :

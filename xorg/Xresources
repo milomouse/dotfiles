@@ -4,12 +4,16 @@
 !# detail: X.Org and X terminal parameters   #!
 !#############################################!
 
-#*dpi: 163
-Xcursor.size: 48
+!! NOTE: may also need to configure Xorg.conf.d files
+!! and/or export different "scale" settings via ~/.profile or shell config
+Xft.dpi: 144
+!! NOTE: also need to add 'export CURSOR_SIZE=50' to /etc/profile.d/cursor.sh
+!! since some applications do not acknowledge Xresources file attributes
+Xcursor.size: 50
 
-!! NOTE: here for emulators that need it
+!! NOTE: only here in case other emulators/software need to reference it
 !! terminal colorscheme(s):
-!! scheme: candymouse
+!! scheme: candymouse [possibly outdated version]
 *cursorColor: #E31763
 *background:  #121212
 *foreground:  #A9B1A6

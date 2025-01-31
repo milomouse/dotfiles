@@ -1,5 +1,6 @@
 -- file: ${XDG_CONFIG_HOME}/nvim/lua/config/lualine.lua
 
+-- initialize lualine
 local lualine = require('lualine')
 
 -- color variables
@@ -146,6 +147,11 @@ local conditions = {
 
 
 -- redefine and clear sections
+--
+-- +-------------------------------------------------+
+-- | A | B | C                             X | Y | Z |
+-- +-------------------------------------------------+
+--
 local config = {
     options = {
         component_separators = '',

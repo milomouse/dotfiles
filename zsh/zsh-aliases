@@ -3,7 +3,7 @@
 ## detail: configuration file for zsh aliases ##
 ################################################
 
-# file management:
+# file management (may remove some of these in future):
 alias gh="cd /home/${USER}"
 alias ls="/bin/ls -h --file-type --time-style='+%y-%m-%d %H%M%S' --color=auto --group-directories-first"
 alias la="ls -A"
@@ -29,10 +29,9 @@ alias bc="bc -q"
 alias df="df -hTP"
 alias diff="colordiff"
 alias grep="grep --color=auto"
-alias lynx="lynx -vikeys -tna -force_secure -accept_all_cookies -cookie_file='/tmp/lynx_cookies' -short_url -show_rate -telnet -lss='~/lynx/lynx.lss'"
-alias mpq="mpv -really-quiet"
+# alias lynx="lynx -vikeys -tna -force_secure -accept_all_cookies -cookie_file='/tmp/lynx_cookies' -short_url -show_rate -telnet -lss='~/lynx/lynx.lss'"
 alias mupdf="mupdf -Y 2 -I"
-alias sxiv="sxiv -s f -ab -g '3000x2000'"
+alias sxiv="sxiv -s f -a -g '3000x2000'"
 alias tsm="transmission-remote"
 alias krita="krita --nosplash"
 

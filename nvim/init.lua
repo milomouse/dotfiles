@@ -2,9 +2,11 @@
 
 require('plugins')
 require('settings')
+require('autocmds')
 require('keybindings')
-require('config.term')
 require('config.lsp')
-require('config.git')
+require('config.flog')
 require('config.fzf')
+require('config.pear')
+require('config.vifm')
 require('config.lualine')

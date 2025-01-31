@@ -2,11 +2,13 @@ Current Setup:
 --------------
 
 
++ *PC BUILD* = View on PCPartPicker ( [link](https://pcpartpicker.com/user/islewolf/saved/#view=8NDrGX) )
+
 + *DISTRO* = Gentoo ( ~amd64 nomultilib llvm ) ( [link](https://www.gentoo.org) )
 
-+ *KERNEL* = GNU/Linux 6.9.10 ( [link](https://kernel.org) )
++ *KERNEL* = GNU/Linux 6.12.10 ( [link](https://kernel.org) )
 
-+ *SOURCES* = Zen ( [link](https://github.com/zen-kernel/zen-kernel) )
++ *PATCHSET* = Zen ( [link](https://github.com/zen-kernel/zen-kernel) )
 
 + *COMPILER* = Clang ( [link](https://clang.llvm.org/) / [link](https://llvm.org) )
 

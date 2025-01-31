@@ -19,23 +19,26 @@ return require('packer').startup(function(use)
     -- 'packer' can self manage
     use 'wbthomason/packer.nvim'
 
-    -- statusbar/tabline customization
-    use { 'nvim-lualine/lualine.nvim', requires = { 'nvim-tree/nvim-web-devicons' } }
-
     -- LSP framework
     use 'neovim/nvim-lspconfig'
+
+    -- statusbar/tabline customization
+    use { 'nvim-lualine/lualine.nvim', requires = { 'nvim-tree/nvim-web-devicons' } }
 
     -- git integration
     use { 'rbong/vim-flog', requires = 'tpope/vim-fugitive' }
 
-    -- fuzzy finder
-    use 'junegunn/fzf.vim'
+    -- file picker ['vifm' inside 'neovim']
+    use 'vifm/vifm.vim'
 
-    -- keybindings for commenting code quickly
+    -- auto-pairing
+    use 'tmsvg/pear-tree'
+
+    -- quick comment/uncomment
     use 'tomtom/tcomment_vim'
 
-    -- better terminal control
-    use 'vimlab/split-term.vim'
+    -- fuzzy finder (prefer this simpler version over 'ibhagwan/fzf-lua')
+    use 'junegunn/fzf.vim'
 
     -- automatically set up configuration after cloning packer.nvim
     if packer_bootstrap then

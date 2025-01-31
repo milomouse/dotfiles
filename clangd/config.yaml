@@ -1,0 +1,8 @@
+# file: ${XDG_CONFIG_HOME}/clangd/config.yaml
+# default error checking for all c/c++ files inside file location
+CompileFlags:
+  Add: [
+    -Wpedantic,
+    -Wall,
+    -Wextra
+  ]

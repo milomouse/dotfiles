@@ -1,0 +1,11 @@
+# file: ${XDG_CONFIG_HOME}/.clang-format
+
+# NOTE: This file is stored within $HOME but symlinked to its parent directory.
+# This ensures that it's contents are applied to all of my C/CPP files (not just those within ~).
+# The main reason for this choice is so that I can manage the file with my git:dotfiles repo.
+
+# 'Microsoft' is very similar to 'Allman' (preferred).
+BasedOnStyle: Microsoft
+# Future-proof redundancy in case these change from their default values.
+IndentWidth: 4
+TabWidth: 4

@@ -74,38 +74,3 @@ vim.api.nvim_create_autocmd('LspAttach', {
         end, opts)
     end,
 })
-
-
--- -- (TODO: lspkind.nvim) kinds completion icons
--- local M = {}
--- M.icons = {
---     Class = "a ",
---     Color = "b ",
---     Constant = "c ",
---     Enum = "d ",
---     EnumMember = "e ",
---     Field = "f ",
---     File = "g ",
---     Folder = "h ",
---     Function = "i ",
---     Interface = "j ",
---     Keyword = "k ",
---     Method = "l ",
---     Module = "m ",
---     Property = "n ",
---     Snippet = "o ",
---     Struct = "p ",
---     Text = "q ",
---     Unit = "r ",
---     Value = "s ",
---     Variable = "t ",
--- }
---
--- function M.setup()
---     local kinds = vim.lsp.protocol.CompletionItemKind
---     for i, kind in ipairs(kinds) do
---         kinds[i] = M.icons[kind] or kind
---     end
--- end
---
--- return M

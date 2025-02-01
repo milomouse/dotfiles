@@ -176,7 +176,7 @@ if hc silent new_attr bool my_autostart_sanity_check ; then
   hc lock_tag BenQ
 
   # setup default frames for second monitor
-  # hc load X '(split vertical:0.61:0)'
+  hc load X '(split vertical:0.61:0)'
 
   # example: run external programs if desired
   # spotify &

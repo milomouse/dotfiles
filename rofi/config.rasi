@@ -34,7 +34,7 @@ window {
     width:                          1600px;
     location:                       center;
     x-offset:                       0;
-    y-offset:                       0;
+    y-offset:                       -15%;
 }
 
 prompt {

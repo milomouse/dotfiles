@@ -37,5 +37,4 @@ Current Setup:
 Screenshots:
 --------------
 
-![Empty](share/images/2024_09_01-095534.png)
-![Workload](share/images/2024_09_01-095342.png)
+![Workload](share/images/2025_02_01-113912.png)

@@ -75,14 +75,14 @@ vim.opt.shortmess:append("I") -- +=
 
 
 -- indentation
-vim.opt.tabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.softtabstop = 4
-vim.opt.expandtab = true
-vim.opt.smarttab = true
-vim.opt.autoindent = true
-vim.opt.breakindent = true
-vim.opt.cindent = false
+vim.opt.expandtab = true    -- use spaces instead of tabs
+vim.opt.tabstop = 4         -- define width of <Tab> character
+vim.opt.shiftwidth = 0      -- how many blanks inserted with > and < and during auto indent (0 uses tabstop)
+vim.opt.softtabstop = 4     -- <Tab> and <Backspace> will insert and delete this many spaces
+vim.opt.smarttab = true     -- true = pressing <Tab> for identation uses shiftwidth
+vim.opt.autoindent = true   -- automatically indent newline to the size of previous line when hitting <CR>
+vim.opt.breakindent = true  -- wrapped lines will visually preserve indentation
+vim.opt.cindent = false     -- highly configurable C style indentation settings (see :h c-indenting)
 
 
 -- searching

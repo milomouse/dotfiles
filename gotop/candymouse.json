@@ -1,0 +1,22 @@
+{
+    "Fg": 59,
+    "Bg": -1,
+
+    "BorderLabel": 249,
+    "BorderLine":  238,
+
+    "CPULines": [61, 27, 78, 125, 75, 163, 56, 73],
+
+    "BattLines": [61, 27, 78, 125, 75, 163, 56, 73],
+
+    "MemLines": [242, 238, 61, 27, 78, 125, 75, 163, 56, 73],
+
+    "ProcCursor": 61,
+
+    "Sparklines": [61, 73],
+
+    "DiskBar": 242,
+
+    "TempLow":  78,
+    "TempHigh": 125
+}

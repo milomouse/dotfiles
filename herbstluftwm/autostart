@@ -59,7 +59,9 @@ hc attr theme.normal.inner_color '#080808'
 hc attr theme.outer_color '#292929'
 hc attr theme.active.outer_color '#616161'
 hc attr theme.normal.outer_color '#080808'
-hc attr theme.active.color '#313238'
+hc attr theme.active.color '#262626'
+# hc attr theme.active.color '#292929'
+# hc attr theme.active.color '#313238'
 hc attr theme.normal.color '#161616'
 # hc attr theme.normal.color '#121212'
 # hc attr theme.normal.color '#1E1E21'
@@ -174,7 +176,7 @@ if hc silent new_attr bool my_autostart_sanity_check ; then
   hc lock_tag BenQ
 
   # setup default frames for second monitor
-  hc load X '(split vertical:0.61:0)'
+  # hc load X '(split vertical:0.61:0)'
 
   # example: run external programs if desired
   # spotify &

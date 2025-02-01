@@ -29,11 +29,11 @@ alias bc="bc -q"
 alias df="df -hTP"
 alias diff="colordiff"
 alias grep="grep --color=auto"
-# alias lynx="lynx -vikeys -tna -force_secure -accept_all_cookies -cookie_file='/tmp/lynx_cookies' -short_url -show_rate -telnet -lss='~/lynx/lynx.lss'"
 alias mupdf="mupdf -Y 2 -I"
 alias sxiv="sxiv -s f -a -g '3000x2000'"
-alias tsm="transmission-remote"
 alias krita="krita --nosplash"
+alias gotop="TERM=xterm-256color $H/code/go/gotop/gotop --mbps --no-statusbar --celsius --layout custom"
+# alias lynx="lynx -vikeys -tna -force_secure -accept_all_cookies -cookie_file='/tmp/lynx_cookies' -short_url -show_rate -telnet -lss='~/lynx/lynx.lss'"
 
 # system/media shortcuts:
 alias loadavg='print - ${$(</proc/loadavg)[1,3]}'

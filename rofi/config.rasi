@@ -8,12 +8,18 @@ configuration {
     hide-scrollbar:                 true;
     sidebar-mode:                   false;
 
-    kb-remove-to-eol: "";
-    kb-remove-to-sol: "";
-    kb-remove-char-back: "BackSpace,Shift+BackSpace";
-    kb-accept-entry: "Control+m,Return,KP_Enter";
-    kb-mode-next: "Shift+Right,Control+Tab,Control+l";
-    kb-mode-previous: "Shift+Left,Control+ISO_Left_Tab,Control+h";
+    kb-move-char-forward: "Right,Control+l";
+    kb-move-char-back: "Left,Control+h";
+    kb-remove-char-forward: "Delete,Control+L";
+    kb-remove-char-back: "BackSpace,Shift+BackSpace,Control+H";
+    kb-remove-word-forward: "Control+w";
+    kb-remove-word-back: "Control+b";
+    kb-clear-line: "Control+u";
+    kb-remove-to-sol: "Control+s";
+    kb-remove-to-eol: "Control+d";
+    kb-accept-entry: "Return,KP_Enter";
+    kb-mode-next: "Shift+Right,Control+Tab,Control+m";
+    kb-mode-previous: "Shift+Left,Control+ISO_Left_Tab,Control+M";
     kb-mode-complete: "";
     kb-row-up: "Up,Control+p,Control+k";
     kb-row-down: "Down,Control+n,Control+j";

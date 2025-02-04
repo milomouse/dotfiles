@@ -444,14 +444,26 @@ ins_right {
 }
 
 
--- filetype
+-- filetype [icon]
 ins_right {
     'filetype',
     fmt = string.upper,
     icons_enabled = true,
-    icon_only = false,
+    icon_only = true,
     colored = false,
     color = { fg = colors.fg, gui = 'bold' },
+    padding = { left = 1, right = 0 },
+}
+
+-- filetype [label]
+ins_right {
+    'filetype',
+    fmt = string.upper,
+    icons_enabled = false,
+    icon_only = false,
+    colored = false,
+    color = { fg = colors.gray5, gui = 'bold' },
+    padding = { left = 0, right = 1 },
 }
 
 

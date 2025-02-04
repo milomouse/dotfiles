@@ -1,0 +1,12 @@
+gtk-theme-name="Vimix-dark-beryl"
+gtk-icon-theme-name="Suru-++"
+gtk-cursor-theme-name="Simp1e-Catppuccin"
+gtk-font-name="Dina 10"
+gtk-menu-images=0
+gtk-cursor-theme-size=0
+gtk-button-images=0
+gtk-xft-antialias=1
+gtk-xft-hinting=1
+gtk-xft-hintstyle="hintmedium"
+gtk-xft-rgba="rgb"
+gtk-xft-dpi=147456

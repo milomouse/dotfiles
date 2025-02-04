@@ -20,8 +20,9 @@ api.map('K', 'u');
 api.map('J', 'd');
 api.map('gd', 'x');
 api.map('u', 'X');
-api.map('d', 'zr');
 api.map('P', 'cc');
+
+api.unmap('d');
 
 api.cmap('<Ctrl-j>', '<Tab>');
 api.cmap('<Ctrl-k>', '<Shift-Tab>');

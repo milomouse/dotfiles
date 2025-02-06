@@ -24,8 +24,8 @@ vim.keymap.set('n', '<leader>au', ':FZF $HOME<CR>', opts)-- access user config d
 
 -- keybindings: search/find/grep
 vim.keymap.set('n', '<leader>fd', ':Rg<CR>', opts)-- grep within directory
-vim.keymap.set('n', '<leader>fa', ':Lines<CR>', opts)-- grep within buffers
-vim.keymap.set('n', '<leader>fb', ':BLines<CR>', opts)-- grep within buffer
+vim.keymap.set('n', '<leader>fa', ':Lines<CR>', opts)-- grep within active buffers
+vim.keymap.set('n', '<leader>fb', ':BLines<CR>', opts)-- grep within active buffer
 vim.keymap.set('n', '<leader>fh', ':History<CR>', opts)-- show file history
 vim.keymap.set('n', '<leader>fc', ':History:<CR>', opts)-- show cmd history
 

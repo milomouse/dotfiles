@@ -3,10 +3,29 @@ configuration {
     font:                           "Input Mono Condensed 10";
     show-icons:                     false;
     drun-display-format:            "{name}";
-    disable-history:                true;
-    fullscreen:                     false;
+    disable-history:                false;
+    fullscreen:                     true;
     hide-scrollbar:                 true;
     sidebar-mode:                   false;
+
+    kb-move-char-forward: "Right,Control+l";
+    kb-move-char-back: "Left,Control+h";
+    kb-remove-char-forward: "Delete,Control+L";
+    kb-remove-char-back: "BackSpace,Shift+BackSpace,Control+H";
+    kb-remove-word-forward: "Control+w";
+    kb-remove-word-back: "Control+b";
+    kb-clear-line: "Control+u";
+    kb-remove-to-sol: "Control+s";
+    kb-remove-to-eol: "Control+d";
+    kb-accept-entry: "Return,KP_Enter";
+    kb-mode-next: "Shift+Right,Control+Tab,Control+m";
+    kb-mode-previous: "Shift+Left,Control+ISO_Left_Tab,Control+M";
+    kb-mode-complete: "";
+    kb-row-up: "Up,Control+p,Control+k";
+    kb-row-down: "Down,Control+n,Control+j";
+    kb-row-tab: "";
+    kb-element-next: "Tab";
+    kb-element-prev: "ISO_Left_Tab";
 }
 
 @import "colors.rasi"
@@ -18,10 +37,10 @@ window {
     border:                         13px;
     border-color:                   @se;
     border-radius:                  0px;
-    width:                          800px;
+    width:                          1600px;
     location:                       center;
     x-offset:                       0;
-    y-offset:                       0;
+    y-offset:                       -15%;
 }
 
 prompt {
@@ -60,7 +79,7 @@ listview {
     text-color:                     @fg;
     padding:                        0px;
     columns:                        1;
-    lines:                          4;
+    lines:                          5;
     spacing:                        10px;
     cycle:                          true;
     dynamic:                        true;

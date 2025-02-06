@@ -109,8 +109,8 @@ hc rule class="polybar" manage=off
 hc rule class="mpv" pseudotile=off
 hc rule class="Nvidia-settings" floating=on
 hc rule class="sun-awt-X11-XFramePeer" pseudotile=on
-hc rule class~'(.*[yY]ad)' floating=on
-hc rule class~'(.*[pP]qiv)' pseudotile=on
+hc rule class~'([yY]ad)' floating=on
+hc rule class~'([pP]qiv)' pseudotile=on
 # hc rule title="Open File" floating=on
 # hc rule title="Open Image" pseudotile=on
 # hc rule title="Save As" pseudotile=on
@@ -130,31 +130,53 @@ hc rule class="Godot" tag=III
 hc rule class="calibre" tag=IV
 
 # tag V (gaming);
+hc rule class="EoCApp" tag=V fullscreen=on
+hc rule class="by-gdev-Main" tag=V floating=on
+hc rule class="org-tlauncher-tlauncher-rmo-TLauncher" tag=V floating=on
 hc rule class="duckstation-nogui" tag=V
 hc rule class="retroarch" tag=V
-hc rule class~'(.*[pP]csx2)' tag=V pseudotile=on
-hc rule class~'(.*[eE]u4)' tag=V
-hc rule class~'(.*[sS]lime [rR]ancher)' tag=V
-hc rule class~'(.*[fF]actorio)' tag=V
-hc rule class~'(.*[rR]im[wW]orld[lL]inux)' tag=V
+hc rule class~'([pP]csx2)' tag=V pseudotile=on
+hc rule class~'([fF]actorio)' tag=V fullscreen=on
+hc rule class~'([rR]im[wW]orld[lL]inux)' tag=V fullscreen=on
+hc rule class~'([cC]k[23])' tag=V
+hc rule class~'([eE]u4)' tag=V fullscreen=on
+hc rule class~'([vV]ictoria3)' tag=V fullscreen=on
+hc rule class~'([cC]ivilization6)' tag=V fullscreen=on
+hc rule class~'([kK]ingmaker)' tag=V fullscreen=on
+hc rule class~'([iI]cewind[dD]ale)' tag=V fullscreen=on
+hc rule class~'([tT]orment64)' tag=V fullscreen=on
+hc rule class~'([sS]lay [tT]he [sS]pire)' tag=V fullscreen=on
+hc rule class~'([dD]eep [sS]ky [dD]erelicts.*)' tag=V fullscreen=on
+hc rule class~'([bB]reach)' tag=V fullscreen=on
+hc rule class~'([bB]attle[tT]ech)' tag=V fullscreen=on
+hc rule class~'([mM]idnight[pP]rotocol)' tag=V fullscreen=on
+hc rule class~'([iI]nscryption.*)' tag=V fullscreen=on
+hc rule class~'([pP]apers[pP]lease)' tag=V fullscreen=on
+hc rule class~'([sS]tardew [vV]alley)' tag=V fullscreen=on
+hc rule class~'([sS]lime [rR]ancher)' tag=V fullscreen=on
+hc rule class~'([mM]inecraft.*)' tag=V
+hc rule class~'([bB]aldurs[gG]ate.*)' tag=V fullscreen=on
+hc rule title~'([pP]illars [oO]f [eE]ternity.*)' tag=V fullscreen=on
+hc rule title="Torment" tag=V fullscreen=on
+
 
 # tag VI (illustration);
-hc rule class~'(.*[kK]rita)' tag=VI
-hc rule class~'(.*[gG]imp)' tag=VI
-hc rule class~'(.*[iI]nkscape)' tag=VI
-hc rule class~'(.*[mM]y[pP]aint)' tag=VI
-hc rule class~'(.*[sS]ubstance-[pP]ainter)' tag=VI
+hc rule class~'([kK]rita)' tag=VI
+hc rule class~'([gG]imp)' tag=VI
+hc rule class~'([iI]nkscape)' tag=VI
+hc rule class~'([mM]y[pP]aint)' tag=VI
+hc rule class~'([sS]ubstance-[pP]ainter)' tag=VI
 
 # tag VII (3D modeling);
-hc rule class~'(.*[bB]lender)' tag=VII
+hc rule class~'([bB]lender)' tag=VII
 
 # tag X ([second monitor]);
 # search the herbstluftwm manpage for "FRAME INDEX"
-hc rule class~'(.*[fF]irefox)' tag=X index=0
-hc rule class~'(.*[nN]avigator)' tag=X index=0
-hc rule class~'(.*[sS]potify)' tag=X index=1
-hc rule class~'(.*[dD]iscord)' tag=X index=1
-hc rule class~'(.*[pP]ure[rR]ef)' tag=X fullscreen=off index=e
+hc rule class~'([fF]irefox)' tag=X index=0
+hc rule class~'([nN]avigator)' tag=X index=0
+hc rule class~'([sS]potify)' tag=X index=1
+hc rule class~'([dD]iscord)' tag=X index=1
+hc rule class~'([pP]ure[rR]ef)' tag=X fullscreen=off index=e
 hc rule class="obs" tag=X index=e
 hc rule class="LM Studio" tag=X index=0
 

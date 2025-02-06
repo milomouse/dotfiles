@@ -1,4 +1,26 @@
-Europa Universalis IV,herbstclient use IV ; /home/mother/game/EuropaUniversalisIV/start.sh
-Factorio,herbstclient use IV ; /home/mother/game/Factorio/run.sh
-RimWorld,herbstclient use IV ; /home/mother/game/GOG/RimWorld/start.sh
-Slime Rancher,herbstclient use IV ; /home/mother/game/GOG/Slime_Rancher_1/start.sh
+Minecraft,herbstclient use V ; /home/mother/game/minecraft.sh
+Factorio,herbstclient use V ; /home/mother/game/Factorio/bin/x64/factorio
+RimWorld,herbstclient use V ; /home/mother/game/RimWorld/start.sh
+Crusader Kings 2,herbstclient use V ; /home/mother/game/Crusader_Kings_2/start.sh
+Crusader Kings 3,herbstclient use V ; /home/mother/game/Crusader_Kings_3/start.sh
+Europa Universalis IV,herbstclient use V ; /home/mother/game/EuropaUniversalisIV/start.sh
+Victoria 3,herbstclient use V ; /home/mother/game/Victoria_3/start
+Civilization VI,herbstclient use V ; /home/mother/game/Sid_Meiers_Civilization_VI/run.sh
+Pillars of Eternity 1,herbstclient use V ; /home/mother/game/Pillars_of_Eternity_1/start.sh
+Pillars of Eternity 2,herbstclient use V ; /home/mother/game/Pillars_of_Eternity_2/start.sh
+Pathfinder - Kingmaker,herbstclient use V ; /home/mother/game/Pathfinder_-_Kingmaker_-_Enhanced_Plus_Edition/run.sh
+Divinity - Original Sin,herbstclient use V ; /home/mother/game/Divinity_Original_Sin_-_Enhanced_Edition/start.sh
+Baldurs Gate 1,herbstclient use V ; /home/mother/game/Baldurs_Gate_1_-_Enhanced_Edition/start.sh
+Baldurs Gate 2,herbstclient use V ; /home/mother/game/Baldurs_Gate_2_-_Enhanced_Edition/start.sh
+Icewind Dale,herbstclient use V ; /home/mother/game/Icewind_Dale_-_Enhanced_Edition/start.sh
+Planescape - Torment,herbstclient use V ; /home/mother/game/Planescape_Torment_-_Enhanced_Edition/start.sh
+Torment - Tides of Numenera,herbstclient use V ; /home/mother/game/Torment_-_Tides_of_Numenera/start.sh
+Slay the Spire,herbstclient use V ; /home/mother/game/Slay_the_Spire/run.sh
+Deep Sky Derelicts,herbstclient use V ; /home/mother/game/Deep_Sky_Derelicts/start.sh
+Into The Breach,herbstclient use V ; /home/mother/game/Into_The_Breach/start.sh
+BATTLETECH,herbstclient use V ; /home/mother/game/BATTLETECH/run.sh
+Midnight Protocol,herbstclient use V ; /home/mother/game/Midnight_Protocol/run.sh
+Inscryption,herbstclient use V ; /home/mother/game/Inscryption/start.sh
+Papers Please,herbstclient use V ; /home/mother/game/Papers_Please/start.sh
+Stardew Valley,herbstclient use V ; /home/mother/game/Stardew_Valley/start.sh
+Slime Rancher,herbstclient use V ; /home/mother/game/Slime_Rancher_1/start.sh

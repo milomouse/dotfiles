@@ -62,7 +62,8 @@ export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[00;34m'
 export GREP_COLORS="mt=01;32:sl=00;35"
 export CALIBRE_USE_DARK_PALETTE=1
-export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dsun.java2d.xrender=true -Dsun.java2d.uiScale=2'
+export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=gasp -Dsun.java2d.xrender=true -Dsun.java2d.uiScale=2.0'
+export JAVA_FONTS=/usr/share/fonts/local
 export __GL_SYNC_TO_VBLANK=1
 
 # custom RG configuration file

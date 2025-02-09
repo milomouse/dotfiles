@@ -44,11 +44,11 @@ mod4 + mod1 + minus
 mod4 + {_,shift +} BackSpace
     herbstclient split {explode,auto}
 
-#+ shift window focus next/previous within a frame
+#+ shift window focus next/previous within a frame (or floating windows if focused)
 mod4 + {_,shift +} space
     herbstclient cycle {+,-}1
 
-#+ shift window focus next/previous within a tag
+#+ shift window focus next/previous within a tag (both tiled and floating, skipping minimized)
 mod4 + {_,shift +} i
     herbstclient cycle_all --skip-invisible {-,+}1
 
@@ -90,7 +90,7 @@ mod4 + {_,shift +} u
     herbstclient {jumpto,bring} urgent
 
 #+ close focused window (with backup/alternative command)
-mod4 + {control,shift} + Delete
+mod4 + {shift,control} + Delete
     {herbstclient close,wmctrl -c :ACTIVE:}
 
 #+ remove/collapse frame

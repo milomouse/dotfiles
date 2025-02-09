@@ -20,9 +20,9 @@ vim.keymap.set('n', '<space>', '<Nop>', opts)
 
 -- buffers: faster navigation
 vim.keymap.set('n', 'gn', ':bnext<CR>', opts)
-vim.keymap.set('n', 'g[', ':blast<CR>', opts)
+vim.keymap.set('n', 'g]', ':blast<CR>', opts)
 vim.keymap.set('n', 'gp', ':bprevious<CR>', opts)
-vim.keymap.set('n', 'g]', ':bfirst<CR>', opts)
+vim.keymap.set('n', 'g[', ':bfirst<CR>', opts)
 vim.keymap.set('n', 'gd', ':bwipeout<CR>', opts)-- [usually] prevents re-opening closed buffers..
 vim.keymap.set('n', 'gD', ':bwipeout!<CR>', opts)-- e.g. when using :blast/<c-^>, <c-i>, <c-o>,..
 -- vim.keymap.set('n', 'gd', ':bdelete<CR>', opts)

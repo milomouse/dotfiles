@@ -23,7 +23,7 @@ xsetbg \
     -gamma 0.5 -at 2016,0 /home/mother/foto/fandom/movies/solaris/solaris_peter_jojaio-4k-edit2.jpg &
 
 # set volume to a safe level
-amixer -c 1 -q -D pulse sset Master 40% &
+amixer -c 1 -q -D pulse sset Master 70% &
 
 # custom script to check if drawing tablet is connected, rebinding shortcut buttons if so
 # ${H}/code/sh/wacom.sh &

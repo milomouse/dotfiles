@@ -95,7 +95,7 @@ filextype *.ps,*.eps,*.ps.gz,*.djvu,*.cbz
 " Audio
 filetype *.wav,*.mp3,*.flac,*.m4a,*.wma,*.ape,*.ac3,*.og[agx],*.spx,*.opus
         \ {Play using mpv}
-        \ mpv -no-video %c &,
+        \ mpv -no-video %c,
         \ {Play using ffplay}
         \ ffplay %c,
 fileviewer *.wav,*.mp3,*.flac,*.m4a,*.wma,*.ape,*.ac3,*.og[agx],*.spx,*.opus

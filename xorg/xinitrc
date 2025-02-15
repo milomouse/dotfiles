@@ -4,6 +4,9 @@
 ## detail: X.Org init configuration file    ##
 ##############################################
 
+# allow programs to identify session type (since we're not using a display manager, etc.)
+export XDG_SESSION_TYPE=x11
+
 # since we cannot apply scaling to second monitor within Xorg configuration, apply it via 'xrandr'
 # also taking into account the new resolution of scaled monitor (do not use left-of when scaling!)
 # NOTE: Xorg configured for the same setup, except without the scaling

@@ -145,6 +145,14 @@ mod4 + control + i
 mod4 + Print
     /usr/local/bin/clipswap.sh
 
+#+ raise spotify app volume
+mod4+ Prior
+    playerctl --player spotify volume 0.1+
+
+#+ lower spotify app volume
+mod4+ Next
+    playerctl --player spotify volume 0.1-
+
 # #+ raise brightness via I2C
 # XF86MonBrightnessUp
 #     ddccontrol -r 0x10 -W +20 dev:/dev/i2c-2 &>/dev/null

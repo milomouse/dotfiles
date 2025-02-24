@@ -97,6 +97,10 @@ mod4 + {shift,control} + Delete
 mod4 + z
     herbstclient remove
 
+#+ remove/collapse all frames recursively
+mod4 + shift + z
+    /bin/sh -c 'while true ; do if (herbstclient dump|grep split &>/dev/null) ; then herbstclient remove ; else exit 0 ; fi ; done'
+
 #+ fullscreen client toggle
 mod4 + o
     herbstclient {fullscreen} toggle
@@ -108,8 +112,10 @@ mod4 + {_,shift,control +} f
 #+ "ELECOM TrackBall HUGE" [mouse] extra function keys [10,11] (12 used as scroll modifier)
 {_,shift} + button10
     /home/mother/conf/herbstluftwm/scripts/switch-tag.sh {next,prev}
+
 control + button10
     herbstclient use_previous
+
 {_,shift} + button11
     herbstclient cycle {+,-}1
 
@@ -145,6 +151,10 @@ mod4 + control + i
 mod4 + Print
     /usr/local/bin/clipswap.sh
 
+#+ load custom layout on second monitor (instead of doing it automatically via 'autostart' file)
+mod4 + Home
+    herbstclient load X '(split vertical:0.7:0 (split vertical:0.61:1))'
+
 #+ raise spotify app volume
 mod4+ Prior
     playerctl --player spotify volume 0.1+
@@ -152,14 +162,6 @@ mod4+ Prior
 #+ lower spotify app volume
 mod4+ Next
     playerctl --player spotify volume 0.1-
-
-# #+ raise brightness via I2C
-# XF86MonBrightnessUp
-#     ddccontrol -r 0x10 -W +20 dev:/dev/i2c-2 &>/dev/null
-#
-# #+ lower brightness via I2C
-# XF86MonBrightnessDown
-#     ddccontrol -r 0x10 -W -20 dev:/dev/i2c-2 &>/dev/null
 
 #+ raise pulseaudio volume via ALSA
 XF86AudioRaiseVolume

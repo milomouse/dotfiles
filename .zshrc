@@ -6,22 +6,22 @@
 
 # source external configuration files:
 for i in ${HOME}/zsh/zsh-{options,exports,aliases,functions} /usr/share/fzf/key-bindings.zsh ; do
-  if [[ -f $i ]] { source $i } else { print "Cannot find file: $i" }
+    if [[ -f $i ]] { source $i } else { print "Cannot find file: $i" }
 done
 
 # prompt line:
 [[ ${TERM} =~ screen ]] && precmd() { print -Pn "\e]2;%2d\a" }
 function zle-keymap-select zle-line-init zle-line-finish
 {
-  if [[ $KEYMAP == (viins|main) ]] ; then
-    _VP1="{magenta}MOTHER%b%F{white}"
-    _VP2="{magenta}"
-  else
-    _VP1="{black}MOTHER%b%F{cyan}"
-    _VP2="{black}"
-  fi
-  zle reset-prompt
-  zle -R
+    if [[ $KEYMAP == (viins|main) ]] ; then
+        _VP1="{magenta}MOTHER%b%F{white}"
+        _VP2="{magenta}"
+    else
+        _VP1="{black}MOTHER%b%F{cyan}"
+        _VP2="{black}"
+    fi
+    zle reset-prompt
+    zle -R
 }
 PS1='%(1j.%b%F{white}%j .)%(0?..%B%F{red}%? )%B%F${_VP1}%#%b%f '
 PS2='%B%F${_VP2}> %b%f'
@@ -55,14 +55,14 @@ zstyle ':completion:*:kill:*' force-list always
 
 # framebuffer colors:
 if [[ ${TERM} == linux ]] || [[ ${TERM} =~ screen && ${+DISPLAY} == 0 ]]; then
-  echo -en "\e]P0000000" ; echo -en "\e]P83D3A3A" # 0: black/default
-  echo -en "\e]P1E31763" ; echo -en "\e]P9C2003B" # 1: red
-  echo -en "\e]P200CC6C" ; echo -en "\e]PA008C6C" # 2: green
-  echo -en "\e]P3EAE900" ; echo -en "\e]PBFFCB6B" # 3: yellow
-  echo -en "\e]P4009DFF" ; echo -en "\e]PC0047BB" # 4: blue
-  echo -en "\e]P54F4FAF" ; echo -en "\e]PD6300FF" # 5: magenta
-  echo -en "\e]P600CCCC" ; echo -en "\e]PE00AFAF" # 6: cyan
-  echo -en "\e]P7A9B1A6" ; echo -en "\e]PF9E9DA5" # 7: white
+    echo -en "\e]P0000000" ; echo -en "\e]P83D3A3A" # 0: black/default
+    echo -en "\e]P1E31763" ; echo -en "\e]P9C2003B" # 1: red
+    echo -en "\e]P200CC6C" ; echo -en "\e]PA008C6C" # 2: green
+    echo -en "\e]P3EAE900" ; echo -en "\e]PBFFCB6B" # 3: yellow
+    echo -en "\e]P4009DFF" ; echo -en "\e]PC0047BB" # 4: blue
+    echo -en "\e]P54F4FAF" ; echo -en "\e]PD6300FF" # 5: magenta
+    echo -en "\e]P600CCCC" ; echo -en "\e]PE00AFAF" # 6: cyan
+    echo -en "\e]P7A9B1A6" ; echo -en "\e]PF9E9DA5" # 7: white
 fi
 
 # source custom colors:
@@ -70,7 +70,7 @@ eval $(dircolors -b ${HOME}/.dir_colors)
 
 # Fish-like syntax highlighting for ZSH:
 if [[ -f $HOME/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
-  source $HOME/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    source $HOME/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
   # activate highlighters:
   ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
@@ -115,21 +115,21 @@ fi
 
 # Fish-like history sub-string search for ZSH (load AFTER syntax):
 if [[ -f $HOME/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh ]]; then
-  source $HOME/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+    source $HOME/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 
   # override main colors:
-  HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='fg=cyan,bold'
-  HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='bg=red,fg=black'
-  HISTORY_SUBSTRING_SEARCH_GLOBBING_FLAGS='i'
+    HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='fg=cyan,bold'
+    HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='bg=red,fg=black'
+    HISTORY_SUBSTRING_SEARCH_GLOBBING_FLAGS='i'
 
   # bind UP/DOWN in normal mode:
-  zmodload zsh/terminfo
-  bindkey "$terminfo[kcuu1]" history-substring-search-up
-  bindkey "$terminfo[kcud1]" history-substring-search-down
+    zmodload zsh/terminfo
+    bindkey "$terminfo[kcuu1]" history-substring-search-up
+    bindkey "$terminfo[kcud1]" history-substring-search-down
 
   # bind K/J for VI mode:
-  bindkey -M vicmd 'k' history-substring-search-up
-  bindkey -M vicmd 'j' history-substring-search-down
+    bindkey -M vicmd 'k' history-substring-search-up
+    bindkey -M vicmd 'j' history-substring-search-down
 fi
 
 # keybindings (defined AFTER scripts):

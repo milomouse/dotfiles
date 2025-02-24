@@ -5,38 +5,36 @@
 
 # use history, but skip certain cmds/args from being written:
 function zshaddhistory {
-  local line cmd
-  line=${1%%$'\n'} ; cmd=${line%% *}
-  [[ ${#line} -ge 5
-      && ${cmd} != (history|fc|[zx]edit|[zx]load)
-  ]] && (( ! $argv[(I)*spar*] ))
+    local line cmd
+    line=${1%%$'\n'} ; cmd=${line%% *}
+    [[ ${#line} -ge 5 && ${cmd} != (history|fc|zedit|zload|find) ]] && (( ! $argv[(I)*.mp4|*spar*] ))
 }
 
 # safely recompile and reload shell settings:
 function zload {
-  source /etc/profile &>/dev/null
-  autoload -U zrecompile
-  [[ -f ~/.zshrc ]] && zrecompile -p ~/.zshrc
-  [[ -f ~/.zcompdump ]] && zrecompile -p ~/.zcompdump
-  [[ -f ~/.zshrc.zwc.old ]] && rm -f ~/.zshrc.zwc.old
-  [[ -f ~/.zcompdump.zwc.old ]] && rm -f ~/.zcompdump.zwc.old
-  source ~/.zshrc
+    source /etc/profile &>/dev/null
+    autoload -U zrecompile
+    [[ -f ~/.zshrc ]] && zrecompile -p ~/.zshrc
+    [[ -f ~/.zcompdump ]] && zrecompile -p ~/.zcompdump
+    [[ -f ~/.zshrc.zwc.old ]] && rm -f ~/.zshrc.zwc.old
+    [[ -f ~/.zcompdump.zwc.old ]] && rm -f ~/.zcompdump.zwc.old
+    source ~/.zshrc
 }
 
 # go up Nth amount of directories:
 # a bit quicker than ../../.. (are there better built-in zsh alternatives?)
 function up {
-  local arg=${1:-1};
-  while [ ${arg} -gt 0 ]; do
-    cd .. >& -;
-    arg=$((${arg} - 1));
-  done
+    local arg=${1:-1};
+    while [ ${arg} -gt 0 ]; do
+        cd .. >& -;
+        arg=$((${arg} - 1));
+    done
 }
 
 # shortcuts/masquing:
-function nw { setterm --linewrap off ; eval "$@" ; setterm --linewrap on }
-function comfy { cd ${H}/code/bin/ComfyUI && python -m venv $PYTHONUSERBASE && . $PYTHONUSERBASE/bin/activate && python main.py ; deactivate }
 function dropcache { sync && print 1 | doas tee /proc/sys/vm/drop_caches }
+function nw { setterm --linewrap off ; eval "$@" ; setterm --linewrap on }
 function mkcd { command mkdir -p "${@}" && cd "$@" }
 function pqiv { command pqiv -n "${@}" 2>/dev/null }
 function startx { [[ ${+DISPLAY} -eq 1 ]] || { cd && /usr/bin/xinit ${XINITRC} -nolisten tcp -once -retro -- vt${$(tty)/*tty} &>!/var/tmp/logs/${USER}/xorg/runtime.log } }
+function comfy { cd ${H}/code/bin/ComfyUI && python -m venv $PYTHONUSERBASE && . $PYTHONUSERBASE/bin/activate && python main.py ; deactivate }

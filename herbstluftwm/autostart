@@ -7,7 +7,7 @@
 
 # function shortcut
 hc() {
-  herbstclient "$@"
+    herbstclient "$@"
 }
 
 # reload and reset
@@ -30,12 +30,12 @@ hc set_layout max
 # automatically assign keybindings to appropriate tag
 hc rename default "${tag_names[0]}" || true
 for i in ${!tag_names[@]} ; do
-  hc add "${tag_names[$i]}"
-  key="${tag_keys[$i]}"
-  if ! [ -z "$key" ] ; then
-    hc keybind "$Mod-$key" use_index "$i"
-    hc keybind "$Mod-Shift-$key" move_index "$i"
-  fi
+    hc add "${tag_names[$i]}"
+    key="${tag_keys[$i]}"
+    if ! [ -z "$key" ] ; then
+        hc keybind "$Mod-$key" use_index "$i"
+        hc keybind "$Mod-Shift-$key" move_index "$i"
+    fi
 done
 
 # mouse/pointer related
@@ -109,6 +109,7 @@ hc rule class="polybar" manage=off
 hc rule class="mpv" pseudotile=off
 hc rule class="Nvidia-settings" floating=on
 hc rule class="sun-awt-X11-XFramePeer" pseudotile=on
+hc rule class="About Mozilla Firefox" pseudotile=on
 hc rule class~'([yY]ad)' floating=on
 hc rule class~'([pP]qiv)' pseudotile=on
 # hc rule title="Open File" floating=on
@@ -130,6 +131,7 @@ hc rule class="Godot" tag=III
 hc rule class="calibre" tag=IV
 
 # tag V (gaming);
+hc rule class="forge-view-Main" tag=V pseudotile=on
 hc rule class="PolyMC" tag=V floating=on
 hc rule class="EoCApp" tag=V fullscreen=on
 hc rule class="duckstation-nogui" tag=V
@@ -157,6 +159,7 @@ hc rule class~'([mM]inecraft.*)' tag=V
 hc rule class~'([bB]aldurs[gG]ate.*)' tag=V fullscreen=on
 hc rule title~'([pP]illars [oO]f [eE]ternity.*)' tag=V fullscreen=on
 hc rule title="Torment" tag=V fullscreen=on
+hc rule title="Loading Forge..." tag=V floating=on
 
 
 # tag VI (illustration);
@@ -187,23 +190,23 @@ hc unlock
 # we do not want these commands ran when herbstluftwm is reloaded
 # NOTE: custom attribute must begin with: my_
 if hc silent new_attr bool my_autostart_sanity_check ; then
-  # second monitor has scaling applied via 'xrandr' within xinitrc file
-  # re-adjust size for correct boundaries within herbstluftwm
-  hc set_monitors 3840x2160+2016+0 2016x3584+0+0
+    # second monitor has scaling applied via 'xrandr' within xinitrc file
+    # re-adjust size for correct boundaries within herbstluftwm
+    hc set_monitors 3840x2160+2016+0 2016x3584+0+0
 
-  # rename monitors for possible script integration
-  hc rename_monitor 0 "ViewSonic"
-  hc rename_monitor 1 "BenQ"
+    # rename monitors for possible script integration
+    hc rename_monitor 0 "ViewSonic"
+    hc rename_monitor 1 "BenQ"
 
-  # lock second monitor from switching tags ("use" and "use_index")
-  hc lock_tag BenQ
+    # lock second monitor from switching tags ("use" and "use_index")
+    hc lock_tag BenQ
 
-  # setup default frames for second monitor
-  # hc load X '(split vertical:0.61:0)'
-  hc load X '(split vertical:0.7:0 (split vertical:0.61:1))'
+    # setup default frames for second monitor (alternatively; use keybind)
+    # hc load X '(split vertical:0.61:0)'
+    # hc load X '(split vertical:0.7:0 (split vertical:0.61:1))'
 
-  # example: run external programs if desired
-  # spotify &
+    # example: run external programs if desired
+    # spotify &
 fi
 
 # panel (restart 'polybar' if already running)

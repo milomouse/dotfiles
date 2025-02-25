@@ -176,7 +176,7 @@ hc rule class~'([bB]lender)' tag=VII
 # search the herbstluftwm manpage for "FRAME INDEX"
 hc rule class~'([fF]irefox)' tag=X index=00
 hc rule class~'([nN]avigator)' tag=X index=00
-hc rule class~'([sS]potify)' tag=X index=0
+hc rule class~'([sS]potify)' tag=X index=01
 hc rule class~'([dD]iscord)' tag=X index=1
 hc rule class~'([pP]ure[rR]ef)' tag=X fullscreen=off index=e
 hc rule class="obs" tag=X index=e

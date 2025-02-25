@@ -105,7 +105,7 @@ mod4 + shift + z
 mod4 + o
     herbstclient {fullscreen} toggle
 
-#+ pseudotile, float client, float tag
+#+ pseudotile; float client; float tag
 mod4 + {_,shift,control +} f
     herbstclient {pseudotile,attr clients.focus.floating,floating} toggle
 
@@ -153,7 +153,8 @@ mod4 + Print
 
 #+ load custom layout on second monitor (instead of doing it automatically via 'autostart' file)
 mod4 + Home
-    herbstclient load X '(split vertical:0.7:0 (split vertical:0.61:1))'
+    herbstclient load X '(split vertical:0.75:1 (split vertical:0.56:1))'
+    # herbstclient load X '(split vertical:0.7:0 (split vertical:0.61:1))'
 
 #+ raise spotify app volume
 mod4+ Prior

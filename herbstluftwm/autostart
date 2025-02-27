@@ -174,9 +174,9 @@ hc rule class~'([bB]lender)' tag=VII
 
 # tag X ([second monitor]);
 # search the herbstluftwm manpage for "FRAME INDEX"
-hc rule class~'([fF]irefox)' tag=X index=00
-hc rule class~'([nN]avigator)' tag=X index=00
-hc rule class~'([sS]potify)' tag=X index=01
+hc rule class~'([fF]irefox)' tag=X index=01
+hc rule class~'([nN]avigator)' tag=X index=01
+hc rule class~'([sS]potify)' tag=X index=1
 hc rule class~'([dD]iscord)' tag=X index=1
 hc rule class~'([pP]ure[rR]ef)' tag=X fullscreen=off index=e
 hc rule class="obs" tag=X index=e
@@ -201,10 +201,8 @@ if hc silent new_attr bool my_autostart_sanity_check ; then
     # lock second monitor from switching tags ("use" and "use_index")
     hc lock_tag BenQ
 
-    # setup default frames for second monitor (alternatively; use keybind)
-    # hc load X '(split vertical:0.61:0)'
-    # # hc load X '(split vertical:0.7:0 (split vertical:0.61:1))'
-    # # # hc load X '(split vertical:0.75:1 (split vertical:0.56:1))'
+    # setup default frames for second monitor (alternatively; use keybind in 'sxhkdrc' file)
+    hc load X '(split vertical:0.69:0 (split vertical:0.28:0))'
 
     # example: run external programs if desired
     # spotify &

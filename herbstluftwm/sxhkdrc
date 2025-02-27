@@ -151,9 +151,10 @@ mod4 + control + i
 mod4 + Print
     /usr/local/bin/clipswap.sh
 
-#+ load custom layout on second monitor (instead of doing it automatically via 'autostart' file)
+#+ load custom layout on second monitor (if "removed" splits or not running via 'autostart' file)
 mod4 + Home
-    herbstclient load X '(split vertical:0.75:1 (split vertical:0.56:1))'
+    herbstclient load X '(split vertical:0.69:0 (split vertical:0.28:0))'
+    # herbstclient load X '(split vertical:0.75:1 (split vertical:0.57:1))'
     # herbstclient load X '(split vertical:0.7:0 (split vertical:0.61:1))'
 
 #+ raise spotify app volume

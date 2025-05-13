@@ -35,7 +35,7 @@ return require('packer').startup(function(use)
     use 'vifm/vifm.vim'
 
     -- auto-pairing
-    use 'tmsvg/pear-tree'
+    -- use 'tmsvg/pear-tree'
 
     -- quick comment/uncomment
     use 'tomtom/tcomment_vim'

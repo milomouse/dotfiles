@@ -26,7 +26,7 @@ mod4 + {_,shift +} minus
 
 #+ manually split frame horizontally
 mod4 + control + {_,shift +} minus
-    herbstclient split {bottom,top} 0.3
+    herbstclient split {bottom,top} 0.7
 
 #+ manually split frame vertically
 mod4 + {_,shift +} equal
@@ -34,7 +34,7 @@ mod4 + {_,shift +} equal
 
 #+ manually split frame vertically
 mod4 + control + {_,shift +} equal
-    herbstclient split {right,left} 0.3
+    herbstclient split {right,left} 0.7
 
 #+ manually split frame horizontally (to preferred size for vertical monitor)
 mod4 + mod1 + minus

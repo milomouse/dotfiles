@@ -7,7 +7,7 @@
 function zshaddhistory {
     local line cmd
     line=${1%%$'\n'} ; cmd=${line%% *}
-    [[ ${#line} -ge 5 && ${cmd} != (history|fc|zedit|zload|find) ]] && (( ! $argv[(I)*.mp4|*spar*] ))
+    [[ ${#line} -ge 5 && ${cmd} != (history|fc|zedit|zload|find|mpv) ]] && (( ! $argv[(I)*mp4|*spar*] ))
 }
 
 # safely recompile and reload shell settings:

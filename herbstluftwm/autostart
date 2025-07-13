@@ -101,6 +101,7 @@ hc set tree_style '·│ ├└+─┐'
 hc unrule -F
 
 # non-tag specific rules;
+# NOTE: search the herbstluftwm manpage for "FRAME INDEX"
 hc rule focus=on
 hc rule class="a.out" floating=on
 hc rule class="Toplevel" pseudotile=on
@@ -110,6 +111,8 @@ hc rule class="mpv" pseudotile=off
 hc rule class="Nvidia-settings" floating=on
 hc rule class="sun-awt-X11-XFramePeer" pseudotile=on
 hc rule class="About Mozilla Firefox" pseudotile=on
+hc rule class~'([fF]irefox)' index=00
+hc rule class="kitty" index=e
 hc rule class~'([yY]ad)' floating=on
 hc rule class~'([pP]qiv)' pseudotile=on
 # hc rule title="Open File" floating=on
@@ -161,7 +164,6 @@ hc rule title~'([pP]illars [oO]f [eE]ternity.*)' tag=V fullscreen=on
 hc rule title="Torment" tag=V fullscreen=on
 hc rule title="Loading Forge..." tag=V floating=on
 
-
 # tag VI (illustration);
 hc rule class~'([kK]rita)' tag=VI
 hc rule class~'([gG]imp)' tag=VI
@@ -173,11 +175,9 @@ hc rule class~'([sS]ubstance-[pP]ainter)' tag=VI
 hc rule class~'([bB]lender)' tag=VII
 
 # tag X ([second monitor]);
-# search the herbstluftwm manpage for "FRAME INDEX"
-# hc rule class~'([fF]irefox)' tag=X index=01
 hc rule class~'([nN]avigator)' tag=X index=01
+hc rule class~'([dD]iscord)' tag=X index=01
 hc rule class~'([sS]potify)' tag=X index=1
-hc rule class~'([dD]iscord)' tag=X index=1
 hc rule class~'([pP]ure[rR]ef)' tag=X fullscreen=off index=e
 hc rule class="obs" tag=X index=e
 hc rule class="LM Studio" tag=X index=0
@@ -203,6 +203,10 @@ if hc silent new_attr bool my_autostart_sanity_check ; then
 
     # setup default frames for second monitor (alternatively; use keybind in 'sxhkdrc' file)
     # hc load X '(split vertical:0.69:0 (split vertical:0.28:0))'
+    # hc load X '(split vertical:0.7:0)'
+    hc load X '(split vertical:0.7:0 (split vertical:0.61:1))'
+    # hc load I '(split horizontal:0.7:0)'
+    hc load I '(split vertical:0.7:1 (split horizontal:0.7:0))'
 
     # example: run external programs if desired
     # spotify &

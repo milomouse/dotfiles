@@ -28,6 +28,10 @@ mod4 + {_,shift +} minus
 mod4 + control + {_,shift +} minus
     herbstclient split {bottom,top} 0.7
 
+#+ manually split frame horizontally
+mod4 + mod1 + {_,shift +} minus
+    herbstclient split {top,bottom} 0.3
+
 #+ manually split frame vertically
 mod4 + {_,shift +} equal
     herbstclient split {right,left} 0.5
@@ -36,9 +40,9 @@ mod4 + {_,shift +} equal
 mod4 + control + {_,shift +} equal
     herbstclient split {right,left} 0.7
 
-#+ manually split frame horizontally (to preferred size for vertical monitor)
-mod4 + mod1 + minus
-    herbstclient split bottom 0.61
+#+ manually split frame vertically
+mod4 + mod1 + {_,shift +} equal
+    herbstclient split {left,right} 0.3
 
 #+ automatically split, and/or shift window to new split (if available)
 mod4 + {_,shift +} BackSpace

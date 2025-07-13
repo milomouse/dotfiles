@@ -4,7 +4,7 @@
 # bypass geographic restriction by faking X-Forwarded-For HTTP header
 --geo-bypass
 
-# stictly prefer free containers over non-free ones
+# prefer free containers over non-free ones
 --prefer-free-formats
 --format-sort ext
 
@@ -23,6 +23,5 @@
 # restrict filenames to only ASCII characters
 --restrict-filenames
 
-# preferred formats with safe fallbacks
-# --format "bv[height>=720]+ba[acodec=opus]/bv[height>=720]+ba[ext=webm]/bv[height>=720]+ba/best"
---format "bv[height<=720]+ba[acodec=opus]/bv[height<=720]+ba[ext=webm]/bv[height<=720]+ba/best"
+# catchall preferred formats with safe fallbacks (use -f for edge cases)
+--format "bv[height=1080][vcodec=webm]+ba[acodec=opus]/bv[height=720][vcodec=webm]+ba[acodec=opus]/bv[height=1080]+ba[acodec=opus]/bv[height=1080]+ba/bv[height=1440][vcodec=webm]+ba[acodec=opus]/bv[height=720]+ba[acodec=opus]/bv[height=720]+ba/bv[height<=1080][vcodec=webm]+ba[acodec=opus]/bv[height<=1080]+ba[acodec=opus]/bv[height<=1080]+ba/bv+ba[acodec=opus]/best"

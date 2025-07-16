@@ -3,7 +3,7 @@ Current Setup:
 
 + *DISTRO* = Gentoo ( ~amd64 nomultilib llvm ) ( [link](https://www.gentoo.org) )
 
-+ *KERNEL* = GNU/Linux 6.12.10 ( [link](https://kernel.org) )
++ *KERNEL* = GNU/Linux 6.13.8 ( [link](https://kernel.org) )
 
 + *PATCHSET* = Zen ( [link](https://github.com/zen-kernel/zen-kernel) )
 

@@ -159,6 +159,8 @@ hc rule class~'([sS]lime [rR]ancher)' tag=V fullscreen=on
 hc rule class~'([mM]inecraft.*)' tag=V
 hc rule class~'([bB]aldurs[gG]ate.*)' tag=V fullscreen=on
 hc rule title~'([pP]illars [oO]f [eE]ternity.*)' tag=V fullscreen=on
+hc rule title="American Truck Simulator" tag=V fullscreen=off
+hc rule title="Euro Truck Simulator 2" tag=V fullscreen=off
 hc rule title="Torment" tag=V fullscreen=on
 hc rule title="Loading Forge..." tag=V floating=on
 

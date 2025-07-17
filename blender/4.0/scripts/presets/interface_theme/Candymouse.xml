@@ -7,9 +7,7 @@
         icon_alpha="1"
         icon_saturation="0.5"
         widget_emboss="#ffffff05"
-        editor_border="#121212"
-        editor_outline="#1f1f1f15"
-        editor_outline_active="#ffffff2a"
+        editor_outline="#1f1f1f"
         widget_text_cursor="#4f4faf"
         panel_roundness="0.4"
         transparent_checker_primary="#61666c"
@@ -31,7 +29,6 @@
         icon_modifier="#84b8ffff"
         icon_shading="#ea7581ff"
         icon_folder="#49aad7ff"
-        icon_autokey="#ab3c48ff"
         icon_border_intensity="0"
         >
         <wcol_regular>
@@ -321,10 +318,6 @@
         </wcol_list_item>
         <wcol_state>
           <ThemeWidgetStateColors
-            error="#771111ff"
-            warning="#ac8737ff"
-            info="#28487dff"
-            success="#188625ff"
             inner_anim="#81b359"
             inner_anim_sel="#72cc5c"
             inner_key="#e6c573"
@@ -376,11 +369,11 @@
         speaker="#000000"
         vertex="#000000"
         vertex_select="#00cc6b"
+        vertex_active="#000000"
         vertex_size="6"
         vertex_bevel="#009dff"
         vertex_unreferenced="#000000"
         edge_select="#008c6c"
-        edge_mode_select="#ffd800"
         edge_seam="#c2003b"
         edge_sharp="#49f2f2"
         edge_crease="#ffcb6b"
@@ -389,7 +382,6 @@
         freestyle_edge_mark="#7fff7f"
         face="#12121211"
         face_select="#008c6c40"
-        face_mode_select="#ffb70033"
         face_dot="#7fff7f"
         facedot_size="2"
         freestyle_face_mark="#7fff7f33"
@@ -422,15 +414,13 @@
         bone_pose_active="#00cccc"
         bone_solid="#adbfcc"
         bone_locked_weight="#ff000080"
-        frame_current="#6282b3"
-        before_current_frame="#f22e23"
-        after_current_frame="#78f244"
         bundle_solid="#c8c8c8"
         camera_path="#121212"
         camera_passepartout="#000000"
         skin_root="#b44d4d"
         view_overlay="#121212"
         transform="#adbacc"
+        frame_current="#6282b3"
         paint_curve_handle="#7fff7f7f"
         paint_curve_pivot="#ff7f7f7f"
         outline_width="2"
@@ -690,8 +680,6 @@
         keyframe_jitter_selected="#61c042"
         keyframe_movehold="#5c5656"
         keyframe_movehold_selected="#ffaf23"
-        keyframe_generated="#585858"
-        keyframe_generated_selected="#a28962"
         keyframe_border="#121212ff"
         keyframe_border_selected="#121212ff"
         keyframe_scale_factor="1"
@@ -746,12 +734,12 @@
         grid="#292b2eff"
         vertex="#121212"
         vertex_select="#00cc6b"
+        vertex_active="#000000"
         vertex_size="3"
         vertex_bevel="#009dff"
         vertex_unreferenced="#000000"
         face="#12121211"
         face_select="#008c6c40"
-        face_mode_select="#ffb70033"
         face_dot="#7fff7f"
         facedot_size="2"
         freestyle_face_mark="#7fff7f33"
@@ -817,13 +805,6 @@
             </panelcolors>
           </ThemeSpaceGeneric>
         </space>
-        <asset_shelf>
-          <ThemeAssetShelf
-            header_back="#2d2e3300"
-            back="#292b2eff"
-            >
-          </ThemeAssetShelf>
-        </asset_shelf>
       </ThemeImageEditor>
     </image_editor>
     <sequence_editor>
@@ -853,8 +834,6 @@
         keyframe_breakdown_selected="#54bfed"
         keyframe_movehold="#808080"
         keyframe_movehold_selected="#ffaf23"
-        keyframe_generated="#585858"
-        keyframe_generated_selected="#a28962"
         keyframe_border="#000000ff"
         keyframe_border_selected="#000000ff"
         draw_action="#4cd9f2"
@@ -863,8 +842,6 @@
         metadatatext="#ffffff"
         preview_range="#a14d0066"
         row_alternate="#ffffff05"
-        text_strip_cursor="#71a8ffff"
-        selected_text="#ffffff4d"
         >
         <space>
           <ThemeSpaceGeneric
@@ -1024,8 +1001,6 @@
         attribute_node="#001566"
         simulation_zone="#66416233"
         repeat_zone="#76512f33"
-        foreach_geometry_element_zone="#33527f33"
-        closure_zone="#527f3333"
         >
         <space>
           <ThemeSpaceGeneric
@@ -1114,8 +1089,11 @@
       <ThemeInfo
         info_selected="#282a2e"
         info_selected_text="#00cccc"
+        info_error="#b34c34ff"
         info_error_text="#c2003b"
+        info_warning="#ac8737ff"
         info_warning_text="#eae900"
+        info_info="#1f3862ff"
         info_info_text="#00cccc"
         info_debug="#282a2eff"
         info_debug_text="#ee80c5"
@@ -1252,7 +1230,6 @@
         strips_selected="#95b5e6"
         metadatabg="#000000"
         metadatatext="#ffffff"
-        preview_range="#a14d0066"
         handle_free="#121212"
         handle_auto="#909000"
         handle_align="#803060"
@@ -1638,7 +1615,6 @@
     <panel_title>
       <ThemeFontStyle
         points="11"
-        character_weight="400"
         shadow="0"
         shadow_offset_x="1"
         shadow_offset_y="-1"
@@ -1647,10 +1623,20 @@
         >
       </ThemeFontStyle>
     </panel_title>
+    <widget_label>
+      <ThemeFontStyle
+        points="11"
+        shadow="3"
+        shadow_offset_x="0"
+        shadow_offset_y="-1"
+        shadow_alpha="0.5"
+        shadow_value="0"
+        >
+      </ThemeFontStyle>
+    </widget_label>
     <widget>
       <ThemeFontStyle
         points="11"
-        character_weight="400"
         shadow="0"
         shadow_offset_x="0"
         shadow_offset_y="-1"
@@ -1659,17 +1645,5 @@
         >
       </ThemeFontStyle>
     </widget>
-    <tooltip>
-      <ThemeFontStyle
-        points="11"
-        character_weight="400"
-        shadow="1"
-        shadow_offset_x="0"
-        shadow_offset_y="-1"
-        shadow_alpha="0.5"
-        shadow_value="0"
-        >
-      </ThemeFontStyle>
-    </tooltip>
   </ThemeStyle>
 </bpy>

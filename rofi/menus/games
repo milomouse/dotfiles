@@ -1,8 +1,7 @@
+Euro Truck Simulator 2,herbstclient use V ; /home/mother/game/Euro_Truck_Simulator_2/start.sh
 Minecraft,herbstclient use V ; /home/mother/game/minecraft.sh
 Factorio,herbstclient use V ; /home/mother/game/Factorio/bin/x64/factorio
 RimWorld,herbstclient use V ; /home/mother/game/RimWorld/start.sh
-Euro Truck Simulator 2,herbstclient use V ; /home/mother/game/Euro_Truck_Simulator_2/start.sh
-American Truck Simulator,herbstclient use V ; /home/mother/game/American_Truck_Simulator/start.sh
 Crusader Kings 2,herbstclient use V ; /home/mother/game/Crusader_Kings_2/start.sh
 Crusader Kings 3,herbstclient use V ; /home/mother/game/Crusader_Kings_3/start.sh
 Europa Universalis IV,herbstclient use V ; /home/mother/game/EuropaUniversalisIV/start.sh

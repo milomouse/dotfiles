@@ -108,8 +108,10 @@ hc rule class="polybar" manage=off
 hc rule class="mpv" pseudotile=off
 hc rule class="Nvidia-settings" floating=on
 hc rule class="sun-awt-X11-XFramePeer" pseudotile=on
-hc rule class="About Mozilla Firefox" pseudotile=on
+hc rule class~'([nN]avigator)' index=00
 hc rule class~'([fF]irefox)' index=00
+hc rule class~'([fF]irefox-esr)' index=00
+hc rule class="About Mozilla Firefox" pseudotile=on
 hc rule class="kitty" index=e
 hc rule class~'([yY]ad)' floating=on
 hc rule class~'([pP]qiv)' pseudotile=on
@@ -175,7 +177,6 @@ hc rule class~'([sS]ubstance-[pP]ainter)' tag=VI
 hc rule class~'([bB]lender)' tag=VII
 
 # tag X ([second monitor]);
-hc rule class~'([nN]avigator)' tag=X index=01
 hc rule class~'([dD]iscord)' tag=X index=01
 hc rule class~'([sS]potify)' tag=X index=1
 hc rule class~'([pP]ure[rR]ef)' tag=X fullscreen=off index=e

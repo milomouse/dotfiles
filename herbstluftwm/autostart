@@ -111,7 +111,7 @@ hc rule class="sun-awt-X11-XFramePeer" pseudotile=on
 hc rule class~'([nN]avigator)' index=00
 hc rule class~'([fF]irefox)' index=00
 hc rule class~'([fF]irefox-esr)' index=00
-hc rule class="About Mozilla Firefox" pseudotile=on
+hc rule title="About Mozilla Firefox" pseudotile=on
 hc rule class="kitty" index=e
 hc rule class~'([yY]ad)' floating=on
 hc rule class~'([pP]qiv)' pseudotile=on

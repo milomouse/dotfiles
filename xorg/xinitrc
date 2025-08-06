@@ -28,9 +28,6 @@ xsetbg \
 # set volume to a safe level
 amixer -c 1 -q -D pulse sset Master 50% &
 
-# custom script to check if drawing tablet is connected, rebinding shortcut buttons if so
-# ${H}/code/sh/wacom.sh &
-
 # custom keybindings for use with 'herbstluftwm'
 sxhkd -c ${XDG_CONFIG_HOME}/herbstluftwm/sxhkdrc &
 

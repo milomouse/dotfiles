@@ -155,18 +155,20 @@ mod4 + control + i
 mod4 + Print
     /usr/local/bin/clipswap.sh
 
-#+ load custom layout on second monitor (if "removed" splits or not running via 'autostart' file)
+#+ load custom layout on main monitor (if "removed" splits or not running via 'autostart' file)
 mod4 + Home
-    herbstclient load X '(split vertical:0.69:0 (split vertical:0.28:0))'
-    # herbstclient load X '(split vertical:0.75:1 (split vertical:0.57:1))'
-    # herbstclient load X '(split vertical:0.7:0 (split vertical:0.61:1))'
+    herbstclient load I '(split horizontal:0.7:0 (split vertical:0.72:1))'
+
+#+ load custom layout on second monitor (if "removed" splits or not running via 'autostart' file)
+mod4 + shift + Home
+    herbstclient load X '(split vertical:0.7:0 (split vertical:0.63:1))'
 
 #+ raise spotify app volume
-mod4+ Prior
+mod4 + Prior
     playerctl --player spotify volume 0.1+
 
 #+ lower spotify app volume
-mod4+ Next
+mod4 + Next
     playerctl --player spotify volume 0.1-
 
 #+ raise pulseaudio volume via ALSA

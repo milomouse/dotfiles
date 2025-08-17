@@ -156,6 +156,8 @@ local config = {
     options = {
         component_separators = '',
         section_separators = '',
+        -- provided by pull request: https://github.com/nvim-lualine/lualine.nvim/pull/1334/commits
+        line_total_in_location = true,
         theme = {
             -- we are going to use lualine_c as left section, with lualine_x as right section.
             -- both are highlighted by c theme (unless manually overridden).

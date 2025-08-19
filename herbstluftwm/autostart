@@ -20,8 +20,8 @@ Mod=Mod4
 # define tags and associated keys
 # secondary monitor always assigned to the second tag,
 # so we change the order of tag/index to be more coherent once created
-tag_names=( I X II III IV V VI VII)
-tag_keys=( 1 0 {2..7} )
+tag_names=(I X II III IV V VI VII)
+tag_keys=(1 0 {2..7})
 
 # frame layout (always prefer one frame by default)
 hc set default_frame_layout 2
@@ -35,6 +35,7 @@ for i in ${!tag_names[@]} ; do
     if ! [ -z "$key" ] ; then
         hc keybind "$Mod-$key" use_index "$i"
         hc keybind "$Mod-Shift-$key" move_index "$i"
+        hc keybind "$Mod-Control-$key" chain , move_index "$i" , use_index "$i"
     fi
 done
 
@@ -112,7 +113,7 @@ hc rule class~'([nN]avigator)' index=00
 hc rule class~'([fF]irefox)' index=00
 hc rule class~'([fF]irefox-esr)' index=00
 hc rule title="About Mozilla Firefox" pseudotile=on
-hc rule class="kitty" index=e
+# hc rule class="kitty" index=e
 hc rule class~'([yY]ad)' floating=on
 hc rule class~'([pP]qiv)' pseudotile=on
 # hc rule title="Open File" floating=on

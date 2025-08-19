@@ -148,7 +148,7 @@ mod4 + g
     /home/mother/conf/rofi/scripts/games.sh
 
 #+ image capture of current screen
-mod4 + control + i
+mod4 + control + y
     import -window root /home/mother/foto/shot/$(date '+%Y_%m_%d-%H%M%S').png
 
 #+ rotation of primary/clipboard selections
@@ -175,28 +175,50 @@ mod4 + Next
 XF86AudioRaiseVolume
     amixer -c 1 -q -D pulse sset Master 5%+
 
+mod4 + F12
+    amixer -c 1 -q -D pulse sset Master 5%+
+
 #+ lower pulseaudio volume via ALSA
 XF86AudioLowerVolume
+    amixer -c 1 -q -D pulse sset Master 5%-
+
+mod4 + F11
     amixer -c 1 -q -D pulse sset Master 5%-
 
 #+ mute/unmute pulseaudio volume via ALSA
 XF86AudioMute
     amixer -c 1 -q -D pulse sset Master toggle
 
-#+ suspend system to memory
-{XF86Sleep,mod4 + control + shift + End}
-    /bin/sh -c 'echo freeze | doas tee /sys/power/state'
+mod4 + F10
+    amixer -c 1 -q -D pulse sset Master toggle
 
 #+ remotely control music player
 XF86AudioPlay
     playerctl --player spotify play-pause
 
-#+ remotely control music player
+mod4 + F8
+    playerctl --player spotify play-pause
+
 XF86AudioPrev
     playerctl --player spotify previous
 
-#+ remotely control music player
+mod4 + F7
+    playerctl --player spotify previous
+
+mod4 + control + F7
+    playerctl --player spotify position 10-
+
 XF86AudioNext
     playerctl --player spotify next
+
+mod4 + F9
+    playerctl --player spotify next
+
+mod4 + control + F9
+    playerctl --player spotify position 10+
+
+#+ suspend system to memory
+mod4 + control + shift + End
+    /bin/sh -c 'echo freeze | doas tee /sys/power/state'
 
 # vim: set ft=sxhkdrc:

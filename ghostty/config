@@ -1,0 +1,65 @@
+# font
+font-family = InputMonoNarrow
+font-family-bold = InputMonoNarrow
+font-family-italic = InputMonoNarrow
+font-family-bold-italic = InputMonoNarrow
+font-style = default
+font-style-bold = Bold
+font-style-italic = Italic
+font-style-bold-italic = BoldIta
+font-size = 14
+
+
+# cursor
+cursor-color = #555555
+cursor-invert-fg-bg = false
+cursor-style = block
+cursor-style-blink = false
+
+
+# decoration
+# window-theme = system
+gtk-custom-css = "/home/mother/conf/ghostty/custom.css"
+window-decoration = none
+gtk-titlebar = false
+gtk-tabs-location = hidden
+window-padding-x = 2
+window-padding-y = 2
+
+
+# colors: system
+background = #121212
+foreground = #A9B1A6
+selection-foreground = #121212
+selection-background = #FF5500
+selection-invert-fg-bg = false
+# [black]
+palette = 0=#161616
+palette = 8=#2D2E33
+# [red]
+palette = 1=#E31763
+palette = 9=#C2003B
+# [green]
+palette = 2=#00CC6C
+palette = 10=#008C6C
+# [yellow]
+palette = 3=#EAE900
+palette = 11=#FFCB6B
+# [blue]
+palette = 4=#009DFF
+palette = 12=#0047BB
+# [magenta]
+palette = 5=#4F4FAF
+palette = 13=#6300FF
+# [cyan]
+palette = 6=#00CCCC
+palette = 14=#00AFAF
+# [white]
+palette = 7=#A9B1A6
+palette = 15=#9E9DA5
+
+
+# general
+shell-integration-features = no-cursor,no-sudo,title
+mouse-hide-while-typing = true
+# window-inherit-working-directory = true

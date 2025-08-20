@@ -5,10 +5,10 @@
   bg:   #1E1E21FF;
   bga:  #E31763FF;
   bar:  #5F5FAFFF;
-  fg:   #A9B1A6FF;
+  fg:   #A9B1A66F;
   fga:  #9E9DA5FF;
   ac:   #27C8B1FF;
-  se:   #8D8D8DFF;
+  se:   #8D8D8D66;
   sea:  #161616FF;
-  seb:  #222222FF;
+  seb:  #22222266;
 }

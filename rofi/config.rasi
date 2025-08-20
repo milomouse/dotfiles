@@ -1,11 +1,11 @@
 configuration {
     dpi:                            1;
+    location:                       2;
     font:                           "Input Mono Condensed 10";
     show-icons:                     false;
-    drun-display-format:            "{name}";
+    drun-display-format:            "{name} : {generic}";
     disable-history:                false;
     fullscreen:                     false;
-    hide-scrollbar:                 true;
     sidebar-mode:                   false;
 
     kb-move-char-forward: "Right,Control+l";
@@ -26,21 +26,32 @@ configuration {
     kb-row-tab: "";
     kb-element-next: "Tab";
     kb-element-prev: "ISO_Left_Tab";
+
+    window {
+        hide-active-window:             true;
+    }
+
 }
 
 @import "colors.rasi"
 
+
 window {
-    transparency:                   "real";
     background-color:               @bg;
     text-color:                     @fg;
-    border:                         13px;
+    border:                         10px;
     border-color:                   @se;
     border-radius:                  0px;
-    width:                          1600px;
-    location:                       center;
+    width:                          1500px;
     x-offset:                       0;
-    y-offset:                       -15%;
+    y-offset:                       500px;
+}
+
+scrollbar {
+    handle-width:                   0px;
+    background-color:               @se;
+    handle-color:                   @se;
+    border-color:                   @se;
 }
 
 prompt {
@@ -95,6 +106,10 @@ mainbox {
     children:                       [ inputbar, listview ];
     spacing:                        10px;
     padding:                        2px 10px 10px 10px;
+}
+
+textbox {
+    text-color:                     @fg;
 }
 
 element {

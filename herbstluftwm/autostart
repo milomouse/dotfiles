@@ -34,8 +34,8 @@ for i in ${!tag_names[@]} ; do
     key="${tag_keys[$i]}"
     if ! [ -z "$key" ] ; then
         hc keybind "$Mod-$key" use_index "$i"
-        hc keybind "$Mod-Shift-$key" move_index "$i"
-        hc keybind "$Mod-Control-$key" chain , move_index "$i" , use_index "$i"
+        hc keybind "$Mod-Control-$key" move_index "$i"
+        hc keybind "$Mod-Shift-$key" chain , move_index "$i" , use_index "$i"
     fi
 done
 
@@ -204,8 +204,8 @@ if hc silent new_attr bool my_autostart_sanity_check ; then
     hc lock_tag BenQ
 
     # setup default frames for second monitor (alternatively; use keybind in 'sxhkdrc' file)
-    hc load I '(split horizontal:0.7:0 (split vertical:0.72:1))'
-    hc load X '(split vertical:0.7:0 (split vertical:0.63:1))'
+    hc load I '(split horizontal:0.66:0 (split vertical:0.72:1))'
+    hc load X '(split vertical:0.7:0 (split vertical:0.64:1))'
 
     # example: run external programs if desired
     # spotify &

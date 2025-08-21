@@ -153,18 +153,18 @@ mod4 + Print
 
 #+ load custom layout on main monitor (if "removed" splits or not running via 'autostart' file)
 mod4 + Home
-    herbstclient load I '(split horizontal:0.66:0 (split vertical:0.72:1))'
+    herbstclient load I '(split horizontal:0.67:0 (split vertical:0.71:0))'
 
 #+ load custom layout on second monitor (if "removed" splits or not running via 'autostart' file)
 mod4 + shift + Home
     herbstclient load X '(split vertical:0.7:0)'
 
 #+ raise spotify app volume
-mod4 + shift + F12
+mod4 + control + F12
     playerctl --player spotify volume 0.1+
 
 #+ lower spotify app volume
-mod4 + shift + F11
+mod4 + control + F11
     playerctl --player spotify volume 0.1-
 
 #+ raise pulseaudio volume via ALSA

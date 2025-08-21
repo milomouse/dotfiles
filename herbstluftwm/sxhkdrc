@@ -131,12 +131,8 @@ control + button10
 mod4 + shift + s
     pkill -USR1 -x sxhkd
 
-#+ spawn terminal with tmux
-mod4 + {Return,KP_Enter}
-    kitty -e tmux
-
 #+ spawn terminal
-mod4 + shift + {Return,KP_Enter}
+mod4 + {Return,KP_Enter}
     kitty
 
 #+ application/window menu
@@ -161,7 +157,7 @@ mod4 + Home
 
 #+ load custom layout on second monitor (if "removed" splits or not running via 'autostart' file)
 mod4 + shift + Home
-    herbstclient load X '(split vertical:0.7:0 (split vertical:0.64:1))'
+    herbstclient load X '(split vertical:0.7:0)'
 
 #+ raise spotify app volume
 mod4 + shift + F12

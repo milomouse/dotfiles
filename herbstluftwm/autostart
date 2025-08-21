@@ -205,7 +205,7 @@ if hc silent new_attr bool my_autostart_sanity_check ; then
 
     # setup default frames for second monitor (alternatively; use keybind in 'sxhkdrc' file)
     hc load I '(split horizontal:0.66:0 (split vertical:0.72:1))'
-    hc load X '(split vertical:0.7:0 (split vertical:0.64:1))'
+    hc load X '(split vertical:0.7:0)'
 
     # example: run external programs if desired
     # spotify &

@@ -270,7 +270,7 @@ nnoremap yF :!echo %c:p | xclip -selection clipboard -i %i<cr>:echo expand('%"c:
 nnoremap o :shell<cr>
 
 " Open shell in current directory (in a new window)
-nnoremap O :!kitty --title "[VIFM] $PWD" 2>/dev/null &<cr>
+nnoremap O :!kitty $PWD" 2>/dev/null &<cr>
 
 " Open editor to edit vifmrc and apply settings after returning to vifm
 " MYVIFMRC is export variable within shell configuration (zsh/zsh-exports)

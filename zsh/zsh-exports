@@ -70,7 +70,7 @@ export __GL_SYNC_TO_VBLANK=1
 export RIPGREP_CONFIG_PATH="${XDG_CONFIG_HOME}/.ripgreprc"
 
 # fix kitty->tmux->neovim undercurl support [see also ~/tmux.conf]:
-export TERM="tmux-256color"
+# export TERM="tmux-256color"
 
 # bat theme for syntax highlighting
 export BAT_THEME="base16"

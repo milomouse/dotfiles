@@ -17,8 +17,6 @@ Current Setup:
 
 + *EDITOR* = Neovim ( [link](https://neovim.io/) )
 
-+ *TERMINAL MULTIPLEX* = Tmux ( [link](https://github.com/tmux/tmux/wiki) )
-
 + *TERMINAL EMULATOR* = kitty ( [link](https://sw.kovidgoyal.net/kitty/) )
 
 + *FILE EXPLORER* = vifm ( [link](https://vifm.info) )

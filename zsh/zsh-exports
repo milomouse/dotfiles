@@ -28,9 +28,11 @@ export XDG_VIDEOS_DIR="${H}/vide"
 # directories [software]:
 export CUDA_PATH="/opt/cuda"
 export GOPATH="${H}/code/lang/go"
+export GOBIN="${H}/code/lang/go/bin"
 export PYTHONUSERBASE="${H}/code/lang/python/pip_modules"
 export PYTHONPATH="${PYTHONUSERBASE}/lib"
 path+="${PYTHONUSERBASE}/bin"
+path+="${GOBIN}"
 path+="${XDG_CONFIG_HOME}/.cargo/bin"
 path+="${XDG_CONFIG_HOME}/.lmstudio/bin"
 

@@ -60,7 +60,8 @@ hc attr theme.normal.inner_color '#080808'
 hc attr theme.outer_color '#292929'
 hc attr theme.active.outer_color '#616161'
 hc attr theme.normal.outer_color '#080808'
-hc attr theme.active.color '#292929'
+hc attr theme.active.color '#242424'
+# hc attr theme.active.color '#292929'
 # hc attr theme.active.color '#313238'
 hc attr theme.normal.color '#161616'
 # hc attr theme.normal.color '#121212'
@@ -204,7 +205,7 @@ if hc silent new_attr bool my_autostart_sanity_check ; then
     hc lock_tag BenQ
 
     # setup default frames for second monitor (alternatively; use keybind in 'sxhkdrc' file)
-    hc load I '(split horizontal:0.67:0 (split vertical:0.71:0))'
+    hc load I '(split horizontal:0.57:0)'
     hc load X '(split vertical:0.7:0)'
 
     # example: run external programs if desired
